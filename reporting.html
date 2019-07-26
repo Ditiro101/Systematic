@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
+  <meta name="author" content="Creative Tim">
+  <title>Reporting - Stock Path</title>
+  <!-- Favicon -->
+  <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="./assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+  <link href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <!-- Argon CSS -->
+  <link type="text/css" href="./assets/css/argon.css?v=1.0.0" rel="stylesheet">
+</head>
+
+<body>
+  <!-- Sidenav -->
+  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
+    <div class="container-fluid">
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <!-- Brand -->
+      <a class="navbar-brand pt-0" href="./index.html">
+        <img src="./assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
+      </a>
+      <!-- User -->
+      <ul class="nav align-items-center d-md-none">
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="media align-items-center">
+              <span class="avatar avatar-sm rounded-circle">
+                <img alt="Image placeholder" src="./assets/img/theme/admin.jpg">
+              </span>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+            <div class=" dropdown-header noti-title">
+              <h6 class="text-overflow m-0">Welcome!</h6>
+            </div>
+            <a href="../../profile/my-profile.html" class="dropdown-item">
+              <i class="ni ni-single-02"></i>
+              <span>My profile</span>
+            </a>
+            <div class="dropdown-divider"></div>
+            <a href="../../index.html" class="dropdown-item">
+              <i class="ni ni-user-run"></i>
+              <span>Logout</span>
+            </a>
+          </div>
+        </li>
+      </ul>
+      <!-- Collapse -->
+      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
+        <!-- Collapse header -->
+        <div class="navbar-collapse-header d-md-none">
+          <div class="row">
+            <div class="col-6 collapse-brand">
+              <a href="./index.html">
+                <img src="./assets/img/brand/blue.png">
+              </a>
+            </div>
+            <div class="col-6 collapse-close">
+              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
+                <span></span>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Navigation -->
+        <ul class="navbar-nav">
+
+        <!-- Heading -->
+       
+          <li class="nav-item">
+            <a class="nav-link" href="dashboard.html">
+              <i class="ni ni-tv-2 text-primary"></i> Dashboard
+            </a>
+  
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="customer.html">
+              <i class="ni ni-circle-08 text-green"></i> Customer  
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="employee.html">
+              <i class="ni ni-badge text-orange"></i> Employee
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="user.html">
+              <i class="ni ni-laptop text-yellow"></i> User
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">
+              <i class="ni ni-settings text-red"></i> Admin
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="supplier.html">
+              <i class="ni ni-briefcase-24 text-info"></i> Suppliers
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="warehouse.html">
+              <i class="ni ni-shop text-pink"></i> Warehouse
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sales.html">
+              <i class="ni ni-cart text-green"></i> Sales
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="product.html">
+              <i class="ni ni-basket text-orange"></i> Products
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="stock.html">
+              <i class="ni ni-box-2 text-yellow"></i> Stock
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="delivery_collection.html">
+              <i class="ni ni-delivery-fast text-red"></i> Delivery
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="driver.html">
+              <i class="ni ni-user-run text-pink"></i> Driver
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="reporting.html">
+              <i class="ni ni-chart-bar-32 text-info"></i> Reports
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+  <!-- Main content -->
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Reporting</a>
+
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="./assets/img/theme/admin.jpg">
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">User</span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="pages/profile/my-profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="index.html" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <!-- Header -->
+    <div class="header bg-gradient-custom pb-8 pt-5 pt-md-8">
+      <div class="container-fluid">
+        <div class="header-body">
+          <!-- Card stats -->
+          
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--7">
+      <!-- Table -->
+      <div class="row">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Reporting Functions</h3>
+            </div>
+            <div class="card-body">
+              <div class="row icon-examples">
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
+                    <a>
+                      <div>
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Sales Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                    <a>
+                      <div>
+                        <i class="far fa-clipboard"></i>
+                        <span>Stock Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                    <a>
+                      <div>
+                        <i class="fas fa-user-clock"></i>
+                        <span>Wage Slips Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
+                    <a>
+                      <div>
+                        <i class="fas fa-chart-line"></i>
+                        <span>Product Trends Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                    <a>
+                      <div>
+                        <i class="far fa-handshake"></i>
+                        <span>Debtors Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                    <a>
+                      <div>
+                        <i class="fas fa-briefcase"></i>
+                        <span>Creditors Report</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                    <a>
+                      <div>
+                        <i class="fas fa-users"></i>
+                        <span>Employee Attendance Roll</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="generate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to generate the selected report?</p>
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+              </div> 
+              <div class="modal-body">
+                  <p>Report generated successfully</p>    
+              </div> 
+              <div class="modal-footer">                        
+                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button> 
+              </div>            
+            </div>
+        </div>
+      </div>
+      <div class="modal fade" id="generateDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Please enter the timeframe for which the report should be generated?</p>
+              <div class="form-row ">
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date From</label>
+                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+                </div>
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date To</label>
+                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-success">Generate Report</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+              </div> 
+              <div class="modal-body">
+                  <p>Report generated successfully</p>    
+              </div> 
+              <div class="modal-footer">                        
+                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button> 
+              </div>            
+            </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="row align-items-center justify-content-xl-between">
+          <div class="col-xl-6">
+            <div class="copyright text-center text-xl-left text-muted">
+              &copy; 2019 <a class="font-weight-bold ml-1" target="_blank" href="./pages/about_us/stock-path.html">Stock Path</a>
+            </div>
+          </div>
+          <div class="col-xl-6">
+            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
+              <li class="nav-item">
+                <a href="./pages/about_us/aboout-us.html" class="nav-link" target="_blank">About Us</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
+  <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  <script src="./assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="./assets/js/argon.js?v=1.0.0"></script>
+</body>
+
+</html>
