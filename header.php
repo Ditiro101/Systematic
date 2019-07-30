@@ -80,13 +80,13 @@
         <!-- Heading -->
        
           <li class="nav-item">
-            <a class="nav-link" href="dashboard.html">
+            <a class="nav-link" href="dashboard.php">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
   
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="customer.html">
+            <a class="nav-link" href="customer.php">
               <i class="ni ni-circle-08 text-green"></i> Customer  
             </a>
           </li>
@@ -96,52 +96,52 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="user.html">
+            <a class="nav-link" href="user.php">
               <i class="ni ni-laptop text-yellow"></i> User
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="admin.html">
+            <a class="nav-link" href="admin.php">
               <i class="ni ni-settings text-red"></i> Admin
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="supplier.html">
+            <a class="nav-link" href="supplier.php">
               <i class="ni ni-briefcase-24 text-info"></i> Suppliers
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="warehouse.html">
+            <a class="nav-link" href="warehouse.php">
               <i class="ni ni-shop text-pink"></i> Warehouse
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="sales.html">
+            <a class="nav-link" href="sales.php">
               <i class="ni ni-cart text-green"></i> Sales
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="product.html">
+            <a class="nav-link" href="product.php">
               <i class="ni ni-basket text-orange"></i> Products
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="stock.html">
+            <a class="nav-link" href="stock.php">
               <i class="ni ni-box-2 text-yellow"></i> Stock
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="delivery_collection.html">
+            <a class="nav-link" href="delivery_collection.php">
               <i class="ni ni-delivery-fast text-red"></i> Delivery
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="driver.html">
+            <a class="nav-link" href="driver.php">
               <i class="ni ni-user-run text-pink"></i> Driver
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="reporting.html">
+            <a class="nav-link" href="reporting.php">
               <i class="ni ni-chart-bar-32 text-info"></i> Reports
             </a>
           </li>
@@ -149,3 +149,43 @@
       </div>
     </div>
   </nav>
+
+   <!-- Main content -->
+  <div class="main-content">
+    <!-- Top navbar -->
+    <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Change This</a>
+
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="./assets/img/theme/admin.jpg">
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold">User</span>
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="pages/profile/my-profile.html" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="index.html" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
