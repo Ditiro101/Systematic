@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/add-employee-type.html">
+                    <a href="pages/admin/add-employee-type.php">
                       <div>
                         <i class="far fa-plus-square"></i>
                         <span>Add Employee Type</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/maintain-employee-type.html">
+                    <a href="pages/admin/maintain-employee-type.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Employee Type</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/search-employee-type.html">
+                    <a href="pages/admin/search-employee-type.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Employee Type</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/view-audit-log.html">
+                    <a href="pages/admin/view-audit-log.php">
                       <div>
                         <i class="far fa-eye"></i>
                         <span>View Audit Log</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/backup.html">
+                    <a href="pages/admin/backup.php">
                       <div>
                         <i class="far fa-save"></i>
                         <span>Backup</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/restore.html">
+                    <a href="pages/admin/restore.php">
                       <div>
                         <i class="fas fa-undo"></i>
                         <span>Restore</span>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/delete-user.html">
+                    <a href="pages/admin/delete-user.php">
                       <div>
                         <i class="fas fa-user-times"></i>
                         <span>Delete User</span>
