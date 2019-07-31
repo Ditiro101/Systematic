@@ -53,7 +53,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/employee/add.html">
+                    <a href="pages/employee/add.php">
                       <div>
                         <i class="fas fa-plus"></i>
                         <span>Add Employee</span>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/search.html">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Employee</span>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/search.html">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Employee</span>
@@ -83,7 +83,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/search.html">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Dismiss Employee</span>
@@ -93,7 +93,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/checkin.html">
+                    <a href="pages/employee/checkin.php">
                       <div>
                         <i class="far fa-file-alt"></i>
                         <span>Check-in</span>
@@ -103,7 +103,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/checkout.html">
+                    <a href="pages/employee/checkout.php">
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Checkout</span>
@@ -113,7 +113,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/issueWage.html">
+                    <a href="pages/employee/issueWage.php">
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Collect Wage</span>
@@ -123,7 +123,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/employee/search.html">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Regenerate Employee Tag</span>

@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/product/add.html"><div>
+                    <a href="pages/product/add.php"><div>
                       <i class="fas fa-plus"></i>
                       <span>Add Product</span>
                     </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" >
-                    <a href="pages/product/search.html"><div>
+                    <a href="pages/product/search.php"><div>
                       <i class="far fa-edit"></i>
                       <span>Maintain Product</span>
                     </div></a>
@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" >
-                    <a href="pages/product/search.html"><div>
+                    <a href="pages/product/search.php"><div>
                       <i class="fas fa-search"></i>
                       <span>Search Product</span>
                     </div>
@@ -77,7 +77,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/product/add_type.html"><div>
+                    <a href="pages/product/add_type.php"><div>
                       <i class="fas fa-plus"></i>
                       <span>Add Product Type</span>
                     </div>
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/product/search_type.html"><div>
+                    <a href="pages/product/search_type.php"><div>
                       <i class="far fa-edit"></i>
                       <span>Maintain Product Type</span>
                     </div></a>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" >
-                    <a href="pages/product/search_type.html"><div>
+                    <a href="pages/product/search_type.php"><div>
                       <i class="fas fa-search"></i>
                       <span>Search Product Type</span>
                     </div>
