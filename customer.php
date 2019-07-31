@@ -51,8 +51,8 @@
             <div class="card-body">
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  href="/pages/customer/register.html">
-                    <a href="pages/customer/register.html">
+                  <button type="button" class="btn-icon-clipboard"  href="/pages/customer/register.php">
+                    <a href="pages/customer/register.php">
                       <div>
                       <i class="fas fa-plus"></i>
                       <span>Register Customer</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/customer/search.html">
+                    <a href="pages/customer/search.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Customer</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/customer/search.html">
+                    <a href="pages/customer/search.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Customer</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button class="btn-icon-clipboard" href="#">
-                    <a href="pages/customer/search.html">
+                    <a href="pages/customer/search.php">
                       <div>
                         <i class="ni ni-fat-remove"></i>
                         <span>Deregister Customer</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
-                    <a href="pages/customer/search.html">
+                    <a href="pages/customer/search.php">
                       <div>
                         <i class="far fa-file-alt"></i>
                         <span>Apply for Credit</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
-                    <a href="pages/customer/search.html">
+                    <a href="pages/customer/search.php">
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>View Customer Account</span>
