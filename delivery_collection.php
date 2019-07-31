@@ -25,7 +25,7 @@
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Customer</a>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Delivery/Collection</a>
         <?php include_once("usernavbar.php");?>
         
       </div>
@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/sales/search-sale.html">
+                    <a href="pages/sales/search-sale.php">
                       <div>
                         <i class="fas fa-truck"></i>
                         <span>Add Sale Delivery</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-sale-delivery.html">
+                    <a href="pages/delivery_collection/search-sale-delivery.php">
                       <div>
                         <i class="far fa-window-close"></i>
                         <span>Cancel Sale Delivery</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-sale-delivery.html">
+                    <a href="pages/delivery_collection/search-sale-delivery.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Sale Delivery</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-order.html">
+                    <a href="pages/supplier/search-order.php">
                       <div>
                         <i class="fas fa-truck-moving"></i>
                         <span>Add Order Collection</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-supplier-order-collection.html">
+                    <a href="pages/delivery_collection/search-supplier-order-collection.php">
                       <div>
                         <i class="far fa-times-circle"></i>
                         <span>Cancel Order Collection</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-supplier-order-collection.html">
+                    <a href="pages/delivery_collection/search-supplier-order-collection.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Order Collection</span>
@@ -112,7 +112,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/add_truck.html">
+                    <a href="pages/delivery_collection/add_truck.php">
                       <div>
                         <i class="fas fa-plus"></i>
                         <span>Add Truck</span>
@@ -122,7 +122,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-truck.html">
+                    <a href="pages/delivery_collection/search-truck.php">
                       <div>
                         <i class="fas fa-wrench"></i>
                         <span>Maintain Truck</span>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/search-truck.html">
+                    <a href="pages/delivery_collection/search-truck.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Truck</span>
@@ -142,7 +142,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/assign-truck.html">
+                    <a href="pages/delivery_collection/assign-truck.php">
                       <div>
                         <i class="fas fa-truck"></i>
                         <span>Assign Truck</span>
@@ -152,7 +152,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/maintain-assigned-truck.html">
+                    <a href="pages/delivery_collection/maintain-assigned-truck.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Assigned Truck</span>
@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/finalise-assigned-truck.html">
+                    <a href="pages/delivery_collection/finalise-assigned-truck.php">
                       <div>
                         <i class="far fa-check-square"></i>
                         <span>Finalise Assigned Truck</span>
