@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/add-user.html">
+                    <a href="pages/user/add-user.php">
                       <div>
                         <i class="fas fa-user-plus"></i>
                         <span>Add User</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/search-user.html">
+                    <a href="pages/user/search-user.php">
                       <div>
                         <i class="fas fa-user-edit"></i>
                         <span>Maintain User</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/search-user.html">
+                    <a href="pages/user/search-user.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search User</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/add-user-role.html">
+                    <a href="pages/user/add-user-role.php">
                       <div>
                         <i class="fas fa-user-tie"></i>
                         <span>Add User Role</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/search-user-role.html">
+                    <a href="pages/user/search-user-role.php">
                       <div>
                         <i class="fas fa-pen"></i>
                         <span>Maintain User Role</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/search-user-role.html">
+                    <a href="pages/user/search-user-role.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search User Role</span>

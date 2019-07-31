@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Login - Stock Path</title>
+  <title>Reset Password Request - Stock Path</title>
   <!-- Favicon -->
   <link href="../../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -75,7 +75,7 @@
             </div>
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
-                <small>Welcome</small>
+                <small>Please enter your email address</small>
               </div>
               <form role="form">
                 <div class="form-group mb-3">
@@ -86,24 +86,40 @@
                     <input class="form-control" placeholder="Email" type="email">
                   </div>
                 </div>
-                <div class="form-group">
-                  <div class="input-group input-group-alternative">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                    </div>
-                    <input class="form-control" placeholder="Password" type="password">
-                  </div>
-                </div>
-
                 <div class="text-center">
-                  <a  class="btn btn-customGreen my-4" href="../../index.html">Log in</a>
+                  <button type="button" class="btn btn-customGreen mt-4 mb-3" data-toggle="modal" data-target="#modal-default">Send Link
+                  </button>
                 </div>
+                <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                        <div class="modal-content">
+                          
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            
+                            <div class="modal-body">
+                                <p>Reset password link sent. Check your email</p>
+                                
+                            </div>
+                            
+                            <div class="modal-footer">
+                                
+                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../index.php'">Close</button> 
+                            </div>
+                            
+                        </div>
+                    </div>
+                  </div>
               </form>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-12 text-center">
-              <a href="reset-user-password-request.html" class="text-dark"><small>Forgot Password?</small></a>
+              <a href="login.php" class="text-dark"><small>Login</small></a>
             </div>
           </div>
         </div>
@@ -112,26 +128,7 @@
   </div>
   <!-- Footer -->
 
-  <footer class="py-6">
-    <div class="container">
-      <div class="row align-items-center justify-content-xl-between">
-        <div class="col-xl-6">
-          <div class="copyright text-center text-xl-left text-muted">
-           <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2019 <a href="#" class="font-weight-bold ml-1" target="_blank">Stock Path</a>
-            </div>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-            <li class="nav-item">
-              <a href="#" class="nav-link" target="_blank">About Us</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </footer>
+  <?php include_once("../footer.php");?>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
