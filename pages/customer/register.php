@@ -75,7 +75,6 @@
                         <div class="form-group col-6">
                           <label for="exampleInputEmail1">Name</label>
                           <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
-                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group col-6">
                           <label for="exampleInputPassword1">Surname</label>
