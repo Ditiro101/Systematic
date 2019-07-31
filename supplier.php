@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/add-supplier.html">
+                    <a href="pages/supplier/add-supplier.php">
                       <div>
                         <i class="fas fa-user-plus"></i>
                         <span>Add Supplier</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-supplier.html">
+                    <a href="pages/supplier/search-supplier.php">
                       <div>
                         <i class="fas fa-user-edit"></i>
                         <span>Maintain Supplier</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-supplier.html">
+                    <a href="pages/supplier/search-supplier.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Supplier</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/place-order.html">
+                    <a href="pages/supplier/place-order.php">
                       <div>
                         <i class="fas fa-shopping-cart"></i>
                         <span>Place Order</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-order.html">
+                    <a href="pages/supplier/search-order.php">
                       <div>
                         <i class="far fa-times-circle"></i>
                         <span>Cancel Order</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-order.html">
+                    <a href="pages/supplier/search-order.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Order</span>

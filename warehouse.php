@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/warehouse/add.html">
+                    <a href="pages/warehouse/add.php">
                       <div>
                         <i class="fas fa-plus"></i>
                         <span>Add Warehouse</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/warehouse/search.html">
+                    <a href="pages/warehouse/search.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Warehouse</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/warehouse/search.html">
+                    <a href="pages/warehouse/search.php">
                       <div>
                         <i class="fas fa-warehouse"></i>
                         <span>Search Warehouse</span>

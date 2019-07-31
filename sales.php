@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/sales/make-sale.html">
+                    <a href="pages/sales/make-sale.php">
                       <div>
                         <i class="fas fa-dollar-sign"></i>
                         <span>Make Sale</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/sales/search-sale.html">
+                    <a href="pages/sales/search-sale.php">
                       <div>
                         <i class="far fa-times-circle"></i>
                         <span>Return Sale</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/sales/search-sale.html">
+                    <a href="pages/sales/search-sale.php">
                       <div>
                         <i class="fas fa-search-dollar"></i>
                         <span>Search Sale</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/sales/search-sale.html">
+                    <a href="pages/sales/search-sale.php">
                       <div>
                         <i class="fas fa-people-carry"></i>
                         <span>Collect Sale</span>
@@ -117,12 +117,12 @@
             <div class="modal-body text-centre">
               <p class="px-auto text-center">Does the customer want to pay for a sale or pay off account?</p>   
               <div class="col px-auto text-center">
-                <button class="btn btn-icon btn-2 btn-success mt-0 mx-auto col-5" type="button" onclick="window.location='pages/sales/search-sale.html'">
+                <button class="btn btn-icon btn-2 btn-success mt-0 mx-auto col-5" type="button" onclick="window.location='pages/sales/search-sale.php'">
                   <span><i class="fas fa-money-bill-alt"></i></span>
                   <span class="btn-inner--text">Pay Off Sale</span>
                 </button>
                 <br>
-                <button class="btn btn-icon btn-2 btn-default mt-3 px-4 mx-auto col-5" type="button" onclick="window.location='pages/customer/search.html'">
+                <button class="btn btn-icon btn-2 btn-default mt-3 px-4 mx-auto col-5" type="button" onclick="window.location='pages/customer/search.php'">
                   <span><i class="fas fa-file-invoice"></i></span>
                   <span class="btn-inner--text">Pay Off Account</span>
                 </button>

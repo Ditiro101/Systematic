@@ -26,175 +26,16 @@
 </style>
 
 <body>
-  <!-- Sidenav -->
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-    <div class="container-fluid">
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Brand -->
-      <a class="navbar-brand pt-0" href="../../index.html">
-        <img src="../../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
-      </a>
-      <!-- User -->
-      <ul class="nav align-items-center d-md-none">
-        <li class="nav-item dropdown">
-          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
-              </span>
-            </div>
-          </a>
-          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-            <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
-            </div>
-            <a href="../profile/my-profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="../../index.html" class="dropdown-item">
-              <i class="ni ni-user-run"></i>
-              <span>Logout</span>
-            </a>
-          </div>
-        </li>
-      </ul>
-      <!-- Collapse -->
-      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-        <!-- Collapse header -->
-        <div class="navbar-collapse-header d-md-none">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="../../index.html">
-                <img src="../../assets/img/brand/blue.png">
-              </a>
-            </div>
-            <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Navigation -->
-        <ul class="navbar-nav">
-
-        <!-- Heading -->
-       
-          <li class="nav-item">
-            <a class="nav-link" href="../../dashboard.html">
-              <i class="ni ni-tv-2 text-primary"></i> Dashboard
-            </a>
-  
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../customer.html">
-              <i class="ni ni-circle-08 text-green"></i> Customer  
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../employee.html">
-              <i class="ni ni-badge text-orange"></i> Employee
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../user.html">
-              <i class="ni ni-laptop text-yellow"></i> User
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../admin.html">
-              <i class="ni ni-settings text-red"></i> Admin
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../supplier.html">
-              <i class="ni ni-briefcase-24 text-info"></i> Suppliers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../warehouse.html">
-              <i class="ni ni-shop text-pink"></i> Warehouse
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../sales.html">
-              <i class="ni ni-cart text-green"></i> Sales
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../product.html">
-              <i class="ni ni-basket text-orange"></i> Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../stock.html">
-              <i class="ni ni-box-2 text-yellow"></i> Stock
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../delivery_collection.html">
-              <i class="ni ni-delivery-fast text-red"></i> Delivery
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../driver.html">
-              <i class="ni ni-user-run text-pink"></i> Driver
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../reporting.html">
-              <i class="ni ni-chart-bar-32 text-info"></i> Reports
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-  <!-- Main content -->
+  <?php include_once("../header.php");?>
+   <!-- Main content -->
   <div class="main-content">
     <!-- Top navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">View Order</a>
-
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
-                </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">User</span>
-                </div>
-              </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class=" dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome!</h6>
-              </div>
-              <a href="../profile/my-profile.html" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="../../index.html" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
-            </div>
-          </li>
-        </ul>
+        <?php include_once("../usernavbar.php");?>
+        
       </div>
     </nav>
     <!-- Header -->
@@ -225,7 +66,7 @@
                   <ol class="progtrckr" data-progtrckr-steps="3">
                     <li class="progtrckr-done">Order Sent</li>
                     <li class="progtrckr-done">Order Confirmed</li>
-                    <li class="progtrckr-todo">Order Received</li>
+                    <li class="progtrckr-done">Order Received</li>
                    
                   </ol>
                 </div>
@@ -373,53 +214,78 @@
               </div>
             </div>
             <br>
- 
+            <div class="col-12">
+              <h2 class="ml-4 my-3">Returns</h3>
+            </div>
             
-          
+            <div class="col-12">
+                <div class="card shadow">
+                <div class="table-responsive">
+
+                  <table id="myTable" class="table align-items-center table-flush">
+                     <thead class="thead-light">
+                    <tr class="header">
+                      <th class="text-center"> Quantity Returned</th>
+                      <th> Item Name</th>
+                      <th class="pl-4 text-right"> Unit Price</th>
+                      <th class="text-right"> Total </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="py-3 text-center">10</td>
+                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
+                      <td class="text-right py-3">R83.00</td>
+                      <td class="text-right py-3">830.00</td>
+                    </tr>
+                    <tr>
+                      <td class="py-3 text-center">15</td>
+                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
+                      <td class="text-right py-3">R47.00</td>
+                      <td class="text-right py-3">R705.00</td>
+                    </tr>
+                    </tbody>
+                    <tfoot class="tfoot-light">
+                    <tr class="footer">
+                      <td></td>
+                      <td></td>
+                      <th class="text-right"><b>TOTAL</b></th>
+                      <td class="text-right"><b>R1 535.00</b></td>
+                    </tr>
+                    <tr class="footer">
+                      <td></td>
+                      <td></td>
+                      <th class="text-right"><b>VAT (15%)</b></th>
+                      <td class="text-right"><b>R230.25</b></td>
+                    </tr>
+                    </tfoot>
+                  </table>
+                </div>
+              </div>
+            </div>
 
               <div class="col mt-4">
                 <button class="btn btn-icon btn-2 btn-primary mt-0" type="button" onclick="window.history.go(-1); return false;">
                   <span class="btn-inner--text">Close</span>
-                </button>  
-                <button class="btn btn-icon btn-2 btn-danger mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#del">
+                </button> 
+                <button class="btn btn-icon btn-2 btn-danger mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#del" disabled>
                   <span class="btn-inner--icon"><i class="fas fa-times-circle"></i></span>
                   <span class="btn-inner--text" >Cancel Order</span>
                 </button>
-                <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="button" onclick="window.location='../stock/return-order.html'" disabled>
+                <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="button" onclick="window.location='../stock/return-order.html'">
                   <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
                   <span class="btn-inner--text">Make Return</span>
                 </button>
-                <button class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="button" onclick="window.location='../stock/receive-order.html'">
+                <button class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="button" onclick="window.location='../stock/receive-order.html'" disabled>
                   <span class="btn-inner--icon"><i class="fas fa-layer-group"></i></span>
                   <span class="btn-inner--text" >Receive Order</span>
                 </button>
-                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-addCollection">
+                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-addCollection" disabled>
                   <span class="btn-inner--icon">
                     <i class="fas fa-truck"></i>
                   </span>
                   <span class="btn-inner--text" >Add Collection</span>
                 </button>
-              </div>
-              <div class="modal fade" id="modal-addCollection" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content"> 
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default">Warning</h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                      <div class="form-group col">
-                        <label for="bane">Are you sure you want to add a collection to the order?</label>
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-accountSuccess" onclick="window.location='../delivery_collection/add_collection.html'">Yes</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                    </div>   
-                  </div>
-                </div>
               </div>
               <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -468,23 +334,7 @@
           </div>
           </div>
         </div>
-        <!-- Footer -->
-        <footer class="footer">
-          <div class="row align-items-center justify-content-xl-between">
-            <div class="col-xl-6">
-              <div class="copyright text-center text-xl-left text-muted">
-                &copy; 2019 <a class="font-weight-bold ml-1" target="_blank" href="../about_us/stock-path.html">Stock Path</a>
-              </div>
-            </div>
-            <div class="col-xl-6">
-              <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-                <li class="nav-item">
-                  <a href="../about_us/aboout-us.html" class="nav-link" target="_blank">About Us</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </footer>
+        <?php include_once("../footer.php");?>
       </div>
     </div>
   <!-- Argon Scripts -->

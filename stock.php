@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-order.html">
+                    <a href="pages/supplier/search-order.php">
                       <div>
                         <i class="fas fa-layer-group"></i>
                         <span>Receive Stock</span>
@@ -62,7 +62,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/product/search.html">
+                    <a href="pages/product/search.php">
                       <div>
                         <i class="far fa-window-close"></i>
                         <span>Write-off Stock</span>
@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-order.html">
+                    <a href="pages/supplier/search-order.php">
                       <div>
                         <i class="fas fa-backspace"></i>
                         <span>Return Stock</span>
@@ -82,7 +82,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/product/search.html">
+                    <a href="pages/product/search.php">
                       <div>
                         <i class="fas fa-th"></i>
                         <span>Convert Stock</span>
@@ -92,7 +92,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/stock/place-stock-item.html">
+                    <a href="pages/stock/place-stock-item.php">
                       <div>
                         <i class="fas fa-pallet"></i>
                         <span>Place Stock Item</span>
@@ -102,7 +102,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/stock/stock_take.html">
+                    <a href="pages/stock/stock_take.php">
                       <div>
                         <i class="fas fa-clipboard-list"></i>
                         <span>Stock Take</span>
