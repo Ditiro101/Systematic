@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Make Collection - Stock Path</title>
+  <title>Make Delivery - Stock Path</title>
   <!-- Favicon -->
   <link href="../../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -19,175 +19,16 @@
 </head>
 
 <body>
-  <!-- Sidenav -->
-  <nav class="navbar navbar-vertical fixed-left navbar-expand-md navbar-light bg-white" id="sidenav-main">
-    <div class="container-fluid">
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <!-- Brand -->
-      <a class="navbar-brand pt-0" href="../../index.html">
-        <img src="../../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
-      </a>
-      <!-- User -->
-      <ul class="nav align-items-center d-md-none">
-        <li class="nav-item dropdown">
-          <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
-              </span>
-            </div>
-          </a>
-          <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-            <div class=" dropdown-header noti-title">
-              <h6 class="text-overflow m-0">Welcome!</h6>
-            </div>
-            <a href="../profile/my-profile.html" class="dropdown-item">
-              <i class="ni ni-single-02"></i>
-              <span>My profile</span>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a href="../../index.html" class="dropdown-item">
-              <i class="ni ni-user-run"></i>
-              <span>Logout</span>
-            </a>
-          </div>
-        </li>
-      </ul>
-      <!-- Collapse -->
-      <div class="collapse navbar-collapse" id="sidenav-collapse-main">
-        <!-- Collapse header -->
-        <div class="navbar-collapse-header d-md-none">
-          <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="../../index.html">
-                <img src="../../assets/img/brand/blue.png">
-              </a>
-            </div>
-            <div class="col-6 collapse-close">
-              <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
-                <span></span>
-                <span></span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <!-- Navigation -->
-        <ul class="navbar-nav">
-
-        <!-- Heading -->
-       
-          <li class="nav-item">
-            <a class="nav-link" href="../../dashboard.html">
-              <i class="ni ni-tv-2 text-primary"></i> Dashboard
-            </a>
-  
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../customer.html">
-              <i class="ni ni-circle-08 text-green"></i> Customer  
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../employee.html">
-              <i class="ni ni-badge text-orange"></i> Employee
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../user.html">
-              <i class="ni ni-laptop text-yellow"></i> User
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../admin.html">
-              <i class="ni ni-settings text-red"></i> Admin
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../supplier.html">
-              <i class="ni ni-briefcase-24 text-info"></i> Suppliers
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../warehouse.html">
-              <i class="ni ni-shop text-pink"></i> Warehouse
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../sales.html">
-              <i class="ni ni-cart text-green"></i> Sales
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../product.html">
-              <i class="ni ni-basket text-orange"></i> Products
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../stock.html">
-              <i class="ni ni-box-2 text-yellow"></i> Stock
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../delivery_collection.html">
-              <i class="ni ni-delivery-fast text-red"></i> Delivery
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../driver.html">
-              <i class="ni ni-user-run text-pink"></i> Driver
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="../../reporting.html">
-              <i class="ni ni-chart-bar-32 text-info"></i> Reports
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-
-
-  <!-- Main content -->
+  <?php include_once("../header.php");?>
+   <!-- Main content -->
   <div class="main-content">
     <!-- Top navbar -->
     <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
       <div class="container-fluid">
         <!-- Brand -->
-        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Make Collection</a>
-
-        <!-- User -->
-        <ul class="navbar-nav align-items-center d-none d-md-flex">
-          <li class="nav-item dropdown">
-            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <div class="media align-items-center">
-                <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
-                </span>
-                <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">User</span>
-                </div>
-              </div>
-            </a>
-            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-              <div class=" dropdown-header noti-title">
-                <h6 class="text-overflow m-0">Welcome!</h6>
-              </div>
-              <a href="../profile/my-profile.html" class="dropdown-item">
-                <i class="ni ni-single-02"></i>
-                <span>My profile</span>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a href="../../index.html" class="dropdown-item">
-                <i class="ni ni-user-run"></i>
-                <span>Logout</span>
-              </a>
-            </div>
-          </li>
-        </ul>
+        <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Make Delivery</a>
+        <?php include_once("../usernavbar.php");?>
+        
       </div>
     </nav>
     <!-- Header -->
@@ -214,7 +55,7 @@
                                   <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="fa fa-search"></i></span>
                                   </div>
-                                  <input class="form-control"  id="myInput" onkeyup="myFunction()" placeholder="Enter order #" title="Type in a name" type="text">
+                                  <input class="form-control"  id="myInput" onkeyup="myFunction()" placeholder="Enter Invoice #" title="Type in a name" type="text">
                                 </div>
                               </div>
                             </div>
@@ -246,13 +87,13 @@
                       <tr class="header">
                        
                         <th></th>
-                        <th>Supplier Order#</th>
+                        <th>Invoice#</th>
                     
                       </tr>
                     </thead>
                     <tbody>
                       <thead class="table-light" id="dateHeading1">
-                        <th><b>04/07/2019</b></th>
+                        <th><b>25/07/2019</b></th>
                         <th></th>
                       </thead>
                       <tr>
@@ -260,27 +101,14 @@
                           <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select" >
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
                         <td>321</td>
 
                       </tr>
-                      <tr>
-                       
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Collection</span>
-                          </button>
-                        </td>
-                        <td>124</td>
-                     
-                        
-                      </tr>
                       <thead class="table-light" id="dateHeading2">
-                        <th><b>05/07/2019</b></th>
+                        <th><b>26/07/2019</b></th>
                         <th></th>
                       </thead>
                       <tr>
@@ -288,14 +116,14 @@
                           <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
-                        <td>128</td>
+                        <td>329</td>
                       </tr>
 
                       <thead class="table-light" id="dateHeading3">
-                        <th><b>06/07/2019</b></th>
+                        <th><b>27/07/2019</b></th>
                         <th></th>
                       </thead>
                       <tr>
@@ -303,13 +131,13 @@
                           <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
-                        <td>135</td>
+                        <td>330</td>
                       </tr>
                       <tr id="emptySearch" style="display: none;" class="table-danger">
-                        <td><b>No Collection Found</b></td>
+                        <td><b>No Delivery Found</b></td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -323,7 +151,7 @@
                       <tr class="header">
                        
                         <th></th>
-                        <th>Order#</th>
+                        <th>Invoice/Order#</th>
                     
                       </tr>
                     </thead>
@@ -337,7 +165,7 @@
                           <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select" >
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
                         <td>321</td>
@@ -346,47 +174,47 @@
                       <tr>
                        
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
                         <td>255</td>
                      
                         
                       </tr>
-                      <thead class="table-light"  id="cityHeading2">
+                      <thead class="table-light" id="cityHeading2">
                         <th><b>Kimberly</b></th>
                         <th></th>
                       </thead>
                       <tr>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
                         <td>128</td>
                       </tr>
 
-                      <thead class="table-light"  id="cityHeading3">
+                      <thead class="table-light" id="cityHeading3">
                         <th><b>Nelspruit</b></th>
                         <th></th>
                       </thead>
                       <tr>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
-                            <span class="btn-inner--text">Make Collection</span>
+                            <span class="btn-inner--text">Make Delivery</span>
                           </button>
                         </td>
                         <td>135</td>
                       </tr>
                       <tr id="emptySearch2" style="display: none;" class="table-danger">
-                        <td><b>No Collection Found</b></td>
+                        <td><b>No Delivery Found</b></td>
                         <td></td>
                       </tr>
                     </tbody>
@@ -401,11 +229,11 @@
                       <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
                     </div>
                     <div class="modal-body">
-                      <p>Are you sure you want to make the selected collection?</p>
+                      <p>Are you sure you want to make the selected delivery?</p>
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" onclick="window.location='finalise_collection.html'">Yes</button>
+                    <button type="button" class="btn btn-success" onclick="window.location='finalise_delivery.html'">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -501,23 +329,7 @@
       </div>
   
 
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-          <div class="col-xl-6">
-            <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2019 <a class="font-weight-bold ml-1" target="_blank" href="../about_us/stock-path.html">Stock Path</a>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <ul class="nav nav-footer justify-content-center justify-content-xl-end">
-              <li class="nav-item">
-                <a href="../about_us/aboout-us.html" class="nav-link" target="_blank">About Us</a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </footer>
+      <?php include_once("../footer.php");?>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

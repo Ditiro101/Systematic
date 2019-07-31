@@ -52,7 +52,7 @@
               <div class="row icon-examples">
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/driver/select_truck_delivery.html">
+                    <a href="pages/driver/select_truck_delivery.php">
                       <div>
                         <i class="fas fa-truck"></i>
                         <span>Make Delivery</span>
@@ -63,7 +63,7 @@
 
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/driver/select_truck_collection.html">
+                    <a href="pages/driver/select_truck_collection.php">
                       <div>
                         <i class="fas fa-truck-moving"></i>
                         <span>Make Collection</span>
