@@ -111,7 +111,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="../../delivery_collection.php">
-              <i class="ni ni-delivery-fast text-red"></i> Delivery
+              <i class="ni ni-delivery-fast text-red"></i> Delivery/Collection
             </a>
           </li>
           <li class="nav-item">
