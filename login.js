@@ -30,10 +30,11 @@ $(document).ready(function(){
         }
         else{
             if(password==""){
-                 $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please!</strong> </span></div>"); 
+                 $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter password!</strong> </span></div>"); 
             }
             else if(email==""){
-
+                $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter email!</strong> </span></div>"); 
+            
             }
            //_549!d.TQi%9
                        
