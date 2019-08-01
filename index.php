@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <meta charset="utf-8"> gg
+  <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
@@ -69,10 +69,16 @@
                   <img class="img-fluid" src="./assets/img/brand/blue.png">
               </div>
             </div>
+
             <div class="card-body px-lg-5 py-lg-5">
+
               <div class="text-center text-muted mb-4">
+                <div id="alert-login">
+                </div>
                 <small>Welcome</small>
+                
               </div>
+              
                 <form method='post' action="">
                   <div class="form-group mb-3">
                     <div class="input-group input-group-alternative">

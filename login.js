@@ -5,20 +5,39 @@ $(document).ready(function(){
         var email = $("#email").val().trim();
         var password = $("#password").val().trim();
 
-         
+        
         if( email != "" && password != "" ){
-            console.log(email);
+           
             $.ajax({
                 url:'login.php',
                 type:'post',
                 data:{email:email,password:password},
                 success:function(response){
-                        console.log("success");
-                        //window.location = "dashboard.html";
+                    if(response=="success"){
+                        window.location = "dashboard.html"; 
+                    }
+                    else{
+                         //$("<tr></tr>").append($("<td></td>").html(`Assignment ${element['number']}`),($("<td></td>").html(element["mark"])));
+                        $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Login failed!</strong> </span></div>"); 
+                        
+                    }
+                       
               
-                }
+                },
+             
 
             });
         }
+        else{
+            if(password==""){
+                 $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please!</strong> </span></div>"); 
+            }
+            else if(email==""){
+
+            }
+           //_549!d.TQi%9
+                       
+        }
+
     });
 });
