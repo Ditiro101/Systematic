@@ -79,14 +79,14 @@
                 <td>Smith</td>
                 <td>085 515 6262</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -100,7 +100,7 @@
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.html'">
+                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                     </span>
                     <span class="btn-inner--text">View Credit Account</span>
@@ -113,14 +113,14 @@
                 <td>Haynes</td>
                 <td>065 626 3161</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'" >
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'" >
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -134,7 +134,7 @@
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.html'">
+                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.php'">
                     <span class="btn-inner--icon"><i class="fas fa-edit"></i>
                     </span>
                     <span class="btn-inner--text">Apply For Account</span>
@@ -147,14 +147,14 @@
                 <td>Saynes</td>
                 <td>061 656 5551</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -168,7 +168,7 @@
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.html'">
+                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                     </span>
                     <span class="btn-inner--text">View Credit Account</span>
@@ -181,14 +181,14 @@
                 <td>Cooper</td>
                 <td>063 213 5122</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -202,7 +202,7 @@
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.html'">
+                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.php'">
                     <span class="btn-inner--icon"><i class="fas fa-edit"></i>
                     </span>
                     <span class="btn-inner--text">Apply For Account</span>
@@ -260,7 +260,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                       </div>
                       
                   </div>
