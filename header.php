@@ -81,7 +81,7 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="admin.php">
-              <i class="ni ni-settings text-red"></i> Admin
+              <i class="ni ni-settings text-red"></i> Administration
             </a>
           </li>
           <li class="nav-item">

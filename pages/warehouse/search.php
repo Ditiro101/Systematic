@@ -74,7 +74,7 @@
                   <td>This warehouse stores all the products to be sold.</td>
                   <td>450</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -86,7 +86,7 @@
                 <td>This warehouse stores stock before it is moved to the main warehouse.</td>
                 <td>350</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -98,7 +98,7 @@
                 <td>This warehouse stores beverages.</td>
                 <td>500</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -110,7 +110,7 @@
                 <td>This warehouse stores cases of products that have been broken down.</td>
                 <td>200</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>

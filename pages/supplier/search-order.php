@@ -77,7 +77,7 @@
                   <td>Better Bulk</td>
                   <td>Recieved</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -90,7 +90,7 @@
                   <td>Caines Foods</td>
                   <td>Pending</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -103,7 +103,7 @@
                   <td>Coca Cola</td>
                   <td>Returned</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -116,7 +116,7 @@
                   <td>Makro</td>
                   <td>Pending</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -129,7 +129,7 @@
                   <td>Wholesale Market</td>
                   <td>Pending</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -142,7 +142,7 @@
                   <td>Bulk Bounty</td>
                   <td>Pending</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -200,7 +200,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" onclick="window.location='../../supplier.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" onclick="window.location='../../supplier.php'">Close</button> 
                       </div>
                       
                   </div>

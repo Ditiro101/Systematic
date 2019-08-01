@@ -72,7 +72,7 @@
                 <td>Beverage</td>
                 <td>Any coldrinks, juice or concerntrates</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.html'">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -83,7 +83,7 @@
                 <td>Soap</td>
                 <td>Soap based products</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -94,7 +94,7 @@
                 <td>Maze meal</td>
                 <td>Grain and maze based products</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -105,7 +105,7 @@
                 <td>Alcohol</td>
                 <td>Any beverage with alchohol</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>

@@ -59,14 +59,14 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.html'">
+                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                     </span>
                     <span class="btn-inner--text">View Credit Account</span>

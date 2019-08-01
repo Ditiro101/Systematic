@@ -74,7 +74,7 @@
                 <td>Level 1 - Administration 1</td>
                 <td>No</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -86,7 +86,7 @@
                 <td>Level 2 - Sales 1</td>
                 <td>No</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -98,7 +98,7 @@
                 <td>Level 3 - Warehouse 1</td>
                 <td>No</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -110,7 +110,7 @@
                 <td>Level 4 - Warehouse 2</td>
                 <td>Yes</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button">
+        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
         						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
         						</span>
         						<span class="btn-inner--text">Edit</span>
@@ -122,7 +122,7 @@
                 <td>Level 5 - Driver 1</td>
                 <td>No</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>

@@ -90,7 +90,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <a href="list_collection.html" class="btn btn-success" >Yes</a>
+                    <a href="list_collection.php" class="btn btn-success" >Yes</a>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>

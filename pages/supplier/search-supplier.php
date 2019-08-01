@@ -80,14 +80,14 @@
                 <td>085 515 6262</td>
                 <td>better.bulk@gmail.com</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -100,14 +100,14 @@
                 <td>062 345 8725</td>
                 <td>bulk.bounty@gmail.com</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -120,14 +120,14 @@
                 <td>078 457 2257</td>
                 <td>orders@cocacola.com</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -140,14 +140,14 @@
                 <td>063 249 2045</td>
                 <td>caines.foods@gmail.com</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -160,14 +160,14 @@
                 <td>063 234 1738</td>
                 <td>ordering@macro.co.za</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -180,14 +180,14 @@
                 <td>065 446 7435</td>
                 <td>supply@wholesalemarket.com</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>

@@ -80,7 +80,7 @@
                         <td>Mr Alfreds Futterkiste</td>
                         <th>Not Delivered</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -101,7 +101,7 @@
                         <td>Mr Benny Haynes</td>
                         <th>Not Delivered</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -122,7 +122,7 @@
                         <td>Miss Annie Saynes</td>
                         <th>On Delivery</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -143,7 +143,7 @@
                         <td>Mr David Cooper</td>
                         <th>On Delivery</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -164,7 +164,7 @@
                         <td>Mrs Kim Gardner</td>
                         <th>Truck Assigned</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -185,7 +185,7 @@
                         <td>Mrs Delia Mitchell</td>
                         <th>Not Delivered</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" onclick="window.location='cancel_delivery.html'">Yes</button>
+                    <button type="button" class="btn btn-success" onclick="window.location='cancel_delivery.php'">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -248,7 +248,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.php'">Close</button> 
                       </div>
                       
                   </div>

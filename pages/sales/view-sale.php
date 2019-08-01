@@ -265,7 +265,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.php'">Close</button> 
                       </div>
                       
                   </div>
@@ -286,7 +286,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-accountSuccess" onclick="window.location='../delivery_collection/add_delivery.html'">Yes</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-accountSuccess" onclick="window.location='../delivery_collection/add_delivery.php'">Yes</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>   
                   </div>
@@ -307,7 +307,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" onclick="window.location='return-sale.html'">Yes</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" onclick="window.location='return-sale.php'">Yes</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>   
                   </div>
@@ -371,7 +371,7 @@
                       <p class="ml-2">Sale payment successful. Printing payment invoice...</p>   
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.html'">Close</button> 
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.php'">Close</button> 
                     </div>    
                   </div>
                 </div>
@@ -441,7 +441,7 @@
                     </div>
                     <div class="modal-footer">
                         
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.html'">Close</button> 
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../sales.php'">Close</button> 
                     </div>    
                   </div>
                 </div>

@@ -187,7 +187,7 @@
                       <tr>
                        
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
                             <span class="btn-inner--text">Make Collection</span>
@@ -203,7 +203,7 @@
                       </thead>
                       <tr>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
                             <span class="btn-inner--text">Make Collection</span>
@@ -218,7 +218,7 @@
                       </thead>
                       <tr>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-truck"></i>
                             </span>
                             <span class="btn-inner--text">Make Collection</span>
@@ -246,7 +246,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" onclick="window.location='finalise_collection.html'">Yes</button>
+                    <button type="button" class="btn btn-success" onclick="window.location='finalise_collection.php'">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>

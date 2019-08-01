@@ -80,7 +80,7 @@
                         <td>Better Bulk</td>
                         <th>Not Collected</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -101,7 +101,7 @@
                         <td>Makro</td>
                         <th>On Collection</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -122,7 +122,7 @@
                         <td>Coca Cola</td>
                         <th>Not Collected</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -143,7 +143,7 @@
                         <td>Caines Foods</td>
                         <th>Truck Assigned</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -164,7 +164,7 @@
                         <td>Wholesale Market</td>
                         <th>On Collection</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -185,7 +185,7 @@
                         <td>Bulk Bounty</td>
                         <th>Collected</th>
                         <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
+                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
                             <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                             </span>
                             <span class="btn-inner--text">View</span>
@@ -224,7 +224,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location='cancel_collection.html'">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location='cancel_collection.php'">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -248,7 +248,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.php'">Close</button> 
                       </div>
                       
                   </div>

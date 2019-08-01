@@ -73,7 +73,7 @@
                 <td>Level 1 - Administration 1</td>
                 <td>Customer, Employee, User, Admin </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -91,7 +91,7 @@
                 <td>Level 2 - Sales 1</td>
                 <td>Customer, Sales, Products, Stock</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.html'" >
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.php'" >
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -109,7 +109,7 @@
                 <td>Level 3 - Sales 2</td>
                 <td>Customer, Sales</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -127,7 +127,7 @@
                 <td>Level 4 - Warehouse Manager</td>
                 <td>Warehouse, Delivery, Driver</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -145,7 +145,7 @@
                 <td>Level 5 - Driver 1</td>
                 <td>Driver</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user-role.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -206,7 +206,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../user.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../user.php'">Close</button> 
                       </div>
                       
                   </div>

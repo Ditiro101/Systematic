@@ -386,7 +386,7 @@
                         </div>
                         <div class="modal-footer">
                             
-                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                         </div>
                     </div>
                 </div>
@@ -408,7 +408,7 @@
                         </div>
                         
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                         </div>
                         
                     </div>
@@ -470,7 +470,7 @@
                       <p class="ml-2">Account payment successful. Printing payment invoice...</p>   
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                     </div>    
                   </div>
                 </div>

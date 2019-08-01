@@ -81,7 +81,7 @@
                   <td>Alana</td>
                   <td>R70.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -96,7 +96,7 @@
                   <td>Mark</td>
                   <td>R8 350.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -111,7 +111,7 @@
                   <td>Mark</td>
                   <td>R13 732.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -126,7 +126,7 @@
                   <td>Jabu</td>
                   <td>R6 190.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -141,7 +141,7 @@
                   <td>Wilfred</td>
                   <td>R21 450.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -156,7 +156,7 @@
                   <td>Jabu</td>
                   <td>R13 240.00</td>
                   <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.html'">
+                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                       </span>
                       <span class="btn-inner--text">View</span>
@@ -175,7 +175,7 @@
               </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
-              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../sales.html'">Back</button>
+              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../sales.php'">Back</button>
             </div>
             <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">

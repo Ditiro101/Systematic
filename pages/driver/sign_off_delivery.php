@@ -157,7 +157,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../driver.html'">Close</button> 
+                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../driver.php'">Close</button> 
                   </div>
                 </div>
               </div>

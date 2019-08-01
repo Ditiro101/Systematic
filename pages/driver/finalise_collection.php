@@ -88,7 +88,7 @@
                <div class="row ">
                 <div class="col ">
                   
-                  <button type="button" class="btn btn-warning text-center"  onclick="window.location='sign_off_collection.html'" >
+                  <button type="button" class="btn btn-warning text-center"  onclick="window.location='sign_off_collection.php'" >
                     
                         <i class="fas fa-truck"></i>
                         <span>Finalise Collection</span>

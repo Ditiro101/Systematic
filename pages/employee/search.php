@@ -75,7 +75,7 @@
                         </div>
                         <div class="modal-footer">
                           <p>Place Employee QR inside the QR scanner box</p>
-                          <button type="button" class="btn btn-primary" onclick="window.location='view.html'">Scan QR</button>
+                          <button type="button" class="btn btn-primary" onclick="window.location='view.php'">Scan QR</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           
                           </div>
@@ -105,14 +105,14 @@
                 <td>Futterkiste</td>
                 <td>9401015800080</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -132,14 +132,14 @@
                 <td>Haynes</td>
                 <td>9610084800082</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'" >
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'" >
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -159,14 +159,14 @@
                 <td>Saynes</td>
                 <td>9706295800083</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -186,14 +186,14 @@
                 <td>Cooper</td>
                 <td>8312025800088</td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.html'">
+                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
                     <span class="btn-inner--icon"><i class="fas fa-user"></i>
                     </span>
                     <span class="btn-inner--text">View</span>
                   </button>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.html'">
+                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
                     <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                     </span>
                     <span class="btn-inner--text">Edit</span>
@@ -268,7 +268,7 @@
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.php'">Close</button> 
                       </div>
                       
                   </div>

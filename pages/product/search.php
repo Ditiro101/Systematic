@@ -78,7 +78,7 @@
                 <td>0</td>
                 <td>0</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.html'">
+        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
         						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
         						</span>
         						<span class="btn-inner--text">View</span>
@@ -93,7 +93,7 @@
                 <td>40</td>
                 <td>0</td>
                 <td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.html'">
+        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
         						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
         						</span>
         						<span class="btn-inner--text">View</span>
@@ -107,7 +107,7 @@
                 <td>0</td>
                 <td>0</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.html'">
+        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
         						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
         						</span>
         						<span class="btn-inner--text">View</span>
@@ -121,7 +121,7 @@
                 <td>15</td>
                 <td>0</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.html'">
+        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
         						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
         						</span>
         						<span class="btn-inner--text">View</span>
@@ -135,7 +135,7 @@
                 <td>15</td>
                 <td>0</td>
               	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.html'">
+        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
         						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
         						</span>
         						<span class="btn-inner--text">View</span>

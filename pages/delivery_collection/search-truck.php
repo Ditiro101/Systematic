@@ -84,7 +84,7 @@
                       <td>10 Tonnes</td>
                       <td>Yes</td>
                       <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
                             <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                             </span>
                             <span class="btn-inner--text">Maintain</span>
@@ -97,7 +97,7 @@
                       <td>25 Tonnes</td>
                       <td>Yes</td>
                       <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
                             <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                             </span>
                             <span class="btn-inner--text">Maintain</span>
@@ -110,7 +110,7 @@
                       <td>40 Tonnes</td>
                       <td>Yes</td>
                       <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
                             <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                             </span>
                             <span class="btn-inner--text">Maintain</span>
@@ -123,7 +123,7 @@
                       <td>50 Tonnes</td>
                       <td>No</td>
                       <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.html'">
+                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
                             <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                             </span>
                             <span class="btn-inner--text">Maintain</span>
