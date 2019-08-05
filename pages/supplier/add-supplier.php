@@ -65,7 +65,6 @@
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
                             <input type="text" class="form-control" id="VATNumber" name="suppVAT" placeholder="Enter VAT Number" required>
-                            <div class="invalid-feedback">Please Enter a Name</div> 
                           </div>
                         </div>
                         <div class="form-row ">
@@ -155,7 +154,7 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-  <script src="supplier.js"></script>
+  <script src="JS/supplier.js"></script>
 </body>
 
 </html>

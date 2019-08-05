@@ -50,7 +50,7 @@ $(()=>{
 			$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{arr}
+				data:{name:arr["name"]}
 			})
 			.done(data=>{
 				alert(data);
