@@ -157,7 +157,7 @@
                     </form>
                   </div>
                   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <form>
+                    <form method="POST" action="">
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="exampleInputEmail1">Name of organisation</label>
