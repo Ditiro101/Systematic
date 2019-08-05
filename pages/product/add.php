@@ -57,17 +57,17 @@
                     <form>
                       <div class="form-group col">
                         <label for="bane">Product Name</label>
-                        <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter product name">
+                        <input type="email" class="form-control" id="productName" name="product-name" aria-describedby="emailHelp" placeholder="Enter product name">
                       </div>
 
                       <div class="form-group col">
                         <label for="des">Description</label>
-                         <textarea class="form-control" id="des" rows="2" placeholder="Enter product Description"></textarea>
+                         <textarea class="form-control" id="productDescription" name="product-description" rows="2" placeholder="Enter product Description"></textarea>
                       </div>
 
                       <div class="form-group col">
                         <label for="bane">Product Type</label>
-                        <select class="form-control">
+                        <select class="form-control" id="productType" name="product-type">
                         	<option>Select product type</option>
                           	<option>Beverage</option>
                           	<option>Maze meal</option>
@@ -79,15 +79,15 @@
                        	<div class="form-row">
 	                       <div class="form-group col-lg-4">
 	                        <label for="bane">Number of Units in Case</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter units in case" >
+	                        <input type="number" class="form-control" id="unitsInCase" name="units-in-case" aria-describedby="emailHelp" placeholder="Enter units in case" >
 	                      </div>
 	                       <div class="form-group col-lg-4">
 	                        <label for="bane">Number of Cases in Pallet</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter cases in pallet" >
+	                        <input type="number" class="form-control" id="casesInPallet" name="cases-in-pallet" aria-describedby="emailHelp" placeholder="Enter cases in pallet" >
 	                      </div>
 	                      <div class="form-group col-lg-4">
 	                        <label for="bane">Quantity</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="0" disabled>
+	                        <input type="number" class="form-control" id="productQuantity" name="product-quantity" aria-describedby="emailHelp" placeholder="0" disabled>
 	                      </div>
 	                  	</div>
 	                  </div>
@@ -95,24 +95,23 @@
 	                      <div class="form-row">
 	                       <div class="form-group col-lg-4">
 	                        <label for="bane">Individual Cost Price</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter cost price" >
+	                        <input type="number" class="form-control" id="costPrice" name="cost-price" aria-describedby="emailHelp" placeholder="Enter cost price" >
 	                      </div>
 	                      <div class="form-group col-lg-4">
 	                        <label for="bane">Individual Guide Discount Price</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter guide price" >
+	                        <input type="number" class="form-control" id="discountPrice" name="discount-price" aria-describedby="emailHelp" placeholder="Enter guide price" >
 	                      </div>
 	                      <div class="form-group col-lg-4">
 	                        <label for="bane">Individual Selling Price</label>
-	                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter selling price">
+	                        <input type="number" class="form-control" id="sellingPrice" name="selling-price" aria-describedby="emailHelp" placeholder="Enter selling price">
 	                      </div>
 	                     </div>
+                       <button type="button" class="btn btn-primary mb-3 px-4" id="addProduct" name="add-product" >Save</button>
 	                    </div>
 
-                     
-                     <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
+                     <!--  <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" id="addProduct" name="add-product" data-target="#modal-default">Save</button> -->
 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default">Save</button>
                           <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
@@ -152,6 +151,7 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
+  
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Optional JS -->
@@ -159,6 +159,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Add Product JS -->
+  <script src="JS/addProduct.js"></script>
 </body>
 
 </html>
