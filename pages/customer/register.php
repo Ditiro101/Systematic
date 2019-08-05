@@ -72,48 +72,48 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form method="POST" action="">
+                    <form method="POST" action="" id="form-register-indi">
                       <div class="form-row">
                         <div class="form-group col-6">
-                          <label for="exampleInputEmail1">Name</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name" required>
+                          <label for="name-indi">Name</label>
+                          <input type="text" class="form-control" id="name-indi" name="name-indi" placeholder="Enter name" required>
                         </div>
                         <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Surname</label>
-                          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Surname" required>
+                          <label for="surname-indi">Surname</label>
+                          <input type="text" class="form-control" id="surname-indi" name="surname-indi" placeholder="Surname" required>
                         </div>
                       </div>
                       <div class="form-row ">
                         <div class="form-group col-2">
-                          <label for="bane">Title</label>
-                          <select class="form-control">
+                          <label for="title">Title</label>
+                          <select class="form-control" id="title" name="title">
                             <option>Ms</option>
                             <option>Mr</option>
                             <option>Mrs</option>
                           </select>
                         </div>
                         <div class="form-group col-10">
-                          <label for="exampleInputPassword1">Contact Number</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact Number" required>
+                          <label for="number-indi">Contact Number</label>
+                          <input type="number" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email" required>
+                        <label for="email-indi">Email</label>
+                        <input type="email" class="form-control" id="email-indi" name="email-indi" placeholder="Email" required>
                       </div>
 
                       <div class="form-group">
-                        <label for="inputAddress">Address line 1</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+                        <label for="address1">Address line 1</label>
+                        <input type="text" class="form-control" id="address1" placeholder="1234 Main St" name="address1" required>
                       </div>
                       <div class="form-group">
-                        <label for="inputAddress2">Address line 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" required>
+                        <label for="address2">Address line 2</label>
+                        <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" name="address2" required>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="inputCity">Suburb</label>
-                          <input type="text" class="form-control" id="inputCity" required>
+                          <label for="suburb">Suburb</label>
+                          <input type="text" class="form-control" id="suburb" name="suburb" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
@@ -123,39 +123,16 @@
                           </select>
                         </div>
                         <div class="form-group col-md-2">
-                          <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control" id="inputZip" required>
+                          <label for="zip">Zip</label>
+                          <input type="text" class="form-control" id="zip" name="zip" required>
                         </div>
                       </div> 
 
 
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-success2">
+                      <button id="btn-submit-register-indi" type="button" class="btn btn-primary">
                         Submit
                       </button>
-                      <div class="modal fade" id="modal-success2" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
-                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                              
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-success">Success!</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location='../../customer.html'">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <p>Customer added successfully</p>
-                                    
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
-                                </div>
-                                
-                            </div>
-                        </div>
-                      </div>
+                      
                     </form>
                   </div>
 
@@ -199,14 +176,14 @@
                         </div>
                         <div class="form-group col-md-4">
                           <label for="city-org">City</label>
-                          <select id="city-org" class="form-control">
+                          <select id="city-org" name="city-org" class="form-control">
                             <option selected>Pretoria</option>
                             <option>...</option>
                           </select>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="zip-org">Zip</label>
-                          <input type="text" class="form-control" id="zip-org" required>
+                          <input type="text" class="form-control" id="zip-org" name="zip-org" required>
                         </div>
                       </div> 
                       <button id="btn-submit-register-org" type="button" class="btn btn-primary" >
