@@ -45,15 +45,28 @@ $(()=>{
 		}
 		else
 		{
+			
+			
 			let arr=getInput();
 			console.log(arr);
 			$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{name:arr["name"]}
+				data:{name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"]}
 			})
 			.done(data=>{
-				alert(data);
+				if(data=="True")
+				{
+					$("#MMessage").text("Supplier Added Successfully!");
+					$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+					$("#displayModal").modal("show");
+				}
+				else
+				{
+					$("#MMessage").text("Supplier Not Added!");
+					$("#btnClose").attr("onclick","window.location='add-supplier.php'");
+					$("#displayModal").modal("show");
+				}
 			});
 		}
 	});
