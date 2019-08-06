@@ -14,7 +14,7 @@
 	if (!$con) {
 	  die("Connection failed: " . mysqli_connect_error());
 	}
-	if($_POST["choice"]==1)
+	if($_POST["choice"]==3)
 	{
 		$name=$_POST["name"];
 		$vat=$_POST["vat"];
@@ -32,8 +32,5 @@
 			echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 		}
 	}
-	mysqli_close($con);	
-	
-	      
-	    
+	mysqli_close($con);
 ?>

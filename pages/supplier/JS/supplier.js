@@ -1,6 +1,24 @@
-let NotValid = function()
+let CheckValid = function(valArr)
 {
-	alert("Data is not valid, please try again");
+	if(valArr["con"].length!=10)
+	{
+		$("#MMessage").text("Contact Number must be 10 digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if (valArr["VATNumber"].length!=10)
+	{
+		$("#MMessage").text("VAT Number must be 10 digits.");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
+	
 }
 
 let getInput= function()
@@ -48,26 +66,36 @@ $(()=>{
 			
 			
 			let arr=getInput();
-			console.log(arr);
-			$.ajax({
+			if(CheckValid(arr)!=true)
+			{
+				e.stopPropagation();
+			}
+			else
+			{
+				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"]}
-			})
-			.done(data=>{
-				if(data=="True")
-				{
-					$("#MMessage").text("Supplier Added Successfully!");
-					$("#btnClose").attr("onclick","window.location='../../supplier.php'");
-					$("#displayModal").modal("show");
-				}
-				else
-				{
-					$("#MMessage").text("Supplier Not Added!");
-					$("#btnClose").attr("onclick","window.location='add-supplier.php'");
-					$("#displayModal").modal("show");
-				}
-			});
+				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"]}
+				})
+				.done(data=>{
+					if(data=="True")
+					{
+						$("#MMessage").text("Supplier Added Successfully!");
+						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+						$("#displayModal").modal("show");
+					}
+					else
+					{
+						$("#MMessage").text("Supplier Not Added!");
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
+					}
+				});	
+			}
+			
 		}
 	});
+	/////////////////////////////////////////////////
+	
+
 });

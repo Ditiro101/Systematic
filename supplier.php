@@ -72,7 +72,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-supplier.php">
+                    <a id="btnSearchSupplier" href="pages/supplier/search-supplier.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Supplier</span>
@@ -127,6 +127,7 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/script.js"></script>
 </body>
 
 </html>
