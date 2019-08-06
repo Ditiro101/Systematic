@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Developer Ravi | QR Code Generator</title>
+  <title>QR Code Generator</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta charset="UTF-8">
 <meta name="description" content="QR Code Generator Developed By Developer Ravi Khadka .It's Free Online QR Code Generator to make your own QR Codes.No sign-up required. Create unlimited non-expiring free QR codes for a website URL, YouTube video etc.">
@@ -155,70 +155,109 @@ span.psw {
 </style>
 </head>
 <body>
-    <?php 
-  include "meRaviQr/qrlib.php";
-  include "config.php";
-  if(isset($_POST['create']))
-  {
-    $qc =  $_POST['qrContent'];
-    $qrUname = $_POST['qrUname'];
-    $qrImgName = "meravi".rand();
-    if($qc=="" && $qrUname=="")
-    {
-      echo "<script>alert('Please Enter Your Name And Msg For QR Code');</script>";
-    }
-    elseif($qc=="")
-    {
-      echo "<script>alert('Please Enter QR Code Msg');</script>";
-    }
-    elseif($qrUname=="")
-    {
-      echo "<script>alert('Please Enter Your Name');</script>";
-    }
-    else
-    {
-    //$dev = " ...Develop By Ravi Khadka";
-    $final = $qc; //.$dev;
-    $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
-    $qrimage = $qrImgName.".png";
-    $workDir = $_SERVER['HTTP_HOST'];
-    $qrlink = $workDir."/qrcode".$qrImgName.".png";
-    $insQr = $meravi->insertQrCode($qrUname,$final,$qrimage,$qrlink);
-    if($insQr==true)
-    {
-      echo "<script>alert('Thank You $qrUname. Success Create Your QR Code'); window.location='index.php?success=$qrimage';</script>";
 
-    }
-    else
-    {
-      echo "<script>alert('cant create QR Code');</script>";
-    }
-  }
- }
+<?php 
+    include "meRaviQr/qrlib.php";
+    //include "config.php";
+    $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+    
+    $dbparts = parse_url($url);
+    
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
+    $DBConnect;
+
+    $DBConnect = mysqli_connect($hostname, $username, $password, $database);
+  
+        if($DBConnect === false)
+        {
+          die("ERROR: Could not connect. " . mysqli_connect_error());
+        }
+        else
+        {
+            if(isset($_POST['create']))
+            {
+              $userid_qr =  $_POST['qrContent'];
+              var_dump($userid_qr);
+          
+              $hash = sha1($userid_qr);
+          
+              
+          
+              $qrUname = $_POST['qrUname'];
+              $qrImgName = "meravi".rand();
+              if($userid_qr=="" && $qrUname=="")
+              {
+                echo "<script>alert('Please Enter Your Name And USER_ID For QR Code');</script>";
+              }
+              elseif($userid_qr=="")
+              {
+                echo "<script>alert('Please Enter QR Code USER_ID');</script>";
+              }
+              elseif($qrUname=="")
+              {
+                echo "<script>alert('Please Enter Your Name');</script>";
+              }
+              else
+              {
+              //$dev = " ...Develop By Ravi Khadka";
+              $final = $userid_qr; //.$dev;
+              $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
+              $qrimage = $qrImgName.".png";
+              $workDir = $_SERVER['HTTP_HOST'];
+              $qrlink = $workDir."/qrcode".$qrImgName.".png";
+              $date = date("Y-m-d H:i:s");
+              
+              $sql = "INSERT INTO EMPLOYEE_QR(HASH,DATE_GENERATED,EMPLOYEE_ID) VALUES('$hash','$date','$userid_qr')";
+              //var_dump($sql);
+              $query_QR = mysqli_query($DBConnect , $sql);
+             
+              //var_dump($query_QR);
+                      //return $query;
+          
+          
+              //$insQr = $meravi->insertQrCode($qrUname,$final,$qrimage,$qrlink);
+                if($query_QR==true)
+                {
+                    echo "<script>alert('Thank You $qrUname. Success Create Your QR Code'); window.location='index.php?success=$qrimage';</script>";
+            
+                }
+                else
+                {
+                    echo "<script>alert('cant create QR Code');</script>";
+                }
+             }
+           }
+          //Close database connection
+          mysqli_close($DBConnect);
+        }  
   ?>
   <?php 
   if(isset($_GET['success']))
   {
   ?>
   <div id="qrSucc">
-  <div class="modal-content animate container">
-    <?php 
-    ?>
- 
-    <img src="userQr/<?php echo $_GET['success']; ?>" alt="">
-    <?php 
-$workDir = $_SERVER['HTTP_HOST'];
-    $qrlink = $workDir."/qrcode/userQr/".$_GET['success'];
-    ?>
-     
-    <input type="text" value="<?php echo $qrlink; ?>" readonly>
-    <br><br>
-<a href="download.php?download=<?php echo $_GET['success']; ?>">Download Now</a>
-<br>
- <br><br>
-    <a href="index.php">Go Back To Generate Again</a>
+    <div class="modal-content animate container">
+        <?php 
+        ?>
     
-     </div></div>
+        <img src="userQr/<?php echo $_GET['success']; ?>" alt="">
+        <?php 
+            $workDir = $_SERVER['HTTP_HOST'];
+            $qrlink = $workDir."/qrcode/userQr/".$_GET['success'];
+        ?>
+        
+        <input type="text" value="<?php echo $qrlink; ?>" readonly>
+        <br><br>
+    <a href="download.php?download=<?php echo $_GET['success']; ?>">Download Now</a>
+    <br>
+    <br><br>
+        <a href="index.php">Go Back To Generate Again</a>
+        
+    </div>
+ </div>
   <?php
 }
 else
@@ -246,3 +285,4 @@ else
 
 </body>
 </html>
+

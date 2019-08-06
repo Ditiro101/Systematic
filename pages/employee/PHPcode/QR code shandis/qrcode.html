@@ -7,15 +7,55 @@
   <body>
     <video id="preview"></video>
     <script>
-        let scanner = new Instascan.Scanner(
+         let scanner = new Instascan.Scanner(
             {
                 video: document.getElementById('preview')
             }
         );
+
         scanner.addListener('scan', function(content) {
-            alert('The scanned content is: ' + content);
-            window.open(content, "_blank");
+
+
+            console.log(content);
+            
+             $.ajax({
+            type: 'POST',
+            url: 'verifyQRcode.php',
+            data: {qrCode : content},
+            beforeSend:()=>
+                        {
+                            
+                        }
+            })
+            .done(response => {
+            // do something with data
+                console.log(response);
+                    if(response == "success")
+                    {
+                        //Add this when fully done.
+                        alert("The employee is sucessfully checked-in!");
+                        //$('#modal-title-default').text("Success!");
+                        //$('#modalText').text("Product added sucessfully");
+                        //$('#successfullyAdded').modal("show");*/
+                        // alert('The scanned content is: ' + content);
+                         window.open(content, "_blank");
+
+                    }
+                    else
+                    {
+                        console.log("Error in php");
+                        alert("Employee does not exist");
+                    }
+                })
+                .fail(()=>
+                    {
+                        console.log("ajax failed");
+                    });
+
+                    
         });
+
+
         Instascan.Camera.getCameras().then(cameras => 
         {
             if(cameras.length > 0){
@@ -24,7 +64,18 @@
                 console.error("No Camera Device");
             }
         });
+       
     </script>
 
+     
+    <script src="../../../../assets/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="../../../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Optional JS -->
+    <script src="../../../../assets/vendor/chart.js/dist/Chart.min.js"></script>
+    <script src="../../../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+    <!-- Argon JS -->
+    <!-- <script src="../../../../assets/js/argon.js?v=1.0.0"></script> -->
+  <!--script src="sendVerificationData.js"></script-->
  </body>
 </html>
+
