@@ -59,47 +59,50 @@
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Coca Cola">
+                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=<?php echo $_POST["NAME"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" placeholder="115477887878">
+                            <input type="number" class="form-control" id="VATNumber" placeholder=<?php echo $_POST["VAT"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="email" class="form-control" id="ContactNo" placeholder="078 457 2257">
+                            <input type="email" class="form-control" id="ContactNo" placeholder=<?php echo $_POST["PHONE"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="John@gmail.com">
+                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder=<?php echo $_POST["EMAIL"];?>>
                           </div>
                         </div>
-
+                        <?php $addName=$_POST["ADDR"];
+                        $addName=str_replace("/"," ",$addName);
+                        ?>
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                          <label id="convertAdd" hidden="true"><?php echo $addName;?></label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                          <input type="text" class="form-control" id="inputAddress2">
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" id="inputCity" placeholder=<?php echo $_POST["SUBURB"];?>>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
                             <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
+                              <option selected><?php echo $_POST["CITY"];?></option>
                               <option>...</option>
                             </select>
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" placeholder=<?php echo $_POST["ZIP"];?>>
                           </div>
                         </div>
                       </div> 
@@ -208,6 +211,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/maintainSupplier.js" type="text/javascript"></script>
 </body>
 
 </html>

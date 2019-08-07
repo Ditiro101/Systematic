@@ -1,3 +1,30 @@
+<?php
+  include_once("PHPcode/connection.php");
+  $supID=$_POST["ID"];
+  $sql_query="SELECT ADDRESS_ID FROM SUPPLIER_ADDRESS WHERE SUPPLIER_ID='$supID'";
+  $result=mysqli_query($con,$sql_query);
+  $row=$result->fetch_assoc();
+  $addID=$row["ADDRESS_ID"];
+  $sql_query="SELECT * FROM ADDRESS WHERE ADDRESS_ID='$addID'";
+  $result2=mysqli_query($con,$sql_query);
+  $row2=$result2->fetch_assoc();
+  $addName=$row2["ADDRESS_LINE_1"];
+  $subID=$row2["SUBURB_ID"];
+  $sql_query="SELECT * FROM SUBURB WHERE SUBURB_ID='$subID'";
+  $result3=mysqli_query($con,$sql_query);
+  $row3=$result3->fetch_assoc();
+  $subName=$row3["NAME"];
+  $zip=$row3["ZIPCODE"];
+  $cityID=$row3["CITY_ID"];
+   $sql_query="SELECT * FROM CITY WHERE CITY_ID='$cityID'";
+  $result4=mysqli_query($con,$sql_query);
+  $row4=$result4->fetch_assoc();
+  $cityName=$row4["CITY_NAME"];
+  $addNames="15losperstreet";
+  mysqli_close($con);
+
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -59,11 +86,21 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="button" onclick="window.location='maintain-supplier.html'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
+                  <form action="maintain-supplier.php" method="POST">
+                    <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                    <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                    <input type="hidden" name="ADDR" value=<?php echo str_replace(" ","/",$addName);?>>
+                    <input type="hidden" name="SUBURB" value=<?php echo $subName;?>>
+                    <input type="hidden" name="CITY" value=<?php echo $cityName;?>>
+                    <input type="hidden" name="ZIP" value=<?php echo $zip;?>>
+                    <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                      <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                      </span>
+                      <span class="btn-inner--text">Edit</span>
+                    </button>
+                  </form>
                 </td>
                 <td>
                   <button class="btn btn-icon btn-2 btn-danger btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
@@ -127,25 +164,25 @@
               </div>
               <div class="text-center mt-0">
                 <h2>
-                  Coca Cola
+                  <?php echo $_POST["NAME"];?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
-                  <div class="pt-2"><b>Supplier ID : </b><p class="d-inline">3</p></div>
-                  <div class="pt-2"><b>VAT Number : </b><p class="d-inline">115477887878</p></div>            
-                  <div class="pt-2"><b>Email : </b><p class="d-inline">orders@cocacola.com</p></div>
-                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline">078 457 2257</p></div>
+                  <div class="pt-2"><b>Supplier ID : </b><p class="d-inline"><?php echo $_POST["ID"];?></p></div>
+                  <div class="pt-2"><b>VAT Number : </b><p class="d-inline"><?php echo $_POST["VAT"];?></p></div>            
+                  <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>
+                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $_POST["PHONE"];?></p></div>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <i class="ni location_pin mr-2 text-center"></i>
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0">Coca Cola Offices</p>
-                  <p class="mb-0">2 Glenhove Rd</p>
-                  <p class="mb-0">Melrose Estate, Johannesburg, 2196</p>
+                  <p class="mb-0"><?php echo $addName; ?></p>
+                  <p class="mb-0"><?php echo $subName.", ".$zip; ?></p>
+                  <p class="mb-0"><?php echo $cityName; ?></p>
                   <p class="mb-0">South Africa</p>
                 </div>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
                   </div>
               </div>
             </div>
