@@ -39,11 +39,50 @@ else
     //echo $request;
     //$submit = mysqli_query($conn,$request);
 
+    $time = new DateTime();
+    $currentTime = $time->format("H:i:s");//checkin/checkout time.
+
+   
+    $addedTime = "";//flag
+
+     //date("H:i:s");
+    $day = date("Y-m-d");
+    $setCheckinTime = new DateTime("08:00:00");
+    $checkoutTime = new DateTime("17:00:00");
+    if($query_QR)
+    {
+        if($currentTime <= $setCheckinTime)
+        {
+             $currentTime = $setCheckinTime;
+            
+            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+            $submitQuery = mysqli_query($DBConnect,$query);
+            $addedTime = "Time SQL works";
+
+        }
+        else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
+        {
+             
+            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+            $submitQuery = mysqli_query($DBConnect,$query);
+            $addedTime = "Time SQL works";
+        }
+        else
+        {
+            echo "Cannot checkin because its over the checkout time ";
+        }
+
+
+    }
+    else
+    {
+        echo "Employee does not exist on system";
+    }
     $verifyID = sha1($employeeID);
     //var_dump($verifyID);
     while($correctHash = mysqli_fetch_assoc($query_QR))
     {
-        if($correctHash["HASH"]== $verifyID)
+        if($correctHash["HASH"]== $verifyID && $addedTime == "Time SQL works" )
         {
            $success = "success";
             echo $success;
