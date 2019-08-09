@@ -9,7 +9,7 @@ $(document).ready(function(){
         if( email != "" && password != "" ){
            
             $.ajax({
-                url:'login.php',
+                url:'assets/login/PHPcode/login.php',
                 type:'post',
                 data:{email:email,password:password},
                 success:function(response){
@@ -29,12 +29,15 @@ $(document).ready(function(){
             });
         }
         else{
-            if(password==""){
-                 $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter password!</strong> </span></div>"); 
+            $('#alert-login').empty();
+            if(password=="" && email==""){
+                $('#alert-login').append("<div class='alert alert-sm alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter email & password!</strong> </span></div>"); 
+            }
+            else if(password==""){
+                $('#alert-login').append("<div class='alert alert-sm alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter password!</strong> </span></div>"); 
             }
             else if(email==""){
-                $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter email!</strong> </span></div>"); 
-            
+                $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter email!</strong> </span></div>");
             }
            //_549!d.TQi%9
                        
