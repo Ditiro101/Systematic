@@ -25,7 +25,8 @@
 
 
         if ($email != "" && $password != "")
-        {  
+        { 
+            //fetch salt 
             $saltQ = "SELECT * FROM USER WHERE USERNAME='$email'";
             $saltQResult = mysqli_query($DBConnect, $saltQ);
             $saltResult = mysqli_fetch_assoc($saltQResult);
@@ -38,7 +39,7 @@
             $passSalt = $password.$salt;
             $HSPassword = hash('sha256', $passSalt);
 
-            $query = "SELECT * FROM USER WHERE USERNAME='$email' AND PASSWORD='$HSPassword'";
+            $query = "SELECT * FROM USER WHERE USERNAME='$email' AND USER_PASSWORD='$HSPassword'";
             $results = mysqli_query($DBConnect, $query);
 
             if (mysqli_num_rows($results) == 1) 
@@ -62,24 +63,23 @@
                 }
                 
                 //Populate session variable
+                session_start();
                 $_SESSION['name'] = $name;
                 $_SESSION['surname'] = $surname;
                 $_SESSION['userID'] = $userID;
                 $_SESSION['accessLevel'] = $access;
                 $_SESSION['access'] = true;
 
-                header('location: home.php');
+                echo "success";
             }
             else
             {
-                array_push($errors, "Wrong username/password combination");
                 $_SESSION['access'] = false;
-                header('location: login.php');
+                $response = "Wrong username/password combination";
+                echo $response;
             }
         }
-    }
-
-    //Close database connection
-    mysqli_close($DBConnect);
+        //Close database connection
+        mysqli_close($DBConnect);
     }
 ?>

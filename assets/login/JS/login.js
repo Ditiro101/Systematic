@@ -11,17 +11,18 @@ $(document).ready(function(){
             $.ajax({
                 url:'assets/login/PHPcode/login.php',
                 type:'post',
-                data:{email:email,password:password},
+                data:{email:email, password:password},
                 success:function(response)
                 {
 
                     console.log(response);
                     if(response=="success")
                     {
-                        window.location = "dashboard.html"; 
+                        window.location = "dashboard.php"; 
                     }
                     else
                     {
+                        $('#alert-login').empty();
                         $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Login failed!</strong> </span></div>");    
                     }
                 },
@@ -38,9 +39,7 @@ $(document).ready(function(){
             }
             else if(email==""){
                 $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Please enter email!</strong> </span></div>");
-            }
-           //_549!d.TQi%9
-                       
+            }          
         }
 
     });
