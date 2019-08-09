@@ -134,7 +134,7 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="login.js"></script>
+  <script src="assets/login/JS/login.js"></script>
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
