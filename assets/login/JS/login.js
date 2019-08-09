@@ -14,8 +14,6 @@ $(document).ready(function(){
                 data:{email:email, password:password},
                 success:function(response)
                 {
-
-                    console.log(response);
                     if(response=="success")
                     {
                         window.location = "dashboard.php"; 
