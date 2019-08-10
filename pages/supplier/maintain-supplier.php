@@ -59,7 +59,9 @@
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder=<?php echo $_POST["NAME"];?>>
+                            <input type="hidden" id="sID" value=<?php echo $_POST["ID"];?>>
+                            <input type="hidden" id="sAddID" value=<?php echo $_POST["ADDID"];?>>
+                            <input type="text" class="form-control" id="sName" aria-describedby="emailHelp" placeholder=<?php echo $_POST["NAME"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
@@ -69,11 +71,11 @@
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="email" class="form-control" id="ContactNo" placeholder=<?php echo $_POST["PHONE"];?>>
+                            <input type="text" class="form-control" id="ContactNo" placeholder=<?php echo $_POST["PHONE"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder=<?php echo $_POST["EMAIL"];?>>
+                            <input type="text" class="form-control" id="sEmail" placeholder=<?php echo $_POST["EMAIL"];?>>
                           </div>
                         </div>
                         <?php $addName=$_POST["ADDR"];
@@ -91,14 +93,15 @@
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity" placeholder=<?php echo $_POST["SUBURB"];?>>
+                            <input type="text" class="form-control" id="sSuburb" placeholder=<?php echo $_POST["SUBURB"];?>>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected><?php echo $_POST["CITY"];?></option>
+                            <input type="text" class="form-control" id="sCity" placeholder=<?php echo $_POST["CITY"];?>>
+                            <!-- <select id="inputState" class="form-control">
+                              <option selected></option>
                               <option>...</option>
-                            </select>
+                            </select> -->
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
@@ -109,14 +112,14 @@
                       <div class="col">
                         <div class="form-group">
                           <div class="form-group mr-2">
-                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save Changes
+                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default" id="btnSave">Save Changes
                               </button>
                               <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
                               </button>
                           </div>
                         </div>
                       </div>
-                      <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                      <!-- <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               
@@ -187,7 +190,7 @@
                               
                           </div>
                       </div>
-                    </div>
+                    </div> -->
                         
                     </form>
                   </div>

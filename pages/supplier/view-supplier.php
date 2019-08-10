@@ -87,10 +87,12 @@
               <div class="d-flex justify-content-between">
                 <td>
                   <form action="maintain-supplier.php" method="POST">
+                    <input type="hidden" name="ID" value=<?php echo $supID;?>>
                     <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
                     <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
                     <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                    <input type="hidden" name="ADDID" value=<?php echo $addID;?>>
                     <input type="hidden" name="ADDR" value=<?php echo str_replace(" ","/",$addName);?>>
                     <input type="hidden" name="SUBURB" value=<?php echo $subName;?>>
                     <input type="hidden" name="CITY" value=<?php echo $cityName;?>>
