@@ -21,14 +21,13 @@ $(document).ready(function(){
                 },
                 success:function(response)
                 {
-                    console.log(response);
                     if(response=="success")
                     {
                         window.location = "dashboard.php"; 
                     }
                     else
                     {
-                        $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'>Login failed! </span></div>");    
+                        $('#alert-login').append("<div class='alert alert-danger py-2' role='alert'><span class='alert-inner--text'>Login failed! </span></div>");    
                     }
                 },
             });
@@ -36,13 +35,13 @@ $(document).ready(function(){
         else
         {
             if(password=="" && email==""){
-                $('#alert-login').append("<div class='alert alert-sm alert-danger' role='alert'><span class='alert-inner--text'>Please enter email & password! </span></div>"); 
+                $('#alert-login').append("<div class='alert alert-sm alert-danger py-2' role='alert'><span class='alert-inner--text'>Please enter email & password! </span></div>"); 
             }
             else if(password==""){
-                $('#alert-login').append("<div class='alert alert-sm alert-danger' role='alert'><span class='alert-inner--text'>Please enter password! </span></div>"); 
+                $('#alert-login').append("<div class='alert alert-sm alert-danger py-2' role='alert'><span class='alert-inner--text'>Please enter password! </span></div>"); 
             }
             else if(email==""){
-                $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'>Please enter email! </span></div>");
+                $('#alert-login').append("<div class='alert alert-danger py-2' role='alert'><span class='alert-inner--text'>Please enter email! </span></div>");
             }          
         }
 
