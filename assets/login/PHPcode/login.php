@@ -81,5 +81,6 @@
         }
         //Close database connection
         mysqli_close($DBConnect);
+        echo "Closed Connection";
     }
 ?>
