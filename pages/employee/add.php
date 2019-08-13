@@ -54,17 +54,17 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form enctype='multipart/form-data' action='' method='' id='picToUpload'>
                       <div class="col">
                         <div class="form-row">
                           <div class="form-group col-6">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+                            <label for="employeeName">Name</label>
+                            <input type="text" class="form-control" id="employeeName" aria-describedby="emailHelp" placeholder="Enter name">
                             
                           </div>
                           <div class="form-group col-6">
-                            <label for="exampleInputPassword1">Surname</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Surname">
+                            <label for="employeeSurname">Surname</label>
+                            <input type="text" class="form-control" id="employeeSurname" placeholder="Surname">
                           </div>
                         </div>
                         <div class="form-row ">
@@ -77,8 +77,8 @@
                             </select>
                           </div>
                           <div class="form-group col-10">
-                            <label for="exampleInputPassword1">Contact Number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact Number">
+                            <label for="contactNumber">Contact Number</label>
+                            <input type="number" class="form-control" id="contactNumber" placeholder="Contact Number">
                           </div>
                         </div>
                         <div class="form-row ">
@@ -124,9 +124,18 @@
                               <option>Warehouse Manager</option>
                             </select>
                           </div>
+                          
+                            <div class='form-group col-12'>
+                                <label for="Uploads">Upload Employee Picture</label>
+                                <input type='hidden' class='form-control' name='set' id="Uploads" class="form-control"/>
+                                <input type='file' class='form-control' name='picToUpload'  class="form-control"/><br/>
+                                
+                             
+                          </div>
+                          
                         </div>
                         <div>
-                        <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default">Save</button> 
+                        <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default" id="SavingDetails">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
                             <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
@@ -177,6 +186,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/addEmployee-Ajax.js"></script>
 </body>
 
 </html>
