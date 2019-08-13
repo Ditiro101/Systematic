@@ -98,11 +98,11 @@
                               <option selected>Choose...</option>
                               <option>Pretoria</option>
                             </select> -->
-                            <input type="text" class="form-control" id="inputCity" name="suppSuburb" required>
+                            <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" name="suppZip" required>
+                            <input type="text" class="form-control" id="inputZip" name="suppZip" readonly>
                           </div>
                         </div> 
                       </div>

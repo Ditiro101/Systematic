@@ -1,5 +1,6 @@
 <?php
 	include_once("connection.php");
+	///////////////////////
 	function checkSuburb($con,$suburbName)
 	{
 		$suburb_query="SELECT * FROM SUBURB WHERE NAME='$suburbName'";
@@ -15,15 +16,290 @@
 		
 
 	}
-	if($_POST["choice"]==1)
+	///////////////////////////////
+	function checkCity($con,$cityName)
 	{
-		if(checkSuburb($con,$_POST["suburb"]))
+		$city_query="SELECT * FROM CITY WHERE CITY_NAME='$cityName'";
+		$city_result=mysqli_query($con,$city_query);
+		if(mysqli_num_rows($city_result)>0)
 		{
-			echo "True";
+			return true;
 		}
 		else
 		{
-			echo $_POST["suburb"];
+			return false;
+		}
+	}
+	///////////////////////////////////
+	function addSuburb($con,$suburbName,$cityID,$zip)
+	{
+		$add_query="INSERT INTO SUBURB (NAME,ZIPCODE,CITY_ID) VALUES ('$suburbName','$zip','$cityID')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////
+	function addCity($con,$cityName)
+	{
+		$add_query="INSERT INTO CITY (CITY_NAME) VALUES('$cityName')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	///////////////////////////////////////
+	function getCityID($con,$cityName)
+	{
+		$get_query="SELECT * FROM CITY WHERE CITY_NAME='$cityName'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$cityID=$row["CITY_ID"];
+		}
+		else
+		{
+			$cityID="City ID does not exist";
+		}
+		return $cityID;
+	}
+	/////////////////////////////////////////
+	function getSuburbID($con,$suburbName)
+	{
+		$get_query="SELECT * FROM SUBURB WHERE NAME='$suburbName'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$suburbID=$row["SUBURB_ID"];
+		}
+		else
+		{
+			$suburbID="Suburb does now exist";
+		}
+		return $suburbID;
+	}
+	/////////////////////////////////////////
+	function addressCheck($con,$addressName)
+	{
+		$address_query="SELECT * FROM ADDRESS WHERE ADDRESS_LINE_1='$addressName'";
+		$address_result=mysqli_query($con,$address_query);
+		if(mysqli_num_rows($address_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////
+	function addAddress($con,$addressName,$suburbID)
+	{
+		$add_query="INSERT INTO ADDRESS (ADDRESS_LINE_1,SUBURB_ID) VALUES ('$addressName','$suburbID')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	////////////////////////////////////
+	function getAddressID($con,$addressName)
+	{
+		$get_query="SELECT * FROM ADDRESS WHERE ADDRESS_LINE_1='$addressName'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$addressID=$row["ADDRESS_ID"];
+		}
+		else
+		{
+			$addressID="Address does not exist";
+		}
+		return $addressID;
+	}
+	//////////////////////////////////////////
+	function checkSupplier($con,$contactNo)
+	{
+		$supplier_query="SELECT * FROM SUPPLIER WHERE CONTACT_NUMBER ='$contactNo'";
+		$supplier_result=mysqli_query($con,$supplier_query);
+		if(mysqli_num_rows($supplier_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////
+	function addSupplier($con,$name,$vat,$contact,$email)
+	{
+		$add_query="INSERT INTO SUPPLIER (NAME,VAT_NUMBER,CONTACT_NUMBER,EMAIL) VALUES ('$name','$vat','$contact','$email')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	//////////////////////////////////////////////
+	function getSupplierID($con,$contact)
+	{
+		$get_query="SELECT * FROM SUPPLIER WHERE CONTACT_NUMBER='$contact'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$supplierID=$row["SUPPLIER_ID"];
+		}
+		else
+		{
+			$supplierID="Supplier does not exist";
+		}
+		return $supplierID;
+	}
+	///////////////////////////////////////////////////
+	function addSupplierAddress($con,$addressID,$supplierID)
+	{
+		$add_query="INSERT INTO SUPPLIER_ADDRESS (ADDRESS_ID,SUPPLIER_ID) VALUES ('$addressID','$supplierID')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	//////////////////////////////////////////////////////////////
+	if($_POST["choice"]==1)
+	{
+		if(checkSupplier($con,$_POST["contact"]))
+		{
+			echo "F,Supplier Exists";
+		}
+		else
+		{
+			if(addSupplier($con,$_POST["name"],$_POST["vat"],$_POST["contact"],$_POST["email"]))
+			{
+				if(addressCheck($con,$_POST["address"]))
+				{
+					if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+					{
+						echo "T,Supplier Added";
+					}
+					else
+					{
+						echo "F,Supplier Added but Supplier Address Not Added";
+					}
+				}
+				else
+				{
+					if(checkSuburb($con,$_POST["suburb"]))
+					{
+						if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+						{
+							if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+							{
+								echo "T,Supplier Added";
+							}
+							else
+							{
+								echo "F,Suburb Found Address added but Supplier Address Not Added";
+							}
+
+						}
+						else
+						{
+							echo "F,Suburb found but Address not added.";
+						}
+					}
+					else
+					{
+						if(checkCity($con,$_POST["city"]))
+						{
+							if(addSuburb($con,$_POST["suburb"],getCityID($con,$_POST["city"]),$_POST["zip"]))
+							{
+
+								if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+								{
+									if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+									{
+										echo "T,Supplier Added";
+									}
+									else
+									{
+										echo "F,City found Suburb Added Address Added but Supplier Address Not Added"; //A Test triggered this
+									}
+
+								}
+
+							}
+							else
+							{
+								echo "F,City Found but Suburb Not Added";
+							}
+						}
+						else
+						{
+							if(addCity($con,$_POST["city"]))
+							{
+								if(addSuburb($con,$_POST["suburb"],getCityID($con,$_POST["city"]),$_POST["zip"]))
+								{
+
+									if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+									{
+										if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+										{
+											echo "T,Supplier Added";
+										}
+										else
+										{
+											echo "F,City Added Suburb Added Address Added but Supplier Address Not Added";
+										}
+
+									}
+
+								}
+								else
+								{
+									echo "F,City Added but Suburb Not Added";
+								}
+
+							}
+							else
+							{
+								echo "F,City Not Added";
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				echo "F,Supplier Not added";
+			}
 		}
 		// $name=$_POST["name"];
 		// $vat=$_POST["vat"];

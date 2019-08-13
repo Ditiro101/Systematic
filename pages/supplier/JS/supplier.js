@@ -102,6 +102,8 @@ $(()=>{
 			
 			
 			let arr=getInput();
+			let addr=arr["address"].split(",");
+			let a=addr[0];
 			console.log(arr["suburb"]);
 			if(CheckValid(arr)!=true)
 			{
@@ -112,22 +114,25 @@ $(()=>{
 				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],suburb:arr["suburb"]}
+				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:a,suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]}
 				})
 				.done(data=>{
-					if(data=="True")
+					//alert(data);
+					let doneData=data.split(",");
+					console.log(doneData);
+					if(doneData[0]=="T")
 					{
-						alert("True");
-						// $("#MMessage").text("Supplier Added Successfully!");
-						// $("#btnClose").attr("onclick","window.location='../../supplier.php'");
-						// $("#displayModal").modal("show");
+						//alert("True");
+						$("#MMessage").text(doneData[1]);
+						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+						$("#displayModal").modal("show");
 					}
 					else
 					{
-						alert(data);
-						// $("#MMessage").text("Supplier Not Added!");
-						// $("#btnClose").attr("data-dismiss","modal");
-						// $("#displayModal").modal("show");
+						//alert(doneData[1]);
+						$("#MMessage").text(doneData[1]);
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
 					}
 				});	
 			}
