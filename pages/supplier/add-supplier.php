@@ -16,6 +16,7 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 </head>
 
@@ -82,10 +83,10 @@
                           <label for="inputAddress">Address line 1</label>
                           <input type="text" class="form-control" id="inputAddress" name="suppAddr" placeholder="1234 Main St" required>
                         </div>
-                        <div class="form-group">
+                        <!-- <div class="form-group">
                           <label for="inputAddress2">Address line 2</label>
                           <input type="text" class="form-control" id="inputAddress2" name="suppAddr2" placeholder="Apartment, studio, or floor">
-                        </div>
+                        </div> -->
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
@@ -93,10 +94,11 @@
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
-                            <select id="inputCity" class="form-control" name="suppCity" required>
+                            <!-- <select id="inputCity" class="form-control" name="suppCity" required>
                               <option selected>Choose...</option>
                               <option>Pretoria</option>
-                            </select>
+                            </select> -->
+                            <input type="text" class="form-control" id="inputCity" name="suppSuburb" required>
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
@@ -154,6 +156,7 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
   <script src="JS/supplier.js"></script>
 </body>
 

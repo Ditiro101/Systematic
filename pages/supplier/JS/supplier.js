@@ -28,7 +28,7 @@ let getInput= function()
 	let contact=$("#ContactNo").val().trim();
 	let email=$("#supplierEmail").val().trim();
 	let address1=$("#inputAddress").val().trim();
-	let address2=$("#inputAddress2").val().trim();
+	//let address2=$("#inputAddress2").val().trim();
 	let suburb=$("#inputSuburb").val().trim();
 	let city=$("#inputCity").val().trim();
 	let zip=$("#inputZip").val().trim();
@@ -37,7 +37,7 @@ let getInput= function()
 	addSupplierArr["VATNumber"]=VatNum;
 	addSupplierArr["con"]=contact;
 	addSupplierArr["email"]=email;
-	addSupplierArr["address"]=address1+" "+address2;
+	addSupplierArr["address"]=address1;
 	addSupplierArr["suburb"]=suburb;
 	addSupplierArr["city"]=city;
 	addSupplierArr["zip"]=zip;
@@ -47,10 +47,46 @@ let getInput= function()
 }
 
 $(()=>{
-	
+	//APP ID: 4ubUBkg0ecyvqIcmRpJw
+	//APP CODE : R1S3qwnTFxK3FbiK1ucSqw
 	jQuery.validator.setDefaults({
   		debug: true,
   		success: "valid"
+	});
+	$("#inputAddress").on('keyup',function(e){
+		e.preventDefault();
+		$.getJSON("http://autocomplete.geocoder.api.here.com/6.2/suggest.json?app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw&query="+$(this).val()+"&country=ZAF",{
+			format:"json",
+			delay:250
+		})
+		.done(data=>{
+			//console.log(data.suggestions);
+			let viewArr=[];
+			let obj={label:"",index:""};
+			//console.log(data.suggestions);
+			for(k=0;k<data.suggestions.length;k++)
+			{
+				obj={label:"",index:""};
+				obj.label=data.suggestions[k].label.split(', ').reverse().join(', ');
+				obj.index=data.suggestions[k].locationId;
+				viewArr.push(obj);
+			}
+			console.log(viewArr);
+			let useArr=data.suggestions;
+			$("#inputAddress").autocomplete({
+				source:viewArr,
+				select: function(event,ui){
+				// alert(ui.item.index);
+				let finalObj=useArr.filter(element=>element.locationId==ui.item.index);
+				//console.log(finalObj);
+				$("#inputSuburb").val(finalObj[0].address.district);
+				$("#inputCity").val(finalObj[0].address.city);
+				$("#inputZip").val(finalObj[0].address.postalCode);
+			}
+			});
+
+		});
+
 	});
 	$("#addSave").on('click',function(e){
 		e.preventDefault();
@@ -66,6 +102,7 @@ $(()=>{
 			
 			
 			let arr=getInput();
+			console.log(arr["suburb"]);
 			if(CheckValid(arr)!=true)
 			{
 				e.stopPropagation();
@@ -75,20 +112,22 @@ $(()=>{
 				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"]}
+				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],suburb:arr["suburb"]}
 				})
 				.done(data=>{
 					if(data=="True")
 					{
-						$("#MMessage").text("Supplier Added Successfully!");
-						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
-						$("#displayModal").modal("show");
+						alert("True");
+						// $("#MMessage").text("Supplier Added Successfully!");
+						// $("#btnClose").attr("onclick","window.location='../../supplier.php'");
+						// $("#displayModal").modal("show");
 					}
 					else
 					{
-						$("#MMessage").text("Supplier Not Added!");
-						$("#btnClose").attr("data-dismiss","modal");
-						$("#displayModal").modal("show");
+						alert(data);
+						// $("#MMessage").text("Supplier Not Added!");
+						// $("#btnClose").attr("data-dismiss","modal");
+						// $("#displayModal").modal("show");
 					}
 				});	
 			}

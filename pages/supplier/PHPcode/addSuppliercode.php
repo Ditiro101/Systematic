@@ -1,22 +1,45 @@
 <?php
 	include_once("connection.php");
+	function checkSuburb($con,$suburbName)
+	{
+		$suburb_query="SELECT * FROM SUBURB WHERE NAME='$suburbName'";
+		$suburb_result=mysqli_query($con,$suburb_query);
+		if(mysqli_num_rows($suburb_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+		
+
+	}
 	if($_POST["choice"]==1)
 	{
-		$name=$_POST["name"];
-		$vat=$_POST["vat"];
-		$contact=$_POST["contact"];
-		$email=$_POST["email"];
-		$sql_query ="INSERT INTO SUPPLIER (NAME,VAT_NUMBER,CONTACT_NUMBER,EMAIL)
-		VALUES('$name','$vat','$contact','$email')";
-		$result = mysqli_query($con,$sql_query);
-		if($result)
+		if(checkSuburb($con,$_POST["suburb"]))
 		{
 			echo "True";
 		}
 		else
 		{
-			echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
+			echo $_POST["suburb"];
 		}
+		// $name=$_POST["name"];
+		// $vat=$_POST["vat"];
+		// $contact=$_POST["contact"];
+		// $email=$_POST["email"];
+		// $sql_query ="INSERT INTO SUPPLIER (NAME,VAT_NUMBER,CONTACT_NUMBER,EMAIL)
+		// VALUES('$name','$vat','$contact','$email')";
+		// $result = mysqli_query($con,$sql_query);
+		// if($result)
+		// {
+		// 	echo "True";
+		// }
+		// else
+		// {
+		// 	echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
+		// }
 	}
 	elseif ($_POST["choice"]==2) 
 	{
