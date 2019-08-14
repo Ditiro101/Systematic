@@ -203,80 +203,67 @@
 		{
 			if(addSupplier($con,$_POST["name"],$_POST["vat"],$_POST["contact"],$_POST["email"]))
 			{
-				if(addressCheck($con,$_POST["address"]))
-				{
-					if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+				$stopCount=$_POST["num"]-1;
+				for ($i=0; $i<$_POST["num"];$i++) 
+				{ 
+					if(addressCheck($con,$_POST["address"][$i]))
 					{
-						echo "T,Supplier Added";
-					}
-					else
-					{
-						echo "F,Supplier Added but Supplier Address Not Added";
-					}
-				}
-				else
-				{
-					if(checkSuburb($con,$_POST["suburb"]))
-					{
-						if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+						if(addSupplierAddress($con,getAddressID($con,$_POST["address"][$i]),getSupplierID($con,$_POST["contact"])))
 						{
-							if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+							if($i==$stopCount)
 							{
 								echo "T,Supplier Added";
 							}
-							else
-							{
-								echo "F,Suburb Found Address added but Supplier Address Not Added";
-							}
-
+							
 						}
 						else
 						{
-							echo "F,Suburb found but Address not added.";
+							echo "F,Supplier Added but Supplier Address Not Added ".$i;
 						}
 					}
 					else
 					{
-						if(checkCity($con,$_POST["city"]))
+						if(checkSuburb($con,$_POST["suburb"][$i]))
 						{
-							if(addSuburb($con,$_POST["suburb"],getCityID($con,$_POST["city"]),$_POST["zip"]))
+							if(addAddress($con,$_POST["address"][$i],getSuburbID($con,$_POST["suburb"][$i])))
 							{
-
-								if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+								if(addSupplierAddress($con,getAddressID($con,$_POST["address"][$i]),getSupplierID($con,$_POST["contact"])))
 								{
-									if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+									if($i==$stopCount)
 									{
 										echo "T,Supplier Added";
 									}
-									else
-									{
-										echo "F,City found Suburb Added Address Added but Supplier Address Not Added"; //A Test triggered this
-									}
-
+								}
+								else
+								{
+									echo "F,Suburb Found Address added but Supplier Address Not Added ".$i;
 								}
 
 							}
 							else
 							{
-								echo "F,City Found but Suburb Not Added";
+								echo "F,Suburb found but Address not added. ".$i;
 							}
 						}
 						else
 						{
-							if(addCity($con,$_POST["city"]))
+							if(checkCity($con,$_POST["city"][$i]))
 							{
-								if(addSuburb($con,$_POST["suburb"],getCityID($con,$_POST["city"]),$_POST["zip"]))
+								if(addSuburb($con,$_POST["suburb"][$i],getCityID($con,$_POST["city"][$i]),$_POST["zip"][$i]))
 								{
 
-									if(addAddress($con,$_POST["address"],getSuburbID($con,$_POST["suburb"])))
+									if(addAddress($con,$_POST["address"][$i],getSuburbID($con,$_POST["suburb"][$i])))
 									{
-										if(addSupplierAddress($con,getAddressID($con,$_POST["address"]),getSupplierID($con,$_POST["contact"])))
+										if(addSupplierAddress($con,getAddressID($con,$_POST["address"][$i]),getSupplierID($con,$_POST["contact"])))
 										{
-											echo "T,Supplier Added";
+											if($i==$stopCount)
+											{
+												echo "T,Supplier Added";
+											}
 										}
 										else
 										{
-											echo "F,City Added Suburb Added Address Added but Supplier Address Not Added";
+											echo "F,City found Suburb Added Address Added but Supplier Address Not Added ".$i; //A Test triggered this
 										}
 
 									}
@@ -284,16 +271,46 @@
 								}
 								else
 								{
-									echo "F,City Added but Suburb Not Added";
+									echo "F,City Found but Suburb Not Added ".$i;
 								}
-
 							}
 							else
 							{
-								echo "F,City Not Added";
+								if(addCity($con,$_POST["city"][$i]))
+								{
+									if(addSuburb($con,$_POST["suburb"][$i],getCityID($con,$_POST["city"][$i]),$_POST["zip"][$i]))
+									{
+
+										if(addAddress($con,$_POST["address"][$i],getSuburbID($con,$_POST["suburb"][$i])))
+										{
+											if(addSupplierAddress($con,getAddressID($con,$_POST["address"][$i]),getSupplierID($con,$_POST["contact"])))
+											{
+												if($i==$stopCount)
+												{
+													echo "T,Supplier Added";
+												}
+											}
+											else
+											{
+												echo "F,City Added Suburb Added Address Added but Supplier Address Not Added ".$i;
+											}
+
+										}
+
+									}
+									else
+									{
+										echo "F,City Added but Suburb Not Added ".$i;
+									}
+
+								}
+								else
+								{
+									echo "F,City Not Added ".$i;
+								}
 							}
 						}
-					}
+					}	
 				}
 			}
 			else

@@ -1,3 +1,4 @@
+var count=1;
 let CheckValid = function(valArr)
 {
 	if(valArr["con"].length!=10)
@@ -27,20 +28,57 @@ let getInput= function()
 	let VatNum=$("#VATNumber").val().trim();
 	let contact=$("#ContactNo").val().trim();
 	let email=$("#supplierEmail").val().trim();
-	let address1=$("#inputAddress").val().trim();
-	//let address2=$("#inputAddress2").val().trim();
-	let suburb=$("#inputSuburb").val().trim();
-	let city=$("#inputCity").val().trim();
-	let zip=$("#inputZip").val().trim();
+	// let address1=$("#inputAddress").val().trim();
+	// let suburb=$("#inputSuburb").val().trim();
+	// let city=$("#inputCity").val().trim();
+	// let zip=$("#inputZip").val().trim();
+	// let address2=$("#inputAddress2").val().trim();
+	// let suburb2=$("#inputSuburb2").val().trim();
+	// let city2=$("#inputCity2").val().trim();
+	// let zip2=$("#inputZip2").val().trim();
+	// let address3=$("#inputAddress3").val().trim();
+	// let suburb3=$("#inputSuburb3").val().trim();
+	// let city3=$("#inputCity3").val().trim();
+	// let zip3=$("#inputZip3").val().trim();
+	addressArr=[];
+	suburbArr=[];
+	zipArr=[];
+	cityArr=[];
+	$(".inputAddress").each(function(index,item){
+		let addr=$(item).val().trim().split(",");
+		let a=addr[0];
+		addressArr[index]=a;
+	});
+	$(".inputSuburb").each(function(index,item){
+		suburbArr[index]=$(item).val().trim();
+	});
+	$(".inputCity").each(function(index,item){
+		zipArr[index]=$(item).val().trim();
+	});
+	$(".inputZip").each(function(index,item){
+		cityArr[index]=$(item).val().trim();
+	});
+	// for(let k=0;k<count;k++)
+	// {
+	// 	let a="#inputAddress"+k;
+	// 	let s="#inputSuburb"+k;
+	// 	let c="#inputCity"+k;
+	// 	let z="#inputZip"+k;
+	// 	addressArr[k]=$(a).val().trim();
+	// 	suburbArr[k]=$(s).val().trim();
+	// 	cityArr[k]=$(c).val().trim();
+	// 	zipArr[k]=$(z).val().trim();
+	// }
+
 	let addSupplierArr=[];
 	addSupplierArr["name"]=name;
 	addSupplierArr["VATNumber"]=VatNum;
 	addSupplierArr["con"]=contact;
 	addSupplierArr["email"]=email;
-	addSupplierArr["address"]=address1;
-	addSupplierArr["suburb"]=suburb;
-	addSupplierArr["city"]=city;
-	addSupplierArr["zip"]=zip;
+	addSupplierArr["address"]=addressArr;
+	addSupplierArr["suburb"]=suburbArr;
+	addSupplierArr["city"]=cityArr;
+	addSupplierArr["zip"]=zipArr;
 	return addSupplierArr;
 
 
@@ -59,15 +97,15 @@ let getInput= function()
 
 		let suburb=$('<div></div>').addClass('form-group col-md-6');
 		suburb.append( $('<label></label>').attr('for', 'inputSuburb'+tmp).html('Suburb'));
-		suburb.append( $('<input></input>').addClass('form-control').attr('id', 'inputSuburb'+tmp));
+		suburb.append( $('<input></input>').addClass('form-control inputSuburb').attr('id', 'inputSuburb'+tmp));
 		
 		let city=$('<div></div>').addClass('form-group col-md-4');
 		city.append( $('<label></label>').attr('for', 'inputCity'+tmp).html('City'));
-		city.append( $('<input></input>').addClass('form-control').attr('id', 'inputCity'+tmp).attr('readonly',''));
+		city.append( $('<input></input>').addClass('form-control inputCity').attr('id', 'inputCity'+tmp).attr('readonly',''));
 
 		let zip=$('<div></div>').addClass('form-group col-md-2');
 		zip.append( $('<label></label>').attr('for', 'inputZip'+tmp).html('Zip'));
-		zip.append( $('<input></input>').addClass('form-control').attr('id', 'inputZip'+tmp).attr('readonly',''));
+		zip.append( $('<input></input>').addClass('form-control inputZip').attr('id', 'inputZip'+tmp).attr('readonly',''));
 
 		form_row2.append(suburb);
 		form_row2.append(city);
@@ -194,7 +232,6 @@ $(()=>{
 
 	});
 
-	var count=1;
 
 
 
@@ -228,6 +265,7 @@ $(()=>{
 
 	$("#addSave").on('click',function(e){
 		e.preventDefault();
+		console.log(count);
 		let form=$('#mainf');
 		form.validate();
 		//element.valid();78\6\\\\\\\\\\\\
@@ -240,9 +278,7 @@ $(()=>{
 			
 			
 			let arr=getInput();
-			let addr=arr["address"].split(",");
-			let a=addr[0];
-			console.log(arr["suburb"]);
+			console.log(arr);
 			if(CheckValid(arr)!=true)
 			{
 				e.stopPropagation();
@@ -252,7 +288,7 @@ $(()=>{
 				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{choice:1,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:a,suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]}
+				data:{choice:1,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]}
 				})
 				.done(data=>{
 					//alert(data);
