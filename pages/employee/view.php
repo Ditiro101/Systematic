@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 
@@ -51,6 +53,23 @@
               <div class="col ">
                 <div class="card-profile-image">
                   <a href="#">
+                <?php
+
+                //Pic to be inserted here.
+                         /* $dir = "../images/ProfilePic/" . $employeeID. ".jpg";
+                        if(file_exists($dir))
+                        {
+                            echo '<div>
+                                          <img class="card-img-top" src="' . $dir . ' " class="rounded-circle" alt="person">
+                            </div>';
+                        }
+                        else
+                        {
+                            echo '<div>
+                                          <img class="card-img-top" src="../images/person.png" class="rounded-circle" alt="person">
+                            </div>';
+                        }*/
+                ?>   
                     <img src="../../images/user.png" class="rounded-circle">
                   </a>
                 </div>

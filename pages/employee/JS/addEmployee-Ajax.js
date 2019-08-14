@@ -1,9 +1,9 @@
 $(document).ready(function(){
-    $("#SavingDetails").click(function(e){
+    $("#picToUpload").on("submit",function(e){//use ID of the form
         e.preventDefault();
 
         
-        var form = $('#picToUpload')[0];
+        /*var form = $('#picToUpload')[0];
         var file = new FormData(form);
 
 
@@ -19,33 +19,40 @@ $(document).ready(function(){
         var contactNumber =  $("#contactNumber").val().trim();
         console.log(name);
         let norMalfile = $("#UploadsPic").val();
-        console.log(norMalfile);
+        console.log(norMalfile);*/
 
-        let info = {employeeName: name, employeeSurname:surname , employeeNumber: contactNumber };
+        //let info = {employeeName: name, employeeSurname:surname , employeeNumber: contactNumber };
             $.ajax({
                 url:'PHPcode/addEmployee-SQL.php',
                 type:'post',
-                data:info
-            })
-            .then(function(data) {
+                data:new FormData(this),
+                processData: false,
+                contentType: false,
+                cache: false,
+                success:function(data)
+                {
+                    console.log(data);
+                }
+            });
+           /* .done(function(response) {
                 //return success of saving the data , retuned Employee_ID
-                   
-                    if(data == "")
+                   console.log(response);
+                    if(response == "")
                     {
-                        console.log(data + "was saved as well");
+                        console.log(response+ "was saved as well");
                     }
-                    else if(data == "")
+                    else if(response == "")
                     {
-                        console.log(data + "was saved as well");
+                        console.log(response + "was saved as well");
                     }
                     else
                     {
-                        console.log(data + "was saved as well");
-                        return data;
+                        console.log(response + "was saved as well");
+                        //return data;
                     }
                    
-                })
-            .then(function(details) {
+                });
+            /*.then(function(details) {
                 
                 console.log(details);
                 console.log("hey");
@@ -55,9 +62,7 @@ $(document).ready(function(){
                     //enctype: 'multipart/form-data',
                     url: 'PHPcode/Picture Upload/imageValidator.php',
                     data:fileDetails,
-                    //processData: false,
-                    //contentType: false,
-                    //cache: false,
+                    //
                     //timeout: 600000,
                     success:function(data)
                     {
@@ -72,13 +77,12 @@ $(document).ready(function(){
                         {
                            /* $('#alert-login').empty();
                             $('#alert-login').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Login failed!</strong> </span></div>");  */
-                            console.log("Could not upload pictures");  
+                         /*   console.log("Could not upload pictures");  
                         }
                     },
-            });
+            });*/
         
         });
     
 
     });
-});

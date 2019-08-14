@@ -59,12 +59,12 @@
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="employeeName">Name</label>
-                            <input type="text" class="form-control" id="employeeName" aria-describedby="emailHelp" placeholder="Enter name">
+                            <input type="text" class="form-control" id="employeeName" name="employeeName" aria-describedby="emailHelp" placeholder="Enter name">
                             
                           </div>
                           <div class="form-group col-6">
                             <label for="employeeSurname">Surname</label>
-                            <input type="text" class="form-control" id="employeeSurname" placeholder="Surname">
+                            <input type="text" class="form-control" id="employeeSurname" name="employeeSurname" placeholder="Surname">
                           </div>
                         </div>
                         <div class="form-row ">
@@ -78,7 +78,7 @@
                           </div>
                           <div class="form-group col-10">
                             <label for="contactNumber">Contact Number</label>
-                            <input type="number" class="form-control" id="contactNumber" placeholder="Contact Number">
+                            <input type="number" class="form-control" id="contactNumber" name="employeeNumber" placeholder="Contact Number">
                           </div>
                         </div>
                         <div class="form-row ">
@@ -128,14 +128,14 @@
                             <div class='form-group col-12'>
                                 <label for="UploadsPic">Upload Employee Picture</label>
                                 <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
-                                <input type='file' class='form-control' name='picToUpload'  class="form-control"/><br/>
+                                <input type='file' class='form-control' name='UploadsPic'  class="form-control"/><br/>
                                 
                              
                           </div>
                           
                         </div>
                         <div>
-                        <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default" id="SavingDetails">Save</button> 
+                        <button type="submit" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default" id="SavingDetails">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
                             <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">

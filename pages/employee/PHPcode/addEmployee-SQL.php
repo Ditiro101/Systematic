@@ -20,7 +20,8 @@
 	$name = mysqli_real_escape_string($DBConnect,$_POST["employeeName"]);
 	$surname = $_POST["employeeSurname"];//5
 	$contact = $_POST["employeeNumber"];//8
-	
+	$fileTo= $_FILES["UploadsPic"];
+
 	//GET IDs
 
 	//INSERT INTO TABLE
@@ -29,16 +30,86 @@
 	
 	if($check)
 	{
+	
 		$query = "SELECT `EMPLOYEE_ID` FROM `EMPLOYEE` WHERE (NAME='$name' and SURNAME ='$surname' and CONTACT_NUMBER ='$contact')";
 		$submitQuery = mysqli_query($DBConnect,$query);
-
-		$object = array();
+		
+		//$object = array();
 		if($submitQuery)
 		{
+			$savedID = mysqli_fetch_assoc($submitQuery);
+		
+			$employeeID = $savedID["EMPLOYEE_ID"];
 			
-			$employeeID = mysqli_fetch_assoc($submitQuery);
+				//Upload picture.
+			if(empty($employeeID))
+			{
+				echo "Employee ID not created, something is wrong with the code";
+			}
+			else
+			{
+						$dir= "../images/ProfilePic/";		
+						$counter = count($fileTo["name"]);
+					if(($fileTo["type"] == "image/jpeg")&& ($fileTo["size"] < 125000))
+					{
+						
+								if($fileTo["error"] > 0)
+								{
+										echo "Error: " . $fileTo["error"]  . "<br/>";
+								}
+						else
+						{
+							
+								$faker = true;
+										if(file_exists($dir . $fileTo["name"] ))
+										{
+											echo $fileTo["name"] . " already exists.";
+										} 
+										else
+										{
+												
+												
+											
+											
+												$temp = explode(".", $fileTo["name"]);
+											
+												$newfilename = $employeeID . '.' . end($temp);
+												move_uploaded_file($fileTo["tmp_name"] , $dir . $newfilename);
+											
 			
-				echo $employeeID["EMPLOYEE_ID"];	
+													//Upload pic on database.
+												
+												$query = "INSERT INTO EMPLOYEE_PICTURE (FILENAME, EMPLOYEE_ID) VALUES ('$newfilename', '$employeeID')"; // insert the user_id for specific pictures
+												$res = mysqli_query($DBConnect, $query);
+												var_dump($res);
+												if($res)
+												{
+													$obj = array();
+													$obj[0] = "success";
+													$myJson = json_encode($obj);
+													echo $myJson;
+													
+												}
+												else
+												{
+													echo "error in saving employee pic";
+												}
+																
+										}
+										
+						}
+			
+					}
+					else
+					{
+							echo  '<div class="alert alert-danger mt-3" role="alert">
+							There was an error within the picture upload<br/>
+					</div>';
+							
+					}
+
+			}
+			
 		}
 		else
 		{
@@ -47,7 +118,7 @@
 	}
 	else
 	{
-		echo "Couldnt insert details ". $subm;
+		echo "Couldnt insert details ";
 	}
     //Close database connection
     mysqli_close($DBConnect);
