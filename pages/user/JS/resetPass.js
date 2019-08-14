@@ -22,15 +22,19 @@ $(document).ready(function(){
                 {
 
                     console.log(data);
-                    /*if(data=="success")
+                    if(data=="successful reset password")
                     {
-                       window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`; 
+                        $("#modal-title-default").text("Success!");
+                        $("#modalText").text("Password reset successfully");
+                        $("#successfullyChanged").modal("show");
+                       //window.location = "../../login.php"; 
                     }
                     else
                     {
                         $('#alert-password').empty();
-                        $('#alert-password').append("<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>Error sending email!</strong> </span></div>");    
-                    }*/
+                        $('#alert-password').append(`<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>The link is expired. You are trying to use the expired link which 
+                        as valid only 10 minutes after request. </strong> </span></div>`);    
+                    }
                 
             });
      

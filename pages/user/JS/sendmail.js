@@ -3,7 +3,7 @@ $(document).ready(function(){
         e.preventDefault();
 
         let emailSent = $("#email").val();
-        console.log(emailSent);
+        //console.log(emailSent);
             $.ajax({
                 url:'PHPcode/sendEmail.php',
                 type:'post',
@@ -15,7 +15,14 @@ $(document).ready(function(){
                     console.log(data);
                     if(data=="success")
                     {
-                       window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`; 
+                        $("#modal-title-default").text("Success!");
+                        $("#modalText").text("Reset password link sent. Check your email");
+                        $("#successfullyChanged").modal("show");
+
+                       window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`;
+                        
+                       
+                       
                     }
                     else
                     {

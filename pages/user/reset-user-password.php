@@ -97,9 +97,9 @@
                 </div>
 
                 <div class="text-center">
-                  <button  type="submit" class="btn btn-customGreen my-4" data-toggle="modal" data-target="#modal-default" >Reset Password </button>
+                  <button  type="submit" class="btn btn-customGreen my-4" >Reset Password </button>
                 </div>
-                <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal fade" id="successfullyChanged" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                   <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                       <div class="modal-content">
                         
@@ -110,14 +110,14 @@
                               </button>
                           </div>
                           
-                          <div class="modal-body">
-                              <p>Password reset successfully</p>
+                          <div class="modal-body" >
+                              <p id="modalText"></p>
                               
                           </div>
                           
                           <div class="modal-footer">
                               
-                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='login.php'">Close</button> 
+                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../index.php'">Close</button> 
                           </div>
                           
                       </div>

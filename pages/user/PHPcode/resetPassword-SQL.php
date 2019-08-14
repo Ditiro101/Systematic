@@ -85,7 +85,7 @@ $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.u
                 $saltedQuery =  "SELECT * FROM `USER` WHERE  `USER_ID`='$userId'";
                
                 $submitSalt = mysqli_query($DBConnect,$saltedQuery);
-                var_dump($submitSalt);
+                //var_dump($submitSalt);
                 $rowArray = mysqli_fetch_assoc($submitSalt);
 
                 
@@ -100,7 +100,7 @@ $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.u
               
               $delPass = "DELETE FROM `USER_TEMPORARY_PASSWORD` WHERE `USER_ID`='$userId'";
               $redirect =mysqli_query($DBConnect,$delPass);
-              var_dump($redirect);
+              //var_dump($redirect);
               if($submitSalt==true && $newCheckedPass==true && $redirect==true)
               {
                 echo "successful reset password";
