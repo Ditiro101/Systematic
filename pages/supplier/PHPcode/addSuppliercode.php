@@ -402,7 +402,7 @@
 	}
 	elseif ($_POST["choice"]==3)
 	{
-		$sql_query ="SELECT * FROM  SUPPLIER";
+		$sql_query ="SELECT * FROM SUPPLIER";
 	    $result = mysqli_query($con,$sql_query);
 	    //$row = mysqli_fetch_array($result);
 

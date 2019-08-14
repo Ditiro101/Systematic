@@ -44,6 +44,20 @@
 			return false;
 		}
 	}
+	//////////////////////////////////////////
+	function maintainTruck($con,$id,$reg,$tname,$tcap,$active)
+	{
+		$update_query="UPDATE TRUCK SET REGISTRATION_NUMBER='$reg',TRUCK_NAME='$tname',CAPACITY='$tcap',ACTIVE='$active' WHERE TRUCK_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	///////////////////////////////////////////
 	/////////////////////////////////////////////
 	if($_POST["choice"]==1)
@@ -66,11 +80,36 @@
 	}
 	elseif($_POST["choice"]==2)
 	{
-
+		if(maintainTruck($con,$_POST["ID"],$_POST["registration"],$_POST["name"],$_POST["capacity"],$_POST["active"]))
+		{
+			echo "T,Truck Updated Successfully";
+		}
+		else
+		{
+			echo "F,Truck Not Updated";
+		}
 	}
 	elseif($_POST["choice"]==3)
 	{
+		$sql_query ="SELECT * FROM TRUCK";
+	    $result = mysqli_query($con,$sql_query);
+	    //$row = mysqli_fetch_array($result);
 
+	    if (mysqli_num_rows($result)>0) {
+	        $count=0;
+	        while ($row=$result->fetch_assoc())
+	        {
+	        	$vals[]=$row;
+	        	//$vals[$count]["ID"]=$row["SUPPLIER_ID"];
+	        	$count=$count+1;
+	        }
+	        echo json_encode($vals);
+	        // echo mysqli_num_rows($result);
+	        
+	    }
+	    else{
+	         echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
+	    }
 	}
 	mysqli_close($con);
 ?>
