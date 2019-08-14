@@ -54,7 +54,7 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form enctype='multipart/form-data' action='' method='' id='picToUpload'>
+                    <form enctype='multipart/form-data' action='' method='' class="card-body" id='picToUpload'>
                       <div class="col">
                         <div class="form-row">
                           <div class="form-group col-6">
@@ -126,8 +126,8 @@
                           </div>
                           
                             <div class='form-group col-12'>
-                                <label for="Uploads">Upload Employee Picture</label>
-                                <input type='hidden' class='form-control' name='set' id="Uploads" class="form-control"/>
+                                <label for="UploadsPic">Upload Employee Picture</label>
+                                <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
                                 <input type='file' class='form-control' name='picToUpload'  class="form-control"/><br/>
                                 
                              

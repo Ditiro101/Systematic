@@ -5,15 +5,25 @@ $(document).ready(function(){
         
         var form = $('#picToUpload')[0];
         var file = new FormData(form);
+
+
+        jQuery.each(jQuery('#picToUpload')[0].files, function(i, f) {
+            file.append('file[]', f);
+        });
         
+        console.log("hey");
+        console.log(file);
+
         var name = $("#employeeName").val().trim();
         var surname = $("#employeeSurname").val().trim();
         var contactNumber =  $("#contactNumber").val().trim();
-        //let file = $("#picToUpload").val();
+        console.log(name);
+        let norMalfile = $("#UploadsPic").val();
+        console.log(norMalfile);
 
         let info = {employeeName: name, employeeSurname:surname , employeeNumber: contactNumber };
             $.ajax({
-                url:'../PHPcode/addEmployee-SQL.php',
+                url:'PHPcode/addEmployee-SQL.php',
                 type:'post',
                 data:info
             })
@@ -35,25 +45,28 @@ $(document).ready(function(){
                     }
                    
                 })
-            .then(function(data) {
+            .then(function(details) {
                 
+                console.log(details);
+                console.log("hey");
+                let fileDetails = {employeeID: details, picToUpload:norMalfile};
                 $.ajax({
                     type: "POST",
-                    enctype: 'multipart/form-data',
-                    url: '..PHPcode/Picture Upload/imageValidator.php',
-                    response:{employee_ID:data ,picToUpload :file},
-                    processData: false,
-                    contentType: false,
+                    //enctype: 'multipart/form-data',
+                    url: 'PHPcode/Picture Upload/imageValidator.php',
+                    data:fileDetails,
+                    //processData: false,
+                    //contentType: false,
                     //cache: false,
                     //timeout: 600000,
-                    success:function(response)
+                    success:function(data)
                     {
     
-                        console.log(response);
-                        if(response=="success")
+                        console.log(data);
+                        if(data=="successfully saved picture")
                         {
                             //window.location = "dashboard.php"; 
-                            console.log(response);
+                            console.log(data);
                         }
                         else
                         {

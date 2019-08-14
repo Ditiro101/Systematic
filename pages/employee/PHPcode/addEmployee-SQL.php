@@ -24,8 +24,7 @@
 	//GET IDs
 
 	//INSERT INTO TABLE
-	$subm = "INSERT INTO `EMPLOYEE`(`NAME`, `SURNAME`, `CONTACT_NUMBER`, `EMAIL`,`IDENTITY_NUMBER`,`ADDRESS_LINE_1`,`TITLE_ID`,`SUBURB_ID`
-	,`EMPLOYEE_TYPE_ID`,`EMPLOYEE_STATUS_ID`) VALUES ('$name','$surname','$contact','NULL', 'NULL','NULL','NULL','NULL','NULL','NULL')";
+	$subm = "INSERT INTO `EMPLOYEE`(`NAME`, `SURNAME`, `CONTACT_NUMBER`) VALUES ('$name','$surname','$contact')";
 	$check= mysqli_query($DBConnect,$subm);
 	
 	if($check)
@@ -37,7 +36,7 @@
 		if($submitQuery)
 		{
 			
-			$employeeID = mysqli_fetch_assoc($submitQuery))
+			$employeeID = mysqli_fetch_assoc($submitQuery);
 			
 				echo $employeeID["EMPLOYEE_ID"];	
 		}
@@ -48,7 +47,7 @@
 	}
 	else
 	{
-		echo "Couldnt insert details";
+		echo "Couldnt insert details ". $subm;
 	}
     //Close database connection
     mysqli_close($DBConnect);

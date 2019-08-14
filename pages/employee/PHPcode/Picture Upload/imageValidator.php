@@ -1,12 +1,26 @@
 <?php
-session_start();
-require 'validate-login.php';
-include 'header.php';
- if(isset($_POST["set"]))
- {
-     $dir= "../images/ProfilePic/";
+$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+
+  $dbparts = parse_url($url);
+
+  $hostname = $dbparts['host'];
+  $username = $dbparts['user'];
+  $password = $dbparts['pass'];
+  $database = ltrim($dbparts['path'],'/');
+
+  $DBConnect = mysqli_connect($hostname, $username, $password, $database);
+
+  if($DBConnect === false)
+  {
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+  }
+  else
+  {
+
+    $dir= "../../images/ProfilePic/";
      $fileTo= $_FILES["picToUpload"];
      $counter = count($fileTo["name"]);
+     $employeeID = $_POST["employeeID"];
      $f_file;
      $imageFileType;
      //$email = $_POST['email'];
@@ -35,30 +49,30 @@ include 'header.php';
                 //$filer = $fileTo["name"][$k];
                 
                  $temp = explode(".", $fileTo["name"]);
-                 var_dump(end($temp));
-                 $newfilename = $_SESSION["users"] . '.' . end($temp);
-                 var_dump($newfilename);
-                 var_dump($fileTo["tmp_name"]);
+                // var_dump(end($temp));
+                 $newfilename = $employeeID . '.' . end($temp);
+                // var_dump($newfilename);
+                 //var_dump($fileTo["tmp_name"]);
                  move_uploaded_file($fileTo["tmp_name"], $dir . $newfilename);
-                $_SESSION["picSet"]= "sett";
+                //$_SESSION["picSet"]= "sett";
 
 
-                header('location:profile.php');
+               // header('location:profile.php');
                      //move_uploaded_file($fileTo["tmp_name"],
                      //$dir . $fileTo["name"][$k]);
 
                      
-                    /* $query = "SELECT * FROM tbusers WHERE email = '$email' AND password = '$pass'";
-                     $res = $mysqli->query($query);
-                     if($row = mysqli_fetch_array($res)) //Does not override yet
-                     {
-                         $user = $row['user_id'];
-                         $query = "INSERT INTO tbgallery (user_id, filename) VALUES ('$user', '$filer');"; // insert the user_id for specific pictures
-                         $res = mysqli_query($mysqli, $query) == TRUE;
-                     }
-
                    
-                    */ 
+                        
+                         $query = "INSERT INTO EMPLOYEE_PICTURE (FILENAME, EMPLOYEE_ID) VALUES ('$newfilename', '$employeeID');"; // insert the user_id for specific pictures
+                         $res = mysqli_query($DBConnect, $query);
+                         if($res)
+                         {
+                             echo "successfully saved picture";
+                         }
+                     
+
+                
                 }
              
 
@@ -74,43 +88,12 @@ include 'header.php';
        
    }
  
-
+//Close database connection
+mysqli_close($DBConnect);
  }
- /*echo "<h1>
-         <strong>Image Gallery</strong>
-         </h1>";
-  $query = "SELECT * FROM tbusers WHERE email = '$email' AND password = '$pass'";
- $res = $mysqli->query($query);
-     if($row = mysqli_fetch_array($res))
-     {
-       $user = $row["user_id"];
-       $query = "SELECT * FROM tbgallery WHERE user_id = '$user'";
-       $res = $mysqli->query($query);
-       
-       echo "<div class='row imageGallery'>";
-       while($row = mysqli_fetch_array($res))
-       {
-             
-            
-                 echo "<div class='col-3' style='background-image: url(gallery/".$row["filename"].")'>
-                 </div><br/>";
-             
-            
-       }
-       echo "</div>";
-     }
- 
-}				
-else{
-echo 	'<div class="alert alert-danger mt-3" role="alert">
-     You are not registered on this site!
- </div>';
-}
-} 
+    
+    
+  
+   
 
-else{
-echo 	'<div class="alert alert-danger mt-3" role="alert">
- Could not log you in
-</div>';
-}*/
 ?>
