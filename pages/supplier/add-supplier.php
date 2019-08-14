@@ -78,12 +78,8 @@
                             <input type="email" class="form-control" id="supplierEmail" name="suppEmail" placeholder="Enter Email" required>
                           </div>
                         </div>
-                        <div class="form-group ">
-                          <span class="input-group-btn float left">
-                                    <button class="btn btn-success btn-add-address" type="button">
-                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-                                    </button>
-                            </span>
+                        
+
                             <hr class="my-4">
 
                           <div class="form-row">
@@ -101,11 +97,11 @@
                           </div>
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputCity">Suburb</label>
-                              <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" readonly>
+                              <label for="inputSuburb">Suburb</label>
+                              <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" >
                             </div>
                             <div class="form-group col-md-4">
-                              <label for="inputState">City</label>
+                              <label for="inputCity">City</label>
                               <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
                             </div>
                             <div class="form-group col-md-2">
@@ -114,12 +110,20 @@
                             </div>
                           </div> 
                         </div>
-                      
+                        
 
- 
+                          
 
                     </form>
-                    <div class="form-group col-md-2">
+
+                     <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                            </div>
+                    <br>
+                    <div class=" col-md-2">
                           <button type="button" class="btn btn-block btn-primary mb-3" id="addSave">Save</button>
                           <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">

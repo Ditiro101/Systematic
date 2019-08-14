@@ -47,16 +47,31 @@ let getInput= function()
 }
 
 	let createAddress= function(tmp){
-		let formgroup = $('<div></div>').addClass('form-group col');
+		let formgroup = $('<div></div>').addClass('form-group col').attr('id', 'address'+tmp);;
 		 formgroup.append($("<hr>").addClass('my-4'));
 		let form_row1= $('<div></div>').addClass('form-row');
 		form_row1.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
 		let input_group=$('<div></div>').addClass('input-group');
-		input_group.append( $('<input>').addClass('form-control inputAddress').attr('id', 'inputAddress'+tmp) );
+		input_group.append( $('<input>').addClass('form-control inputAddress').attr('id', 'inputAddress'+tmp).attr('type', 'text').attr('required','') );
 		input_group.append( $('<span class="input-group-btn"><button class="btn btn-danger btn-remove-address" type="button"><span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span></button>'))
 		form_row1.append(input_group);
 		let form_row2=$('<div></div>').addClass('form-row');
+
+		let suburb=$('<div></div>').addClass('form-group col-md-6');
+		suburb.append( $('<label></label>').attr('for', 'inputSuburb'+tmp).html('Suburb'));
+		suburb.append( $('<input></input>').addClass('form-control').attr('id', 'inputSuburb'+tmp));
 		
+		let city=$('<div></div>').addClass('form-group col-md-4');
+		city.append( $('<label></label>').attr('for', 'inputCity'+tmp).html('City'));
+		city.append( $('<input></input>').addClass('form-control').attr('id', 'inputCity'+tmp).attr('readonly',''));
+
+		let zip=$('<div></div>').addClass('form-group col-md-2');
+		zip.append( $('<label></label>').attr('for', 'inputZip'+tmp).html('Zip'));
+		zip.append( $('<input></input>').addClass('form-control').attr('id', 'inputZip'+tmp).attr('readonly',''));
+
+		form_row2.append(suburb);
+		form_row2.append(city);
+		form_row2.append(zip);
 		formgroup.append(form_row1);
 		formgroup.append(form_row2);
 		return formgroup;
@@ -69,7 +84,7 @@ $(()=>{
   		debug: true,
   		success: "valid"
 	});
-	$(".inputAddress").on('keyup',function(e){
+	$("#inputAddress").on('keyup',function(e){
 		e.preventDefault();
 		$.getJSON("http://autocomplete.geocoder.api.here.com/6.2/suggest.json?app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw&query="+$(this).val()+"&country=ZAF",{
 			format:"json",
@@ -89,7 +104,7 @@ $(()=>{
 			}
 			console.log(viewArr);
 			let useArr=data.suggestions;
-			$(".inputAddress").autocomplete({
+			$("#inputAddress").autocomplete({
 				source:viewArr,
 				select: function(event,ui){
 				// alert(ui.item.index);
@@ -105,16 +120,110 @@ $(()=>{
 
 	});
 
+	$(document).on('keyup','#inputAddress2',function(e){
+		e.preventDefault();
+		console.log('test');
+		$.getJSON("http://autocomplete.geocoder.api.here.com/6.2/suggest.json?app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw&query="+$(this).val()+"&country=ZAF",{
+			format:"json",
+			delay:100
+		})
+		.done(data=>{
+			console.log(data.suggestions);
+			let viewArr=[];
+			let obj={label:"",index:""};
+			//console.log(data.suggestions);
+			for(k=0;k<data.suggestions.length;k++)
+			{
+				obj={label:"",index:""};
+				obj.label=data.suggestions[k].label.split(', ').reverse().join(', ');
+				obj.index=data.suggestions[k].locationId;
+				viewArr.push(obj);
+			}
+			console.log(viewArr);
+			let useArr=data.suggestions;
+			$("#inputAddress2").autocomplete({
+				source:viewArr,
+				select: function(event,ui){
+				// alert(ui.item.index);
+				let finalObj=useArr.filter(element=>element.locationId==ui.item.index);
+				//console.log(finalObj);
+				$("#inputSuburb2").val(finalObj[0].address.district);
+				$("#inputCity2").val(finalObj[0].address.city);
+				$("#inputZip2").val(finalObj[0].address.postalCode);
+			}
+			});
+
+		});
+
+	});
+
+	$(document).on('keyup','#inputAddress3',function(e){
+		e.preventDefault();
+		console.log('test');
+		$.getJSON("http://autocomplete.geocoder.api.here.com/6.2/suggest.json?app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw&query="+$(this).val()+"&country=ZAF",{
+			format:"json",
+			delay:100
+		})
+		.done(data=>{
+			console.log(data.suggestions);
+			let viewArr=[];
+			let obj={label:"",index:""};
+			//console.log(data.suggestions);
+			for(k=0;k<data.suggestions.length;k++)
+			{
+				obj={label:"",index:""};
+				obj.label=data.suggestions[k].label.split(', ').reverse().join(', ');
+				obj.index=data.suggestions[k].locationId;
+				viewArr.push(obj);
+			}
+			console.log(viewArr);
+			let useArr=data.suggestions;
+			$("#inputAddress3").autocomplete({
+				source:viewArr,
+				select: function(event,ui){
+				// alert(ui.item.index);
+				let finalObj=useArr.filter(element=>element.locationId==ui.item.index);
+				//console.log(finalObj);
+				$("#inputSuburb3").val(finalObj[0].address.district);
+				$("#inputCity3").val(finalObj[0].address.city);
+				$("#inputZip3").val(finalObj[0].address.postalCode);
+			}
+			});
+
+		});
+
+	});
+
 	var count=1;
 
 
 
-	$(".btn-add-address").on('click',function(e){
+	$("#btn-add-address").on('click',function(e){
 		e.preventDefault();
 		count++;
+		
+		if(count<=3){
 		 let el= createAddress(count);
 		 $('#mainf').append(el);
+		 
+		 if(count==3){
+		 	$("#btn-add-address").attr('disabled','');
+		 }
+		}
 
+		
+
+	});
+
+	$('#mainf').on('click','.btn-remove-address', function(event) {
+		event.preventDefault();
+		/* Act on the event */
+		
+		console.log('test');
+		$('#address'+count).remove();
+		count--;
+		$("#btn-add-address").removeAttr('disabled','');
+	
 	});
 
 	$("#addSave").on('click',function(e){
