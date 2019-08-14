@@ -57,7 +57,7 @@
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form id="mainf" class="needs-validation" novalidate>
-                      <div class="col">
+                     
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
@@ -78,42 +78,55 @@
                             <input type="email" class="form-control" id="supplierEmail" name="suppEmail" placeholder="Enter Email" required>
                           </div>
                         </div>
+                        <div class="form-group ">
+                          <span class="input-group-btn float left">
+                                    <button class="btn btn-success btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
+                                    </button>
+                            </span>
+                            <hr class="my-4">
 
-                        <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" name="suppAddr" placeholder="1234 Main St" required>
+                          <div class="form-row">
+                            <div class="form-group col">
+                               <label for="inputAddress">Address 1</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control inputAddress" id="inputAddress" name="suppAddr" placeholder="1234 Main St" required/>
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-add-address" type="button" disabled>
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
+                                    </button>
+                                  </span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputCity">Suburb</label>
+                              <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" readonly>
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputState">City</label>
+                              <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control" id="inputZip" name="suppZip" readonly>
+                            </div>
+                          </div> 
                         </div>
-                        <!-- <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" name="suppAddr2" placeholder="Apartment, studio, or floor">
-                        </div> -->
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" required>
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <!-- <select id="inputCity" class="form-control" name="suppCity" required>
-                              <option selected>Choose...</option>
-                              <option>Pretoria</option>
-                            </select> -->
-                            <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
-                          </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" name="suppZip" readonly>
-                          </div>
-                        </div> 
-                      </div>
-                      <div class="form-group col-md-2">
+                      
+
+ 
+
+                    </form>
+                    <div class="form-group col-md-2">
                           <button type="button" class="btn btn-block btn-primary mb-3" id="addSave">Save</button>
                           <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
                                     <div class="modal-header">
-                                        <h6 class="modal-title" id="MTop" modal-title-default">Success!</h6>
+                                        <h6 class="modal-title" id="MTopW modal-title-default">Success!</h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
@@ -132,7 +145,6 @@
                             </div>
                           </div>
                         </div>
-                    </form>
                   </div>
                 
                 </div>

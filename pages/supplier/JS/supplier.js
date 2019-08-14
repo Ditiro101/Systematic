@@ -46,6 +46,22 @@ let getInput= function()
 
 }
 
+	let createAddress= function(tmp){
+		let formgroup = $('<div></div>').addClass('form-group col');
+		 formgroup.append($("<hr>").addClass('my-4'));
+		let form_row1= $('<div></div>').addClass('form-row');
+		form_row1.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
+		let input_group=$('<div></div>').addClass('input-group');
+		input_group.append( $('<input>').addClass('form-control inputAddress').attr('id', 'inputAddress'+tmp) );
+		input_group.append( $('<span class="input-group-btn"><button class="btn btn-danger btn-remove-address" type="button"><span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span></button>'))
+		form_row1.append(input_group);
+		let form_row2=$('<div></div>').addClass('form-row');
+		
+		formgroup.append(form_row1);
+		formgroup.append(form_row2);
+		return formgroup;
+	}
+
 $(()=>{
 	//APP ID: 4ubUBkg0ecyvqIcmRpJw
 	//APP CODE : R1S3qwnTFxK3FbiK1ucSqw
@@ -53,11 +69,11 @@ $(()=>{
   		debug: true,
   		success: "valid"
 	});
-	$("#inputAddress").on('keyup',function(e){
+	$(".inputAddress").on('keyup',function(e){
 		e.preventDefault();
 		$.getJSON("http://autocomplete.geocoder.api.here.com/6.2/suggest.json?app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw&query="+$(this).val()+"&country=ZAF",{
 			format:"json",
-			delay:250
+			delay:100
 		})
 		.done(data=>{
 			//console.log(data.suggestions);
@@ -73,7 +89,7 @@ $(()=>{
 			}
 			console.log(viewArr);
 			let useArr=data.suggestions;
-			$("#inputAddress").autocomplete({
+			$(".inputAddress").autocomplete({
 				source:viewArr,
 				select: function(event,ui){
 				// alert(ui.item.index);
@@ -88,11 +104,24 @@ $(()=>{
 		});
 
 	});
+
+	var count=1;
+
+
+
+	$(".btn-add-address").on('click',function(e){
+		e.preventDefault();
+		count++;
+		 let el= createAddress(count);
+		 $('#mainf').append(el);
+
+	});
+
 	$("#addSave").on('click',function(e){
 		e.preventDefault();
 		let form=$('#mainf');
 		form.validate();
-		//element.valid();
+		//element.valid();78\6\\\\\\\\\\\\
 		if(form.valid()===false)
 		{
 			e.stopPropagation();
