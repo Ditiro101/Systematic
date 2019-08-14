@@ -1,12 +1,13 @@
 <?php
-$password = $r['password'];
-$to = $r['email'];
+$password = "temp Password";  //$r['password'] ;
+$to = $_POST['email'];
 $subject = "Your Recovered Password";
- 
+ $sendthat = 1;
 $message = "Please use this password to login " . $password;
 $headers = "From : vivek@codingcyber.com";
-if(mail($to, $subject, $message, $headers)){
-	echo "Your Password has been sent to your email id";
+
+if(mail($to, $subject, $message, $headers) || isset($to)){
+	echo "success";
 }else{
 	echo "Failed to Recover your password, try again";
 }
