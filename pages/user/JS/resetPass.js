@@ -33,7 +33,7 @@ $(document).ready(function(){
                     {
                         $('#alert-password').empty();
                         $('#alert-password').append(`<div class='alert alert-danger' role='alert'><span class='alert-inner--text'><strong>The link is expired. You are trying to use the expired link which 
-                        as valid only 10 minutes after request. </strong> </span></div>`);    
+                        as valid only 1 minute after request. </strong> </span></div>`);    
                     }
                 
             });

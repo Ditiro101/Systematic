@@ -58,7 +58,7 @@
             //Set the timer of password.
 
            $expFormat = mktime(
-           date("H"), date("i")+10, date("s"), date("m") ,date("d"), date("Y")
+           date("H"), date("i")+1, date("s"), date("m") ,date("d"), date("Y")
            );
            $expDate = date("Y-m-d H:i:s",$expFormat);
            $key = md5(425*4+$email); //
@@ -80,7 +80,7 @@
         ../reset-user-password.php?key='.$key.'&userID='.$userId.'&action=reset</a></p>'; 
         $output.='<p>-------------------------------------------------------------</p>';
         $output.='<p>Please be sure to copy the entire link into your browser.
-        The link will expire after 10 minutes for security reason.</p>';
+        The link will expire after 1 minute for security reason.</p>';
         $output.='<p>If you did not request this forgotten password email, no action 
         is needed, your password will not be reset. However, you may want to log into 
         your account and change your security password as someone may have guessed it.</p>';   
