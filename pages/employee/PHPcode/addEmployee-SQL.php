@@ -1,5 +1,5 @@
 <?php
-
+include "meRaviQr/qrlib.php";
   $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
   $dbparts = parse_url($url);
@@ -82,7 +82,34 @@
 												$query = "INSERT INTO EMPLOYEE_PICTURE (FILENAME, EMPLOYEE_ID) VALUES ('$newfilename', '$employeeID')"; // insert the user_id for specific pictures
 												$res = mysqli_query($DBConnect, $query);
 												var_dump($res);
-												if($res)
+
+
+
+												  
+												  var_dump($employeeID);
+												  $hash = sha1($employeeID);
+											  
+												  $qrImgName = "StockPath".rand();
+												 
+												 
+												  $final = $employeeID ; //.$dev;
+												  $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
+												  $qrimage = $qrImgName.".png";
+												  $workDir = $_SERVER['HTTP_HOST'];
+												  $qrlink = $workDir."/qrcode".$qrImgName.".png";
+												  $date = date("Y-m-d H:i:s");
+												  
+												  $sql = "INSERT INTO EMPLOYEE_QR(HASH,DATE_GENERATED,EMPLOYEE_ID) VALUES('$hash','$date','$employeeID')";
+												  //var_dump($sql);
+												  $query_QR = mysqli_query($DBConnect , $sql);
+												 
+												  //var_dump($query_QR);
+														  //return $query;
+											  
+											  
+												  //$insQr = $meravi->insertQrCode($qrUname,$final,$qrimage,$qrlink);
+													
+												if(($res== true) && ($query_QR==true))
 												{
 													$obj = array();
 													$obj[0] = "success";
@@ -92,7 +119,7 @@
 												}
 												else
 												{
-													echo "error in saving employee pic";
+													echo "error in saving employee pic or generated employee tag";
 												}
 																
 										}
