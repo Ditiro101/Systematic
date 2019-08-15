@@ -98,15 +98,15 @@
                           <div class="form-row">
                             <div class="form-group col-md-6">
                               <label for="inputSuburb">Suburb</label>
-                              <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" >
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb" name="suppSuburb" >
                             </div>
                             <div class="form-group col-md-4">
                               <label for="inputCity">City</label>
-                              <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
+                              <input type="text" class="form-control inputCity" id="inputCity" name="suppSuburb" readonly>
                             </div>
                             <div class="form-group col-md-2">
                               <label for="inputZip">Zip</label>
-                              <input type="text" class="form-control" id="inputZip" name="suppZip" readonly>
+                              <input type="text" class="form-control inputZip" id="inputZip" name="suppZip" readonly>
                             </div>
                           </div> 
                         </div>

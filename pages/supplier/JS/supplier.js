@@ -53,10 +53,10 @@ let getInput= function()
 		suburbArr[index]=$(item).val().trim();
 	});
 	$(".inputCity").each(function(index,item){
-		zipArr[index]=$(item).val().trim();
+		cityArr[index]=$(item).val().trim();
 	});
 	$(".inputZip").each(function(index,item){
-		cityArr[index]=$(item).val().trim();
+		zipArr[index]=$(item).val().trim();
 	});
 	// for(let k=0;k<count;k++)
 	// {
