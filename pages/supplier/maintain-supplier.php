@@ -54,71 +54,64 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form id="mainf">
                       <div class="col">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
+                            <label id="suppName" hidden="true"><?php echo $_POST["NAME"];?></label>
                             <input type="hidden" id="sID" value=<?php echo $_POST["ID"];?>>
-                            <input type="hidden" id="sAddID" value=<?php echo $_POST["ADDID"];?>>
-                            <input type="text" class="form-control" id="sName" aria-describedby="emailHelp" placeholder=<?php echo $_POST["NAME"];?>>
+                            <input type="text" class="form-control" id="sName" aria-describedby="emailHelp">
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" placeholder=<?php echo $_POST["VAT"];?>>
+                            <input type="number" class="form-control" id="VATNumber" value=<?php echo $_POST["VAT"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="text" class="form-control" id="ContactNo" placeholder=<?php echo $_POST["PHONE"];?>>
+                            <input type="text" class="form-control" id="ContactNo" value=<?php echo $_POST["PHONE"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="text" class="form-control" id="sEmail" placeholder=<?php echo $_POST["EMAIL"];?>>
+                            <input type="text" class="form-control" id="sEmail" value=<?php echo $_POST["EMAIL"];?>>
                           </div>
                         </div>
-                        <?php $addName=$_POST["ADDR"];
-                        $addName=str_replace("/"," ",$addName);
-                        ?>
-                        <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <label id="convertAdd" hidden="true"><?php echo $addName;?></label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2">
-                        </div>
+                        <hr class="my-4">
                         <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="sSuburb" placeholder=<?php echo $_POST["SUBURB"];?>>
+                            <div class="form-group col">
+                               <label for="inputAddress">Address 1</label>
+                               <label id="convertAdd" hidden="true"><?php echo $_POST["ADDR"];?></label>
+                              <div class="input-group">
+                                <input type="text" class="form-control inputAddress" id="inputAddress1" name="suppAddr" placeholder="1234 Main St" required/>
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-add-address" type="button" disabled>
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
+                                    </button>
+                                  </span>
+                                </div>
+                            </div>
                           </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <input type="text" class="form-control" id="sCity" placeholder=<?php echo $_POST["CITY"];?>>
-                            <!-- <select id="inputState" class="form-control">
-                              <option selected></option>
-                              <option>...</option>
-                            </select> -->
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputSuburb">Suburb</label>
+                              <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="suppSuburb" >
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputCity">City</label>
+                              <label id="convertCity" hidden="true"><?php echo $_POST["CITY"];?></label>
+                              <input type="text" class="form-control inputCity" id="inputCity1" name="suppSuburb" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control inputZip" id="inputZip1" name="suppZip" readonly>
+                            </div>
                           </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" placeholder=<?php echo $_POST["ZIP"];?>>
-                          </div>
-                        </div>
-                      </div> 
-                      <div class="col">
-                        <div class="form-group">
-                          <div class="form-group mr-2">
-                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default" id="btnSave">Save Changes
-                              </button>
-                              <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
-                              </button>
-                          </div>
-                        </div>
                       </div>
+
+
                       <!-- <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
@@ -193,6 +186,23 @@
                     </div> -->
                         
                     </form>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div> 
+                      <br>
+                      <div class="col">
+                        <div class="form-group">
+                          <div class="form-group mr-2">
+                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default" id="btnSave">Save Changes
+                              </button>
+                              <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
+                              </button>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 
                 </div>

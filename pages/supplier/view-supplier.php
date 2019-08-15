@@ -83,17 +83,16 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <form action="maintain-supplier.php" method="POST">
+                  <form id="formMaintain" action="maintain-supplier.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $supID;?>>
-                    <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="NAME" id="NAME">
                     <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
                     <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
-                    <!-- <input type="hidden" name="ADDID" value=<?php echo $addID;?>> -->
-                    <input type="hidden" name="ADDR" value=<?php echo json_encode($addressInfo);?>>
+                    <input type="hidden" name="ADDR" id="ADDR">
                     <input type="hidden" name="SUBURB" value=<?php echo json_encode($suburbInfo);?>>
                     <input type="hidden" name="CITY" value=<?php echo json_encode($cityInfo);?>>
-                    <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>>
+                    <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
                     <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
                       <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                       </span>
@@ -162,7 +161,7 @@
                 </div>
               </div>
               <div class="text-center mt-0">
-                <h2>
+                <h2 id="supName">
                   <?php echo $_POST["NAME"];?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">

@@ -51,6 +51,20 @@ $(()=>{
 	addressInfo=JSON.parse($("#addresses").text());
 	suburbInfo=JSON.parse($("#suburbs").text());
 	cityInfo=JSON.parse($("#cities").text());
+	// let testArr=JSON.parse($("#test").val());
+	//console.log(addressInfo);
+	//console.log($("#supName").text());
+	let supplierName=$("#supName").text().trim();
+	console.log(supplierName);
+	let changedName=supplierName.replace(" ","/");
+	let changedAddressInfo=addressInfo;
+
+	for(let k=0;k<addressInfo.length;k++)
+	{
+		changedAddressInfo[k]["ADDRESS_LINE_1"]=changedAddressInfo[k]["ADDRESS_LINE_1"].replace(" ","/");
+	}
+	$("#ADDR").val(JSON.stringify(changedAddressInfo));
+	$("#NAME").val(changedName);
 	let list=$("#listAddress");
 	let listElement="";
 	let num=0

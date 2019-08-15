@@ -121,7 +121,7 @@
                                         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
                                     <small>Max 3 Adresses allowed</small>
-                            </div>
+                      </div>
                     <br>
                     <div class=" col-md-2">
                           <button type="button" class="btn btn-block btn-primary mb-3" id="addSave">Save</button>

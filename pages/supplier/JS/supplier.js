@@ -239,13 +239,15 @@ $(()=>{
 		e.preventDefault();
 		count++;
 		
-		if(count<=3){
-		 let el= createAddress(count);
-		 $('#mainf').append(el);
-		 
-		 if(count==3){
-		 	$("#btn-add-address").attr('disabled','');
-		 }
+		if(count<=3)
+		{
+			let el= createAddress(count);
+			$('#mainf').append(el);
+			 
+			if(count==3)
+			{
+				$("#btn-add-address").attr('disabled','');
+			}
 		}
 
 		
