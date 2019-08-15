@@ -95,7 +95,7 @@
                       <div class="form-group col">
                         <div class="form-row">
                           <label for="des">Description</label>
-                           <textarea type = "text" maxlength="10" class="form-control mb-2" id="productDescription" name="product-description" rows="2" placeholder="Enter product Description" required></textarea>
+                           <textarea type = "text" maxlength="50" class="form-control mb-2" id="productDescription" name="product-description" rows="2" placeholder="Enter product Description" required></textarea>
                          </div>
                       </div>
 
@@ -174,28 +174,23 @@
                        <button type="button" class="btn btn-primary mb-3 px-4" id="addProduct" name="add-product" >Save</button>
 	                    </div>
 
-                     <!--  <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" id="addProduct" name="add-product" data-target="#modal-default">Save</button> -->
-
                       <div class="form-group col-md-2">
                           <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
-                                  
                                     <div class="modal-header">
                                         <h6 class="modal-title" id="modal-title-default">Success!</h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
-                                    
                                     <div class="modal-body">
                                         <p id="modalText">Successfully Saved</p>
                                         
                                     </div>
-                                    
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../product.php'">Close</button> 
+                                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="window.location='../../product.php'">Close</button> 
                                     </div>
                                     
                                 </div>
@@ -205,7 +200,6 @@
                     </form>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>

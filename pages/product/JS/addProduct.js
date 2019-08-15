@@ -53,18 +53,28 @@ $("button#addProduct").on('click', event => {
 		})
 		.done(response => {
 			console.log(response);
-			if (response == "success") 
+			if (response == "success")
 			{
 				$('#modal-title-default').text("Success!");
 				$('#modalText').text("Product added sucessfully");
+				$("#modalCloseButton").attr("onclick",window.location='../../product.php');
+				$('#successfullyAdded').modal("show");
+			}
+			else if(response == "product name exists")
+			{
+				$('#modal-title-default').text("Error!");
+				$('#modalText').text("This product already exists");
+				$("#modalCloseButton").attr("onclick","");
 				$('#successfullyAdded').modal("show");
 			}
 			else if(response == "databaseError")
 			{
 				$('#modal-title-default').text("Error!");
 				$('#modalText').text("Error adding product");
+				$("#modalCloseButton").attr("onclick",window.location='../../product.php');
 				$('#successfullyAdded').modal("show");
 			}
+			
 			ajaxDone = true;
 		});
 	}	
