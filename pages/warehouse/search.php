@@ -68,55 +68,7 @@
               	<th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                  <td>Main Warehouse</td>
-                  <td>This warehouse stores all the products to be sold.</td>
-                  <td>450</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-                </tr>
-              <tr>
-                <td>Storage Warehouse</td>
-                <td>This warehouse stores stock before it is moved to the main warehouse.</td>
-                <td>350</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Beverages Warehouse</td>
-                <td>This warehouse stores beverages.</td>
-                <td>500</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Cases Warehouse</td>
-                <td>This warehouse stores cases of products that have been broken down.</td>
-                <td>200</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Warehouse Found</b></td>
                 <td></td>
@@ -190,6 +142,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchWarehouse.js"></script>
 </body>
 
 </html>
