@@ -40,53 +40,56 @@ else
     //$submit = mysqli_query($conn,$request);
 
     $time = new DateTime();
-    $currentTime = $time->format("Y-m-d H:i:s");//checkin/checkout time.
-   var_dump($currentTime); 
+    $currentTime = $time->format("H:i:s");//checkin/checkout time.
+
    
     $addedTime = "";//flag
 
      //date("H:i:s");
-    $day = date("Y-m-d");
-    $setCheckinTime = new DateTime("08:00:00");
-    $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
-    //var_dump($setCheckinTime);
-    $checkoutTime = new DateTime("23:00:00");
-    $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
-    var_dump($checkoutTime);
+     $time = new DateTime();
+     $currentTime = $time->format("Y-m-d H:i:s");//checkin/checkout time.
+    
+    
+     $addedTime = "";//flag
+ 
+      //date("H:i:s");
+     $day = date("Y-m-d");
+     $setCheckinTime = new DateTime("08:00:00");
+     $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
+     
+     $checkoutTime = new DateTime("23:00:00");
+     $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
 
-   
     if($query_QR)
     {
         if($currentTime <= $setCheckinTime)
         {
              $currentTime = $setCheckinTime;
             
+            
             $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
-            var_dump($query);
+          
             $submitQuery = mysqli_query($DBConnect,$query);
+            
             if($submitQuery)
             {
                 $addedTime = "Time SQL works";
             }
-            
 
         }
         else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
         {
              
             $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
-            var_dump($query);
             $submitQuery = mysqli_query($DBConnect,$query);
-            var_dump($submitQuery);
             if($submitQuery)
             {
                 $addedTime = "Time SQL works";
             }
-            
         }
         else
         {
-            echo "Cannot checkin because its over the checkout time ";
+            echo "Over checkout time";
         }
 
 
