@@ -54,20 +54,22 @@ else
  
       //date("H:i:s");
      $day = date("Y-m-d");
-     $setCheckinTime = new DateTime("08:00:00");
+     $setCheckinTime = new DateTime("00:00:00");
      $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
      
-     $checkoutTime = new DateTime("17:00:00");
+     $checkoutTime = new DateTime("03:00:00");
      $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
 
     if($query_QR)
     {
-        if($currentTime <= $setCheckinTime)
+        if(($currentTime < $checkoutTime) && ($currentTime > $setCheckinTime))
         {
-             $currentTime = $setCheckinTime;
+             //$currentTime = $setCheckinTime;
             
             
-            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+            $query = "UPDATE `EMPLOYEE_HOUR` 
+            SET `CHECK_OUT_TIME`= '$currentTime'
+            WHERE `EMPLOYEE_ID` ='$employeeID' and `DATE`= '$day'";
           
             $submitQuery = mysqli_query($DBConnect,$query);
             
@@ -77,11 +79,16 @@ else
             }
 
         }
-        else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
+        else if($currentTime >= $checkoutTime)
         {
              
-            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+            $currentTime = $checkoutTime;
+            $query = "UPDATE `EMPLOYEE_HOUR` 
+            SET `CHECK_OUT_TIME`= '$currentTime'
+            WHERE `EMPLOYEE_ID` ='$employeeID' and `DATE`= '$day'";
+
             $submitQuery = mysqli_query($DBConnect,$query);
+
             if($submitQuery)
             {
                 $addedTime = "Time SQL works";
@@ -89,7 +96,7 @@ else
         }
         else
         {
-            echo "Over checkout time";
+            echo "Too early to checkout";
         }
 
 
