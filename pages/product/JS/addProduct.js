@@ -57,7 +57,6 @@ $("button#addProduct").on('click', event => {
 			{
 				$('#modal-title-default').text("Success!");
 				$('#modalText').text("Product added sucessfully");
-				$("#modalCloseButton").attr("onclick",window.location='../../product.php');
 				$('#successfullyAdded').modal("show");
 			}
 			else if(response == "product name exists")
@@ -71,7 +70,7 @@ $("button#addProduct").on('click', event => {
 			{
 				$('#modal-title-default').text("Error!");
 				$('#modalText').text("Error adding product");
-				$("#modalCloseButton").attr("onclick",window.location='../../product.php');
+				$("#modalCloseButton").attr("onclick","");
 				$('#successfullyAdded').modal("show");
 			}
 			

@@ -185,7 +185,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p id="modalText">Successfully Saved</p>
+                                        <p id="modalText"></p>
                                         
                                     </div>
                                     <div class="modal-footer">

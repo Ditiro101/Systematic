@@ -45,7 +45,7 @@
 		$measurement  = mysqli_real_escape_string($DBConnect, $_POST['measurement_']);
 		$measurementUnit  = mysqli_real_escape_string($DBConnect, $_POST['measurementUnit_']);
 
-		$query = "SELECT * FROM PRODUCT WHERE NAME = '$productName'";
+		$query = "SELECT * FROM PRODUCT WHERE NAME = '$productName' AND PRODUCT_MEASUREMENT = '$measurement' AND PRODUCT_MEASUREMENT_UNIT = '$measurementUnit'";
 	    $result = mysqli_query( $DBConnect, $query);
 	    if (mysqli_num_rows($result)) 
 	    {
