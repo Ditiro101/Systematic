@@ -57,7 +57,7 @@ else
      $setCheckinTime = new DateTime("08:00:00");
      $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
      
-     $checkoutTime = new DateTime("17:00:00");
+     $checkoutTime = new DateTime("22:00:00");
      $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
 
     if($query_QR)
