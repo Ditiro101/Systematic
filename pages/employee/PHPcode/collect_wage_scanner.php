@@ -21,16 +21,21 @@ else
 {
 
             $employeeID = $_POST["qrCode"];
+           
    
 
 
    
             $sql = "SELECT HASH FROM EMPLOYEE_QR WHERE (EMPLOYEE_ID='$employeeID')";
             $query_QR = mysqli_query($DBConnect , $sql);
-
+            $success = "success";
             if($query_QR)
             {
-                echo "success";
+                echo $success;
+            }
+            else
+            {
+                echo "not found";
             }
                
         
@@ -38,16 +43,7 @@ else
 }
 
    
-//$conn->close();
 
-
-/*$request = "UPDATE FriendRequest SET sender_id ='$sender' WHERE confirmedFriend = 'yes' and user_id ='$sender' and otherUser ='$receiver'";
-$yeah=mysqli_query($conn,$request);
-
-
-
-$query = "UPDATE FriendRequest SET receiver_id='$receiver' WHERE confirmedFriend = 'yes' and user_id ='$sender' and otherUser ='$receiver'";
-$submit=mysqli_query($conn,$query);*/
 
 ?>
 

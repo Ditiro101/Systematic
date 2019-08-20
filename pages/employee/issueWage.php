@@ -16,6 +16,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+
+  
+ <!-- Link scanning library -->
+ <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
 </head>
 
 <body>
@@ -101,7 +105,7 @@
 
                       e.preventDefault();
                       console.log(content);
-                  
+                  let savedID = content;
                   $.ajax({
                   type: 'POST',
                   url: 'PHPcode/collect_wage_scanner.php',
@@ -114,20 +118,38 @@
                   .done(data => {
                   // do something with data
                           console.log(data);
-                          if(data == "success")
+                          let confirmation = data.trim();
+                         
+                          if(confirmation == "success")
                           {
                               //Add this when fully done.
                               
-                              $('#modal-title-default').text("Success!");
-                              $('#modalText').text("Employee found , wage will be calculated on next screen...");
-                              $('#scannerSearch').modal("show");
+                            
+                                $('#modal-title-default').text("Success!");
+                                $('#modalText').text("Employee found , wage will be calculated on next screen...");
+                                $('#scannerSearch').modal("show");
+
+                                $("#successSearch").click(function(e) {
+
+                                    e.preventDefault();
+
+                                    window.location=`wage_calc.php?employeeID = ${savedID}`;
+                                });
+                               /* setTimeout(function(){redirect()},10000);
+                              
+                              function redirect()
+                              {
+                                // go do that thing
+                                  
+                               
+                              }*/
 
 
                               // alert('The scanned content is: ' + content);
                              // window.open(content, "_blank");
 
                           }
-                          else
+                          else if(confirmation != "success")
                           {
                             $('#modal-title-default').text("Error!");
                             $('#modalText').text("Employee not found , please try again or search employee");
@@ -179,7 +201,7 @@
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location='wage_calc.php'">Close</button>
+                              <button type="button" class="btn btn-secondary" id="successSearch" data-dismiss="modal" onclick="window.location='wage_calc.php'">Close</button>
                           
                           </div>
                         </div>

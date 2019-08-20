@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+    $employee_ID = $_GET["employeeID"];
+    echo $employee_ID;
+  ?>
+<?php
+/*<!DOCTYPE html>
 <html>
 
 <head>
@@ -26,7 +31,7 @@
 </style>
 
 <body>
-   <?php include_once("../header.php");?>
+   php include_once("../header.php");
    <!-- Main content -->
   <div class="main-content">
     <!-- Top navbar -->
@@ -34,7 +39,7 @@
       <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Collect Wage</a>
-        <?php include_once("../usernavbar.php");?>
+        php include_once("../usernavbar.php");
         
       </div>
     </nav>
@@ -47,6 +52,7 @@
         </div>
       </div>
     </div>
+  
     <!-- Page content -->
     <div class="container-fluid mt--8">
       <!-- Table -->
@@ -293,7 +299,7 @@
           </div>
           </div>
         </div>
-        <?php include_once("../footer.php");?>
+        php include_once("../footer.php");
       </div>
     </div>
 
@@ -386,4 +392,5 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
 </body>
 
-</html>
+</html>*/
+?>
