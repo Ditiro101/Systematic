@@ -46,7 +46,7 @@ else
                 $day = date("Y-m-d");
                 $counter = 0;
                 $temp = array();
-                $sql = "SELECT * FROM EMPLOYEE_HOUR WHERE (`DATE`='$day'and `CHECK_IN_TIME` != 'null')";
+                $sql = "SELECT * FROM EMPLOYEE_HOUR WHERE (`DATE`='$day'and `CHECK_IN_TIME` != 'null' and `CHECK_OUT_TIME` = '0000-00-00 00:00:00.000000')";
                 
                 $query_QR = mysqli_query($DBConnect , $sql);
                 
@@ -66,7 +66,7 @@ else
                     }
                     else
                     {
-                        echo "No one is checked in or there is an error in the sql logic";
+                        echo "No one is checked in or there is an error in the sql logic or all workers checkedout";
                     }
                     
                 
