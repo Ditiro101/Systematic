@@ -29,99 +29,103 @@ else
     {
         $subm = "INSERT INTO `chats`(`receiver_id`, `sender_id`, `chat`, `date_order`) VALUES ('$receiver','$sender','$info','$date')";
         $check= mysqli_query($conn,$subm);
+
     }*/
 
-    $sql = "SELECT HASH FROM EMPLOYEE_QR WHERE (EMPLOYEE_ID='$employeeID')";
-    $query_QR = mysqli_query($DBConnect , $sql);
-
-    //$request ="SELECT * FROM `chats` WHERE ((receiver_id='$receiver' and sender_id='$sender') or (receiver_id='$sender' and sender_id='$receiver'))
-    //ORDER BY date_order Asc" ;
-    //echo $request;
-    //$submit = mysqli_query($conn,$request);
-
-    $time = new DateTime();
-    $currentTime = $time->format("H:i:s");//checkin/checkout time.
 
    
-    $addedTime = "";//flag
-
-     //date("H:i:s");
-     $time = new DateTime();
-     $currentTime = $time->format("Y-m-d H:i:s");//checkin/checkout time.
-    
-    
-     $addedTime = "";//flag
- 
-      //date("H:i:s");
-     $day = date("Y-m-d");
-     $setCheckinTime = new DateTime("08:00:00");
-     $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
-     
-     $checkoutTime = new DateTime("22:00:00");
-     $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
-
-    if($query_QR)
-    {
-        if($currentTime <= $setCheckinTime)
-        {
-             $currentTime = $setCheckinTime;
+                $sql = "SELECT HASH FROM EMPLOYEE_QR WHERE (EMPLOYEE_ID='$employeeID')";
+                $query_QR = mysqli_query($DBConnect , $sql);
+            
+                //$request ="SELECT * FROM `chats` WHERE ((receiver_id='$receiver' and sender_id='$sender') or (receiver_id='$sender' and sender_id='$receiver'))
+                //ORDER BY date_order Asc" ;
+                //echo $request;
+                //$submit = mysqli_query($conn,$request);
+            
+                $time = new DateTime();
+                $currentTime = $time->format("H:i:s");//checkin/checkout time.
             
             
-            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
-          
-            $submitQuery = mysqli_query($DBConnect,$query);
+                $addedTime = "";//flag
             
-            if($submitQuery)
-            {
-                $addedTime = "Time SQL works";
-            }
-
-        }
-        else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
-        {
-             
-            $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
-            $submitQuery = mysqli_query($DBConnect,$query);
-            if($submitQuery)
-            {
-                $addedTime = "Time SQL works";
-            }
-        }
-        else
-        {
-            echo "Over checkout time";
-        }
-
-
+                //date("H:i:s");
+                $time = new DateTime();
+                $currentTime = $time->format("Y-m-d H:i:s");//checkin/checkout time.
+                
+                
+                $addedTime = "";//flag
+            
+                //date("H:i:s");
+                $day = date("Y-m-d");
+                $setCheckinTime = new DateTime("08:00:00");
+                $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
+                
+                $checkoutTime = new DateTime("22:00:00");
+                $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
+            
+                if($query_QR)
+                {
+                    if($currentTime <= $setCheckinTime)
+                    {
+                        $currentTime = $setCheckinTime;
+                        
+                        
+                        $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+                    
+                        $submitQuery = mysqli_query($DBConnect,$query);
+                        
+                        if($submitQuery)
+                        {
+                            $addedTime = "Time SQL works";
+                        }
+            
+                    }
+                    else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
+                    {
+                        
+                        $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
+                        $submitQuery = mysqli_query($DBConnect,$query);
+                        if($submitQuery)
+                        {
+                            $addedTime = "Time SQL works";
+                        }
+                    }
+                    else
+                    {
+                        echo "Over checkout time";
+                    }
+            
+            
+                }
+                else
+                {
+                    echo "Employee does not exist on system";
+                }
+                $verifyID = sha1($employeeID);
+                //var_dump($verifyID);
+                while($correctHash = mysqli_fetch_assoc($query_QR))
+                {
+                    if($correctHash["HASH"]== $verifyID && $addedTime == "Time SQL works" )
+                    {
+                    $success = "success";
+                        echo $success;
+                        break;
+                    }
+                }
+            
+            
+                //Used for search
+                /*$obj = array();
+                while($looper = mysqli_fetch_assoc($query_QR))
+                {
+                    $obj[] = $looper;
+                }*/
+            
+        
+            mysqli_close($DBConnect);
     }
-    else
-    {
-        echo "Employee does not exist on system";
-    }
-    $verifyID = sha1($employeeID);
-    //var_dump($verifyID);
-    while($correctHash = mysqli_fetch_assoc($query_QR))
-    {
-        if($correctHash["HASH"]== $verifyID && $addedTime == "Time SQL works" )
-        {
-           $success = "success";
-            echo $success;
-            break;
-        }
-    }
 
-
-    //Used for search
-    /*$obj = array();
-    while($looper = mysqli_fetch_assoc($query_QR))
-    {
-        $obj[] = $looper;
-    }*/
-
-    mysqli_close($DBConnect);
-
-
-}
+   
 //$conn->close();
 
 
