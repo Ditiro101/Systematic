@@ -75,7 +75,7 @@
                     </video>
                   </div>
                   <script>
-                    var video = document.querySelector("#videoElement");
+                    /* var video = document.querySelector("#videoElement");
 
                       if (navigator.mediaDevices.getUserMedia) {
                         navigator.mediaDevices.getUserMedia({ video: true })
@@ -85,32 +85,101 @@
                           .catch(function (err0r) {
                             console.log("Something went wrong!");
                           });
+                      }*/
+
+
+
+                  let scanner = new Instascan.Scanner(
+                      {
+                        video: document.getElementById('videoElement')
                       }
+                  );
+
+                  scanner.addListener('scan', function(content) {
+
+                    $("#scanQr").click(function(e) {
+
+                      e.preventDefault();
+                      console.log(content);
+                  
+                  $.ajax({
+                  type: 'POST',
+                  url: 'PHPcode/collect_wage_scanner.php',
+                  data: {qrCode : content},
+                  beforeSend:()=>
+                              {
+                                  
+                              }
+                  })
+                  .done(data => {
+                  // do something with data
+                          console.log(data);
+                          if(data == "success")
+                          {
+                              //Add this when fully done.
+                              
+                              $('#modal-title-default').text("Success!");
+                              $('#modalText').text("Employee found , wage will be calculated on next screen...");
+                              $('#scannerSearch').modal("show");
+
+
+                              // alert('The scanned content is: ' + content);
+                             // window.open(content, "_blank");
+
+                          }
+                          else
+                          {
+                            $('#modal-title-default').text("Error!");
+                            $('#modalText').text("Employee not found , please try again or search employee");
+                            $('#scannerSearch').modal("show");
+                          }
+                      })
+                      .fail(()=>
+                          {
+                              console.log("ajax failed");
+                          });
+
+                          
+              });
+                    });
+                
+
+
+              Instascan.Camera.getCameras().then(cameras => 
+              {
+                  if(cameras.length > 0){
+                      scanner.start(cameras[0]);
+                  } else {
+                      console.error("No Camera Device");
+                  }
+              });
+
+
                   </script>
                 
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" onclick="window.location='wage_calc.html'">
+                  <button type="button" class="btn-icon-clipboard" id="scanQr" >
                     <div>
                       <i class="fas fa-qrcode"></i></i>
                       <span>Scan Employee QR</span>
                     </div>
                   </button>
 
-                        <div class="modal fade" id="suc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="scannerSearch" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                <h5 class="modal-title" id="modal-title-default"></h5>
                               </div>
                               <div class="modal-body">
-                                <p>Employee Successfully wage successfully issued</p>
+                                <p id="modalText"></p>
                               </div>
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location='employee.html'">Close</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location='wage_calc.php'">Close</button>
                           
                           </div>
                         </div>
@@ -148,7 +217,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
-  <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!--script src="../../assets/js/argon.js?v=1.0.0"></script-->
 </body>
 
 </html>
