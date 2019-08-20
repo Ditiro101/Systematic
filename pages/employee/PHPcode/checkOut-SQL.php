@@ -54,10 +54,10 @@ else
  
       //date("H:i:s");
      $day = date("Y-m-d");
-     $setCheckinTime = new DateTime("00:00:00");
+     $setCheckinTime = new DateTime("08:00:00");
      $setCheckinTime = $setCheckinTime->format("Y-m-d H:i:s");
      
-     $checkoutTime = new DateTime("03:00:00");
+     $checkoutTime = new DateTime("22:00:00");
      $checkoutTime = $checkoutTime->format("Y-m-d H:i:s");
 
     if($query_QR)
