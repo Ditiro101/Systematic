@@ -21,24 +21,48 @@ else
 {
 
             $testerVariable = $_POST["exampleVariable"];
+            $emptyCheckInTime;
    if($testerVariable)
    {
+
+                $query = "SELECT count(*) as total_employees  FROM EMPLOYEE_TYPE WHERE (`WAGE_EARNING` = '1' )";
+                $execute = mysqli_query($DBConnect , $query);
+                if($execute)
+                {
+                    if($allValues = mysqli_fetch_assoc($execute))
+                    {
+                         $total_employees = $allValues["total_employees"];
+                         echo "Total n.o of employees is: " . $total_employees . "\n";
+                    }
+                }
+                else
+                {
+                    echo "Error with finding the number of employees that earn wage";
+                }
+               
+
+
+
                 $day = date("Y-m-d");
-    
                 $counter = 0;
                 $temp = array();
-                $sql = "SELECT * FROM EMPLOYEE_HOUR WHERE (`DATE`='$day'and `CHECK_IN_TIME` !=NULL)";
+                $sql = "SELECT * FROM EMPLOYEE_HOUR WHERE (`DATE`='$day'and `CHECK_IN_TIME` != 'null')";
+                
                 $query_QR = mysqli_query($DBConnect , $sql);
+                
+                
                 if($query_QR)
                 {
-                    while($row = mysqli_fetch_assoc($query_QR) )
+                    while($row = mysqli_fetch_assoc($query_QR))
                     {
                         $temp[] = $row["EMPLOYEE_ID"];
                         $counter++;
                     }
-                    if($counter < 0)
+                    
+                    if($counter > 0)
                     {
-                        echo "the total workers are: " . $counter . "and the employee ID array is: " . $temp;
+                        
+                        echo "Total number of present employees is: " . $counter . "\n";
                     }
                     else
                     {
