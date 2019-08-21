@@ -1,9 +1,45 @@
 <?php
-    $employee_ID = $_GET["employeeID"];
-    echo $employee_ID;
+$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+
+$dbparts = parse_url($url);
+
+$hostname = $dbparts['host'];
+$username = $dbparts['user'];
+$password = $dbparts['pass'];
+$database = ltrim($dbparts['path'],'/');
+$DBConnect;
+
+$DBConnect = mysqli_connect($hostname, $username, $password, $database);
+
+if($DBConnect === false)
+{
+die("ERROR: Could not connect. " . mysqli_connect_error());
+}
+else
+{
+
+  $employee_ID = $_GET["employeeID"];
+  //echo $employee_ID;
+           
+   
+
+if(isset($employee_ID))//check if session has userID too when you get userID
+{
+
+
+   
+           
+  $sql = "SELECT * FROM EMPLOYEE WHERE (EMPLOYEE_ID=$employee_ID)";
+  $query_QR = mysqli_query($DBConnect , $sql);
+
+  
+  $rows = mysqli_fetch_assoc($query_QR);
+
+
+    
   ?>
-<?php
-/*<!DOCTYPE html>
+
+<!DOCTYPE html>
 <html>
 
 <head>
@@ -31,7 +67,7 @@
 </style>
 
 <body>
-   php include_once("../header.php");
+   <?php include_once("../header.php");?>
    <!-- Main content -->
   <div class="main-content">
     <!-- Top navbar -->
@@ -39,7 +75,7 @@
       <div class="container-fluid">
         <!-- Brand -->
         <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Collect Wage</a>
-        php include_once("../usernavbar.php");
+        <?php include_once("../usernavbar.php");?>
         
       </div>
     </nav>
@@ -76,7 +112,7 @@
                                   Employee ID
                               </th>
                               <td >
-                                  12
+                                  <?php echo $rows["EMPLOYEE_ID"];?>
                               </td>
                             </tr>                               
                             <tr>
@@ -84,7 +120,7 @@
                                   Name
                               </th>
                               <td >
-                                  Nicolas
+                              <?php echo $rows["NAME"];?>
                               </td>
                             </tr> 
                             <tr>
@@ -92,7 +128,7 @@
                                   Surname
                               </th>
                               <td >
-                                  Norman
+                              <?php echo $rows["SURNAME"];?>
                               </td>
                             </tr>
                             <tr>
@@ -100,7 +136,7 @@
                                   Contact No
                               </th>
                               <td >
-                                  067 345 6789
+                              <?php echo $rows["CONTACT_NUMBER"];?>
                               </td>
                             </tr>
                             <tr>
@@ -126,7 +162,8 @@
                                 Date 
                               </th>
                               <td >
-                                04/07/2019
+                              <?php $date = date("Y-m-d");
+                                      echo $date;?>
                               </td>
                             </tr>                               
                             <tr>
@@ -134,7 +171,7 @@
                                 Employee Wage ID #
                               </th>
                               <td >
-                                321
+                                (not done yet)
                               </td>
                             </tr> 
                             <tr>
@@ -142,7 +179,7 @@
                                 Bookeeper
                               </th>
                               <td >
-                                Jabu
+                                Jabu/replaced with logged on user
                               </td>
                             </tr>      
                         </tbody>
@@ -155,36 +192,30 @@
               <div class="col-12">
                 <div class="card shadow">
                   <div class="card-header border-0">
-                    <div class="input-group input-group-rounded input-group-merge">
-                        
-                        <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="dropdown_coins">
-                            <form class="px-1 py-2">
-                              <div class="input-group input-group-rounded input-group-merge">
-                                <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true" onchange="focusSearch()">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <span class="fa fa-search"></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                            <div id="menuItems"></div>
-                            <div id="empty" class="dropdown-header" style="color: black">
-                              No products found
-                            </div>
-                        </div>
-                      </div>
+                  <form>
                       <div class="col-4"> 
                         <div class="input-group">
                           <label class="mt-2 mr-3">Wage Rate Per Hour</label>
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                           </div>
-                          <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" autofocus />
+                          <input type="hidden" value="" min="0" step="100" data-number-to-fixed="2" value=<?php echo $employee_ID;?> class="form-control currency" id="employee_ID" autofocus />
+                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="payRate" autofocus />
+                              
+     
                         </div>
                     </div> 
+                        <button class="btn btn-icon btn-2 btn-success mt-3" type="submit" id="submitRate">
+                                    <span>Set Pay Rate</span>
+                          </button>
+                  </form>
                   </div>
-                  
+                  <?php
+                  $getTimes = "SELECT * FROM EMPLOYEE_HOUR WHERE (EMPLOYEE_ID=$employee_ID)";
+                  $executeTimes =mysqli_query($DBConnect , $getTimes);
+                  $count= 0;
+                   
+                  ?>
                   
                 <div class="table-responsive">
 
@@ -199,34 +230,42 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>02/07/2019</td>
-                      <td>08:00</td>
-                      <td>17:30</td>
-                      <td>8.5</td>
-                      <td class="text-right">R255.00</td>
-                    </tr>
-                    <tr>
-                      <td>03/07/2019</td>
-                      <td>09:15</td>
-                      <td>17:30</td>
-                      <td>7.25</td>
-                      <td class="text-right">R217.50</td>
-                    </tr>
-                    <tr>
-                      <td>04/07/2019</td>
-                      <td>08:00</td>
-                      <td>17:00</td>
-                      <td>8.0</td>
-                      <td class="text-right">R240.00</td>
-                    </tr>
-                    <tr>
-                      <td>05/07/2019</td>
-                      <td>08:00</td>
-                      <td>17:30</td>
-                      <td>8.5</td>
-                      <td class="text-right">R255.00</td>
-                    </tr> 
+                  <?php  
+
+                  while($wageArray = mysqli_fetch_assoc($executeTimes))
+                    {
+
+                      $justdate = new DateTime($wageArray['DATE']);
+                      $justdate = $justdate->format("Y-m-d");
+
+                      $checkInTime = new DateTime($wageArray['CHECK_IN_TIME']);
+                      $checkInTime = $checkInTime->format("H:i:s");
+
+                      $checkOutTime = new DateTime($wageArray['CHECK_OUT_TIME']);
+                      $checkOutTime = $checkOutTime->format("H:i:s");
+
+                      $first_date = new DateTime($wageArray['CHECK_IN_TIME']);
+                      $second_date = new DateTime($wageArray['CHECK_OUT_TIME']);
+                      $interval = $first_date->diff($second_date);
+
+
+                      
+                      echo $_GET["rate"];
+                       if(isset($_GET["rate"]))
+                      {
+                        
+                      }
+
+                    echo "<tr>
+                        <td>".$justdate ."</td>
+                        <td>". $checkInTime ."</td>
+                        <td>". $checkOutTime ."</td>
+                        <td>".$interval->h."</td>
+                        <td class='text-right'>..</td>
+                      </tr>";
+
+                    }
+                   ?>
                   </tbody>
                   <tfoot class="tfoot-light">
                     <tr class="footer">
@@ -295,92 +334,41 @@
                 </div>
               </div>
           </div>
-          
+          <script>
+         $(document).ready(function(){
+           console.log("works");
+           let employeeID = $("#employee_ID").val();
+           console.log(employeeID);
+              $("#submitRate").click(function(e){
+                e.preventDefault();
+                      let employeeID = $("#employee_ID").val();
+
+                      let payRate = $("#payRate").val();
+                          console.log(payRate);
+                          console.log(employeeID);
+                                $.ajax({
+                                  url:'wage_calc.php',
+                                  type: 'get',
+                                  data: {rate: payRate, employee_ID :employeeID},
+                                  success: function(response){
+                                    
+                                  }
+                                });
+                      });
+              });             
+          </script>
           </div>
           </div>
         </div>
-        php include_once("../footer.php");
+        <?php include_once("../footer.php");?>
       </div>
     </div>
 
-    <script type="text/javascript">
-      function setTwoNumberDecimal(el) {
-        el.value = parseFloat(el.value).toFixed(2);
-      };
-
-      //Initialize with the list of symbols
-      let names = ["All Gold Tomato Sauce (6x350ml) Case", "All Gold Tomato Sauce (6x700ml) Case", "Apple Munch (96x50ml) Pallet", "Ariel Washing Powder (6x500g) Case", "Bakers Toppers (12x125g) Case","Coca Cola (6x2l) Case","Dragon Energy Drink (24x500ml) Case","Kingsley Cola (6x2l) Case","Kingsley Iron Brew (6x2l) Case","Kingsley Ginger Bear (6x2l) Case","Kingsley Granadila (6x2l) Case", "Kingsley Orange (6x2l) Case", "Kingsley Pineapple (6x2l) Case", "Kingsley Cream Soda (6x2l) Case", "Kingsley Apple (6x2l) Case", "Monster Energy Drink (24x500ml) Case"]
-
-      //Find the input search box
-      let search = document.getElementById("searchProduct");
-
-      //Find every item inside the dropdown
-      let items = document.getElementsByClassName("dropdown-item");
-      function buildDropDown(values) 
-      {
-          let contents = []
-          for (let name of values) 
-          {
-          contents.push('<input type="button" class="dropdown-item" id="dropdownItem" type="button" value="' + name + '"/>')
-          }
-          $('#menuItems').append(contents.join(""))
-
-          //Hide the row that shows no items were found
-          $('#empty').hide()
-      }
-
-      //Capture the event when user types into the search box
-      window.addEventListener('input', function () {
-          filter(search.value.trim().toLowerCase())
-      })
-
-      //For every word entered by the user, check if the symbol starts with that word
-      //If it does show the symbol, else hide it
-      function filter(word) 
-      {
-          let length = items.length
-          let collection = []
-          let hidden = 0
-
-          for (let i = 0; i < length; i++) 
-          {
-            if (items[i].value.toLowerCase().startsWith(word)) 
-            {
-                $(items[i]).show()
-            }
-            else {
-                $(items[i]).hide()
-                hidden++
-            }
-          }
-
-          //If all items are hidden, show the empty view
-          if (hidden === length) 
-          {
-            $('#empty').show()
-          }
-          else 
-          {
-            $('#empty').hide()
-          }
-      }
-
-      //If the user clicks on any item, set the title of the button as the text of the item
-
-      function focusSearch() 
-      {
-        document.getElementById("searchProduct").focus();
-      }
-
-      $('#menuItems').on('click', '.dropdown-item', function()
-      {
-          $("#dropdown_coins").dropdown('toggle');
-          $('#searchProduct').val("");
-          filter("");
-      })
-
-      buildDropDown(names);
-    </script>
+<?php
+}
+  mysqli_close($DBConnect);
+}
+?>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -392,5 +380,5 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
 </body>
 
-</html>*/
+</html>
 ?>

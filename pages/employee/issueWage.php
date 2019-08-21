@@ -132,8 +132,8 @@
                                 $("#successSearch").click(function(e) {
 
                                     e.preventDefault();
-
-                                    window.location=`wage_calc.php?employeeID = ${savedID}`;
+                                   
+                                    window.location=`wage_calc.php?employeeID='${savedID}'`;
                                 });
                                /* setTimeout(function(){redirect()},10000);
                               
