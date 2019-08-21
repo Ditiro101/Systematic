@@ -1,4 +1,6 @@
 <?php
+ include_once("../../sessionCheckLanding.php");
+
 $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
 $dbparts = parse_url($url);
@@ -179,7 +181,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                                 Bookeeper
                               </th>
                               <td >
-                                Jabu/replaced with logged on user
+                                <?php echo  $_SESSION['userID'];?>
                               </td>
                             </tr>      
                         </tbody>
@@ -199,7 +201,8 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                           </div>
-                          <input type="hidden" value="" min="0" step="100" data-number-to-fixed="2" value=<?php echo $employee_ID;?> class="form-control currency" id="employee_ID" autofocus />
+                         
+                          <input type="hidden" min="0" step="100" data-number-to-fixed="2" value=<?php echo $employee_ID;?> class="form-control currency" id="employee_ID" autofocus />
                               <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="payRate" autofocus />
                               
      
@@ -250,10 +253,10 @@ if(isset($employee_ID))//check if session has userID too when you get userID
 
 
                       
-                      echo $_GET["rate"];
+                      
                        if(isset($_GET["rate"]))
                       {
-                        
+                        echo $_GET["rate"];
                       }
 
                     echo "<tr>
@@ -261,7 +264,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                         <td>". $checkInTime ."</td>
                         <td>". $checkOutTime ."</td>
                         <td>".$interval->h."</td>
-                        <td class='text-right'>..</td>
+                        <td class='text-right'>".  $_GET["rate"]. "</td>
                       </tr>";
 
                     }
@@ -337,8 +340,8 @@ if(isset($employee_ID))//check if session has userID too when you get userID
           <script>
          $(document).ready(function(){
            console.log("works");
-           let employeeID = $("#employee_ID").val();
-           console.log(employeeID);
+          // let employeeID = $("#employee_ID").val();
+           //console.log(employeeID);
               $("#submitRate").click(function(e){
                 e.preventDefault();
                       let employeeID = $("#employee_ID").val();
@@ -348,7 +351,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                           console.log(employeeID);
                                 $.ajax({
                                   url:'wage_calc.php',
-                                  type: 'get',
+                                  type: 'post',
                                   data: {rate: payRate, employee_ID :employeeID},
                                   success: function(response){
                                     
@@ -378,6 +381,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!--script src="JS/employee.js"></script-->
 </body>
 
 </html>
