@@ -16,6 +16,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -54,82 +58,99 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
-                      <div class="col">
+                    <form id="mainf" class="needs-validation" novalidate>
+                     
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name"> 
+                            <input type="text" class="form-control" id="supplierName" name="suppName" aria-describedby="emailHelp" placeholder="Enter name" required>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" placeholder="Enter VAT Number">
+                            <input type="text" class="form-control" id="VATNumber" name="suppVAT" placeholder="Enter VAT Number" required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="email" class="form-control" id="ContactNo" placeholder="Enter Contact Number">
+                            <input type="text" maxlength="10" class="form-control" id="ContactNo" name="suppContact" placeholder="Enter Contact Number" required>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Enter Email">
+                            <input type="email" class="form-control" id="supplierEmail" name="suppEmail" placeholder="Enter Email" required>
                           </div>
                         </div>
+                        
 
-                        <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                            <hr class="my-4">
+
+                          <div class="form-row">
+                            <div class="form-group col">
+                               <label for="inputAddress">Address 1</label>
+                              <div class="input-group">
+                                <input type="text" class="form-control inputAddress" id="inputAddress" name="suppAddr" placeholder="1234 Main St" required/>
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-add-address" type="button" disabled>
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
+                                    </button>
+                                  </span>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputSuburb">Suburb</label>
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb" name="suppSuburb" >
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputCity">City</label>
+                              <input type="text" class="form-control inputCity" id="inputCity" name="suppSuburb" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control inputZip" id="inputZip" name="suppZip" readonly>
+                            </div>
+                          </div> 
                         </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity">
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                          </div>
-                        </div> 
+                        
+
+                          
+
+                    </form>
+
+                     <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
                       </div>
-                      <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <br>
+                    <div class=" col-md-2">
+                          <button type="button" class="btn btn-block btn-primary mb-3" id="addSave">Save</button>
+                          <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
                                     <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                        <h6 class="modal-title" id="MTopW modal-title-default">Success!</h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Supplier successfully added</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-link  ml-auto" onclick="window.location='../../supplier.html'">Close</button> 
+                                        <button type="button" class="btn btn-link ml-auto" id="btnClose" >Close</button> 
                                     </div>
                                     
                                 </div>
                             </div>
                           </div>
                         </div>
-                    </form>
                   </div>
                 
                 </div>
@@ -151,6 +172,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script src="JS/supplier.js"></script>
 </body>
 
 </html>
