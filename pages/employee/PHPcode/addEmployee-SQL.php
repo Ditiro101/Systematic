@@ -401,12 +401,12 @@ include "meRaviQr/qrlib.php";
 												
 												$query = "INSERT INTO EMPLOYEE_PICTURE (FILENAME, EMPLOYEE_ID) VALUES ('$newfilename', '$employeeID')"; // insert the user_id for specific pictures
 												$res = mysqli_query($DBConnect, $query);
-												var_dump($res);
+												//var_dump($res);
 
 
 
 												  
-												  var_dump($employeeID);
+												  //var_dump($employeeID);
 												  $hash = sha1($employeeID);
 											  
 												  $qrImgName = "StockPath".rand();
@@ -431,10 +431,7 @@ include "meRaviQr/qrlib.php";
 													
 												if(($res== true) && ($query_QR==true))
 												{
-													$obj = array();
-													$obj[0] = "success";
-													$myJson = json_encode($obj);
-													echo $myJson;
+													echo "success";
 													
 												}
 												else
@@ -449,9 +446,7 @@ include "meRaviQr/qrlib.php";
 					}
 					else
 					{
-							echo  '<div class="alert alert-danger mt-3" role="alert">
-							There was an error within the picture upload<br/>
-					</div>';
+							echo  'There was an error within the picture upload';
 							
 					}
 
@@ -465,7 +460,7 @@ include "meRaviQr/qrlib.php";
 	}
 	else
 	{
-		echo "Couldnt insert details ";
+		echo "Couldnt insert details";
 	}
     //Close database connection
     mysqli_close($DBConnect);
