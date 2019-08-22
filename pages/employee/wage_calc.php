@@ -34,7 +34,13 @@ if(isset($employee_ID))//check if session has userID too when you get userID
   $sql = "SELECT * FROM EMPLOYEE WHERE (EMPLOYEE_ID=$employee_ID)";
   $query_QR = mysqli_query($DBConnect , $sql);
 
+  $wageQuery = "SELECT WAGE_ID FROM WAGE WHERE (EMPLOYEE_ID=$employee_ID)";
+  $submitwageQuery = mysqli_query($DBConnect , $wageQuery);
+
+  //for employee , who is receiving wage , wage ID
+  $queryFilter = mysqli_fetch_assoc($submitwageQuery);
   
+  //for employee , who is receiving wage , employee ID
   $rows = mysqli_fetch_assoc($query_QR);
 
 
@@ -173,7 +179,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                                 Employee Wage ID #
                               </th>
                               <td >
-                                (not done yet)
+                                <?php echo $queryFilter["WAGE_ID"];?>
                               </td>
                             </tr> 
                             <tr>
@@ -181,7 +187,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                                 Bookeeper
                               </th>
                               <td >
-                                <?php echo  $_SESSION['userID'];?>
+                                <?php echo  $_SESSION['name'];?>
                               </td>
                             </tr>      
                         </tbody>
@@ -208,9 +214,9 @@ if(isset($employee_ID))//check if session has userID too when you get userID
      
                         </div>
                     </div> 
-                        <button class="btn btn-icon btn-2 btn-success mt-3" type="submit" id="submitRate">
+                        <!--button class="btn btn-icon btn-2 btn-success mt-3" type="submit" id="submitRate">
                                     <span>Set Pay Rate</span>
-                          </button>
+                          </button-->
                   </form>
                   </div>
                   <?php
@@ -254,17 +260,14 @@ if(isset($employee_ID))//check if session has userID too when you get userID
 
                       
                       
-                       if(isset($_GET["rate"]))
-                      {
-                        echo $_GET["rate"];
-                      }
+                      
 
                     echo "<tr>
                         <td>".$justdate ."</td>
                         <td>". $checkInTime ."</td>
                         <td>". $checkOutTime ."</td>
                         <td>".$interval->h."</td>
-                        <td class='text-right'>".  $_GET["rate"]. "</td>
+                        <td class='text-right' charges='".$interval->h."'>...</td>
                       </tr>";
 
                     }
@@ -276,7 +279,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R967.50</b></td>
+                      <td class="text-right" id="totalAmountPayable"></td>
                     </tr>
 
                   </tfoot>
@@ -308,11 +311,11 @@ if(isset($employee_ID))//check if session has userID too when you get userID
             <br>
 
               <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-success mt-0" type="button" data-toggle="modal" data-target="#modal-succ">
+                <button class="btn btn-icon btn-2 btn-success mt-0"  id="submitWagePayment" type="button" >
                   <span class="btn-inner--text">Finalise Wage Collection</span>
                 </button>
               </div>
-              <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal fade" id="finaliseWage" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                     <div class="modal-content">
                       
@@ -324,42 +327,20 @@ if(isset($employee_ID))//check if session has userID too when you get userID
                         </div>
                         
                         <div class="modal-body text-left">
-                          <p>Wage successfully collected. Printing wage slip...</p>
+                          <p id="modalText"></p>
                             
                         </div>
                         
                         <div class="modal-footer">
                             
-                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.html'">Close</button> 
+                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="closeWage">Close</button> 
                         </div>
                         
                     </div>
                 </div>
               </div>
           </div>
-          <script>
-         $(document).ready(function(){
-           console.log("works");
-          // let employeeID = $("#employee_ID").val();
-           //console.log(employeeID);
-              $("#submitRate").click(function(e){
-                e.preventDefault();
-                      let employeeID = $("#employee_ID").val();
-
-                      let payRate = $("#payRate").val();
-                          console.log(payRate);
-                          console.log(employeeID);
-                                $.ajax({
-                                  url:'wage_calc.php',
-                                  type: 'post',
-                                  data: {rate: payRate, employee_ID :employeeID},
-                                  success: function(response){
-                                    
-                                  }
-                                });
-                      });
-              });             
-          </script>
+      
           </div>
           </div>
         </div>
@@ -381,7 +362,7 @@ if(isset($employee_ID))//check if session has userID too when you get userID
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <!--script src="JS/employee.js"></script-->
+  <script src="JS/calculateWage.js"></script>
 </body>
 
 </html>
