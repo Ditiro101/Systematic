@@ -125,13 +125,13 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+                    <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
@@ -143,13 +143,13 @@
                       </div>
                       
                       <div class="modal-body text-left">
-                          <p>Empoyee tag is being generated...</p>
+                          <p id="modalText"></p>
                           
                       </div>
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.php'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnClose" onclick="">Close</button> 
                       </div>
                       
                   </div>
@@ -172,7 +172,7 @@
                   <?php echo $titleInfo["TITLE_NAME"]." ".$_POST["NAME"]." ".$_POST["SURNAME"]; ?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
-                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline"><?php echo $_POST["EMPLOYEE_ID"];?></p></div>
+                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline" id="employee_ID"><?php echo $_POST["EMPLOYEE_ID"];?></p></div>
                    <div class="pt-2">
                       <b>Employee Type : </b>
                       <label hidden="true"><?php echo $employeeType;?></label>
