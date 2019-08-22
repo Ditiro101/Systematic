@@ -133,7 +133,7 @@
                         <button type="submit" class="btn btn-primary mb-3 px-4" id="SavingDetails">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
-                            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                   <div class="modal-content">
                                     
@@ -151,7 +151,7 @@
                                       
                                       <div class="modal-footer">
                                           
-                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.html'">Close</button>
+                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose" onclick="window.location='../../employee.html'">Close</button>
                                       </div>
                                       
                                   </div>

@@ -131,6 +131,47 @@ $(document).ready(function()
         })
         .done(data=>{
             console.log(data);
+            let confirmation = data.trim();
+            if(confirmation== "success")
+            {
+                $("#modal-title-default").text("Success!");
+                $("#modal-body").text("Employee added successfully");
+                $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "Employee Exists!")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("Employee Exists! , press close and try again");
+               
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "City found suburb added but address not added.")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("City found suburb added but address not added.");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "error in saving employee pic or generated employee tag")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("error in saving employee pic or generated employee tag");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "Couldnt get ID of employee details")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("Couldnt get ID of employee details");
+                $("#displayModal").modal("show");
+            }
+            else
+            {
+                
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("Couldnt insert details");
+                $("#displayModal").modal("show");
+            }
+          
         });
     });
     
