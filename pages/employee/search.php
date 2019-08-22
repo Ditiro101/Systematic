@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -89,124 +90,14 @@
             <table id="myTable" class="table align-items-center table-flush">
                <thead class="thead-light">
               <tr class="header">
-                <th>Title</th>
+                <th>Employee ID</th>
                 <th >Name</th>
                 <th >Surname</th>
                 <th> ID Number</th>
                 <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Mr</td>
-                <td>Alfreds</td>
-                <td>Futterkiste</td>
-                <td>9401015800080</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>Benny</td>
-                <td>Haynes</td>
-                <td>9610084800082</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'" >
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Ms</td>
-                <td>Annie</td>
-                <td>Saynes</td>
-                <td>9706295800083</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>David</td>
-                <td>Cooper</td>
-                <td>8312025800088</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Employee Found</b></td>
                 <td></td>
@@ -332,6 +223,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchEmployee.js"></script>
 </body>
 
 </html>

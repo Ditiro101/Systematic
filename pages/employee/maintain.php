@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -59,17 +60,18 @@
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="John">
+                            <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?>>
                             
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Surname</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Smith">
+                            <input type="text" class="form-control" id="inputSurname" value=<?php echo $_POST["SURNAME"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-2">
                             <label for="bane">Title</label>
+                            <label hidden="true"><?php echo $_POST["TITLE_NAME"];?></label>
                             <select class="form-control">
                               <option>Ms</option>
                               <option>Mr</option>
@@ -78,46 +80,41 @@
                           </div>
                           <div class="form-group col-10">
                             <label for="exampleInputPassword1">Contact Number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="076 6673 0125">
+                            <input type="number" class="form-control" id="inputContact" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="john@gmail.com">
+                            <input type="email" class="form-control" id="inputEmail" value=<?php echo $_POST["EMAIL"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">SA ID or Passport number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="982522 224 148462">
+                            <input type="number" class="form-control" id="inputPassport" value=<?php echo $_POST["IDENTITY_NUMBER"];?>>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                          <label hidden="true" id="eAddress"><?php echo $_POST["ADDR"];?></label>
+                          <input type="text" class="form-control" id="inputAddress">
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity" placeholder="Hatfield">
+                            <input type="text" class="form-control" id="inputSuburb" value=<?php echo $_POST["SUBURB"];?>>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Pretoria</option>
-                              <option>...</option>
-                            </select>
+                            <input type="text" class="form-control" id="inputCity" value=<?php echo $_POST["CITY"];?>>
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" value=<?php echo $_POST["ZIP"];?>>
                           </div>
                           <div class="form-group col-12">
                             <label for="bane">Employee Type</label>
+                            <label hidden=true><?php echo $_POST["EMPLOYEE_TYPE_ID"];?></label>
                             <select class="form-control">
                               <option>Driver</option>
                               <option>Bookeeper</option>
@@ -173,6 +170,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/maintainEmployee.js"></script>
 </body>
 
 </html>

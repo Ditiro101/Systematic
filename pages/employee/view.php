@@ -1,8 +1,16 @@
-
-
+<?php include_once("../sessionCheckPages.php");?>
+<?php
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $addressInfo=getAddressInfo($con,$_POST["ADDRESS_ID"]);
+  $suburbInfo=getSuburbInfo($con,$addressInfo["SUBURB_ID"]);
+  $cityInfo=getCityInfo($con,$suburbInfo["CITY_ID"]);
+  $employeeType=getEmployeeType($con,$_POST["EMPLOYEE_TYPE_ID"]);
+  $titleInfo=getTitleInfo($con,$_POST["TITLE_ID"]);
+  mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -78,11 +86,26 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
+                  <form id="formMaintain" action="maintain.php" method="POST">
+                    <input type="hidden" name="ID" value=<?php echo $_POST["EMPLOYEE_ID"];?>>
+                    <input type="hidden" name="NAME" id="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
+                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                     <input type="hidden" name="IDENTITY_NUMBER" value=<?php echo $_POST["IDENTITY_NUMBER"];?>>
+                    <input type="hidden" name="TITLE_NAME" value=<?php echo $titleInfo["TITLE_NAME"];?>>
+                    <input type="hidden" name="EMPLOYEE_TYPE_ID" value=<?php echo $_POST["EMPLOYEE_TYPE_ID"];?>>
+                    <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $_POST["EMPLOYEE_STATUS_ID"];?>>
+                    <input type="hidden" name="ADDR" id="ADDR">
+                    <input type="hidden" name="SUBURB" value=<?php echo $suburbInfo["NAME"];?>>
+                    <input type="hidden" name="CITY" value=<?php echo $cityInfo["CITY_NAME"];?>>
+                    <input type="hidden" name="ZIP" value=<?php echo $suburbInfo["ZIPCODE"];?>>
+                    <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                      <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                      </span>
+                      <span class="btn-inner--text">Edit</span>
+                    </button>
+                  </form>
                 </td>
                 <td>
                   <button class="btn btn-icon btn-2 btn-default btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
@@ -146,31 +169,36 @@
               </div>
               <div class="text-center mt-0">
                 <h2>
-                  Mr David Cooper
+                  <?php echo $titleInfo["TITLE_NAME"]." ".$_POST["NAME"]." ".$_POST["SURNAME"]; ?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
-                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline">12</p></div>
-                   <div class="pt-2"><b>Employee Type : </b><p class="d-inline">Warhouse Manager</p></div>                 
+                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline"><?php echo $_POST["EMPLOYEE_ID"];?></p></div>
+                   <div class="pt-2">
+                      <b>Employee Type : </b>
+                      <label hidden="true"><?php echo $employeeType;?></label>
+                      <p class="d-inline"><?php echo $employeeType["NAME"];?></p>
+                   </div>                 
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
 
-                  <div class="pt-2"><b>ID Number : </b><p class="d-inline">8312025800088</p></div>
+                  <div class="pt-2"><b>ID Number : </b><p class="d-inline"><?php echo $_POST["IDENTITY_NUMBER"];?></p></div>
 
-                  <div class="pt-2"><b>Email : </b><p class="d-inline">david.cooper@gmail.com</p></div>
+                  <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>
                   
-                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline">081 145 2456</p></div>
+                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $_POST["CONTACT_NUMBER"]?></p></div>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <i class="ni location_pin mr-2 text-center"></i>
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0">Fairview Village</p>
-                  <p class="mb-0">230 Lunnon Rd</p>
-                  <p class="mb-0">Hillcrest, Pretoria, 0083</p>
+                  <label id="eAddress" hidden="true"><?php echo $addressInfo["ADDRESS_LINE_1"];?></label>
+                  <p class="mb-0"><?php echo $addressInfo["ADDRESS_LINE_1"];?></p>
+                  <p class="mb-0"><?php echo $suburbInfo["NAME"];?></p>
+                  <p class="mb-0"><?php echo $cityInfo["CITY_NAME"].",".$suburbInfo["ZIPCODE"]; ?></p>
                   <p class="mb-0">South Africa</p>
                 </div>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
                   </div>
               </div>
             </div>
@@ -198,6 +226,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewEmployee.js"></script>
 </body>
 
 </html>
