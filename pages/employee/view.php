@@ -95,11 +95,11 @@
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
                      <input type="hidden" name="IDENTITY_NUMBER" value=<?php echo $_POST["IDENTITY_NUMBER"];?>>
                     <input type="hidden" name="TITLE_NAME" value=<?php echo $titleInfo["TITLE_NAME"];?>>
-                    <input type="hidden" name="EMPLOYEE_TYPE_ID" value=<?php echo $_POST["EMPLOYEE_TYPE_ID"];?>>
+                    <input type="hidden" id="EMPLOYEE_TYPE_NAME" name="EMPLOYEE_TYPE_NAME">
                     <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $_POST["EMPLOYEE_STATUS_ID"];?>>
                     <input type="hidden" name="ADDR" id="ADDR">
-                    <input type="hidden" name="SUBURB" value=<?php echo $suburbInfo["NAME"];?>>
-                    <input type="hidden" name="CITY" value=<?php echo $cityInfo["CITY_NAME"];?>>
+                    <input type="hidden" name="SUBURB" id="SUBURB">
+                    <input type="hidden" name="CITY" id="CITY">
                     <input type="hidden" name="ZIP" value=<?php echo $suburbInfo["ZIPCODE"];?>>
                     <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
                       <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
@@ -176,8 +176,7 @@
                    <div class="pt-2"><b>Employee ID : </b><p class="d-inline" id="employee_ID"><?php echo $_POST["EMPLOYEE_ID"];?></p></div>
                    <div class="pt-2">
                       <b>Employee Type : </b>
-                      <label hidden="true"><?php echo $employeeType;?></label>
-                      <p class="d-inline"><?php echo $employeeType["NAME"];?></p>
+                      <p class="d-inline" id="eEmployeeTypeName"><?php echo $employeeType["NAME"];?></p>
                    </div>                 
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
@@ -193,7 +192,8 @@
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
                   <label id="eAddress" hidden="true"><?php echo $addressInfo["ADDRESS_LINE_1"];?></label>
                   <p class="mb-0"><?php echo $addressInfo["ADDRESS_LINE_1"];?></p>
-                  <p class="mb-0"><?php echo $suburbInfo["NAME"];?></p>
+                  <p class="mb-0" id="eSuburb"><?php echo $suburbInfo["NAME"];?></p>
+                  <label id="eCity"><?php echo $cityInfo["CITY_NAME"];?></label>
                   <p class="mb-0"><?php echo $cityInfo["CITY_NAME"].",".$suburbInfo["ZIPCODE"]; ?></p>
                   <p class="mb-0">South Africa</p>
                 </div>

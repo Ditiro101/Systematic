@@ -1,9 +1,13 @@
 $(()=>{
 	let eAddr=$("#eAddress").text();
 	let changedAddress=eAddr.replace(" ","/");
-	console.log(eAddr);
-	console.log(changedAddress);
+	let changedSuburb=$("#eSuburb").text().replace(" ","/");
+    let changedCity=$("#eCity").text().replace(" ","/");
 	$("#ADDR").val(changedAddress);
+    $("#SUBURB").val(changedSuburb);
+    $("#CITY").val(changedCity);
+    $("#EMPLOYEE_TYPE_NAME").val($("#eEmployeeTypeName").text().replace(" ","/"));
+
 
 
 	$("#btnClick").click(function(e)
