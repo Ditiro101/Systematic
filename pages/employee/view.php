@@ -87,6 +87,7 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
+                  <div>
                   <form id="formMaintain" action="maintain.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $_POST["EMPLOYEE_ID"];?>>
                     <input type="hidden" name="NAME" id="NAME" value=<?php echo $_POST["NAME"];?>>
@@ -107,7 +108,22 @@
                       <span class="btn-inner--text">Edit</span>
                     </button>
                   </form>
+                  </div>
+                  <div>
+                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
+                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                    </span>
+                    <span class="btn-inner--text">Delete</span>
+                    </button>
+                  </div>
                 </td>
+                <!-- <td>
+                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
+                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                    </span>
+                    <span class="btn-inner--text">Delete</span>
+                  </button>
+                </td> -->
                 <td>
                   <button class="btn btn-icon btn-2 btn-default btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
                     <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
@@ -128,6 +144,7 @@
                       
                     <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </td>
                   </div>
                 </div>
               </div>
