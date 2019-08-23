@@ -52,8 +52,8 @@ $(()=>{
 	suburbInfo=JSON.parse($("#suburbs").text());
 	cityInfo=JSON.parse($("#cities").text());
 	// let testArr=JSON.parse($("#test").val());
-	console.log(addressInfo);
-	// console.log($("#supName").text());
+	//console.log(addressInfo);
+	//console.log($("#supName").text());
 	let supplierName=$("#supName").text().trim();
 	console.log(supplierName);
 	let changedName=supplierName.replace(" ","/");
