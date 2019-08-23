@@ -212,7 +212,7 @@
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.html'">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.php?wage_collect=1'">
                     <div>
                       <i class="fa fa-search"></i>
                       <span>Search Employee</span>
