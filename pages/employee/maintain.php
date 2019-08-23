@@ -125,7 +125,15 @@
                             <select class="form-control" id="eType">
                             </select>
                           </div>
+
+                          <div class='form-group col-12'>
+                                <label for="UploadsPic">Upload Employee Picture</label>
+                                <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
+                                <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control"/><br/>
+                                   
+                          </div>
                         </div> 
+
                         <button type="submit" class="btn btn-primary mb-3">Save</button>
                         <div class="form-group col-md-2">
                             

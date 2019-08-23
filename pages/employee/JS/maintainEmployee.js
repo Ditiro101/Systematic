@@ -122,9 +122,9 @@ $(()=>{
         e.preventDefault();
         let arr=getVals();
         let form=new FormData();
-        //let pics=$("#fileUpload").get(0).files[0];
+        let pics=$("#fileUpload").get(0).files[0];
         //$("#fileUpload").prop('files')[0]
-        //form.append("file",pics);
+        form.append("file",pics);
         form.append("choice",1);
         form.append("employeeID",arr["ID"]);
         form.append("name",arr["name"]);
