@@ -56,120 +56,61 @@
                   <option>ADW 586 NW  |  2016 Volvo VNL84430     | 50 Tonnes</option>
                 </select>
               </div>
-               <div class="input-group input-group-rounded input-group-merge col">
-                  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter order or invoice # to search" title="Type in a name" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <span class="fa fa-search"></span>
-                    </div>
-                  </div>
-                  <!-- Button trigger modal -->
-            </div>
+
           </div>
           <div class="tab-content" id="myTabContent">
             <div class="table-responsive">
-              <table id="myTable" class="table align-items-center table-flush">
+              <table class="table align-items-center table-flush">
                 <thead class="thead-light">
-                  <tr class="header">
-                    <th></th>
-                    <th>Type</th>
-                    <th>Order/Invoice #</th>
-                    <th>Date</th>
-                    <th>City</th>
-                    <th></th>
+                  <tr>
+                    <th scope="col-2">Qty</th>
+                    <th scope="col-4">Delivery ID</th>
+                    <th scope="col">Product Name</th>
+            
                   </tr>
                 </thead>
                 <tbody>
-                  <thead class="table-light">
-                    <th><b>04/07/2019</b></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </thead>
                   <tr>
+<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
+                    <td>1</td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" id="customCheck1" type="checkbox">
-                        <label class="custom-control-label" for="customCheck1"> &nbsp;</label>
-                      </div>
+                      Coke
                     </td>
-                    <td>Delivery</td>
-                    <td>321</td>
-                    <td>04/07/2019</td>
-                    <td>Pretoria</td>
-                    <td>
-                      <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                        </span>
-                        <span class="btn-inner--text">View</span>
-                      </button>
-                    </td>
+                    
                   </tr>
-                  <thead class="table-light">
-                    <th><b>05/07/2019</b></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </thead>
                   <tr>
+<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
+                    <td>1</td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" id="customCheck3" type="checkbox">
-                        <label class="custom-control-label" for="customCheck3"> &nbsp;</label>
-                      </div>
+                      Coke
                     </td>
-                    <td>Collection</td>
-                    <td>128</td>
-                    <td>05/07/2019</td>
-                    <td>Pretoria</td>
-                    <td>
-                      <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                        </span>
-                        <span class="btn-inner--text">View</span>
-                      </button>
-                    </td>
+                
                   </tr>
-                  <thead class="table-light">
-                    <th><b>06/07/2019</b></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                  </thead>
-                  <tr>
+                <tr>
+<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
+                    <td>1</td>
                     <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" id="customCheck6" type="checkbox">
-                        <label class="custom-control-label" for="customCheck6"> &nbsp;</label>
-                      </div>
+                      Coke
                     </td>
-                    <td>Collection</td>
-                    <td>135</td>
-                    <td>06/07/2019</td>
-                    <td>Johannesburg</td>
+                    
+                  </tr>
+             
+                    <tr>
+<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
+                    <td>1</td>
                     <td>
-                      <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                        </span>
-                        <span class="btn-inner--text">View</span>
-                      </button>
+                      Coke
                     </td>
+                    
                   </tr>
-                  <tr id="emptySearch" style="display: none;">
-                    <td >No Delivery/Collection Found</td>
-                  </tr>
+          
+
                 </tbody>
               </table>
             </div>
 
               <hr class="mt-0">
-              <div class="col mt-4">
+              <div class="col text-center mt-4">
                 <button class="btn btn-icon btn-2 btn-primary mt-0 mb-3" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
                   <span class="btn-inner--text">Remove Assignment</span>
                 </button>
