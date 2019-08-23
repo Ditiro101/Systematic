@@ -140,7 +140,7 @@
                               </div>
                               <div class="modal-footer">
                                   
-                                  <button type="button" id="modalCloseButton" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../product.html'">Close</button> 
+                                  <button type="button" id="modalCloseButton" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../product.php'">Close</button> 
                               </div>
                               
                           </div>
