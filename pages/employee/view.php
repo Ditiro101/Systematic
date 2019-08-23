@@ -85,8 +85,9 @@
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            
               <div class="d-flex justify-content-between">
-                <td>
+                
                   <div>
                   <form id="formMaintain" action="maintain.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $_POST["EMPLOYEE_ID"];?>>
@@ -110,13 +111,13 @@
                   </form>
                   </div>
                   <div>
-                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
+                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" style="margin-top: 30px;">
+                      <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                      </span>
+                      <span class="btn-inner--text">Delete</span>
                     </button>
                   </div>
-                </td>
+                <!--/td-->
                 <!-- <td>
                   <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
                     <span class="btn-inner--icon"><i class="fas fa-trash"></i>
