@@ -64,21 +64,22 @@
                 <?php
 
                 //Pic to be inserted here.
-                         /* $dir = "../images/ProfilePic/" . $employeeID. ".jpg";
+                        $dir = "images/ProfilePic/" . $_POST["EMPLOYEE_ID"]. ".jpg";
+                       
                         if(file_exists($dir))
                         {
-                            echo '<div>
-                                          <img class="card-img-top" src="' . $dir . ' " class="rounded-circle" alt="person">
-                            </div>';
+                            
+                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person">';
+                           
                         }
                         else
                         {
-                            echo '<div>
-                                          <img class="card-img-top" src="../images/person.png" class="rounded-circle" alt="person">
-                            </div>';
-                        }*/
+                         
+                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person">';
+                            
+                        }
                 ?>   
-                    <img src="../../images/user.png" class="rounded-circle">
+                    <!--img src="../../images/user.png" class="rounded-circle"-->
                   </a>
                 </div>
               </div>
