@@ -122,7 +122,7 @@
                   <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
                     <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                     </span>
-                    <span class="btn-inner--text">Delete</span>
+                    <span class="btn-inner--text" id="deleteButton">Delete</span>
                   </button>
                 </td>
               </tr>
@@ -237,20 +237,20 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">Breach of contract</span>
                           </div>
-                          <input type="text" value=""  class="form-control " id="c2" autofocus />
+                          <input type="text" value=""  class="form-control " id="reasonOFDismissal" autofocus />
                         </div> 
                       </div>
                     </div>
 
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
@@ -262,13 +262,13 @@
                       </div>
                       
                       <div class="modal-body">
-                          <p>Employee successfully dismissed</p>
+                          <p id="modalText">Employee successfully dismissed</p>
                           
                       </div>
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.php'">Close</button> 
+                          <button type="button"  id="btnClose" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
                       </div>
                       
                   </div>
@@ -332,6 +332,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src ="JS/dismissEmployee.js"></script>
 </body>
 
 </html>
