@@ -20,25 +20,34 @@
       $choice = $_POST["choice"];
       if($choice == 0 )
       {
-        $vals = array();
+            $vals = array();
 
-        $get_query = "SELECT * FROM `ACCESS_LEVEL`";
-		$get_result = mysqli_query($DBConnect,$get_query);
-		if(mysqli_num_rows($get_result)>0){
-			while($row=mysqli_fetch_assoc($get_result))
-			{
-				$vals[]=$row;
-			}
-			echo json_encode($vals);
-		}
-		else
-		{
-			echo "False";
-		}
+            $get_query = "SELECT * FROM `ACCESS_LEVEL`";
+            $get_result = mysqli_query($DBConnect,$get_query);
+            if(mysqli_num_rows($get_result)>0)
+            {
+              while($row=mysqli_fetch_assoc($get_result))
+              {
+                $vals[]=$row;
+              }
+              echo json_encode($vals);
+            }
+            else
+            {
+              echo "False";
+            }
       }
       else if($choice > 0 )
       {
-          
+        $password = $_POST["pass"];
+        $username = $_POST["email"];
+        $accessLevelID = $_POST["accessLevel"];
+        $userStatusID = $_POST["userStatusID"];
+
+        $salt = 
+
+
+
       }
 
 

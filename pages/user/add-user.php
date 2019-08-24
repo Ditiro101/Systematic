@@ -16,6 +16,13 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+
+  <!--Validation libraries-->
+
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -68,7 +75,7 @@
                           <div class="form-group col-6">
                             <label for="inputPassword2">Confirm Password</label>
                             <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password">
-                            <span id='alert-message'></span>
+                              <div id="alert-message"></div>
                           </div>
                         </div>
                         <div class="form-group">
@@ -130,6 +137,12 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+
+   <!--Validation libraries-->
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+
   <script src="JS/addUser-JS.js"></script>
 </body>
 
