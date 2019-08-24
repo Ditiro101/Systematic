@@ -17,7 +17,10 @@
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
   <!-- validation -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -57,13 +60,13 @@
                 <ul class="nav nav-pills ml-3" id="myTab" role="tablist">
                  
                   <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <a class="nav-link active" id="cIndividual" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
                       <i class="far fa-user mr-2"></i>
                     Individual</a>
                   </li>
              
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <a class="nav-link" id="cOrganisation" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                     <i class="fas fa-building mr-2"></i>
                     Organisation</a>
                   </li>
@@ -72,7 +75,7 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form method="POST" action="" id="form-register-indi">
+                    <form method="POST" action="" id="mainfind">
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="name-indi">Name</label>
@@ -87,8 +90,8 @@
                         <div class="form-group col-2">
                           <label for="title">Title</label>
                           <select class="form-control" id="title" name="title">
-                            <option>Ms</option>
                             <option>Mr</option>
+                            <option>Ms</option>
                             <option>Mrs</option>
                           </select>
                         </div>
@@ -104,40 +107,39 @@
 
                       <div class="form-group">
                         <label for="address1">Address line 1</label>
-                        <input type="text" class="form-control" id="address1" placeholder="1234 Main St" name="address1" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="address2">Address line 2</label>
-                        <input type="text" class="form-control" id="address2" placeholder="Apartment, studio, or floor" name="address2" required>
+                        <input type="text" class="form-control indinputAddress" id="indinputAddress" placeholder="1234 Main St" name="address1" required>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="suburb">Suburb</label>
-                          <input type="text" class="form-control" id="suburb" name="suburb" required>
+                          <input type="text" class="form-control indinputSuburb" id="indinputSuburb" name="suburb" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
-                          <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                          </select>
+                          <input type="text" class="form-control indinputCity" id="indinputCity" name="suburb" readonly>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="zip">Zip</label>
-                          <input type="text" class="form-control" id="zip" name="zip" required>
+                          <input type="text" class="form-control indinputZip" id="indinputZip" name="zip" readonly>
                         </div>
                       </div> 
 
 
-                      <button id="btn-submit-register-indi" type="button" class="btn btn-primary">
-                        Submit
-                      </button>
                       
                     </form>
+                    <button id="btnSaveind" type="button" class="btn btn-primary">
+                        Submit
+                      </button>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address-ind" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div>
                   </div>
 
                   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <form method="POST" action="" id="form-register-org" novalidate>
+                    <form method="POST" action="" id="mainforg" novalidate>
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="email-org">Name of organisation</label>
@@ -146,13 +148,13 @@
                         </div>
                         <div class="form-group col-6">
                           <label for="password-indi">Business email</label>
-                          <input type="email" class="form-control" id="password-indi" name="password-indi" placeholder="Email" required>
+                          <input type="email" class="form-control" id="email-org" name="password-indi" placeholder="Email" required>
                         </div>
                       </div>
                       <div class="form-row ">
                         <div class="form-group col-8">
                           <label for="vat">VAT Number</label>
-                          <input type="number" class="form-control" id="vat" name="vat" placeholder="Vat number" required>
+                          <input type="number" class="form-control" id="vat-org" name="vat" placeholder="Vat number" required>
                         </div>
                         <div class="form-group col-4">
                           <label for="number-org">Business Contact Number</label>
@@ -163,33 +165,56 @@
 
                       <div class="form-group">
                         <label for="address1-org">Address line 1</label>
-                        <input type="text" class="form-control" id="address1-org" name="address1-org" placeholder="1234 Main St" required>
-                      </div>
-                      <div class="form-group">
-                        <label for="address2-org">Address line 2</label>
-                        <input type="text" class="form-control" id="address2-org" name="address2-or" placeholder="Apartment, studio, or floor" required>
+                        <input type="text" class="form-control orginputAddress" id="orginputAddress" name="address1-org" placeholder="1234 Main St" required>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="suburb-org">Suburb</label>
-                          <input type="text" class="form-control" id="suburb-org" name="suburb-org" required>
+                          <label for="orginputSuburb">Suburb</label>
+                          <input type="text" class="form-control orginputSuburb" id="orginputSuburb" name="suburb-org" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="city-org">City</label>
-                          <select id="city-org" name="city-org" class="form-control">
-                            <option selected>Pretoria</option>
-                            <option>...</option>
-                          </select>
+                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" required>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="zip-org">Zip</label>
-                          <input type="text" class="form-control" id="zip-org" name="zip-org" required>
+                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" required>
                         </div>
                       </div> 
-                      <button id="btn-submit-register-org" type="button" class="btn btn-primary" >
-                        Submit
-                      </button>
+                      
                     </form>
+                    <button id="btnSaveorg" type="button" class="btn btn-primary" >
+                        Submit
+                    </button>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address-org" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div>
+                      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content">
+                                  
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="MTopW modal-title-default">Success!</h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <p id="MMessage"></p>
+                                        
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link ml-auto" id="btnClose" >Close</button> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                          </div>
                   </div>
                 </div>
 
@@ -212,9 +237,10 @@
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <!-- validation scripts -->
-    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-  <script src="JS/customer.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script type="text/javascript" src="JS/registerCustomer.js"></script>
 </body>
 
 </html>

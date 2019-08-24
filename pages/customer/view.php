@@ -3,6 +3,16 @@
   include_once("PHPcode/functions.php");
   $cusID=$_POST["ID"];
   $addressIDs=getCustomerAddressIDs($con,$cusID);
+  if(checkCreditAccount($con,$cusID))
+  {
+    $creditAccountCheck="True";
+  }
+  else
+  {
+    $creditAccountCheck="False";
+  }
+  $customerTypeName=getCustomerTypeName($con,$_POST["CUSTOMER_TYPE_ID"]);
+  $customerStatus=getCustomerStatus($con,$_POST["STATUS_ID"]);
   $addressInfo=[];
   $suburbInfo=[];
   $cityInfo=[];
@@ -102,11 +112,20 @@
                   </form>
                 </td>
                 <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                    </span>
-                    <span class="btn-inner--text">View Credit Account</span>
-                  </button>
+                  <label hidden="true" id="cAccountCheck"><?php echo $creditAccountCheck;?></label>
+                  <form id="formAccount" type='POST'>
+                    <input type="hidden" name="ID" value=<?php echo $cusID;?>>
+                    <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
+                    <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                    <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
+                    <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                    <input type="hidden" name="ADDR" id="accountADDR">
+                    <input type="hidden" name="SUBURB" id="accountSUBURB">
+                    <input type="hidden" name="CITY" id="accountCITY">
+                  </form>
                 </td>
               </div>
             </div>
@@ -127,6 +146,8 @@
                   <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>
                   
                   <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $_POST["CONTACT_NUMBER"];?></p></div>
+                  <div class="pt-3"><b>Customer Type : </b><p class="d-inline"><?php echo $customerTypeName[0]["CUSTOMER_TYPE_NAME"];?></p></div>
+                  <div class="pt-3"><b>Customer Status : </b><p class="d-inline"><?php echo $customerStatus[0]["STATUS_NAME"];?></p></div>
                   <label id="addresses" hidden="true"><?php echo json_encode($addressInfo);?></label>
                   <label id="suburbs" hidden="true"><?php echo json_encode($suburbInfo);?></label>
                   <label id="cities" hidden="true"><?php echo json_encode($cityInfo);?></label>
@@ -137,13 +158,9 @@
                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Address1</a>
                     </li> -->
                   </ul>
-                  <!-- <i class="ni location_pin mr-2 text-center"></i>
-                  <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0">Eagle Offices</p>
-                  <p class="mb-0">1234 Main Street</p>
-                  <p class="mb-0">Hatfield, Pretoria, 0083</p>
-                  <p class="mb-0">South Africa</p> -->
-                </div>
+                  <div class="tab-content" id="pills-tabContent">
+                  </div>
+                </div>                
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>

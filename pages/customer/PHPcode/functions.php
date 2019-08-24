@@ -299,6 +299,7 @@
 		}
 	}
 	///////////////////////////////////////////////////////////
+	///////////////////////////////////////////////////////////
 	function getCustomerAddressIDs($con,$cusID)
 	{
 		$get_query="SELECT ADDRESS_ID FROM CUSTOMER_ADDRESS WHERE CUSTOMER_ID='$cusID'";
@@ -315,5 +316,139 @@
 		{
 			return false;
 		}
+	}
+	/////////////////////////////////////////////////////////
+	function getCustomerTypeName($con,$id)
+	{
+		$get_query="SELECT * FROM CUSTOMER_TYPE WHERE CUSTOMER_TYPE_ID='$id'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	///////////////////////////////////////////////////////
+	function checkCreditAccount($con,$id)
+	{
+		$check_query="SELECT * FROM CUSTOMER_ACCOUNT WHERE CUSTOMER_ID='$id'";
+		$check_result=mysqli_query($con,$check_query);
+		if(mysqli_num_rows($check_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////////////
+	function getCustomerStatus($con,$id)
+	{
+		$get_query="SELECT * FROM CUSTOMER_STATUS WHERE STATUS_ID='$id'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	///////////////////////////////////////////////////
+	function checkCustomer($con,$name,$contact)
+	{
+		$customer_query="SELECT * FROM CUSTOMER WHERE NAME='$name' AND CONTACT_NUMBER='$contact'";
+		$customer_result=mysqli_query($con,$customer_query);
+		if(mysqli_num_rows($customer_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////
+	function addIndCustomer($con,$name,$surname,$contact,$email,$title,$customerType,$customerStatus)
+	{
+		$add_query="INSERT INTO CUSTOMER (NAME,SURNAME,EMAIL,CONTACT_NUMBER,TITLE_ID,CUSTOMER_TYPE_ID,STATUS_ID) VALUES ('$name','$surname','$email','$contact','$title','$customerType','$customerStatus')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	//////////////////////////////////////////////
+	function addOrgCustomer($con,$name,$vat,$contact,$email,$customerType,$customerStatus)
+	{
+		$add_query="INSERT INTO CUSTOMER (NAME,EMAIL,VAT_NUMBER,CONTACT_NUMBER,CUSTOMER_TYPE_ID,STATUS_ID) VALUES ('$name','$email','$vat','$contact','$customerType','$customerStatus')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	//////////////////////////////////////////////
+	function getCustomerID($con,$name,$contact)
+	{
+		$get_query="SELECT * FROM CUSTOMER WHERE NAME='$name' AND CONTACT_NUMBER='$contact'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$customerID=$row["CUSTOMER_ID"];
+		}
+		else
+		{
+			$customerID="Customer does not exist";
+		}
+		return $customerID;
+		$get_query="SELECT * FROM SUPPLIER WHERE CONTACT_NUMBER='$contact'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$supplierID=$row["SUPPLIER_ID"];
+		}
+		else
+		{
+			$supplierID="Supplier does not exist";
+		}
+		return $supplierID;
+	}
+	///////////////////////////////////////////////////
+	function addCustomerAddress($con,$addressID,$customerID)
+	{
+		$add_query="INSERT INTO CUSTOMER_ADDRESS (ADDRESS_ID,CUSTOMER_ID) VALUES ('$addressID','$customerID')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
 	}
 ?>

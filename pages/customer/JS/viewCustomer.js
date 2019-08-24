@@ -1,6 +1,9 @@
 var addressInfo;
 var suburbInfo;
 var cityInfo;
+var changedAddressInfo;
+var chnagedSuburbInfo;
+var changedCityInfo;
 let createListItem=function(val)
 {
 	let listItem=$("<li></li>").addClass("nav-item");
@@ -48,18 +51,40 @@ let createListItem=function(val)
 
 }
 $(()=>{
+	let accountCheck=$("#cAccountCheck").text();
+	let accountButton="";
+	if(accountCheck=="True")
+	{
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton.attr("type","submit");
+		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
+		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
+		innerButtonText.text("View Credit Account");
+		accountButton.append(innerButtonText);
+		$("#formAccount").append(accountButton);
+		$("#formAccount").attr("action","view-credit-account.php");
+	}
+	else
+	{
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton.attr("type","submit");
+		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
+		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
+		innerButtonText.text("Apply For Credit");
+		accountButton.append(innerButtonText);
+		$("#formAccount").append(accountButton);
+		$("#formAccount").attr("action","apply-for-credit.php");
+	}
+	
 	addressInfo=JSON.parse($("#addresses").text());
 	suburbInfo=JSON.parse($("#suburbs").text());
 	cityInfo=JSON.parse($("#cities").text());
 	// let testArr=JSON.parse($("#test").val());
 	//console.log(addressInfo);
 	//console.log($("#supName").text());
-	let supplierName=$("#supName").text().trim();
-	console.log(supplierName);
-	let changedName=supplierName.replace(" ","/");
-	let changedAddressInfo=addressInfo;
-	let chnagedSuburbInfo=suburbInfo;
-	let changedCityInfo=cityInfo;
+	changedAddressInfo=addressInfo;
+	chnagedSuburbInfo=suburbInfo;
+	changedCityInfo=cityInfo;
 	for(let k=0;k<addressInfo.length;k++)
 	{
 		changedAddressInfo[k]["ADDRESS_LINE_1"]=changedAddressInfo[k]["ADDRESS_LINE_1"].replace(" ","/");
@@ -69,7 +94,9 @@ $(()=>{
 	$("#ADDR").val(JSON.stringify(changedAddressInfo));
 	$("#SUBURB").val(JSON.stringify(chnagedSuburbInfo));
 	$("#CITY").val(JSON.stringify(changedCityInfo));
-	$("#NAME").val(changedName);
+	$("#accountADDR").val(JSON.stringify(changedAddressInfo));
+	$("#accountSUBURB").val(JSON.stringify(chnagedSuburbInfo));
+	$("#accountCITY").val(JSON.stringify(changedCityInfo));
 	let list=$("#listAddress");
 	let listElement="";
 	let num=0
