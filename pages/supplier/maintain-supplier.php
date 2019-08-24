@@ -59,61 +59,67 @@
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Coca Cola">
+                            <input type="hidden" id="sID" value=<?php echo $_POST["ID"];?>>
+                            <input type="hidden" id="sAddID" value=<?php echo $_POST["ADDID"];?>>
+                            <input type="text" class="form-control" id="sName" aria-describedby="emailHelp" placeholder=<?php echo $_POST["NAME"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" placeholder="115477887878">
+                            <input type="number" class="form-control" id="VATNumber" placeholder=<?php echo $_POST["VAT"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="email" class="form-control" id="ContactNo" placeholder="078 457 2257">
+                            <input type="text" class="form-control" id="ContactNo" placeholder=<?php echo $_POST["PHONE"];?>>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="John@gmail.com">
+                            <input type="text" class="form-control" id="sEmail" placeholder=<?php echo $_POST["EMAIL"];?>>
                           </div>
                         </div>
-
+                        <?php $addName=$_POST["ADDR"];
+                        $addName=str_replace("/"," ",$addName);
+                        ?>
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+                          <label id="convertAdd" hidden="true"><?php echo $addName;?></label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="">
                         </div>
                         <div class="form-group">
                           <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                          <input type="text" class="form-control" id="inputAddress2">
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" id="sSuburb" placeholder=<?php echo $_POST["SUBURB"];?>>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
+                            <input type="text" class="form-control" id="sCity" placeholder=<?php echo $_POST["CITY"];?>>
+                            <!-- <select id="inputState" class="form-control">
+                              <option selected></option>
                               <option>...</option>
-                            </select>
+                            </select> -->
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" placeholder=<?php echo $_POST["ZIP"];?>>
                           </div>
                         </div>
                       </div> 
                       <div class="col">
                         <div class="form-group">
                           <div class="form-group mr-2">
-                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save Changes
+                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default" id="btnSave">Save Changes
                               </button>
                               <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
                               </button>
                           </div>
                         </div>
                       </div>
-                      <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                      <!-- <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               
@@ -184,7 +190,7 @@
                               
                           </div>
                       </div>
-                    </div>
+                    </div> -->
                         
                     </form>
                   </div>
@@ -208,6 +214,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/maintainSupplier.js" type="text/javascript"></script>
 </body>
 
 </html>
