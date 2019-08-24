@@ -23,6 +23,7 @@ $(()=>{
 		else
 		{
 			let arr=getVals();
+
 			$.ajax({
 			url:'PHPcode/truckcode.php',
 			type:'POST',
@@ -43,8 +44,32 @@ $(()=>{
 					$("#displayModal").modal("show");
 				}
 			});
+
+
+			//place changes variable her and user id here
+			let changes="Name/Ben,Number/079545522";
+			let user_id="1";
+			$.ajax({
+			url:'../admin/PHPcode/audit_log.php',
+			type:'POST',
+			data:{Functionality_ID:10,changes:changes,user_id:user_id} //functionality id needs to be included
+			})
+			.done(data=>{
+				if(data=="success"){
+					alert("success");
+				}
+				else{
+					alert("failure");
+				}
+			
+			});
+
+
+
 		}
 		
 	});
+
+
 
 });
