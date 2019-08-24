@@ -91,7 +91,7 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <form id="formMaintain" action="maintain-supplier.php" method="POST">
+                  <form id="formMaintain" action="maintain.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $cusID;?>>
                     <input type="hidden" name="NAME" id="NAME" value=<?php echo $_POST["NAME"];?>>
                     <input type="hidden" name="SURNAME" id="SURNAME" value=<?php echo $_POST["SURNAME"];?>>

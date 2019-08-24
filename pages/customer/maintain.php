@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -54,21 +59,24 @@
             
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
-                    <form>
+                    <form id="mainf">
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="exampleInputEmail1">Name</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="John">
+                          <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?>>
                         </div>
                         <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Surname</label>
-                          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Smith">
+                          <label for="exampleInputPassword1" id="cSurnameLabel"></label>
+                          <label hidden="true" id="cTypeID"><?php echo $_POST["CUSTOMER_TYPE_ID"];?></label>
+                          <label hidden="true" id="cVat"><?php echo $_POST["VAT"];?></label>
+                          <label hidden="true" id="cSur"><?php echo $_POST["SURNAME"];?></label>
+                          <input type="text" class="form-control" id="cSurname" placeholder="Smith">
                         </div>
                       </div>
                       <div class="form-row ">
                         <div class="form-group col-2">
                           <label for="bane">Title</label>
-                          <select class="form-control">
+                          <select class="form-control" id="titleSelect">
                             <option>Mr</option>
                             <option>Ms</option>
                             <option>Mrs</option>
@@ -76,44 +84,53 @@
                         </div>
                         <div class="form-group col-10">
                           <label for="exampleInputPassword1">Contact Number</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="081 145 2456">
+                          <input type="number" class="form-control" id="ContactNo" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="johnsmith@gmail.com">
+                        <input type="email" class="form-control" id="customerEmail" value=<?php echo $_POST["EMAIL"];?>>
                       </div>
 
                       <div class="form-group">
                         <label for="inputAddress">Address line 1</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputAddress2">Address line 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <label id="convertAdd" hidden="true"><?php echo $_POST["ADDR"];?></label>
+                        <div class="input-group">
+                                <input type="text" class="form-control inputAddress" id="inputAddress1" name="cusAddr" placeholder="1234 Main St" required/>
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-add-address" type="button" disabled>
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
+                                    </button>
+                                  </span>
+                                </div>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
                           <label for="city">Suburb</label>
-                          <input type="text" class="form-control" id="city" placeholder="Hatfield">
+                          <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
+                          <input type="text" class="form-control inputSuburb" id="inputSuburb1">
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
-                          <select id="inputState" class="form-control">
-                            <option selected>Hatfield</option>
-                            <option>...</option>
-                          </select>
+                          <label id="convertCity" hidden="true"><?php echo $_POST["CITY"];?></label>
+                          <input type="text" class="form-control inputCity" id="inputCity1">
                         </div>
                         <div class="form-group col-md-2">
                           <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control" id="inputZip" placeholder="0012">
+                          <input type="text" class="form-control inputZip" id="inputZip1">
                         </div>
                       </div> 
 
-
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-success2">
+                    </form>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSave">
                         Submit
                       </button>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div> 
                       <div class="modal fade" id="modal-success2" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
@@ -132,14 +149,12 @@
                                 
                                 <div class="modal-footer">
                                     
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
                                 </div>
                                 
                             </div>
                         </div>
                       </div>
-                    </form>
-
                 </div>
 
               </div>
@@ -160,6 +175,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script type="text/javascript" src="JS/maintainCustomer.js"></script>
 </body>
 
 </html>
