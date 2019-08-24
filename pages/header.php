@@ -6,7 +6,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- Brand -->
-      <a class="navbar-brand pt-0" href="../../index.html">
+      <a class="navbar-brand pt-0" href="../../dashboard.php">
         <img src="../../assets/img/brand/blue.png" class="navbar-brand-img" alt="...">
       </a>
       <!-- User -->
@@ -55,75 +55,162 @@
         </div>
         <!-- Navigation -->
         <ul class="navbar-nav">
-
         <!-- Heading -->
-       
+          <?php 
+          if (in_array("0", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../dashboard.php">
               <i class="ni ni-tv-2 text-primary"></i> Dashboard
             </a>
-  
           </li>
+          <?php
+            }
+          ?>
+          
+          <?php 
+          if (in_array("1", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../customer.php">
               <i class="ni ni-circle-08 text-green"></i> Customer  
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("2", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../employee.php">
               <i class="ni ni-badge text-orange"></i> Employee
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("3", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../user.php">
               <i class="ni ni-laptop text-yellow"></i> User
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("4", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../admin.php">
               <i class="ni ni-settings text-red"></i> Administration
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("5", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../supplier.php">
               <i class="ni ni-briefcase-24 text-info"></i> Suppliers
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("6", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../warehouse.php">
               <i class="ni ni-shop text-pink"></i> Warehouse
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("7", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../sales.php">
               <i class="ni ni-cart text-green"></i> Sales
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("8", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../product.php">
               <i class="ni ni-basket text-orange"></i> Products
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("9", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../stock.php">
               <i class="ni ni-box-2 text-yellow"></i> Stock
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("10", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../delivery_collection.php">
               <i class="ni ni-delivery-fast text-red"></i> Delivery/Collection
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("11", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../driver.php">
               <i class="ni ni-user-run text-pink"></i> Driver
             </a>
           </li>
+          <?php
+            }
+          ?>
+
+          <?php 
+          if (in_array("12", $accessLevels)) {
+          ?>
           <li class="nav-item">
             <a class="nav-link" href="../../reporting.php">
               <i class="ni ni-chart-bar-32 text-info"></i> Reports
             </a>
           </li>
+          <?php
+            }
+          ?>
         </ul>
       </div>
     </div>
