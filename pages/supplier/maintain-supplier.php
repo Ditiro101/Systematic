@@ -16,6 +16,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -54,66 +58,65 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form id="mainf">
                       <div class="col">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Coca Cola">
+                            <label id="suppName" hidden="true"><?php echo $_POST["NAME"];?></label>
+                            <input type="hidden" id="sID" value=<?php echo $_POST["ID"];?>>
+                            <input type="text" class="form-control" name="sName" id="supplierName" aria-describedby="emailHelp" required>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" placeholder="115477887878">
+                            <input type="number" class="form-control" name="VAT" id="VATNumber" value=<?php echo $_POST["VAT"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="email" class="form-control" id="ContactNo" placeholder="078 457 2257">
+                            <input type="text" class="form-control" name="contact" id="ContactNo" maxlength="10" value=<?php echo $_POST["PHONE"];?> required>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="John@gmail.com">
+                            <input type="text" class="form-control" name="email" id="supplierEmail" value=<?php echo $_POST["EMAIL"];?> required>
                           </div>
                         </div>
-
-                        <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-                        </div>
+                        <hr class="my-4">
                         <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <div class="form-group col">
+                               <label for="inputAddress">Address 1</label>
+                               <label id="convertAdd" hidden="true"><?php echo $_POST["ADDR"];?></label>
+                              <div class="input-group">
+                                <input type="text" class="form-control inputAddress" id="inputAddress1" name="suppAddr" placeholder="1234 Main St" required/>
+                                  <span class="input-group-btn">
+                                    <button class="btn btn-danger btn-add-address" type="button" disabled>
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span>
+                                    </button>
+                                  </span>
+                                </div>
+                            </div>
                           </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                              <label for="inputSuburb">Suburb</label>
+                              <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="suppSuburb">
+                            </div>
+                            <div class="form-group col-md-4">
+                              <label for="inputCity">City</label>
+                              <label id="convertCity" hidden="true"><?php echo $_POST["CITY"];?></label>
+                              <input type="text" class="form-control inputCity" id="inputCity1" name="suppSuburb" readonly>
+                            </div>
+                            <div class="form-group col-md-2">
+                              <label for="inputZip">Zip</label>
+                              <input type="text" class="form-control inputZip" id="inputZip1" name="suppZip" readonly>
+                            </div>
                           </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                          </div>
-                        </div>
-                      </div> 
-                      <div class="col">
-                        <div class="form-group">
-                          <div class="form-group mr-2">
-                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save Changes
-                              </button>
-                              <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
-                              </button>
-                          </div>
-                        </div>
                       </div>
-                      <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+
+                      <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               
@@ -125,19 +128,19 @@
                                 </div>
                                 
                                 <div class="modal-body">
-                                    <p>Supplier successfully updated</p>
+                                    <p id="MMessage"></p>
                                     
                                 </div>
                                 
                                 <div class="modal-footer">
                                     
-                                    <button type="button" class="btn btn-link  ml-auto" onclick="window.location='../../supplier.html'">Close</button> 
+                                    <button type="button" class="btn btn-link  ml-auto" id="btnClose">Close</button> 
                                 </div>
                                 
                             </div>
                         </div>
                       </div>
-                                          <div class="modal fade" id="modal-del" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                       <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                           <div class="modal-content">
                             
@@ -149,12 +152,12 @@
                               </div>
                               
                               <div class="modal-body">
-                                  <p>Are you sure you want to delete the supplier? </p>
+                                  <p id="MRemove"></p>
                                   
                               </div>
                               
                               <div class="modal-footer">                                 
-                                  <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#success2">Yes</button>
+                                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnRemove">Yes</button>
                                   <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                               </div>
                               
@@ -187,6 +190,23 @@
                     </div>
                         
                     </form>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div> 
+                      <br>
+                      <div class="col">
+                        <div class="form-group">
+                          <div class="form-group mr-2">
+                              <button type="button" class="btn btn-primary mb-3" id="btnSave">Save Changes
+                              </button>
+                              <button type="button" class="btn btn-danger mb-3 float-right" id="btnDeleteSupplier">Delete Supplier
+                              </button>
+                          </div>
+                        </div>
+                      </div>
                   </div>
                 
                 </div>
@@ -208,6 +228,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script src="JS/maintainSupplier.js" type="text/javascript"></script>
 </body>
 
 </html>

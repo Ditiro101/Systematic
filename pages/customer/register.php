@@ -16,6 +16,11 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- validation -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -55,13 +60,13 @@
                 <ul class="nav nav-pills ml-3" id="myTab" role="tablist">
                  
                   <li class="nav-item">
-                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
+                    <a class="nav-link active" id="cIndividual" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
                       <i class="far fa-user mr-2"></i>
                     Individual</a>
                   </li>
              
                   <li class="nav-item">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
+                    <a class="nav-link" id="cOrganisation" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
                     <i class="fas fa-building mr-2"></i>
                     Organisation</a>
                   </li>
@@ -70,170 +75,146 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form method="POST" action="" id="mainfind">
                       <div class="form-row">
                         <div class="form-group col-6">
-                          <label for="exampleInputEmail1">Name</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+                          <label for="name-indi">Name</label>
+                          <input type="text" class="form-control" id="name-indi" name="name-indi" placeholder="Enter name" required>
                         </div>
                         <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Surname</label>
-                          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Surname">
+                          <label for="surname-indi">Surname</label>
+                          <input type="text" class="form-control" id="surname-indi" name="surname-indi" placeholder="Surname" required>
                         </div>
                       </div>
                       <div class="form-row ">
                         <div class="form-group col-2">
-                          <label for="bane">Title</label>
-                          <select class="form-control">
-                            <option>Ms</option>
+                          <label for="title">Title</label>
+                          <select class="form-control" id="title" name="title">
                             <option>Mr</option>
+                            <option>Ms</option>
                             <option>Mrs</option>
                           </select>
                         </div>
                         <div class="form-group col-10">
-                          <label for="exampleInputPassword1">Contact Number</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact Number">
+                          <label for="number-indi">Contact Number</label>
+                          <input type="number" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="exampleInputPassword1">Email</label>
-                        <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                        <label for="email-indi">Email</label>
+                        <input type="email" class="form-control" id="email-indi" name="email-indi" placeholder="Email" required>
                       </div>
 
                       <div class="form-group">
-                        <label for="inputAddress">Address line 1</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputAddress2">Address line 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <label for="address1">Address line 1</label>
+                        <input type="text" class="form-control indinputAddress" id="indinputAddress" placeholder="1234 Main St" name="address1" required>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="inputCity">Suburb</label>
-                          <input type="text" class="form-control" id="inputCity">
+                          <label for="suburb">Suburb</label>
+                          <input type="text" class="form-control indinputSuburb" id="indinputSuburb" name="suburb" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
-                          <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                          </select>
+                          <input type="text" class="form-control indinputCity" id="indinputCity" name="suburb" readonly>
                         </div>
                         <div class="form-group col-md-2">
-                          <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control" id="inputZip">
+                          <label for="zip">Zip</label>
+                          <input type="text" class="form-control indinputZip" id="indinputZip" name="zip" readonly>
                         </div>
                       </div> 
 
 
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-success2">
+                      
+                    </form>
+                    <button id="btnSaveind" type="button" class="btn btn-primary">
                         Submit
                       </button>
-                      <div class="modal fade" id="modal-success2" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
-                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                              
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-success">Success!</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="window.location='../../customer.html'">
-                                        <span aria-hidden="true">×</span>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address-ind" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <p>Customer added successfully</p>
-                                    
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
-                                </div>
-                                
-                            </div>
-                        </div>
+                                    <small>Max 3 Adresses allowed</small>
                       </div>
-                    </form>
                   </div>
+
                   <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                    <form>
+                    <form method="POST" action="" id="mainforg" novalidate>
                       <div class="form-row">
                         <div class="form-group col-6">
-                          <label for="exampleInputEmail1">Name of organisation</label>
-                          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Name">
+                          <label for="email-org">Name of organisation</label>
+                          <input type="text" class="form-control" id="name-org" name="name-org"  placeholder="Name" required>
     
                         </div>
                         <div class="form-group col-6">
-                          <label for="exampleInputPassword1">Business email</label>
-                          <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                          <label for="password-indi">Business email</label>
+                          <input type="email" class="form-control" id="email-org" name="password-indi" placeholder="Email" required>
                         </div>
                       </div>
                       <div class="form-row ">
                         <div class="form-group col-8">
-                          <label for="exampleInputPassword1">VAT Number</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Vat number">
+                          <label for="vat">VAT Number</label>
+                          <input type="number" class="form-control" id="vat-org" name="vat" placeholder="Vat number" required>
                         </div>
                         <div class="form-group col-4">
-                          <label for="exampleInputPassword1">Business Contact Number</label>
-                          <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact number">
+                          <label for="number-org">Business Contact Number</label>
+                          <input type="number" class="form-control" id="number-org" name="number-org" placeholder="Contact number" required>
                         </div>
                       </div>
 
 
                       <div class="form-group">
-                        <label for="inputAddress">Address line 1</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                      </div>
-                      <div class="form-group">
-                        <label for="inputAddress2">Address line 2</label>
-                        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                        <label for="address1-org">Address line 1</label>
+                        <input type="text" class="form-control orginputAddress" id="orginputAddress" name="address1-org" placeholder="1234 Main St" required>
                       </div>
                       <div class="form-row">
                         <div class="form-group col-md-6">
-                          <label for="inputCity">Suburb</label>
-                          <input type="text" class="form-control" id="inputCity">
+                          <label for="orginputSuburb">Suburb</label>
+                          <input type="text" class="form-control orginputSuburb" id="orginputSuburb" name="suburb-org" required>
                         </div>
                         <div class="form-group col-md-4">
-                          <label for="inputState">City</label>
-                          <select id="inputState" class="form-control">
-                            <option selected>Choose...</option>
-                            <option>...</option>
-                          </select>
+                          <label for="city-org">City</label>
+                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" required>
                         </div>
                         <div class="form-group col-md-2">
-                          <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control" id="inputZip">
+                          <label for="zip-org">Zip</label>
+                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" required>
                         </div>
                       </div> 
-                      <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#modal-success">
-                        Submit
-                      </button>
-                      <div class="modal fade" id="modal-success" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
-                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                              
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-success">Success!</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <p>Customer added successfully</p>
-                                    
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
-                                </div>
-                                
-                            </div>
-                        </div>
-                      </div>
+                      
                     </form>
+                    <button id="btnSaveorg" type="button" class="btn btn-primary" >
+                        Submit
+                    </button>
+                      <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address-org" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div>
+                      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                                <div class="modal-content">
+                                  
+                                    <div class="modal-header">
+                                        <h6 class="modal-title" id="MTopW modal-title-default">Success!</h6>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="modal-body">
+                                        <p id="MMessage"></p>
+                                        
+                                    </div>
+                                    
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-link ml-auto" id="btnClose" >Close</button> 
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                          </div>
                   </div>
                 </div>
 
@@ -255,6 +236,11 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- validation scripts -->
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script type="text/javascript" src="JS/registerCustomer.js"></script>
 </body>
 
 </html>
