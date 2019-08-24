@@ -1,3 +1,4 @@
+
 let getVals=function()
 {
 	let arr=[];
@@ -33,9 +34,30 @@ $(()=>{
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
 				{
+
+					//place changes variable her and user id here
+					let changes="";
+					let user_id=1;
+					let Sub_Functionality_ID=10.7;
+					$.ajax({
+					url:'../admin/PHPcode/audit_log.php',
+					type:'POST',
+					data:{Sub_Functionality_ID:Sub_Functionality_ID,changes:changes} //functionality id needs to be included
+					})
+					.done(data=>{
+						if(data=="success"){
+							alert("success");
+						}
+						else{
+							alert(data);
+						}
+					
+					});
+
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 					$("#displayModal").modal("show");
+
 				}
 				else
 				{
@@ -46,23 +68,7 @@ $(()=>{
 			});
 
 
-			//place changes variable her and user id here
-			let changes="Name/Ben,Number/079545522";
-			let user_id="1";
-			$.ajax({
-			url:'../admin/PHPcode/audit_log.php',
-			type:'POST',
-			data:{Functionality_ID:10,changes:changes,user_id:user_id} //functionality id needs to be included
-			})
-			.done(data=>{
-				if(data=="success"){
-					alert("success");
-				}
-				else{
-					alert("failure");
-				}
-			
-			});
+
 
 
 

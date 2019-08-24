@@ -1,32 +1,21 @@
+
+
 <?php
     
-
+ include_once("../../sessionCheckPages.php");
     
 
 
     //check if all values are set
-    // if (!isset($_POST["Functionality_ID"]) && !isset($_POST["Changes"])) {
-    // echo "You are missing a Functionality_ID or changes in your post method";  
-    // exit;  
-    // }
+    if (!isset($_POST["Sub_Functionality_ID"]) && !isset($_POST["changes"]) ) {
+    echo "You are missing a Functionality_ID or changes in your post method";  
+  
+    exit;  
+    }
 
-    $Functionality_ID=10;
-    $changes="Name/Ben,Number/079545522";
-    // $userID=$_SESSION['userID'];
-    $userID="1";
-    $DateAudit = date('Y-m-d H:i:s');
-
-
-
-
-
-
-
-    //variables
-    $Functionality_ID=10;
-    $changes="Name/Ben,Number/079545522";
-    // $userID=$_SESSION['userID'];
-    $userID="1";
+    $Functionality_ID= $_POST["Sub_Functionality_ID"];
+    $changes=$_POST["changes"];
+    
     $DateAudit = date('Y-m-d H:i:s');
 
     //db connection
@@ -48,7 +37,7 @@
     else
     {
         // receive all input values from the form
-        $add_query="INSERT INTO AUDIT_LOG (DateAudit,User_ID,Functionality_ID,Changes) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+        $add_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
         $add_result=mysqli_query($con,$add_query);
         if($add_result)
         {
