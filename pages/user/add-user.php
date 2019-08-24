@@ -68,19 +68,16 @@
                           <div class="form-group col-6">
                             <label for="inputPassword2">Confirm Password</label>
                             <input type="password" class="form-control" id="inputPassword2" placeholder="Confirm Password">
+                            <span id='alert-message'></span>
                           </div>
                         </div>
                         <div class="form-group">
                           <label for="bane">Access Level</label>
-                          <select class="form-control">
-                            <option>Level 1 - Administration 1</option>
-                            <option>Level 2 - Sales 1</option>
-                            <option>Level 3 - Sales 2</option>
-                             <option>Level 4 - Warehouse Manager</option>
-                            <option>Level 5 - Driver 1</option>
+                          <select class="form-control" id="aLevel">
+                           
                           </select>
                         </div>
-                        <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default">Save</button> 
+                        <button type="submit" class="btn btn-primary mb-3 px-4" id="addUserSave">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
                             <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
@@ -133,6 +130,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/addUser-JS.js"></script>
 </body>
 
 </html>
