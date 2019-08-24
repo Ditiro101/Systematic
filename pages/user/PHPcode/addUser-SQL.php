@@ -44,7 +44,13 @@
         $accessLevelID = $_POST["accessLevel"];
         $userStatusID = $_POST["userStatusID"];
 
-        $salt = 
+        $salt = rand_string(10);
+        $saltedPassword = $password. $salt;
+        $hashedpassword = hash("sha256",$saltedPassword);
+
+        
+
+
 
 
 

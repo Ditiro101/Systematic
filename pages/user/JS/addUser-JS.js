@@ -52,6 +52,9 @@ $(document).ready(function()
                     let accessLevelID = parseInt($("#aLevel option:selected").attr("name"));;
                     let username = $("#inputUsername").val();
                     let password = $("#inputPassword1").val();
+                    let employeeID = $("#employee_ID").val();
+                
+    
                     let userStatus = 1;//Active
                     $.ajax({
                         url:"PHPcode/addUser-SQL.php",

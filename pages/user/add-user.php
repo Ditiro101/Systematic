@@ -65,7 +65,8 @@
                       <div class="col">
                         <div class="form-group">
                           <label for="inputUsername">Email (Username)</label>
-                          <input type="email" class="form-control" id="inputUsername" placeholder="Enter email address">
+                          <input type="email" class="form-control" id="inputUsername" placeholder="Enter email address" value=<?php echo $_POST["email"]?> disable>
+                          <input type="hidden" class="form-control" id="employee_ID" value=<?php echo $_POST["employee_ID"]?> placeholder="Enter email address" disable>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
