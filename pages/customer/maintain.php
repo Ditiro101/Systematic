@@ -17,10 +17,12 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- Validation -->
   <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <!-- end validation -->
 </head>
 
 <body>
@@ -63,16 +65,16 @@
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="exampleInputEmail1">Name</label>
-                          <label id="cName"><?php echo $_POST["NAME"];?></label>
+                          <label id="cName" hidden="true"><?php echo $_POST["NAME"];?></label>
                           <input type="hidden" id="cID" value=<?php echo $_POST["ID"];?>>
-                          <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp">
+                          <input type="text" class="form-control" id="customerName" name="customerName" aria-describedby="emailHelp" required>
                         </div>
                         <div class="form-group col-6">
                           <label for="exampleInputPassword1" id="cSurnameLabel"></label>
                           <label hidden="true" id="cTypeID"><?php echo $_POST["CUSTOMER_TYPE_ID"];?></label>
                           <label hidden="true" id="cVat"><?php echo $_POST["VAT"];?></label>
                           <label hidden="true" id="cSur"><?php echo $_POST["SURNAME"];?></label>
-                          <input type="text" class="form-control" id="cSurname" placeholder="Smith">
+                          <input type="text" class="form-control" id="cSurname" placeholder="Smith" name="cSurname" required>
                         </div>
                       </div>
                       <div class="form-row ">
@@ -87,7 +89,7 @@
                         </div>
                         <div class="form-group col-10">
                           <label for="exampleInputPassword1">Contact Number</label>
-                          <input type="number" class="form-control" id="ContactNo" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                          <input type="text" class="form-control" id="ContactNo"  name="ContactNo" value=<?php echo $_POST["CONTACT_NUMBER"];?> required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -111,16 +113,16 @@
                         <div class="form-group col-md-6">
                           <label for="city">Suburb</label>
                           <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
-                          <input type="text" class="form-control inputSuburb" id="inputSuburb1">
+                          <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="inputSuburb" required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
                           <label id="convertCity" hidden="true"><?php echo $_POST["CITY"];?></label>
-                          <input type="text" class="form-control inputCity" id="inputCity1">
+                          <input type="text" class="form-control inputCity" id="inputCity1" readonly>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control inputZip" id="inputZip1">
+                          <input type="text" class="form-control inputZip" id="inputZip1" readonly>
                         </div>
                       </div> 
 
@@ -202,9 +204,11 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- validation -->
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
   <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <!-- validation end -->
   <script type="text/javascript" src="JS/maintainCustomer.js"></script>
 </body>
 
