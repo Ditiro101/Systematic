@@ -451,4 +451,76 @@
 			return false;
 		}	
 	}
+	/////////////////////////////////////////////////////////
+	function getTitleInfo($con,$titleID)
+	{
+		$get_query="SELECT * FROM TITLE WHERE TITLE_ID='$titleID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$Info=$row;
+		}
+		else
+		{
+			$Info=false;
+		}
+		return $Info;
+	}
+	//////////////////////////////////////////////////////////
+	function removeCustomerAddress($con,$addressID,$customerID)
+	{
+		$delete_query="DELETE FROM CUSTOMER_ADDRESS WHERE ADDRESS_ID='$addressID' AND CUSTOMER_ID='$customerID'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}	
+	}
+	///////////////////////////////////////////////////////////
+	function updateIndCustomer($con,$id,$name,$surname,$contact,$email,$title,$customerType,$customerStatus)
+	{
+		$update_query="UPDATE CUSTOMER SET NAME='$name',SURNAME='$surname',CONTACT_NUMBER='$contact',EMAIL='$email',TITLE_ID='$title',CUSTOMER_TYPE_ID='$customerType',STATUS_ID='$customerStatus' WHERE CUSTOMER_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	//////////////////////////////////////////////////////
+	function updateOrgCustomer($con,$id,$name,$vat,$contact,$email,$customerType,$customerStatus)
+	{
+		$update_query="UPDATE CUSTOMER SET NAME='$name',VAT_NUMBER='$vat',CONTACT_NUMBER='$contact',EMAIL='$email',CUSTOMER_TYPE_ID='$customerType',STATUS_ID='$customerStatus' WHERE CUSTOMER_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	/////////////////////////////////////////////////////////
+	function removeAllCustomerAddress($con,$id)
+	{
+		$delete_query="DELETE FROM CUSTOMER_ADDRESS WHERE CUSTOMER_ID='$id'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 ?>

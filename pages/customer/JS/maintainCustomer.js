@@ -5,6 +5,16 @@ let getInput= function()
 	let VatNum=$("#cSurname").val().trim();
 	let contact=$("#ContactNo").val().trim();
 	let email=$("#customerEmail").val().trim();
+	let title=$("#titleSelect option:selected").text();
+	let titleID=1;
+	if(title=="Ms")
+	{
+		titleID=2;
+	}
+	else if(title=="Mrs")
+	{
+		titleID=3
+	}
 	addressArr=[];
 	suburbArr=[];
 	zipArr=[];
@@ -24,8 +34,11 @@ let getInput= function()
 		zipArr[index]=$(item).val().trim();
 	});
 	let addSupplierArr=[];
+	addSupplierArr["title"]=titleID;
+	addSupplierArr["customer_type"]=1;
+	addSupplierArr["status"]=1;
 	addSupplierArr["name"]=name;
-	addSupplierArr["VATNumber"]=VatNum;
+	addSupplierArr["VS"]=VatNum;
 	addSupplierArr["con"]=contact;
 	addSupplierArr["email"]=email;
 	addSupplierArr["address"]=addressArr;
@@ -109,6 +122,8 @@ $(()=>{
 	{
 		$("#cSurnameLabel").text("Surname");
 		$("#cSurname").val($("#cSur").text());
+		let preTitle=$("#eTitle").text();
+		$("#titleSelect").val(preTitle);
 	}
 	else
 	{
@@ -116,6 +131,9 @@ $(()=>{
 		$("#cSurname").val($("#cVat").text());
 		$("#titleSelect").attr("disabled",true);
 	}
+	let changedName=$("#cName").text().replace("/"," ");
+	$("#customerName").val(changedName);
+	let cusID=$("#cID").val();
 	let addressArr=JSON.parse($("#convertAdd").text());
 	let suburbArr=JSON.parse($("#convertSuburb").text());
 	let cityArr=JSON.parse($("#convertCity").text());
@@ -306,11 +324,12 @@ $(()=>{
 		$("#btnRemove").on("click",function(t){
 			t.preventDefault();
 			$.ajax({
-				url:'PHPcode/addSupplierCode.php',
+				url:'PHPcode/customercode.php',
 				type:'POST',
-				data:{choice:4,supplierID:supID,addressID:addressArr[numToDelete-1]["ADDRESS_ID"]}
+				data:{choice:5,customerID:cusID,addressID:addressArr[numToDelete-1]["ADDRESS_ID"]}
 			})
 			.done(data=>{
+				console.log(data);
 				if(data="True")
 				{
 					$('#address'+numToDelete).remove();
@@ -332,6 +351,7 @@ $(()=>{
 		e.preventDefault();
 		let arr=getInput();
 		console.log(count);
+		console.log(arr["title"]);
 		let form=$('#mainf');
 		form.validate();
 		if(form.valid()===false)
@@ -342,17 +362,18 @@ $(()=>{
 		{
 			let arr=getInput();
 			$.ajax({
-				url: 'PHPcode/addSupplierCode.php',
+				url: 'PHPcode/customercode.php',
 				type: 'POST',
-				data: {choice:2,ID:supID,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]} 
+				data: {choice:2,ID:cusID,num:count,name:arr["name"],vat:arr["VS"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:customerTypeID,status:arr["status"],title:arr["title"]} 
 			})
 			.done(data=>{
+				console.log(data);
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")
 				{
 					$("#MMessage").text(doneData[1]);
-					$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+					$("#btnClose").attr("onclick","window.location='../../customer.php'");
 					$("#displayModal").modal("show");
 				}
 				else
