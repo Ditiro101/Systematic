@@ -1,5 +1,21 @@
 <?php
 
+function rand_string($length)
+{
+  $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  $size = strlen($chars);
+  $str = "";
+  for($i=0; $i<$length; $i++)
+  {
+    $str .= $chars[rand(0,$size-1)];
+  }
+  return $str;
+
+}
+
+
+
+
   $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
   $dbparts = parse_url($url);
@@ -39,16 +55,57 @@
       }
       else if($choice > 0 )
       {
-        $password = $_POST["pass"];
-        $username = $_POST["email"];
-        $accessLevelID = $_POST["accessLevel"];
-        $userStatusID = $_POST["userStatusID"];
+            $password = $_POST["pass"];
+            $username = $_POST["email"];
+            $accessLevelID = $_POST["accessLevel"];
+            $userStatusID = $_POST["userStatusID"];
+            $employee_ID = $_POST["employee_ID"];
 
-        $salt = rand_string(10);
-        $saltedPassword = $password. $salt;
-        $hashedpassword = hash("sha256",$saltedPassword);
+            $salt = rand_string(10);
+            $saltedPassword = $password. $salt;
+            $hashedpassword = hash("sha256",$saltedPassword);
 
+            $checkIfUserExists = "SELECT `USER_ID` FROM USER WHERE (`EMPLOYEE_ID`='$employee_ID')";
         
+            $checkResult=mysqli_query($DBConnect,$checkIfUserExists);
+            if($checkResult)
+            {
+              $row=mysqli_fetch_assoc($checkResult);
+                if(isset($row["USER_ID"]))
+                {
+                  echo "User exists! ";
+                }
+                else
+                {
+                   
+
+
+                    $add_query="INSERT INTO USER (`USERNAME`,`USER_PASSWORD`,`PASSWORD_SALT`,`ACCESS_LEVEL_ID`,`USER_STATUS_ID`,`EMPLOYEE_ID`) VALUES ('$username','$hashedpassword','$salt','$accessLevelID','$userStatusID','$employee_ID')";
+                    $add_result=mysqli_query($DBConnect,$add_query);
+                    if($add_result)
+                    {
+                      echo "success";
+                    }
+                    else
+                    {
+                      echo  "failure to insert";
+                    } 
+                    //echo "Arrived to insert"; 
+                }
+
+              
+              
+            }
+            else
+            {
+            
+              echo "Database Error";
+             
+            }
+
+       
+      
+
 
 
 

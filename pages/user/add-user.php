@@ -19,10 +19,10 @@
 
   <!--Validation libraries-->
 
-  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <!--link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script-->
 </head>
 
 <body>
@@ -61,12 +61,12 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form action="" method="POST" >
                       <div class="col">
                         <div class="form-group">
                           <label for="inputUsername">Email (Username)</label>
-                          <input type="email" class="form-control" id="inputUsername" placeholder="Enter email address" value=<?php echo $_POST["email"]?> disable>
-                          <input type="hidden" class="form-control" id="employee_ID" value=<?php echo $_POST["employee_ID"]?> placeholder="Enter email address" disable>
+                          <input type="email" class="form-control" id="inputUsername" placeholder="Enter email address" value=<?php echo $_POST["EMAIL"]?> disabled>
+                          <input type="hidden" class="form-control" id="employee_ID" value=<?php echo $_POST["ID"]?> placeholder="Enter email address" disable>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
@@ -88,7 +88,7 @@
                         <button type="submit" class="btn btn-primary mb-3 px-4" id="addUserSave">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
-                            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                   <div class="modal-content">
                                     
@@ -100,13 +100,13 @@
                                       </div>
                                       
                                       <div class="modal-body">
-                                          <p>User added successfully</p>
+                                          <p id="modalText" ></p>
                                           
                                       </div>
                                       
                                       <div class="modal-footer">
                                           
-                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../user.html'">Close</button> 
+                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose" >Close</button> 
                                       </div>
                                       
                                   </div>
@@ -140,8 +140,8 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
 
    <!--Validation libraries-->
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <!--script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script-->
   <script src="../../assets/jqueryui/jquery-ui.js"></script>
 
   <script src="JS/addUser-JS.js"></script>

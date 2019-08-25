@@ -1,9 +1,9 @@
 $(document).ready(function()
 {
-            jQuery.validator.setDefaults({
+            /*jQuery.validator.setDefaults({
                 debug: true,
                 success: "valid"
-            });
+            });*/
 
             
             $.ajax({
@@ -47,8 +47,11 @@ $(document).ready(function()
                   
               });
 
-            $("#addUserSave").on('submit',function(e)
+            $("#addUserSave").on("click",function(e)
                 {
+
+                    e.preventDefault();
+                    //alert("Yeyi");
                     let accessLevelID = parseInt($("#aLevel option:selected").attr("name"));;
                     let username = $("#inputUsername").val();
                     let password = $("#inputPassword1").val();
@@ -56,20 +59,38 @@ $(document).ready(function()
                 
     
                     let userStatus = 1;//Active
+
+                    console.log(accessLevelID);
+
+                    console.log(username);
                     $.ajax({
                         url:"PHPcode/addUser-SQL.php",
                         type:'POST',
-                        data:{choice:1 , accessLevel:accessLevelID , email:username , pass:password , userStatusID :userStatus}
+                        data:{choice:1 , accessLevel:accessLevelID , email:username , pass:password , userStatusID :userStatus , employee_ID :employeeID}
                     })
                     .done(data=>{
 
-                        if(data=="success")
+                        console.log(data);
+                        let confirmation = data.trim();
+                        if(confirmation== "success")
                         {
-                           
+                            $("#modal-title-default").text("Success!");
+                            $("#modalText").text("User added successfully");
+                            $("#btnClose").attr("onclick","window.location='../../user.php'");
+                            $("#displayModal").modal("show");
+                        }
+                        else if(confirmation == "User exists!")
+                        {
+                            $("#modal-title-default").text("Error!");
+                            $("#modalText").text("User exists! , press close and try again");
+                            $("#displayModal").modal("show");
                         }
                         else
                         {
-                            alert("Error");
+                            $("#modal-title-default").text("Error!");
+                            $("#modalText").text("Database error");
+                           
+                            $("#displayModal").modal("show");
                         }
                     });
 

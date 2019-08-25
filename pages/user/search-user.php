@@ -70,73 +70,18 @@
                 <th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>3</td>
-                <td>Alfreds</td>
-                <td>Futterkiste</td>
-                <td>Level 1 - Administration 1</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>6</td>
-                <td>Benny</td>
-                <td>Haynes</td>
-                <td>Level 2 - Sales 1</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user.php'" >
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>12</td>
-                <td>Annie</td>
-                <td>Saynes</td>
-                <td>Level 3 - Sales 2</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>17</td>
-                <td>David</td>
-                <td>Cooper</td>
-                <td>Level 4 - Warehouse Manager</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-user.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
-                <td><b>No User Found</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
-              </tbody>
-            </table>
+            <tbody id="tBody">
+            <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
+              <td><b>No User Found</b></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            </tbody>
+          </table>
             <div class="form-group col-md-2 mt-3">
               <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
             </div>
