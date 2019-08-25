@@ -174,11 +174,11 @@
                         </div>
                         <div class="form-group col-md-4">
                           <label for="city-org">City</label>
-                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" required>
+                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" readonly>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="zip-org">Zip</label>
-                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" required>
+                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" readonly>
                         </div>
                       </div> 
                       
