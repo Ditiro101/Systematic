@@ -75,13 +75,12 @@ $(()=>{
 		$("#formAccount").append(accountButton);
 		$("#formAccount").attr("action","apply-for-credit.php");
 	}
-	
+	let customerName=$("#cName").text();
+	let changedName=customerName.replace(" ","/");
+	$("#NAME").val(changedName);
 	addressInfo=JSON.parse($("#addresses").text());
 	suburbInfo=JSON.parse($("#suburbs").text());
 	cityInfo=JSON.parse($("#cities").text());
-	// let testArr=JSON.parse($("#test").val());
-	//console.log(addressInfo);
-	//console.log($("#supName").text());
 	changedAddressInfo=addressInfo;
 	chnagedSuburbInfo=suburbInfo;
 	changedCityInfo=cityInfo;

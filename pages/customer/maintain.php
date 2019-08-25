@@ -63,7 +63,9 @@
                       <div class="form-row">
                         <div class="form-group col-6">
                           <label for="exampleInputEmail1">Name</label>
-                          <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?>>
+                          <label id="cName"><?php echo $_POST["NAME"];?></label>
+                          <input type="hidden" id="cID" value=<?php echo $_POST["ID"];?>>
+                          <input type="text" class="form-control" id="customerName" aria-describedby="emailHelp">
                         </div>
                         <div class="form-group col-6">
                           <label for="exampleInputPassword1" id="cSurnameLabel"></label>
@@ -76,6 +78,7 @@
                       <div class="form-row ">
                         <div class="form-group col-2">
                           <label for="bane">Title</label>
+                          <label hidden="true" id="eTitle"><?php echo $_POST["TITLE_NAME"];?></label>
                           <select class="form-control" id="titleSelect">
                             <option>Mr</option>
                             <option>Ms</option>
@@ -131,7 +134,7 @@
                                     </button>
                                     <small>Max 3 Adresses allowed</small>
                       </div> 
-                      <div class="modal fade" id="modal-success2" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
+                      <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               
@@ -143,7 +146,7 @@
                                 </div>
                                 
                                 <div class="modal-body">
-                                    <p>Customer details updated successfully</p>
+                                    <p id="MMessage"></p>
                                     
                                 </div>
                                 
@@ -155,6 +158,30 @@
                             </div>
                         </div>
                       </div>
+                      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                      <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                          <div class="modal-content">
+                            
+                              <div class="modal-header">
+                                  <h6 class="modal-title" id="modal-title-default">Warning!</h6>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                  </button>
+                              </div>
+                              
+                              <div class="modal-body">
+                                  <p id="MRemove"></p>
+                                  
+                              </div>
+                              
+                              <div class="modal-footer">                                 
+                                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnRemove">Yes</button>
+                                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
+                              </div>
+                              
+                          </div>
+                      </div>
+                    </div>
                 </div>
 
               </div>

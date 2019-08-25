@@ -2,6 +2,12 @@
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
   $cusID=$_POST["ID"];
+  $titleName="";
+  if($_POST["CUSTOMER_TYPE_ID"]==1)
+  {
+    $titleInfo=getTitleInfo($con,$_POST["TITLE_ID"]);
+    $titleName=$titleInfo["TITLE_NAME"];
+  }
   $addressIDs=getCustomerAddressIDs($con,$cusID);
   if(checkCreditAccount($con,$cusID))
   {
@@ -93,10 +99,11 @@
                 <td>
                   <form id="formMaintain" action="maintain.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $cusID;?>>
-                    <input type="hidden" name="NAME" id="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="NAME" id="NAME">
                     <input type="hidden" name="SURNAME" id="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
                     <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
                     <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                    <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
                     <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
                     <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
@@ -110,6 +117,13 @@
                       <span class="btn-inner--text">Edit</span>
                     </button>
                   </form>
+                </td>
+                <td>
+                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
+                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                    </span>
+                    <span class="btn-inner--text">Delete</span>
+                  </button>
                 </td>
                 <td>
                   <label hidden="true" id="cAccountCheck"><?php echo $creditAccountCheck;?></label>
@@ -139,8 +153,18 @@
               </div>
               <div class="text-center mt-0">
                 <h2>
-                  <?php echo $_POST["NAME"]." ".$_POST["SURNAME"];?>
+                  <?php
+                    if($_POST["SURNAME"]=="null")
+                    {
+                      echo $_POST["NAME"]." Organisation";
+                    }
+                    else
+                    {
+                      echo $_POST["NAME"]." ".$_POST["SURNAME"];
+                    }
+                    ?>
                 </h2>
+                <label hidden="true" id="cName"><?php echo $_POST["NAME"];?></label>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
                   
                   <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>

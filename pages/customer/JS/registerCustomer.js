@@ -9,7 +9,7 @@ let CheckValid = function(valArr)
 		$("#displayModal").modal("show");
 		return false;
 	}
-	else if (valArr["VATNumber"].length!=10)
+	else if (valArr["vat"].length!=10)
 	{
 		$("#MMessage").text("VAT Number must be 10 digits.");
 		$("#btnClose").attr("data-dismiss","modal");
