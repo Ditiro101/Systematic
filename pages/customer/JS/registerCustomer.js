@@ -1,27 +1,27 @@
 var indcount=1;
 var orgcount=1;
-let CheckValid = function(valArr)
-{
-	if(valArr["con"].length!=10)
-	{
-		$("#MMessage").text("Contact Number must be 10 digits");
-		$("#btnClose").attr("data-dismiss","modal");
-		$("#displayModal").modal("show");
-		return false;
-	}
-	else if (valArr["vat"].length!=10)
-	{
-		$("#MMessage").text("VAT Number must be 10 digits.");
-		$("#btnClose").attr("data-dismiss","modal");
-		$("#displayModal").modal("show");
-		return false;
-	}
-	else
-	{
-		return true;
-	}
+// let CheckValid = function(valArr)
+// {
+// 	if(valArr["con"].length!=10)
+// 	{
+// 		$("#MMessage").text("Contact Number must be 10 digits");
+// 		$("#btnClose").attr("data-dismiss","modal");
+// 		$("#displayModal").modal("show");
+// 		return false;
+// 	}
+// 	else if (valArr["vat"].length!=10)
+// 	{
+// 		$("#MMessage").text("VAT Number must be 10 digits.");
+// 		$("#btnClose").attr("data-dismiss","modal");
+// 		$("#displayModal").modal("show");
+// 		return false;
+// 	}
+// 	else
+// 	{
+// 		return true;
+// 	}
 	
-}
+// }
 let getIndInput= function()
 {
 	let name=$("#name-indi").val().trim();
@@ -510,13 +510,7 @@ $(()=>{
 			
 			
 			let arr=getOrgInput();
-			console.log(arr);
-			if(CheckValid(arr)!=true)
-			{
-				e.stopPropagation();
-			}
-			else
-			{
+
 				$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
@@ -541,7 +535,7 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});
-			}
+			
 			
 		}
 	});

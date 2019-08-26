@@ -1,3 +1,4 @@
+
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
@@ -36,6 +37,7 @@
   }
   mysqli_close($con);
 ?>
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
