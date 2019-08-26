@@ -58,6 +58,7 @@
 
 
                     $add_query="INSERT INTO EMPLOYEE_TYPE (`NAME`,`WAGE_EARNING`,`ACCESS_LEVEL_ID`) VALUES ('$postionName','$wageEarningID','$accessLevelID')";
+                    //var_dump($add_query);
                     $add_result=mysqli_query($DBConnect,$add_query);
                     if($add_result)
                     {
