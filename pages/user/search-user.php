@@ -71,7 +71,7 @@
             </thead>
             <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
-                <td><b>No Employee Found</b></td>
+                <td><b>No User Found</b></td>
                 <td></td>
                 <td></td>
                 <td></td>

@@ -68,73 +68,16 @@
                 <th style="width:auto;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Administrator</td>
-                <td>Level 1 - Administration 1</td>
-                <td>No</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Sales Manager</td>
-                <td>Level 2 - Sales 1</td>
-                <td>No</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-        				<td>Warehouse Manager</td>
-                <td>Level 3 - Warehouse 1</td>
-                <td>No</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Warehouse Worker</td>
-                <td>Level 4 - Warehouse 2</td>
-                <td>Yes</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Driver</td>
-                <td>Level 5 - Driver 1</td>
-                <td>No</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-employee-type.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
-                <td><b>No Employee Type Found</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
-              </tr>
+              <tbody id="tBody">
+                <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
+                  <td><b>No Employee Type Found</b></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
@@ -196,6 +139,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/searchEmployeeType-JS.js"></script>
 </body>
 
 </html>
