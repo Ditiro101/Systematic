@@ -1,31 +1,3 @@
-<?php
-
-  $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
-
-  $dbparts = parse_url($url);
-
-  $hostname = $dbparts['host'];
-  $username = $dbparts['user'];
-  $password = $dbparts['pass'];
-  $database = ltrim($dbparts['path'],'/');
-
-  $DBConnect = mysqli_connect($hostname, $username, $password, $database);
-
-  if($DBConnect === false)
-  {
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-  }
-  else
-  {
-    //Retrieve product types
-    $productTypeQuery = "SELECT * FROM PRODUCT_TYPE";
-    $prodTyperesult = $DBConnect->query($productTypeQuery);
-
-    //Close database connection
-    mysqli_close($DBConnect);
-  }
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -104,14 +76,7 @@
                           <label for="bane">Product Type</label>
                           <select class="form-control mb-2" id="productType" name="product-type" required>
                             <option></option>
-                            <?php
-                              while( $prodType = mysqli_fetch_array($prodTyperesult))
-                              {
-                                ?>
-                                  <option value="<?php echo $prodType['PRODUCT_TYPE_ID']; ?>""><?php echo $prodType['TYPE_NAME']; ?></option>
-                                <?php
-                              }
-                            ?>
+
                           </select>
                         </div>
                       </div>
@@ -149,7 +114,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
-  	                        <input type="number" class="form-control" id="costPrice" name="cost-price" aria-describedby="emailHelp" placeholder="Enter cost price" required>
+  	                        <input type="number" class="form-control" id="costPrice" name="cost-price" aria-describedby="emailHelp" placeholder="Enter cost price" onchange="setTwoNumberDecimal(this)" step='0.01' required>
   	                      </div>
                         </div>
 	                      <div class="form-group col-lg-4">
@@ -158,7 +123,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
-  	                        <input type="number" class="form-control" id="discountPrice" name="discount-price" aria-describedby="emailHelp" placeholder="Enter guide price" required>
+  	                        <input type="number" class="form-control" id="discountPrice" name="discount-price" aria-describedby="emailHelp" placeholder="Enter guide price" onchange="setTwoNumberDecimal(this)" step='0.01' required>
   	                      </div>
                         </div>
 	                      <div class="form-group col-lg-4">
@@ -167,7 +132,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
-  	                        <input type="number" class="form-control" id="sellingPrice" name="selling-price" aria-describedby="emailHelp" placeholder="Enter selling price" required>
+  	                        <input type="number" class="form-control" id="sellingPrice" name="selling-price" aria-describedby="emailHelp" placeholder="Enter selling price" onchange="setTwoNumberDecimal(this)" step='0.01' required>
   	                      </div>
                         </div>
 	                     </div>
