@@ -55,7 +55,7 @@
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/add-user.php">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="fas fa-user-plus"></i>
                         <span>Add User</span>
