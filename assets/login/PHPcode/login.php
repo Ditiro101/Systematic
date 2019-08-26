@@ -63,7 +63,7 @@
                 }
 
                 //Fetch sub functionality level functionalities
-                $userSubFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_SUB_FUNCTIONALITY WHERE ACCESS_LEVEL_ID='$accessLevelID'";
+                $userSubFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_SUB_FUNCTIONALITY WHERE ACCESS_LEVEL_ID ='$accessLevelID'";
                 $userSubFunctionalityQResult = mysqli_query($DBConnect, $userSubFunctionalityQ);
 
                 $subFunctionality = array();
