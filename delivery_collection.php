@@ -142,10 +142,10 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/delivery_collection/assign-truck.php">
+                    <a href="pages/delivery_collection/template-assign.php">
                       <div>
                         <i class="fas fa-truck"></i>
-                        <span>Assign Truck</span>
+                        <span>Assign Delivery</span>
                       </div>
                     </a>
                   </button>

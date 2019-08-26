@@ -1,0 +1,128 @@
+var productForm;
+var NAME;
+var PRODUCT_GROUP_ID;
+var UNITS_PER_CASE;
+var CASES_PER_PALLET;
+var INDIVIDUAL_QUANTITY;
+var CASES_QUANTITY;
+var PALLETS_QUANTITY;
+var COST_PRICE;
+var GUIDE_DISCOUNT;
+var SELLING_PRICE;
+var PRODUCT_MEASUREMENT;
+var PRODUCT_MEASUREMENT_UNIT;
+var PRODUCT_TYPE_ID;
+var TYPE_NAME;
+var PRODUCT_DESCR;
+var SIZE_TYPE_ID;
+
+$(()=>{
+	let NAME = $('input[name=NAME]').val();
+	let PRODUCT_GROUP_ID = $('input[name=PRODUCT_GROUP_ID]').val();
+	let UNITS_PER_CASE = $('input[name=UNITS_PER_CASE]').val();
+	let CASES_PER_PALLET = $('input[name=CASES_PER_PALLET]').val();
+	let INDIVIDUAL_QUANTITY = $('input[name=INDIVIDUAL_QUANTITY]').val();
+	let CASES_QUANTITY = $('input[name=CASES_QUANTITY]').val();
+	let PALLETS_QUANTITY = $('input[name=PALLETS_QUANTITY]').val();
+	let COST_PRICE = $('input[name=COST_PRICE]').val();
+	let GUIDE_DISCOUNT = $('input[name=GUIDE_DISCOUNT]').val();
+	let SELLING_PRICE = $('input[name=SELLING_PRICE]').val();
+	let PRODUCT_MEASUREMENT = $('input[name=PRODUCT_MEASUREMENT]').val();
+	let PRODUCT_MEASUREMENT_UNIT = $('input[name=PRODUCT_MEASUREMENT_UNIT]').val();
+	let PRODUCT_TYPE_ID = $('input[name=PRODUCT_TYPE_ID]').val();
+	let TYPE_NAME = $('input[name=TYPE_NAME]').val();
+	let PRODUCT_DESCR = $('input[name=PRODUCT_DESCR]').val();
+	let SIZE_TYPE_ID = $('input[name=SIZE_TYPE_ID]').val();
+
+	productForm = $('#productForm');
+});
+
+//Maintain Product
+$("button#maintainProduct").on('click', event => {
+	event.preventDefault();
+	$("#productForm").attr("action","maintain.php");
+	$("#productForm" ).submit();
+});
+
+//Convert Pallet
+$("button#convertPallet").on('click', event => {
+	event.preventDefault();
+	$('input[name=SIZE_TYPE_ID]').attr("value","3");
+	$("#productForm").attr("action","../stock/convert.php");
+	$("#productForm" ).submit();
+});
+
+//Writeofff Pallet
+$("button#writeOffPallet").on('click', event => {
+	event.preventDefault();
+	$('input[name=SIZE_TYPE_ID]').attr("value","3");
+	$("#productForm").attr("action","../stock/writeoff.php");
+	$("#productForm" ).submit();
+});
+
+//Convert Case
+$("button#convertCase").on('click', event => {
+	event.preventDefault();
+	$('input[name=SIZE_TYPE_ID]').attr("value","2");
+	$("#productForm").attr("action","../stock/convert.php");
+	$("#productForm" ).submit();
+});
+
+//Writeoff Case
+$("button#writeOffCase").on('click', event => {
+	event.preventDefault();
+	$('input[name=SIZE_TYPE_ID]').attr("value","2");
+	$("#productForm").attr("action","../stock/writeoff.php");
+	$("#productForm" ).submit();
+});
+
+//Writeoff Individual
+$("button#writeOffIndividual").on('click', event => {
+	event.preventDefault();
+	$('input[name=SIZE_TYPE_ID]').attr("value","1");
+	$("#productForm").attr("action","../stock/writeoff.php");
+	$("#productForm" ).submit();
+});
+
+//Delete Product
+$("button#deleteProduct").on('click', event => {
+	event.preventDefault();
+			$.ajax({
+			url: 'PHPcode/deleteProduct_.php',
+			type: 'POST',
+			data: { 
+				PRODUCT_NAME_ : NAME,
+				PRODUCT_GROUP_ID_ : PRODUCT_GROUP_ID,
+				UNITS_PER_CASE_ : UNITS_PER_CASE
+			},
+			beforeSend: function() {
+	
+	    	}
+		})
+		.done(response => {
+			console.log(response);
+			if (response == "success")
+			{
+				$('#modal-title-default-deleteModal').text("Success!");
+				$('#modalText').text("Product deleted sucessfully");
+				$('#modal-delete').modal("show");
+			}
+			else if(response == "product cannot be deleted")
+			{
+				$('#modal-title-default-deleteModal').text("Error!");
+				$('#modalText').text("This product cannot be deleted");
+				$("#modalCloseButton").attr("onclick","");
+				$('#modal-delete').modal("show");
+			}
+			else if(response == "databaseError")
+			{
+				$('#modal-title-default-deleteModal').text("Error!");
+				$('#modalText').text("Database error deleting product");
+				$("#modalCloseButton").attr("onclick","");
+				$('#modal-delete').modal("show");
+			}
+			
+			ajaxDone = true;
+		});
+});
+
