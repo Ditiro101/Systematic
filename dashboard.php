@@ -194,6 +194,10 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript">
+    var session = eval('(<?php echo json_encode($_SESSION)?>)');
+    console.log(session);
+  </script>
 </body>
 
 </html>

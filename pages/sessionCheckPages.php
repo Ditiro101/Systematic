@@ -8,4 +8,5 @@
     $surname = $_SESSION['surname'];
     $userID = $_SESSION['userID'];
     $accessLevels = $_SESSION['accessLevel'];
+    $subFunctionality = $_SESSION['subFunctionality'];
 ?>

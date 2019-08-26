@@ -61,6 +61,16 @@
                 { 
                     array_push($access, $level['FUNCTIONALITY_ID']);
                 }
+
+                //Fetch sub functionality level functionalities
+                $userSubFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_SUB_FUNCTIONALITY WHERE ACCESS_LEVEL_ID='$accessLevelID'";
+                $userSubFunctionalityQResult = mysqli_query($DBConnect, $userSubFunctionalityQ);
+
+                $subFunctionality = array();
+                while( $functionality = mysqli_fetch_array($userSubFunctionalityQResult))
+                { 
+                    array_push($subFunctionality, $functionality['SUB_FUNCTIONALITY_ID']);
+                }
                 
                 //Populate session variable
                 session_start();
@@ -68,6 +78,7 @@
                 $_SESSION['surname'] = $surname;
                 $_SESSION['userID'] = $userID;
                 $_SESSION['accessLevel'] = $access;
+                $_SESSION['subFunctionality'] = $subFunctionality;
                 $_SESSION['access'] = true;
 
                 echo "success";
