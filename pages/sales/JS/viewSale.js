@@ -36,6 +36,16 @@ let buildTable=function(tmp)
 }
 ///////////////////////////////////////
 $(()=>{
+	let deliveryCheck=$("#deliveryCheck").text();
+	console.log(deliveryCheck);
+	if(deliveryCheck=="")
+	{
+		$("#btnAddDelivery").attr("hidden",false);
+	}
+	else
+	{
+		$("#btnAddDelivery").attr("hidden",true);
+	}
 	let customerData=JSON.parse($("#cData").text());
 	let employeeData=JSON.parse($("#eData").text());
 	productsArr=JSON.parse($("#productsArr").text());
@@ -64,6 +74,7 @@ $(()=>{
 	let vat=total*0.15;
 	$("#sTotal").text("R"+total);
 	$("#sVAT").text("R"+vat);
+
 
 
 });

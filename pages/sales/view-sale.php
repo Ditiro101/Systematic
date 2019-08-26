@@ -1,8 +1,10 @@
 <?php
+  include_once("../sessionCheckPages.php");
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
   $saleProducts=getSaleProductDetails($con,$_POST["SALE_ID"]);
   $products=getProductDetails($con);
+  $isDelivered=checkDelivery($con,$_POST["SALE_ID"]);
 ?>
 <!DOCTYPE html>
 <html>
@@ -209,12 +211,20 @@
                   <span class="btn-inner--text">Make Payment</span>
                 </button>
 
-                <button class="btn btn-icon btn-2 btn-warning mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-addDelivery">
-                  <span class="btn-inner--icon">
-                    <i class="fas fa-truck"></i>
-                  </span>
-                  <span class="btn-inner--text">Add Delivery</span>
-                </button>
+                <form action="../delivery_collection/add_delivery.php" method="POST">
+                  <input type="hidden" name="SALE_ID" value=<?php echo $_POST["SALE_ID"];?>>
+                  <input type="hidden" name="SALE_DATE" value=<?php echo $_POST["SALE_DATE"];?>>
+                  <input type="hidden" name="CUSTOMER_ID" value=<?php echo $_POST["CUSTOMER_ID"];?>>
+                  <input type="hidden" name="CUSTOMER_DATA" value=<?php echo $_POST["CUSTOMER_DATA"];?>>
+                  <label hidden="true" id="deliveryCheck"><?php echo $isDelivered;?></label>
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right" 
+                    type="submit" id="btnAddDelivery">
+                    <span class="btn-inner--icon">
+                      <i class="fas fa-truck"></i>
+                    </span>
+                    <span class="btn-inner--text">Add Delivery</span>
+                  </button>
+                </form>
 
                 <button class="btn btn-icon btn-2 btn-danger mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-makeReturn">
                   <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
