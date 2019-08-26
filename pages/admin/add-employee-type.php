@@ -54,19 +54,17 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form action="" method="POST"> 
                       <div class="form-group col">
                         <label for="bane">Position Name</label>
-                        <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Position Name">
+                        <input type="text" class="form-control" id="posName" aria-describedby="emailHelp" placeholder="Enter Position Name">
                       </div>
 
                       <div class="form-row col">
                         <div class="form-group col-6">
                           <label for="bane">User Access Level</label>
-                          <select class="form-control">
-                            <option>Level 1 - Administration</option>
-                            <option>Level 2 - Warehouse</option>
-                            <option>Level 3 - Driver</option>
+                          <select class="form-control" id="aLevel">
+                
                           </select>
                         </div>
 
@@ -83,8 +81,8 @@
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-block btn-primary mb-3" id="addEmployeeTypeSave">Save</button>
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
@@ -96,13 +94,13 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Employee type added successfully</p>
+                                        <p id="modalText"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../admin.html'">Close</button> 
+                                        <button type="button" id="btnClose" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../admin.php'">Close</button> 
                                     </div>
                                     
                                 </div>
@@ -131,6 +129,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/addEmployeeType-JS.js"></script>
 </body>
 
 </html>
