@@ -50,6 +50,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("10.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/sales/search-sale.php">
@@ -60,6 +64,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-sale-delivery.php">
@@ -70,6 +81,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-sale-delivery.php">
@@ -80,6 +98,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/supplier/search-order.php">
@@ -90,6 +115,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-supplier-order-collection.php">
@@ -100,6 +132,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-supplier-order-collection.php">
@@ -110,6 +149,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/add_truck.php">
@@ -120,6 +166,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.8", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-truck.php">
@@ -130,6 +183,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.9", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/search-truck.php">
@@ -140,16 +200,30 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.101", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/assign-truck.php">
                       <div>
                         <i class="fas fa-truck"></i>
-                        <span>Assign Truck</span>
+                        <span>Assign Delivery</span>
                       </div>
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.11", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/maintain-assigned-truck.php">
@@ -160,6 +234,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("10.12", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/delivery_collection/finalise-assigned-truck.php">
@@ -170,6 +251,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>

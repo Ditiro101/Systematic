@@ -50,6 +50,9 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+                <?php 
+                  if (in_array("3.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/add-user.php">
@@ -60,6 +63,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user.php">
@@ -70,6 +80,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+                
+                <?php 
+                  if (in_array("3.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user.php">
@@ -80,6 +97,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/add-user-role.php">
@@ -90,6 +114,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.9", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user-role.php">
@@ -100,6 +131,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.8", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user-role.php">
@@ -110,6 +148,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>
