@@ -93,62 +93,63 @@ function rand_string($length)
             $checkResult=mysqli_query($DBConnect,$checkIfUserExists);
             if($checkResult)
             {
-            
-                if(!empty($hashedpassword))
-                {
-                    $add_query="UPDATE USER 
-                    SET `USER_PASSWORD`='$hashedpassword', `PASSWORD_SALT` = '$salt'
-                    WHERE (`USER_ID`='$user_ID')";
-                    $add_result=mysqli_query($DBConnect,$add_query);
-                    if($add_result)
+              
+                    if(!empty($hashedpassword))
                     {
-                        $maintainedChecker="success";
+                        $add_query="UPDATE USER 
+                        SET `USER_PASSWORD`='$hashedpassword', `PASSWORD_SALT` = '$salt'
+                        WHERE (`USER_ID`='$user_ID')";
+                        $add_result=mysqli_query($DBConnect,$add_query);
+                        if($add_result)
+                        {
+                            $maintainedChecker="success";
+                        }
+                        else
+                        {
+                          echo  "failure to update password";
+                        } 
                     }
-                    else
+                    if(!empty($username))
                     {
-                      echo  "failure to update";
-                    } 
-                }
-                if(!empty($username))
-                {
-                    $add_query="UPDATE USER 
-                    SET `USERNAME`='$username',
-                    WHERE (`USER_ID`='$user_ID')";
-                    $add_result=mysqli_query($DBConnect,$add_query);
-                    if($add_result)
-                    {
-                        $maintainedChecker="success";
+                        $add_query="UPDATE USER 
+                        SET `USERNAME`='$username'
+                        WHERE (`USER_ID`='$user_ID')";
+                        $add_result=mysqli_query($DBConnect,$add_query);
+                        if($add_result)
+                        {
+                            $maintainedChecker="success";
+                        }
+                        else
+                        {
+                          echo  "failure to update password";
+                        } 
                     }
-                    else
+                    if(!empty($accessLevelID)&& isset($accessLevelID))
                     {
-                      echo  "failure to update";
-                    } 
-                }
-                if(!empty($accessLevelID))
-                {
-                    $add_query="UPDATE USER 
-                    SET `ACCESS_LEVEL_ID`='$accessLevelID',
-                    WHERE (`USER_ID`='$user_ID')";
-                    $add_result=mysqli_query($DBConnect,$add_query);
-                    if($add_result)
-                    {
-                        $maintainedChecker ="success";
+                        $add_query="UPDATE USER 
+                        SET `ACCESS_LEVEL_ID`='$accessLevelID'
+                        WHERE (`USER_ID`='$user_ID')";
+                        //var_dump($add_query);
+                        $add_result=mysqli_query($DBConnect,$add_query);
+                        if($add_result)
+                        {
+                            $maintainedChecker ="success";
+                        }
+                        else
+                        {
+                          echo  "failure to update accessLevel";
+                        } 
                     }
-                    else
-                    {
-                      echo  "failure to update";
-                    } 
-                }
                 
 
-                if($maintainedChecker=="success")
-                {
-                    echo $maintainedChecker;
-                }
-                else
-                {
-                    echo "Nothing is maintained";
-                }
+                    if($maintainedChecker=="success")
+                    {
+                        echo $maintainedChecker;
+                    }
+                    else
+                    {
+                        echo "Nothing is maintained";
+                    }
                 
                   
                     //echo "Arrived to insert"; 
