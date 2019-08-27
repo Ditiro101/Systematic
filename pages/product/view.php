@@ -69,7 +69,7 @@
               <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" id="maintainProduct">
                   <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                   </span>
-                  <span class="btn-inner--text">Edit</span>
+                  <span class="btn-inner--text">Maintain</span>
               </button>
               <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button"  data-toggle="modal" data-target="#del" >
                   <span class="btn-inner--icon"><i class="ni ni-fat-remove"></i>
