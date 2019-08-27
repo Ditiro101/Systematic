@@ -1,3 +1,0 @@
-# StockPath
-## Subheading
-the
