@@ -16,8 +16,13 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
-    <script src="http://maps.google.com/maps/api/js?sensor=false" 
-          type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script> -->
 </head>
 
 <body>
@@ -209,7 +214,7 @@
             <div class="car shadow border-0">
                <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
 
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               var locations = [
                 ['Bondi Beach', -33.890542, 151.274856, 4],
                 ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -241,7 +246,7 @@
                   }
                 })(marker, i));
               }
-            </script>
+            </script> -->
 
             </div>
           </div>
@@ -462,6 +467,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/assignTruckMap.js"></script>
 </body>
 
 </html>
