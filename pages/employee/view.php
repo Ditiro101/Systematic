@@ -304,42 +304,58 @@
                   </div>
 
 
-
                   <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                        </div>
-                        <div class="modal-body text-left">
-                            <p>Are you sure you want to dismiss the selected employee?</p>
-                        </div>
-                        <div class="modal-footer">   
-                          <button type="button" class="btn btn-success" id="deleteButton" data-dismiss="modal" >Yes</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to dismiss the selected employee?</p>
+                      </div>
+                      <div class="modal-body text-left">
+                        <div class="col mb-4">
+                          <label for="c2">Reason for dismissal</label>
+                          <div class="input-group"> 
+                            <input type="text" value=""  class="form-control" placeholder="Breach of contract" id="reasonOFDismissal" autofocus />
+                            <input type="hidden"  class="form-control " id="EMPLOYEE_ID" value=<?php echo $employeeID;?> />
+                          </div> 
                         </div>
                       </div>
+  
+                      <div class="modal-footer">
+                        
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="deleteButton">Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>
                   </div>
-
-                  <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">×</span>
-                                </button>
-                            </div>      
-                            <div class="modal-body text-left">
-                                <p id="modalTextDismiss"></p>                             
-                            </div>
-                            <div class="modal-footer">  
-                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnCloseDismiss" onclick="">Close</button> 
-                            </div>
+                </div>
+              </div>
+              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                      
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
                         </div>
+                        
+                        <div class="modal-body">
+                            <p id="modalTextDismiss"></p>
+                            
+                        </div>
+                        
+                        <div class="modal-footer">
+                            
+                            <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                        </div>
+                        
                     </div>
-                  </div>
+                </div>
+              </div>
+  
               </div>
             </div>
 
@@ -410,6 +426,7 @@
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <script type="text/javascript" src="JS/viewEmployee.js"></script>
+  <script type="text/javascript" src= "JS/dismissEmployee.js"></script>
 </body>
 
 </html>

@@ -26,7 +26,7 @@
     
     if(isset($reason) && isset($employee_ID))
     {
-        $sql ="INSERT INTO `EMPLOYEE_DISMISAL`(`EMPLOYEE_ID`,`REASON_OF_DISMISAL`,`DATE_OF_DISMISAL`) VALUES('$employee_ID','$reason', '$day')";
+        $sql ="INSERT INTO `EMPLOYEE_DISMISAL`(`REASON_OF_DISMISAL`,`DATE_OF_DISMISAL` , `EMPLOYEE_ID`) VALUES('$reason', '$day','$employee_ID')";
         $submitQuery = mysqli_query($DBConnect,$sql);
 
         if($submitQuery)

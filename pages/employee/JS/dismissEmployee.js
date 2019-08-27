@@ -1,9 +1,10 @@
 $(document).ready(function(){
+    console.log("Catch all these errors");
     $("#deleteButton").click(function(e){
         e.preventDefault();
 
 
-            let employeeID;
+            let employeeID = $("#EMPLOYEE_ID").val();
             let dismissalReason = $("#reasonOFDismissal").val();
       
             $.ajax({
