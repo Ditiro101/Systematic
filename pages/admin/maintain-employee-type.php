@@ -57,17 +57,16 @@
                     <form>
                       <div class="form-group col">
                         <label for="bane">Position Name</label>
-                        <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Administrator">
+                        <input type="email" class="form-control" id="posName" aria-describedby="emailHelp" placeholder="Administrator" value=<?php echo $_POST["NAME"];?>>
+                        <input type="hidden" class="form-control" id="EMPLOYEE_TYPE_ID" value=<?php echo $_POST["EMPLOYEE_TYPE_ID"];?>>
+                        <input type="hidden" class="form-control" id="WAGE_EARNING" value=<?php echo $_POST["WAGE_EARNING"];?>>
                       </div>
 
                       <div class="form-row col">
                         <div class="form-group col-6">
                           <label for="bane">User Access Level</label>
-                          <select class="form-control">
-                            <option>Level 1 - Administration 1</option>
-                            <option>Level 2 - Warehouse 1</option>
-                            <option>Level 3 - Warehouse 2</option>
-                            <option>Level 4 - Driver 1</option>
+                          <select class="form-control" id="aLevel">
+                            <option value=<?php echo $_POST["ROLE_NAME"];?> selected><?php echo $_POST["ROLE_NAME"];?></option>
                           </select>
                         </div>
 
@@ -84,32 +83,32 @@
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
 
                       <div class="col mt-2">
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save
+                        <button type="button" class="btn btn-primary mb-3" id="maintainEmployeeTypeSave">Save
                         </button>
                         <button class="btn btn-icon btn-2 btn-danger mt-0 px-4 float-right" type="button" data-toggle="modal" data-target="#modal-del">
                           <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
                           <span class="btn-inner--text" >Delete Employee Type</span>
                         </button>   
                     </form>
-                    <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <div class="modal fade" id="displayUpdateModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                       <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                           <div class="modal-content">
                             
                               <div class="modal-header">
-                                  <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                  <h6 class="modal-title" id="modal-title-default"></h6>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                       <span aria-hidden="true">×</span>
                                   </button>
                               </div>
                               
                               <div class="modal-body">
-                                  <p>Employee type successfully updated</p>
+                                  <p id="modalText"></p>
                                   
                               </div>
                               
                               <div class="modal-footer">
                                   
-                                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../admin.html'">Close</button> 
+                                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose" onclick="">Close</button> 
                               </div>
                               
                           </div>
@@ -183,6 +182,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/maintainEmployeeType-JS.js"></script>
 </body>
 
 </html>
