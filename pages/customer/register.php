@@ -90,7 +90,7 @@
                       <div class="form-row ">
                         <div class="form-group col-lg-2 col-md-4 col-sm-12">
                           <label for="title">Title</label>
-                          <select class="form-control" id="title" name="title">
+                          <select class="form-control" id="titleSelect" name="title">
                             <option>Mr</option>
                             <option>Ms</option>
                             <option>Mrs</option>
@@ -98,7 +98,7 @@
                         </div>
                         <div class="form-group col-lg-10 col-md-8 col-sm-12">
                           <label for="number-indi">Contact Number</label>
-                          <input type="number" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
+                          <input type="text" maxlength="10" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
                         </div>
                       </div>
                       <div class="form-group">

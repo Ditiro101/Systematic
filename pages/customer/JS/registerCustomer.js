@@ -26,7 +26,16 @@ let getIndInput= function()
 {
 	let name=$("#name-indi").val().trim();
 	let surname=$("#surname-indi").val().trim();
-	let title=1; //To add later
+	let title=$("#titleSelect option:selected").text();
+	let titleID=1;
+	if(title=="Ms")
+	{
+		titleID=2;
+	}
+	else if(title=="Mrs")
+	{
+		titleID=3
+	}
 	//let VatNum=$("#VATNumber").val().trim();
 	let contact=$("#number-indi").val().trim();
 	let email=$("#email-indi").val().trim();
@@ -50,7 +59,7 @@ let getIndInput= function()
 	});
 
 	let addSupplierArr=[];
-	addSupplierArr["title"]=title;
+	addSupplierArr["title"]=titleID;
 	addSupplierArr["customer_type"]=1;
 	addSupplierArr["status"]=1;
 	addSupplierArr["name"]=name;
@@ -460,12 +469,12 @@ $(()=>{
 			
 			let arr=getIndInput();
 			console.log(arr);
-			if(CheckValid(arr)!=true)
-			{
-				e.stopPropagation();
-			}
-			else
-			{
+			// if(CheckValid(arr)!=true)
+			// {
+			// 	e.stopPropagation();
+			// }
+			// else
+			// {
 				$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
@@ -479,7 +488,7 @@ $(()=>{
 					{
 						//alert("True");
 						$("#MMessage").text(doneData[1]);
-						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
 					}
 					else
@@ -490,7 +499,7 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});	
-			}
+			// }
 			
 		}
 	});
