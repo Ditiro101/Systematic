@@ -70,7 +70,6 @@ $(()=>{
 				data:{choice:1,SALE_ID:saleID,ADDRESS_ID:chooseAddressID,dDate:deliveryDate}
 				})
 				.done(data=>{
-					alert(data);
 					let doneData=data.split(",");
 					console.log(doneData);
 					if(doneData[0]=="T")

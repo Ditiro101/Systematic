@@ -1,4 +1,5 @@
 <?php
+  include_once("../sessionCheckPages.php");
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
   $customerAddress=getCustomerAddressIDs($con,$_POST["CUSTOMER_ID"]);

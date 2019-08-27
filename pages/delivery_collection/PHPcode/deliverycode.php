@@ -26,5 +26,16 @@
 			echo "F,Delivery Not Added";
 		}
 	}
+	elseif($_POST["choice"]==2)
+	{
+		if(deleteDelivery($con,$_POST["deliveryID"]))
+		{
+			echo "T,Delivery Cancelled Successfully";
+		}
+		else
+		{
+			echo "F,Delivery not cancelled";
+		}
+	}
 	mysqli_close($con);
 ?>

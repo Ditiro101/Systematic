@@ -6,10 +6,10 @@ var customerData;
 var saleData;
 var dctStatus=[];
 dctStatus[1]="Not Delivered";
-dctStatus[2]="On Delivery";
-dctStatus[3]="Delivered";
-dctStatus[4]="Truck Assigned";
-dctStatus[5]="Final Assignment";
+dctStatus[2]="Truck Assigned";
+dctStatus[3]="Final Assignment";
+dctStatus[4]="On Delivery";
+dctStatus[5]="Delivered";
 $(()=>{
 	deliveryData=JSON.parse($("#dData").text());
 	addressData=JSON.parse($("#aData").text());
@@ -68,11 +68,11 @@ $(()=>{
 		{
 			searchCustomer["SURNAME"]="Organisation";
 		}
-		formView="<form action='assign-truck-view-delivery.php' method='POST'><input type='hidden' name='DELIVERY_ID' value='"+deliveryData[k]["DELIVERY_ID"]+"'>"+"<input type='hidden' name='SALE_ID' value='"+deliveryData[k]["SALE_ID"]+"'>"+"<input type='hidden' name='EXPECTED_DATE' value='"+deliveryData[k]["EXPECTED_DATE"]+"'>"+"<input type='hidden' name='CUSTOMER_DATA' value='"+JSON.stringify(searchCustomer)+"'>"+"<input type='hidden' name='SALE_DATA' value='"+JSON.stringify(searchSale)+"'>"+"<input type='hidden' name='ADDRESS_DATA' value='"+JSON.stringify(searchAddress)+"'>"+"<input type='hidden' name='SUBURB_DATA' value='"+JSON.stringify(searchSuburb)+"'>"+"<input type='hidden' name='CITY_DATA' value='"+JSON.stringify(searchCity)+"'>"+"<input type='hidden' name='DCT_STATUS' value='"+deliveryData[k]["DCT_STATUS_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
+		formView="<form action='assign-truck-view-delivery.php' method='POST'><input type='hidden' name='DELIVERY_ID' value='"+deliveryData[k]["DELIVERY_ID"]+"'>"+"<input type='hidden' name='SALE_ID' value='"+deliveryData[k]["SALE_ID"]+"'>"+"<input type='hidden' name='EXPECTED_DATE' value='"+deliveryData[k]["EXPECTED_DATE"]+"'>"+"<input type='hidden' name='CUSTOMER_DATA' value='"+JSON.stringify(searchCustomer)+"'>"+"<input type='hidden' name='SALE_DATA' value='"+JSON.stringify(searchSale)+"'>"+"<input type='hidden' name='ADDRESS_DATA' value='"+JSON.stringify(searchAddress)+"'>"+"<input type='hidden' name='SUBURB_DATA' value='"+JSON.stringify(searchSuburb)+"'>"+"<input type='hidden' name='CITY_DATA' value='"+JSON.stringify(searchCity)+"'>"+"<input type='hidden' name='DCT_STATUS_ID' value='"+deliveryData[k]["DCT_STATUS_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
 		tableEntries+="<tr><td>"+deliveryData[k]["SALE_ID"]+"</td><td>"+deliveryData[k]["EXPECTED_DATE"]+"</td><td>"+searchCity["CITY_NAME"]+"</td><td>"+searchCustomer["NAME"]+" "+searchCustomer["SURNAME"]+"</td><td>"+dctStatus[deliveryData[k]["DCT_STATUS_ID"]]+"</td><td>"+formView+"</td>";
 		formCancel="<form action='cancel_delivery.php' method='POST'><input type='hidden' name='DELIVERY_ID' value='"+deliveryData[k]["DELIVERY_ID"]+"'>"+"<input type='hidden' name='SALE_ID' value='"+deliveryData[k]["SALE_ID"]+"'>"+"<input type='hidden' name='EXPECTED_DATE' value='"+deliveryData[k]["EXPECTED_DATE"]+"'>"+"<input type='hidden' name='CUSTOMER_DATA' value='"+JSON.stringify(searchCustomer)+"'>"+"<input type='hidden' name='SALE_DATA' value='"+JSON.stringify(searchSale)+"'>"+"<input type='hidden' name='ADDRESS_DATA' value='"+JSON.stringify(searchAddress)+"'>"+"<input type='hidden' name='SUBURB_DATA' value='"+JSON.stringify(searchSuburb)+"'>"+"<input type='hidden' name='CITY_DATA' value='"+JSON.stringify(searchCity)+"'>"+"<input type='hidden' name='DCT_STATUS' value='"+deliveryData[k]["DCT_STATUS_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-danger btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-times-circle'></i></span><span class='btn-inner--text'>Cancel</span></button>"+"</form>";
 		formCancel2="<form action='cancel_delivery.php' method='POST'><input type='hidden' name='DELIVERY_ID' value='"+deliveryData[k]["DELIVERY_ID"]+"'>"+"<input type='hidden' name='SALE_ID' value='"+deliveryData[k]["SALE_ID"]+"'>"+"<input type='hidden' name='EXPECTED_DATE' value='"+deliveryData[k]["EXPECTED_DATE"]+"'>"+"<input type='hidden' name='CUSTOMER_DATA' value='"+JSON.stringify(searchCustomer)+"'>"+"<input type='hidden' name='SALE_DATA' value='"+JSON.stringify(searchSale)+"'>"+"<input type='hidden' name='ADDRESS_DATA' value='"+JSON.stringify(searchAddress)+"'>"+"<input type='hidden' name='SUBURB_DATA' value='"+JSON.stringify(searchSuburb)+"'>"+"<input type='hidden' name='CITY_DATA' value='"+JSON.stringify(searchCity)+"'>"+"<input type='hidden' name='DCT_STATUS' value='"+deliveryData[k]["DCT_STATUS_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-danger btn-sm' type='submit' disabled='true'><span class='btn-inner--icon'><i class='fas fa-times-circle'></i></span><span class='btn-inner--text'>Cancel</span></button>"+"</form>";
-		if(deliveryData[k]["DCT_STATUS_ID"]==1||deliveryData[k]["DCT_STATUS_ID"]==4)
+		if(deliveryData[k]["DCT_STATUS_ID"]==1||deliveryData[k]["DCT_STATUS_ID"]==2)
 		{
 			tableEntries+="<td>"+formCancel+"</td></tr>";
 		}
