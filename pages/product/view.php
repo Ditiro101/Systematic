@@ -35,7 +35,6 @@
     <div class="header bg-gradient-custom pb-8 pt-5 pt-md-8">
       <div class="container-fluid">
         <div class="header-body">
-          <!-- Card stats -->
           
         </div>
       </div>
@@ -43,13 +42,31 @@
     <!-- Page content -->
     <div class="container-fluid mt--7">
       <!-- Table -->
+      <form id="productForm" action='' method='POST'>
+          <input type='hidden' name='SIZE_TYPE_ID' value=''>
+          <input type='hidden' name='CASES_PER_PALLET' value='<?php echo $_POST['CASES_PER_PALLET'] ?>'>
+          <input type='hidden' name='CASES_QUANTITY' value='<?php echo $_POST["CASES_QUANTITY"] ?>'>
+          <input type='hidden' name='COST_PRICE' value='<?php echo $_POST["COST_PRICE"] ?>'>
+          <input type='hidden' name='GUIDE_DISCOUNT' value='<?php echo $_POST["GUIDE_DISCOUNT"] ?>'>
+          <input type='hidden' name='INDIVIDUAL_QUANTITY' value='<?php echo $_POST["INDIVIDUAL_QUANTITY"] ?>'>
+          <input type='hidden' name='NAME' value='<?php echo $_POST["NAME"] ?>'>
+          <input type='hidden' name='PALLETS_QUANTITY' value='<?php echo $_POST["PALLETS_QUANTITY"] ?>'>
+          <input type='hidden' name='PRODUCT_GROUP_ID' value='<?php echo $_POST["PRODUCT_GROUP_ID"] ?>'>
+          <input type='hidden' name='PRODUCT_MEASUREMENT' value='<?php echo $_POST["PRODUCT_MEASUREMENT"] ?>'>
+          <input type='hidden' name='PRODUCT_MEASUREMENT_UNIT' value='<?php echo $_POST["PRODUCT_MEASUREMENT_UNIT"] ?>'>
+          <input type='hidden' name='SELLING_PRICE' value='<?php echo $_POST["SELLING_PRICE"] ?>'>
+          <input type='hidden' name='TYPE_NAME' value='<?php echo $_POST["TYPE_NAME"] ?>'>
+          <input type='hidden' name='PRODUCT_TYPE_ID' value='<?php echo $_POST["PRODUCT_TYPE_ID"] ?>'>
+          <input type='hidden' name='UNITS_PER_CASE' value='<?php echo $_POST["UNITS_PER_CASE"] ?>'>
+          <input type='hidden' name='PRODUCT_DESCR' value='<?php echo $_POST["PRODUCT_DESCR"] ?>'>
+        </form>
       <div class="row">
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
               <div >
 
-              <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button"  onclick="window.location='maintain.html'">
+              <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" id="maintainProduct">
                   <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                   </span>
                   <span class="btn-inner--text">Edit</span>
@@ -62,18 +79,18 @@
              </div>
              <div class="text-center">
            
-                <h2>
-                 Monster Energy Drink 500ml 
+                <h2 id="Product Name">
+                 <?php echo $_POST['NAME']." (".$_POST['PRODUCT_MEASUREMENT'].$_POST['PRODUCT_MEASUREMENT_UNIT'].")";?>
                 </h2>
                  <hr class="h5 font-weight-300 pb-0 mt-3"></hr>
-
-                  
-                  <div class="pt-2"><b>Description : </b><p class="d-inline">The orignal 500ml Canned energy drink by monster </p></div>
-                  
-                  <div class="pt-3"><b>Product type :  </b><p class="d-inline">Energy drink</p></div>
+                  <div class="pt-2"><b>Description : </b><p class="d-inline"><?php echo $_POST['PRODUCT_DESCR'];?></p></div>
+                  <div class="pt-3"><b>Product type :  </b><p class="d-inline"><?php echo $_POST['TYPE_NAME'];?></p></div>
                
-               
-                  <h3 class="text-info">Cost Price : R8 230.00</h3>
+                  <div class="pt-3">
+                    <div class="text-info"><b> Cost Price : </b> R<?php echo $_POST['COST_PRICE'];?></div>
+                    <div class="text-success"><b> Guide Discount Price : </b> R<?php echo $_POST['GUIDE_DISCOUNT'];?></div>
+                    <div class="text-warning"><b> Selling Price : </b> R<?php echo $_POST['SELLING_PRICE'];?></div>
+                    <div class="pt-3">
               
                 </div>
             </div>
@@ -81,34 +98,36 @@
               <div class="container">
                 <div class="row">
                   <div class="col-sm">
-                    <span><h3 class="text-primary"> Qty palette(s) on hand : 15</h3></span>
-                      <button class="btn btn-icon btn-6 btn-warning btn-sm" type="button" onclick="window.location='../stock/convert.html'">
+                    <span><h3 class="text-primary"> Qty palette(s) on hand : <?php echo $_POST['PALLETS_QUANTITY'];?></h3></span>
+                      <button id="convertPallet" class="btn btn-icon btn-6 btn-warning btn-sm" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-exchange-alt"></i>
                         </span>
                         <span class="btn-inner--text">Convert</span>
                     </button>
-                    <button class="btn btn-icon btn-6 btn-danger btn-sm" type="button"  onclick="window.location='../stock/writeoff.html'">
+                    <button id="writeOffPallet" class="btn btn-icon btn-6 btn-danger btn-sm" type="button">
                         <span class="btn-inner--icon"><i class="ni ni-fat-remove"></i>
                         </span>
                         <span class="btn-inner--text">Write Off</span>
                     </button>
                   </div>
+
                   <div class="col-sm">
-                    <span><h3 class="text-primary"> Qty case(s) on hand : 7 </h3></span>
-                    <button class="btn btn-icon btn-6 btn-warning btn-sm" type="button"  onclick="window.location='../stock/convert.html'">
+                    <span><h3 class="text-primary"> Qty case(s) on hand : <?php echo $_POST['CASES_QUANTITY'];?> </h3></span>
+                    <button id="convertCase" class="btn btn-icon btn-6 btn-warning btn-sm" type="button">
                         <span class="btn-inner--icon"><i class="fas fa-exchange-alt"></i>
                         </span>
                         <span class="btn-inner--text">Convert</span>
                     </button>
-                    <button class="btn btn-icon btn-6 btn-danger btn-sm" type="button"  onclick="window.location='../stock/writeoff.html'">
+                    <button id="writeOffCase" class="btn btn-icon btn-6 btn-danger btn-sm" type="button">
                         <span class="btn-inner--icon"><i class="ni ni-fat-remove"></i>
                         </span>
                         <span class="btn-inner--text" >Write Off</span>
                     </button>
                   </div>
+
                   <div class="col-sm">
-                    <span><h3 class="text-primary"> Qty item(s) on hand :  52</h3></span>
-                    <button class="btn btn-icon btn-6 btn-danger btn-sm" type="button"  onclick="window.location='../stock/writeoff.html'">
+                    <span><h3 class="text-primary"> Qty item(s) on hand :  <?php echo $_POST['INDIVIDUAL_QUANTITY'];?></h3></span>
+                    <button id="writeOffIndividual" class="btn btn-icon btn-6 btn-danger btn-sm" type="button">
                         <span class="btn-inner--icon"><i class="ni ni-fat-remove"></i>
                         </span>
                         <span class="btn-inner--text">Write Off</span>
@@ -118,7 +137,7 @@
               </div>
               <hr class="my-2 d-flex justify-content-center mt-5">
               <div class="d-flex justify-content-center">
-                 <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
+                 <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close();">Close</button>
               </div>
             </div>
           </div>
@@ -134,31 +153,32 @@
                       <p>Are you sure you want to delete the selected product?</p>
                     </div>
                     <div class="modal-footer">       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+                    <button id="deleteProduct"type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+            <div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
                       <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                          <h6 class="modal-title" id="modal-title-default-deleteModal">Success!</h6>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                           </button>
                       </div>
                       
                       <div class="modal-body">
-                          <p>Product successfully deleted</p>
+                          <p id="modalText">Product successfully deleted</p>
                           
                       </div>
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../product.html'">Close</button> 
+                          <button id="modalCloseButton" type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../product.php'">Close</button> 
                       </div>
                       
                   </div>
@@ -176,6 +196,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Add Product JS -->
+  <script src="JS/viewProduct.js"></script>
 </body>
 
 </html>
+
+        
