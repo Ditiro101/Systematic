@@ -157,6 +157,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
     	//console.log(response);
         if (response == "success")
 		{
+			SALEPRODUCTS = [];
 			for (var i = SALEPRODUCTIDs.length - 1; i >= 0; i--) 
 			{
 				var thisProductID = SALEPRODUCTIDs[i];
@@ -166,7 +167,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 				var productLine = {
 				    'PRODUCT_ID': thisProductID,
 				    'QUANTITY': thisProductQuantity,
-				    'SELLINGPRICE': thisSellingPrice
+				    'SELLING_PRICE': thisSellingPrice
 				};
 				SALEPRODUCTS.push(productLine);
 			}
@@ -187,7 +188,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		    })
 		    .done(response => {
 
-		    	//console.log(response);
+		    	console.log(response);
 		        if (response == "success")
 				{
 					$('#modal-title-default').text("Success!");

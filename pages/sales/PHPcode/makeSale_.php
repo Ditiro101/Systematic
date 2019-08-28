@@ -1,15 +1,8 @@
 <?php
 
-  	$productName = "";
-	$productDescription = "";
-	$productType = "";
-	$unitsInCase = "";
-	$casesInPallet = "";
-	$costPrice = "";
-	$discountPrice = "";
-	$sellingPrice = "";
-	$measurement = "";
-	$measurementUnit = "";
+	$customerID = "";
+	$userID = "";
+	$saleProducts = Array();
 
 	$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
@@ -24,87 +17,54 @@
 
 	if($DBConnect === false)
 	{
-		//Send error response
-	  	$response = "databaseError";
-      	echo $response;
-      	die("ERROR: Could not connect. " . mysqli_connect_error());
+	//Send error response
+	  $response = "database Error";
+	  echo $response;
 	}
 	else
 	{
-		$exists = false;
-
 		// Retrieve product details from $_POST
-		$productName = mysqli_real_escape_string($DBConnect, $_POST['productName_']);
-		$productDescription  = mysqli_real_escape_string($DBConnect, $_POST['productDescription_']);
-		$productType  = mysqli_real_escape_string($DBConnect, $_POST['productType_']);
-		$unitsInCase  = mysqli_real_escape_string($DBConnect, $_POST['unitsInCase_']);
-		$casesInPallet  = mysqli_real_escape_string($DBConnect, $_POST['casesInPallet_']);
-		$costPrice  = mysqli_real_escape_string($DBConnect, $_POST['costPrice_']);
-		$discountPrice  = mysqli_real_escape_string($DBConnect, $_POST['discountPrice_']);
-		$sellingPrice  = mysqli_real_escape_string($DBConnect, $_POST['sellingPrice_']);
-		$measurement  = mysqli_real_escape_string($DBConnect, $_POST['measurement_']);
-		$measurementUnit  = mysqli_real_escape_string($DBConnect, $_POST['measurementUnit_']);
+		$customerID = mysqli_real_escape_string($DBConnect, $_POST['customerID']);
+		$userID = mysqli_real_escape_string($DBConnect, $_POST['saleUserID']);
+		$saleProducts  = $_POST['saleProducts'];
 
-		$query = "SELECT * FROM PRODUCT WHERE NAME = '$productName' AND PRODUCT_MEASUREMENT = '$measurement' AND PRODUCT_MEASUREMENT_UNIT = '$measurementUnit'";
-	    $result = mysqli_query( $DBConnect, $query);
-	    if (mysqli_num_rows($result)) 
-	    {
-	        $exists = true;
-	    } 
-	    else 
-	    {
-	        $exists = false;
-	    }
+		$saleTotal = 0.00;
+		$arraySize = sizeof($saleProducts);
+		for ($i=0; $i < $arraySize; $i++) 
+		{ 
+			$lineTotal = (float)$saleProducts[$i]['SELLING_PRICE'] * (int)$saleProducts[$i]['QUANTITY'];
+			$saleTotal += $lineTotal;
+		}
 
-	    if($exists == false)
-	    {	
-	      	$lastIDQuery = "SELECT PRODUCT_ID FROM PRODUCT ORDER BY PRODUCT_ID DESC LIMIT 1";        
-		    $lastIDQueryResult = mysqli_query($DBConnect, $lastIDQuery);
-		    $lastID = mysqli_fetch_array($lastIDQueryResult)[0];
-		    $nextProductID = $lastID + 1;
+		$query = "SELECT EMPLOYEE_ID FROM USER WHERE USER_ID = '$userID'";
+		$result = mysqli_query( $DBConnect, $query);
+		$employeeID = mysqli_fetch_array($result)['EMPLOYEE_ID'];
 
-			//Add product to database
-			$queryIndividual = "INSERT INTO PRODUCT(NAME, PRODUCT_DESCR, QTY_ON_HAND, CASES_PER_PALLET, UNITS_PER_CASE, COST_PRICE, GUIDE_DISCOUNT, SELLING_PRICE, QUANTITY_AVAILABLE, PRODUCT_TYPE_ID, PRODUCT_SIZE_TYPE, PRODUCT_MEASUREMENT, PRODUCT_MEASUREMENT_UNIT, PRODUCT_GROUP_ID) 
-	                  VALUES( '$productName', '$productDescription',0 , '$casesInPallet', '$unitsInCase', '$costPrice', '$discountPrice', '$sellingPrice', 0, '$productType', 1, '$measurement', '$measurementUnit', $nextProductID)";
-	      	mysqli_query($DBConnect, $queryIndividual);
+		$dateTimeNow = date('Y-m-d H:i:s');
 
-	      	$costPriceCase = $_POST['costPrice_'] * $_POST['unitsInCase_'];
-	      	$guideDiscountCase = $_POST['discountPrice_'] * $_POST['unitsInCase_'];
-	      	$sellingPriceCase = $_POST['sellingPrice_'] * $_POST['unitsInCase_'];
+		//Add product to database
+		$querySale = "INSERT INTO SALE(USER_ID, EMPLOYEE_ID, CUSTOMER_ID, SALE_DATE, SALE_AMOUNT, SALE_STATUS_ID) VALUES( '$userID', '$employeeID', '$customerID', '$dateTimeNow', '$saleTotal', 1)";
+		mysqli_query($DBConnect, $querySale);
 
-	      	$costPriceCase = mysqli_real_escape_string($DBConnect, $costPriceCase);
-	      	$guideDiscountCase = mysqli_real_escape_string($DBConnect, $guideDiscountCase);
-	      	$sellingPriceCase = mysqli_real_escape_string($DBConnect, $sellingPriceCase);
+		$lastIDQuery = "SELECT LAST_INSERT_ID();";        
+		$lastIDQueryResult = mysqli_query($DBConnect, $lastIDQuery);
+		$lastID = mysqli_fetch_array($lastIDQueryResult)[0];
 
+		$arraySize = sizeof($saleProducts);
+		for ($i=0; $i < $arraySize; $i++) 
+		{ 
+			$productLineProductID = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['PRODUCT_ID']);
+			$productLineSellingPrice = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['SELLING_PRICE']);
+			$productLineQuantity = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['QUANTITY']);
+			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity')";
+			mysqli_query($DBConnect, $querySaleProduct);
+		}
 
-	      	$queryCase = "INSERT INTO PRODUCT(NAME, PRODUCT_DESCR, QTY_ON_HAND, CASES_PER_PALLET, UNITS_PER_CASE, COST_PRICE, GUIDE_DISCOUNT, SELLING_PRICE, QUANTITY_AVAILABLE, PRODUCT_TYPE_ID, PRODUCT_SIZE_TYPE, PRODUCT_MEASUREMENT, PRODUCT_MEASUREMENT_UNIT, PRODUCT_GROUP_ID) 
-	                  VALUES( '$productName', '$productDescription',0 , '$casesInPallet', '$unitsInCase', '$costPriceCase', '$guideDiscountCase', '$sellingPriceCase', 0, '$productType', 2, '$measurement', '$measurementUnit', $nextProductID)";
-	      	mysqli_query($DBConnect, $queryCase);
+		//Close database connection
+		mysqli_close($DBConnect);
 
-	      	$costPricePallet = $_POST['costPrice_'] * $_POST['unitsInCase_'] * $_POST['casesInPallet_'];
-	      	$guideDiscountPallet = $_POST['discountPrice_'] * $_POST['unitsInCase_'] * $_POST['casesInPallet_'];
-	      	$sellingPricePallet = $_POST['sellingPrice_'] * $_POST['unitsInCase_'] * $_POST['casesInPallet_'];
-
-	      	$costPricePallet = mysqli_real_escape_string($DBConnect, $costPricePallet);
-			$guideDiscountPallet = mysqli_real_escape_string($DBConnect, $guideDiscountPallet);
-			$sellingPricePallet = mysqli_real_escape_string($DBConnect, $sellingPricePallet);
-
-	      	$queryPallet = "INSERT INTO PRODUCT(NAME, PRODUCT_DESCR, QTY_ON_HAND, CASES_PER_PALLET, UNITS_PER_CASE, COST_PRICE, GUIDE_DISCOUNT, SELLING_PRICE, QUANTITY_AVAILABLE, PRODUCT_TYPE_ID, PRODUCT_SIZE_TYPE, PRODUCT_MEASUREMENT, PRODUCT_MEASUREMENT_UNIT, PRODUCT_GROUP_ID) 
-	                  VALUES( '$productName', '$productDescription',0 , '$casesInPallet', '$unitsInCase', '$costPricePallet', '$guideDiscountPallet', '$sellingPricePallet', 0, '$productType', 3, '$measurement', '$measurementUnit', $nextProductID)";
-	      	mysqli_query($DBConnect, $queryPallet);
-
-	      	//Close database connection
-			mysqli_close($DBConnect);
-
-			//Send success response
-			$response = "success";
-	      	echo $response;
-	    }
-	    else
-	    {
-	    	mysqli_close($DBConnect);
-	    	$response = "product name exists";
-	      	echo $response;
-	    }
+		//Send success response
+		$response = "success";
+		echo $response;
 	}
 ?>
