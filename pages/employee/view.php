@@ -267,6 +267,19 @@
                     </button>
                   </div>
 
+                  <div class="col-6">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkIn">
+                            <span class="btn-inner--icon"><i class="far fa-check-square"></i>
+                            </span>
+                            <span class="btn-inner--text">Check-in</span>
+                        </button>
+                      </form>
+                  </div> 
+
                   <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">

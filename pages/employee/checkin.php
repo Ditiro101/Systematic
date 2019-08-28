@@ -117,21 +117,24 @@
                   .done(data => {
                   // do something with data
                           console.log(data);
-                          if(data == "success")
+                          var confirmation = data.trim();
+                          if(confirmation.includes("success"))
                           {
                               //Add this when fully done.
                               
                               $('#modal-title-default').text("Success!");
                               $('#modalText').text("Employee Successfully checked-in");
+                              $("#btnClose").attr("onclick","window.location='../../employee.php'");
                               $('#checkedIn').modal("show");
                               // alert('The scanned content is: ' + content);
                              // window.open(content, "_blank");
 
                           }
-                          else if(data == "Over checkout time")
+                          else if(confirmation.includes("Over checkout time"))
                           {
                             $('#modal-title-default').text("Error!");
                             $('#modalText').text("Cannot check-in , checkout time has passed");
+                            
                             $('#checkedIn').modal("show");
                           }
                           else
@@ -184,7 +187,7 @@
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose" >Close</button>
                           
                           </div>
                         </div>
@@ -195,7 +198,7 @@
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.html'">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.php'">
                     <div>
                       <i class="fa fa-search"></i>
                       <span>Search Employee</span>
