@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,11 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- Validation  -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -56,17 +62,17 @@
                 <div class="tab-content col" id="myTabContent">
                     <form>
                       <div class="form-row mb-4 col">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of Bank Statement</label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01"  >
+                              <input type="file" class="custom-file-input" name="inputGroupFile01" id="inputGroupFile01"
+                                aria-describedby="inputGroupFileAddon01"  required="">
                               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of ID</label>
                           <div class="input-group">
                             <div class="custom-file">
@@ -76,7 +82,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Proof Of Residence</label>
                           <div class="input-group">
                             <div class="custom-file">
@@ -94,7 +100,7 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
-                            <input type="number" value="1000" min="0" step="0" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+                            <input type="number" name="c2" value="1000" min="0" step="0"  data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" required />
                           </div> 
                         </div>
                       </form>                     
@@ -145,6 +151,11 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Validation scripts -->
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script type="text/javascript" src="JS/maintainCustomer.js"></script>
 </body>
 
 </html>
