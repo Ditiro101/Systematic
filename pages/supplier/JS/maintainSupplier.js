@@ -1,4 +1,50 @@
 var count=0;
+var regex=/^\d{3}\d{3}\d{4}$/;
+var emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+let CheckValid = function(valArr)
+{
+	if(valArr["con"].length!=10)
+	{
+		$("#MMessage").text("Contact Number must be 10 digits and contain no letters.");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if (valArr["VATNumber"].length!=10)
+	{
+		$("#MMessage").text("VAT Number must be 10 digits and contain no letters.");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if(regex.test(valArr["con"])!=true)
+	{
+		$("#MMessage").text("Contact Number must only contain digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if(regex.test(valArr["VATNumber"])!=true)
+	{
+		$("#MMessage").text("VAT Number must only contain digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if(emailRegex.test(valArr["email"])!=true)
+	{
+		$("#MMessage").text("Email is not valid");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+
+	}
+	else
+	{
+		return true;
+	}
+	
+}
 let getInput= function()
 {
 	let name=$("#supplierName").val().trim();
@@ -346,27 +392,35 @@ $(()=>{
 		else
 		{
 			let arr=getInput();
-			$.ajax({
+			if(CheckValid(arr)!=true)
+			{
+				e.stopPropagation();
+			}
+			else
+			{
+				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
 				data: {choice:2,ID:supID,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]} 
-			})
-			.done(data=>{
-				let doneData=data.split(",");
-				console.log(doneData);
-				if(doneData[0]=="T")
-				{
-					$("#MMessage").text(doneData[1]);
-					$("#btnClose").attr("onclick","window.location='../../supplier.php'");
-					$("#displayModal").modal("show");
-				}
-				else
-				{
-					$("#MMessage").text(doneData[1]);
-					$("#btnClose").attr("data-dismiss","modal");
-					$("#displayModal").modal("show");
-				}
-			});
+				})
+				.done(data=>{
+					let doneData=data.split(",");
+					console.log(doneData);
+					if(doneData[0]=="T")
+					{
+						$("#MMessage").text(doneData[1]);
+						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+						$("#displayModal").modal("show");
+					}
+					else
+					{
+						$("#MMessage").text(doneData[1]);
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
+					}
+				});
+			}
+			
 		}
 		
 	});

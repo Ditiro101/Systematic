@@ -67,7 +67,7 @@
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="text" class="form-control" id="VATNumber" name="suppVAT" placeholder="Enter VAT Number" required>
+                            <input type="text" maxlength="10" class="form-control" id="VATNumber" name="suppVAT" placeholder="Enter VAT Number" required>
                           </div>
                         </div>
                         <div class="form-row ">
