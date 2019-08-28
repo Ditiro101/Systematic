@@ -267,6 +267,19 @@
                     </button>
                   </div>
 
+                  <div class="col-6">
+                      <form action='wage_calc.php' method="POST" id="addUserView">
+                        <input type="hidden" name="employeesID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="button">
+                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i>
+                            </span>
+                            <span class="btn-inner--text">Add User</span>
+                        </button>
+                      </form>
+                  </div> 
+
                   <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
