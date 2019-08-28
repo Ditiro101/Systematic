@@ -62,65 +62,65 @@
                     <form enctype='multipart/form-data' action='' method='' class="card-body" id='picToUpload'>
                       <div class="col">
                         <div class="form-row">
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="employeeName">Name</label>
                             <input type="text" class="form-control" id="employeeName" name="employeeName" aria-describedby="emailHelp" placeholder="Enter name" required>
                             
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="employeeSurname">Surname</label>
                             <input type="text" class="form-control" id="employeeSurname" name="employeeSurname" placeholder="Surname" required>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-2">
+                          <div class="form-group col-lg-2 col-md-2 col-sm-12">
                             <label for="bane">Title</label>
-                            <select class="form-control" id="eTitle">
+                            <select class="form-control" name="eTitle" id="eTitle">
                               <option>Mr</option>
                               <option>Ms</option>
                               <option>Mrs</option>
                             </select>
                           </div>
-                          <div class="form-group col-10">
+                          <div class="form-group col-lg-10 col-md-10 col-sm-12">
                             <label for="contactNumber">Contact Number</label>
-                            <input type="text" maxlength="10" class="form-control" id="contactNumber" name="employeeNumber" placeholder="Contact Number" required>
+                            <input type="text" maxlength="10" class="form-control" name="contactNumber" id="contactNumber" name="employeeNumber" placeholder="Contact Number" required>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="email" class="form-control" id="employeeEmail" placeholder="Email" required>
+                            <input type="email" class="form-control" id="employeeEmail" name="employeeEmail" placeholder="Email" required>
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">SA ID or Passport number</label>
-                            <input type="text" maxlength="15" class="form-control" id="eID" placeholder="ID" required>
+                            <input type="text" maxlength="13" class="form-control" name="eID" id="eID" placeholder="ID" required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St" required>
+                          <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="1234 Main St" required>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputSuburb" required>
+                            <input type="text" class="form-control" name="inputSuburb" id="inputSuburb" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputState">City</label>
-                            <input type="text" class="form-control" id="inputCity" readonly>
+                            <input type="text" class="form-control" name="inputCity" id="inputCity" readonly>
                           </div>
-                          <div class="form-group col-md-2">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" readonly>
+                            <input type="text" class="form-control" name="inputZip" id="inputZip" readonly>
                           </div>
-                          <div class="form-group col-12">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="bane">Employee Type</label>
-                            <select class="form-control" id="eType">
+                            <select class="form-control" name="eType" id="eType">
                             </select>
                           </div>
                           
-                            <div class='form-group col-12'>
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <label for="UploadsPic">Upload Employee Picture</label>
                                 <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
                                 <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control"/><br/>
@@ -145,13 +145,13 @@
                                       </div>
                                       
                                       <div class="modal-body">
-                                          <p>Employee added successfully</p>
+                                          <p id="MMessage"></p>
                                           
                                       </div>
                                       
                                       <div class="modal-footer">
                                           
-                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose" onclick="window.location='../../employee.html'">Close</button>
+                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
                                       </div>
                                       
                                   </div>
