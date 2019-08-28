@@ -18,26 +18,84 @@
   else
   {
 
-    $userID = $_POST["userID"];  
-    $checkInTime = $_POST["checkin"];
-    $checkOutTime = $_POST["checkout"];
+          $userID; 
+          $checkInTime = 0; 
+          $checkOutTime = 0;
+
+          if(isset($_POST["userID"]))
+          {
+            $userID = $_POST["userID"]; 
+          }
+          if(isset($_POST["checkin"]))
+          {
+            $checkInTime = $_POST["checkin"];
+          }
+          if(isset($_POST["checkout"]))
+          {
+            $checkOutTime = $_POST["checkout"];
+          }
+          
+          $checkintimeSet = "";
+          $checkouttimeSet = "";
+          $successIn = "";
+          $successOut = "";
+
+          if($checkOutTime != 0)
+          {
+              $sql = "UPDATE CHECKIN_CHECKOUT_TIME 
+              SET `DEPATURE_TIME` = '$checkOutTime', `USER_ID` = '$userID'
+              WHERE CHECKIN_CHECKOUT_TIME_ID = '0'";
+              $query_QR = mysqli_query($DBConnect , $sql);
+              
+              
+              if($query_QR)
+              {
+                $successOut = "success";
+                $checkouttimeSet = "Checkout Time has been successfully changed";
+              }
+              else
+              {
+                  echo "Failure";
+              }
+          }
+          if($checkInTime != 0)
+          {
+              $sql = "UPDATE CHECKIN_CHECKOUT_TIME 
+              SET `ARRIVAL_TIME` = '$checkInTime', `USER_ID` = '$userID'
+              WHERE CHECKIN_CHECKOUT_TIME_ID = '0'";
+              $query_QR = mysqli_query($DBConnect , $sql);
+              
+            
+              if($query_QR)
+              {
+                $successIn = "success";
+                $checkintimeSet = "Check-in Time has been successfully changed";
+              }
+              else
+              {
+                  echo "Failure";
+              }
+          }
 
 
 
-     $sql = "UPDATE CHECKIN_CHECKOUT_TIME 
-     SET `ARRIVAL_TIME` = '$checkInTime',`DEPATURE_TIME` = '$checkOutTime' , `USER_ID` = '$userID'";
-     $query_QR = mysqli_query($DBConnect , $sql);
-     
-     $success = "success";
-     if($query_QR)
-     {
-         echo $success;
-     }
-     else
-     {
-         echo "not found";
-     }
-        
+
+          if(($successOut=="success") && ($successIn !="success"))
+          {
+            echo $checkouttimeSet;
+          } 
+          else if(($successOut !="success") && ($successIn =="success"))
+          {
+            echo $checkintimeSet;
+          }   
+          else if(($successOut=="success") && ($successIn =="success"))
+          {
+            echo $checkouttimeSet . " and " . $checkintimeSet;
+          }
+          else
+          {
+            echo "Nothing was changed!";
+          }
  
      mysqli_close($DBConnect); 
     //Close database connection
