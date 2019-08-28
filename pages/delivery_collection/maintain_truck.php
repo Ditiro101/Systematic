@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -66,7 +67,7 @@
                         </div>
                         <div class="form-row ">
                           <div class="form-group col">
-                            <label for="exampleInputPassword1">Truck Name</label>
+                            <label for="tName">Truck Name</label>
                             <label id="rTName" hidden="true"><?php echo $_POST["TRUCK_NAME"]; ?></label>
                             <input type="text" name="tName" class="form-control" id="tName" maxlength="20" required>
                           </div>

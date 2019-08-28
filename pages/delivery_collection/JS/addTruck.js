@@ -36,8 +36,8 @@ $(()=>{
 				{
 
 					//place changes variable her and user id here
-					let changes="";
-					let user_id=1;
+					
+					let changes="Registration:"+arr["registration"]+" | name:"+arr["name"]+" | capacity:"+arr["capacity"];
 					let Sub_Functionality_ID=10.7;
 					$.ajax({
 					url:'../admin/PHPcode/audit_log.php',
@@ -46,10 +46,10 @@ $(()=>{
 					})
 					.done(data=>{
 						if(data=="success"){
-							alert("success");
+							//alert("success");
 						}
 						else{
-							alert(data);
+							//alert(data);
 						}
 					
 					});
@@ -61,6 +61,7 @@ $(()=>{
 				}
 				else
 				{
+
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("data-dismiss","modal");
 					$("#displayModal").modal("show");
