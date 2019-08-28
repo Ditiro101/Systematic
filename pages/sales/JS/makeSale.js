@@ -1,8 +1,22 @@
 var SALECUSTOMERID;
-var arr;
-var cArr;
-var eArr;
+var SALEUSERID;
+var SALEPRODUCTIDs = [];
+var SALEPRODUCTS = [];
+var productElementsCount = 1;
+var productsArray;
+
+Array.prototype.remByVal = function(val) {
+    for (var i = 0; i < this.length; i++) {
+        if (this[i] === val) {
+            this.splice(i, 1);
+            i--;
+        }
+    }
+    return this;
+}
+
 $(()=>{
+	
 
 	$.ajax({
 		url: 'PHPcode/getProducts_.php',
@@ -12,96 +26,63 @@ $(()=>{
 	.done(data=>{
 		if(data!="False")
 		{
-			let arr = JSON.parse(data);
-			console.log(arr);
-			let options="";
-			for(let k=0;k<arr.length;k++)
-			{
-				options+="<option value='"+arr[k]["PRODUCT_TYPE_ID"]+"' >"+arr[k]["TYPE_NAME"]+"</option>";
-			}
-			$("#productType").append(options);
-			buildDropDown(arr);
-		}
-		else
-		{
-			alert("Error");
-		}
-	});
+			let productsArray = JSON.parse(data);
+			buildDropDown(productsArray);
+
+			$("input[id='dropdownItem']").on('click', function(){
+				let productIndex = this.name;
+
+				let pType="Individual";
+				let pNumber= 1;
+				if(productsArray[productIndex].PRODUCT_SIZE_TYPE==2)
+				{
+					pType="Case";
+					pNumber=productsArray[productIndex].UNITS_PER_CASE;
+				}
+				else if(productsArray[productIndex].PRODUCT_SIZE_TYPE==3)
+				{
+					pType="Pallet";
+					pNumber=productsArray[productIndex].CASES_PER_PALLET;
+				}
+
+				let theProductName = productsArray[productIndex].NAME+" ("+pNumber+" x "+productsArray[productIndex].PRODUCT_MEASUREMENT+productsArray[productIndex].PRODUCT_MEASUREMENT_UNIT+")"+" "+pType;
+
+				let theUnitPrice = productsArray[productIndex].SELLING_PRICE;
+				theUnitPrice = theUnitPrice;
+
+				let theGuidePrice = productsArray[productIndex].GUIDE_DISCOUNT;
+				theGuidePrice = theGuidePrice;
+				theGuidePrice = numberWithSpaces(theGuidePrice);
+				theGuidePrice = "R"+ theGuidePrice;
+
+				let theCostPrice = productsArray[productIndex].COST_PRICE;
+				theCostPrice = theCostPrice;
+				theCostPrice = numberWithSpaces(theCostPrice);
+				theCostPrice = "R"+ theCostPrice;
+
+				let theProfit = productsArray[productIndex].SELLING_PRICE - productsArray[productIndex].COST_PRICE;
+				theProfit = theProfit.toFixed(2);
+				theProfit = numberWithSpaces(theProfit);
+				theProfit = "R"+ theProfit;
 
 
+				$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
+				let productsTable = $('#productsTable');
+				productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
+				productElementsCount++;
 
-	$.ajax({
-		url:'PHPcode/salecode.php',
-		type:'POST',
-		data:{choice:3}
-	})
-	.done(data=>{
-		if(data!="False")
-		{
-			//console.log(data);
-			arr=JSON.parse(data);
-			$.ajax({
-				url:'PHPcode/salecode.php',
-				type:'POST'//,
-				//data:{choice:4}
-
-			})
-			.done(cData=>{
-				//cArr=JSON.parse(cData);
-				$.ajax({
-					url:'PHPcode/salecode.php',
-					type:'POST'//,
-					//data:{choice:5}
-				})
-				.done(eData=>{
-					if(eData!="False")
-					{
-						eArr=JSON.parse(eData);
-						let tableEntries="";
-						let formView="";
-						let cfound="";
-						let efound="";
-						let jCFound="";
-						let jEFound="";
-						for(let k=0;k<arr.length;k++)
-						{
-							cfound=cArr.find(function(element){
-								if(element["CUSTOMER_ID"]==arr[k][
-									"CUSTOMER_ID"])
-								{
-									return element;
-								}
-							});
-							efound=eArr.find(function(element){
-								if(element["EMPLOYEE_ID"]==arr[k][
-									"EMPLOYEE_ID"])
-								{
-									return element;
-								}
-							});
-							//console.log(cfound);
-							//console.log(efound);
-							jCFound=JSON.stringify(cfound);
-							jEFound=JSON.stringify(efound);
-							formView="<form action='view-sale.php' method='POST'><input type='hidden' name='SALE_ID' value='"+arr[k]["SALE_ID"]+"'>"+"<input type='hidden' name='USER_ID' value='"+arr[k]["USER_ID"]+"'>"+"<input type='hidden' name='EMPLOYEE_ID' value='"+arr[k]["EMPLOYEE_ID"]+"'>"+"<input type='hidden' name='CUSTOMER_ID' value='"+arr[k]["CUSTOMER_ID"]+"'>"+"<input type='hidden' name='SALE_DATE' value='"+arr[k]["SALE_DATE"]+"'>"+"<input type='hidden' name='SALE_AMOUNT' value='"+arr[k]["SALE_AMOUNT"]+"'>"+"<input type='hidden' name='SALE_STATUS_ID' value='"+arr[k]["SALE_STATUS_ID"]+"'>"+"<input type='hidden' name='CUSTOMER_DATA' value='"+jCFound+"'>"+"<input type='hidden' name='EMPLOYEE_DATA' value='"+jEFound+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
-							tableEntries+="<tr><td>"+arr[k]["SALE_ID"]+"</td><td>"+arr[k]["SALE_DATE"]+"</td><td>"+cfound["NAME"]+"</td><td>"+efound["NAME"]+"</td><td>R"+arr[k]["SALE_AMOUNT"]+"</td><td>"+formView+"</td></tr>";
-						}
-						$("#tBody").append(tableEntries);
-					}
-					else
-					{
-						alert("Error");
-					}
-
-				});
+				calculateVATandTotal();
+				SALEPRODUCTIDs.push(productsArray[productIndex].PRODUCT_ID);
+				
 			});
 		}
 		else
 		{
 			alert("Error");
 		}
-		
 	});
+
+	SALEUSERID = SESSION['userID'];
 });
 
 $("button#searchCustomerButton").on('click', event => {
@@ -150,6 +131,118 @@ $("button#searchCustomerButton").on('click', event => {
 	}	
 });
 
+$("button#finaliseSale").on('click', event => {
+	
+	console.log(SALEPRODUCTS);
+});
+
+$("button#confirmSalesManagerPassword").on('click', event => {
+
+	var password = $("#salesManagerPassword").val().trim();
+	$.ajax({
+        url:'PHPcode/verifySalesManagerPassword.php',
+        type:'post',
+        data:{ 
+        	password:password
+        },
+        beforeSend: function(){
+            //$('.loadingModal').modal('show');
+        },
+        complete: function(){
+            //$('.loadingModal').modal('hide')
+        }
+    })
+    .done(response => {
+
+    	//console.log(response);
+        if (response == "success")
+		{
+			for (var i = SALEPRODUCTIDs.length - 1; i >= 0; i--) 
+			{
+				var thisProductID = SALEPRODUCTIDs[i];
+				var thisProductQuantity = $('#quantity'+thisProductID).val();
+				var thisSellingPrice = $('#unitPrice'+thisProductID).val();
+
+				var productLine = {
+				    'PRODUCT_ID': thisProductID,
+				    'QUANTITY': thisProductQuantity,
+				    'SELLINGPRICE': thisSellingPrice
+				};
+				SALEPRODUCTS.push(productLine);
+			}
+			$.ajax({
+		        url:'PHPcode/makeSale_.php',
+		        type:'post',
+		        data:{ 
+		        	saleProducts:SALEPRODUCTS,
+		        	customerID:SALECUSTOMERID,
+		        	saleUserID:SALEUSERID
+		        },
+		        beforeSend: function(){
+		            //$('.loadingModal').modal('show');
+		        },
+		        complete: function(){
+		            //$('.loadingModal').modal('hide')
+		        }
+		    })
+		    .done(response => {
+
+		    	//console.log(response);
+		        if (response == "success")
+				{
+					$('#modal-title-default').text("Success!");
+					$('#modalText').text("Correct Password. Sale is complete. Printing invoice...");
+					$("#modalCloseButton").attr("onclick","callTwo()");
+					$('#successfullyAdded').modal("show");
+				}
+				else if(response == "failed")
+				{
+					$('#modal-title-default').text("Error!");
+					$('#modalText').text("Incorrect password entered");
+					$("#modalCloseButton").attr("onclick","");
+					$('#successfullyAdded').modal("show");
+				}
+				else if(response == "Database error")
+				{
+					$('#modal-title-default').text("Database Error!");
+					$('#modalText').text("Database error whilst verifying password");
+					$("#modalCloseButton").attr("onclick","");
+					$('#successfullyAdded').modal("show");
+				}
+				
+				ajaxDone = true;
+		    });
+
+			
+		}
+		else if(response == "failed")
+		{
+			$('#modal-title-default').text("Error!");
+			$('#modalText').text("Incorrect password entered");
+			$("#modalCloseButton").attr("onclick","");
+			$('#successfullyAdded').modal("show");
+		}
+		else if(response == "Password empty")
+		{
+			$('#modal-title-default').text("Error!");
+			$('#modalText').text("Please enter a password");
+			$("#modalCloseButton").attr("onclick","");
+			$('#successfullyAdded').modal("show");
+		}
+		else if(response == "Database error")
+		{
+			$('#modal-title-default').text("Database Error!");
+			$('#modalText').text("Database error whilst verifying password");
+			$("#modalCloseButton").attr("onclick","");
+			$('#successfullyAdded').modal("show");
+		}
+		
+		ajaxDone = true;
+    });
+});
+
+
+
 ////////////////////////////CODE FROM PHP///////////////////////////////
 
 function setTwoNumberDecimal(el) 
@@ -162,40 +255,39 @@ function numberWithSpaces(x)
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 }
 
-let productDetails = [
-{productName:"All Gold Tomato Sauce (6x350ml) Case", up:70.00, gp:65.00, cp:55.00}, 
-{productName:"All Gold Tomato Sauce (6x700ml) Case", up:85.00, gp:81.00, cp:80.00}, 
-{productName:"Apple Munch (96x50ml) Pallet", up:121.00, gp:110.00, cp:105.50}, 
-{productName:"Ariel Washing Powder (6x500g) Case", up:167.20, gp:154.50, cp:149.10}, 
-{productName:"Bakers Toppers (12x125g) Case", up:121.10, gp:115.00, cp:110.00},
-{productName:"Coca Cola (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Dragon Energy Drink (24x500ml) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Kingsley Cola (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Kingsley Iron Brew (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Kingsley Ginger Bear (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Kingsley Granadila (6x2l) Case", up:70.00, gp:65.00, cp:55.00}, 
-{productName:"Kingsley Orange (6x2l) Case", up:70.00, gp:65.00, cp:55.00}, 
-{productName:"Kingsley Pineapple (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Kingsley Cream Soda (6x2l) Case", up:70.00, gp:65.00, cp:55.00}, 
-{productName:"Kingsley Apple (6x2l) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Monster Energy Drink (24x500ml) Case", up:70.00, gp:65.00, cp:55.00},
-{productName:"Surprise Product", up:46.00, gp:34.00, cp:30.00}
-];
+$('#menuItems').on('click', '.dropdown-item', function()
+{
+	$("#searchProduct").dropdown('toggle');
+	$('#searchProduct').val("");
+	filter("");
+});
+
+if (productElementsCount == 1) {
+	console.log(this.name);
+	let productIndex = this.name;
+
+	let productsTable = $('#productsTable');
+	productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
+	productElementsCount++;
+	calculateVATandTotal();
+};
 
 $('#searchProduct').on('input', function()
 {
 	var dropdownShown = $("#menu").hasClass("show");
-	if(dropdownShown === false);
+	if(dropdownShown === false)
 	{
-		console.log($("#menu").hasClass("show"));
-		console.log("toggling");
-		$("#dropdown_coins").dropdown('toggle');
+		$("#searchProduct").dropdown('toggle');
 	}
-	//$('#searchProduct').val("");
-	//filter("");
 	let search = $("#searchProduct");
 	let searchWord = search.val().trim().toLowerCase()
 	filter(searchWord);
+});
+
+
+$('.productDropdownMenuItem').on('click', function()
+{
+	console.log(this.name);
 });
 
 function buildDropDown(arrayOfProducts) 
@@ -205,7 +297,7 @@ function buildDropDown(arrayOfProducts)
   for (let product of arrayOfProducts) 
   {
   	let pType="Individual";
-	let pNumber="";
+	let pNumber= 1;
 	if(product.PRODUCT_SIZE_TYPE==2)
 	{
 		pType="Case";
@@ -228,11 +320,6 @@ function buildDropDown(arrayOfProducts)
   //console.log(productDetails);
 }
 
-// //Capture the event when user types into the search box
-// window.addEventListener('input', function () {
-//   filter(search.value.trim().toLowerCase())
-// })
-
 //For every word entered by the user, check if the symbol starts with that word
 //If it does show the symbol, else hide it
 function filter(word) 
@@ -254,89 +341,30 @@ function filter(word)
 	    }
 	}
 
-	  //If all items are hidden, show the empty view
-	  if (hidden === length) 
-	  {
-	    $('#empty').show()
-	  }
-	  else 
-	  {
-	    $('#empty').hide()
-	  }
+	//If all items are hidden, show the empty view
+	if (hidden === length) 
+	{
+		$('#empty').show()
+	}
+	else 
+	{
+		$('#empty').hide()
+	}
 }
 
-      //If the user clicks on any item, set the title of the button as the text of the item
-
-function focusSearch() 
-{
-//document.getElementById("searchProduct").focus();
-}
-
-$('#menuItems').on('click', '.dropdown-item', function()
-{
-	$("#dropdown_coins").dropdown('toggle');
-	$('#searchProduct').val("");
-	filter("");
-});
 
 //buildDropDown(productDetails);
 
 function callTwo(){
 
-	var URL = "invoice/invoice.html";
+	var URL = "invoice/invoice.php";
 	window.open(URL, '_blank');
 	location.reload();
 }
 
 // Adding Rows
 $(document).ready(function(){
-    var i=1;
-
-	$("input[id='dropdownItem']").click(function(element)
-	{
-		console.log(this.name);
-		let productIndex = this.name;
-
-		let theProductName = productDetails[productIndex].productName;
-
-		console.log(theProductName);
-
-		let theUnitPrice = productDetails[productIndex].up;
-		theUnitPrice = theUnitPrice.toFixed(2);
-
-		let theGuidePrice = productDetails[productIndex].gp;
-		theGuidePrice = theGuidePrice.toFixed(2);
-		theGuidePrice = numberWithSpaces(theGuidePrice);
-		theGuidePrice = "R"+ theGuidePrice;
-
-		let theCostPrice = productDetails[productIndex].cp;
-		theCostPrice = theCostPrice.toFixed(2);
-		theCostPrice = numberWithSpaces(theCostPrice);
-		theCostPrice = "R"+ theCostPrice;
-
-		let theProfit = productDetails[productIndex].up - productDetails[productIndex].cp;
-		theProfit = theProfit.toFixed(2);
-		theProfit = numberWithSpaces(theProfit);
-		theProfit = "R"+ theProfit;
-
-		$('#productLine'+i).html("<td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productIndex+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productIndex+"2' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td><td class='px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td>");
-
-		let productsTable = $('#productsTable');
-		productsTable.append('<tr id="productLine'+(i+1)+'"></tr>');
-		i++;
-
-		calculateVATandTotal();
-	});
-
-	if (i == 1) {
-		console.log(this.name);
-		let productIndex = this.name;
-
-		let productsTable = $('#productsTable');
-		productsTable.append('<tr id="productLine'+(i+1)+'"></tr>');
-		i++;
-		calculateVATandTotal();
-	};
+    
 });
 
 function calculateRowTotalQuantity(element)
@@ -408,8 +436,13 @@ function removeRow(src)
        get the parent of the parent (in this case <tr>)
     */   
     var oRow = src.parentElement.parentElement;  
+    //var quantity = element.parentNode.parentNode.previousSibling.previousSibling.childNodes[0].childNodes[0].value;
+    var productID = src.parentNode.parentNode.childNodes[0].value;
+    console.log(productID);
     
     //once the row reference is obtained, delete it passing in its rowIndex   
     document.all("productsTable").deleteRow(oRow.rowIndex);  
     calculateVATandTotal();
+    SALEPRODUCTIDs = SALEPRODUCTIDs.remByVal(productID);
+
 } 

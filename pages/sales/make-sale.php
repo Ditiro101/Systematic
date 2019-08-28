@@ -24,7 +24,7 @@
 
 <style type="text/css">
   .dropdown-menu{
-    transform: translate3d(0px, 5rem, 0px)!important;
+    transform: translate3d(0px, 2.7rem, 0px)!important;
   }
 </style>
 
@@ -57,7 +57,13 @@
                 <div class="card card-stats shadow col-lg-8 px-0">
                     <div class="card-header border-0 bg-secondary">
                       <div class="input-group input-group-rounded input-group-merge">
-                        <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true" onchange="focusSearch()">
+                        <input type="search" class="form-control form-control-rounded form-control-prepended dropdown-toggle" id="searchProduct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Product Name" autofocus="true">
+                        <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="searchProduct">
+                          <div id="menuItems"></div>
+                          <div id="empty" class="dropdown-header table-danger" style="color: black">
+                            No product found
+                          </div>
+                        </div>
                         <div class="input-group-prepend">
                           <div class="input-group-text">
                             <span class="fa fa-search"></span>
@@ -65,27 +71,21 @@
                         </div>
                       </div>
                   </div>
-                  <input type='hidden'class="btn btn-default dropdown-toggle btn-block col" type="button" id="dropdown_coins" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="focusSearch()" ></input>
-                  <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="dropdown_coins">
-                    <div id="menuItems"></div>
-                    <div id="empty" class="dropdown-header table-danger" style="color: black">
-                      No product found
-                    </div>
-                  </div>
                 <div class="card-body">
-                  <div class="table-responsive col-12">
+                  <div class="table-responsive col-12 pl-0">
 
                     <table id="productsTable" class="table align-items-center table-flush">
                        <thead class="thead-light">
                       <tr class="header">
-                        <th> Quantity</th>
-                        <th class="pl-0"> Item Name</th>
+                        <th class="col-3" style="width: 2rem"> Quantity</th>
+                        <th class="pl-0" style="width: 20rem"> Item Name</th>
                         <th class="pl-4" style="text-align: center;"> Unit Price</th>
-                        <th class="text-right pr-1"> Total </th>
+                        <th class="text-right pr-1" style="width: 8rem"> Total </th>
+                        <th class="text-centre px-0" style="width: 0.5rem"></th>
                         <th class="text-right pr-1 pl-2"> Guide Price</th>
                         <th class="text-right pr-1"> Cost Price</th>
                         <th class="text-right pr-1"> Profit </th>
-                        <th class="text-left px-0" style="width: 0.5rem"></th>
+                        
                       </tr>
                     </thead>
                     <tbody>
@@ -95,7 +95,7 @@
                         <td></td>
                         <td></td>
                         <th class="text-right pr-1"><b>TOTAL</b></th>
-                        <td class="text-right pr-1" id="totalOfSale"><b>R11 280.00</b></td>
+                        <td class="text-right pr-1" id="totalOfSale"><b></b></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -105,7 +105,7 @@
                         <td></td>
                         <td></td>
                         <th class="text-right pr-1"><b>VAT (15%)</b></th>
-                        <td class="text-right pr-1" id="vatOfSale"><b>R2 820.00</b></td>
+                        <td class="text-right pr-1" id="vatOfSale"><b></b></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -117,180 +117,65 @@
                 </div>
               </div>
 
-                <div class="col-sm-6 col-lg-4 bg-transparent ">
-                  <div class="card card-stats table" id="myTabContent" >
-                    <div class="card-header bg-secondary">
-                      <div class="row"> 
-                        <div class="mx-2">
-                          <form id="searchCustomertForm" class="needs-validation" novalidate>
-                            <div class="input-group input-group-rounded input-group-merge mx-2">
-                              <input type="text" id="customerSearchInput" placeholder="Search Customer ID" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search" required>
-                              <div class="input-group-prepend mr-3">
-                                <button class="input-group-text btn-info bg-customGreen" id="searchCustomerButton">
-                                <span class="fa fa-search" style="color: white"></span>
-                                </button>
-                              </div>
+              <div class="col-md col-4 bg-transparent ">
+                <div class="card card-stats table" id="myTabContent" >
+                  <div class="card-header bg-secondary">
+                    <div class="row"> 
+                      <div class="col">
+                        <form id="searchCustomertForm" class="needs-validation" novalidate>
+                          <div class="input-group input-group-rounded input-group-merge mx-2">
+                            <input type="text" id="customerSearchInput" placeholder="Search Customer ID" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search" required>
+                            <div class="input-group-prepend mr-3">
+                              <button class="input-group-text btn-info bg-customGreen" id="searchCustomerButton">
+                              <span class="fa fa-search" style="color: white"></span>
+                              </button>
                             </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="card-body px-3" style="height: 18rem">
-
-                      <table class="table align-items-center table-flush table-borderless" id= "customerCard">
-                        <tbody class="list">    
-                            <tr>
-                              
-                          </tr>
-                          <tr>
-                              <th> No Customer Added</th>
-                              <td >
-                                  
-                              </td>
-                            </tr>                  
-                        </tbody>
-                      </table>
-
-                    </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col">
-                           <div class="custom-control custom-checkbox mb-3">
-                            
-                            <input class="custom-control-input" style="font-size: 5rem" id="customCheck2" type="checkbox" checked>
-                            <label class="custom-control-label" for="customCheck2">Add Sale Delivery</label>
-                          
                           </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-body px-3" style="height: 18rem">
+
+                    <table class="table align-items-center table-flush table-borderless" id= "customerCard">
+                      <tbody class="list">    
+                          <tr>
+                            
+                        </tr>
+                        <tr>
+                            <th> No Customer Added</th>
+                            <td >
+                                
+                            </td>
+                          </tr>                  
+                      </tbody>
+                    </table>
+
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col">
+                         <div class="custom-control custom-checkbox mb-3">
+                          
+                          <input class="custom-control-input" style="font-size: 5rem" id="customCheck2" type="checkbox" checked>
+                          <label class="custom-control-label" for="customCheck2">Add Sale Delivery</label>
+                        
                         </div>
                       </div>
                     </div>
-                    <div class="card-body pl-2" style="height: 5rem">
-                      <span class="col">
-                          <button class="btn btn-primary ">Finalise Sale</button>
-                        </span>
-                    </div>
+                  </div>
+                  <div class="card-body pl-2" style="height: 5rem">
+                    <span class="col">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal-salesManagerPassword">Finalise Sale</button>
+
+                      </span>
                   </div>
                 </div>
-
-
- <!--          <div class="card shadow col">
-            <div class="card-header bg-transparent">
-              <h3 class="mb-0">Sale Details</h3>
-            </div>
-            <div class="card-body">
-              <div class="row mb-3"> -->
-                
-
-
-<!--                 <div class="col-sm-6 col-lg-6 mt-3 mt-sm-0 table">
-                  <div class="card card-stats table light" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 21.7rem">
-                      <table class="table align-items-center table-flush table-borderless table-responsive">
-                        <tbody class="list">    
-                            <tr>
-                              <th style="width: 12rem">
-                                Date 
-                              </th>
-                              <td >
-                                25/07/2019
-                              </td>
-                            </tr>                               
-                            <tr>
-                              <th>
-                                Invoice #
-                              </th>
-                              <td >
-                                321
-                              </td>
-                            </tr> 
-                            <tr>
-                              <th>
-                                Salesperson
-                              </th>
-                              <td >
-                                Alana
-                              </td>
-                            </tr>      
-                        </tbody>
-                      </table>
-                  </div>
-                </div>
-              </div> -->
-<!--             </div>
-            <div class="row">
-              <div class="col-12">
-                <div class="card shadow">
-                  <div class="card-header border-0">
-                    <div class="input-group input-group-rounded input-group-merge">
-                        <button class="btn btn-default dropdown-toggle btn-block col" type="button" id="dropdown_coins" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" onclick="focusSearch()" >
-                            Add Product
-                        </button>
-                        <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="dropdown_coins">
-                            <form class="px-1 py-2">
-                              <div class="input-group input-group-rounded input-group-merge">
-                                <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true" onchange="focusSearch()">
-                                <div class="input-group-prepend">
-                                  <div class="input-group-text">
-                                    <span class="fa fa-search"></span>
-                                  </div>
-                                </div>
-                              </div>
-                            </form>
-                            <div id="menuItems"></div>
-                            <div id="empty" class="dropdown-header table-danger" style="color: black">
-                              No product found
-                            </div>
-                        </div>
-                      </div>
-                  </div>
-                <div class="table-responsive">
-
-                  <table id="productsTable" class="table align-items-center table-flush">
-                     <thead class="thead-light">
-                    <tr class="header">
-                      <th> Quantity</th>
-                      <th class="pl-0"> Item Name</th>
-                      <th class="pl-4" style="text-align: center;"> Unit Price</th>
-                      <th class="text-right pr-1"> Total </th>
-                      <th class="text-right pr-1 pl-2"> Guide Price</th>
-                      <th class="text-right pr-1"> Cost Price</th>
-                      <th class="text-right pr-1"> Profit </th>
-                      <th class="text-left px-0" style="width: 0.5rem"></th>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      
-                    
-                    </tbody>
-                    <tfoot class="tfoot-light">
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right pr-1"><b>TOTAL</b></th>
-                      <td class="text-right pr-1" id="totalOfSale"><b>R11 280.00</b></td>
-                    </tr>
-                     <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right pr-1"><b>VAT (15%)</b></th>
-                      <td class="text-right pr-1" id="vatOfSale"><b>R2 820.00</b></td>
-                    </tr>
-                    </tfoot>
-                  </table> -->
-
-<!--                 </div>
               </div>
-            </div>
-            <br>
 
-              <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-success mt-0" type="button" data-toggle="modal" data-target="#modal-creditlimit">
-                  <span class="btn-inner--text">Finalise Sale</span>
-                </button>
-              </div>
-                <div class="modal fade" id="modal-creditlimit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              
+
+              <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                     <div class="modal-content">
                       
@@ -304,49 +189,45 @@
                         <div class="modal-body">
                           <div class="form-group col">
                             <label for="bane">Sales Manager Password</label>
-                            <input type="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter password">
+                            <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
                           </div>
                         </div>
                         <div class="modal-footer">
-                            
-                            <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Approve Sale</button> 
+                            <button type="button" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
                         </div>
                         
                     </div>
                 </div>
               </div>
-              <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                    <div class="modal-content">
-                      
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        
-                        <div class="modal-body text-left">
-                          <p>Sale successful. Printing invoice...</p>
-                            
-                        </div>
-                        
-                        <div class="modal-footer">
-                            
-                            <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
-                        </div>
-                        
-                    </div>
+              
+              <div class="form-group col-md-2">
+                <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <p id="modalText"></p>
+                              
+                          </div>
+                          <div class="modal-footer">
+                              
+                              <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
+                          </div>
+                          
+                      </div>
+                  </div>
                 </div>
               </div>
-          </div> -->
-          
-          </div>
+
+            </div>
+            <?php include_once("../footer.php");?>
           </div>
         </div>
-        <?php include_once("../footer.php");?>
-      </div>
-    </div>
 
   <!-- Argon Scripts -->
   <!-- Core -->
@@ -362,6 +243,11 @@
   <script src="../../assets/js/additional-methods.min.js"></script>
   <!-- Make Sale JS -->
   <script src="JS/makeSale.js"></script>
+  <!-- Get Session Variable -->
+  <script type="text/javascript">
+    var SESSION = eval('(<?php echo json_encode($_SESSION)?>)');
+  </script>
 </body>
 
 </html>
+
