@@ -7,7 +7,7 @@
   $suburbData=getAllSuburbs($con);
   $cityData=getAllCity($con);
   $customerData=getAllCustomer($con);
-  $saleData=getAllSales($con)
+  $saleData=getAllSales($con);
 ?>
 <!DOCTYPE html>
 <html>

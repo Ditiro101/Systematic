@@ -1,3 +1,18 @@
+<?php
+    include_once("../sessionCheckPages.php");
+    include_once("PHPcode/connection.php");
+    include_once("PHPcode/functions.php");
+    $truckData=getAllTrucks($con);
+    $deliveryData=getUnassignedDeliveries($con,1);
+    $addressData=getAllAddresses($con);
+    $suburbData=getAllSuburbs($con);
+    $cityData=getAllCity($con);
+    $saleData=getAllSales($con);
+    $saleProductData=getAllSaleProducts($con);
+    $productData=getProductDetails($con);
+    $truckProductData=getTruckProductData($con);
+    $deliveryTruckData=getDeliveryTruckData($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -28,6 +43,7 @@
 <body>
   <?php include_once("../header.php");?>
    <!-- Main content -->
+   <!-- <img src='http://i.imgur.com/pKopwXp.gif' hidden="true" id="loadImage" alt='loading...' style="display:block; margin:0 auto;" /> -->
   <div class="main-content">
     <!-- Top navbar -->
       <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -57,158 +73,12 @@
               <div class="card-body " id="headingOne">
                 <div class="row">
                   <div class="col-10">
+                    <label hidden="true" id="tData"><?php echo json_encode($truckData);?></label>
                     <h4 class="mb-0 text-white text-uppercas ">My Trucks</h4> 
                 </div>
               </div>
               </div>
             </div>
-            <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <h5 class="mb-0 ">BBC 123 NW GP- 2015 Isuzu NPR</h5> 
-                    <h6>Capacity : 20 Pallets</h6>
-                    <h6><i class="far fa-dot-circle text-warning"></i> Status : Packing</h6>
-                  </button>
-                </div>
-                <div class="col-2 mt-2">
-                   <label class="custom-toggle">
-                    <input type="checkbox" >
-                    <span class="custom-toggle-slider  rounded-circle"></span>
-                  </label>
-                </div>
-              </div>
-              </div>
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned :</p>
-                    <div class="table-responsive">
-                      <div>
-                      <table class="table align-items-center">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th scope="col">
-                                      DeliveryID#
-                                  </th>
-                                  <th scope="col">
-                                      Product Name
-                                  </th>
-                                  <th scope="col">
-                                      Quantity
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody class="list">  
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                          </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-           <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      <h5 class="mb-0 ">CNN 123 NW GP- 2015 Volvo Frieghtliner</h5> 
-                      <h6>Capacity : 20 Pallets</h6>
-                      <h6><i class="far fa-dot-circle text-success"></i> Status : Empty</h6>
-                    </button>
-                  </div>
-                  <div class="col-2 mt-2">
-                     <label class="custom-toggle">
-                      <input type="checkbox" >
-                      <span class="custom-toggle-slider  rounded-circle"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div id="collapseTwo" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned :</p>
-                    <h6><i class="far fa-dot-circle text-warning"></i> Status : Packing</h6>
-                    <div class="table-responsive">
-                      <div>
-                      <table class="table align-items-center">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th scope="col">
-                                      DeliveryID#
-                                  </th>
-                                  <th scope="col">
-                                      Product Name
-                                  </th>
-                                  <th scope="col">
-                                      Quantity
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody class="list">  
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <h5 class="mb-0 ">BBC 123 NW GP- 2015 Isuzu NPR</h5> 
-                    <h6>Capacity : 20 Pallets</h6> 
-                    <h6><i class="far fa-dot-circle text-success"></i> Status : Empty</h6>
-                  </button>
-
-                </div>
-                <div class="col-2 mt-2">
-                   <label class="custom-toggle">
-                    <input type="checkbox" >
-                    <span class="custom-toggle-slider  rounded-circle"></span>
-                  </label>
-                </div>
-              </div>
-              </div>
-
-              <div id="collapseThree" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned : Empty</p>    
-              </div>
-            </div>
-          </div>
           </div>
           <div class="col-8">
             <div class="car shadow border-0">
@@ -259,6 +129,15 @@
             <div class="card-header border-0 bg-default">
               <div class="row align-items-center">
                 <div class="col ">
+                  <label hidden="true" id="dData"><?php echo json_encode($deliveryData);?></label>
+                  <label hidden="true" id="aData"><?php echo json_encode($addressData);?></label>
+                  <label hidden="true" id="subData"><?php echo json_encode($suburbData);?></label>
+                  <label hidden="true" id="citData"><?php echo json_encode($cityData);?></label>
+                   <label hidden="true" id="sData"><?php echo json_encode($saleData);?></label>
+                    <label hidden="true" id="spData"><?php echo json_encode($saleProductData);?></label>
+                    <label hidden="true" id="pData"><?php echo json_encode($productData);?></label>
+                    <label hidden="true" id="tpData"><?php echo json_encode($truckProductData);?></label>
+                    <label hidden="true" id="dtData"><?php echo json_encode($deliveryTruckData);?></label>
                   <h3 class="mb-0 text-white">Deliveries Pending</h3>
                 </div>
                 <div class="col text-right">
@@ -279,112 +158,7 @@
                     
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  
+                <tbody id="dBody">
                 </tbody>
               </table>
             </div>
@@ -398,7 +172,7 @@
                   <h3 class="mb-0 s">Delivery Item(s)</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-lg btn-success">Assign</a>
+                  <a href="#!" class="btn btn-lg btn-success" id="btnAssign">Assign</a>
                 </div>
               </div>
             </div>
@@ -412,38 +186,7 @@
             
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                
-                  </tr>
-                <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-             
-                    <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-          
-
+                <tbody id="enterProducts">
                 </tbody>
               </table>
             </div>
@@ -467,7 +210,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <script type="text/javascript" src="JS/assignTruckMap.js"></script>
+  <!-- <script type="text/javascript" src="JS/assignTruckMap.js"></script> -->
+  <script type="text/javascript" src="JS/assignTruck.js"></script>
 </body>
 
 </html>
