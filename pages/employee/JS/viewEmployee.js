@@ -67,6 +67,48 @@ $(()=>{
           
         });
     });
+
+
+
+
+    $("#checkIn").click(function(e)
+    {//use ID of the form
+        e.preventDefault();
+		let id = $("#employee_ID").text().trim();
+		let employeeID=parseInt(id);
+		
+        console.log(employeeID);
+        $.ajax({
+            url:'PHPcode/verifyQRcode.php',
+            type:'POST',
+            data: {qrCode:employeeID}
+        })
+        .done(data=>{
+            console.log(data);
+            let confirmation = data.trim();
+            if(confirmation.includes("success"))
+            {
+                $("#modal-title-default").text("Success!");
+                $("#modalText").text("Employee Successfully checked-in");
+                $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation.includes("Over checkout time"))
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modalText").text("Cannot check-in , checkout time has passed");
+               
+                $("#displayModal").modal("show");
+            }
+            else
+            {
+              $('#modal-title-default').text("Error!");
+              $('#modalText').text("Employee not found , please try again");
+              $('#checkedIn').modal("show");
+            }
+           
+        });
+    });
     
 
 

@@ -268,14 +268,14 @@
                   </div>
 
                   <div class="col-6">
-                      <form action='wage_calc.php' method="POST" id="addUserView">
-                        <input type="hidden" name="employeesID" value=<?php echo $employeeID;?>>
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
 
-                        <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="button">
-                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i>
+                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkIn">
+                            <span class="btn-inner--icon"><i class="far fa-check-square"></i>
                             </span>
-                            <span class="btn-inner--text">Add User</span>
+                            <span class="btn-inner--text">Check-in</span>
                         </button>
                       </form>
                   </div> 
