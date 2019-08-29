@@ -9,7 +9,7 @@ $(document).ready(function(){
            
       
             $.ajax({
-                url:'PHPcode/overDue-SQL.php',
+                url:'pages/admin/PHPcode/overDue-SQL.php',
                 type:'post',
                 data:{user_ID:userID, overdueTime:days},
                 success:function(data)
@@ -21,7 +21,7 @@ $(document).ready(function(){
                     {
                         $("#modal-title-defaultOverdue").text("Success!");
                         $("#modalTextOverdue").text("Overdue status successfully maintained");
-                        $("#btnCloseOverdue").attr('onclick',"window.location='../../admin.php'");
+                        $("#btnCloseOverdue").attr('onclick',"window.location='admin.php'");
                         $("#overdueStatusSet").modal("show");
                     }
                     else if(confirmation.includes("Could not change overdue delivery status"))
