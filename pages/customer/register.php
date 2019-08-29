@@ -133,7 +133,7 @@
                                     <button class="btn btn-success " id="btn-add-address-ind" type="button">
                                         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
-                                    <small>Max 3 Adresses allowed</small>
+                                    
                       </div>
                      </div>
                      <div class="row">
@@ -146,7 +146,7 @@
 
                   </div>
 					
-                  <div class="tab-pane fade show active" id="profile"  aria-labelledby="profile-tab">
+                  <div class="tab-pane fade " id="profile"  aria-labelledby="profile-tab">
                     <form method="POST" action="" id="mainforg" novalidate>
                       <div class="form-row">
                         <div class="form-group col-lg-6 col-md-6 col-sm-12">
@@ -198,7 +198,7 @@
                                     <button class="btn btn-success " id="btn-add-address-org" type="button">
                                         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
-                                    <small>Max 3 Adresses allowed</small>
+                                    
                       </div>
 					</div>
 					<div class="row">
