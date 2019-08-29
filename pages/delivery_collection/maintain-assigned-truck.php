@@ -1,3 +1,10 @@
+<?php
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $assignedDeliveryData=getAssignedDeliveries($con);
+  $assignedDeliveryProductData=getAssignedDeliveryProducts($con);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,12 +55,10 @@
           <div class="card shadow">
             <div class="card-header border-0">
               <div class="form-group col-12">
+                <label hidden="true" id="adData"><?php echo json_encode($assignedDeliveryData);?></label>
+                <label hidden="true" id="adpData"><?php echo json_encode($assignedDeliveryProductData);?></label>
                 <label>Truck</label>
-                <select class="form-control btn-default">
-                  <option>BBC 123 NW  |  2015 Isuzu NPR          | 10 Tonnes</option>
-                  <option>DSM 032 NW  |  2017 GMC Savana G33903  | 25 Tonnes</option>
-                  <option>CAD 347 NW  |  2017 Freightliner M2    | 40 Tonnes</option>
-                  <option>ADW 586 NW  |  2016 Volvo VNL84430     | 50 Tonnes</option>
+                <select class="form-control btn-default" id="truckSelect">
                 </select>
               </div>
 
@@ -64,47 +69,12 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col-2">Qty</th>
-                    <th scope="col-4">Delivery ID</th>
+                    <th scope="col-4">Sale ID</th>
                     <th scope="col">Product Name</th>
             
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>1</td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>1</td>
-                    <td>
-                      Coke
-                    </td>
-                
-                  </tr>
-                <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>1</td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-             
-                    <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>1</td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-          
-
+                <tbody id="enterProducts">
                 </tbody>
               </table>
             </div>
@@ -126,7 +96,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#success">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYes">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -202,6 +172,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/maintainAssignedTruck.js"></script>
 </body>
 
 </html>

@@ -498,5 +498,101 @@
 			return false;
 		}
 	}
+	////////////////////////////////////////////////////////
+	//code for maintain
+	function getAssignedDeliveries($con)
+	{
+		$get_query="SELECT A.DELIVERY_ID,A.SALE_ID,B.DELIVERY_TRUCK_ID,B.TRUCK_ID,C.REGISTRATION_NUMBER,C.TRUCK_NAME,C.CAPACITY
+			FROM DELIVERY A
+			JOIN DELIVERY_TRUCK B ON A.DELIVERY_ID=B.DELIVERY_ID
+			JOIN TRUCK C ON B.TRUCK_ID=C.TRUCK_ID
+			WHERE A.DCT_STATUS_ID=2";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getAssignedDeliveryProducts($con)
+	{
+		$get_query="SELECT A.DELIVERY_TRUCK_ID,A.DELIVERY_ID,A.SALE_ID,B.PRODUCT_ID,B.QUANTITY,C.TRUCK_ID,CONCAT(D.NAME,' (',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN '1'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN D.UNITS_PER_CASE
+			ELSE D.CASES_PER_PALLET
+			END,' x ',D.PRODUCT_MEASUREMENT,D.PRODUCT_MEASUREMENT_UNIT,') ',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
+			ELSE 'Pallet'
+			END) AS PRODUCT_NAME
+			FROM DELIVERY_TRUCK A
+			JOIN TRUCK_PRODUCT B ON A.DELIVERY_TRUCK_ID=B.DELIVERY_TRUCK_ID
+			JOIN TRUCK C ON A.TRUCK_ID=C.TRUCK_ID
+			JOIN PRODUCT D ON B.PRODUCT_ID=D.PRODUCT_ID
+			WHERE A.DCT_STATUS_ID=2";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function deleteMaintainProductAssignment($con,$deliverytruckid,$saleid,$productid)
+	{
+		$delete_query="DELETE FROM TRUCK_PRODUCT WHERE DELIVERY_TRUCK_ID='$deliverytruckid' AND SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateMaintainProductAssignment($con,$deliverytruckid,$saleid,$productid,$qty)
+	{
+		$update_query="UPDATE TRUCK_PRODUCT SET QUANTITY=QUANTITY-'$qty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid' AND DELIVERY_TRUCK_ID='$deliverytruckid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateMaintainProductSaleAssignment($con,$saleid,$productid,$qty)
+	{
+		$update_query="UPDATE SALE_PRODUCT SET QUANTITY_ASSIGNED=QUANTITY_ASSIGNED+'$qty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 ?>

@@ -121,5 +121,54 @@
 			}
 		}
 	}
+	elseif($_POST["choice"]==3)
+	{
+		$assignCount=$_POST["num"]-1;
+		for ($i=0; $i<;$_POST["num"] $i++) 
+		{ 
+			if($_POST["productremove"][$i])
+			{
+				if(deleteMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i]))
+				{
+					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
+					{
+						if($i==$assignCount)
+						{
+							echo "T,Maintained Assignment";
+						}
+					}
+					else
+					{
+						echo "F,Update Sale Assignment Failed".$i;
+					}
+				}
+				else
+				{
+					echo "F, Delete Fail".$i;
+				}
+			}
+			else
+			{
+				if(updateMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i]))
+				{
+					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
+					{
+						if($i==$assignCount)
+						{
+							echo "T,Maintained Assigned";
+						}
+					}
+					else
+					{
+						echo "False,Update Sale Assignment Failed".$i;
+					}
+				}
+				else
+				{
+					echo "F, Update Fail".$i;
+				}
+			}
+		}
+	}
 	mysqli_close($con);
 ?>
