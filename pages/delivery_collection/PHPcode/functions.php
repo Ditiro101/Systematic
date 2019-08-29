@@ -71,9 +71,9 @@
 		}
 	}
 
-	function addDelivery($con,$saleID,$date,$addressID,$dct)
+	function addDelivery($con,$saleID,$date,$addressID,$dct,$lat,$long)
 	{
-		$add_query="INSERT INTO DELIVERY (SALE_ID,EXPECTED_DATE,ADDRESS_ID,DCT_STATUS_ID) VALUES ('$saleID','$date','$addressID','$dct')";
+		$add_query="INSERT INTO DELIVERY (SALE_ID,EXPECTED_DATE,ADDRESS_ID,LATITUDE,LONGITUDE,DCT_STATUS_ID) VALUES ('$saleID','$date','$addressID','$lat','$long','$dct')";
 		$add_result=mysqli_query($con,$add_query);
 		if($add_result)
 		{
@@ -138,6 +138,7 @@
 			return false;
 		}	
 	}
+
 
 	function getAllSaleProducts($con)
 	{
@@ -415,6 +416,74 @@
 	function getDeliveryTruckData($con)
 	{
 		$get_query="SELECT * FROM DELIVERY_TRUCK";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getCompleteAddress($con)
+	{
+		$get_query="SELECT A.ADDRESS_ID,B.ADDRESS_LINE_1,C.NAME,C.ZIPCODE,D.CITY_NAME
+			FROM DELIVERY A
+			JOIN ADDRESS B ON A.ADDRESS_ID=B.ADDRESS_ID
+			JOIN SUBURB C ON B.SUBURB_ID=C.SUBURB_ID
+			JOIN CITY D ON C.CITY_ID=D.CITY_ID
+			WHERE DCT_STATUS_ID=1";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getSalesCustomer($con)
+	{
+		$get_query="SELECT A.SALE_ID,B.CUSTOMER_ID,C.NAME,C.SURNAME
+			FROM DELIVERY A
+			JOIN SALE B ON A.SALE_ID=B.SALE_ID
+			JOIN CUSTOMER C ON B.CUSTOMER_ID=C.CUSTOMER_ID
+			WHERE DCT_STATUS_ID=1";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getCompleteCustomerAddresses($con,$id)
+	{
+		$get_query="SELECT A.ADDRESS_ID,B.ADDRESS_LINE_1,C.NAME,C.ZIPCODE,D.CITY_NAME
+			FROM CUSTOMER_ADDRESS A
+			JOIN ADDRESS B ON A.ADDRESS_ID=B.ADDRESS_ID
+			JOIN SUBURB C ON B.SUBURB_ID=C.SUBURB_ID
+			JOIN CITY D ON C.CITY_ID=D.CITY_ID
+			WHERE CUSTOMER_ID='$id'";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{

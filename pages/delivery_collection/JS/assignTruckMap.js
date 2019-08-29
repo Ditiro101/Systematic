@@ -4,6 +4,12 @@
  * @param {H.geo.Point} coordinate  The location of the marker
  * @param {String} html             Data associated with the marker
  */
+var mapDeliveryData;
+$(()=>{
+  mapDeliveryData=JSON.parse($("#dData").text());
+  console.log(mapDeliveryData);
+});
+
 function addMarkerToGroup(group, coordinate, html) {
   var marker = new H.map.Marker(coordinate);
   // add custom data to the marker
@@ -16,7 +22,7 @@ function addMarkerToGroup(group, coordinate, html) {
  * Clicking on a marker opens an infobubble which holds HTML content related to the marker.
  * @param  {H.Map} map      A HERE Map instance within the application
  */
-function addInfoBubble(map) {
+function addInfoBubble(map,mapArr) {
   var group = new H.map.Group();
 
   map.addObject(group);
@@ -33,8 +39,12 @@ function addInfoBubble(map) {
     ui.addBubble(bubble);
   }, false);
 
-  addMarkerToGroup(group, {lat:-25.64242, lng:27.78417},
+  for(let k=0;k<mapArr.length;k++)
+  {
+    addMarkerToGroup(group, {lat:mapArr[k]["LATITUDE"], lng:mapArr[k]["LONGITUDE"]},
     'Manchester City' +'City of Manchester Stadium Capacity: 48,000');
+  }
+
 
   // addMarkerToGroup(group, {lat:53.430, lng:-2.961},
   //   'Liverpool' +'Anfield Capacity: 45,362');
@@ -70,4 +80,4 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 
 // Now use the map as required...
-addInfoBubble(map);
+addInfoBubble(map,mapDeliveryData);

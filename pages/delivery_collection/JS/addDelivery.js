@@ -1,36 +1,22 @@
-var customerAddress;
 var addressData;
-var suburbData;
-var cityData;
 var chooseAddressID;
-let preLoadAddress=function(num)
+var coordinates=[];
+var lat;
+var long;
+let preLoadAddress=function(arr)
 {
 	let dW=$("#inputAddress");
-	let wOption=$("<option></option>").addClass("classAddress");
-	let id="d"+num;
-	wOption.attr("id",id);
-	wOption.attr("name",num);
-	let address=addressData.find(function(element){
-		if(element["ADDRESS_ID"]==num)
-		{
-			return element;
-		}
-	});
-	let suburb=suburbData.find(function(element){
-		if(element["SUBURB_ID"]==address["SUBURB_ID"])
-		{
-			return element;
-		}
-	});
-	let city=cityData.find(function(element){
-		if(element["CITY_ID"]==suburb["CITY_ID"])
-		{
-			return element;
-		}
-	});
-	let final=address["ADDRESS_LINE_1"]+","+suburb["NAME"]+","+suburb["ZIPCODE"]+","+city["CITY_NAME"]+",South Africa";
-	wOption.text(final);
-	dW.append(wOption);
+	for(let k=0;k<addressData.length;k++)
+	{
+		let wOption=$("<option></option>").addClass("classAddress");
+		let id="d"+addressData[k]["ADDRESS_ID"];
+		wOption.attr("id",id);
+		wOption.attr("name",addressData[k]["ADDRESS_ID"]);
+		let final=addressData[k]["ADDRESS_LINE_1"]+","+addressData[k]["NAME"]+","+addressData[k]["ZIPCODE"]+","+addressData[k]["CITY_NAME"]+",South Africa";
+		wOption.text(final);
+		dW.append(wOption);
+	}
+	
 }
 $(()=>{
 	let customerData=JSON.parse($("#cData").text());
@@ -38,18 +24,11 @@ $(()=>{
 	$("#saleID").text("Sale No. #"+saleID+": ");
 	$("#CustomerName").text(customerData["NAME"]+" "+customerData["SURNAME"]);
 	$("#delDate").val($("#sDate").text());
-	customerAddress=JSON.parse($("#cAddress").text());
+	//customerAddress=JSON.parse($("#cAddress").text());
 	addressData=JSON.parse($("#addData").text());
-	suburbData=JSON.parse($("#subData").text());
-	cityData=JSON.parse($("#citData").text());
-	console.log(customerAddress);
-	console.log(addressData);
-	console.log(suburbData);
-	console.log(cityData);
-	for(let k=0;k<customerAddress.length;k++)
-	{
-		preLoadAddress(customerAddress[k]["ADDRESS_ID"]);
-	}
+	//suburbData=JSON.parse($("#subData").text());
+	//cityData=JSON.parse($("#citData").text());
+	preLoadAddress(addressData);
 
 	chooseAddressID=$("#inputAddress option:selected").attr("name");
 
@@ -63,11 +42,25 @@ $(()=>{
 		let deliveryDate=$("#delDate").val();
 		console.log(deliveryDate);
 		console.log(chooseAddressID);
-		console.log(saleID);
-				$.ajax({
+		let chooseAddress=addressData.find(function(element){
+			if(element["ADDRESS_ID"]==chooseAddressID)
+			{
+				return element;
+			}
+		});
+		let chooseAddressName=chooseAddress["ADDRESS_LINE_1"]+", "+chooseAddress["CITY_NAME"]+", "+chooseAddress["ZIPCODE"]+", South Africa";
+		console.log(chooseAddressName);
+		$.getJSON("https://geocoder.api.here.com/6.2/geocode.json?searchtext="+chooseAddressName+"&gen=9&app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw",{
+			format:"json"
+		})
+		.done(data=>{
+			coordinates=data;
+			lat=coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Latitude"];
+			long=coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Longitude"];
+			$.ajax({
 				url: 'PHPcode/deliverycode.php',
 				type: 'POST',
-				data:{choice:1,SALE_ID:saleID,ADDRESS_ID:chooseAddressID,dDate:deliveryDate}
+				data:{choice:1,SALE_ID:saleID,ADDRESS_ID:chooseAddressID,dDate:deliveryDate,latitude:lat,longitude:long}
 				})
 				.done(data=>{
 					let doneData=data.split(",");
@@ -86,7 +79,9 @@ $(()=>{
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
 					}
-				});	
+				});
+		});
+					
 	});
 
 

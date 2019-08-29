@@ -17,7 +17,7 @@
 		// {
 		// 	echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 		// }
-		if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1))
+		if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1,$_POST["latitude"],$_POST["longitude"]))
 		{
 			echo "T,Delivery Added Sucessfully";
 		}
