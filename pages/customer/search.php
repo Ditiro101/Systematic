@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -67,46 +68,11 @@
                 <th >Surname</th>
                 <th> Contact number</th>
                 <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
+         
               </tr>
             </thead>
             <tbody id="tBody">
-              <tr>
-                <td>Mr</td>
-                <td>John</td>
-                <td>Smith</td>
-                <td>085 515 6262</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                    </span>
-                    <span class="btn-inner--text">View Credit Account</span>
-                  </button>
-                </td>
-              </tr>
+
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Customer Found</b></td>
                 <td></td>

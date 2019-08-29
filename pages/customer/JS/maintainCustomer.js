@@ -120,7 +120,7 @@ $(()=>{
 	jQuery.validator.setDefaults({
   		debug: true,
   		success: "valid"
-	});
+  	});
 	let customerTypeID=parseInt($("#cTypeID").text());
 	if(customerTypeID==1)
 	{
