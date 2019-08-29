@@ -229,27 +229,31 @@ $(document).ready(function()
                     else if(confirmation == "error in saving employee pic or generated employee tag")
                     {
                         $("#modal-title-default").text("Error!");
-                        $("#MMessage").text("error in saving employee pic or generated employee tag");
+                        $("#MMessage").text("error in saving employee pic or generated employee tag , generate employee tag or upload picture in mainatain");
                         $("#displayModal").modal("show");
+
+                        
                     }
                     else if(confirmation == "Couldnt get ID of employee details")
                     {
                         $("#modal-title-default").text("Error!");
-                        $("#MMessage").text("Couldnt get ID of employee details");
+                        $("#MMessage").text("Couldnt get ID of employee details , generate employee tag or upload picture in mainatain");
                         $("#displayModal").modal("show");
                     }
                     else if(confirmation.includes("There was an error within the picture upload"))
                     {
                         $("#modal-title-default").text("Error!");
-                        $("#MMessage").text("Incorrect picture size or format");
+                        $("#MMessage").text("Incorrect picture size or format , generate employee tag or upload picture in mainatain");
                         $("#displayModal").modal("show");
                     }
                     else
                     {
                         
                         $("#modal-title-default").text("Error!");
-                        $("#MMessage").text("Couldnt insert details");
+                        $("#MMessage").text(confirmation);
                         $("#displayModal").modal("show");
+
+                        
                     }
                   
                 });
