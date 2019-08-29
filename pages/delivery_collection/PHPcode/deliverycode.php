@@ -17,13 +17,24 @@
 		// {
 		// 	echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 		// }
-		if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1))
+		if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1,$_POST["latitude"],$_POST["longitude"]))
 		{
 			echo "T,Delivery Added Sucessfully";
 		}
 		else
 		{
 			echo "F,Delivery Not Added";
+		}
+	}
+	elseif($_POST["choice"]==2)
+	{
+		if(deleteDelivery($con,$_POST["deliveryID"]))
+		{
+			echo "T,Delivery Cancelled Successfully";
+		}
+		else
+		{
+			echo "F,Delivery not cancelled";
 		}
 	}
 	mysqli_close($con);

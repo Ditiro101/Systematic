@@ -1,10 +1,11 @@
 <?php
+  include_once("../sessionCheckPages.php");
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
-  $customerAddress=getCustomerAddressIDs($con,$_POST["CUSTOMER_ID"]);
-  $addressData=getAllAddresses($con);
-  $suburbData=getAllSuburbs($con);
-  $cityData=getAllCity($con);
+  // $customerAddress=getCustomerAddressIDs($con,$_POST["CUSTOMER_ID"]);
+  $addressData=getCompleteCustomerAddresses($con,$_POST["CUSTOMER_ID"]);
+  // $suburbData=getAllSuburbs($con);
+  // $cityData=getAllCity($con);
 ?>
 <!DOCTYPE html>
 <html>
@@ -67,9 +68,9 @@
                         <div class="form-row ">
                           <div class="form-group col">
                             <label id="addData" hidden="true"><?php echo json_encode($addressData);?></label>
-                            <label id="subData" hidden="true"><?php echo json_encode($suburbData);?></label>
-                            <label id="citData" hidden="true"><?php echo json_encode($cityData);?></label>
-                            <label id="cAddress" hidden="true"><?php echo json_encode($customerAddress);?></label>
+                            <!-- <label id="subData" hidden="true"><?php echo json_encode($suburbData);?></label>
+                            <label id="citData" hidden="true"><?php echo json_encode($cityData);?></label> -->
+                           <!--  <label id="cAddress" hidden="true"><?php echo json_encode($customerAddress);?></label> -->
                             <label id="cData" hidden="true"><?php echo $_POST["CUSTOMER_DATA"];?></label>
                             <label id="sID" hidden="true"><?php echo $_POST["SALE_ID"];?></label>
                             <label id="sDate" hidden="true"><?php echo $_POST["SALE_DATE"];?></label>

@@ -1,3 +1,16 @@
+<?php
+    include_once("../sessionCheckPages.php");
+    include_once("PHPcode/connection.php");
+    include_once("PHPcode/functions.php");
+    $truckData=getAllTrucks($con);
+    $deliveryData=getUnassignedDeliveries($con,1);
+    $addressData=getCompleteAddress($con);
+    $saleData=getSalesCustomer($con);
+    $saleProductData=getAllSaleProducts($con);
+    $productData=getProductDetails($con);
+    $truckProductData=getTruckProductData($con);
+    $deliveryTruckData=getDeliveryTruckData($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -16,13 +29,173 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
-    <script src="http://maps.google.com/maps/api/js?sensor=false" 
-          type="text/javascript"></script>
+  <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+  <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" 
+          type="text/javascript"></script> -->
+    <style type="text/css">
+      .directions li span.arrow {
+        display:inline-block;
+        min-width:28px;
+        min-height:28px;
+        background-position:0px;
+        background-image: url("https://heremaps.github.io/maps-api-for-javascript-examples/map-with-route-from-a-to-b/img/arrows.png");
+        position:relative;
+        top:8px;
+      }
+      .directions li span.depart  {
+        background-position:-28px;
+      }
+      .directions li span.rightUTurn  {
+        background-position:-56px;
+      }
+      .directions li span.leftUTurn  {
+        background-position:-84px;
+      }
+      .directions li span.rightFork  {
+        background-position:-112px;
+      }
+      .directions li span.leftFork  {
+        background-position:-140px;
+      }
+      .directions li span.rightMerge  {
+        background-position:-112px;
+      }
+      .directions li span.leftMerge  {
+        background-position:-140px;
+      }
+      .directions li span.slightRightTurn  {
+        background-position:-168px;
+      }
+      .directions li span.slightLeftTurn{
+        background-position:-196px;
+      }
+      .directions li span.rightTurn  {
+        background-position:-224px;
+      }
+      .directions li span.leftTurn{
+        background-position:-252px;
+      }
+      .directions li span.sharpRightTurn  {
+        background-position:-280px;
+      }
+      .directions li span.sharpLeftTurn{
+        background-position:-308px;
+      }
+      .directions li span.rightRoundaboutExit1 {
+        background-position:-616px;
+      }
+      .directions li span.rightRoundaboutExit2 {
+        background-position:-644px;
+      }
+      
+      .directions li span.rightRoundaboutExit3 {
+        background-position:-672px;
+      }
+      
+      .directions li span.rightRoundaboutExit4 {
+        background-position:-700px;
+      }
+      
+      .directions li span.rightRoundaboutPass {
+        background-position:-700px;
+      }
+      
+      .directions li span.rightRoundaboutExit5 {
+        background-position:-728px;
+      }
+      .directions li span.rightRoundaboutExit6 {
+        background-position:-756px;
+      }
+      .directions li span.rightRoundaboutExit7 {
+        background-position:-784px;
+      }
+      .directions li span.rightRoundaboutExit8 {
+        background-position:-812px;
+      }
+      .directions li span.rightRoundaboutExit9 {
+        background-position:-840px;
+      }
+      .directions li span.rightRoundaboutExit10 {
+        background-position:-868px;
+      }
+      .directions li span.rightRoundaboutExit11 {
+        background-position:896px;
+      }
+      .directions li span.rightRoundaboutExit12 {
+        background-position:924px;
+      }
+      .directions li span.leftRoundaboutExit1  {
+        background-position:-952px;
+      }
+      .directions li span.leftRoundaboutExit2  {
+        background-position:-980px;
+      }
+      .directions li span.leftRoundaboutExit3  {
+        background-position:-1008px;
+      }
+      .directions li span.leftRoundaboutExit4  {
+        background-position:-1036px;
+      }
+      .directions li span.leftRoundaboutPass {
+        background-position:1036px;
+      }
+      .directions li span.leftRoundaboutExit5  {
+        background-position:-1064px;
+      }
+      .directions li span.leftRoundaboutExit6  {
+        background-position:-1092px;
+      }
+      .directions li span.leftRoundaboutExit7  {
+        background-position:-1120px;
+      }
+      .directions li span.leftRoundaboutExit8  {
+        background-position:-1148px;
+      }
+      .directions li span.leftRoundaboutExit9  {
+        background-position:-1176px;
+      }
+      .directions li span.leftRoundaboutExit10  {
+        background-position:-1204px;
+      }
+      .directions li span.leftRoundaboutExit11  {
+        background-position:-1232px;
+      }
+      .directions li span.leftRoundaboutExit12  {
+        background-position:-1260px;
+      }
+      .directions li span.arrive  {
+        background-position:-1288px;
+      }
+      .directions li span.leftRamp  {
+        background-position:-392px;
+      }
+      .directions li span.rightRamp  {
+        background-position:-420px;
+      }
+      .directions li span.leftExit  {
+        background-position:-448px;
+      }
+      .directions li span.rightExit  {
+        background-position:-476px;
+      }
+      .directions li span.ferry  {
+        background-position:-1316px;
+      }
+      </style>
 </head>
 
 <body>
   <?php include_once("../header.php");?>
    <!-- Main content -->
+   <!-- <img src='http://i.imgur.com/pKopwXp.gif' hidden="true" id="loadImage" alt='loading...' style="display:block; margin:0 auto;" /> -->
   <div class="main-content">
     <!-- Top navbar -->
       <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
@@ -52,164 +225,18 @@
               <div class="card-body " id="headingOne">
                 <div class="row">
                   <div class="col-10">
+                    <label hidden="true" id="tData"><?php echo json_encode($truckData);?></label>
                     <h4 class="mb-0 text-white text-uppercas ">My Trucks</h4> 
                 </div>
               </div>
               </div>
             </div>
-            <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                    <h5 class="mb-0 ">BBC 123 NW GP- 2015 Isuzu NPR</h5> 
-                    <h6>Capacity : 20 Pallets</h6>
-                    <h6><i class="far fa-dot-circle text-warning"></i> Status : Packing</h6>
-                  </button>
-                </div>
-                <div class="col-2 mt-2">
-                   <label class="custom-toggle">
-                    <input type="checkbox" >
-                    <span class="custom-toggle-slider  rounded-circle"></span>
-                  </label>
-                </div>
-              </div>
-              </div>
-              <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned :</p>
-                    <div class="table-responsive">
-                      <div>
-                      <table class="table align-items-center">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th scope="col">
-                                      DeliveryID#
-                                  </th>
-                                  <th scope="col">
-                                      Product Name
-                                  </th>
-                                  <th scope="col">
-                                      Quantity
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody class="list">  
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                          </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-           <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                    <button class="btn btn-link" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-                      <h5 class="mb-0 ">CNN 123 NW GP- 2015 Volvo Frieghtliner</h5> 
-                      <h6>Capacity : 20 Pallets</h6>
-                      <h6><i class="far fa-dot-circle text-success"></i> Status : Empty</h6>
-                    </button>
-                  </div>
-                  <div class="col-2 mt-2">
-                     <label class="custom-toggle">
-                      <input type="checkbox" >
-                      <span class="custom-toggle-slider  rounded-circle"></span>
-                    </label>
-                  </div>
-                </div>
-              </div>
-              <div id="collapseTwo" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned :</p>
-                    <h6><i class="far fa-dot-circle text-warning"></i> Status : Packing</h6>
-                    <div class="table-responsive">
-                      <div>
-                      <table class="table align-items-center">
-                          <thead class="thead-light">
-                              <tr>
-                                  <th scope="col">
-                                      DeliveryID#
-                                  </th>
-                                  <th scope="col">
-                                      Product Name
-                                  </th>
-                                  <th scope="col">
-                                      Quantity
-                                  </th>
-                              </tr>
-                          </thead>
-                          <tbody class="list">  
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                            <tr>
-                              <td>3</td>
-                              <td > Coke</td>
-                              <td > 50</td>
-                            </tr>
-                          </tbody>
-                        </table>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            <div class="card ">
-              <div class="card-header bg-secondary" id="headingOne">
-                <div class="row">
-                  <div class="col-10">
-                  <button class="btn btn-link" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                    <h5 class="mb-0 ">BBC 123 NW GP- 2015 Isuzu NPR</h5> 
-                    <h6>Capacity : 20 Pallets</h6> 
-                    <h6><i class="far fa-dot-circle text-success"></i> Status : Empty</h6>
-                  </button>
-
-                </div>
-                <div class="col-2 mt-2">
-                   <label class="custom-toggle">
-                    <input type="checkbox" >
-                    <span class="custom-toggle-slider  rounded-circle"></span>
-                  </label>
-                </div>
-              </div>
-              </div>
-
-              <div id="collapseThree" class="collapse " aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body">
-                  <p>Item(s) Assigned : Empty</p>    
-              </div>
-            </div>
-          </div>
           </div>
           <div class="col-8">
             <div class="car shadow border-0">
                <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
 
-            <script type="text/javascript">
+            <!-- <script type="text/javascript">
               var locations = [
                 ['Bondi Beach', -33.890542, 151.274856, 4],
                 ['Coogee Beach', -33.923036, 151.259052, 5],
@@ -241,19 +268,28 @@
                   }
                 })(marker, i));
               }
-            </script>
+            </script> -->
 
             </div>
           </div>
 
         </div>
-
-          <div class="row mt-5">
+        <div id="panel"></div>
+        <div class="row mt-5">
         <div class="col-xl-8 mb-5 mb-xl-0">
           <div class="card shadow">
             <div class="card-header border-0 bg-default">
               <div class="row align-items-center">
                 <div class="col ">
+                  <label hidden="true" id="dData"><?php echo json_encode($deliveryData);?></label>
+                  <label hidden="true" id="aData"><?php echo json_encode($addressData);?></label>
+                  <!-- <label hidden="true" id="subData"><?php echo json_encode($suburbData);?></label>
+                  <label hidden="true" id="citData"><?php echo json_encode($cityData);?></label> -->
+                   <label hidden="true" id="sData"><?php echo json_encode($saleData);?></label>
+                    <label hidden="true" id="spData"><?php echo json_encode($saleProductData);?></label>
+                    <label hidden="true" id="pData"><?php echo json_encode($productData);?></label>
+                    <label hidden="true" id="tpData"><?php echo json_encode($truckProductData);?></label>
+                    <label hidden="true" id="dtData"><?php echo json_encode($deliveryTruckData);?></label>
                   <h3 class="mb-0 text-white">Deliveries Pending</h3>
                 </div>
                 <div class="col text-right">
@@ -274,112 +310,7 @@
                     
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  <tr>
-                    <td><button class="btn btn-sm btn-warning">Select</button>
-                    <th scope="row">
-                     321
-                    </th>
-                    <td>
-                      25/07/2019
-                    </td>
-                    <td>
-                      Pretoria
-                    </td>
-
-                  </tr>
-                  
+                <tbody id="dBody">
                 </tbody>
               </table>
             </div>
@@ -393,7 +324,7 @@
                   <h3 class="mb-0 s">Delivery Item(s)</h3>
                 </div>
                 <div class="col text-right">
-                  <a href="#!" class="btn btn-lg btn-success">Assign</a>
+                  <a href="#!" class="btn btn-lg btn-success" id="btnAssign">Assign</a>
                 </div>
               </div>
             </div>
@@ -407,44 +338,12 @@
             
                   </tr>
                 </thead>
-                <tbody>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-                  <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                
-                  </tr>
-                <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-             
-                    <tr>
-<td class="py-2 px-0" id="quantityCol"><div class="input-group mx-auto" style="width: 4rem"><input type="number" value="0" min="0" step="1" data-number-to-fixed="00.10" data-number-stepfactor="1" class="form-control currency pr-0 quantityBox" onchange="calculateRowTotalQuantity(this)" id="quantity2" style="height: 2rem;"></div> </td>
-                    <td>
-                      Coke
-                    </td>
-                    
-                  </tr>
-          
-
+                <tbody id="enterProducts">
                 </tbody>
               </table>
             </div>
           </div>
         </div>
-
         </div>
       </div>
 
@@ -462,6 +361,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- <script type="text/javascript" src="JS/assignTruckMap.js"></script> -->
+  <script type="text/javascript" src="JS/assignTruck.js"></script>
 </body>
 
 </html>
