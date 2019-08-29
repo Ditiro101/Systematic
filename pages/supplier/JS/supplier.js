@@ -1,19 +1,43 @@
 var count=1;
+var regex=/^\d{3}\d{3}\d{4}$/;
+var emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 let CheckValid = function(valArr)
 {
 	if(valArr["con"].length!=10)
 	{
-		$("#MMessage").text("Contact Number must be 10 digits");
+		$("#MMessage").text("Contact Number must be 10 digits and contain no letters.");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
 	}
 	else if (valArr["VATNumber"].length!=10)
 	{
-		$("#MMessage").text("VAT Number must be 10 digits.");
+		$("#MMessage").text("VAT Number must be 10 digits and contain no letters.");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
+	}
+	else if(regex.test(valArr["con"])!=true)
+	{
+		$("#MMessage").text("Contact Number must only contain digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if(regex.test(valArr["VATNumber"])!=true)
+	{
+		$("#MMessage").text("VAT Number must only contain digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if(emailRegex.test(valArr["email"])!=true)
+	{
+		$("#MMessage").text("Email is not valid");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+
 	}
 	else
 	{

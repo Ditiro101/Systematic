@@ -69,7 +69,7 @@
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" name="VAT" id="VATNumber" value=<?php echo $_POST["VAT"];?> required>
+                            <input type="text" class="form-control" name="VAT" maxlength="10" id="VATNumber" value=<?php echo $_POST["VAT"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
@@ -79,7 +79,7 @@
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="text" class="form-control" name="email" id="supplierEmail" value=<?php echo $_POST["EMAIL"];?> required>
+                            <input type="email" class="form-control" name="email" id="supplierEmail" value=<?php echo $_POST["EMAIL"];?> required>
                           </div>
                         </div>
                         <hr class="my-4">
