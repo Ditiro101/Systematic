@@ -215,97 +215,188 @@
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            
-              <div class="d-flex justify-content-between">
-                
-                  <div>
-                  <form id="formMaintain" action="maintain.php" method="POST">
-                    <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
-                    <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
-                    <input type="hidden" name="SURNAME" value=<?php echo $surname;?>>
-                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $contactNumber;?>>
-                    <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
-                     <input type="hidden" name="IDENTITY_NUMBER" value=<?php echo $identityNo;?>>
-                    <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
-                    <input type="hidden" id="EMPLOYEE_TYPE_NAME" name="EMPLOYEE_TYPE_NAME">
-                    <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $employeeStatus;?>>
-                    <input type="hidden" name="ADDR" id="ADDR">
-                    <input type="hidden" name="SUBURB" id="SUBURB">
-                    <input type="hidden" name="CITY" id="CITY">
-                    <input type="hidden" name="ZIP" value=<?php echo $zipCode;?>>
-                    <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
-                      <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                      </span>
-                      <span class="btn-inner--text">Edit</span>
-                    </button>
-                  </form>
+              <div class="row">
+                  <div class="col-md-6 col-lg-6 col-sm-6 ">
+                    <form id="formMaintain" action="maintain.php" method="POST">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
+                        <input type="hidden" name="SURNAME" value=<?php echo $surname;?>>
+                        <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $contactNumber;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+                         <input type="hidden" name="IDENTITY_NUMBER" value=<?php echo $identityNo;?>>
+                        <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
+                        <input type="hidden" id="EMPLOYEE_TYPE_NAME" name="EMPLOYEE_TYPE_NAME">
+                        <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $employeeStatus;?>>
+                        <input type="hidden" name="ADDR" id="ADDR">
+                        <input type="hidden" name="SUBURB" id="SUBURB">
+                        <input type="hidden" name="CITY" id="CITY">
+                        <input type="hidden" name="ZIP" value=<?php echo $zipCode;?>>
+                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                          <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                          </span>
+                          <span class="btn-inner--text">Edit</span>
+                        </button>
+                      </form>
                   </div>
-                  <div>
-                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" style="margin-top: 30px;">
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                      <form action='../user/add-user.php' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="submit">
+                            <span class="btn-inner--icon"><i class="fas fa-user-plus"></i>
+                            </span>
+                            <span class="btn-inner--text">Add User</span>
+                        </button>
+                      </form>
+                  </div> 
+                </div>
+
+                <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-info btn-sm px-2" type="button" id="wageCalc">
+                            <span class="btn-inner--icon"><i class="far fa-money-bill-alt"></i>
+                            </span>
+                            <span class="btn-inner--text">Calculate Wage</span>
+                        </button>
+                      </form>
+                  </div> 
+
+
+                <div class="row">
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2 pb-2">
+                    <button class="btn btn-icon btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" >
                       <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                       </span>
                       <span class="btn-inner--text">Delete</span>
                     </button>
                   </div>
-                <!--/td-->
-                <!-- <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td> -->
-                <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
-                    </span>
-                    <span class="btn-inner--text">Re-generate Tag</span>
-                  </button>
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                    <button class="btn btn-sm btn-icon btn-default " type="button" data-toggle="modal" data-target="#del">
+                      <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
+                      </span>
+                      <span class="btn-inner--text">Re-generate Tag</span>
+                    </button>
+                  </div>
 
+                  <div class="col-6">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkIn">
+                            <span class="btn-inner--icon"><i class="far fa-check-square"></i>
+                            </span>
+                            <span class="btn-inner--text">Check-in</span>
+                        </button>
+                      </form>
+                  </div> 
+
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkOUT">
+                            <span class="btn-inner--icon"><i class="fas fa-check-double"></i>
+                            </span>
+                            <span class="btn-inner--text">Checkout</span>
+                        </button>
+                      </form>
+                  </div> 
+                  
                   <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                        </div>
+                        <div class="modal-body text-left">
+                            <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
+                        </div>
+                        <div class="modal-footer">   
+                          <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        </div>
+                      </div>
                     </div>
-                    <div class="modal-body text-left">
-                      <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
+                  </div>
+
+                  <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                    <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>      
+                            <div class="modal-body text-left">
+                                <p id="modalText"></p>                             
+                            </div>
+                            <div class="modal-footer">  
+                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnClose" onclick="">Close</button> 
+                            </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                      
-                    <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                </td>
+                  </div>
+
+
+                  <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to dismiss the selected employee?</p>
+                      </div>
+                      <div class="modal-body text-left">
+                        <div class="col mb-4">
+                          <label for="c2">Reason for dismissal</label>
+                          <div class="input-group"> 
+                            <input type="text" value=""  class="form-control" placeholder="Breach of contract" id="reasonOFDismissal" autofocus />
+                            <input type="hidden"  class="form-control " id="EMPLOYEE_ID" value=<?php echo $employeeID;?> />
+                          </div> 
+                        </div>
+                      </div>
+  
+                      <div class="modal-footer">
+                        
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="deleteButton">Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content">
-                    
-                      <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">×</span>
-                          </button>
-                      </div>
+              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
                       
-                      <div class="modal-body text-left">
-                          <p id="modalText"></p>
-                          
-                      </div>
-                      
-                      <div class="modal-footer">
-                          
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnClose" onclick="">Close</button> 
-                      </div>
-                      
-                  </div>
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p id="modalTextDismiss"></p>
+                            
+                        </div>
+                        
+                        <div class="modal-footer">
+                            
+                            <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                        </div>
+                        
+                    </div>
+                </div>
               </div>
-            </div>
-
-                </td>
+  
               </div>
             </div>
 
@@ -376,6 +467,7 @@
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <script type="text/javascript" src="JS/viewEmployee.js"></script>
+  <script type="text/javascript" src= "JS/dismissEmployee.js"></script>
 </body>
 
 </html>
