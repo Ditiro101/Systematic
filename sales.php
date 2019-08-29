@@ -50,6 +50,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("7.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/sales/make-sale.php">
@@ -60,6 +64,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("7.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/sales/search-sale.php">
@@ -70,6 +81,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("7.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/sales/search-sale.php">
@@ -80,6 +98,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("7.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/sales/search-sale.php">
@@ -90,6 +115,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("7.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a data-dismiss="modal" data-toggle="modal" data-target="#modal-payment" href="">
@@ -100,6 +132,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>

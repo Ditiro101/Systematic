@@ -50,6 +50,9 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+                <?php 
+                  if (in_array("1.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="/pages/customer/register.php">
                     <a href="pages/customer/register.php">
@@ -60,6 +63,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("1.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/customer/search.php">
@@ -70,6 +80,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("1.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/customer/search.php">
@@ -80,6 +97,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("1.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button class="btn-icon-clipboard" href="#">
                     <a href="pages/customer/search.php">
@@ -90,6 +114,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("1.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
                     <a href="pages/customer/search.php">
@@ -100,6 +131,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("1.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
                     <a href="pages/customer/search.php">
@@ -110,7 +148,9 @@
                     </a>
                   </button>
                 </div>
-
+                <?php
+                  }
+                ?>
 
               </div>
             </div>
