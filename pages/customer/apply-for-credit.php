@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,11 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- Validation  -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -56,7 +62,7 @@
                 <div class="tab-content col" id="myTabContent">
                     <form id="uploadForm">
                       <div class="form-row mb-4 col">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of Bank Statement</label>
                           <div class="input-group">
                             <div class="custom-file">
@@ -65,7 +71,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of ID</label>
                           <div class="input-group">
                             <div class="custom-file">
@@ -74,7 +80,7 @@
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Proof Of Residence</label>
                           <div class="input-group">
                             <div class="custom-file">
