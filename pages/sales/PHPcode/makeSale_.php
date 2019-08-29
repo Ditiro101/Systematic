@@ -61,7 +61,7 @@
 			$productLineProductID = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['PRODUCT_ID']);
 			$productLineSellingPrice = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['SELLING_PRICE']);
 			$productLineQuantity = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['QUANTITY']);
-			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity')";
+			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY,QUANTITY_ASSIGNED) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity','$productLineQuantity')";
 			mysqli_query($DBConnect, $querySaleProduct);
 		}
 
