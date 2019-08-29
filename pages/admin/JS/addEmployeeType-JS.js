@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+
+
         let switchStatus = false;
         $("#toggle-two").on('change', function() {
             if ($(this).is(':checked')) {
@@ -46,7 +48,17 @@ $(document).ready(function()
                 let accessLevelID = parseInt($("#aLevel option:selected").attr("name"));;
                 let postionName = $("#posName").val();
                 let wageEarningID;
-                if(switchStatus)
+                let form=$('#mainf');
+                form.validate();
+
+                if (form.valid()===false) 
+                {
+                    e.stopPropagation();
+                }
+                else
+                {
+
+                    if(switchStatus)
                 {
                     wageEarningID = 1;
                 }
@@ -92,6 +104,8 @@ $(document).ready(function()
                     }
                 });
 
+                }    
+                
             });
 
 });
