@@ -124,6 +124,7 @@
                               
                               $('#modal-title-default').text("Success!");
                               $('#modalText').text("Employee Successfully checked out");
+                              $("#btnClose").attr("onclick","window.location='../../employee.php'");
                               $('#checkedOut').modal("show");
                               // alert('The scanned content is: ' + content);
                              // window.open(content, "_blank");
@@ -185,7 +186,7 @@
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose">Close</button>
                           
                           </div>
                         </div>
@@ -196,7 +197,7 @@
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.html'">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.php'">
                     <div>
                       <i class="fa fa-search"></i>
                       <span>Search Employee</span>

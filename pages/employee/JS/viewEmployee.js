@@ -100,11 +100,56 @@ $(()=>{
                
                 $("#displayModal").modal("show");
             }
+            else if(confirmation.includes("Already Checked-in!"))
+            {
+              $('#modal-title-default').text("Warning!");
+              $('#modalText').text("Already Checked-in!!");
+              $('#displayModal').modal("show");
+            }
             else
             {
               $('#modal-title-default').text("Error!");
-              $('#modalText').text("Employee not found , please try again");
-              $('#checkedIn').modal("show");
+              $('#modalText').text("Database Error!");
+              $('#displayModal').modal("show");
+            }
+           
+        });
+    });
+
+
+    $("#checkOUT").click(function(e)
+    {//use ID of the form
+        e.preventDefault();
+		let id = $("#employee_ID").text().trim();
+		let employeeID=parseInt(id);
+		
+        console.log(employeeID);
+        $.ajax({
+            url:'PHPcode/checkOut-SQL.php',
+            type:'POST',
+            data: {qrCode:employeeID}
+        })
+        .done(data=>{
+            console.log(data);
+            let confirmation = data.trim();
+            if(confirmation.includes("success"))
+            {
+                $("#modal-title-default").text("Success!");
+                $("#modalText").text("Employee Successfully checked out");
+                $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation.includes("Too early to checkout"))
+            {
+              $('#modal-title-default').text("Error!");
+              $('#modalText').text("Check in first");
+              $('#displayModal').modal("show");
+            }
+            else 
+            {
+              $('#modal-title-default').text("Error!");
+              $('#modalText').text("Database Error!");
+              $('#displayModal').modal("show");
             }
            
         });

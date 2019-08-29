@@ -216,7 +216,7 @@
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="row">
-                  <div class="col-6">
+                  <div class="col-md-6 col-lg-6 col-sm-6 ">
                     <form id="formMaintain" action="maintain.php" method="POST">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
@@ -238,7 +238,7 @@
                         </button>
                       </form>
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
                       <form action='../user/add-user.php' method="POST" id="addUserView">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
@@ -252,7 +252,7 @@
                   </div> 
                 </div>
 
-                <div class="col-6">
+                <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
                       <form action='' method="POST" id="addUserView">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
@@ -266,15 +266,15 @@
                   </div> 
 
 
-                <div class="row mt-3">
-                  <div class="col-6">
+                <div class="row">
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2 pb-2">
                     <button class="btn btn-icon btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" >
                       <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                       </span>
                       <span class="btn-inner--text">Delete</span>
                     </button>
                   </div>
-                  <div class="col-6">
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
                     <button class="btn btn-sm btn-icon btn-default " type="button" data-toggle="modal" data-target="#del">
                       <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
                       </span>
@@ -295,6 +295,19 @@
                       </form>
                   </div> 
 
+                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkOUT">
+                            <span class="btn-inner--icon"><i class="fas fa-check-double"></i>
+                            </span>
+                            <span class="btn-inner--text">Checkout</span>
+                        </button>
+                      </form>
+                  </div> 
+                  
                   <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered" role="document">
                       <div class="modal-content">
