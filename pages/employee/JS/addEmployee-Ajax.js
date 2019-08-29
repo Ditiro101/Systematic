@@ -195,14 +195,25 @@ $(document).ready(function()
                 .done(data=>{
                     console.log(data);
                     let confirmation = data.trim();
-                    if(confirmation== "success")
+                    if(confirmation.includes("success"))
                     {
+                        let id = confirmation.split(",");
+                        let employeeID = parseInt(id[0]);
+                        console.log(id[0]);
                         $("#modal-title-default").text("Success!");
                         $("#MMessage").text("Employee added successfully");
-                        $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                        //$("#btnClose").attr("onclick","window.location='../../employee.php'");
                         $("#displayModal").modal("show");
+
+
+                         $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                   
+                                    window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
+                                });
                     }
-                    else if(confirmation == "Employee Exists!")
+                    else if(confirmation.includes("Employee Exists"))
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Employee Exists! , press close and try again");
@@ -225,6 +236,12 @@ $(document).ready(function()
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Couldnt get ID of employee details");
+                        $("#displayModal").modal("show");
+                    }
+                    else if(confirmation.includes("There was an error within the picture upload"))
+                    {
+                        $("#modal-title-default").text("Error!");
+                        $("#MMessage").text("Incorrect picture size or format");
                         $("#displayModal").modal("show");
                     }
                     else
