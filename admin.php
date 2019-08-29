@@ -203,6 +203,23 @@
                   }
                 ?>
 
+                 <?php 
+                  if (in_array("4.101", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  href="#">
+                    <a href="pages/admin/delete-user.php">
+                      <div>
+                        <i class="fas fa-user-times"></i>
+                        <span>Maintain Overdue Delivery Status</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>
