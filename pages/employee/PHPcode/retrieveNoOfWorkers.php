@@ -32,7 +32,7 @@ else
                     if($allValues = mysqli_fetch_assoc($execute))
                     {
                          $total_employees = $allValues["total_employees"];
-                         echo "Total n.o of employees is: " . $total_employees . "\n";
+                         echo "Total n.o of employees is " . $total_employees . "\n";
                     }
                 }
                 else
@@ -62,7 +62,7 @@ else
                     if($counter > 0)
                     {
                         
-                        echo "Total number of present employees is: " . $counter . "\n";
+                        echo "Total number of present employees is: " . $counter . ":" . $total_employees. "\n";
                     }
                     else
                     {

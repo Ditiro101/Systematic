@@ -8,7 +8,7 @@ $(document).ready(function(){
         
         var  tempVar = "fromJs";
             $.ajax({
-                url:'pages/employee/PHPcode/retrieveNoOfWorkers.php',
+                url:'pages/customer/PHPcode/retrieveNoOfCustomers.php',
                 type:'post',
                 data:{exampleVariable:tempVar},
                 success:function(response)
@@ -16,17 +16,17 @@ $(document).ready(function(){
 
                     console.log(response);
                     let confirmation = response;
-                   if(confirmation.includes("Total number of present employees is:"))
+                   if(confirmation.includes("Total n.o of credit customers is:"))
                     {
-                        let numberOfEmployees = confirmation.split(":");
-                        let percent = (numberOfEmployees[1]/numberOfEmployees[2]) * 100;
-                        $("#NoOfEmployees").text(numberOfEmployees[1]);
-                        $("#percentageOfEmployees").text(percent+"%");
+                        let numberOfCustomers = confirmation.split(":");
+                        let percent = (numberOfCustomers[1]/numberOfCustomers[2]) * 100;
+                        $("#NoOfCustomers").text(numberOfCustomers[1]);
+                        $("#percentageOfCustomers").text(percent.toFixed(2)+"%");
                     }
                     else
                     {
-                        $("#NoOfEmployees").text("0");
-                        $("#percentageOfEmployees").text("0%");
+                        $("#NoOfCustomers").text("0");
+                        $("#percentageOfCustomers").text("0%");
                     }
                 },
             });
