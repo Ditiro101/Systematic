@@ -46,7 +46,7 @@ $(document).ready(function(){
                                     if(confirm == "success")
                                     {
                                         $("#modal-title-default").text("Success!");
-                                        $("#modalText").text("Wage successfully collected. Printing wage slip...");    
+                                        $("#modalText").text("Wage successfully collected.");    
                                         $("#finaliseWage").modal('show');
 
                                         $("#closeWage").click(function(e){
