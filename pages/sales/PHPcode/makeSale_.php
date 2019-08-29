@@ -2,7 +2,10 @@
 
 	$customerID = "";
 	$userID = "";
+	$addSaleDelivery;
+	$saleDeliveryAddressID;
 	$saleProducts = Array();
+	$lastID;
 
 	$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
@@ -27,6 +30,8 @@
 		$customerID = mysqli_real_escape_string($DBConnect, $_POST['customerID']);
 		$userID = mysqli_real_escape_string($DBConnect, $_POST['saleUserID']);
 		$saleProducts  = $_POST['saleProducts'];
+		$addSaleDelivery = $_POST['addSaleDelivery'];
+		$saleDeliveryAddressID = $_POST['saleDeliveryID'];
 
 		$saleTotal = 0.00;
 		$arraySize = sizeof($saleProducts);
@@ -58,6 +63,14 @@
 			$productLineQuantity = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['QUANTITY']);
 			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity')";
 			mysqli_query($DBConnect, $querySaleProduct);
+		}
+
+		if ($addSaleDelivery == true) 
+		{
+			$dateFiveFromNow = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 5, date('Y')));
+
+			$querySaleDelivery = "INSERT INTO DELIVERY(SALE_ID, EXPECTED_DATE, ADDRESS_ID, DCT_STATUS_ID) VALUES( '$lastID', '$dateFiveFromNow', '$saleDeliveryAddressID', 1)";
+			mysqli_query($DBConnect, $querySaleDelivery);
 		}
 
 		//Close database connection

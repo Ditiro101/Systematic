@@ -26,13 +26,13 @@
       <div id="details" class="clearfix">
         <div id="client">
           <h2 class="name"><b>INVOICE TO:</b></h2>
-          <h2 class="name">Dr Weilbach</h2>
-          <div class="address">IT Building Room 5-69, University Of Pretoria</div>
+          <h2 class="name"><?php echo $_POST['CUSTOMER_NAME']; ?></h2>
+          <div class="address"><?php echo $_POST['ADDRESS']; ?></div>
           <div class="email"><a href="mailto:john@example.com">lizette.weilbach@up.ac.za </a></div>
         </div>
         <div id="invoice">
           <h1>INVOICE #321</h1>
-          <div class="date">Date of Invoice: 25/07/2019</div>
+          <div class="date">Date of Invoice: <?php echo(date('m/d/Y')); ?></div>
           <div class="date">Salesperson: Alana</div>
         </div>
       </div>
@@ -72,7 +72,7 @@
       </table>
       <div id="thanks">Thank you!</div>
       <div id="notices">
-       
+       <?php echo( $_POST['SALE_PRODUCTS']); ?>
     </main>
     <footer>
       Invoice was created on a computer and is valid without the signature and seal.

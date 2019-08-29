@@ -16,18 +16,27 @@
 		//Send error response
 	  	$response = "databaseError";
       	echo $response;
-      	die("ERROR: Could not connect. " . mysqli_connect_error());
 	}
 	else
 	{
-	;	$customerPhoneNumber = $_POST['customerPhone'];
-		$sql_query = "SELECT * FROM CUSTOMER WHERE CONTACT_NUMBER = '$customerPhoneNumber' OR CUSTOMER_ID = '$customerPhoneNumber' LIMIT 1";
+		$customerID = $_POST['customerID_'];
+		$sql_query = "SELECT A.ADDRESS_ID, B.ADDRESS_LINE_1, C.NAME, D.CITY_NAME, C.ZIPCODE
+		FROM CUSTOMER_ADDRESS A 
+		JOIN ADDRESS B ON A.ADDRESS_ID = B.ADDRESS_ID 
+		JOIN SUBURB C ON B.SUBURB_ID = C.SUBURB_ID
+		JOIN CITY D ON C.CITY_ID = D.CITY_ID
+		WHERE CUSTOMER_ID = '$customerID'";
+
 		$result = mysqli_query($DBConnect,$sql_query);
 
 		if (mysqli_num_rows($result)>0) 
 		{
-			$customerDetails=$result->fetch_assoc();
-		    echo json_encode($customerDetails);
+			$addresses = array();
+			for ($i=0; $i < mysqli_num_rows($result); $i++) 
+			{ 
+				array_push($addresses, $result->fetch_assoc());
+			}
+		    echo json_encode($addresses);
 	    }
 	    else
 	    {

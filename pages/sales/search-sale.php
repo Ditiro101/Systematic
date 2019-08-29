@@ -1,3 +1,5 @@
+<?php include_once("../sessionCheckPages.php");?>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 

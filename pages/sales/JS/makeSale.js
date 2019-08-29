@@ -2,8 +2,13 @@ var SALECUSTOMERID;
 var SALEUSERID;
 var SALEPRODUCTIDs = [];
 var SALEPRODUCTS = [];
+var SALEDELIVERYADD = false;
+var SALEDELIVERYADDRESSID;
 var productElementsCount = 1;
 var productsArray;
+
+var INVOICE_CUSTOMER_NAME;
+var INVOICE_CUSTOMER_ADDRESS;
 
 Array.prototype.remByVal = function(val) {
     for (var i = 0; i < this.length; i++) {
@@ -27,52 +32,78 @@ $(()=>{
 		if(data!="False")
 		{
 			let productsArray = JSON.parse(data);
+			//console.log(productsArray);
 			buildDropDown(productsArray);
 
 			$("input[id='dropdownItem']").on('click', function(){
 				let productIndex = this.name;
 
-				let pType="Individual";
-				let pNumber= 1;
-				if(productsArray[productIndex].PRODUCT_SIZE_TYPE==2)
+				if (!SALEPRODUCTIDs.includes(productsArray[productIndex].PRODUCT_ID)) 
 				{
-					pType="Case";
-					pNumber=productsArray[productIndex].UNITS_PER_CASE;
+
+					let pType="Individual";
+					let pNumber= 1;
+					if(productsArray[productIndex].PRODUCT_SIZE_TYPE==2)
+					{
+						pType="Case";
+						pNumber=productsArray[productIndex].UNITS_PER_CASE;
+					}
+					else if(productsArray[productIndex].PRODUCT_SIZE_TYPE==3)
+					{
+						pType="Pallet";
+						pNumber=productsArray[productIndex].CASES_PER_PALLET;
+					}
+
+					let theProductName = productsArray[productIndex].NAME+" ("+pNumber+" x "+productsArray[productIndex].PRODUCT_MEASUREMENT+productsArray[productIndex].PRODUCT_MEASUREMENT_UNIT+")"+" "+pType;
+
+					let theUnitPrice = productsArray[productIndex].SELLING_PRICE;
+					theUnitPrice = theUnitPrice;
+
+					let theGuidePrice = productsArray[productIndex].GUIDE_DISCOUNT;
+					theGuidePrice = theGuidePrice;
+					theGuidePrice = numberWithSpaces(theGuidePrice);
+					theGuidePrice = "R"+ theGuidePrice;
+
+					let theCostPrice = productsArray[productIndex].COST_PRICE;
+					theCostPrice = theCostPrice;
+					theCostPrice = numberWithSpaces(theCostPrice);
+					theCostPrice = "R"+ theCostPrice;
+
+					let theProfit = productsArray[productIndex].SELLING_PRICE - productsArray[productIndex].COST_PRICE;
+					theProfit = theProfit.toFixed(2);
+					theProfit = numberWithSpaces(theProfit);
+					theProfit = "R"+ theProfit;
+
+
+					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
+					let productsTable = $('#productsTable');
+					productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
+					productElementsCount++;
+
+					calculateVATandTotal();
+					SALEPRODUCTIDs.push(productsArray[productIndex].PRODUCT_ID);
 				}
-				else if(productsArray[productIndex].PRODUCT_SIZE_TYPE==3)
+				else
 				{
-					pType="Pallet";
-					pNumber=productsArray[productIndex].CASES_PER_PALLET;
+					let pType="Individual";
+					let pNumber= 1;
+					if(productsArray[productIndex].PRODUCT_SIZE_TYPE==2)
+					{
+						pType="Case";
+						pNumber=productsArray[productIndex].UNITS_PER_CASE;
+					}
+					else if(productsArray[productIndex].PRODUCT_SIZE_TYPE==3)
+					{
+						pType="Pallet";
+						pNumber=productsArray[productIndex].CASES_PER_PALLET;
+					}
+					let theProductName = productsArray[productIndex].NAME+" ("+pNumber+" x "+productsArray[productIndex].PRODUCT_MEASUREMENT+productsArray[productIndex].PRODUCT_MEASUREMENT_UNIT+")"+" "+pType;
+
+					$('#modal-title-default2').text("Error!");
+					$('#modalText').text("The product "+theProductName+" has already been added to the sale.");
+					$("#modalCloseButton").attr("onclick","");
+					$('#successfullyAdded').modal("show");
 				}
-
-				let theProductName = productsArray[productIndex].NAME+" ("+pNumber+" x "+productsArray[productIndex].PRODUCT_MEASUREMENT+productsArray[productIndex].PRODUCT_MEASUREMENT_UNIT+")"+" "+pType;
-
-				let theUnitPrice = productsArray[productIndex].SELLING_PRICE;
-				theUnitPrice = theUnitPrice;
-
-				let theGuidePrice = productsArray[productIndex].GUIDE_DISCOUNT;
-				theGuidePrice = theGuidePrice;
-				theGuidePrice = numberWithSpaces(theGuidePrice);
-				theGuidePrice = "R"+ theGuidePrice;
-
-				let theCostPrice = productsArray[productIndex].COST_PRICE;
-				theCostPrice = theCostPrice;
-				theCostPrice = numberWithSpaces(theCostPrice);
-				theCostPrice = "R"+ theCostPrice;
-
-				let theProfit = productsArray[productIndex].SELLING_PRICE - productsArray[productIndex].COST_PRICE;
-				theProfit = theProfit.toFixed(2);
-				theProfit = numberWithSpaces(theProfit);
-				theProfit = "R"+ theProfit;
-
-
-				$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
-				let productsTable = $('#productsTable');
-				productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
-				productElementsCount++;
-
-				calculateVATandTotal();
-				SALEPRODUCTIDs.push(productsArray[productIndex].PRODUCT_ID);
 				
 			});
 		}
@@ -95,13 +126,13 @@ $("button#searchCustomerButton").on('click', event => {
 	}
 	else
 	{
-		let customerID = $("#customerSearchInput").val();
+		let customerPhoneNumber = $("#customerSearchInput").val();
 
 		$.ajax({
 			url: 'PHPcode/getCustomer_.php',
 			type: 'POST',
 			data: { 
-				customerID_ : customerID,
+				customerPhone : customerPhoneNumber,
 			},
 			beforeSend: function() {
 	
@@ -109,6 +140,7 @@ $("button#searchCustomerButton").on('click', event => {
 		})
 		.done(response => {
 			let customerDetails = JSON.parse(response);
+			console.log(customerDetails);
 			SALECUSTOMERID = customerDetails["CUSTOMER_ID"];
 			if (response != "false") 
 			{
@@ -116,7 +148,78 @@ $("button#searchCustomerButton").on('click', event => {
 				customerDetails["CUSTOMER_ID"]
 				let custtomerID = $('#customerSearchInput').val();
 				let customerCard = $('#customerCard');
-				customerCard.html('<tr><th style="width: 12rem">Customer ID</th><td >'+customerDetails["CUSTOMER_ID"]+'</td></tr><tr><th>Name</th><td>'+customerDetails["NAME"]+'</td></tr><tr><th>Surname</th><td >'+customerDetails["SURNAME"]+'</td></tr><tr><th>Contact No</th><td >'+customerDetails["CONTACT_NUMBER"]+'</td></tr>');	
+				let customerInfo = '<tr><th style="width: 12rem">Customer ID</th><td >'+customerDetails["CUSTOMER_ID"]+'</td></tr><tr><th>Name</th><td>'+customerDetails["NAME"]+'</td></tr>';
+				INVOICE_CUSTOMER_NAME = customerDetails["NAME"];
+				if (customerDetails["SURNAME"] != null) 
+				{
+					customerInfo +='<tr><th>Surname</th><td >'+customerDetails["SURNAME"]+'</td></tr>';
+					INVOICE_CUSTOMER_NAME += " ";
+					INVOICE_CUSTOMER_NAME += customerDetails["SURNAME"];
+				}
+				else
+				{
+					customerInfo +='<tr><th>VAT Number</th><td >'+customerDetails["VAT_NUMBER"]+'</td></tr>';
+				}
+				customerInfo +='<tr><th>Contact No</th><td >'+customerDetails["CONTACT_NUMBER"]+'</td></tr>'
+				customerCard.html(customerInfo);	
+				
+				$.ajax({
+					url: 'PHPcode/getSaleDeliveryAddress.php',
+					type: 'POST',
+					data: { 
+						customerID_ : SALECUSTOMERID,
+					},
+					beforeSend: function() {
+			
+			    	}
+				})
+				.done(response => {
+					let customerAddressDetails = JSON.parse(response);
+					//console.log(customerAddressDetails);
+					
+					if (response != "false") 
+					{
+						var addresses = "";
+						for (var i = 0; i < customerAddressDetails.length; i++) {
+							//console.log(customerAddressDetails[i].ADDRESS_ID);
+							var checked = "";
+							if (i == 0) 
+							{
+								checked = "checked";
+								INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+
+							}
+							addresses +='<div class="custom-control custom-radio mb-3 col"><input name="custom-radio-2" class="custom-control-input deliveryAddressSelect" id="addressSelect'+i+'" type="radio" value="'+customerAddressDetails[i].ADDRESS_ID+'"'+checked+'><label class="custom-control-label" for="addressSelect'+i+'">'+customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE+'</label></div>';
+						}
+						let addressesDiv = $('#customerAddresses');
+						addressesDiv.html(addresses);
+
+						SALEDELIVERYADDRESSID = $('.deliveryAddressSelect:checked').val();
+						console.log(SALEDELIVERYADDRESSID);
+
+						$('.deliveryAddressSelect').on('input', function()
+						{
+							//console.log(this.value);
+							if (this.checked) 
+							{
+								SALEDELIVERYADDRESSID = this.value;
+								console.log(SALEDELIVERYADDRESSID);
+							}
+							else
+							{
+								console.log(SALEDELIVERYADDRESSID);
+							}
+						});	
+					}
+					else
+					{
+						var addresses = "";
+						let addressesDiv = $('#customerAddresses');
+						addressesDiv.html(addresses);
+					}
+					
+					ajaxDone = true;
+				});
 			}
 			else
 			{
@@ -124,16 +227,38 @@ $("button#searchCustomerButton").on('click', event => {
 				let customerCard = $('#customerCard');
 				customerCard.html('<tr><th>No Customer Found</th><td></td></tr>');
 				$('#customerSearchInput').val("");
+
+				var addresses = "";
+				let addressesDiv = $('#customerAddresses');
+				addressesDiv.html(addresses);
 			}
 			
 			ajaxDone = true;
 		});
 	}	
-});
+});  
 
 $("button#finaliseSale").on('click', event => {
+	//console.log(SALECUSTOMERID);
+	//console.log(SALEPRODUCTIDs);
+	if (SALECUSTOMERID == undefined) 
+	{
+		event.stopPropagation();
+		$('#modal-title-default2').text("Error!");
+		$('#modalText').text("Please add a customer to the sale");
+		$("#modalCloseButton").attr("onclick","");
+		$('#successfullyAdded').modal("show");
+	}
+	else if (SALEPRODUCTIDs.length == 0) 
+	{
+		event.stopPropagation();
+		$('#modal-title-default2').text("Error!");
+		$('#modalText').text("Please add products to the sale");
+		$("#modalCloseButton").attr("onclick","");
+		$('#successfullyAdded').modal("show");
+	}
 	
-	console.log(SALEPRODUCTS);
+
 });
 
 $("button#confirmSalesManagerPassword").on('click', event => {
@@ -154,7 +279,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
     })
     .done(response => {
 
-    	//console.log(response);
+    	console.log(response);
         if (response == "success")
 		{
 			SALEPRODUCTS = [];
@@ -163,6 +288,8 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 				var thisProductID = SALEPRODUCTIDs[i];
 				var thisProductQuantity = $('#quantity'+thisProductID).val();
 				var thisSellingPrice = $('#unitPrice'+thisProductID).val();
+				
+				
 
 				var productLine = {
 				    'PRODUCT_ID': thisProductID,
@@ -175,9 +302,12 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		        url:'PHPcode/makeSale_.php',
 		        type:'post',
 		        data:{ 
-		        	saleProducts:SALEPRODUCTS,
-		        	customerID:SALECUSTOMERID,
-		        	saleUserID:SALEUSERID
+		        	saleProducts : SALEPRODUCTS,
+		        	customerID : SALECUSTOMERID,
+		        	saleUserID : SALEUSERID,
+		        	addSaleDelivery: SALEDELIVERYADD,
+		        	saleDeliveryID: SALEDELIVERYADDRESSID
+
 		        },
 		        beforeSend: function(){
 		            //$('.loadingModal').modal('show');
@@ -191,21 +321,21 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		    	console.log(response);
 		        if (response == "success")
 				{
-					$('#modal-title-default').text("Success!");
+					$('#modal-title-default2').text("Success!");
 					$('#modalText').text("Correct Password. Sale is complete. Printing invoice...");
 					$("#modalCloseButton").attr("onclick","callTwo()");
 					$('#successfullyAdded').modal("show");
 				}
 				else if(response == "failed")
 				{
-					$('#modal-title-default').text("Error!");
+					$('#modal-title-default2').text("Error!");
 					$('#modalText').text("Incorrect password entered");
 					$("#modalCloseButton").attr("onclick","");
 					$('#successfullyAdded').modal("show");
 				}
 				else if(response == "Database error")
 				{
-					$('#modal-title-default').text("Database Error!");
+					$('#modal-title-default2').text("Database Error!");
 					$('#modalText').text("Database error whilst verifying password");
 					$("#modalCloseButton").attr("onclick","");
 					$('#successfullyAdded').modal("show");
@@ -218,21 +348,21 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		}
 		else if(response == "failed")
 		{
-			$('#modal-title-default').text("Error!");
+			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Incorrect password entered");
 			$("#modalCloseButton").attr("onclick","");
 			$('#successfullyAdded').modal("show");
 		}
 		else if(response == "Password empty")
 		{
-			$('#modal-title-default').text("Error!");
+			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Please enter a password");
 			$("#modalCloseButton").attr("onclick","");
 			$('#successfullyAdded').modal("show");
 		}
 		else if(response == "Database error")
 		{
-			$('#modal-title-default').text("Database Error!");
+			$('#modal-title-default2').text("Database Error!");
 			$('#modalText').text("Database error whilst verifying password");
 			$("#modalCloseButton").attr("onclick","");
 			$('#successfullyAdded').modal("show");
@@ -261,6 +391,21 @@ $('#menuItems').on('click', '.dropdown-item', function()
 	$("#searchProduct").dropdown('toggle');
 	$('#searchProduct').val("");
 	filter("");
+});
+
+$('#addSaleDeliveryCheckbox').on('input', function()
+{
+	var makeDelivery = $('#addSaleDeliveryCheckbox').is(":checked");
+	if (makeDelivery == true) 
+	{
+		SALEDELIVERYADD = true;
+		//console.log("Adding Delivery => "+makeDelivery);
+	}
+	else
+	{
+		SALEDELIVERYADD = false;
+		//console.log("Not adding Delivery => "+makeDelivery);
+	}
 });
 
 if (productElementsCount == 1) {
@@ -358,8 +503,12 @@ function filter(word)
 
 function callTwo(){
 
-	var URL = "invoice/invoice.php";
-	window.open(URL, '_blank');
+	//var URL = "invoice/invoice.php";
+	//window.open(URL, '_blank');
+	var form="<form target='_blank' action='invoice/invoice.php' id='sendSaleInfo' method='POST'><input type='hidden' name='CUSTOMER_NAME' value='"+INVOICE_CUSTOMER_NAME+"'>"+"<input type='hidden' name='ADDRESS' value='"+INVOICE_CUSTOMER_ADDRESS+"'>"+"<input type='hidden' name='SALE_PRODUCTS' value='"+JSON.stringify(SALEPRODUCTS)+"'>"+"</form>";
+
+	$("body").append(form);
+	$( "#sendSaleInfo" ).submit();
 	location.reload();
 }
 
@@ -439,7 +588,7 @@ function removeRow(src)
     var oRow = src.parentElement.parentElement;  
     //var quantity = element.parentNode.parentNode.previousSibling.previousSibling.childNodes[0].childNodes[0].value;
     var productID = src.parentNode.parentNode.childNodes[0].value;
-    console.log(productID);
+    //console.log(productID);
     
     //once the row reference is obtained, delete it passing in its rowIndex   
     document.all("productsTable").deleteRow(oRow.rowIndex);  
