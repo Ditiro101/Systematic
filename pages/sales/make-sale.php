@@ -529,6 +529,7 @@
 
   function calculateRowTotalQuantity(element)
   {
+    
     var thisQuantity = element.value;
     var unitPrice = element.parentNode.parentNode.nextSibling.nextSibling.childNodes[0].childNodes[2].value;
 

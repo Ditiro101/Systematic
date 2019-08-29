@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,9 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+
+  <!-- Link scanning library -->
+ <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>
 </head>
 
 <body>
@@ -71,11 +75,119 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <img class="img-fluid" src="../../assets/img/brand/qr.png">
+                          <!--img class="img-fluid" src="../../assets/img/brand/qr.png"-->
+
+                          <div id="qrscan"  class="embed-responsive embed-responsive-16by9">
+                                            <video autoplay="true" id="videoElement" class="embed-responsive-item">
+
+                                            
+                                            </video>
+                                          </div>
+                                          <script>
+                                            /* var video = document.querySelector("#videoElement");
+
+                                              if (navigator.mediaDevices.getUserMedia) {
+                                                navigator.mediaDevices.getUserMedia({ video: true })
+                                                  .then(function (stream) {
+                                                    video.srcObject = stream;
+                                                  })
+                                                  .catch(function (err0r) {
+                                                    console.log("Something went wrong!");
+                                                  });
+                                              }*/
+
+
+
+                                          let scanner = new Instascan.Scanner(
+                                              {
+                                                video: document.getElementById('videoElement')
+                                              }
+                                          );
+
+                                          scanner.addListener('scan', function(content) {
+
+                                            $("#scanQr").click(function(e) {
+
+                                              e.preventDefault();
+                                              console.log(content);
+                                          let savedID = content;
+                                          $.ajax({
+                                          type: 'POST',
+                                          url: 'PHPcode/searchScanner-SQL.php',
+                                          data: {qrCode : content},
+                                          beforeSend:()=>
+                                                      {
+                                                          
+                                                      }
+                                          })
+                                          .done(data => {
+                                          // do something with data
+                                                  console.log(data);
+                                                  let confirmation = data.trim();
+                                                
+                                                  if(confirmation == "success")
+                                                  {
+                                                      //Add this when fully done.
+                                                      
+                                                    
+                                                        /*$('#modal-title-default').text("Success!");
+                                                        $('#modalText').text("Employee found ,you will shortly be redirected to the view screen");
+                                                        $('#scannerSearch').modal("show");
+
+                                                        $("#successSearch").click(function(e) {
+
+                                                            e.preventDefault();*/
+                                                            window.location=`view.php?employeeID='${savedID}'`;
+                                                           // window.location=`wage_calc.php?employeeID='${savedID}'`;
+                                                        //});
+                                                      /* setTimeout(function(){redirect()},10000);
+                                                      
+                                                      function redirect()
+                                                      {
+                                                        // go do that thing
+                                                          
+                                                      
+                                                      }*/
+
+
+                                                      // alert('The scanned content is: ' + content);
+                                                    // window.open(content, "_blank");
+
+                                                  }
+                                                  else if(confirmation != "success")
+                                                  {
+                                                    $('#modal-title-default').text("Error!");
+                                                    $('#modalText').text("Employee not found , please try again or search employee");
+                                                    $('#scannerSearch').modal("show");
+                                                  }
+                                              })
+                                              .fail(()=>
+                                                  {
+                                                      console.log("ajax failed");
+                                                  });
+
+                                                  
+                                      });
+                                            });
+                                        
+
+
+                                      Instascan.Camera.getCameras().then(cameras => 
+                                      {
+                                          if(cameras.length > 0){
+                                              scanner.start(cameras[0]);
+                                          } else {
+                                              console.error("No Camera Device");
+                                          }
+                                      });
+
+
+                  </script>							 
+				
                         </div>
                         <div class="modal-footer">
                           <p>Place Employee QR inside the QR scanner box</p>
-                          <button type="button" class="btn btn-primary" onclick="window.location='view.php'">Scan QR</button>
+                          <button type="button" class="btn btn-primary" id="scanQr" onclick="">Scan QR</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                           
                           </div>
@@ -89,124 +201,14 @@
             <table id="myTable" class="table align-items-center table-flush">
                <thead class="thead-light">
               <tr class="header">
-                <th>Title</th>
+                <th>Employee ID</th>
                 <th >Name</th>
                 <th >Surname</th>
                 <th> ID Number</th>
                 <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Mr</td>
-                <td>Alfreds</td>
-                <td>Futterkiste</td>
-                <td>9401015800080</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text" id="deleteButton">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>Benny</td>
-                <td>Haynes</td>
-                <td>9610084800082</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'" >
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Ms</td>
-                <td>Annie</td>
-                <td>Saynes</td>
-                <td>9706295800083</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>David</td>
-                <td>Cooper</td>
-                <td>8312025800088</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Employee Found</b></td>
                 <td></td>
@@ -275,6 +277,9 @@
               </div>
             </div>
 
+
+           
+
             <script>
               function myFunction() 
             {
@@ -332,7 +337,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <script src ="JS/dismissEmployee.js"></script>
+  <script type="text/javascript" src="JS/searchEmployee.js"></script>
+
 </body>
 
 </html>
