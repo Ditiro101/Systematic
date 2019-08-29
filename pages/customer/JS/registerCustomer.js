@@ -487,6 +487,8 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
+
+						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
 						$("#MMessage").text(doneData[1]);
 						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
@@ -532,6 +534,7 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
+						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
 						$("#MMessage").text(doneData[1]);
 						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
