@@ -58,7 +58,7 @@
             //Set the timer of password.
 
            $expFormat = mktime(
-           date("H"), date("i")+1, date("s"), date("m") ,date("d"), date("Y")
+           date("H"), date("i")+10, date("s"), date("m") ,date("d"), date("Y")
            );
            $expDate = date("Y-m-d H:i:s",$expFormat);
            $key = md5(425*4+$email); //
