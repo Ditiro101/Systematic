@@ -251,6 +251,21 @@
                       </form>
                   </div> 
                 </div>
+
+                <div class="col-6">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn pb-2 btn-icon btn-2 btn-info btn-sm px-2" type="button" id="wageCalc">
+                            <span class="btn-inner--icon"><i class="far fa-money-bill-alt"></i>
+                            </span>
+                            <span class="btn-inner--text">Calculate Wage</span>
+                        </button>
+                      </form>
+                  </div> 
+
+
                 <div class="row mt-3">
                   <div class="col-6">
                     <button class="btn btn-icon btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" >

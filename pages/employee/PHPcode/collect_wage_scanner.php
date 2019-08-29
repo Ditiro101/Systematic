@@ -31,11 +31,41 @@ else
             $success = "success";
             if($query_QR)
             {
-                echo $success;
+                $sql = "SELECT EMPLOYEE_TYPE.WAGE_EARNING FROM EMPLOYEE
+                INNER JOIN EMPLOYEE_TYPE
+                ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
+                 WHERE (EMPLOYEE_ID='$employeeID')";
+                $query_QR = mysqli_query($DBConnect , $sql);
+
+                if($query_QR)
+                {
+                    if($row = mysqli_fetch_assoc($query_QR))
+                    {
+                        if($row["WAGE_EARNING"] == 1)
+                        {
+                            echo $success;
+                        }
+                        else
+                        {
+                            echo "Employee does not earn wage";
+                        }
+                    }
+                    else
+                    {
+                        echo "Fetch array has errors";
+                    }
+                }
+                else
+                {
+                        echo "Inner join is faulty";
+                }
+
+
+               
             }
             else
             {
-                echo "not found";
+                echo "Employee not found on system";
             }
                
         

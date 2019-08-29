@@ -109,6 +109,46 @@ $(()=>{
            
         });
     });
+
+
+    $("#wageCalc").click(function(e)
+    {//use ID of the form
+        e.preventDefault();
+		let id = $("#employee_ID").text().trim();
+		let employeeID=parseInt(id);
+		
+        console.log(employeeID);
+        $.ajax({
+            url:'PHPcode/collect_wage_scanner.php',
+            type:'POST',
+            data: {qrCode:employeeID}
+        })
+        .done(data=>{
+            console.log(data);
+            let confirmation = data.trim();
+            if(confirmation.includes("success"))
+            {
+                $("#modal-title-default").text("Success!");
+                $("#modalText").text("Employee found , wage will be calculated on next screen...");
+                //$("#btnClose").attr("onclick",`window.location=wage_calc.php?employeeID='${employeeID}'`);
+                $("#displayModal").modal("show");
+
+                   $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                   
+                                    window.location=`wage_calc.php?employeeID='${employeeID}'`;
+                                });
+            }
+            else if(confirmation != "success")
+            {
+              $('#modal-title-default').text("Error!");
+              $('#modalText').text(confirmation);
+              $('#scannerSearch').modal("show");
+            }
+           
+        });
+    });
     
 
 

@@ -121,7 +121,7 @@
                           console.log(data);
                           let confirmation = data.trim();
                          
-                          if(confirmation == "success")
+                          if(confirmation.includes("success"))
                           {
                               //Add this when fully done.
                               
@@ -153,7 +153,7 @@
                           else if(confirmation != "success")
                           {
                             $('#modal-title-default').text("Error!");
-                            $('#modalText').text("Employee not found , please try again or search employee");
+                            $('#modalText').text(confirmation);
                             $('#scannerSearch').modal("show");
                           }
                       })
@@ -202,7 +202,7 @@
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" id="successSearch" data-dismiss="modal" onclick="window.location='wage_calc.php'">Close</button>
+                              <button type="button" class="btn btn-secondary" id="successSearch" data-dismiss="modal" >Close</button>
                           
                           </div>
                         </div>
