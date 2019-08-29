@@ -139,7 +139,7 @@
             </div>
             <div class="card-body px-3" style="height: 15rem">
 
-              <table class="table align-items-center table-flush table-borderless" id= "customerCard">
+              <table class="table align-items-center table-flush table-borderless table-responsive" id= "customerCard">
                 <tbody class="list">    
                     <tr>
                       

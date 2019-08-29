@@ -6,6 +6,8 @@
 	$saleDeliveryAddressID;
 	$saleProducts = Array();
 	$lastID;
+	$deliveryLongitude;
+	$deliveryLatitude;
 
 	$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
@@ -32,6 +34,10 @@
 		$saleProducts  = $_POST['saleProducts'];
 		$addSaleDelivery = $_POST['addSaleDelivery'];
 		$saleDeliveryAddressID = $_POST['saleDeliveryID'];
+		$deliveryLongitude = $_POST['deliveryLongitude'];
+		$deliveryLatitude = $_POST['deliveryLatitude'];
+
+		//echo var_dump($_POST);
 
 		$saleTotal = 0.00;
 		$arraySize = sizeof($saleProducts);
@@ -61,15 +67,19 @@
 			$productLineProductID = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['PRODUCT_ID']);
 			$productLineSellingPrice = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['SELLING_PRICE']);
 			$productLineQuantity = mysqli_real_escape_string($DBConnect, $saleProducts[$i]['QUANTITY']);
-			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY,QUANTITY_ASSIGNED) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity','$productLineQuantity')";
+			$querySaleProduct = "INSERT INTO SALE_PRODUCT(SALE_ID, PRODUCT_ID, SELLING_PRICE, QUANTITY, QUANTITY_ASSIGNED) VALUES( '$lastID','$productLineProductID', '$productLineSellingPrice', '$productLineQuantity','$productLineQuantity')";
 			mysqli_query($DBConnect, $querySaleProduct);
+
+			//UPDATE AVAILABLE QUANTITY
+			$queryUpdateQuantity = "UPDATE PRODUCT SET QUANTITY_AVAILABLE = QUANTITY_AVAILABLE - $productLineQuantity WHERE PRODUCT_ID = $productLineProductID";
+			mysqli_query($DBConnect, $queryUpdateQuantity);
 		}
 
 		if ($addSaleDelivery == true) 
 		{
-			$dateFiveFromNow = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 5, date('Y')));
+			$dateFiveFromNow = date('Y-m-d', mktime(0, 0, 0, date('m'), date('d') + 3, date('Y')));
 
-			$querySaleDelivery = "INSERT INTO DELIVERY(SALE_ID, EXPECTED_DATE, ADDRESS_ID, DCT_STATUS_ID) VALUES( '$lastID', '$dateFiveFromNow', '$saleDeliveryAddressID', 1)";
+			$querySaleDelivery = "INSERT INTO DELIVERY(SALE_ID, EXPECTED_DATE, ADDRESS_ID, LONGITUDE, LATITUDE, DCT_STATUS_ID) VALUES( '$lastID', '$dateFiveFromNow', '$saleDeliveryAddressID', '$deliveryLongitude','$deliveryLatitude', 1)";
 			mysqli_query($DBConnect, $querySaleDelivery);
 		}
 
@@ -77,7 +87,7 @@
 		mysqli_close($DBConnect);
 
 		//Send success response
-		$response = "success";
+		$response = "success".",".$lastID;
 		echo $response;
 	}
 ?>

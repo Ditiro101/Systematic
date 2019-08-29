@@ -66,7 +66,7 @@
                <thead class="thead-light">
                 <tr class="header">
                   <th>Invoice #</th>
-                  <th>Date</th>
+                  <th>Date & Time</th>
                   <th>Customer Name</th>
                   <th>Salesperson</th>
                   <th>Total</th>

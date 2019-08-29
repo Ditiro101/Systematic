@@ -117,7 +117,7 @@
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
-                                Date 
+                                Date & Time
                               </th>
                               <td id="saleDate">
                                 <?php echo $_POST["SALE_DATE"];?>
@@ -206,18 +206,19 @@
                   <span class="btn-inner--text">Close</span>
                 </button>
 
-                <button class="btn btn-icon btn-2 btn-success mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-payment">
+                <button class="btn btn-icon btn-2 btn-success mt-0 float-right d-inline" type="button" data-toggle="modal" data-target="#modal-payment">
                   <span><i class="fas fa-money-bill-wave-alt"></i></span>
                   <span class="btn-inner--text">Make Payment</span>
                 </button>
 
-                <form action="../delivery_collection/add_delivery.php" method="POST">
+                <form action="../delivery_collection/add_delivery.php" class="d-inline" method="POST">
                   <input type="hidden" name="SALE_ID" value=<?php echo $_POST["SALE_ID"];?>>
                   <input type="hidden" name="SALE_DATE" value=<?php echo $_POST["SALE_DATE"];?>>
                   <input type="hidden" name="CUSTOMER_ID" value=<?php echo $_POST["CUSTOMER_ID"];?>>
                   <input type="hidden" name="CUSTOMER_DATA" value=<?php echo $_POST["CUSTOMER_DATA"];?>>
                   <label hidden="true" id="deliveryCheck"><?php echo $isDelivered;?></label>
-                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right" 
+
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right d-inline mr-2" 
                     type="submit" id="btnAddDelivery">
                     <span class="btn-inner--icon">
                       <i class="fas fa-truck"></i>
@@ -226,12 +227,12 @@
                   </button>
                 </form>
 
-                <button class="btn btn-icon btn-2 btn-danger mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-makeReturn">
+                <button class="btn btn-icon btn-2 btn-danger mt-0 float-right d-inline" type="button" data-toggle="modal" data-target="#modal-makeReturn">
                   <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
                   <span class="btn-inner--text">Make Return</span>
                 </button>
 
-                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-updateSale">
+                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2 d-inline" type="button" data-toggle="modal" data-target="#modal-updateSale">
                   <span class="btn-inner--icon"><i class="fas fa-people-carry"></i>
                   <span class="btn-inner--text">Collect Sale</span>
                 </button>

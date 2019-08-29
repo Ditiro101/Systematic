@@ -1,5 +1,6 @@
 var SALECUSTOMERID;
 var SALEUSERID;
+var SALEUSERNAME;
 var SALEPRODUCTIDs = [];
 var SALEPRODUCTS = [];
 var SALEDELIVERYADD = false;
@@ -9,6 +10,11 @@ var productsArray;
 
 var INVOICE_CUSTOMER_NAME;
 var INVOICE_CUSTOMER_ADDRESS;
+var INVOICE_CUSTOMER_EMAIL;
+var INVOICE_SALE_ID;
+
+var saleDeliveryLongitude = 0.0;
+var saleDeliveryLatitude = 0.0;
 
 Array.prototype.remByVal = function(val) {
     for (var i = 0; i < this.length; i++) {
@@ -75,7 +81,7 @@ $(()=>{
 					theProfit = "R"+ theProfit;
 
 
-					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
+					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' max='"+productsArray[productIndex].QUANTITY_AVAILABLE+"' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0 unitPriceSpinBox' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
 					let productsTable = $('#productsTable');
 					productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
 					productElementsCount++;
@@ -104,6 +110,33 @@ $(()=>{
 					$("#modalCloseButton").attr("onclick","");
 					$('#successfullyAdded').modal("show");
 				}
+
+				$('.unitPriceSpinBox').on('input', function()
+				{
+					//console.log(this.value);
+					//console.log(this.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML);
+					var costPriceOfRow = this.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML;
+					costPriceOfRow = costPriceOfRow.slice(1);
+					costPriceOfRow = costPriceOfRow.replace(/\s/g, '');
+					costPriceOfRow = parseFloat(costPriceOfRow);
+
+					var thisPrice = this.value;
+					thisPrice = thisPrice.replace(/\s/g, '');
+					thisPrice = parseFloat(thisPrice);
+
+					if (thisPrice < costPriceOfRow) 
+					{
+						this.style.backgroundColor = "red";
+					}
+					else if (thisPrice == costPriceOfRow) 
+					{
+						this.style.backgroundColor = "orange";
+					}
+					else
+					{
+						this.style.backgroundColor = "white";
+					}
+				});
 				
 			});
 		}
@@ -114,6 +147,7 @@ $(()=>{
 	});
 
 	SALEUSERID = SESSION['userID'];
+	SALEUSERNAME = SESSION['name'];
 });
 
 $("button#searchCustomerButton").on('click', event => {
@@ -150,6 +184,7 @@ $("button#searchCustomerButton").on('click', event => {
 				let customerCard = $('#customerCard');
 				let customerInfo = '<tr><th style="width: 12rem">Customer ID</th><td >'+customerDetails["CUSTOMER_ID"]+'</td></tr><tr><th>Name</th><td>'+customerDetails["NAME"]+'</td></tr>';
 				INVOICE_CUSTOMER_NAME = customerDetails["NAME"];
+				INVOICE_CUSTOMER_EMAIL = customerDetails["EMAIL"];
 				if (customerDetails["SURNAME"] != null) 
 				{
 					customerInfo +='<tr><th>Surname</th><td >'+customerDetails["SURNAME"]+'</td></tr>';
@@ -189,13 +224,13 @@ $("button#searchCustomerButton").on('click', event => {
 								INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
 
 							}
-							addresses +='<div class="custom-control custom-radio mb-3 col"><input name="custom-radio-2" class="custom-control-input deliveryAddressSelect" id="addressSelect'+i+'" type="radio" value="'+customerAddressDetails[i].ADDRESS_ID+'"'+checked+'><label class="custom-control-label" for="addressSelect'+i+'">'+customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE+'</label></div>';
+							addresses +='<div class="custom-control custom-radio mb-3 col"><input name="custom-radio-2" class="custom-control-input deliveryAddressSelect" array-index="'+i+'" id="addressSelect'+i+'" type="radio" value="'+customerAddressDetails[i].ADDRESS_ID+'"'+checked+'><label class="custom-control-label" for="addressSelect'+i+'">'+customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE+'</label></div>';
 						}
 						let addressesDiv = $('#customerAddresses');
 						addressesDiv.html(addresses);
 
 						SALEDELIVERYADDRESSID = $('.deliveryAddressSelect:checked').val();
-						console.log(SALEDELIVERYADDRESSID);
+						//console.log(SALEDELIVERYADDRESSID);
 
 						$('.deliveryAddressSelect').on('input', function()
 						{
@@ -203,7 +238,10 @@ $("button#searchCustomerButton").on('click', event => {
 							if (this.checked) 
 							{
 								SALEDELIVERYADDRESSID = this.value;
-								console.log(SALEDELIVERYADDRESSID);
+								i = this.getAttribute("array-index");;
+								INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+								//console.log(INVOICE_CUSTOMER_ADDRESS);
+
 							}
 							else
 							{
@@ -298,6 +336,18 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 				};
 				SALEPRODUCTS.push(productLine);
 			}
+
+			$.getJSON("https://geocoder.api.here.com/6.2/geocode.json?searchtext="+INVOICE_CUSTOMER_ADDRESS+"&gen=9&app_id=4ubUBkg0ecyvqIcmRpJw&app_code=R1S3qwnTFxK3FbiK1ucSqw",{
+			format:"json"
+			})
+			.done(data=>{
+				coordinates=data;
+				saleDeliveryLongitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Latitude"];
+				saleDeliveryLatitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Longitude"];
+
+				//console.log("Longitude => "+saleDeliveryLongitude+", Latitude => "+saleDeliveryLatitude);
+			});
+
 			$.ajax({
 		        url:'PHPcode/makeSale_.php',
 		        type:'post',
@@ -306,8 +356,9 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		        	customerID : SALECUSTOMERID,
 		        	saleUserID : SALEUSERID,
 		        	addSaleDelivery: SALEDELIVERYADD,
-		        	saleDeliveryID: SALEDELIVERYADDRESSID
-
+		        	saleDeliveryID: SALEDELIVERYADDRESSID,
+		        	deliveryLongitude: saleDeliveryLongitude,
+		        	deliveryLatitude: saleDeliveryLatitude
 		        },
 		        beforeSend: function(){
 		            //$('.loadingModal').modal('show');
@@ -319,7 +370,12 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		    .done(response => {
 
 		    	console.log(response);
-		        if (response == "success")
+		    	var reponseArray = response.split(',');
+		    	INVOICE_SALE_ID = reponseArray[1];
+		    	var responseText = reponseArray[0];
+		    	console.log(reponseArray);
+
+		        if (responseText == "success")
 				{
 					$('#modal-title-default2').text("Success!");
 					$('#modalText').text("Correct Password. Sale is complete. Printing invoice...");
@@ -409,7 +465,7 @@ $('#addSaleDeliveryCheckbox').on('input', function()
 });
 
 if (productElementsCount == 1) {
-	console.log(this.name);
+	//console.log(this.name);
 	let productIndex = this.name;
 
 	let productsTable = $('#productsTable');
@@ -505,7 +561,7 @@ function callTwo(){
 
 	//var URL = "invoice/invoice.php";
 	//window.open(URL, '_blank');
-	var form="<form target='_blank' action='invoice/invoice.php' id='sendSaleInfo' method='POST'><input type='hidden' name='CUSTOMER_NAME' value='"+INVOICE_CUSTOMER_NAME+"'>"+"<input type='hidden' name='ADDRESS' value='"+INVOICE_CUSTOMER_ADDRESS+"'>"+"<input type='hidden' name='SALE_PRODUCTS' value='"+JSON.stringify(SALEPRODUCTS)+"'>"+"</form>";
+	var form="<form target='_blank' action='invoice/invoice.php' id='sendSaleInfo' method='POST'><input type='hidden' name='CUSTOMER_NAME' value='"+INVOICE_CUSTOMER_NAME+"'>"+"<input type='hidden' name='ADDRESS' value='"+INVOICE_CUSTOMER_ADDRESS+"'>"+"<input type='hidden' name='SALE_ID' value='"+INVOICE_SALE_ID+"'>"+"<input type='hidden' name='SALESPERSON' value='"+SALEUSERNAME+"'>"+"<input type='hidden' name='EMAIL' value='"+INVOICE_CUSTOMER_EMAIL+"'>"+"<input type='hidden' name='SALE_PRODUCTS' value='"+JSON.stringify(SALEPRODUCTS)+"'>"+"</form>";
 
 	$("body").append(form);
 	$( "#sendSaleInfo" ).submit();
@@ -544,14 +600,15 @@ function calculateRowTotalUnitPrice(element)
 	element.parentNode.parentNode.nextSibling.innerHTML = rowTotal2;
 	calculateVATandTotal();
 
-	var costPrice = element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.innerHTML.replace("R","").replace(/\s/g, "");
+	var costPrice = element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML.replace("R","").replace(/\s/g, "");
 
 	var newProfit = thisUnitPrice - costPrice;
 	newProfit = newProfit.toFixed(2);
 	newProfit = numberWithSpaces(newProfit);
 	newProfit = "R"+ newProfit;
 
-	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = newProfit;
+	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = newProfit;
+	//console.log(element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling);
 
 	setTwoNumberDecimal(element);
 }
