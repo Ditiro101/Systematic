@@ -131,6 +131,16 @@
                     </a>
                   </button>
                 </div>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard">
+                    <a href="pages/employee/changeTimes.php">
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Change Checkin/Checkout Time</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
