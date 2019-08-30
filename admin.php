@@ -1,4 +1,13 @@
-<?php include_once("sessionCheckLanding.php");?>
+<?php include_once("sessionCheckLanding.php");
+
+$userID;
+if(isset($_SESSION['userID']))
+{
+  $userID = $_SESSION["userID"];
+}
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,7 +81,7 @@
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/maintain-employee-type.php">
+                    <a href="pages/admin/search-employee-type.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Employee Type</span>
@@ -273,7 +282,6 @@
                 <?php
                   }
                 ?>
-
 
               </div>
             </div>
