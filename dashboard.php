@@ -16,6 +16,10 @@
   <link href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="./assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- calendar -->
+    <link href='assets/fullcalender/packages/core/main.css' rel='stylesheet' />
+  <link href='assets/fullcalender/packages/daygrid/main.css' rel='stylesheet' />
+  <link href='assets/fullcalender/packages/bootstrap/main.css' rel='stylesheet' />
 </head>
 <body>
   <?php include_once("header.php");?>
@@ -42,8 +46,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">Supplier Orders</h5>
-                      <span class="h2 font-weight-bold mb-0">350</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">New Credit Customers</h5>
+                      <span class="h2 font-weight-bold mb-0" id="NoOfCustomers"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -52,8 +56,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last month</span>
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up" id="percentageOfCustomers"></i></span>
+                    <span class="text-nowrap" >Rate of Credit Customer Growth</span>
                   </p>
                 </div>
               </div>
@@ -63,8 +67,8 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
-                      <h5 class="card-title text-uppercase text-muted mb-0">New customers</h5>
-                      <span class="h2 font-weight-bold mb-0">2,356</span>
+                      <h5 class="card-title text-uppercase text-muted mb-0">Checked-in Employees</h5>
+                      <span class="h2 font-weight-bold mb-0" id="NoOfEmployees"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -73,8 +77,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
-                    <span class="text-nowrap">Since last week</span>
+                    <span class="text-danger mr-2"><i class="fas fa-arrow-down" id="percentageOfEmployees"></i></span>
+                    <span class="text-nowrap">Available Employees</span>
                   </p>
                 </div>
               </div>
@@ -182,6 +186,28 @@
           </div>
         </div>
       </div>
+      <?php 
+
+        if($userID==3){
+          echo '      <div class="row mt-5">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Calendar</h3>
+            </div>
+            <div class="card-body">
+              <div class="row icon-examples">
+                
+                <div id="calender"></div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>';
+        }
+      ?>
+
       <?php include_once("footer.php");?>
     </div>
   </div>
@@ -198,6 +224,15 @@
     var session = eval('(<?php echo json_encode($_SESSION)?>)');
     console.log(session);
   </script>
+  <script src="pages/employee/JS/noOfWorkers.js"> </script>
+  <script src="pages/customer/JS/noOfCustomer.js"> </script>
+
+    <script src='assets/fullcalender/packages/core/main.js'></script>
+  <script src='assets/fullcalender/packages/daygrid/main.js'></script>
+  <script src='assets/fullcalender/packages/timegrid/main.js'></script>
+  <script src='assets/fullcalender/packages/list/main.js'></script>
+  <script src='assets/fullcalender/packages/bootstrap/main.js'></script>
+  <script type="text/javascript" src="pages/delivery_collection/JS/calendar.js"></script>
 </body>
 
 </html>
