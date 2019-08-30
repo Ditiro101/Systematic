@@ -204,10 +204,29 @@
 				}
 		}
 	}
-	elseif($_POST["choice"]=5)
+	elseif($_POST["choice"]==5)
 	{
 		$assignSales=getAssignedSales($con,$_POST["TRUCK_ID"]);
 		echo json_encode($assignSales);
+	}
+	elseif($_POST["choice"]==6)
+	{
+		$updateCount=$_POST["num"]-1;
+		for ($i=0; $i<$_POST["num"]; $i++) 
+		{ 
+			if(updateDeliveryTruckStatus($con,$_POST["SALE_ID"][$i],$_POST["TRUCK_ID"],3))
+			{
+				if($i==$updateCount)
+				{
+					echo "T,Finalised Deliveries";
+				}
+			}
+			else
+			{
+				echo "F,Deliveries not finalised";
+			}
+		}
+		
 	}
 	mysqli_close($con);
 ?>
