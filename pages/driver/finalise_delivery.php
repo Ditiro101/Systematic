@@ -1,3 +1,6 @@
+<?php
+  include_once("../sessionCheckPages.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -53,6 +56,8 @@
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
+            <label hidden="true" id="aData"><?php echo $_POST["ass"];?></label>
+            <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
@@ -119,6 +124,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/finaliseDelivery.js"></script>
 </body>
 
 </html>

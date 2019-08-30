@@ -1,3 +1,6 @@
+<?php
+  include_once("../sessionCheckPages.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -82,6 +85,8 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                 <div class="table-responsive">
+                  <label hidden="true" id="aData"><?php echo $_POST["ass"];?></label>
+                  <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
                   <table id="myTable" class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr class="header">
@@ -91,51 +96,21 @@
                     
                       </tr>
                     </thead>
-                    <tbody>
-                      <thead class="table-light" id="dateHeading1">
+                    <tbody id="tBody">
+                      <!-- <thead class="table-light" id="dateHeading1">
                         <th><b>25/07/2019</b></th>
                         <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select" >
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Delivery</span>
-                          </button>
-                        </td>
-                        <td>321</td>
-
-                      </tr>
-                      <thead class="table-light" id="dateHeading2">
+                      </thead> -->
+                      
+                      <!-- <thead class="table-light" id="dateHeading2">
                         <th><b>26/07/2019</b></th>
                         <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Delivery</span>
-                          </button>
-                        </td>
-                        <td>329</td>
-                      </tr>
+                      </thead> -->
 
-                      <thead class="table-light" id="dateHeading3">
+                      <!-- <thead class="table-light" id="dateHeading3">
                         <th><b>27/07/2019</b></th>
                         <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Delivery</span>
-                          </button>
-                        </td>
-                        <td>330</td>
-                      </tr>
+                      </thead> -->
                       <tr id="emptySearch" style="display: none;" class="table-danger">
                         <td><b>No Delivery Found</b></td>
                         <td></td>
@@ -233,7 +208,9 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" onclick="window.location='finalise_delivery.php'">Yes</button>
+                    
+                    <button type="submit" class="btn btn-success">Yes</button>
+                    </form>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -340,6 +317,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/listDelivery.js"></script>
 </body>
 
 </html>
