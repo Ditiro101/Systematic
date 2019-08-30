@@ -16,6 +16,10 @@ $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.u
   }
   else
   {
+    $funcArray = array();
+    $AccessLevelsArray = array();
+
+    
     $sql = "SELECT * FROM ACCESS_LEVEL";
     //var_dump($sql);
     $submit = mysqli_query($DBConnect,$sql);
@@ -26,11 +30,25 @@ $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.u
         $count=0;
         while ($row = mysqli_fetch_assoc($submit))
         {
-          $vals[]=$row;
-          //$vals[$count]["ID"]=$row["SUPPLIER_ID"];
-          $count=$count+1;
+          $accessId = $row['ACCESS_LEVEL_ID'];
+          $accessName = $row['ROLE_NAME'];
+          $ac = "SELECT ACCESS_LEVEL_FUNCTIONALITY.FUNCTIONALITY_ID, FUNCTIONALITY.NAME FROM ACCESS_LEVEL_FUNCTIONALITY JOIN FUNCTIONALITY ON  ACCESS_LEVEL_FUNCTIONALITY.FUNCTIONALITY_ID = FUNCTIONALITY.FUNCTIONALITY_ID 
+          WHERE ACCESS_LEVEL_FUNCTIONALITY.ACCESS_LEVEL_ID = '$accessId'";
+          $result = mysqli_query($DBConnect,$ac);
+
+          $funcArray = [];
+
+            while($filter = mysqli_fetch_assoc($result))
+            {
+              
+              array_push($funcArray,$filter['NAME']);
+
+            }
+
+            $roleArray = array("ACCESS_LEVEL_ID"=>$accessId, "ACCESS_LEVEL_NAME"=>$accessName, "FUNTIONALITY"=>$funcArray);
+            array_push($AccessLevelsArray,$roleArray);
         }
-        echo json_encode($vals);
+        echo json_encode($AccessLevelsArray);
       }
     }
     else

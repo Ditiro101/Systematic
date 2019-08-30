@@ -51,8 +51,8 @@
     <!-- Page content -->
     <div class="container-fluid mt--7">
       <!-- Table -->
-      <input type="hidden" id="userRoleID" value="5">
-      <input type="hidden" id="oldRoleName" value="Warehouse Manager">
+      <input type="hidden" id="userRoleID" value=<?php echo $_POST["ACCESS_LEVEL_ID"];?>>
+      <input type="hidden" id="oldRoleName" value=<?php echo $_POST["ACCESS_LEVEL_NAME"];?>>
       <div class="row">
         <div class="col">
           <div class="card shadow">
@@ -69,7 +69,7 @@
                         <div class="form-group col">
                           <label for="userRoleName">User Role Name</label>
                           <!-- <input type="text" name="user-role-name" class="form-control" id="userRoleName" aria-describedby="emailHelp" value="<?php //echo $_POST['ROLE_NAME'] ?>" required> -->
-                          <input type="text" name="user-role-name" class="form-control" id="userRoleName" aria-describedby="emailHelp" value="Warehouse Manager" required>
+                          <input type="text" name="user-role-name" class="form-control" id="userRoleName" aria-describedby="emailHelp" value=<?php echo $_POST["ACCESS_LEVEL_NAME"];?> required>
                         </div>
                       </div>
                       <div class="form-row col">
@@ -81,11 +81,57 @@
                          </select>
                         </div>
                       </div>
-                      <div class="form-row col">
-                        <div class="form-group col">
+                      <div class="form-row row">
+                        <div class="col">
                           <button type="button" id="addUserRole" class="btn btn-primary mb-3">Save</button>
                         </div>
+                        <div class="col float-right">
+                          <button type="button"  id="deleteUserRole" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#dismiss">Delete</button>
+                        </div>
                       </div>
+
+                      <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Are you sure you want to delete the selected user role?</p>
+                      </div>
+  
+                      <div class="modal-footer">
+                        
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="deleteButton">Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                      
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p id="modalTextDismiss"></p>
+                            
+                        </div>
+                        
+                        <div class="modal-footer">
+                            
+                            <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
 
                       <div class="form-group col-md-2">
                           <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
@@ -140,6 +186,7 @@
   <link rel="stylesheet" href="../../assets/css/bootstrap-multiselect.css" />
   <!-- Add Product JS -->
   <script src="JS/maintainUserRole.js"></script>
+  <script src="JS/deleteUserRole-JS.js"></script>
 </body>
 
 </html>
