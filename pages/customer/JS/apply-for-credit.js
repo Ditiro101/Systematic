@@ -15,6 +15,13 @@ $(document).ready(function(){
             processData: false,
             success: function(data){
                 console.log(data);
+                if(data=="successfile has been uploaded successfullyfile has been uploaded successfullyfile has been uploaded successfully"){
+                	$("#modal-default").modal("show");
+                }
+                else{
+                	console.log("failed");
+                }
+
             }           
         });
     }));

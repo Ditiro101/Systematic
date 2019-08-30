@@ -1,7 +1,40 @@
 <?php
 	//var_dump($_FILES);
-	//var_dump($_POST);
-	$customerID = 23;
+
+
+
+	$url = 'mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+	
+	$dbparts = parse_url($url);
+
+	$hostname = $dbparts['host'];
+	$username = $dbparts['user'];
+	$password = $dbparts['pass'];
+	$database = ltrim($dbparts['path'],'/');
+
+	$con = mysqli_connect($hostname, $username, $password, $database);
+
+	//Check connection
+		if (!$con) {
+		  die("Connection failed: " . mysqli_connect_error());
+		}
+		$customerID = $_POST["customerID"];
+		//echo $customerID;
+		$date= date("Y-m-d");
+		$balance=0;
+		$limit = $_POST["credit-limit"];
+		$add_query="INSERT INTO CUSTOMER_ACCOUNT (CUSTOMER_ID,DATE_OPENED,BALANCE,CREDIT_LIMIT) VALUES ('$customerID','$date','$balance','$limit')";
+		if(mysqli_query($con,$add_query))
+		{
+			echo "success";
+		}
+		else
+		{
+			echo "failed";
+		}	
+	
+
+
 
     for($i=0; $i < count($_FILES); $i++)
     {
@@ -36,6 +69,7 @@
 	    } 
 	    else
 	    {
+
 	        echo "Error uploading file";
 	    }
 	}
@@ -83,5 +117,7 @@
 
 	    curl_close($ch);
 	}
+
+	mysqli_close($con);
 
 ?>

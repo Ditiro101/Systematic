@@ -98,6 +98,8 @@
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
                             <input type="number" value="1000" min="0" step="0" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" name="credit-limit" id="creditLimit" required />
+
+                            <input type="number" id="customerID" name="customerID" value="<?=$_GET["ID"]?>" hidden/>
                           </div> 
                         </div>
                         <div class="form-row col">
@@ -123,7 +125,7 @@
                                   
                                   <div class="modal-footer">
                                       
-                                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                                   </div>
                                   
                               </div>
