@@ -90,7 +90,7 @@
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/supplier/search-supplier.php">
+                    <a id="btnSearchSupplier" href="pages/supplier/search-supplier.php">
                       <div>
                         <i class="fas fa-search"></i>
                         <span>Search Supplier</span>

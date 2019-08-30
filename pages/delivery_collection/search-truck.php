@@ -77,59 +77,7 @@
                       <th style="width:1rem;"></th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>BBC 123 NW</td>
-                      <td>2015 Isuzu NPR</td>
-                      <td>10 Tonnes</td>
-                      <td>Yes</td>
-                      <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                            </span>
-                            <span class="btn-inner--text">Maintain</span>
-                          </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>DSM 032 NW</td>
-                      <td>2017 GMC Savana G33903</td>
-                      <td>25 Tonnes</td>
-                      <td>Yes</td>
-                      <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                            </span>
-                            <span class="btn-inner--text">Maintain</span>
-                          </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>CAD 347 NW</td>
-                      <td>2017 Freightliner M2</td>
-                      <td>40 Tonnes</td>
-                      <td>Yes</td>
-                      <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                            </span>
-                            <span class="btn-inner--text">Maintain</span>
-                          </button>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>ADW 586 NW</td>
-                      <td>2016 Volvo VNL84430</td>
-                      <td>50 Tonnes</td>
-                      <td>No</td>
-                      <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_truck.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                            </span>
-                            <span class="btn-inner--text">Maintain</span>
-                          </button>
-                      </td>
-                    </tr>
+                  <tbody id="tBody">
                     <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                       <td><b>No Truck Found</b></td>
                       <td></td>
@@ -197,6 +145,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchTruck.js"></script>
 </body>
 
 </html>
