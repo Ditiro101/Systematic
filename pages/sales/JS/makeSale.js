@@ -13,8 +13,8 @@ var INVOICE_CUSTOMER_ADDRESS;
 var INVOICE_CUSTOMER_EMAIL;
 var INVOICE_SALE_ID;
 
-var saleDeliveryLongitude = 0.0;
-var saleDeliveryLatitude = 0.0;
+let saleDeliveryLongitude;
+let saleDeliveryLatitude;
 
 Array.prototype.remByVal = function(val) {
     for (var i = 0; i < this.length; i++) {
@@ -309,10 +309,10 @@ $("button#confirmSalesManagerPassword").on('click', event => {
         	password:password
         },
         beforeSend: function(){
-            //$('.loadingModal').modal('show');
+            $('.loadingModal').modal('show');
         },
         complete: function(){
-            //$('.loadingModal').modal('hide')
+            //$('.loadingModal').modal('hide');
         }
     })
     .done(response => {
@@ -342,68 +342,70 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 			})
 			.done(data=>{
 				coordinates=data;
-				saleDeliveryLongitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Latitude"];
-				saleDeliveryLatitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Longitude"];
+				saleDeliveryLatitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Latitude"];
+				saleDeliveryLongitude = coordinates["Response"]["View"][0]["Result"][0]["Location"]["DisplayPosition"]["Longitude"];
 
-				//console.log("Longitude => "+saleDeliveryLongitude+", Latitude => "+saleDeliveryLatitude);
+				//console.log("Longitude Before => "+saleDeliveryLongitude+", Latitude Before => "+saleDeliveryLatitude);
+
+				$.ajax({
+			        url:'PHPcode/makeSale_.php',
+			        type:'post',
+			        data:{ 
+			        	saleProducts : SALEPRODUCTS,
+			        	customerID : SALECUSTOMERID,
+			        	saleUserID : SALEUSERID,
+			        	addSaleDelivery: SALEDELIVERYADD,
+			        	saleDeliveryID: SALEDELIVERYADDRESSID,
+			        	deliveryLongitude_: saleDeliveryLongitude,
+			        	deliveryLatitude_: saleDeliveryLatitude
+			        },
+			        beforeSend: function(){
+			            //$('.loadingModal').modal('show');
+			            //console.log("Longitude => "+saleDeliveryLongitude+", Latitude => "+saleDeliveryLatitude);
+
+			        },
+			        complete: function(){
+			            $('.loadingModal').modal('hide')
+			        }
+			    })
+			    .done(response => {
+
+			    	console.log(response);
+			    	var reponseArray = response.split(',');
+			    	INVOICE_SALE_ID = reponseArray[1];
+			    	var responseText = reponseArray[0];
+			    	console.log(reponseArray);
+
+			        if (responseText == "success")
+					{
+						$('#modal-title-default2').text("Success!");
+						$('#modalText').text("Correct Password. Sale is complete. Printing invoice...");
+						$("#modalCloseButton").attr("onclick","callTwo()");
+						$('#successfullyAdded').modal("show");
+					}
+					else if(response == "failed")
+					{
+						$('#modal-title-default2').text("Error!");
+						$('#modalText').text("Incorrect password entered");
+						$("#modalCloseButton").attr("onclick","");
+						$('#successfullyAdded').modal("show");
+					}
+					else if(response == "Database error")
+					{
+						$('#modal-title-default2').text("Database Error!");
+						$('#modalText').text("Database error whilst verifying password");
+						$("#modalCloseButton").attr("onclick","");
+						$('#successfullyAdded').modal("show");
+					}
+					
+					ajaxDone = true;
+			    });
 			});
-
-			$.ajax({
-		        url:'PHPcode/makeSale_.php',
-		        type:'post',
-		        data:{ 
-		        	saleProducts : SALEPRODUCTS,
-		        	customerID : SALECUSTOMERID,
-		        	saleUserID : SALEUSERID,
-		        	addSaleDelivery: SALEDELIVERYADD,
-		        	saleDeliveryID: SALEDELIVERYADDRESSID,
-		        	deliveryLongitude: saleDeliveryLongitude,
-		        	deliveryLatitude: saleDeliveryLatitude
-		        },
-		        beforeSend: function(){
-		            //$('.loadingModal').modal('show');
-		        },
-		        complete: function(){
-		            //$('.loadingModal').modal('hide')
-		        }
-		    })
-		    .done(response => {
-
-		    	console.log(response);
-		    	var reponseArray = response.split(',');
-		    	INVOICE_SALE_ID = reponseArray[1];
-		    	var responseText = reponseArray[0];
-		    	console.log(reponseArray);
-
-		        if (responseText == "success")
-				{
-					$('#modal-title-default2').text("Success!");
-					$('#modalText').text("Correct Password. Sale is complete. Printing invoice...");
-					$("#modalCloseButton").attr("onclick","callTwo()");
-					$('#successfullyAdded').modal("show");
-				}
-				else if(response == "failed")
-				{
-					$('#modal-title-default2').text("Error!");
-					$('#modalText').text("Incorrect password entered");
-					$("#modalCloseButton").attr("onclick","");
-					$('#successfullyAdded').modal("show");
-				}
-				else if(response == "Database error")
-				{
-					$('#modal-title-default2').text("Database Error!");
-					$('#modalText').text("Database error whilst verifying password");
-					$("#modalCloseButton").attr("onclick","");
-					$('#successfullyAdded').modal("show");
-				}
-				
-				ajaxDone = true;
-		    });
-
-			
+	
 		}
 		else if(response == "failed")
 		{
+			$('.loadingModal').modal('hide');
 			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Incorrect password entered");
 			$("#modalCloseButton").attr("onclick","");
@@ -411,6 +413,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		}
 		else if(response == "Password empty")
 		{
+			$('.loadingModal').modal('hide');
 			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Please enter a password");
 			$("#modalCloseButton").attr("onclick","");
@@ -418,6 +421,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 		}
 		else if(response == "Database error")
 		{
+			$('.loadingModal').modal('hide');
 			$('#modal-title-default2').text("Database Error!");
 			$('#modalText').text("Database error whilst verifying password");
 			$("#modalCloseButton").attr("onclick","");

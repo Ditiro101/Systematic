@@ -190,9 +190,9 @@
                 <div class="table-responsive">
 
                   <table id="myTable" class="table align-items-center table-flush">
-                  <tbody>
+                  <tbody id="tBodyReturns">
                     <tr>
-                      <td class="py-3 text-left"><b>No Returns</b></td>
+                      
                      
                     </tr>
                     </tfoot>
@@ -206,19 +206,19 @@
                   <span class="btn-inner--text">Close</span>
                 </button>
 
-                <button class="btn btn-icon btn-2 btn-success mt-0 float-right d-inline" type="button" data-toggle="modal" data-target="#modal-payment">
+                <button class="btn btn-icon btn-2 btn-success mt-0 float-right" type="button" id="makePaymentButton" data-toggle="modal" data-target="#modal-payment">
                   <span><i class="fas fa-money-bill-wave-alt"></i></span>
                   <span class="btn-inner--text">Make Payment</span>
                 </button>
 
-                <form action="../delivery_collection/add_delivery.php" class="d-inline" method="POST">
-                  <input type="hidden" name="SALE_ID" value=<?php echo $_POST["SALE_ID"];?>>
-                  <input type="hidden" name="SALE_DATE" value=<?php echo $_POST["SALE_DATE"];?>>
-                  <input type="hidden" name="CUSTOMER_ID" value=<?php echo $_POST["CUSTOMER_ID"];?>>
-                  <input type="hidden" name="CUSTOMER_DATA" value=<?php echo $_POST["CUSTOMER_DATA"];?>>
+                <form action="../delivery_collection/add_delivery.php" class="d-inline" method="POST" class="ml-2">
+                  <input type="hidden" name="SALE_ID" value='<?php echo $_POST["SALE_ID"];?>'>
+                  <input type="hidden" name="SALE_DATE" value='<?php echo $_POST["SALE_DATE"];?>'>
+                  <input type="hidden" name="CUSTOMER_ID" id="CUSTOMER_ID" value='<?php echo $_POST["CUSTOMER_ID"];?>'>
+                  <input type="hidden" name="CUSTOMER_DATA" value='<?php echo $_POST["CUSTOMER_DATA"];?>'>
                   <label hidden="true" id="deliveryCheck"><?php echo $isDelivered;?></label>
 
-                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right d-inline mr-2" 
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" 
                     type="submit" id="btnAddDelivery">
                     <span class="btn-inner--icon">
                       <i class="fas fa-truck"></i>
@@ -227,12 +227,17 @@
                   </button>
                 </form>
 
-                <button class="btn btn-icon btn-2 btn-danger mt-0 float-right d-inline" type="button" data-toggle="modal" data-target="#modal-makeReturn">
-                  <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
-                  <span class="btn-inner--text">Make Return</span>
-                </button>
+                
 
-                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2 d-inline" type="button" data-toggle="modal" data-target="#modal-updateSale">
+                  <button class="btn btn-icon btn-2 btn-danger mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-makeReturn">
+                    <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
+                    <span class="btn-inner--text">Make Return</span>
+                  </button>
+                </form>
+
+                <input type="hidden" id="SALE_STATUS_ID" value="<?php echo $_POST['SALE_STATUS_ID'];?>">
+                <input type="hidden" id="SALE_ID" value="<?php echo $_POST["SALE_ID"];?>">
+                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" id="collectSaleButton" type="button" data-toggle="modal" data-target="#modal-updateSale">
                   <span class="btn-inner--icon"><i class="fas fa-people-carry"></i>
                   <span class="btn-inner--text">Collect Sale</span>
                 </button>
@@ -249,11 +254,11 @@
                       <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
                     </div>
                     <div class="modal-body">
-                      <p>Update Sale Status of sale #321 to collected?</p>
+                      <p>Update Sale Status of sale <b>#<?php echo $_POST["SALE_ID"];?></b> to collected?</p>
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-successSale">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="updateSaleStatus">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -319,7 +324,17 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" onclick="window.location='return-sale.php'">Yes</button>
+                      <form action="return-sale.php" class="d-inline" method="POST">
+                        <input type="hidden" name="SALE_ID" value='<?php echo $_POST["SALE_ID"];?>'>
+                        <input type="hidden" name="SALE_DATE" value='<?php echo $_POST["SALE_DATE"];?>'>
+                        <input type="hidden" name="SALE_AMOUNT" value='<?php echo $_POST["SALE_AMOUNT"];?>'>
+                        <input type="hidden" name="CUSTOMER_ID" value='<?php echo $_POST["CUSTOMER_ID"];?>'>
+                        <input type="hidden" name="CUSTOMER_DATA" value='<?php echo $_POST["CUSTOMER_DATA"];?>'>
+                        <input type="hidden" name="EMPLOYEE_DATA" value='<?php echo $_POST["EMPLOYEE_DATA"];?>'>
+                        <input hidden="true" name="PRODUCTS_ARRAY" value='<?php echo json_encode($products);?>'>
+                        <input type="hidden" name="SALE_PRODUCTS_ARRAY" value='<?php echo json_encode($saleProducts);?>'>
+                        <button type="submit" class="btn btn-success">Yes</button>
+                      </form>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>   
                   </div>
@@ -342,7 +357,7 @@
                           <span class="btn-inner--text">Cash</span>
                         </button>
                         <br>
-                        <button class="btn btn-icon btn-2 btn-info mt-3 px-4 mx-auto col-5" type="button" data-dismiss="modal" data-toggle="modal" data-target="#modal-account">
+                        <button class="btn btn-icon btn-2 btn-info mt-3 px-4 mx-auto col-5" type="button" id="accountPaymentButton" data-dismiss="modal" data-toggle="modal" data-target="#modal-account">
                           <span><i class="fas fa-file-invoice"></i></span>
                           <span class="btn-inner--text">Account</span>
                         </button>
@@ -367,16 +382,16 @@
                       <div class="mb-4 px-2">
                         <table class="table table-sm">
                           <tr>
-                            <td class="table-light">Amount Received</td>
-                            <td class="text-right">R100.00</td>
+                            <td class="table-light" id="">Amount Received</td>
+                            <td class="text-right" id="saleAmountReceived">R100.00</td>
                           </tr>
                           <tr>
                             <td class="table-light">Total Outstanding</td>
-                            <td class="text-right">R70.00</td>
+                            <td class="text-right" id="saleTotalOutstanding">R70.00</td>
                           </tr>
                           <tfoot>
                             <td class="table-success">Change</td>
-                            <td class="text-right table-success">R30.00</td>
+                            <td class="text-right table-success" id="saleChange">R30.00</td>
                           </tfoot>
                         </table>
                       </div>
@@ -405,13 +420,13 @@
                           <div class="input-group-prepend">
                             <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                           </div>
-                          <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" autofocus />
+                          <input type="number" id="amountReceived" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" autofocus />
                         </div> 
                       </div>
                     </div>
                     <div class="modal-footer">
                           
-                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Calculate Change</button> 
+                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" id="calculateChangeButton" data-toggle="modal" data-target="#modal-succ">Calculate Change</button> 
                     </div>   
                   </div>
                 </div>
@@ -431,7 +446,7 @@
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-accountSuccess"">Yes</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="makeAccountPaymentButton">Yes</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>   
                   </div>
@@ -458,82 +473,39 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group col-md-2">
+          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-default2"></h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modalText"></p>
+                        
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
+                    </div>
+                    
+                </div>
+            </div>
+          </div>
+        </div>
         <?php include_once("../footer.php");?>
       </div>
     </div>
-
-    <script type="text/javascript">
-      function setTwoNumberDecimal(el) {
-        el.value = parseFloat(el.value).toFixed(2);
-      };
-
-      //Initialize with the list of symbols
-      let names = ["All Gold Tomato Sauce (6x350ml) Case", "All Gold Tomato Sauce (6x700ml) Case", "Apple Munch (96x50ml) Pallet", "Ariel Washing Powder (6x500g) Case", "Bakers Toppers (12x125g) Case","Coca Cola (6x2l) Case","Dragon Energy Drink (24x500ml) Case","Kingsley Cola (6x2l) Case","Kingsley Iron Brew (6x2l) Case","Kingsley Ginger Bear (6x2l) Case","Kingsley Granadila (6x2l) Case", "Kingsley Orange (6x2l) Case", "Kingsley Pineapple (6x2l) Case", "Kingsley Cream Soda (6x2l) Case", "Kingsley Apple (6x2l) Case", "Monster Energy Drink (24x500ml) Case"]
-
-      //Find the input search box
-      let search = document.getElementById("searchProduct");
-
-      //Find every item inside the dropdown
-      let items = document.getElementsByClassName("dropdown-item");
-      function buildDropDown(values) 
-      {
-          let contents = []
-          for (let name of values) 
-          {
-          contents.push('<input type="button" class="dropdown-item" id="dropdownItem" type="button" value="' + name + '"/>')
-          }
-          $('#menuItems').append(contents.join(""))
-
-          //Hide the row that shows no items were found
-          $('#empty').hide()
-      }
-
-      //Capture the event when user types into the search box
-      window.addEventListener('input', function () {
-          filter(search.value.trim().toLowerCase())
-      })
-
-      //For every word entered by the user, check if the symbol starts with that word
-      //If it does show the symbol, else hide it
-      function filter(word) 
-      {
-          let length = items.length
-          let collection = []
-          let hidden = 0
-
-          for (let i = 0; i < length; i++) 
-          {
-            if (items[i].value.toLowerCase().startsWith(word)) 
-            {
-                $(items[i]).show()
-            }
-            else {
-                $(items[i]).hide()
-                hidden++
-            }
-          }
-
-          //If all items are hidden, show the empty view
-          if (hidden === length) 
-          {
-            $('#empty').show()
-          }
-          else 
-          {
-            $('#empty').hide()
-          }
-      }
-
-      //If the user clicks on any item, set the title of the button as the text of the item
-      $('#menuItems').on('click', '.dropdown-item', function()
-      {
-          $("#dropdown_coins").dropdown('toggle');
-          $('#searchProduct').val("");
-          filter("");
-      })
-
-      buildDropDown(names);
-    </script>
+    <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
