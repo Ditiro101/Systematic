@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -77,27 +78,27 @@
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form method="POST" action="" id="mainfind">
                       <div class="form-row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
                           <label for="name-indi">Name</label>
                           <input type="text" class="form-control" id="name-indi" name="name-indi" placeholder="Enter name" required>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
                           <label for="surname-indi">Surname</label>
                           <input type="text" class="form-control" id="surname-indi" name="surname-indi" placeholder="Surname" required>
                         </div>
                       </div>
                       <div class="form-row ">
-                        <div class="form-group col-2">
+                        <div class="form-group col-lg-2 col-md-4 col-sm-12">
                           <label for="title">Title</label>
-                          <select class="form-control" id="title" name="title">
+                          <select class="form-control" id="titleSelect" name="title">
                             <option>Mr</option>
                             <option>Ms</option>
                             <option>Mrs</option>
                           </select>
                         </div>
-                        <div class="form-group col-10">
+                        <div class="form-group col-lg-10 col-md-8 col-sm-12">
                           <label for="number-indi">Contact Number</label>
-                          <input type="number" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
+                          <input type="text" maxlength="10" class="form-control" id="number-indi" name="number-indi" placeholder="Contact Number" required>
                         </div>
                       </div>
                       <div class="form-group">
@@ -110,15 +111,15 @@
                         <input type="text" class="form-control indinputAddress" id="indinputAddress" placeholder="1234 Main St" name="address1" required>
                       </div>
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
                           <label for="suburb">Suburb</label>
                           <input type="text" class="form-control indinputSuburb" id="indinputSuburb" name="suburb" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-lg-4 col-md-6 col-sm-12">
                           <label for="inputState">City</label>
                           <input type="text" class="form-control indinputCity" id="indinputCity" name="suburb" readonly>
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-lg-2 col-md-6 col-sm-12">
                           <label for="zip">Zip</label>
                           <input type="text" class="form-control indinputZip" id="indinputZip" name="zip" readonly>
                         </div>
@@ -127,36 +128,43 @@
 
                       
                     </form>
-                    <button id="btnSaveind" type="button" class="btn btn-primary">
-                        Submit
-                      </button>
-                      <div class="col-md-2 float-right">
+                    <div class="row">
+                       <div class="col-md-2 text-center float-right">
                                     <button class="btn btn-success " id="btn-add-address-ind" type="button">
                                         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
-                                    <small>Max 3 Adresses allowed</small>
+                                    
                       </div>
+                     </div>
+                     <div class="row">
+                     	<div class="col-md-2 mt-3 text-center">
+                    <button id="btnSaveind" type="button" class="btn btn-primary">
+                        Submit
+                      </button>
                   </div>
+                     </div>
 
-                  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                  </div>
+					
+                  <div class="tab-pane fade " id="profile"  aria-labelledby="profile-tab">
                     <form method="POST" action="" id="mainforg" novalidate>
                       <div class="form-row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
                           <label for="email-org">Name of organisation</label>
                           <input type="text" class="form-control" id="name-org" name="name-org"  placeholder="Name" required>
     
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
                           <label for="password-indi">Business email</label>
                           <input type="email" class="form-control" id="email-org" name="password-indi" placeholder="Email" required>
                         </div>
                       </div>
                       <div class="form-row ">
-                        <div class="form-group col-8">
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
                           <label for="vat">VAT Number</label>
                           <input type="number" class="form-control" id="vat-org" name="vat" placeholder="Vat number" required>
                         </div>
-                        <div class="form-group col-4">
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
                           <label for="number-org">Business Contact Number</label>
                           <input type="number" class="form-control" id="number-org" name="number-org" placeholder="Contact number" required>
                         </div>
@@ -168,30 +176,40 @@
                         <input type="text" class="form-control orginputAddress" id="orginputAddress" name="address1-org" placeholder="1234 Main St" required>
                       </div>
                       <div class="form-row">
-                        <div class="form-group col-md-6">
+                        <div class="form-group col-lg-6 col-md-12 col-sm-12">
                           <label for="orginputSuburb">Suburb</label>
                           <input type="text" class="form-control orginputSuburb" id="orginputSuburb" name="suburb-org" required>
                         </div>
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-lg-4 col-md-6 col-sm-12">
                           <label for="city-org">City</label>
-                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" readonly>
+                          <input type="text" class="form-control orginputCity" id="orginputCity" name="suburb-org" readonly="">
                         </div>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-lg-2 col-md-6 col-sm-12">
                           <label for="zip-org">Zip</label>
-                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" readonly>
+                          <input type="text" class="form-control orginputZip" id="orginputZip" name="zip-org" readonly="">
                         </div>
                       </div> 
+
+
                       
                     </form>
-                    <button id="btnSaveorg" type="button" class="btn btn-primary" >
-                        Submit
-                    </button>
-                      <div class="col-md-2 float-right">
+                    <div class="row">
+                    	<div class="col-md-2 float-right">
                                     <button class="btn btn-success " id="btn-add-address-org" type="button">
                                         <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
                                     </button>
-                                    <small>Max 3 Adresses allowed</small>
+                                    
                       </div>
+					</div>
+					<div class="row">
+						<div class="col-md-2 mt-3 text-center">
+                    <button id="btnSaveorg" type="button" class="btn btn-primary" >
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+                      
                       <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">

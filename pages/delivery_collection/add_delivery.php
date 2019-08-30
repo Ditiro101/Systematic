@@ -1,3 +1,12 @@
+<?php
+include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  // $customerAddress=getCustomerAddressIDs($con,$_POST["CUSTOMER_ID"]);
+  $addressData=getCompleteCustomerAddresses($con,$_POST["CUSTOMER_ID"]);
+  // $suburbData=getAllSuburbs($con);
+  // $cityData=getAllCity($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +56,7 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">Sale No. #321 :   <b>John Smith</b></h3>
+              <h3 class="mb-0"><span id="saleID">Sale No. #321 :</span><span><b id="CustomerName">John Smith</b></span></h3>
             </div>
             <div class="card-body">
 
@@ -58,41 +67,31 @@
                       <div class="col">
                         <div class="form-row ">
                           <div class="form-group col">
+                            <label id="addData" hidden="true"><?php echo json_encode($addressData);?></label>
+                            <!-- <label id="subData" hidden="true"><?php echo json_encode($suburbData);?></label>
+                            <label id="citData" hidden="true"><?php echo json_encode($cityData);?></label> -->
+                           <!--  <label id="cAddress" hidden="true"><?php echo json_encode($customerAddress);?></label> -->
+                            <label id="cData" hidden="true"><?php echo $_POST["CUSTOMER_DATA"];?></label>
+                            <label id="sID" hidden="true"><?php echo $_POST["SALE_ID"];?></label>
+                            <label id="sDate" hidden="true"><?php echo $_POST["SALE_DATE"];?></label>
                             <label for="exampleInputPassword1">Delivery Date</label>
-                            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Enter Delivery Date">
+                            <input type="date" class="form-control" id="delDate">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Blue Lagoon Street" value="IT Building Room 5-69">
+                          <!-- <label for="inputAddress">Address line 1</label>
+                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Blue Lagoon Street" value="IT Building Room 5-69"> -->
+                          <label for="inputAddress">Select Address</label>
+                          <select class="form-control" id="inputAddress">
+                          </select>
                         </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Shop 29" value="University Of Pretoria">
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity" value="Hatfield">
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Pretoria</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" value="0028">
-                          </div>
                         </div>
 
                       </div> 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-block btn-primary mb-3" id="btnSave">Save</button>
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
@@ -104,13 +103,13 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Sale Delivery Saved Successfully!</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../delivery_collection.html'">Close</button>  
+                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>  
                                     </div>
                                     
                                 </div>
@@ -139,6 +138,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/addDelivery.js"></script>
 </body>
 
 </html>

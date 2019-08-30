@@ -1,3 +1,4 @@
+
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
@@ -36,6 +37,7 @@
   }
   mysqli_close($con);
 ?>
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -95,8 +97,8 @@
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-              <div class="d-flex justify-content-between">
-                <td>
+              <div class="row mb-3">
+                <div class="col-6">
                   <form id="formMaintain" action="maintain.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $cusID;?>>
                     <input type="hidden" name="NAME" id="NAME">
@@ -117,15 +119,22 @@
                       <span class="btn-inner--text">Edit</span>
                     </button>
                   </form>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
+                  </div>
+                  <div class="col-6">
+
+                  <form id="formDelete" type='POST'>
+                    <input type="hidden" name="ID" value=<?php echo $cusID;?>>
+                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="submit" >
                     <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                     </span>
                     <span class="btn-inner--text">Delete</span>
                   </button>
-                </td>
-                <td>
+                  </form>
+
+                  </div>
+               </div>
+               <div class="row">
+                <div class="col-6">
                   <label hidden="true" id="cAccountCheck"><?php echo $creditAccountCheck;?></label>
                   <form id="formAccount" type='POST'>
                     <input type="hidden" name="ID" value=<?php echo $cusID;?>>
@@ -140,7 +149,8 @@
                     <input type="hidden" name="SUBURB" id="accountSUBURB">
                     <input type="hidden" name="CITY" id="accountCITY">
                   </form>
-                </td>
+                </div>
+
               </div>
             </div>
 
@@ -187,13 +197,38 @@
                 </div>                
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
               </div>
             </div>
           </div>
         </div>
           </div>
+
+        <div class="modal fade" id="modal-succ-del" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+          <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+              <div class="modal-content">
+                
+                  <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                  </div>
+                  
+                  <div class="modal-body text-left">
+                    <p>Customer has been deactivated/deleted</p>
+                      
+                  </div>
+                  
+                  <div class="modal-footer">
+                      
+                      <a  href="../../customer.php" class="btn btn-link  ml-auto" data-dismiss="modal">Close</a> 
+                  </div>
+                  
+              </div>
+          </div>
+        </div>
         
 
   
