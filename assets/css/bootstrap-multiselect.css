@@ -47,6 +47,8 @@ span.multiselect-native-select select
 
 .multiselect-container>li.multiselect-group label
 {
+
+	display: block;
 	margin:0;
 	padding:3px 20px;
 	height:100%;
@@ -55,16 +57,21 @@ span.multiselect-native-select select
 
 .multiselect-container>li.multiselect-group-clickable label
 {
+	display: block !important; 
+	width: 100%  !important;
+	margin-left: 1rem;
 	cursor:pointer
 }
 
 .multiselect-container>li>a
 {
+	list-style: none;
 	padding:0
 }
 
 .multiselect-container>li>a>label
 {
+	display: block;
 	margin:0;
 	height:100%;
 	cursor:pointer;
@@ -74,6 +81,8 @@ span.multiselect-native-select select
 
 .multiselect-container>li>a>label.checkbox,.multiselect-container>li>a>label.radio
 {
+	width :22rem;
+	display: block;
 	margin:0
 	margin-right: 1rem;
 }

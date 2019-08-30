@@ -1,3 +1,5 @@
+
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +18,7 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 </head>
 
 <body>
@@ -54,26 +57,27 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
-                      <div class="form-group col">
+                    <form id="mainf">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="bane">Warehouse Name</label>
-                        <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter warehouse name">
+                        <input type="text" class="form-control" id="wName" name="wName" aria-describedby="emailHelp" placeholder="Enter warehouse name" maxlength="30" required>
                       </div>
-
-                      <div class="form-group col">
+                      <br>
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="des">Description</label>
-                         <textarea class="form-control" id="des" rows="2" placeholder="Enter warehouse description"></textarea>
+                         <input type="text" class="form-control" id="wDes" name="wDes" rows="2" placeholder="Enter warehouse description" maxlength="30" required>
                       </div>
-                       <div class="form-group col-4">
+                      <br>
+                       <div class="form-group col-lg-2 col-md-6 col-sm-12">
                         <label for="bane">Max Number of Pallets</label>
-                        <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="0" >
+                        <input type="number" class="form-control" id="wMax" max="5000" name="wMax" aria-describedby="emailHelp" placeholder="0" required>
                       </div>
 
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-block btn-primary mb-3" id="btnSave">Save</button>
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
@@ -85,13 +89,13 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Warehouse Added Successfully!</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../warehouse.html'">Close</button> 
+                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
                                     </div>
                                     
                                 </div>
@@ -120,6 +124,9 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script type="text/javascript" src="JS/addWarehouse.js"></script>
 </body>
 
 </html>

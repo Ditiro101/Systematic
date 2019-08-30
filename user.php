@@ -1,6 +1,6 @@
+<?php include_once("sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,9 +50,12 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+                <?php 
+                  if (in_array("3.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
-                    <a href="pages/user/add-user.php">
+                    <a href="pages/employee/search.php">
                       <div>
                         <i class="fas fa-user-plus"></i>
                         <span>Add User</span>
@@ -60,6 +63,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user.php">
@@ -70,6 +80,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+                
+                <?php 
+                  if (in_array("3.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user.php">
@@ -80,6 +97,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/add-user-role.php">
@@ -90,6 +114,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.9", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user-role.php">
@@ -100,6 +131,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("3.8", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/user/search-user-role.php">
@@ -110,6 +148,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>

@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -63,137 +64,16 @@
           <div class="table-responsive">
 
             <table id="myTable" class="table align-items-center table-flush">
-               <thead class="thead-light">
+              <thead class="thead-light">
               <tr class="header">
                 <th> Supplier ID</th>
                 <th> Name</th>
                 <th> Contact number</th>
                 <th> Email</th>
                 <th style="width:1rem;"></th>
-                <th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>Better Bulk</td>
-                <td>085 515 6262</td>
-                <td>better.bulk@gmail.com</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Bulk Bounty</td>
-                <td>062 345 8725</td>
-                <td>bulk.bounty@gmail.com</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Coca Cola</td>
-                <td>078 457 2257</td>
-                <td>orders@cocacola.com</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Caines Foods</td>
-                <td>063 249 2045</td>
-                <td>caines.foods@gmail.com</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>Makro</td>
-                <td>063 234 1738</td>
-                <td>ordering@macro.co.za</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>Wholesale Market</td>
-                <td>065 446 7435</td>
-                <td>supply@wholesalemarket.com</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain-supplier.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger">
                 <td><b>No Supplier Found</b></td>
                 <td></td>
@@ -266,6 +146,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/searchSupplier.js" type="text/javascript"></script>
 </body>
 
 </html>
