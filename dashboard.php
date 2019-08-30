@@ -1,6 +1,6 @@
+<?php include_once("sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -8,7 +8,7 @@
   <meta name="author" content="Creative Tim">
   <title>Dashboard - Stock Path</title>
   <!-- Favicon -->
-  <link href="./assets/img/brand/favicon.png" rel="icon" type="image/png">
+  <link href="assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
   <!-- Icons -->
@@ -194,6 +194,10 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript">
+    var session = eval('(<?php echo json_encode($_SESSION)?>)');
+    console.log(session);
+  </script>
 </body>
 
 </html>

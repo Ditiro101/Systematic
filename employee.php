@@ -1,6 +1,6 @@
+<?php include_once("sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,6 +51,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("2.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/employee/add.php">
@@ -61,6 +65,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/search.php">
@@ -71,6 +82,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/search.php">
@@ -81,6 +99,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/search.php">
@@ -91,6 +116,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/checkin.php">
@@ -101,6 +133,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/checkout.php">
@@ -111,6 +150,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/issueWage.php">
@@ -121,6 +167,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("2.8", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
                     <a href="pages/employee/search.php">
@@ -131,6 +184,27 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                 <?php 
+                  if (in_array("2.9", $subFunctionality)) {
+                ?>
+                 <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard">
+                    <a href="pages/employee/changeTimes.php">
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Maintain Checkin/Checkout Time</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>

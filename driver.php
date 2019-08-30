@@ -1,6 +1,6 @@
+<?php include_once("sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,6 +50,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("11.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/driver/select_truck_delivery.php">
@@ -60,7 +64,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
 
+                <?php 
+                  if (in_array("11.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/driver/select_truck_collection.php">
@@ -71,6 +81,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+                  
               </div>
             </div>
           </div>

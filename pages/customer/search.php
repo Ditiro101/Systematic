@@ -62,7 +62,7 @@
             <table id="myTable" class="table align-items-center table-flush">
                <thead class="thead-light">
               <tr class="header">
-                <th>Title</th>
+                <th>Customer ID</th>
                 <th >Name</th>
                 <th >Surname</th>
                 <th> Contact number</th>
@@ -72,7 +72,7 @@
                 <th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="tBody">
               <tr>
                 <td>Mr</td>
                 <td>John</td>
@@ -104,108 +104,6 @@
                     <span class="btn-inner--icon"><i class="fas fa-eye"></i>
                     </span>
                     <span class="btn-inner--text">View Credit Account</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>Benny</td>
-                <td>Haynes</td>
-                <td>065 626 3161</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'" >
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-edit"></i>
-                    </span>
-                    <span class="btn-inner--text">Apply For Account</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Ms</td>
-                <td>Annie</td>
-                <td>Saynes</td>
-                <td>061 656 5551</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-default btn-sm" type="button" onclick="window.location='view-credit-account.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                    </span>
-                    <span class="btn-inner--text">View Credit Account</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Mr</td>
-                <td>David</td>
-                <td>Cooper</td>
-                <td>063 213 5122</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-user"></i>
-                    </span>
-                    <span class="btn-inner--text">View</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-outline-default btn-sm pr-4" type="button" onclick="window.location='apply-for-credit.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-edit"></i>
-                    </span>
-                    <span class="btn-inner--text">Apply For Account</span>
                   </button>
                 </td>
               </tr>
@@ -328,6 +226,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchCustomer.js"></script>
 </body>
 
 </html>

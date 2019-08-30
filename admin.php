@@ -1,6 +1,6 @@
+<?php include_once("sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -50,6 +50,9 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+                <?php 
+                  if (in_array("4.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/add-employee-type.php">
@@ -60,6 +63,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/maintain-employee-type.php">
@@ -70,6 +80,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/search-employee-type.php">
@@ -80,6 +97,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/view-audit-log.php">
@@ -90,6 +114,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/backup.php">
@@ -100,6 +131,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/restore.php">
@@ -110,6 +148,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
                     <a href="pages/admin/delete-user.php">
@@ -120,6 +165,116 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.8", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  href="#">
+                    <a href="#">
+                      <div>
+                        <i class="fas fa-user-times"></i>
+                        <span>Maintain Check-in Checkout Time</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.9", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  href="#">
+                    <a href="pages/admin/delete-user.php">
+                      <div>
+                        <i class="fas fa-user-times"></i>
+                        <span>Export Audit Log</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("4.101", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard" data-toggle="modal" data-target="#over">
+                    
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Maintain Overdue Delivery Status</span>
+                      </div>
+                    
+                  </button>
+                </div>
+
+                <div class="modal fade" id="over" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                      </div>
+                      <div class="modal-body">
+                        <p>Number of days to be used for overdue delivery status?</p>
+                      </div>
+                      <div class="modal-body text-left">
+                        <div class="col mb-4">
+                          <label for="c2">Number of Days</label>
+                          <div class="input-group"> 
+                            <input type="text" value=""  class="form-control" placeholder="7" id="numOfDays" autofocus />
+                            <input type="hidden"  class="form-control " id="USER_ID" value=<?php echo $userID;?> />
+                          </div> 
+                        </div>
+                      </div>
+  
+                      <div class="modal-footer">
+                        
+                      <button type="button" class="btn btn-success" data-dismiss="modal" id="overButton">Confirm</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">Discard</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="overdueStatusSet" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                      
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-defaultOverdue">Success!</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p id="modalTextOverdue"></p>
+                            
+                        </div>
+                        
+                        <div class="modal-footer">
+                            
+                            <button type="button"  id="btnCloseOverdue" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+
+
+                <?php
+                  }
+                ?>
+
+
               </div>
             </div>
           </div>
@@ -137,6 +292,7 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script src="pages/admin/JS/overDue-JS.js"></script>
 </body>
 
 </html>

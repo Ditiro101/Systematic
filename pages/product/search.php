@@ -70,88 +70,13 @@
               	<th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Monster Energy Drink 500ml</td>
-                <td>Beverage</td>
-                <td>0</td>
-                <td>0</td>
-                <td>0</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
-        						</span>
-        						<span class="btn-inner--text">View</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-              	
-                <td>Ace Maze meal 3kg</td>
-                <td>Maze meal</td>             
-                <td>100</td>
-                <td>40</td>
-                <td>0</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
-        						</span>
-        						<span class="btn-inner--text">View</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Castle lite 350ml </td>
-                <td>Alcohol</td> 
-                <td>30</td>
-                <td>0</td>
-                <td>0</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
-        						</span>
-        						<span class="btn-inner--text">View</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Castle lite 750ml</td>
-                <td>Alcohol</td>
-                <td>30</td>
-                <td>15</td>
-                <td>0</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
-        						</span>
-        						<span class="btn-inner--text">View</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Castle lite 1 L</td>
-                <td>Alcohol</td>
-                <td>30</td>
-                <td>15</td>
-                <td>0</td>
-              	<td>
-        					<button class="btn btn-icon btn-2 btn-success btn-sm" type="button"  onclick="window.location='view.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-eye"></i>
-        						</span>
-        						<span class="btn-inner--text">View</span>
-        					</button>
-        				</td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
-                <td><b>No Product Found</b></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><b>No Product Type Found</b></td>
                 <td></td>
                 <td></td>
               </tr>
-
-              </tbody>
+            </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
               <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
@@ -215,6 +140,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Search Product JS -->
+  <script src="JS/searchProduct.js" type="text/javascript"></script>
 </body>
 
 </html>
