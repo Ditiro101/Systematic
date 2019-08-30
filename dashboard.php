@@ -16,6 +16,10 @@
   <link href="./assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="./assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- calendar -->
+    <link href='assets/fullcalender/packages/core/main.css' rel='stylesheet' />
+  <link href='assets/fullcalender/packages/daygrid/main.css' rel='stylesheet' />
+  <link href='assets/fullcalender/packages/bootstrap/main.css' rel='stylesheet' />
 </head>
 <body>
   <?php include_once("header.php");?>
@@ -182,6 +186,28 @@
           </div>
         </div>
       </div>
+      <?php 
+
+        if($userID==3){
+          echo '      <div class="row mt-5">
+        <div class="col">
+          <div class="card shadow">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Calendar</h3>
+            </div>
+            <div class="card-body">
+              <div class="row icon-examples">
+                
+                <div id="calender"></div>
+               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>';
+        }
+      ?>
+
       <?php include_once("footer.php");?>
     </div>
   </div>
@@ -196,6 +222,13 @@
   <script src="./assets/js/argon.js?v=1.0.0"></script>
   <script src="pages/employee/JS/noOfWorkers.js"> </script>
   <script src="pages/customer/JS/noOfCustomer.js"> </script>
+
+    <script src='assets/fullcalender/packages/core/main.js'></script>
+  <script src='assets/fullcalender/packages/daygrid/main.js'></script>
+  <script src='assets/fullcalender/packages/timegrid/main.js'></script>
+  <script src='assets/fullcalender/packages/list/main.js'></script>
+  <script src='assets/fullcalender/packages/bootstrap/main.js'></script>
+  <script type="text/javascript" src="pages/delivery_collection/JS/calendar.js"></script>
 </body>
 
 </html>

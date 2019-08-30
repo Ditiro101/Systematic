@@ -1,6 +1,6 @@
 $(()=>{
   $.ajax({
-    url:'PHPcode/calendar.php',
+    url:'pages/delivery_collection/PHPcode/calendar.php',
     type:'POST',
     data:{}
   })
