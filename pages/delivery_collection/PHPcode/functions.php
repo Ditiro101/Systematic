@@ -502,10 +502,16 @@
 	//code for maintain
 	function getAssignedDeliveries($con)
 	{
-		$get_query="SELECT A.DELIVERY_ID,A.SALE_ID,B.DELIVERY_TRUCK_ID,B.TRUCK_ID,C.REGISTRATION_NUMBER,C.TRUCK_NAME,C.CAPACITY
+		$get_query="SELECT A.DELIVERY_ID,A.EXPECTED_DATE,A.SALE_ID,B.DELIVERY_TRUCK_ID,B.DCT_STATUS_ID,B.TRUCK_ID,C.REGISTRATION_NUMBER,C.TRUCK_NAME,C.CAPACITY,F.CITY_NAME,CONCAT(D.ADDRESS_LINE_1,', ',E.NAME,', ',E.ZIPCODE,', ',F.CITY_NAME,', South Africa') AS ADDRESS_NAME,G.SALE_AMOUNT,H.NAME AS EMPLOYEE_NAME,I.NAME AS CUSTOMER_NAME,I.CUSTOMER_ID,I.SURNAME,I.EMAIL,I.CONTACT_NUMBER
 			FROM DELIVERY A
 			JOIN DELIVERY_TRUCK B ON A.DELIVERY_ID=B.DELIVERY_ID
 			JOIN TRUCK C ON B.TRUCK_ID=C.TRUCK_ID
+			JOIN ADDRESS D ON A.ADDRESS_ID=D.ADDRESS_ID
+			JOIN SUBURB E ON D.SUBURB_ID=E.SUBURB_ID
+			JOIN CITY F on E.CITY_ID=F.CITY_ID
+			JOIN SALE G on A.SALE_ID=G.SALE_ID
+			JOIN EMPLOYEE H on G.EMPLOYEE_ID=H.EMPLOYEE_ID
+			JOIN CUSTOMER I on G.CUSTOMER_ID=I.CUSTOMER_ID
 			WHERE B.DCT_STATUS_ID=2";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
@@ -532,11 +538,12 @@
 			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
 			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
 			ELSE 'Pallet'
-			END) AS PRODUCT_NAME
+			END) AS PRODUCT_NAME,E.SELLING_PRICE
 			FROM DELIVERY_TRUCK A
 			JOIN TRUCK_PRODUCT B ON A.DELIVERY_TRUCK_ID=B.DELIVERY_TRUCK_ID
 			JOIN TRUCK C ON A.TRUCK_ID=C.TRUCK_ID
 			JOIN PRODUCT D ON B.PRODUCT_ID=D.PRODUCT_ID
+			JOIN SALE_PRODUCT E ON A.SALE_ID=E.SALE_ID AND B.PRODUCT_ID=E.PRODUCT_ID
 			WHERE A.DCT_STATUS_ID=2";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
@@ -631,6 +638,20 @@
 	function updateSaleAssignment($con,$dct,$saleid)
 	{
 		$update_query="UPDATE DELIVERY SET DCT_STATUS_ID='$dct' WHERE SALE_ID='$saleid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateDeliveryTruckStatus($con,$sID,$truckid,$dct)
+	{
+		$update_query="UPDATE DELIVERY_TRUCK SET DCT_STATUS_ID='$dct' WHERE SALE_ID='$sID' AND TRUCK_ID='$truckid'";
 		$update_result=mysqli_query($con,$update_query);
 		if($update_result)
 		{
