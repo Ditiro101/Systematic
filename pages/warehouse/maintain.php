@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -56,22 +57,22 @@
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form id="mainf">
-                      <div class="form-group col">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="bane">Warehouse Name</label>
                         <label id="wID" hidden="true"><?php echo $_POST["WAREHOUSE_ID"];?></label>
                         <label id="wName"><?php echo $_POST["NAME"];?></label>
-                        <input type="text" class="form-control" id="warehouseName" name="wName" aria-describedby="emailHelp" required>
+                        <input type="text" class="form-control" maxlength="30" id="warehouseName" name="wName" aria-describedby="emailHelp" required>
                       </div>
                       <br>
-                      <div class="form-group col">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="des">Description</label>
                         <label id="des" hidden="true"><?php echo $_POST["DESCRIPTION"];?></label>
-                         <input type="text" class="form-control" id="wDes" name="wDes" required>
+                         <input type="text" class="form-control" maxlength="30" id="wDes" name="wDes" required>
                       </div>
                       <br>
-                       <div class="form-group col-4">
+                       <div class="form-group col-lg-2 col-md-6 col-sm-12">
                         <label for="bane">Max Number of Pallets</label>
-                        <input type="number" class="form-control" id="wMax" name="wMax" aria-describedby="emailHelp" value=<?php echo $_POST["MAX_PALLETS"];?> required>
+                        <input type="number" class="form-control" id="wMax" max="5000" name="wMax" aria-describedby="emailHelp" value=<?php echo $_POST["MAX_PALLETS"];?> required>
                       </div>
                      
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
