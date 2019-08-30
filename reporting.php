@@ -55,7 +55,7 @@
                   if (in_array("12.1", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDateSale">
                     <a>
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
@@ -72,7 +72,7 @@
                   if (in_array("12.2", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateStock">
                     <a>
                       <div>
                         <i class="far fa-clipboard"></i>
@@ -106,7 +106,7 @@
                   if (in_array("12.4", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDateProduct">
                     <a>
                       <div>
                         <i class="fas fa-chart-line"></i>
@@ -140,7 +140,7 @@
                   if (in_array("12.6", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateCreditors">
                     <a>
                       <div>
                         <i class="fas fa-briefcase"></i>
@@ -204,6 +204,44 @@
 
       <!-- attedance report modal -->
 
+      <div class="modal fade" id="generateStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to generate the selected report?</p>
+
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+              </div> 
+              <div class="modal-body">
+                  <p>Report generated successfully</p>    
+              </div> 
+              <div class="modal-footer">
+                   <a href="pages/reports/stock-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                  
+              </div>            
+            </div>
+        </div>
+      </div>
+
+
       <div class="modal fade" id="generate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -233,12 +271,117 @@
               <div class="modal-body">
                   <p>Report generated successfully</p>    
               </div> 
-              <div class="modal-footer">                        
-                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button> 
+              <div class="modal-footer">
+                   <a href="pages/reports/wage-slips.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                  
               </div>            
             </div>
         </div>
       </div>
+
+
+
+      
+      <div class="modal fade" id="generateCreditors" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to generate the selected report?</p>
+
+            </div>
+            <div class="modal-footer">  
+              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+              </div> 
+              <div class="modal-body">
+                  <p>Report generated successfully</p>    
+              </div> 
+              <div class="modal-footer">
+                   <a href="pages/reports/creditors-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                  
+              </div>            
+            </div>
+        </div>
+      </div>
+            <div class="modal fade" id="generateDateSale" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Please enter the timeframe for which the report should be generated?</p>
+              <div class="form-row ">
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date From</label>
+                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+                </div>
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date To</label>
+                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">  
+              <a href="pages/reports/sale.html"class="btn btn-success" >Generate Report</a>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+        <div class="modal fade" id="generateDateProduct" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Please enter the timeframe for which the report should be generated?</p>
+              <div class="form-row ">
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date From</label>
+                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+                </div>
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date To</label>
+                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">  
+              <a href="pages/reports/product-trends-report.php"class="btn btn-success" >Generate Report</a>
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+
+
+
+
       <div class="modal fade" id="generateDate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
