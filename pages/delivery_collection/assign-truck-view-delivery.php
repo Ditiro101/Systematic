@@ -1,3 +1,11 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $employeeData=getAllEmployees($con);
+  $saleProductData=getSaleProductDetails($con,$_POST["SALE_ID"]);
+  $productData=getProductDetails($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -58,57 +66,66 @@
             <div class="card-body">
               <div class="mb-5">
                 <ol class="progtrckr" data-progtrckr-steps="5">
-                  <li class="progtrckr-done">Not Delivered</li>
-                  <li class="progtrckr-todo">Truck Assigned</li>
-                  <li class="progtrckr-todo">Final Assignment</li>
-                 <li class="progtrckr-todo">On Delivery</li>
-                 <li class="progtrckr-todo">Delivered</li>
+                  <li id="1" class="progtrckr-todo">Not Delivered</li>
+                  <li id="2" class="progtrckr-todo">Truck Assigned</li>
+                  <li id="3" class="progtrckr-todo">Final Assignment</li>
+                 <li id="4" class="progtrckr-todo">On Delivery</li>
+                 <li id="5" class="progtrckr-todo">Delivered</li>
                 </ol>
               </div>
               <div class="row mb-3">
                 <div class="col-7 table">
                   <div class="card card-stats table light" id="myTabContent" >
                     <div class="card-body px-3">
+                      <label id="dctData" hidden="true"><?php echo $_POST["DCT_STATUS_ID"];?></label>
+                      <label id="aData" hidden="true"><?php echo $_POST["ADDRESS_DATA"];?></label>
+                      <label id="subData" hidden="true"><?php echo $_POST["SUBURB_DATA"];?></label>
+                      <label id="citData" hidden="true"><?php echo $_POST["CITY_DATA"];?></label>
+                      <label id="cData" hidden="true"><?php echo $_POST["CUSTOMER_DATA"];?></label>
+                      <label id="eData" hidden="true"><?php echo json_encode($employeeData);?></label>
+                      <label id="sproductData" hidden="true"><?php echo json_encode($saleProductData);?></label>
+                      <label id="prdData" hidden="true"><?php echo json_encode($productData);?></label>
+                      <label id="sData" hidden="true"><?php echo $_POST["SALE_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
                                   Customer ID
                               </th>
-                              <td >
-                                  12
+                              <td id="vCustomerID">
+                                  
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Name
                               </th>
-                              <td >
-                                  Dr Weilbach
+                              <td id="vCustomerName">
+                                  
                               </td>
                             </tr>  
                             <tr>
                               <th>
                                   Email
                               </th>
-                              <td >
-                                  lizette.weilbach@up.ac.za
+                              <td id="vCustomerEmail">
+                                  
                               </td>
                             </tr>
                             <tr>
                               <th>
                                   Contact No
                               </th>
-                              <td >
-                                  012 420 3376
+                              <td id="vContact">
+                                 
                               </td>
                             </tr>  
                             <tr>
                               <th>
                                   Address
                               </th>
-                              <td >
-                                  IT Building Room 5-69, University Of Pretoria
+                              <td id="vAddress">
+                                  
                               </td>
                             </tr>             
                         </tbody>
@@ -125,24 +142,24 @@
                               <th style="width: 12rem">
                                   Invoice #
                               </th>
-                              <td >
-                                  321
+                              <td id="vSaleID">
+                                  <?php echo $_POST["SALE_ID"];?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Date
                               </th>
-                              <td >
-                                  25/07/2019
+                              <td id="vDelDate">
+                                  <?php echo $_POST["EXPECTED_DATE"];?>
                               </td>
                             </tr>  
                             <tr>
                               <th>
                                   Salesperson
                               </th>
-                              <td >
-                                  Alana
+                              <td id="vEmployeeName">
+                                  
                               </td>
                             </tr>
              
@@ -166,26 +183,20 @@
                       <th class="text-right"> Total </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">2</td>
-                      <td class="py-3">Surprise Product</td>
-                      <td class="text-right py-3">R35.00</td>
-                      <td class="text-right py-3">R70.00</td>
-                    </tr>                    
+                  <tbody id="tBody">                    
                     </tbody>
                     <tfoot class="tfoot-light">
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R70.00</b></td>
+                      <td class="text-right"><b id="sTotal"></b></td>
                     </tr>
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R10.50</b></td>
+                      <td class="text-right"><b id="sVAT"></b></td>
                     </tr>
                     </tfoot>
                   </table>
@@ -216,6 +227,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewDelivery.js"></script>
 </body>
 
 </html>

@@ -1,3 +1,9 @@
+<?php
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $assignedDeliveryData=getAssignedDeliveries($con);
+  $assignedDeliveryProductData=getAssignedDeliveryProducts($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -49,12 +55,10 @@
             <div class="card-header border-0">
               <div class="form-group col-12">
                 <label>Truck</label>
-                <select class="form-control btn-default" onchange="showDeliveries()">
+                <label hidden="true" id="adData"><?php echo json_encode($assignedDeliveryData); ?></label>
+                <label hidden="true" id="adpData"><?php echo json_encode($assignedDeliveryProductData); ?></label>
+                <select class="form-control btn-default" id="truckSelect">
                   <option>Select Truck</option>
-                  <option onclick="showDeliveries()">BBC 123 NW  |  2015 Isuzu NPR          | 10 Tonnes</option>
-                  <option>DSM 032 NW  |  2017 GMC Savana G33903  | 25 Tonnes</option>
-                  <option>CAD 347 NW  |  2017 Freightliner M2    | 40 Tonnes</option>
-                  <option>ADW 586 NW  |  2016 Volvo VNL84430     | 50 Tonnes</option>
                 </select>
               </div>
                <div class="input-group input-group-rounded input-group-merge col">
@@ -69,7 +73,7 @@
           </div>
           <div class="tab-content" id="myTabContent">
             <div class="table-responsive">
-              <table id="myTable" class="table align-items-center table-flush" style="display: none;">
+              <table id="myTable" class="table align-items-center table-flush">
                 <thead class="thead-light">
                   <tr class="header">
                     <th></th>
@@ -80,53 +84,15 @@
                     <th></th>
                   </tr>
                 </thead>
-                <tbody>
-                  <thead class="table-light">
+                <tbody id="enterProducts">
+                  <!-- <thead class="table-light">
                     <th><b>25/07/2019</b></th>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
                     <th></th>
-                  </thead>
-                  <tr>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" id="customCheck1" type="checkbox">
-                        <label class="custom-control-label" for="customCheck1"> &nbsp;</label>
-                      </div>
-                    </td>
-                    <td>Delivery</td>
-                    <td>321</td>
-                    <td>25/07/2019</td>
-                    <td>Pretoria</td>
-                    <td>
-                      <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.html'">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                        </span>
-                        <span class="btn-inner--text">View</span>
-                      </button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="custom-control custom-checkbox">
-                        <input class="custom-control-input" id="customCheck3" type="checkbox">
-                        <label class="custom-control-label" for="customCheck3"> &nbsp;</label>
-                      </div>
-                    </td>
-                    <td>Collection</td>
-                    <td>128</td>
-                    <td>25/07/2019</td>
-                    <td>Pretoria</td>
-                    <td>
-                      <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.html'">
-                        <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                        </span>
-                        <span class="btn-inner--text">View</span>
-                      </button>
-                    </td>
-                  </tr>
+                  </thead> -->                  
                   <tr id="emptySearch" style="display: none;">
                     <td >No Delivery/Collection Found</td>
                   </tr>
@@ -151,7 +117,7 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#success">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYes">Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -231,6 +197,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/finaliseAssignedTruck.js"></script>
 </body>
 
 </html>

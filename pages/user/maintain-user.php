@@ -1,6 +1,6 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -58,25 +58,27 @@
                       <div class="col">
                         <div class="form-group">
                           <label for="inputUsername">Email (Username)</label>
-                          <input type="email" class="form-control" id="inputUsername" value="" placeholder=<?php echo $_POST["USERNAME"];?>>
+                          <input type="email" class="form-control" id="inputUsername" value=<?php echo $_POST["USERNAME"];?> placeholder=<?php echo $_POST["USERNAME"];?> >
                           <input type="hidden" class="form-control" id="USER_ID" value=<?php echo $_POST["USER_ID"];?>>
                         </div>
                         <div class="form-group">
                           <label for="inputOldPassword">Password</label>
-                          <input type="password" class="form-control" id="inputOldPassword" placeholder="****" >
+                          <input type="password" class="form-control" id="inputOldPassword" placeholder="****">
                         </div>
                           <div class="form-group">
                             <label for="inputPassword2">Confirm Password</label>
                             <input type="password" class="form-control" id="inputPassword2" placeholder="****">
                           </div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group col">
                           <label for="bane">Access Level</label>
-                          <label hidden=true id="accessLevel"><?php echo $_POST["ROLE_NAME"];?></label>
                           <select class="form-control" id="aLevel">
+                          <option value=<?php echo $_POST["ROLE_NAME"];?> selected><?php echo $_POST["ROLE_NAME"];?></option>
                           </select>
                         </div>
-                        <button type="submit" class="btn btn-primary mb-3 px-4" id="maintainUserSave">Save</button> 
+                        <div class="form-group col">
+                          <button type="submit" class="btn btn-primary mb-3 px-4" id="maintainUserSave">Save</button>
+                        </div> 
                       </div>
                         <div class="form-group col-md-2">
                             <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
@@ -105,16 +107,16 @@
                             </div>
                           </div>
                         </div>
+
                     </form>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+          <!-- Footer -->
+          <?php include_once("../footer.php");?>
         </div>
-      
-      <!-- Footer -->
-      <?php include_once("../footer.php");?>
       </div>
     </div>
   </div>
