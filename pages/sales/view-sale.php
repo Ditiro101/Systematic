@@ -1,3 +1,11 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $saleProducts=getSaleProductDetails($con,$_POST["SALE_ID"]);
+  $products=getProductDetails($con);
+  $isDelivered=checkDelivery($con,$_POST["SALE_ID"]);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -63,38 +71,37 @@
                         <h5 class="card-title mb-0">Customer Details</h5>
                     </div>
                     <div class="card-body px-3">
+                      <label hidden="true" id="cData"><?php echo $_POST["CUSTOMER_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
                                   Customer ID
                               </th>
-                              <td >
-                                  12
+                              <td id="customerID">
+                                <?php echo $_POST["CUSTOMER_ID"];?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Name
                               </th>
-                              <td >
-                                  Dr
+                              <td id="customerName">
                               </td>
                             </tr> 
                             <tr>
                               <th>
                                   Surname
                               </th>
-                              <td >
-                                  Weilbach
+                              <td id="customerSurname">
                               </td>
                             </tr>
                             <tr>
                               <th>
                                   Contact No
                               </th>
-                              <td >
-                                  012 420 3376
+                              <td id="customerContact">
+        
                               </td>
                             </tr>              
                         </tbody>
@@ -105,30 +112,31 @@
                 <div class="col-6">
                   <div class="card card-stats" id="myTabContent" >
                     <div class="card-body px-3" style="height: 18.5rem">
+                      <label hidden="true" id="eData"><?php echo $_POST["EMPLOYEE_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
                                 Date 
                               </th>
-                              <td >
-                                25/07/2019
+                              <td id="saleDate">
+                                <?php echo $_POST["SALE_DATE"];?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                 Invoice #
                               </th>
-                              <td >
-                                321
+
+                              <td id="invoiceNo">
+                                <?php echo $_POST["SALE_ID"]?>
                               </td>
                             </tr> 
                             <tr>
                               <th>
                                 Salesperson
                               </th>
-                              <td >
-                                Alana
+                              <td id="eSalesPerson">
                               </td>
                             </tr>      
                         </tbody>
@@ -141,7 +149,8 @@
               <div class="col-12">
                 <div class="card shadow">
                 <div class="table-responsive">
-
+                  <label hidden="true" id="productsArr"><?php echo json_encode($products);?></label>
+                  <label hidden="true" id="saleproductsArr"><?php echo json_encode($saleProducts);?></label>
                   <table id="myTable" class="table align-items-center table-flush">
                      <thead class="thead-light">
                     <tr class="header">
@@ -151,26 +160,20 @@
                       <th class="text-right"> Total </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">2</td>
-                      <td class="py-3">Surprise Product</td>
-                      <td class="text-right py-3">R35.00</td>
-                      <td class="text-right py-3">R70.00</td>
-                    </tr>
+                  <tbody id="tBody">
                     </tbody>
                     <tfoot class="tfoot-light">
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R70.00</b></td>
+                      <td class="text-right"><b id="sTotal"><?php echo $_POST["SALE_AMOUNT"] ?></b></td>
                     </tr>
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R10.50</b></td>
+                      <td class="text-right"><b id="sVAT"></b></td>
                     </tr>
                     </tfoot>
                   </table>
@@ -208,12 +211,20 @@
                   <span class="btn-inner--text">Make Payment</span>
                 </button>
 
-                <button class="btn btn-icon btn-2 btn-warning mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-addDelivery">
-                  <span class="btn-inner--icon">
-                    <i class="fas fa-truck"></i>
-                  </span>
-                  <span class="btn-inner--text">Add Delivery</span>
-                </button>
+                <form action="../delivery_collection/add_delivery.php" method="POST">
+                  <input type="hidden" name="SALE_ID" value=<?php echo $_POST["SALE_ID"];?>>
+                  <input type="hidden" name="SALE_DATE" value=<?php echo $_POST["SALE_DATE"];?>>
+                  <input type="hidden" name="CUSTOMER_ID" value=<?php echo $_POST["CUSTOMER_ID"];?>>
+                  <input type="hidden" name="CUSTOMER_DATA" value=<?php echo $_POST["CUSTOMER_DATA"];?>>
+                  <label hidden="true" id="deliveryCheck"><?php echo $isDelivered;?></label>
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right" 
+                    type="submit" id="btnAddDelivery">
+                    <span class="btn-inner--icon">
+                      <i class="fas fa-truck"></i>
+                    </span>
+                    <span class="btn-inner--text">Add Delivery</span>
+                  </button>
+                </form>
 
                 <button class="btn btn-icon btn-2 btn-danger mt-0 float-right" type="button" data-toggle="modal" data-target="#modal-makeReturn">
                   <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
@@ -531,6 +542,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewSale.js"></script>
 </body>
 
 </html>
