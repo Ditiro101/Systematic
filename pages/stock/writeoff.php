@@ -59,7 +59,7 @@
                       <div class="form-row">
                         <div class="form-group col">
                           <label for="bane"> Select Warehouse</label>
-                          <select class="form-control">
+                          <select class="form-control" id="options">
                             <option>Sale Warehouse</option>
                             <option>Return Warehouse</option>
                             <option>Receival Warehouse</option>  
@@ -141,6 +141,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/writeoff.js"></script>
 </body>
 
 </html>
