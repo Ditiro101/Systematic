@@ -65,96 +65,19 @@
                 <tr class="header">
                   <th>Invoice #</th>
                   <th>Date</th>
-                  <th>Name</th>
-                  <th>Surname</th>
+                  <th>Customer Name</th>
                   <th>Salesperson</th>
                   <th>Total</th>
                   <th ></th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="tBody">
                 <tr>
                   <td>321</td>
                   <td>25/07/2019</td>
                   <td>Dr</td>
-                  <td>Weilbach</td>
                   <td>Alana</td>
                   <td>R70.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>322</td>
-                  <td>04/07/2019</td>
-                  <td>Dallas</td>
-                  <td>Turner</td>
-                  <td>Mark</td>
-                  <td>R8 350.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>323</td>
-                  <td>04/07/2019</td>
-                  <td>Clifton</td>
-                  <td>Hansen</td>
-                  <td>Mark</td>
-                  <td>R13 732.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>324</td>
-                  <td>05/07/2019</td>
-                  <td>Daniel</td>
-                  <td>Haynes</td>
-                  <td>Jabu</td>
-                  <td>R6 190.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>325</td>
-                  <td>05/07/2019</td>
-                  <td>Omar</td>
-                  <td>Webb</td>
-                  <td>Wilfred</td>
-                  <td>R21 450.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>326</td>
-                  <td>05/07/2019</td>
-                  <td>John</td>
-                  <td>Wood</td>
-                  <td>Jabu</td>
-                  <td>R13 240.00</td>
                   <td>
                     <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
                       <span class="btn-inner--icon"><i class="fas fa-eye"></i>
@@ -274,6 +197,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchSale.js"></script>
 </body>
 
 </html>
