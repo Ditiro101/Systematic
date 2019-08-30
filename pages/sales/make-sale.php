@@ -51,18 +51,100 @@
     <div class="container-fluid mt--8">
       <!-- Table -->
       <div class="row mb-3">
-          <div class="card shadow col">
-            <div class="card-header bg-transparent">
-              <h3 class="mb-0">Sale Details</h3>
-            </div>
-            <div class="card-body">
-              <div class="row mb-3">
-                <div class="col-sm-6 col-lg-6 table">
-                  <div class="card card-stats table light" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Customer Details</h5>
+
+                <div class="card shadow col-lg-8">
+                    <div class="card-header border-0">
+                      <div class="input-group input-group-rounded input-group-merge">
+                        <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true" onchange="focusSearch()">
+                        <div class="input-group-prepend">
+                          <div class="input-group-text">
+                            <span class="fa fa-search"></span>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+                <div class="table-responsive col-12">
+
+                  <table id="productsTable" class="table align-items-center table-flush">
+                     <thead class="thead-light">
+                    <tr class="header">
+                      <th> Quantity</th>
+                      <th class="pl-0"> Item Name</th>
+                      <th class="pl-4" style="text-align: center;"> Unit Price</th>
+                      <th class="text-right pr-1"> Total </th>
+                      <th class="text-right pr-1 pl-2"> Guide Price</th>
+                      <th class="text-right pr-1"> Cost Price</th>
+                      <th class="text-right pr-1"> Profit </th>
+                      <th class="text-left px-0" style="width: 0.5rem"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                 
+                      
+                    
+                    </tbody>
+                    <tfoot class="tfoot-light">
+                    <tr class="footer">
+                      <td></td>
+                      <td></td>
+                      <th class="text-right pr-1"><b>TOTAL</b></th>
+                      <td class="text-right pr-1" id="totalOfSale"><b>R11 280.00</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                     <tr class="footer">
+                      <td></td>
+                      <td></td>
+                      <th class="text-right pr-1"><b>VAT (15%)</b></th>
+                      <td class="text-right pr-1" id="vatOfSale"><b>R2 820.00</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    </tfoot>
+                  </table>
+
+                  <script>
+                  function myFunction() {
+                    var input, filter, table, tr, td, i, txtValue;
+                    input = document.getElementById("myInput");
+                    filter = input.value.toUpperCase();
+                    table = document.getElementById("productsTable");
+                    tr = table.getElementsByTagName("tr");
+                    for (i = 0; i < tr.length; i++) {
+                      td = tr[i].getElementsByTagName("td")[1];
+                      if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                          tr[i].style.display = "";
+                        } else {
+                          tr[i].style.display = "none";
+                        }
+                      }       
+                    }
+                  }
+                  </script>
+                </div>
+              </div>
+
+
+                <div class="col-sm-6 col-lg-4 bg-transparent ">
+                  <div class="card card-stats table" id="myTabContent" >
+                    <div class="card-header bg-default">
+                      <div class="row">
+                       
+                        
+                        <span class="">
+                            <button class="btn btn-primary float-right"> Add Customer</button>
+                         </span>
+                      </div>
                     </div>
                     <div class="card-body px-3" style="height: 18rem">
+                      
+
                       <table class="table align-items-center table-flush table-borderless table-responsive" id= "customerCard">
                         <tbody class="list">    
                             <tr>
@@ -78,19 +160,54 @@
                             </div>
                           </tr>
                           <tr>
-                              <th>
-                                  No Customer Added
-                              </th>
+                              <th> No Customer Added</th>
                               <td >
                                   
                               </td>
                             </tr>                  
                         </tbody>
                       </table>
+
+  
+
+
+                    </div>
+                    <div class="card-header bg-secondary">
+                      <div class="row">
+                       
+                        
+                        <span class="">
+                           <div class="custom-control custom-checkbox mb-3">
+                            
+                            <input class="custom-control-input" style="font-size: 5rem" id="customCheck2" type="checkbox" checked>
+                            <label class="custom-control-label" for="customCheck2">Add Sale Delivery</label>
+                          
+                          </div>
+                         </span>
+                      </div>
+                    </div>
+                    <div class="card-body px-3" style="height: 5rem">
+
+                    </div>
+                    <div class="card-footer px-3" style="height: 5rem">
+                        <span class="">
+                            <button class="btn btn-primary ">Finalise Sale</button>
+                         </span>
+                    </div>
                   </div>
                 </div>
-              </div>
-                <div class="col-sm-6 col-lg-6 mt-3 mt-sm-0 table">
+
+
+ <!--          <div class="card shadow col">
+            <div class="card-header bg-transparent">
+              <h3 class="mb-0">Sale Details</h3>
+            </div>
+            <div class="card-body">
+              <div class="row mb-3"> -->
+                
+
+
+<!--                 <div class="col-sm-6 col-lg-6 mt-3 mt-sm-0 table">
                   <div class="card card-stats table light" id="myTabContent" >
                     <div class="card-body px-3" style="height: 21.7rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
@@ -123,8 +240,8 @@
                       </table>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> -->
+<!--             </div>
             <div class="row">
               <div class="col-12">
                 <div class="card shadow">
@@ -169,88 +286,7 @@
                   </thead>
                   <tbody>
                     <tr>
-                      <!-- <td class="py-2 px-0">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="30" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-2">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="py-2 px-0 float-center">
-                        <div class="input-group px-auto" style="width: 6rem"> 
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01" style="height: 2rem; font-size: 0.9rem">R</span>
-                          </div>
-                          <input type="number" value="83.00" min="0" step=".10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" onchange="setTwoNumberDecimal(this)" />
-                        </div> 
-                      </td>
-                      <td class="text-right py-2 pr-1 price">R2 490.00</td>
-                      <td class="text-right py-2 pr-1">R80.50</td>
-                      <td class="text-right py-2 pr-1">R75.00</td>
-                      <td class="text-right py-2 pr-1">R8.00</td>
-                      <td class="px-0 py-2"><a class="btn py-0 px-1" id="deleteRow" onclick="removeRow(this)"><i class="fas fa-times-circle" style="color: red;"></i></a></td>
-                    </tr> -->
-
-                    <!-- <tr>
-                      <td class="py-2 px-0">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="30" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-2">Apple Munch (96x50ml) Pallet</td>
-                      <td class="py-2 px-0 float-right">
-                        <div class="input-group " style="width: 6rem">
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01" style="height: 2rem; font-size: 0.9rem">R</span>
-                          </div>
-                          <input type="number" value="81.00" min="0" step=".10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" onchange="setTwoNumberDecimal(this)" />
-                        </div> 
-                      </td>
-                      <td class="text-right py-2">R2 430.00</td>
-                      <td class="text-right py-2">R75.00</td>
-                      <td class="text-right py-2">R73.60</td>
-                      <td class="text-right py-2">R7.40</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-0">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="80" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-2">Kingsley Cola (6x2l) Case</td>
-                      <td class="py-2 px-0 float-right">
-                        <div class="input-group " style="width: 6rem"> 
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01" style="height: 2rem; font-size: 0.9rem">R</span>
-                          </div>
-                          <input type="number" value="47.00" min="0" step=".10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" onchange="setTwoNumberDecimal(this)" style="background-color: transparent;" />
-                        </div> 
-                      </td>
-                      <td class="text-right py-2">R3 760.00</td>
-                      <td class="text-right py-2">R46.50</td>
-                      <td class="text-right py-2">R42.20</td>
-                      <td class="text-right py-2">R4.80</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-0">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="20" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                      <td class="py-2 px-0 float-right">
-                        <div class="input-group " style="width: 6rem"> 
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01" style="height: 2rem; font-size: 0.9rem">R</span>
-                          </div>
-                          <input type="number" value="130.00" min="0" step=".10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" onchange="setTwoNumberDecimal(this)" />
-                        </div> 
-                      </td>
-                      <td class="text-right py-2">R2 600.00</td>
-                      <td class="text-right py-2">R126.00</td>
-                      <td class="text-right py-2">R120.00</td>
-                      <td class="text-right py-2">R10.00</td>
-                    </tr> -->
-
+                      
                     
                     </tbody>
                     <tfoot class="tfoot-light">
@@ -267,7 +303,7 @@
                       <td class="text-right pr-1" id="vatOfSale"><b>R2 820.00</b></td>
                     </tr>
                     </tfoot>
-                  </table>
+                  </table> -->
 
                   <script>
                   function myFunction() {
@@ -289,7 +325,7 @@
                     }
                   }
                   </script>
-                </div>
+<!--                 </div>
               </div>
             </div>
             <br>
@@ -348,7 +384,7 @@
                     </div>
                 </div>
               </div>
-          </div>
+          </div> -->
           
           </div>
           </div>
@@ -529,6 +565,7 @@
 
   function calculateRowTotalQuantity(element)
   {
+    
     var thisQuantity = element.value;
     var unitPrice = element.parentNode.parentNode.nextSibling.nextSibling.childNodes[0].childNodes[2].value;
 

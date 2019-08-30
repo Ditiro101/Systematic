@@ -50,6 +50,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("12.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
                     <a>
@@ -60,6 +64,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -70,6 +81,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -80,6 +98,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
                     <a>
@@ -90,16 +115,30 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
-                    <a>
+                  <a href="pages/reports/debtors.php" class="btn-icon-clipboard" >
+                   
                       <div>
                         <i class="far fa-handshake"></i>
                         <span>Debtors Report</span>
                       </div>
-                    </a>
-                  </button>
+                   
+                  </a>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -110,8 +149,15 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateAttendance">
                     <a>
                       <div>
                         <i class="fas fa-users"></i>
@@ -120,11 +166,44 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>
         </div>
       </div>
+
+        <div class="modal fade" id="generateAttendance" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Select the date please?</p>
+                <form action="pages/reports/employeeAttendance.php" method="POST">
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date From</label>
+                  <input type="date" class="form-control" id="DATE" name="DATE" placeholder="Enter Delivery From">
+                </div>
+                <input type="submit" class="btn btn-success" ></input>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
+            </div>
+            <div class="modal-footer"> 
+
+              
+              
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- attedance report modal -->
+
       <div class="modal fade" id="generate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
@@ -133,6 +212,7 @@
             </div>
             <div class="modal-body">
               <p>Are you sure you want to generate the selected report?</p>
+
             </div>
             <div class="modal-footer">  
               <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
