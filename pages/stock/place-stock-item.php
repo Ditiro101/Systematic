@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -85,7 +86,7 @@
                                 </div>
                               </form>
                               <div id="menuItems"></div>
-                              <div id="empty" class="dropdown-header" style="color: black">
+                              <div id="empty" class="dropdown-header table-danger" style="color: black">
                                 No products found
                               </div>
                           </div>
@@ -196,84 +197,6 @@
       </div>
     </div>
 
-    <script type="text/javascript">
-      function setTwoNumberDecimal(el) {
-        el.value = parseFloat(el.value).toFixed(2);
-      };
-
-      //Initialize with the list of symbols
-      // let names = ["All Gold Tomato Sauce (6x350ml) Case", "All Gold Tomato Sauce (6x700ml) Case", "Apple Munch (96x50ml) Pallet", "Ariel Washing Powder (6x500g) Case", "Bakers Toppers (12x125g) Case","Coca Cola (6x2l) Case","Dragon Energy Drink (24x500ml) Case","Kingsley Cola (6x2l) Case","Kingsley Iron Brew (6x2l) Case","Kingsley Ginger Bear (6x2l) Case","Kingsley Granadila (6x2l) Case", "Kingsley Orange (6x2l) Case", "Kingsley Pineapple (6x2l) Case", "Kingsley Cream Soda (6x2l) Case", "Kingsley Apple (6x2l) Case", "Monster Energy Drink (24x500ml) Case"]
-
-      //Find the input search box
-      let search = document.getElementById("searchProduct");
-
-      //Find every item inside the dropdown
-      let items = document.getElementsByClassName("dropdown-item");
-      // function buildDropDown(values) 
-      // {
-      //     let contents = []
-      //     for (let name of values) 
-      //     {
-      //     contents.push('<input type="button" class="dropdown-item" id="dropdownItem" type="button" value="' + name + '"/>')
-      //     }
-      //     $('#menuItems').append(contents.join(""))
-
-      //     //Hide the row that shows no items were found
-      //     $('#empty').hide()
-      // }
-
-      //Capture the event when user types into the search box
-      window.addEventListener('input', function () {
-          filter(search.value.trim().toLowerCase())
-      })
-
-      //For every word entered by the user, check if the symbol starts with that word
-      //If it does show the symbol, else hide it
-      function filter(word) 
-      {
-          let length = items.length
-          let collection = []
-          let hidden = 0
-
-          for (let i = 0; i < length; i++) 
-          {
-            if (items[i].value.toLowerCase().startsWith(word)) 
-            {
-                $(items[i]).show()
-            }
-            else {
-                $(items[i]).hide()
-                hidden++
-            }
-          }
-
-          //If all items are hidden, show the empty view
-          if (hidden === length) 
-          {
-            $('#empty').show()
-          }
-          else 
-          {
-            $('#empty').hide()
-          }
-      }
-
-      //If the user clicks on any item, set the title of the button as the text of the item
-
-      // function focusSearch() 
-      // {
-      //   document.getElementById("searchProduct").focus();
-      // }
-
-      $('#menuItems').on('click', '.dropdown-item', function()
-      {
-          $("#dropdown_coins").dropdown('toggle');
-          $('#searchProduct').val("");
-          filter("");
-      })
-
-      // buildDropDown(names);
-    </script>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>

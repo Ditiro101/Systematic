@@ -104,7 +104,7 @@
                 ?>
 
                 <?php 
-                  if (in_array("2.8", $subFunctionality)) {
+                  if (in_array("2.4", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
@@ -121,7 +121,7 @@
                 ?>
 
                 <?php 
-                  if (in_array("2.4", $subFunctionality)) {
+                  if (in_array("2.5", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
@@ -138,7 +138,7 @@
                 ?>
 
                 <?php 
-                  if (in_array("2.5", $subFunctionality)) {
+                  if (in_array("2.6", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
@@ -155,7 +155,7 @@
                 ?>
 
                 <?php 
-                  if (in_array("2.6", $subFunctionality)) {
+                  if (in_array("2.7", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
@@ -172,7 +172,7 @@
                 ?>
 
                 <?php 
-                  if (in_array("2.7", $subFunctionality)) {
+                  if (in_array("2.8", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard">
@@ -180,6 +180,23 @@
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>
                         <span>Regenerate Employee Tag</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
+                 <?php 
+                  if (in_array("2.9", $subFunctionality)) {
+                ?>
+                 <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard">
+                    <a href="pages/employee/changeTimes.php">
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Maintain Checkin/Checkout Time</span>
                       </div>
                     </a>
                   </button>

@@ -1,3 +1,4 @@
+
 let getVals=function()
 {
 	let arr=[];
@@ -23,6 +24,7 @@ $(()=>{
 		else
 		{
 			let arr=getVals();
+
 			$.ajax({
 			url:'PHPcode/truckcode.php',
 			type:'POST',
@@ -32,19 +34,49 @@ $(()=>{
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
 				{
+
+					//place changes variable her and user id here
+					
+					let changes="Registration:"+arr["registration"]+" | name:"+arr["name"]+" | capacity:"+arr["capacity"];
+					let Sub_Functionality_ID=10.7;
+					$.ajax({
+					url:'../admin/PHPcode/audit_log.php',
+					type:'POST',
+					data:{Sub_Functionality_ID:Sub_Functionality_ID,changes:changes} //functionality id needs to be included
+					})
+					.done(data=>{
+						if(data=="success"){
+							//alert("success");
+						}
+						else{
+							//alert(data);
+						}
+					
+					});
+
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 					$("#displayModal").modal("show");
+
 				}
 				else
 				{
+
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("data-dismiss","modal");
 					$("#displayModal").modal("show");
 				}
 			});
+
+
+
+
+
+
 		}
 		
 	});
+
+
 
 });

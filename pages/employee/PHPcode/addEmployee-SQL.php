@@ -220,7 +220,7 @@ include "meRaviQr/qrlib.php";
 												  //var_dump($employeeID);
 												  $hash = sha1($employeeID);
 											  
-												  $qrImgName = "StockPath".rand();
+												  $qrImgName = $employeeID;
 												 
 												 
 												  $final = $employeeID ; //.$dev;
@@ -242,7 +242,7 @@ include "meRaviQr/qrlib.php";
 													
 												if(($res== true) && ($query_QR==true))
 												{
-													echo "success";
+													echo $employeeID . ",success";
 													
 												}
 												else

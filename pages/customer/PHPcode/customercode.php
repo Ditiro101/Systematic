@@ -384,7 +384,7 @@
 	}
 	elseif($_POST["choice"]==3)
 	{
-		$sql_query ="SELECT * FROM CUSTOMER";
+		$sql_query ="SELECT * FROM CUSTOMER WHERE STATUS_ID='1'";
 	    $result = mysqli_query($con,$sql_query);
 	    //$row = mysqli_fetch_array($result);
 

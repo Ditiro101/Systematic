@@ -33,7 +33,7 @@ include "meRaviQr/qrlib.php";
 
                 $hash = sha1($employeeID);
                 
-                    $qrImgName = "StockPath - ".$name ." ".$surname;
+                    $qrImgName = $employeeID;
                 
                 
                     $final = $employeeID ; //.$dev;
@@ -50,7 +50,7 @@ include "meRaviQr/qrlib.php";
                     $query_QR = mysqli_query($DBConnect , $sql);
                     if($query_QR)
                     {
-                        echo "success";
+                        echo $employeeID . ",success";
                     }
                     else
                     {

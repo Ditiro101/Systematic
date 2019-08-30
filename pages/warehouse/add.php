@@ -1,3 +1,5 @@
+
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -56,19 +58,19 @@
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form id="mainf">
-                      <div class="form-group col">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="bane">Warehouse Name</label>
-                        <input type="text" class="form-control" id="wName" name="wName" aria-describedby="emailHelp" placeholder="Enter warehouse name" maxlength="50" required>
+                        <input type="text" class="form-control" id="wName" name="wName" aria-describedby="emailHelp" placeholder="Enter warehouse name" maxlength="30" required>
                       </div>
                       <br>
-                      <div class="form-group col">
+                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
                         <label for="des">Description</label>
-                         <input type="text" class="form-control" id="wDes" name="wDes" rows="2" placeholder="Enter warehouse description" maxlength="50" required>
+                         <input type="text" class="form-control" id="wDes" name="wDes" rows="2" placeholder="Enter warehouse description" maxlength="30" required>
                       </div>
                       <br>
-                       <div class="form-group col-4">
+                       <div class="form-group col-lg-2 col-md-6 col-sm-12">
                         <label for="bane">Max Number of Pallets</label>
-                        <input type="number" class="form-control" id="wMax" name="wMax" aria-describedby="emailHelp" placeholder="0" required>
+                        <input type="number" class="form-control" id="wMax" max="5000" name="wMax" aria-describedby="emailHelp" placeholder="0" required>
                       </div>
 
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
