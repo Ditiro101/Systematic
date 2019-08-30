@@ -1,3 +1,4 @@
+
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
@@ -36,6 +37,7 @@
   }
   mysqli_close($con);
 ?>
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -187,7 +189,7 @@
                 </div>                
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
               </div>
             </div>

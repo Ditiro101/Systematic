@@ -88,7 +88,7 @@
                               echo  "failure to update Position Name";
                             } 
                         }
-                        if(!empty($wageEarningID))
+                        if(!empty($wageEarningID) || $wageEarningID==0)
                         {
                             $add_query="UPDATE EMPLOYEE_TYPE
                             SET `WAGE_EARNING`='$wageEarningID'

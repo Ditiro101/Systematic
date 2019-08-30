@@ -1,5 +1,5 @@
+<?php include_once("../../sessionCheckLanding.php");?>
 
-<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -18,10 +18,6 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
-  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -60,21 +56,21 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form action="" id="mainf" method="POST"> 
-                      <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    <form action="" method="POST"> 
+                      <div class="form-group col">
                         <label for="bane">Position Name</label>
-                        <input type="text" class="form-control" name="posName" id="posName" aria-describedby="emailHelp" placeholder="Enter Position Name" required>
+                        <input type="text" class="form-control" id="posName" aria-describedby="emailHelp" placeholder="Enter Position Name">
                       </div>
 
                       <div class="form-row col">
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                        <div class="form-group col-6">
                           <label for="bane">User Access Level</label>
                           <select class="form-control" id="aLevel">
                 
                           </select>
                         </div>
 
-                        <div class="form-group col-lg-12 col-md-12 col-sm-12" style="text-align:center; align-items:center; justify-content:center;">
+                        <div class="form-group col-6" style="text-align:center; align-items:center; justify-content:center;">
                           <label for="bane">Wage Earning?</label>
                           <br>
                           <label class="custom-toggle mt-3" >
@@ -135,9 +131,6 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
-  <script src="../../assets/jqueryui/jquery-ui.js"></script>
   <script src="JS/addEmployeeType-JS.js"></script>
 </body>
 

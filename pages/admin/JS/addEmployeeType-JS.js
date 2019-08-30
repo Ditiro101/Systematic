@@ -1,7 +1,5 @@
 $(document).ready(function()
 {
-
-
         let switchStatus = false;
         $("#toggle-two").on('change', function() {
             if ($(this).is(':checked')) {
@@ -23,6 +21,7 @@ $(document).ready(function()
         .done(data=>{
             if(data!="False")
             {
+                console.log(data);
                 let arr=JSON.parse(data);
                 let tableEntries="";
                 for(let k=0;k<arr.length;k++)
@@ -48,17 +47,7 @@ $(document).ready(function()
                 let accessLevelID = parseInt($("#aLevel option:selected").attr("name"));;
                 let postionName = $("#posName").val();
                 let wageEarningID;
-                let form=$('#mainf');
-                form.validate();
-
-                if (form.valid()===false) 
-                {
-                    e.stopPropagation();
-                }
-                else
-                {
-
-                    if(switchStatus)
+                if(switchStatus)
                 {
                     wageEarningID = 1;
                 }
@@ -104,8 +93,6 @@ $(document).ready(function()
                     }
                 });
 
-                }    
-                
             });
 
 });

@@ -1,4 +1,4 @@
-
+<?php include_once("../../sessionCheckLanding.php");?>
 
 <!DOCTYPE html>
 <html>
@@ -85,7 +85,7 @@
               </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
-              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../admin.html'">Back</button>
+              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../admin.php'">Back</button>
             </div>
             <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
