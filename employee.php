@@ -136,7 +136,7 @@
                     <a href="pages/employee/changeTimes.php">
                       <div>
                       <i class="far fa-clock"></i>
-                        <span>Change Checkin/Checkout Time</span>
+                        <span>Maintain Checkin/Checkout Time</span>
                       </div>
                     </a>
                   </button>
