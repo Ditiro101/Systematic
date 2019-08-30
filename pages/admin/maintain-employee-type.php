@@ -1,3 +1,5 @@
+<?php include_once("../../sessionCheckLanding.php");?>
+
 <!DOCTYPE html>
 <html>
 
@@ -85,10 +87,7 @@
                       <div class="col mt-2">
                         <button type="button" class="btn btn-primary mb-3" id="maintainEmployeeTypeSave">Save
                         </button>
-                        <button class="btn btn-icon btn-2 btn-danger mt-0 px-4 float-right" type="button" data-toggle="modal" data-target="#modal-del">
-                          <span class="btn-inner--icon"><i class="fas fa-trash"></i></span>
-                          <span class="btn-inner--text" >Delete Employee Type</span>
-                        </button>   
+                    
                     </form>
                     <div class="modal fade" id="displayUpdateModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                       <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">

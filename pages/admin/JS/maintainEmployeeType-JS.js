@@ -80,7 +80,7 @@ console.log("Early");
                     console.log("Does not go to Nan");
                 }
 
-             
+                console.log(wageEarningID);
 
                 console.log(accessLevelID);
 

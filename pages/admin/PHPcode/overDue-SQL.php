@@ -44,7 +44,7 @@
     }
     else
     {
-        echo "User ID is not set OR Days the delivery is overdue by is not set"
+        echo "User ID is not set OR Days the delivery is overdue by is not set";
     }
     //Close database connection
     mysqli_close($DBConnect);

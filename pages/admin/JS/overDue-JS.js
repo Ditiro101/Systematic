@@ -6,7 +6,8 @@ $(document).ready(function(){
 
             let userID = $("#USER_ID").val();
             let days = $("#numOfDays").val();
-           
+           console.log(userID);
+           console.log(days);
       
             $.ajax({
                 url:'pages/admin/PHPcode/overDue-SQL.php',

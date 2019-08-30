@@ -21,6 +21,7 @@ $(document).ready(function()
         .done(data=>{
             if(data!="False")
             {
+                console.log(data);
                 let arr=JSON.parse(data);
                 let tableEntries="";
                 for(let k=0;k<arr.length;k++)

@@ -81,7 +81,7 @@ if(isset($_SESSION['userID']))
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="pages/admin/maintain-employee-type.php">
+                    <a href="pages/admin/search-employee-type.php">
                       <div>
                         <i class="far fa-edit"></i>
                         <span>Maintain Employee Type</span>

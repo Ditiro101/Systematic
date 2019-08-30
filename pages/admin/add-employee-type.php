@@ -1,3 +1,5 @@
+<?php include_once("../../sessionCheckLanding.php");?>
+
 <!DOCTYPE html>
 <html>
 
