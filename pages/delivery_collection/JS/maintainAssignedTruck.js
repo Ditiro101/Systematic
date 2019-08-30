@@ -1,7 +1,8 @@
 var assignments;
 var assignmentProducts;
 var truckID;
-var preAssignQtys;
+var preAssignQtys=[];
+var removeDeliveryAssignment=0;
 let buildTruck=function()
 {
 	for(let k=0;k<assignments.length;k++)
@@ -50,9 +51,11 @@ $(()=>{
 	console.log(assignmentProducts);
 	buildTruck();
 	let intialProducts=assignmentProducts.filter(element=>element["TRUCK_ID"]==truckID);
+	console.log(intialProducts);
 	for(let k=0;k<intialProducts.length;k++)
 	{
 		buildProduct(k,intialProducts);
+		preAssignQtys.push(intialProducts[k]["QUANTITY"]);
 	}
 	$("#truckSelect").on('change',function(e){
 		e.preventDefault();
@@ -73,10 +76,12 @@ $(()=>{
 		let assignProductDelIDs=[];
 		let assignProductDelTruckIDs=[];
 		let assignQtyRemove=[];
+		let filterArr=assignmentProducts.filter(element=>element["TRUCK_ID"]==truckID);
+
 		$("#enterProducts input").each(function()
 		{
 			assignProductIDs.push($(this).attr("name"));
-			assignProductQtys.push($(this).val())
+			assignProductQtys.push($(this).val());
 		});
 		$("#enterProducts td.classDelivery").each(function()
 		{
@@ -94,15 +99,78 @@ $(()=>{
 			{
 				assignQtyRemove.push(false);
 			}
+			filterArr[k]["QUANTITY"]=assignProductQtys[k];
+			filterArr[k]["PRODUCT_NAME"]=assignQtyRemove[k];
 		}
 		$.ajax({
 			url:'PHPcode/assigncode.php',
-			type:'POST'
-			data:choice{choice:3,num:productQtys.length,productQtys:assignProductQtys,productIDs:assignProductIDs,deltruckIDs:assignProductDelTruckIDs,saleIDs:assignProductDelIDs,productremove:assignQtyRemove}
+			type:'POST',
+			data:{choice:5,TRUCK_ID:truckID}
 		})
 		.done(data=>{
-			console.log(data);
-		});
+			let salesForTruck=JSON.parse(data);
+			console.log(salesForTruck);
+			for(let k=0;k<salesForTruck.length;k++)
+			{
+				let dataArr=filterArr.filter(element=>element["SALE_ID"]==salesForTruck[k]["SALE_ID"]);
+				let dataArrQty=[];
+				let dataArrProductIDs=[];
+				let dataArrDelTruckIDs=[];
+				let dataArrSaleIDs=[];
+				let dataArrQtyRemove=[];
+				dataArr.forEach(function(element){
+					dataArrQty.push(element["QUANTITY"]);
+					dataArrProductIDs.push(element["PRODUCT_ID"]);
+					dataArrDelTruckIDs.push(element["DELIVERY_TRUCK_ID"]);
+					dataArrSaleIDs.push(element["SALE_ID"]);
+					dataArrQtyRemove.push(element["PRODUCT_NAME"]);
+				});
+				removeDeliveryAssignment=0;
+				let removeDeliveryAssignmentBool=false;
+				dataArrQtyRemove.forEach(function(element){
+					if(element==true)
+					{
+						removeDeliveryAssignment++;
+					}
+				});
+				if(removeDeliveryAssignment==dataArrQtyRemove.length)
+				{
+					removeDeliveryAssignmentBool=true;
+				}
+				$.ajax({
+					url:'PHPcode/assigncode.php',
+					type:'POST',
+					data:{choice:3,num:dataArrQty.length,productQtys:dataArrQty,productIDs:dataArrProductIDs,deltruckIDs:dataArrDelTruckIDs,saleIDs:dataArrSaleIDs,productremove:dataArrQtyRemove}
+				})
+				.done(data=>{
+					console.log(data);
+					$.ajax({
+						url:'PHPcode/assigncode.php',
+						type:'POST',
+						data:{choice:4,remove:removeDeliveryAssignmentBool,SALE_ID:salesForTruck[k]["SALE_ID"],TRUCK_ID:truckID}
+					})
+					.done(data=>{
+						console.log(data);
+						let doneData=data.split(",");
+						if(doneData[0]=="T")
+						{
+							$("#MMessage").text(doneData[1]);
+							$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
+							$("#displayModal").modal("show");
+						}
+						else
+						{
+							$("#MMessage").text(doneData[1]);
+							$("#btnClose").attr("data-dismiss","modal");
+							$("#displayModal").modal("show");
+						}
+					});
+				});
+
+			}
+
+
+		})
 
 
 	});

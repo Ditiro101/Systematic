@@ -506,7 +506,7 @@
 			FROM DELIVERY A
 			JOIN DELIVERY_TRUCK B ON A.DELIVERY_ID=B.DELIVERY_ID
 			JOIN TRUCK C ON B.TRUCK_ID=C.TRUCK_ID
-			WHERE A.DCT_STATUS_ID=2";
+			WHERE B.DCT_STATUS_ID=2";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
@@ -584,6 +584,53 @@
 	function updateMaintainProductSaleAssignment($con,$saleid,$productid,$qty)
 	{
 		$update_query="UPDATE SALE_PRODUCT SET QUANTITY_ASSIGNED=QUANTITY_ASSIGNED+'$qty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getAssignedSales($con,$truckid)
+	{
+		$get_query="SELECT SALE_ID FROM DELIVERY_TRUCK
+		WHERE TRUCK_ID='$truckid' AND DCT_STATUS_ID=2";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function deleteDeliveryAssignment($con,$saleid,$truckid)
+	{
+		$delete_query="DELETE FROM DELIVERY_TRUCK WHERE SALE_ID='$saleid' AND TRUCK_ID='$truckid'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateSaleAssignment($con,$dct,$saleid)
+	{
+		$update_query="UPDATE DELIVERY SET DCT_STATUS_ID='$dct' WHERE SALE_ID='$saleid'";
 		$update_result=mysqli_query($con,$update_query);
 		if($update_result)
 		{

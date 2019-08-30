@@ -220,6 +220,7 @@ function addInfoBubble(map,mapArr) {
     	}
     })
     let addName=address["ADDRESS_LINE_1"]+", "+address["NAME"]+", "+address["ZIPCODE"]+", "+address["CITY_NAME"]+", South Africa";
+    console.log(addName);
     addMarkerToGroup(group, {lat:mapArr[k]["LATITUDE"], lng:mapArr[k]["LONGITUDE"]},
     mapArr[k]["SALE_ID"]+": "+saleData[k]["NAME"]+" "+saleData[k]["SURNAME"]+" Address: "+addName);
   }
@@ -461,7 +462,7 @@ $(()=>{
 	{
 		deliveryTruckData=[];
 	}
-	console.log(truckProductData);
+	console.log(deliveryData);
 	addInfoBubble(map,deliveryData);
 	for(let k=0;k<truckData.length;k++)
 	{

@@ -124,17 +124,19 @@
 	elseif($_POST["choice"]==3)
 	{
 		$assignCount=$_POST["num"]-1;
-		for ($i=0; $i<;$_POST["num"] $i++) 
+		$removeCount=0;
+		for ($i=0; $i<$_POST["num"]; $i++) 
 		{ 
-			if($_POST["productremove"][$i])
+			if($_POST["productremove"][$i]=="true")
 			{
+				$removeCount=$removeCount+1;
 				if(deleteMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i]))
 				{
 					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 					{
 						if($i==$assignCount)
 						{
-							echo "T,Maintained Assignment";
+							echo $removeCount;
 						}
 					}
 					else
@@ -149,13 +151,13 @@
 			}
 			else
 			{
-				if(updateMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i]))
+				if(updateMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 				{
 					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 					{
 						if($i==$assignCount)
 						{
-							echo "T,Maintained Assigned";
+							echo $removeCount;
 						}
 					}
 					else
@@ -169,6 +171,43 @@
 				}
 			}
 		}
+	}
+	elseif($_POST["choice"]==4)
+	{
+		if($_POST["remove"]=="true")
+		{
+			if(deleteDeliveryAssignment($con,$_POST["SALE_ID"],$_POST["TRUCK_ID"]))
+			{
+				if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+				{
+					echo "T,Assignment Maintained Successfully";
+				}
+				else
+				{
+					echo "F,Sale Assignment Not Updated";
+				}
+			}
+			else
+			{
+				echo "F,Assignment not deleted";
+			}
+		}
+		else
+		{
+			if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+				{
+					echo "T,Assignment Maintained Successfully";
+				}
+				else
+				{
+					echo "F,Assignment Not Updated";
+				}
+		}
+	}
+	elseif($_POST["choice"]=5)
+	{
+		$assignSales=getAssignedSales($con,$_POST["TRUCK_ID"]);
+		echo json_encode($assignSales);
 	}
 	mysqli_close($con);
 ?>
