@@ -91,14 +91,14 @@
                   </button>
                 </div>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
-                    <a>
+                  <a href="pages/reports/debtors.php" class="btn-icon-clipboard" >
+                   
                       <div>
                         <i class="far fa-handshake"></i>
                         <span>Debtors Report</span>
                       </div>
-                    </a>
-                  </button>
+                   
+                  </a>
                 </div>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
