@@ -71,6 +71,11 @@
               </tr>
             </thead>
             <tbody id="tBody">
+              <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
+                <td><b>No Product Type Found</b></td>
+                <td></td>
+                <td></td>
+              </tr>
             </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
