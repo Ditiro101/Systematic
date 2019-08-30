@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -57,10 +58,12 @@
                   </div>
                   <div class="col-2" style="text-align: right;"><p class="mt-2 mb-0">Search By:</p></div>
                   <!-- Button trigger modal -->
-                  <button type="button" class="btn btn-basic col-1" data-toggle="modal" data-target="#exampleModal" disabled>
-                  Date
+                  <button type="button" class="btn btn-primary mr-1 col-1" onclick="setIndexer(3)">
+                  Data
                   </button>
-                  <button type="button" class="btn btn-primary col-1 px-2" data-toggle="modal" data-target="#exampleModal">User ID
+                  <button type="button" class="btn btn-primary mr-1 col-1 px-2" onclick="setIndexer(0)">User ID
+                  </button>
+                  <button type="button" class="btn btn-primary col-1 px-2" onclick="setIndexer(2)">Function
                   </button>
             </div>
 
@@ -70,88 +73,44 @@
             <table id="myTable" class="table align-items-center table-flush">
                <thead class="thead-light">
               <tr class="header">
-                <th> Audit ID</th>
+                
                 <th> User ID</th>
-                <th> Name</th>
-                <th> Surname</th>
+                <th> DATE : TIME</th>
                 <th> Function Used</th>
-                <th> Date</th>
-                <th> Time</th>
+                <th> Added/Changed Data</th>
+               
               </tr>
             </thead>
-            <tbody>
-              <tr>
-      				  <td>1</td>
-                <td>4</td>
-                <td>Benny</td>
-                <td>Haynes</td>
-                <td>Add User Role </td>
-                <td>12/02/2019</td>
-                <td>13:46</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>11</td>
-                <td>Janet</td>
-                <td>Brooks</td>
-                <td>Add Product </td>
-                <td>23/02/2019</td>
-                <td>10:51</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>9</td>
-                <td>Harold</td>
-                <td>Tyler</td>
-                <td>Maintain Supplier</td>
-                <td>13/03/2019</td>
-                <td>09:24</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>17</td>
-                <td>Melody</td>
-                <td>Floyd</td>
-                <td>Add Warehouse</td>
-                <td>03/03/2019</td>
-                <td>15:34</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>12</td>
-                <td>Elan</td>
-                <td>Diaz</td>
-                <td>Maintain Product </td>
-                <td>30/04/2019</td>
-                <td>12:03</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>21</td>
-                <td>Gilbert</td>
-                <td>Cole</td>
-                <td>Convert Stock </td>
-                <td>08/05/2019</td>
-                <td>08:13</td>
-              </tr>
+            <tbody id="tBody">
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Audit Log Entry Found</b></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                
+                
               </tr>
               </tbody>
             </table>
-            <div class="form-group col-md-2 mt-3">
-              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
+            <div class=" card-footer row">
+            <div class="form-group col-10 mt-3">
+              <button type="button" class="btn btn-4 btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
             </div>
-
+            <div class="form-group float-right col-2 mt-3">
+              <a href="PHPcode/export_audit.json" class="btn btn-4 btn-warning" download>Export Audit log</a>
+            </div>
+          </div>
             <script>
+              var indexer=0;
+
+              function setIndexer(i){
+                indexer=i;
+              }
+
+
               function myFunction() 
               {
+                console.log(indexer);
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("myInput");
                 filter = input.value.toUpperCase();
@@ -160,7 +119,7 @@
                 var showCount = 0;
                 for (i = 0; i < tr.length; i++) 
                 {
-                  td = tr[i].getElementsByTagName("td")[0];
+                  td = tr[i].getElementsByTagName("td")[indexer];
                   if (td) 
                   {
                     txtValue = td.textContent || td.innerText;
@@ -206,6 +165,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewAudit.js"></script>
 </body>
 
 </html>

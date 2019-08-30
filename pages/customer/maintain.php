@@ -17,7 +17,7 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
-  <!-- Validation -->
+  <!-- Validation scripts -->
   <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
@@ -63,22 +63,22 @@
                 <div class="tab-content col" id="myTabContent">
                     <form id="mainf">
                       <div class="form-row">
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6  col-sm-12">
                           <label for="exampleInputEmail1">Name</label>
-                          <label id="cName" hidden="true"><?php echo $_POST["NAME"];?></label>
+                          <label id="cName" hidden><?php echo $_POST["NAME"];?></label>
                           <input type="hidden" id="cID" value=<?php echo $_POST["ID"];?>>
-                          <input type="text" class="form-control" id="customerName" name="customerName" aria-describedby="emailHelp" required>
+                          <input type="text" class="form-control" id="customerName" name="customerName"aria-describedby="emailHelp" required>
                         </div>
-                        <div class="form-group col-6">
+                        <div class="form-group col-lg-6 col-md-6 col-sm-12">
                           <label for="exampleInputPassword1" id="cSurnameLabel"></label>
                           <label hidden="true" id="cTypeID"><?php echo $_POST["CUSTOMER_TYPE_ID"];?></label>
                           <label hidden="true" id="cVat"><?php echo $_POST["VAT"];?></label>
                           <label hidden="true" id="cSur"><?php echo $_POST["SURNAME"];?></label>
-                          <input type="text" class="form-control" id="cSurname" placeholder="Smith" name="cSurname" required>
+                          <input type="text" class="form-control" id="cSurname" placeholder="Smith"  name="cSurname" required>
                         </div>
                       </div>
                       <div class="form-row ">
-                        <div class="form-group col-2">
+                        <div class="form-group col-lg-4 col-md-4 col-sm-12">
                           <label for="bane">Title</label>
                           <label hidden="true" id="eTitle"><?php echo $_POST["TITLE_NAME"];?></label>
                           <select class="form-control" id="titleSelect">
@@ -87,14 +87,14 @@
                             <option>Mrs</option>
                           </select>
                         </div>
-                        <div class="form-group col-10">
+                        <div class="form-group col-lg-8 col-md-8 col-sm-12">
                           <label for="exampleInputPassword1">Contact Number</label>
-                          <input type="text" class="form-control" id="ContactNo"  name="ContactNo" value=<?php echo $_POST["CONTACT_NUMBER"];?> required>
+                          <input type="number" class="form-control" id="ContactNo" name = "ContactNo" required value=<?php echo $_POST["CONTACT_NUMBER"];?>>
                         </div>
                       </div>
                       <div class="form-group">
                         <label for="exampleInputPassword1">Email</label>
-                        <input type="email" class="form-control" id="customerEmail" value=<?php echo $_POST["EMAIL"];?>>
+                        <input type="email" class="form-control" id="customerEmail" name="customerEmail"required value=<?php echo $_POST["EMAIL"];?>>
                       </div>
 
                       <div class="form-group">
@@ -113,16 +113,16 @@
                         <div class="form-group col-md-6">
                           <label for="city">Suburb</label>
                           <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
-                          <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="inputSuburb" required>
+                          <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="inputSuburb1"required>
                         </div>
                         <div class="form-group col-md-4">
                           <label for="inputState">City</label>
                           <label id="convertCity" hidden="true"><?php echo $_POST["CITY"];?></label>
-                          <input type="text" class="form-control inputCity" id="inputCity1" readonly>
+                          <input type="text" class="form-control inputCity" name="inputCity1" id="inputCity1" readonly>
                         </div>
                         <div class="form-group col-md-2">
                           <label for="inputZip">Zip</label>
-                          <input type="text" class="form-control inputZip" id="inputZip1" readonly>
+                          <input type="text" class="form-control inputZip" name="inputZip1" id="inputZip1" readonly>
                         </div>
                       </div> 
 
@@ -204,7 +204,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <!-- validation -->
+  <!-- Validation scripts -->
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
   <script src="../../assets/jqueryui/jquery-ui.js"></script>
