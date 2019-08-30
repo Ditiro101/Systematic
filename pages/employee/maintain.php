@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -55,80 +60,84 @@
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <div class="col">
-                      <form>
+                      <form id="mainf">
                         <div class="form-row">
                           <div class="form-group col-6">
                             <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="John">
+                            <label hidden="true" id="employeeID"><?php echo $_POST["ID"];?></label>
+                            <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?> required>
                             
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Surname</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Smith">
+                            <input type="text" class="form-control" id="inputSurname" value=<?php echo $_POST["SURNAME"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-2">
                             <label for="bane">Title</label>
-                            <select class="form-control">
-                              <option>Ms</option>
-                              <option>Mr</option>
-                              <option>Mrs</option>
+                            <label hidden="true" id="eTitle"><?php echo $_POST["TITLE_NAME"];?></label>
+                            <select class="form-control" id="tit">
+                              <option id="t1" value="Ms">Ms</option>
+                              <option id="t2" value="Mr">Mr</option>
+                              <option id="t3" value="Mrs">Mrs</option>
                             </select>
                           </div>
                           <div class="form-group col-10">
                             <label for="exampleInputPassword1">Contact Number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="076 6673 0125">
+                            <input type="text" class="form-control" maxlength="10" id="inputContact" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="john@gmail.com">
+                            <input type="email" class="form-control" id="inputEmail" value=<?php echo $_POST["EMAIL"];?> required>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">SA ID or Passport number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="982522 224 148462">
+                            <input type="text" maxlength="15" class="form-control" id="inputPassport" value=<?php echo $_POST["IDENTITY_NUMBER"];?> required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                          <label hidden="true" id="eAddress"><?php echo $_POST["ADDR"];?></label>
+                          <input type="text" class="form-control" id="inputAddress" required>
                         </div>
                         <div class="form-row">
                           <div class="form-group col-md-6">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity" placeholder="Hatfield">
+                            <label hidden="true" id="eSuburb"><?php echo $_POST["SUBURB"];?></label>
+                            <input type="text" class="form-control" id="inputSuburb" required>
                           </div>
                           <div class="form-group col-md-4">
                             <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Pretoria</option>
-                              <option>...</option>
-                            </select>
+                            <label hidden="true" id="eCity"><?php echo $_POST["CITY"];?></label>
+                            <input type="text" class="form-control" id="inputCity" readonly>
                           </div>
                           <div class="form-group col-md-2">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" id="inputZip" value=<?php echo $_POST["ZIP"];?> readonly>
                           </div>
                           <div class="form-group col-12">
                             <label for="bane">Employee Type</label>
-                            <select class="form-control">
-                              <option>Driver</option>
-                              <option>Bookeeper</option>
-                              <option>Warehouse Manager</option>
+                            <label hidden=true id="eEmployeeTypeName"><?php echo $_POST["EMPLOYEE_TYPE_NAME"];?></label>
+                            <select class="form-control" id="eType">
                             </select>
                           </div>
+
+                          <div class='form-group col-12'>
+                                <label for="UploadsPic">Upload Employee Picture</label>
+                                <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
+                                <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control"/><br/>
+                                   
+                          </div>
                         </div> 
-                        <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
+
+                        <button type="submit" class="btn btn-primary mb-3">Save</button>
                         <div class="form-group col-md-2">
                             
-                            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                   <div class="modal-content">
                                     
@@ -140,13 +149,13 @@
                                       </div>
                                       
                                       <div class="modal-body">
-                                          <p>Employee details successfully updated</p>
+                                          <p id="MMessage"></p>
                                           
                                       </div>
                                       
                                       <div class="modal-footer">
                                           
-                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.html'">Close</button> 
+                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
                                       </div>
                                   </div>
                               </div>
@@ -173,6 +182,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script type="text/javascript" src="JS/maintainEmployee.js"></script>
 </body>
 
 </html>
