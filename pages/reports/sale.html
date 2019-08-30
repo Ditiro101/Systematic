@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title> Sales Report - Stock Path</title>
+    <link rel="stylesheet" href="sale_CSS/style.css" media="all" />
+    <link href="sale_CSS/favicon.png" rel="icon" type="image/png">
+    <script type="text/javascript" src="sale_CSS/Chart.bundle.js"></script>
+     <script type="text/javascript" src="sale_CSS/Chart.min.js"></script>
+  </head>
+  <body>
+    <header class="clearfix">
+      <div id="logo">
+        <img src="sale_CSS/logo.png">
+      </div>
+      <div id="company">
+
+        <h2 class="name">Greens Supermarket</h2>
+        <div>Plot 80 Poprtion 2,
+              Bethanie Road,
+              Brits, 0250</div>
+        <div>+27 12 254 0224</div>
+        <div><a>info@greens.co.za</a></div>
+      </div>
+      </div>
+    </header>
+    <main>
+      <div id="details" class="clearfix">
+        <div id="client">
+          <div class="name"><b>Date Generated :</b> dd/mm/yyyy</div>
+          <div class="address"><b>Time Generated :</b> HH:mm</div>
+        </div>
+        <div id="invoice">
+          <h1>Sales Report</h1>
+          <div class="date"><b>From :</b>01/01/2019</div>
+          <div class="date"><b>To : </b>31/07/2019</div>
+        </div>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <canvas id="line-chart" width="800" height="400"></canvas>
+      </div>
+      <table border="0" cellspacing="0" cellpadding="0">
+        <thead>
+          <tr>
+            <th class="desc-center">MONTH YEAR</th>
+            <th class="desc">TOTAL SALES</th>
+            <th class="desc" style="text-align: right;">TOTAL REVENUE</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="no">January 2019</td>
+            <td class="desc">678</td>
+            <td class="unit-right">R123 567.00</td>
+          </tr>
+          <tr>
+            <td class="no">February 2019</td>
+            <td class="desc">787</td>
+            <td class="unit-right">R146 475.00</td>
+          </tr>
+          <tr>
+            <td class="no">March 2019</td>
+            <td class="desc">745</td>
+            <td class="unit-right">R135 645.00</td>
+          </tr>
+          <tr>
+            <td class="no">April 2019</td>
+            <td class="desc">876</td>
+            <td class="unit-right">R167 456.00</td>
+          </tr>
+          <tr>
+            <td class="no">May 2019</td>
+            <td class="desc">956</td>
+            <td class="unit-right">R178 463.00</td>
+          </tr>
+          <tr>
+            <td class="no">June 2019</td>
+            <td class="desc">1046</td>
+            <td class="unit-right">R193 478.00</td>
+          </tr>
+          <tr>
+            <td class="no">July 2019</td>
+            <td class="desc">986</td>
+            <td class="unit-right">R185 473.00</td>
+          </tr>
+        </tbody>
+      </table>
+      <table>
+        <tfoot>   
+
+        </tfoot>
+      </table>
+      <div id="notices">
+        
+      </div>
+    </main>
+    <footer>
+      © 2019 Stock Path
+    </footer>
+    <script type="text/javascript">
+      new Chart(document.getElementById("line-chart"), {
+        type: 'line',
+        data: {
+          labels: ['January','February','March','April','May','June','July'],
+          datasets: [{ 
+              data: [567,756,654,887,567,789,786],
+              label: "2017",
+              borderColor: "#3e95cd",
+              fill: false
+            }, { 
+              data: [454,786,675,786,635,809,655],
+              label: "2018",
+              borderColor: "#8e5ea2",
+              fill: false
+            }, { 
+              data: [678,787,745,876,956,1046,986],
+              label: "2019",
+              borderColor: "#7cbf56",
+              fill: false
+            }
+          ]
+        },
+        options: {
+          title: {
+            display: true,
+            text: 'SALES PER MONTH'
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
