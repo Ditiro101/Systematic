@@ -50,6 +50,10 @@
             </div>
             <div class="card-body">
               <div class="row icon-examples">
+
+                <?php 
+                  if (in_array("12.1", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
                     <a>
@@ -60,6 +64,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.2", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -70,6 +81,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.3", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -80,6 +98,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.4", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDate">
                     <a>
@@ -90,6 +115,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.5", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <a href="pages/reports/debtors.php" class="btn-icon-clipboard" >
                    
@@ -100,6 +132,13 @@
                    
                   </a>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.6", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generate">
                     <a>
@@ -110,6 +149,13 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
+                <?php 
+                  if (in_array("12.7", $subFunctionality)) {
+                ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateAttendance">
                     <a>
@@ -120,6 +166,10 @@
                     </a>
                   </button>
                 </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>

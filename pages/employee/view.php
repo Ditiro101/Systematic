@@ -241,6 +241,18 @@
                   </form>
                   </div>
                   <div>
+                    <form action='../user/add-user.php' method="POST" id="addUserView">
+                      <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                      <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                      <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="submit">
+                          <span class="btn-inner--icon"><i class="fas fa-user-plus"></i>
+                          </span>
+                          <span class="btn-inner--text">Add User</span>
+                      </button>
+                    </form>
+                </div>
+                  <div>
                     <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" style="margin-top: 30px;">
                       <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                       </span>
@@ -276,6 +288,7 @@
                     <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                 </td>
+                
                   </div>
                 </div>
               </div>

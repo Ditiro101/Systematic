@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
@@ -22,6 +23,7 @@
 
 
 ?>
+
 <!DOCTYPE html>
 <html>
 

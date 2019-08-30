@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -67,51 +68,7 @@
               	<th style="width:1rem;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Beverage</td>
-                <td>Any coldrinks, juice or concerntrates</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
-        						<span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-        						</span>
-        						<span class="btn-inner--text">Edit</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>Soap</td>
-                <td>Soap based products</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Maze meal</td>
-                <td>Grain and maze based products</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Alcohol</td>
-                <td>Any beverage with alchohol</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" onclick="window.location='maintain_type.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                    </span>
-                    <span class="btn-inner--text">Edit</span>
-                  </button>
-                </td>
-              </tr>
+            <tbody  id="tBody">              
               <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                 <td><b>No Product Type Found</b></td>
                 <td></td>
@@ -181,6 +138,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Search Product Type JS -->
+  <script src="JS/searchProductType.js"></script>
 </body>
 
 </html>

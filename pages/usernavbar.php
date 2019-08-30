@@ -7,7 +7,7 @@
                   <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
-                  <span class="mb-0 text-sm  font-weight-bold">User</span>
+                  <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['name']; ?></span>
                 </div>
               </div>
             </a>
@@ -20,7 +20,7 @@
                 <span>My profile</span>
               </a>
               <div class="dropdown-divider"></div>
-              <a href="../../index.html" class="dropdown-item">
+              <a href="../../assets/logout/PHPcode/logout.php" class="dropdown-item">
                 <i class="ni ni-user-run"></i>
                 <span>Logout</span>
               </a>

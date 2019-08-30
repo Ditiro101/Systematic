@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -20,9 +21,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-3-typeahead/4.0.2/bootstrap3-typeahead.min.js"></script>  
   
-  
-  <script src="../../assets/js/bootstrap-multiselect.js"></script>
-  <link rel="stylesheet" href="../../assets/css/bootstrap-multiselect.css" />
+  <!-- Validation Stylesheet -->
+  <link rel="stylesheet" href="../../assets/css/site-demos.css">
 
 </head>
 
@@ -62,65 +62,53 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form id="addUserRoleForm" class="needs-validation" novalidate>
                       <div class="form-row col">
                         <div class="form-group col">
-                          <label for="bane">User Role Name</label>
-                          <input type="email" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter Position Name">
+                          <label for="userRoleName">User Role Name</label>
+                          <input type="text" name="user-role-name" class="form-control" id="userRoleName" aria-describedby="emailHelp" placeholder="Enter Position Name" required>
                         </div>
                       </div>
                       <div class="form-row col">
                         <div class="form-group col">
-                         <label for="framework"l>User Role Functions
+                         <label for="subFunctionalitites"l>User Role Functions
                          </label>
-                         <select class="form-control select"  id="framework" name="framework[]" multiple  style="color: #8898aa">
-                          <option value="Employee"><p>Employee</p></option>
-                          <option value="User"><p>User</p></option>
-                          <option value="Admin">Admin</option>
-                          <option value="Suppliers">Suppliers</option>
-                          <option value="Warehouse">Warehouse</option>
-                          <option value="Sales">Sales</option>
-                          <option value="Products">Products</option>
-                          <option value="Stock">Stock</option>
-                          <option value="Delivery">Delivery</option>
-                          <option value="Driver">Driver</option>
-                          <option value="Reports">Reports</option>
+                         <select class="form-control select"  id="subFunctionalitites" name="sub-functionalitites[]" multiple  style="color: #8898aa" required>
+
                          </select>
                         </div>
                       </div>
-                     
+                      <div class="form-row col">
+                        <div class="form-group col">
+                          <button type="button" id="addUserRole" class="btn btn-primary mb-3">Save</button>
+                        </div>
+                      </div>
 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
-                                  
-                                    <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="modal-body">
-                                        <p>User Role added successfully</p>
-                                        
-                                    </div>
-                                    
-                                    <div class="modal-footer">
-                                        
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../user.html'">Close</button> 
-                                    </div>
-                                    
+                                  <div class="modal-header">
+                                    <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">×</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <p id="modalText"></p>
+                                  </div>
+                                  <div class="modal-footer">
+                                      <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="window.location='../../user.php'">Close</button> 
+                                  </div>
                                 </div>
                             </div>
                           </div>
                         </div>
+
                     </form>
                   </div>
+                        
                 </div>
-
               </div>
             </div>
           </div>
@@ -131,37 +119,6 @@
     </div>
   </div>
 
-  <script>
-    $(document).ready(function(){
-     $('#framework').multiselect({
-      nonSelectedText: 'Select Functions',
-      enableFiltering: false,
-      enableCaseInsensitiveFiltering: true,
-      buttonWidth:'100%'
-     });
-     
-     
-     $('#framework_form').on('submit', function(event){
-      event.preventDefault();
-      var form_data = $(this).serialize();
-      $.ajax({
-       url:"insert.php",
-       method:"POST",
-       data:form_data,
-       success:function(data)
-       {
-        $('#framework option:selected').each(function(){
-         $(this).prop('selected', false);
-        });
-        $('#framework').multiselect('refresh');
-        alert(data);
-       }
-      });
-     });
-     
-     
-    });
-    </script>
   <!-- Argon Scripts -->
   <!-- Core -->
 
@@ -172,6 +129,14 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+    <!-- Validation JS -->
+  <script src="../../assets/js/jquery.validate.min.js"></script>
+  <script src="../../assets/js/additional-methods.min.js"></script>
+  <!-- Bootstrap Multiselect -->
+  <script src="../../assets/js/bootstrap-multiselect.js"></script>
+  <link rel="stylesheet" href="../../assets/css/bootstrap-multiselect.css" />
+  <!-- Add Product JS -->
+  <script src="JS/addUserRole.js"></script>
 </body>
 
 </html>
