@@ -188,6 +188,39 @@
                   }
                 ?>
 
+                 <?php 
+                  if (in_array("2.8", $subFunctionality)) {
+                ?>
+                 <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard">
+                    <a href="pages/employee/changeTimes.php">
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Dismiss Employee</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+                 <?php 
+                  if (in_array("2.9", $subFunctionality)) {
+                ?>
+                 <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard">
+                    <a href="pages/employee/changeTimes.php">
+                      <div>
+                      <i class="far fa-clock"></i>
+                        <span>Maintain Checkin/Checkout Time</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+
               </div>
             </div>
           </div>
