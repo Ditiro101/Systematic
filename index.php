@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8"> 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Login - Stock Path</title>
   <!-- Favicon -->
@@ -134,7 +132,7 @@
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="login.js"></script>
+  <script src="assets/login/JS/login.js"></script>
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->

@@ -1,3 +1,14 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $deliveryData=getAllDelivery($con);
+  $addressData=getAllAddresses($con);
+  $suburbData=getAllSuburbs($con);
+  $cityData=getAllCity($con);
+  $customerData=getAllCustomer($con);
+  $saleData=getAllSales($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,7 +59,12 @@
           <div class="card shadow">
             <div class="card-header border-0">
                <div class="input-group input-group-rounded input-group-merge">
-                 
+                 <label hidden="true" id="dData"><?php echo json_encode($deliveryData);?></label>
+                 <label hidden="true" id="aData"><?php echo json_encode($addressData);?></label>
+                 <label hidden="true" id="sData"><?php echo json_encode($suburbData);?></label>
+                 <label hidden="true" id="citData"><?php echo json_encode($cityData);?></label>
+                 <label hidden="true" id="cData"><?php echo json_encode($customerData);?></label>
+                 <label hidden="true" id="salData"><?php echo json_encode($saleData);?></label>
                  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Invoice Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
@@ -72,133 +88,7 @@
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>321</td>
-                        <td>04/07/2019</td>
-                        <td>Pretoria</td>
-                        <td>Mr Alfreds Futterkiste</td>
-                        <th>Not Delivered</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>324</td>
-                        <td>04/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Mr Benny Haynes</td>
-                        <th>Not Delivered</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>328</td>
-                        <td>05/07/2019</td>
-                        <td>Pretoria</td>
-                        <td>Miss Annie Saynes</td>
-                        <th>On Delivery</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" disabled="true" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>334</td>
-                        <td>05/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Mr David Cooper</td>
-                        <th>On Delivery</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" disabled="true" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>339</td>
-                        <td>05/07/2019</td>
-                        <td>Bloemfontein</td>
-                        <td>Mrs Kim Gardner</td>
-                        <th>Truck Assigned</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>345</td>
-                        <td>06/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Mrs Delia Mitchell</td>
-                        <th>Not Delivered</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-delivery.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
+                    <tbody id="tBody">
                       <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                         <td><b>No Delivery Found</b></td>
                         <td></td>
@@ -309,6 +199,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchDelivery.js"></script>
 </body>
 
 </html>

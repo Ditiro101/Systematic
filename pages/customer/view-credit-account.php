@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<?php include_once("../sessionCheckPages.php");?>
 <html>
 
 <head>
@@ -60,20 +60,18 @@
                       <div class="table-borderless table-responsive">
                         <div>
                           <table class="table align-items-center table-flush">
-                            <tbody class="list">    <tr>
+                            <tbody class="list">    <tr id="acc">
                                     <th>
                                         Account No
                                     </th>
-                                    <td >
-                                        1907365267
-                                    </td>
+                                   
                                 </tr>                               
                                 <tr>
                                     <th>
                                         Name
                                     </th>
                                     <td >
-                                        Nicolas
+                                       <?=$_GET["NAME"]?>
                                     </td>
                                 </tr> 
                                 <tr>
@@ -81,15 +79,15 @@
                                         Surname
                                     </th>
                                     <td >
-                                        Norman
+                                        <?=$_GET["SURNAME"]?>
                                     </td>
                                 </tr>
                                 <tr>
                                     <th>
                                         Customer ID
                                     </th>
-                                    <td >
-                                        12
+                                    <td id="ID" value="<?=$_GET['ID']?>">
+                                        <?=$_GET["ID"]?>
                                     </td>
                                 </tr>
                                 <tr>
@@ -97,7 +95,7 @@
                                         Email
                                     </th>
                                     <td >
-                                        nic.norman@gmail.com
+                                        <?=$_GET["EMAIL"]?>
                                     </td>
                                 </tr>                      
                             </tbody>
@@ -117,37 +115,19 @@
                         <div>
                           <table class="table align-items-center table-flush">
                             <tbody class="list">                          
-                                <tr>
+                                <tr id="balance">
                                     <th>
                                         Outstanding Balance
                                     </th>
-                                    <td class="text-right">
-                                        R8 180.00
-                                    </td>
+                                  
                                 </tr>
-                                <tr>
-                                    <th>
-                                        Total Paid
-                                    </th>
-                                    <td class="text-right">
-                                        R1 160.00
-                                    </td>
-                                </tr> 
-                                <tr>
-                                    <th>
-                                        Total Interest
-                                    </th>
-                                    <td class="text-right">
-                                        R120.00
-                                    </td>
-                                </tr>   
-                                <tr>
+                      
+                             
+                                <tr id="limit">
                                     <th>
                                         Current Credit Limit
                                     </th>
-                                    <td class="text-right">
-                                        R10 000.00
-                                    </td>
+                                 
                                 </tr> 
                                 <tr class="mt-0 pt-0">
                                     <th>
@@ -171,19 +151,25 @@
                                               </div>
                                               
                                               <div class="modal-body text-left">
+                                                <form action="" method="POST" id="limit-form">
                                                   <div class="col mb-4">
                                                     <label for="c2">Credit Limit</label>
                                                     <div class="input-group"> 
                                                       <div class="input-group-prepend">
                                                         <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                                                       </div>
-                                                      <input type="number" value="10000" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+
+                                                      <input type="number" value="10000" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="credit-limit" name="credit-limit" />
+                                                      <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden>
                                                     </div> 
                                                   </div>
+                                                  <input type="submit" class="btn btn-success  ml-auto" /> 
+
+                                                </form>
                                               </div>
                                               <div class="modal-footer">
                                                   
-                                                  <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Change</button> 
+                                                  
                                               </div>
                                               
                                           </div>
@@ -207,7 +193,7 @@
                                               
                                               <div class="modal-footer">
                                                   
-                                                  <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal">Close</button> 
+                                                  <a  href="../../customer.php" class="btn btn-link  ml-auto" data-dismiss="modal">Close</a> 
                                               </div>
                                               
                                           </div>
@@ -342,8 +328,7 @@
             </div>
           </div>
               <div class="col ">
-                <button type="button" class="btn btn-info mb-3 mt-4" data-toggle="modal" data-target="#modal-default1">Email</button>
-                <button type="button" class="btn btn-primary mb-3 mt-4" data-toggle="modal" data-target="#modal-default2">Print</button>
+                
                 <button type="button" class="btn btn-success mb-3 mt-4 float-right" data-toggle="modal" data-target="#modal-pay">
                   <span><i class="fas fa-money-check-alt mr-2"></i></span>
                 <span class="btn-inner--text">Pay Off Account</span>
@@ -424,19 +409,24 @@
                         </button>
                     </div>
                     <div class="modal-body text-left">
-                      <div class="col mb-4">
-                        <label for="c2">Enter Amount Received</label>
-                        <div class="input-group"> 
-                          <div class="input-group-prepend">
-                            <span class="input-group-text" id="inputGroupFileAddon01">R</span>
+                      <form action="" method="POST">
+                        <div class="col mb-4">
+                            <label for="c2">Enter Amount Received</label>
+                            <div class="input-group"> 
+                              <div class="input-group-prepend">
+                                <span class="input-group-text" id="inputGroupFileAddon01">R</span>
+                              </div>
+                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" autofocus />
+                              <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden>
+                            </div> 
                           </div>
-                          <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" autofocus />
-                        </div> 
-                      </div>
-                    </div>
+                        </div>
+                          <input type="submit" class="btn btn-success  ml-auto"></button> 
+
+                      </form>
                     <div class="modal-footer">
                           
-                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" data-toggle="modal" data-target="#modal-change">Calculate Change</button> 
+                    
                     </div>   
                   </div>
                 </div>
@@ -494,6 +484,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewAccount.js"></script>
 </body>
 
 </html>

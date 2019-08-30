@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,11 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <!-- Validation  -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -54,34 +60,31 @@
             
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
-                    <form>
+                    <form id="uploadForm">
                       <div class="form-row mb-4 col">
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of Bank Statement</label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01"  >
+                              <input type="file" class="custom-file-input" name="file-1" id="bankStatement" required>
                               <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Copy of ID</label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01">
+                              <input type="file" class="custom-file-input" name="file-2" id="idCopy" required>
                               <label class="custom-file-label btn-primary" for="inputGroupFile01">Choose file</label>
                             </div>
                           </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-lg-4 col-md-12 col-sm-12">
                           <label for="exampleInputPassword1">Proof Of Residence</label>
                           <div class="input-group">
                             <div class="custom-file">
-                              <input type="file" class="custom-file-input" id="inputGroupFile01"
-                                aria-describedby="inputGroupFileAddon01">
+                              <input type="file" class="custom-file-input" name="file-3" id="proofOfResidence" required>
                               <label class="custom-file-label btn-primary" for="inputGroupFile01">Choose file</label>
                             </div>
                           </div>
@@ -94,16 +97,20 @@
                             <div class="input-group-prepend">
                               <span class="input-group-text" id="inputGroupFileAddon01">R</span>
                             </div>
-                            <input type="number" value="1000" min="0" step="0" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="c2" />
+                            <input type="number" value="1000" min="0" step="0" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" name="credit-limit" id="creditLimit" required />
+
+                            <input type="number" id="customerID" name="customerID" value="<?=$_GET["ID"]?>" hidden/>
                           </div> 
                         </div>
-                      </form>                     
+                        <div class="form-row col">
+                          <button type="submit" class="btn  btn-primary mb-3" id="submitForm">Submit</button>
+                        </div>
+                      </form>
+                  
                       <div class="form-group col-md-2">
-                        <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Submit</button>
                         <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                           <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                               <div class="modal-content">
-                                
                                   <div class="modal-header">
                                       <h6 class="modal-title" id="modal-title-default">Success!</h6>
                                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -118,7 +125,7 @@
                                   
                                   <div class="modal-footer">
                                       
-                                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.html'">Close</button> 
+                                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../customer.php'">Close</button> 
                                   </div>
                                   
                               </div>
@@ -145,6 +152,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Apply For Credit JS -->
+  <script src="JS/apply-for-credit.js"></script>
 </body>
 
 </html>

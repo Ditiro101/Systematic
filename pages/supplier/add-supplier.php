@@ -18,6 +18,8 @@
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
   <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -78,12 +80,8 @@
                             <input type="email" class="form-control" id="supplierEmail" name="suppEmail" placeholder="Enter Email" required>
                           </div>
                         </div>
-                        <div class="form-group ">
-                          <span class="input-group-btn float left">
-                                    <button class="btn btn-success btn-add-address" type="button">
-                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i></span>
-                                    </button>
-                            </span>
+                        
+
                             <hr class="my-4">
 
                           <div class="form-row">
@@ -101,25 +99,33 @@
                           </div>
                           <div class="form-row">
                             <div class="form-group col-md-6">
-                              <label for="inputCity">Suburb</label>
-                              <input type="text" class="form-control" id="inputSuburb" name="suppSuburb" readonly>
+                              <label for="inputSuburb">Suburb</label>
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb" name="suppSuburb" >
                             </div>
                             <div class="form-group col-md-4">
-                              <label for="inputState">City</label>
-                              <input type="text" class="form-control" id="inputCity" name="suppSuburb" readonly>
+                              <label for="inputCity">City</label>
+                              <input type="text" class="form-control inputCity" id="inputCity" name="suppSuburb" readonly>
                             </div>
                             <div class="form-group col-md-2">
                               <label for="inputZip">Zip</label>
-                              <input type="text" class="form-control" id="inputZip" name="suppZip" readonly>
+                              <input type="text" class="form-control inputZip" id="inputZip" name="suppZip" readonly>
                             </div>
                           </div> 
                         </div>
-                      
+                        
 
- 
+                          
 
                     </form>
-                    <div class="form-group col-md-2">
+
+                     <div class="col-md-2 float-right">
+                                    <button class="btn btn-success " id="btn-add-address" type="button">
+                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
+                                    </button>
+                                    <small>Max 3 Adresses allowed</small>
+                      </div>
+                    <br>
+                    <div class=" col-md-2">
                           <button type="button" class="btn btn-block btn-primary mb-3" id="addSave">Save</button>
                           <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
