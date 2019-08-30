@@ -1,26 +1,23 @@
 <?php
   include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
   $supID=$_POST["ID"];
-  $sql_query="SELECT ADDRESS_ID FROM SUPPLIER_ADDRESS WHERE SUPPLIER_ID='$supID'";
-  $result=mysqli_query($con,$sql_query);
-  $row=$result->fetch_assoc();
-  $addID=$row["ADDRESS_ID"];
-  $sql_query="SELECT * FROM ADDRESS WHERE ADDRESS_ID='$addID'";
-  $result2=mysqli_query($con,$sql_query);
-  $row2=$result2->fetch_assoc();
-  $addName=$row2["ADDRESS_LINE_1"];
-  $subID=$row2["SUBURB_ID"];
-  $sql_query="SELECT * FROM SUBURB WHERE SUBURB_ID='$subID'";
-  $result3=mysqli_query($con,$sql_query);
-  $row3=$result3->fetch_assoc();
-  $subName=$row3["NAME"];
-  $zip=$row3["ZIPCODE"];
-  $cityID=$row3["CITY_ID"];
-   $sql_query="SELECT * FROM CITY WHERE CITY_ID='$cityID'";
-  $result4=mysqli_query($con,$sql_query);
-  $row4=$result4->fetch_assoc();
-  $cityName=$row4["CITY_NAME"];
-  $addNames="15losperstreet";
+  $addressIDs=getSupplierAddressIDs($con,$supID);
+  $addressInfo=[];
+  $suburbInfo=[];
+  $cityInfo=[];
+  for ($i=0;$i<count($addressIDs);$i++)
+  { 
+    $addressInfo[$i]=getAddressInfo($con,$addressIDs[$i]["ADDRESS_ID"]);
+  }
+  for ($i=0;$i<count($addressIDs);$i++)
+  { 
+    $suburbInfo[$i]=getSuburbInfo($con,$addressInfo[$i]["SUBURB_ID"]);
+  }
+  for ($i=0;$i<count($addressIDs);$i++)
+  { 
+    $cityInfo[$i]=getCityInfo($con,$suburbInfo[$i]["CITY_ID"]);
+  }
   mysqli_close($con);
 
 
@@ -86,17 +83,16 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
               <div class="d-flex justify-content-between">
                 <td>
-                  <form action="maintain-supplier.php" method="POST">
+                  <form id="formMaintain" action="maintain-supplier.php" method="POST">
                     <input type="hidden" name="ID" value=<?php echo $supID;?>>
-                    <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="NAME" id="NAME">
                     <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
                     <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
-                    <input type="hidden" name="ADDID" value=<?php echo $addID;?>>
-                    <input type="hidden" name="ADDR" value=<?php echo str_replace(" ","/",$addName);?>>
-                    <input type="hidden" name="SUBURB" value=<?php echo $subName;?>>
-                    <input type="hidden" name="CITY" value=<?php echo $cityName;?>>
-                    <input type="hidden" name="ZIP" value=<?php echo $zip;?>>
+                    <input type="hidden" name="ADDR" id="ADDR">
+                    <input type="hidden" name="SUBURB" id="SUBURB">
+                    <input type="hidden" name="CITY" id="CITY">
+                    <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
                     <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
                       <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                       </span>
@@ -165,7 +161,7 @@
                 </div>
               </div>
               <div class="text-center mt-0">
-                <h2>
+                <h2 id="supName">
                   <?php echo $_POST["NAME"];?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
@@ -173,15 +169,29 @@
                   <div class="pt-2"><b>VAT Number : </b><p class="d-inline"><?php echo $_POST["VAT"];?></p></div>            
                   <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>
                   <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $_POST["PHONE"];?></p></div>
+                  <label id="addresses" hidden="true"><?php echo json_encode($addressInfo);?></label>
+                  <label id="suburbs" hidden="true"><?php echo json_encode($suburbInfo);?></label>
+                  <label id="cities" hidden="true"><?php echo json_encode($cityInfo);?></label>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
-                  <i class="ni location_pin mr-2 text-center"></i>
-                  <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0"><?php echo $addName; ?></p>
-                  <p class="mb-0"><?php echo $subName.", ".$zip; ?></p>
-                  <p class="mb-0"><?php echo $cityName; ?></p>
-                  <p class="mb-0">South Africa</p>
+                  <ul class="nav nav-pills mb-3" id="listAddress" role="tablist">
+                    <!-- <li class="nav-item">
+                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Address1</a>
+                    </li> -->
+                  </ul>
+                  <div class="tab-content" id="pills-tabContent">
+                      <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                        <i class="ni location_pin mr-2 text-center"></i>
+                        <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
+                        <p class="mb-0"><?php echo $addressInfo[0]["ADDRESS_LINE_1"]; ?></p>
+                        <p class="mb-0"><?php echo $suburbInfo[0]["NAME"].", ".$suburbInfo[0]["ZIPCODE"]; ?></p>
+                        <p class="mb-0"><?php echo $cityInfo[0]["CITY_NAME"]; ?></p>
+                        <p class="mb-0">South Africa</p>
+                      </div> -->
+                  </div>
+                  
                 </div>
+                </hr>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
@@ -212,6 +222,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewSupplier.js"></script>
 </body>
 
 </html>

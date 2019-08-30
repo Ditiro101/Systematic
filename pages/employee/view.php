@@ -1,6 +1,146 @@
+<?php include_once("../sessionCheckPages.php");?>
+<?php
+  
+
+  $employeeID;
+  $name; 
+  $surname; 
+  $contactNumber;
+  $email;
+  $identityNo;
+  $titleName;
+  $employeeStatus;
+  $zipCode;
+  $addressInfo;
+  $suburbInfo;
+  $cityInfo;
+  $employeeType;
+  $titleInfo;
+  $addressInfoLine1;
+  $suburbName;
+  $addressID;
+  $suburbID;
+  $employeeTypeID;
+  $cityID;
+  $titleID;
+  $employeeStatus;
+  if(isset($_GET["employeeID"]))
+  {
+    //include_once("PHPcode/connection.php");
+    //include_once("PHPcode/functions.php");
+    $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+    
+    $dbparts = parse_url($url);
+    
+    $hostname = $dbparts['host'];
+    $username = $dbparts['user'];
+    $password = $dbparts['pass'];
+    $database = ltrim($dbparts['path'],'/');
+    $DBConnect;
+    
+    $DBConnect = mysqli_connect($hostname, $username, $password, $database);
+    
+    if($DBConnect === false)
+    {
+    die("ERROR: Could not connect. " . mysqli_connect_error());
+    }
+    else
+    {
+    
+                $employeeID = $_GET["employeeID"];
+               
+       
+    
+    
+       
+                $sql = "SELECT * FROM EMPLOYEE WHERE (EMPLOYEE_ID=$employeeID)";
+                $query_QR = mysqli_query($DBConnect , $sql);
+               
+                $rowsQuery = mysqli_fetch_assoc($query_QR);
+                $success = "success";
+                if($query_QR)
+                {
+                  if($rowsQuery)
+                  {
+                    $employeeID = $rowsQuery["EMPLOYEE_ID"];
+                    $name = $rowsQuery["NAME"];
+                    $surname =  $rowsQuery["SURNAME"];
+                    $contactNumber = $rowsQuery["CONTACT_NUMBER"];
+                    $email = $rowsQuery["EMAIL"];
+                    $identityNo = $rowsQuery["IDENTITY_NUMBER"];
+                    $addressID = $rowsQuery["ADDRESS_ID"];
+                    $employeeTypeID = $rowsQuery["EMPLOYEE_TYPE_ID"];
+                    $titleID = $rowsQuery["TITLE_ID"];
+                    $employeeStatus = $rowsQuery["EMPLOYEE_STATUS_ID"];
+                  }
+                  else
+                  {
+                    echo "Fetched Array is not working";
+                  }
+                 
+
+
+                
+                }
+                else
+                {
+                    echo "not found";
+                }
+                   
+            
+                mysqli_close($DBConnect);
+    }
+    //getting the address stuff
+
+    include_once("PHPcode/connection.php");
+    include_once("PHPcode/functions.php");
+
+    $addressInfo=getAddressInfo($con,$addressID);
+    $suburbInfo=getSuburbInfo($con,$addressInfo["SUBURB_ID"]);
+    $cityInfo=getCityInfo($con,$suburbInfo["CITY_ID"]);
+    $employeeType=getEmployeeType($con,$employeeTypeID);
+    $titleInfo=getTitleInfo($con,$titleID);
+    mysqli_close($con);
+    
+
+    $titleName = $titleInfo["TITLE_NAME"];
+    $zipCode = $suburbInfo["ZIPCODE"];
+    $employeeTypeName = $employeeType["NAME"];
+    $addressInfoLine1 = $addressInfo["ADDRESS_LINE_1"];
+    $suburbName = $suburbInfo["NAME"];
+    $cityName = $cityInfo["CITY_NAME"];
+    
+  }
+  else
+  {
+    include_once("PHPcode/connection.php");
+    include_once("PHPcode/functions.php");
+    $addressInfo=getAddressInfo($con,$_POST["ADDRESS_ID"]);
+    $suburbInfo=getSuburbInfo($con,$addressInfo["SUBURB_ID"]);
+    $cityInfo=getCityInfo($con,$suburbInfo["CITY_ID"]);
+    $employeeType=getEmployeeType($con,$_POST["EMPLOYEE_TYPE_ID"]);
+    $titleInfo=getTitleInfo($con,$_POST["TITLE_ID"]);
+    mysqli_close($con);
+
+
+    $employeeID = $_POST["EMPLOYEE_ID"];  
+    $name = $_POST["NAME"]; 
+    $surname = $_POST["SURNAME"]; 
+    $contactNumber = $_POST["CONTACT_NUMBER"]; 
+    $email = $_POST["EMAIL"]; 
+    $identityNo = $_POST["IDENTITY_NUMBER"];
+    $titleName = $titleInfo["TITLE_NAME"];
+    $employeeStatus = $_POST["EMPLOYEE_STATUS_ID"];
+    $zipCode = $suburbInfo["ZIPCODE"];
+    $employeeTypeName = $employeeType["NAME"];
+    $addressInfoLine1 = $addressInfo["ADDRESS_LINE_1"];
+    $suburbName = $suburbInfo["NAME"];
+    $cityName = $cityInfo["CITY_NAME"];
+
+  }
+?>
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,20 +191,70 @@
               <div class="col ">
                 <div class="card-profile-image">
                   <a href="#">
-                    <img src="../../images/user.png" class="rounded-circle">
+                <?php
+
+                //Pic to be inserted here.
+                        $dir = "images/ProfilePic/" . $employeeID. ".jpg";
+                       
+                        if(file_exists($dir))
+                        {
+                            
+                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person">';
+                           
+                        }
+                        else
+                        {
+                         
+                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person">';
+                            
+                        }
+                ?>   
+                    <!--img src="../../images/user.png" class="rounded-circle"-->
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            
               <div class="d-flex justify-content-between">
-                <td>
-                  <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="button" onclick="window.location='maintain.php'">
-                    <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                
+                  <div>
+                  <form id="formMaintain" action="maintain.php" method="POST">
+                    <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                    <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
+                    <input type="hidden" name="SURNAME" value=<?php echo $surname;?>>
+                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $contactNumber;?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+                     <input type="hidden" name="IDENTITY_NUMBER" value=<?php echo $identityNo;?>>
+                    <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
+                    <input type="hidden" id="EMPLOYEE_TYPE_NAME" name="EMPLOYEE_TYPE_NAME">
+                    <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $employeeStatus;?>>
+                    <input type="hidden" name="ADDR" id="ADDR">
+                    <input type="hidden" name="SUBURB" id="SUBURB">
+                    <input type="hidden" name="CITY" id="CITY">
+                    <input type="hidden" name="ZIP" value=<?php echo $zipCode;?>>
+                    <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                      <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                      </span>
+                      <span class="btn-inner--text">Edit</span>
+                    </button>
+                  </form>
+                  </div>
+                  <div>
+                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" style="margin-top: 30px;">
+                      <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                      </span>
+                      <span class="btn-inner--text">Delete</span>
+                    </button>
+                  </div>
+                <!--/td-->
+                <!-- <td>
+                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del" style="margin-top: 30px;">
+                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                     </span>
-                    <span class="btn-inner--text">Edit</span>
+                    <span class="btn-inner--text">Delete</span>
                   </button>
-                </td>
+                </td> -->
                 <td>
                   <button class="btn btn-icon btn-2 btn-default btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
                     <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
@@ -83,13 +273,14 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+                    <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                </td>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
@@ -101,13 +292,13 @@
                       </div>
                       
                       <div class="modal-body text-left">
-                          <p>Empoyee tag is being generated...</p>
+                          <p id="modalText"></p>
                           
                       </div>
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.php'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnClose" onclick="">Close</button> 
                       </div>
                       
                   </div>
@@ -127,31 +318,36 @@
               </div>
               <div class="text-center mt-0">
                 <h2>
-                  Mr David Cooper
+                  <?php echo $titleName." ".$name." ".$surname; ?>
                 </h2>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
-                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline">12</p></div>
-                   <div class="pt-2"><b>Employee Type : </b><p class="d-inline">Warhouse Manager</p></div>                 
+                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline" id="employee_ID"><?php echo $employeeID;?></p></div>
+                   <div class="pt-2">
+                      <b>Employee Type : </b>
+                      <p class="d-inline" id="eEmployeeTypeName"><?php echo $employeeTypeName;?></p>
+                   </div>                 
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
 
-                  <div class="pt-2"><b>ID Number : </b><p class="d-inline">8312025800088</p></div>
+                  <div class="pt-2"><b>ID Number : </b><p class="d-inline"><?php echo $identityNo;?></p></div>
 
-                  <div class="pt-2"><b>Email : </b><p class="d-inline">david.cooper@gmail.com</p></div>
+                  <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $email;?></p></div>
                   
-                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline">081 145 2456</p></div>
+                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $contactNumber ?></p></div>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <i class="ni location_pin mr-2 text-center"></i>
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0">Fairview Village</p>
-                  <p class="mb-0">230 Lunnon Rd</p>
-                  <p class="mb-0">Hillcrest, Pretoria, 0083</p>
+                  <label id="eAddress" hidden="true"><?php echo $addressInfoLine1;?></label>
+                  <p class="mb-0"><?php echo $addressInfoLine1;?></p>
+                  <p class="mb-0" id="eSuburb"><?php echo $suburbName;?></p>
+                  <label id="eCity"><?php echo $cityName;?></label>
+                  <p class="mb-0"><?php echo $cityName.",".$zipCode; ?></p>
                   <p class="mb-0">South Africa</p>
                 </div>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
                   </div>
               </div>
             </div>
@@ -179,6 +375,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewEmployee.js"></script>
 </body>
 
 </html>

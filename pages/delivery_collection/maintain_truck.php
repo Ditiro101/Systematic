@@ -100,7 +100,7 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p id="MMessage">Successfully Saved</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
