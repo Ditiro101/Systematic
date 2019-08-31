@@ -1,3 +1,5 @@
+<?php include_once("../sessionCheckPages.php");?>
+<!DOCTYPE html>
 <!DOCTYPE html>
 <html>
 
@@ -64,7 +66,7 @@
                <thead class="thead-light">
                 <tr class="header">
                   <th>Invoice #</th>
-                  <th>Date</th>
+                  <th>Date & Time</th>
                   <th>Customer Name</th>
                   <th>Salesperson</th>
                   <th>Total</th>
@@ -72,20 +74,6 @@
                 </tr>
               </thead>
               <tbody id="tBody">
-                <tr>
-                  <td>321</td>
-                  <td>25/07/2019</td>
-                  <td>Dr</td>
-                  <td>Alana</td>
-                  <td>R70.00</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-sale.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
                 <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                   <td><b>No Sale Found</b></td>
                   <td></td>
