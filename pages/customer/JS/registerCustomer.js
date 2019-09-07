@@ -1,41 +1,32 @@
 var indcount=1;
 var orgcount=1;
-// let CheckValid = function(valArr)
-// {
-// 	if(valArr["con"].length!=10)
-// 	{
-// 		$("#MMessage").text("Contact Number must be 10 digits");
-// 		$("#btnClose").attr("data-dismiss","modal");
-// 		$("#displayModal").modal("show");
-// 		return false;
-// 	}
-// 	else if (valArr["vat"].length!=10)
-// 	{
-// 		$("#MMessage").text("VAT Number must be 10 digits.");
-// 		$("#btnClose").attr("data-dismiss","modal");
-// 		$("#displayModal").modal("show");
-// 		return false;
-// 	}
-// 	else
-// 	{
-// 		return true;
-// 	}
+let CheckValid = function(valArr)
+{
+	if(valArr["con"].length!=10)
+	{
+		$("#MMessage").text("Contact Number must be 10 digits");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else if (valArr["vat"].length!=10)
+	{
+		$("#MMessage").text("VAT Number must be 10 digits.");
+		$("#btnClose").attr("data-dismiss","modal");
+		$("#displayModal").modal("show");
+		return false;
+	}
+	else
+	{
+		return true;
+	}
 	
-// }
+}
 let getIndInput= function()
 {
 	let name=$("#name-indi").val().trim();
 	let surname=$("#surname-indi").val().trim();
-	let title=$("#titleSelect option:selected").text();
-	let titleID=1;
-	if(title=="Ms")
-	{
-		titleID=2;
-	}
-	else if(title=="Mrs")
-	{
-		titleID=3
-	}
+	let title=1; //To add later
 	//let VatNum=$("#VATNumber").val().trim();
 	let contact=$("#number-indi").val().trim();
 	let email=$("#email-indi").val().trim();
@@ -59,7 +50,7 @@ let getIndInput= function()
 	});
 
 	let addSupplierArr=[];
-	addSupplierArr["title"]=titleID;
+	addSupplierArr["title"]=title;
 	addSupplierArr["customer_type"]=1;
 	addSupplierArr["status"]=1;
 	addSupplierArr["name"]=name;
@@ -469,12 +460,12 @@ $(()=>{
 			
 			let arr=getIndInput();
 			console.log(arr);
-			// if(CheckValid(arr)!=true)
-			// {
-			// 	e.stopPropagation();
-			// }
-			// else
-			// {
+			if(CheckValid(arr)!=true)
+			{
+				e.stopPropagation();
+			}
+			else
+			{
 				$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
@@ -487,10 +478,8 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
-
-						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
 						$("#MMessage").text(doneData[1]);
-						$("#btnClose").attr("onclick","window.location='../../customer.php'");
+						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
 						$("#displayModal").modal("show");
 					}
 					else
@@ -501,7 +490,7 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});	
-			// }
+			}
 			
 		}
 	});
@@ -521,7 +510,13 @@ $(()=>{
 			
 			
 			let arr=getOrgInput();
-
+			console.log(arr);
+			if(CheckValid(arr)!=true)
+			{
+				e.stopPropagation();
+			}
+			else
+			{
 				$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
@@ -534,7 +529,6 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
-						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
 						$("#MMessage").text(doneData[1]);
 						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
@@ -547,7 +541,7 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});
-			
+			}
 			
 		}
 	});
