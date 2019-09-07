@@ -26,14 +26,14 @@
       <div id="details" class="clearfix">
         <div id="client">
           <h2 class="name"><b>INVOICE TO:</b></h2>
-          <h2 class="name">Dr Weilbach</h2>
-          <div class="address">IT Building Room 5-69, University Of Pretoria</div>
-          <div class="email"><a href="mailto:john@example.com">lizette.weilbach@up.ac.za </a></div>
+          <h2 class="name"><?php echo $_POST['CUSTOMER_NAME']; ?></h2>
+          <div class="address"><?php echo $_POST['ADDRESS']; ?></div>
+          <div class="email"><a><?php echo $_POST['EMAIL']; ?></a></div>
         </div>
         <div id="invoice">
-          <h1>INVOICE #321</h1>
-          <div class="date">Date of Invoice: 25/07/2019</div>
-          <div class="date">Salesperson: Alana</div>
+          <h1>INVOICE #<?php echo $_POST['SALE_ID']; ?></h1>
+          <div class="date"><b>Date of Invoice: &nbsp;</b><?php echo(date('m/d/Y')); ?></div>
+          <div class="date"><b>Salesperson: &nbsp;</b> <?php echo $_POST['SALESPERSON']; ?></div>
         </div>
       </div>
       <table border="0" cellspacing="0" cellpadding="0">
@@ -48,34 +48,33 @@
 
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="no">01</td>
-            <td class="desc"><h3>Surprise Product</h3></td>
-            <td class="unit">R35.00</td>
-            <td class="qty">2</td>
-            <td class="total">R70.00</td>
-          </tr>
+        <tbody id="tBody">
         </tbody>
         <tfoot>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">GRAND TOTAL</td>
-            <td>R70.00</td>
+            <td id="saleTotal"></td>
           </tr>
           <tr>
             <td colspan="2"></td>
             <td colspan="2">TAX 15%</td>
-            <td>R10.50</td>
+            <td id="saleVAT"></td>
           </tr>
         </tfoot>
       </table>
       <div id="thanks">Thank you!</div>
       <div id="notices">
-       
+      </div>
+       <input type="hidden" id="saleProductsArray" value='<?php echo( $_POST['SALE_PRODUCTS']); ?>'>
     </main>
     <footer>
       Invoice was created on a computer and is valid without the signature and seal.
     </footer>
+
+    <!-- Core -->
+  <script src="../../../assets/vendor/jquery/dist/jquery.min.js"></script>
+    <!-- Make Sale JS -->
+  <script src="invoice.js"></script>
   </body>
 </html>
