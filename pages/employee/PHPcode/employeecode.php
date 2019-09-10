@@ -240,7 +240,7 @@
 	elseif($_POST["choice"]==2)
 	{
 		$sql_query ="SELECT * FROM EMPLOYEE
-		WHERE `EMPLOYEE_STATUS_ID` = '1' ";
+		WHERE `EMPLOYEE_STATUS_ID` = '1'";
 	    $result = mysqli_query($con,$sql_query);
 	    //$row = mysqli_fetch_array($result);
 

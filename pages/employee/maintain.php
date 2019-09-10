@@ -62,19 +62,19 @@
                     <div class="col">
                       <form id="mainf">
                         <div class="form-row">
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputEmail1">Name</label>
                             <label hidden="true" id="employeeID"><?php echo $_POST["ID"];?></label>
-                            <input type="text" class="form-control" id="inputName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?> required>
+                            <input type="text" class="form-control" id="inputName"  name="inputName" aria-describedby="emailHelp" value=<?php echo $_POST["NAME"];?> required>
                             
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12 ">
                             <label for="exampleInputPassword1">Surname</label>
-                            <input type="text" class="form-control" id="inputSurname" value=<?php echo $_POST["SURNAME"];?> required>
+                            <input type="text" name="inputSurname" class="form-control" id="inputSurname" value=<?php echo $_POST["SURNAME"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-2">
+                          <div class="form-group col-lg-2 col-md-2 col-sm-12">
                             <label for="bane">Title</label>
                             <label hidden="true" id="eTitle"><?php echo $_POST["TITLE_NAME"];?></label>
                             <select class="form-control" id="tit">
@@ -83,43 +83,43 @@
                               <option id="t3" value="Mrs">Mrs</option>
                             </select>
                           </div>
-                          <div class="form-group col-10">
+                          <div class="form-group col-lg-10 col-md-10 col-sm-12">
                             <label for="exampleInputPassword1">Contact Number</label>
-                            <input type="text" class="form-control" maxlength="10" id="inputContact" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                            <input type="text" class="form-control" maxlength="10" name="inputContact" id="inputContact" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" value=<?php echo $_POST["EMAIL"];?> required>
+                            <input type="email" name="inputEmail" class="form-control" id="inputEmail" value=<?php echo $_POST["EMAIL"];?> required>
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">SA ID or Passport number</label>
-                            <input type="text" maxlength="15" class="form-control" id="inputPassport" value=<?php echo $_POST["IDENTITY_NUMBER"];?> required>
+                            <input type="text" maxlength="13" class="form-control" name="inputPassport" id="inputPassport" value=<?php echo $_POST["IDENTITY_NUMBER"];?> required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
                           <label hidden="true" id="eAddress"><?php echo $_POST["ADDR"];?></label>
-                          <input type="text" class="form-control" id="inputAddress" required>
+                          <input type="text" name="inputAddress" class="form-control" id="inputAddress" required>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="inputCity">Suburb</label>
                             <label hidden="true" id="eSuburb"><?php echo $_POST["SUBURB"];?></label>
-                            <input type="text" class="form-control" id="inputSuburb" required>
+                            <input type="text" class="form-control" name="inputSuburb" id="inputSuburb" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputState">City</label>
                             <label hidden="true" id="eCity"><?php echo $_POST["CITY"];?></label>
-                            <input type="text" class="form-control" id="inputCity" readonly>
+                            <input type="text" name="inputCity" class="form-control" id="inputCity" readonly>
                           </div>
-                          <div class="form-group col-md-2">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" value=<?php echo $_POST["ZIP"];?> readonly>
+                            <input type="text" name="inputZip" class="form-control" id="inputZip" value=<?php echo $_POST["ZIP"];?> readonly>
                           </div>
-                          <div class="form-group col-12">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="bane">Employee Type</label>
                             <label hidden=true id="eEmployeeTypeName"><?php echo $_POST["EMPLOYEE_TYPE_NAME"];?></label>
                             <select class="form-control" id="eType">

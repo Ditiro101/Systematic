@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -137,12 +138,19 @@
                             
                             $('#checkedIn').modal("show");
                           }
+                          else if(confirmation.includes("Already Checked-in!"))
+                          {
+                            $('#modal-title-default').text("Warning!");
+                            $('#modalText').text("Already Checked-in!!");
+                            $('#checkedIn').modal("show");
+                          }
                           else
                           {
                             $('#modal-title-default').text("Error!");
-                            $('#modalText').text("Employee not found , please try again");
+                            $('#modalText').text("Database Error!");
                             $('#checkedIn').modal("show");
                           }
+                          
                       })
                       .fail(()=>
                           {

@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
@@ -22,6 +23,7 @@
 
 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -90,8 +92,8 @@
                     <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
                     <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
                     <input type="hidden" name="ADDR" id="ADDR">
-                    <input type="hidden" name="SUBURB" value=<?php echo json_encode($suburbInfo);?>>
-                    <input type="hidden" name="CITY" value=<?php echo json_encode($cityInfo);?>>
+                    <input type="hidden" name="SUBURB" id="SUBURB">
+                    <input type="hidden" name="CITY" id="CITY">
                     <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
                     <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
                       <span class="btn-inner--icon"><i class="fas fa-wrench"></i>

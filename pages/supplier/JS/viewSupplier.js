@@ -52,18 +52,23 @@ $(()=>{
 	suburbInfo=JSON.parse($("#suburbs").text());
 	cityInfo=JSON.parse($("#cities").text());
 	// let testArr=JSON.parse($("#test").val());
-	//console.log(addressInfo);
-	//console.log($("#supName").text());
+	console.log(addressInfo);
+	// console.log($("#supName").text());
 	let supplierName=$("#supName").text().trim();
 	console.log(supplierName);
 	let changedName=supplierName.replace(" ","/");
 	let changedAddressInfo=addressInfo;
-
+	let chnagedSuburbInfo=suburbInfo;
+	let changedCityInfo=cityInfo;
 	for(let k=0;k<addressInfo.length;k++)
 	{
 		changedAddressInfo[k]["ADDRESS_LINE_1"]=changedAddressInfo[k]["ADDRESS_LINE_1"].replace(" ","/");
+		chnagedSuburbInfo[k]["NAME"]=chnagedSuburbInfo[k]["NAME"].replace(" ","/");
+		changedCityInfo[k]["CITY_NAME"]=changedCityInfo[k]["CITY_NAME"].replace(" ","/");
 	}
 	$("#ADDR").val(JSON.stringify(changedAddressInfo));
+	$("#SUBURB").val(JSON.stringify(chnagedSuburbInfo));
+	$("#CITY").val(JSON.stringify(changedCityInfo));
 	$("#NAME").val(changedName);
 	let list=$("#listAddress");
 	let listElement="";

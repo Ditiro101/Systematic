@@ -4,7 +4,7 @@ $(document).ready(function()
                 debug: true,
                 success: "valid"
             });*/
-
+            console.log("pretty nanah");
             
             $.ajax({
                 url:"PHPcode/addUser-SQL.php",
@@ -52,17 +52,27 @@ $(document).ready(function()
 
                     e.preventDefault();
                     //alert("Yeyi");
-                    let accessLevelID = parseInt($("#aLevel option:selected").attr("name"));;
+                    let accessLevelID = parseInt($("#aLevel option:selected").attr("name")) || -1;
                     let username = $("#inputUsername").val();
                     let password = $("#inputPassword1").val();
                     let userID = $("#USER_ID").val();
                 
     
                     //let userStatus = 1;//Active
-
+                    console.log("Update works!");
                     console.log(accessLevelID);
+                    if(accessLevelID == -1)
+                    {
+                        console.log("Its NaN");
+                        accessLevelID = "";
+                    }
+                    else
+                    {
+                        console.log("Does not go to Nan");
+                    }
+                   
 
-                    console.log(username);
+                    //console.log(username);
                     $.ajax({
                         url:"PHPcode/maintainUser-SQL.php",
                         type:'POST',

@@ -72,15 +72,19 @@
             </div>
             <div class="card-body px-lg-5 py-lg-5">
               <div class="text-center text-muted mb-4">
+                <div id="alert-password"></div>
                 <small>Reset User Password</small>
               </div>
-              <form role="form">
+              <form role="form" method="POST" action="" id="setPassword" >
                 <div class="form-group mb-3">
                   <div class="input-group input-group-alternative">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="New Password" type="email">
+                    <input type="hidden" name="key" value='<?php echo $_GET["key"]?>' id="key" >
+                    <input type="hidden" name="userID" value= '<?php echo $_GET["userID"]?>'id="userID" >
+                    <input type="hidden" name="actionToTake" value='<?php echo $_GET["action"]?>' id="actionToTake" >
+                    <input class="form-control" placeholder="New Password" type="password" maxlength="10" name="newPassword" id="newPassword">
                   </div>
                 </div>
                 <div class="form-group">
@@ -88,14 +92,14 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Confirm New Password" type="password">
+                    <input class="form-control" placeholder="Confirm New Password" type="password" maxlength="10" name="confirmPassword" id="confirmPassword">
                   </div>
                 </div>
 
                 <div class="text-center">
-                  <button  type="button" class="btn btn-customGreen my-4" data-toggle="modal" data-target="#modal-default">Reset Password </button>
+                  <button  type="submit" class="btn btn-customGreen my-4" >Reset Password </button>
                 </div>
-                <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal fade" id="successfullyChanged" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                   <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                       <div class="modal-content">
                         
@@ -106,14 +110,14 @@
                               </button>
                           </div>
                           
-                          <div class="modal-body">
-                              <p>Password reset successfully</p>
+                          <div class="modal-body" >
+                              <p id="modalText"></p>
                               
                           </div>
                           
                           <div class="modal-footer">
                               
-                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../user.php'">Close</button> 
+                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../index.php'">Close</button> 
                           </div>
                           
                       </div>
@@ -131,6 +135,8 @@
       </div>
     </div>
   </div>
+
+
   <!-- Footer -->
 
   <?php include_once("../footer.php");?>
@@ -140,6 +146,8 @@
   <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/resetPass.js"></script>
 </body>
 
 </html>
+

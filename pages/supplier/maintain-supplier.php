@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -61,21 +66,21 @@
                             <label for="exampleInputEmail1">Name</label>
                             <label id="suppName" hidden="true"><?php echo $_POST["NAME"];?></label>
                             <input type="hidden" id="sID" value=<?php echo $_POST["ID"];?>>
-                            <input type="text" class="form-control" id="sName" aria-describedby="emailHelp">
+                            <input type="text" class="form-control" name="sName" id="supplierName" aria-describedby="emailHelp" required>
                           </div>
                           <div class="form-group col-6">
                             <label for="VATNumber">VAT Number</label>
-                            <input type="number" class="form-control" id="VATNumber" value=<?php echo $_POST["VAT"];?>>
+                            <input type="number" class="form-control" name="VAT" id="VATNumber" value=<?php echo $_POST["VAT"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="ContactNo">Contact Number</label>
-                            <input type="text" class="form-control" id="ContactNo" value=<?php echo $_POST["PHONE"];?>>
+                            <input type="text" class="form-control" name="contact" id="ContactNo" maxlength="10" value=<?php echo $_POST["PHONE"];?> required>
                           </div>
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="text" class="form-control" id="sEmail" value=<?php echo $_POST["EMAIL"];?>>
+                            <input type="text" class="form-control" name="email" id="supplierEmail" value=<?php echo $_POST["EMAIL"];?> required>
                           </div>
                         </div>
                         <hr class="my-4">
@@ -97,7 +102,7 @@
                             <div class="form-group col-md-6">
                               <label for="inputSuburb">Suburb</label>
                               <label id="convertSuburb" hidden="true"><?php echo $_POST["SUBURB"]?></label>
-                              <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="suppSuburb" >
+                              <input type="text" class="form-control inputSuburb" id="inputSuburb1" name="suppSuburb">
                             </div>
                             <div class="form-group col-md-4">
                               <label for="inputCity">City</label>
@@ -112,7 +117,7 @@
                       </div>
 
 
-                      <!-- <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                      <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                             <div class="modal-content">
                               
@@ -124,19 +129,19 @@
                                 </div>
                                 
                                 <div class="modal-body">
-                                    <p>Supplier successfully updated</p>
+                                    <p id="MMessage"></p>
                                     
                                 </div>
                                 
                                 <div class="modal-footer">
                                     
-                                    <button type="button" class="btn btn-link  ml-auto" onclick="window.location='../../supplier.html'">Close</button> 
+                                    <button type="button" class="btn btn-link  ml-auto" id="btnClose">Close</button> 
                                 </div>
                                 
                             </div>
                         </div>
                       </div>
-                                          <div class="modal fade" id="modal-del" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                                          <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                       <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                           <div class="modal-content">
                             
@@ -148,12 +153,12 @@
                               </div>
                               
                               <div class="modal-body">
-                                  <p>Are you sure you want to delete the supplier? </p>
+                                  <p id="MRemove"></p>
                                   
                               </div>
                               
                               <div class="modal-footer">                                 
-                                  <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#success2">Yes</button>
+                                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnRemove">Yes</button>
                                   <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                               </div>
                               
@@ -183,7 +188,7 @@
                               
                           </div>
                       </div>
-                    </div> -->
+                    </div>
                         
                     </form>
                       <div class="col-md-2 float-right">
@@ -196,9 +201,9 @@
                       <div class="col">
                         <div class="form-group">
                           <div class="form-group mr-2">
-                              <button type="button" class="btn btn-primary mb-3" data-toggle="modal" data-target="#modal-default" id="btnSave">Save Changes
+                              <button type="button" class="btn btn-primary mb-3" id="btnSave">Save Changes
                               </button>
-                              <button type="button" class="btn btn-danger mb-3 float-right" data-toggle="modal" data-target="#modal-del">Delete Supplier
+                              <button type="button" class="btn btn-danger mb-3 float-right" id="btnDeleteSupplier">Delete Supplier
                               </button>
                           </div>
                         </div>
@@ -224,6 +229,9 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
   <script src="JS/maintainSupplier.js" type="text/javascript"></script>
 </body>
 

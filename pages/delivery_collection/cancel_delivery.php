@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +48,7 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">Sale No. #321 :   <b>John Smith</b></h3>
+              <h3 class="mb-0"><span id="cDeliverySaleID"></span>   <b id="cDeliveryCustomerName"></b></h3>
             </div>
             <div class="card-body">
               <div class="row mt-3">
@@ -55,22 +56,29 @@
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form>
                       <div class="col">
+                        <label hidden="true" id="delID"><?php echo $_POST["DELIVERY_ID"];?></label>
+                        <label hidden="true" id="dctData"><?php echo $_POST["DCT_STATUS"];?></label>
+                        <label hidden="true" id="sData"><?php echo $_POST["SALE_DATA"];?></label>
+                        <label hidden="true" id="aData"><?php echo $_POST["ADDRESS_DATA"];?></label>
+                        <label hidden="true" id="subData"><?php echo $_POST["SUBURB_DATA"];?></label>
+                        <label hidden="true" id="citData"><?php echo $_POST["CITY_DATA"];?></label>
+                        <label hidden="true" id="cData"><?php echo $_POST["CUSTOMER_DATA"];?></label>
                         <div class="form-group">
-                            <p><b>Delivery Date: </b>2019/08/12</p>
+                            <p><b>Delivery Date: </b><?php echo $_POST["EXPECTED_DATE"];?></p>
                         </div>
 
                         <div class="form-group">
-                          <p><b>Delivery Address: </b>124 Pretorius Street</p>
+                          <p><span><b>Delivery Address: </b></span><span id="cDeliveryAddress"></span></p>
                         </div>
                         <div class="form-row pb-0">
                           <div class="form-group col-md-4 mb-2">
-                            <p><b>Suburb: </b>Hatfield</p>
+                            <p><span><b>Suburb: </b></span><span id="cDelSuburb"></span></p>
                           </div>
                           <div class="form-group col-md-4 mb-2">
-                            <p><b>City: </b>Pretoria</p>
+                            <p><span><b>City: </b></span><span id="cDelCity"></span></p>
                           </div>
                           <div class="form-group col-md-2 mb-2">
-                            <p><b>Zip: </b> 0015</p>
+                            <p><span><b>Zip: </b></span><span id="cDelZip"></span></p>
                           </div>
                         </div>
                         <div class="form-row mt-0">
@@ -78,7 +86,7 @@
                             <p><b>Delivered Date: </b> N/A</p>
                           </div>
                           <div class="form-group col-md-6">
-                            <p><b>Delivery Status: </b> Not Delivered</p>
+                            <p><span><b>Delivery Status: </b></span> <span id="cDelStatus"></span></p>
                           </div>
                         </div>
 
@@ -102,28 +110,28 @@
                                     </div>
                                     
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#test2" >Yes</button>
+                                        <button type="button" class="btn btn-success" id="btnYes" >Yes</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                                     </div>
                                     
                                 </div>
                             </div>
-                            <div id="test2" class="modal fade" role="dialog">
+                            <div id="displayModal" class="modal fade" role="dialog">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <!-- Modal Content -->
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-default">Sucess!</h6>
+                                    <h6 class="modal-title" id="modal-title-default">Success!</h6>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                        <p>Sale Delivery canceled successfully</p>
+                                        <p id="MMessage"></p>
                                         
                                   </div>
                                   <div class="modal-footer">
-                                        <button type="button" class="btn btn-link" data-dismiss="modal" onclick="window.location='../../delivery_collection.html'">Close</button> 
+                                        <button type="button" class="btn btn-link" data-dismiss="modal" id="btnClose">Close</button> 
                                   </div>
                                 </div>
                               </div>
@@ -153,6 +161,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/cancelDelivery.js"></script>
 </body>
 
 </html>

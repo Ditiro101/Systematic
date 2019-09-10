@@ -103,13 +103,12 @@
           </div>
           <div class="row mt-3">
             <div class="col-12 text-center">
-              <a href="./pages/user/reset-user-password-request.html" class="text-dark"><small>Forgot Password?</small></a>
+               <a href="http://stockpath.co.za/pages/user/reset-user-password-request.php" class="text-dark"><small>Forgot Password?</small></a>
             </div>
           </div>
         </div>
       </div>
     
-  
   <!-- Footer -->
 
   <footer class="footer mt-7">
@@ -129,6 +128,13 @@
     </div>
   </footer>
   </div>
+  </div>
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="assets/img/loading/loading.gif">
+          </div>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->
