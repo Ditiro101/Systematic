@@ -50,6 +50,7 @@ $(()=>{
 	let suburbData=JSON.parse($("#subData").text());
 	let cityData=JSON.parse($("#citData").text());
 	let dctData=parseInt($("#dctData").text());
+	console.log(dctData);
 	$("#vCustomerID").text(customerData["CUSTOMER_ID"]);
 	if(customerData["SURNAME"]==null)
 	{
@@ -67,6 +68,10 @@ $(()=>{
 		}
 	});
 	$("#vEmployeeName").text(employee["NAME"]);
+	if(dctData==6)
+	{
+		dctData=2;
+	}
 	for(let k=1;k<=5;k++)
 	{
 		if(dctData!=k)

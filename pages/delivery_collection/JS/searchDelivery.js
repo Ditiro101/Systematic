@@ -10,6 +10,7 @@ dctStatus[2]="Truck Assigned";
 dctStatus[3]="Final Assignment";
 dctStatus[4]="On Delivery";
 dctStatus[5]="Delivered";
+dctStatus[6]="Truck Assigned";
 $(()=>{
 	deliveryData=JSON.parse($("#dData").text());
 	addressData=JSON.parse($("#aData").text());

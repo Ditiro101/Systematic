@@ -246,7 +246,7 @@
 
 	function getUnassignedDeliveries($con,$dct)
 	{
-		$get_query="SELECT * FROM DELIVERY WHERE DCT_STATUS_ID='$dct'";
+		$get_query="SELECT * FROM DELIVERY WHERE DCT_STATUS_ID='$dct' OR DCT_STATUS_ID=6";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
@@ -438,7 +438,7 @@
 			JOIN ADDRESS B ON A.ADDRESS_ID=B.ADDRESS_ID
 			JOIN SUBURB C ON B.SUBURB_ID=C.SUBURB_ID
 			JOIN CITY D ON C.CITY_ID=D.CITY_ID
-			WHERE DCT_STATUS_ID=1";
+			WHERE DCT_STATUS_ID=1 OR DCT_STATUS_ID=6";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
@@ -460,7 +460,7 @@
 			FROM DELIVERY A
 			JOIN SALE B ON A.SALE_ID=B.SALE_ID
 			JOIN CUSTOMER C ON B.CUSTOMER_ID=C.CUSTOMER_ID
-			WHERE DCT_STATUS_ID=1";
+			WHERE DCT_STATUS_ID=1 OR DCT_STATUS_ID=6";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
@@ -660,6 +660,24 @@
 		else
 		{
 			return false;
+		}
+	}
+
+	function checkAssigned($con,$sID)
+	{
+		$get_query="SELECT * FROM DELIVERY_TRUCK WHERE SALE_ID='$sID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return count($get_vals);
+		}
+		else
+		{
+			return 0;
 		}
 	}
 
