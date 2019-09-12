@@ -1,3 +1,11 @@
+<?php 
+  include_once("../sessionCheckPages.php"); 
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $saleProducts=getSaleProductDetails($con,$_POST["SALE_ID"]);
+  $products=getProductDetails($con);
+  $isDelivered=checkDelivery($con,$_POST["SALE_ID"]);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -62,6 +70,13 @@
                     <div class="card-header" style="background-color: #81b69d">
                         <h5 class="card-title mb-0">Customer Details</h5>
                     </div>
+                    <input type="hidden" id="SALE_ID" value='<?php echo $_POST["SALE_ID"];?>'>
+                    <input type="hidden" id="SALE_DATE" value='<?php echo $_POST["SALE_DATE"];?>'>
+                    <input type="hidden" id="CUSTOMER_ID" value='<?php echo $_POST["CUSTOMER_ID"];?>'>
+                    <input type="hidden" id="CUSTOMER_DATA" value='<?php echo $_POST["CUSTOMER_DATA"];?>'>
+                    <input type="hidden" id="EMPLOYEE_DATA" value='<?php echo $_POST["EMPLOYEE_DATA"];?>'>
+                    <input type="hidden" id="PRODUCTS_ARRAY" value='<?php echo $_POST["PRODUCTS_ARRAY"];?>'>
+                    <input type="hidden" id="SALE_PRODUCTS_ARRAY" value='<?php echo $_POST["SALE_PRODUCTS_ARRAY"];?>'>
                     <div class="card-body px-3">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
@@ -70,31 +85,28 @@
                                   Customer ID
                               </th>
                               <td >
-                                  12
+                                  <?php echo $_POST["CUSTOMER_ID"];?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Name
                               </th>
-                              <td >
-                                  Nicolas
+                              <td id="customerName">
                               </td>
                             </tr> 
                             <tr>
                               <th>
                                   Surname
                               </th>
-                              <td >
-                                  Norman
+                              <td id="customerSurname">
                               </td>
                             </tr>
                             <tr>
                               <th>
                                   Contact No
                               </th>
-                              <td >
-                                  067 345 6789
+                              <td id="customerContact">
                               </td>
                             </tr>              
                         </tbody>
@@ -109,26 +121,26 @@
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
-                                Date 
+                                Date & Time
                               </th>
-                              <td >
-                                04/07/2019
+                              <td id="saleDate">
+                                <?php echo $_POST["SALE_DATE"];?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                 Invoice #
                               </th>
-                              <td >
-                                321
+
+                              <td id="invoiceNo">
+                                <?php echo $_POST["SALE_ID"]?>
                               </td>
                             </tr> 
                             <tr>
                               <th>
                                 Salesperson
                               </th>
-                              <td >
-                                Jabu
+                              <td id="eSalesPerson">
                               </td>
                             </tr>      
                         </tbody>
@@ -152,77 +164,31 @@
                       <th class="text-center">Return Quantity </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-2 text-center">30</td>
-                      <td class="py-2">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="text-right py-2">R83.00</td>
-                      <td class="text-right py-2">R2 490.00</td>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
+                  <tbody id="tBody">
 
-                    <tr>
-                      <td class="py-2 text-center">30</td>
-                      <td class="py-2">Apple Munch (96x50ml) Pallet</td>
-                      <td class="text-right py-2">R81.00</td>
-                      <td class="text-right py-2">R2 430.00</td>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 text-center">80</td>
-                      <td class="py-2">Kingsley Cola (6x2l) Case</td>
-                      <td class="text-right py-2">R47.00</td>
-                      <td class="text-right py-2">R3 760.00</td>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 text-center">20</td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                      <td class="text-right py-2">R130.00</td>
-                      <td class="text-right py-2">R2 600.00</td>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-
-                    
-                    </tbody>
-                    <tfoot class="tfoot-light">
+                  </tbody>
+                  <tfoot class="tfoot-light">
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R11 280.00</b></td>
+                      <td class="text-right"><b id="sTotal"><?php echo $_POST["SALE_AMOUNT"] ?></b></td>
                     </tr>
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R2 820.00</b></td>
+                      <td class="text-right"><b id="sVAT"></b></td>
                     </tr>
-                    </tfoot>
-                  </table>
-                </div>
+                  </tfoot>
+                </table>
               </div>
             </div>
+          </div>
             <br>
 
               <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal" data-target="#modal-creditlimit">
+                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal" data-target="#modal-creditlimit">
                   <span class="btn-inner--text">Finalise Return</span>
                 </button>
               </div>
@@ -241,38 +207,66 @@
                       </div>
                       <div class="form-group col">
                         <label for="bane">Reason for return</label>
-                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter reason for return">
+                        <input type="text" class="form-control" id="reasonForReturn" aria-describedby="emailHelp" placeholder="Enter reason for return">
                       </div>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-pass">Yes</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-salesManagerPassword">Yes</button>
                       <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                     </div>   
                   </div>
                 </div>
               </div>
-              <div class="modal fade" id="modal-pass" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+              <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content"> 
+                    <div class="modal-content">
+                      
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                          <div class="form-group col">
+                            <label for="bane">Sales Manager Password</label>
+                            <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
+                          </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" id="confirmSalesManagerPassword">Approve Sale</button> 
+                        </div>
+                        
+                    </div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-2">
+          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
                     <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default">Finalise Return</h6>
+                        <h6 class="modal-title" id="modal-title-default2"></h6>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">×</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                      <div class="form-group col">
-                        <label for="bane">Sales Manager Password</label>
-                        <input type="password" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Enter password">
-                      </div>
+                        <p id="modalText"></p>
+                        
                     </div>
                     <div class="modal-footer">
-                          
-                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Approve Return</button> 
-                    </div>   
-                  </div>
+                        
+                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
+                    </div>
+                    
                 </div>
-              </div>
+            </div>
+          </div>
+        </div>
+
               <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
@@ -300,79 +294,14 @@
         <?php include_once("../footer.php");?>
       </div>
     </div>
+    <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+  </div>
 
-    <script type="text/javascript">
-      function setTwoNumberDecimal(el) {
-        el.value = parseFloat(el.value).toFixed(2);
-      };
-
-      //Initialize with the list of symbols
-      let names = ["All Gold Tomato Sauce (6x350ml) Case", "All Gold Tomato Sauce (6x700ml) Case", "Apple Munch (96x50ml) Pallet", "Ariel Washing Powder (6x500g) Case", "Bakers Toppers (12x125g) Case","Coca Cola (6x2l) Case","Dragon Energy Drink (24x500ml) Case","Kingsley Cola (6x2l) Case","Kingsley Iron Brew (6x2l) Case","Kingsley Ginger Bear (6x2l) Case","Kingsley Granadila (6x2l) Case", "Kingsley Orange (6x2l) Case", "Kingsley Pineapple (6x2l) Case", "Kingsley Cream Soda (6x2l) Case", "Kingsley Apple (6x2l) Case", "Monster Energy Drink (24x500ml) Case"]
-
-      //Find the input search box
-      let search = document.getElementById("searchProduct");
-
-      //Find every item inside the dropdown
-      let items = document.getElementsByClassName("dropdown-item");
-      function buildDropDown(values) 
-      {
-          let contents = []
-          for (let name of values) 
-          {
-          contents.push('<input type="button" class="dropdown-item" id="dropdownItem" type="button" value="' + name + '"/>')
-          }
-          $('#menuItems').append(contents.join(""))
-
-          //Hide the row that shows no items were found
-          $('#empty').hide()
-      }
-
-      //Capture the event when user types into the search box
-      window.addEventListener('input', function () {
-          filter(search.value.trim().toLowerCase())
-      })
-
-      //For every word entered by the user, check if the symbol starts with that word
-      //If it does show the symbol, else hide it
-      function filter(word) 
-      {
-          let length = items.length
-          let collection = []
-          let hidden = 0
-
-          for (let i = 0; i < length; i++) 
-          {
-            if (items[i].value.toLowerCase().startsWith(word)) 
-            {
-                $(items[i]).show()
-            }
-            else {
-                $(items[i]).hide()
-                hidden++
-            }
-          }
-
-          //If all items are hidden, show the empty view
-          if (hidden === length) 
-          {
-            $('#empty').show()
-          }
-          else 
-          {
-            $('#empty').hide()
-          }
-      }
-
-      //If the user clicks on any item, set the title of the button as the text of the item
-      $('#menuItems').on('click', '.dropdown-item', function()
-      {
-          $("#dropdown_coins").dropdown('toggle');
-          $('#searchProduct').val("");
-          filter("");
-      })
-
-      buildDropDown(names);
-    </script>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -382,6 +311,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/returnSale.js"></script>
 </body>
 
 </html>
