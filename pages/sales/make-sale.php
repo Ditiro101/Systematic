@@ -58,16 +58,17 @@
           <div class="card card-stats shadow">
               <div class="card-header border-0 bg-secondary">
                 <div class="input-group input-group-rounded input-group-merge">
-                  <input type="search" class="form-control form-control-rounded form-control-prepended dropdown-toggle" id="searchProduct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Product Name" autofocus="true">
-                  <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="searchProduct">
-                    <div id="menuItems"></div>
-                    <div id="empty" class="dropdown-header table-danger" style="color: black">
-                      No product found
-                    </div>
-                  </div>
+                  <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <span class="fa fa-search"></span>
+                    </div>
+                  </div>
+                  <input type="hidden" id="productsDropdownToggle" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div id="menu" class="dropdown-menu col px-4 mb-3" aria-labelledby="productsDropdownToggle">
+                    <div id="menuItems"></div>
+                    <div id="empty" class="dropdown-header table-danger" style="color: black">
+                      No product found
                     </div>
                   </div>
                 </div>
@@ -124,16 +125,21 @@
             <div class="card-header bg-secondary">
               <div class="row"> 
                 <div class="col">
-                  <form id="searchCustomertForm" class="needs-validation" novalidate>
-                    <div class="input-group input-group-rounded input-group-merge mx-2">
-                      <input type="text" id="customerSearchInput" placeholder="Enter Customer Phone # or ID" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search" required>
-                      <div class="input-group-prepend mr-3">
-                        <button class="input-group-text btn-info bg-customGreen" id="searchCustomerButton">
-                        <span class="fa fa-search" style="color: white"></span>
-                        </button>
+                  <div class="input-group input-group-rounded input-group-merge">
+                    <input type="search" id="customerSearchInput" placeholder="Enter Customer Name" title="Type in a name" class="form-control form-control-rounded form-control-prepended">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text bg-customGreen" id="searchCustomerButton">
+                      <span class="fa fa-search" style="color: white"></span>
                       </div>
                     </div>
-                  </form>
+                    <input type="hidden" id="customerDropdownToggle" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="menuCust" class="dropdown-menu col px-2 mb-2" aria-labelledby="customerDropdownToggle">
+                      <div id="menuOfCustomers"></div>
+                      <div id="empty2" class="dropdown-header table-danger" style="color: black">
+                        No Customer found
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

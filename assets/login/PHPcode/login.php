@@ -77,6 +77,7 @@
                 $_SESSION['name'] = $name;
                 $_SESSION['surname'] = $surname;
                 $_SESSION['userID'] = $userID;
+                $_SESSION['employeeID'] = $employeeID;
                 $_SESSION['accessLevel'] = $access;
                 $_SESSION['subFunctionality'] = $subFunctionality;
                 $_SESSION['access'] = true;
