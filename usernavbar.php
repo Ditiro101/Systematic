@@ -4,7 +4,7 @@
             <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <div class="media align-items-center">
                 <span class="avatar avatar-sm rounded-circle">
-                  <img alt="Image placeholder" src="./assets/img/theme/admin.jpg">
+                  <img alt="Image placeholder" src="pages/employee/images/ProfilePic/<?php echo $_SESSION["employeeID"]?>.jpg" onerror="this.onerror=null;this.src='assets/img/theme/admin.jpg'; this.style.width = '44px'; this.style.height = '44px';" style="width: 36px; height: 36px;">
                 </span>
                 <div class="media-body ml-2 d-none d-lg-block">
                   <span class="mb-0 text-sm  font-weight-bold"><?php echo $_SESSION['name']; ?></span>
