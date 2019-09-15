@@ -51,8 +51,8 @@
             <div class="row justify-content-center">
               <div class="col ">
                 <div class="card-profile-image">
-                  <a href="#">
-                    <img src="../../images/user.png" class="rounded-circle">
+                  <a>
+                    <img alt="Image placeholder" class="rounded-circle" src="../employee/images/ProfilePic/<?php echo $_SESSION["employeeID"]?>.jpg" onerror="this.onerror=null;this.src='../../images/user.png';this.style.border = '2px';" style="width: 180px; height: 180px; border: 5px solid white;">
                   </a>
                 </div>
               </div>
