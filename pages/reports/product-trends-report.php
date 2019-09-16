@@ -27,8 +27,8 @@
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="name"><b>Date Generated :</b> dd/mm/yyyy</div>
-          <div class="address"><b>Time Generated :</b> HH:mm</div>
+          <div class="name"><b>Date Generated :</b> <?php echo date("Y/m/d")?></div>
+          <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
           <h1>Product Trends Report</h1>
@@ -116,4 +116,6 @@
       });
     </script>
   </body>
+  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="JS/productTrends.js"></script>
 </html>

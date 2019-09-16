@@ -234,7 +234,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/stock-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/stock-report.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>
@@ -353,18 +353,16 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
             </div>
-            <div class="modal-body">
+           <div class="modal-body">
               <p>Please enter the timeframe for which the report should be generated?</p>
-              <div class="form-row ">
+                <form action="pages/reports/employeeAttendance.php" method="POST">
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date From</label>
-                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+                  <input type="date" class="form-control" id="DATE" name="DATE" placeholder="Enter Delivery From">
                 </div>
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date To</label>
-                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
-                </div>
-              </div>
+                <input type="submit" class="btn btn-success" ></input>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
             </div>
             <div class="modal-footer">  
               <a href="pages/reports/product-trends-report.php"class="btn btn-success" >Generate Report</a>

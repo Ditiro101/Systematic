@@ -29,7 +29,7 @@
       <div id="details" class="clearfix">
         <div id="client">
           <div class="name"><b>Date Generated for:</b> <p id="DATE" ><?=$_POST["DATE"]?></p></div>
-          <div class="address"><b>Time Generated :</b> <?=date("h:i:sa")?></div>
+          <div class="address"><b>Time Generated :</b> <php?=date("h:i:sa")?></div>
         </div>
         <div id="invoice">
           <h1>Employee Attendance Roll</h1>
