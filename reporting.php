@@ -355,10 +355,14 @@
             </div>
            <div class="modal-body">
               <p>Please enter the timeframe for which the report should be generated?</p>
-                <form action="pages/reports/employeeAttendance.php" method="POST">
+                <form action="pages/reports/product-trends-report.php" method="POST">
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date From</label>
-                  <input type="date" class="form-control" id="DATE" name="DATE" placeholder="Enter Delivery From">
+                  <input type="date" class="form-control" id="DATEFROM" name="DATEFROM" placeholder="Enter Date of Sale From">
+                </div>
+                <div class="form-group col-6">
+                  <label for="exampleInputPassword1">Date To</label>
+                  <input type="date" class="form-control" id="DATETO" name="DATETO" placeholder="Enter Date of Sale To">
                 </div>
                 <input type="submit" class="btn btn-success" ></input>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>

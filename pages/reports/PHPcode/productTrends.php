@@ -13,24 +13,60 @@
 
 		//Check connection
 		if (!$con) {
-		  die("Connection failed: " . mysqli_connect_error());
+          die("Connection failed: " . mysqli_connect_error());
+          
+          
 		}
 
-		$day=$_POST['DATE'];
+		/*$day=$_POST['DATE'];
 		// $day='2019-08-21';
 		$date=date_create($day);
-		$date=date_format($date,"Y-m-d");
+        $date=date_format($date,"Y-m-d");*/
+        
+        $dateFrom = $_POST['DATEFROM'];
+        //var_dump($dateFrom);
+        $dateTo = $_POST['DATETO'];
+        //var_dump($dateTo);
 
-		$sql_query ="SELECT EMPLOYEE.NAME, EMPLOYEE_HOUR.DATE, EMPLOYEE.SURNAME, EMPLOYEE.EMPLOYEE_ID, EMPLOYEE.EMPLOYEE_TYPE_ID, EMPLOYEE_TYPE.WAGE_EARNING,EMPLOYEE_HOUR.DATE ,EMPLOYEE_HOUR.EMPLOYEE_HOUR_ID, EMPLOYEE_HOUR.CHECK_IN_TIME, EMPLOYEE_HOUR.CHECK_OUT_TIME FROM EMPLOYEE
-			INNER JOIN EMPLOYEE_TYPE ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
-			LEFT JOIN EMPLOYEE_HOUR ON EMPLOYEE.EMPLOYEE_ID = EMPLOYEE_HOUR.EMPLOYEE_ID
-			WHERE EMPLOYEE_TYPE.WAGE_EARNING='1' OR EMPLOYEE_HOUR.DATE='$date' ";
-	    $result = mysqli_query($con,$sql_query);
-	    //$row = mysqli_fetch_array($result);
+        $startDate = new DateTime($dateFrom);
+        $startDate = $startDate->format("Y-m-d");
 
-	    if (mysqli_num_rows($result)>0) {
+        $endDate = new DateTime($dateTo);
+        $endDate = $endDate->format("Y-m-d");
+
+		$alles_query ="SELECT SALE.SALE_DATE ,SALE_PRODUCT.PRODUCT_ID , SALE_PRODUCT.SELLING_PRICE, SUM(SALE_PRODUCT.QUANTITY) as TOTAL_PRODUCT_QUANTITY ,PRODUCT.PRODUCT_MEASUREMENT,PRODUCT.PRODUCT_MEASUREMENT_UNIT, PRODUCT.NAME ,PRODUCT.CASES_PER_PALLET,PRODUCT.UNITS_PER_CASE , PRODUCT.PRODUCT_SIZE_TYPE ,PRODUCT_TYPE.TYPE_NAME,PRODUCT_TYPE.PRODUCT_TYPE_ID
+                    FROM SALE_PRODUCT 
+                    INNER JOIN SALE ON SALE_PRODUCT.SALE_ID = SALE.SALE_ID
+                    INNER JOIN PRODUCT ON PRODUCT.PRODUCT_ID=SALE_PRODUCT.PRODUCT_ID
+                    INNER JOIN PRODUCT_TYPE ON PRODUCT_TYPE.PRODUCT_TYPE_ID = PRODUCT.PRODUCT_TYPE_ID
+                    WHERE SALE.SALE_DATE BETWEEN '$startDate' AND '$endDate' 
+                    GROUP BY PRODUCT.PRODUCT_ID
+                    ORDER BY COUNT(PRODUCT.PRODUCT_ID) DESC";
+            
+        $submit = mysqli_query($con,$alles_query);
+        //var_dump($alles_query);
+        
+       /* $filterID = [];
+
+        while($max = mysqli_fetch_assoc($submit))
+        {
+            $prodID = $max['PRODUCT_ID'];
+            $findIDs = "SELECT COUNT($prodID) as maxProducTID
+                        FROM SALE_PRODUCT
+                        WHERE PRODUCT_ID = '$prodID'";
+            $IDresult = mysqli_query($con,$findIDs);
+            $idRow = mysqli_fetch_assoc($IDresult);
+
+
+            array_push($filterID,$idRow["maxProducTID"]);
+        }
+        $maxProductID = max()
+	    //$row = mysqli_fetch_array($result);*/
+
+        if (mysqli_num_rows($submit)>0) 
+        {
 	        $count=0;
-	        while ($row=$result->fetch_assoc())
+	        while ($row= $submit->fetch_assoc())
 	        {
 	        	$vals[]=$row;
 	        	//$vals[$count]["ID"]=$row["SUPPLIER_ID"];
