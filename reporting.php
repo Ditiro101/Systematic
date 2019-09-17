@@ -364,14 +364,14 @@
                   <label for="exampleInputPassword1">Date To</label>
                   <input type="date" class="form-control" id="DATETO" name="DATETO" placeholder="Enter Date of Sale To">
                 </div>
-                <input type="submit" class="btn btn-success" ></input>
+                <input type="submit" class="btn btn-success" value="Generate Report"></input>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
               </form>
             </div>
-            <div class="modal-footer">  
+            <!--div class="modal-footer">  
               <a href="pages/reports/product-trends-report.php"class="btn btn-success" >Generate Report</a>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+            </div-->
           </div>
         </div>
       </div>
