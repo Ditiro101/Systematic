@@ -429,11 +429,8 @@
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <i class="ni location_pin mr-2 text-center"></i>
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <label id="eAddress" hidden="true"><?php echo $addressInfoLine1;?></label>
                   <p class="mb-0"><?php echo $addressInfoLine1;?></p>
-                  <p class="mb-0" id="eSuburb"><?php echo $suburbName;?></p>
-                  <label id="eCity"><?php echo $cityName;?></label>
-                  <p class="mb-0"><?php echo $cityName.",".$zipCode; ?></p>
+                  <p class="mb-0" id="eSuburb"><?php echo $suburbName.", ".$cityName.", ".$zipCode;?></p>
                   <p class="mb-0">South Africa</p>
                 </div>
                 <hr class="my-2 d-flex justify-content-center">
