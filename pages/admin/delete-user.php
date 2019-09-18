@@ -1,3 +1,5 @@
+<?php include_once("../../sessionCheckLanding.php");?>
+
 <!DOCTYPE html>
 <html>
 
@@ -70,83 +72,22 @@
               	<th style="width:auto;"></th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>1</td>
-                <td>3</td>
-                <td>Scott</td>
-                <td>Mcbride</td>
-                <td>Active</td>
-                <td>
-        					<button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#suc">
-        						<span class="btn-inner--icon"><i class="fas fa-trash"></i>
-        						</span>
-        						<span class="btn-inner--text">Delete</span>
-        					</button>
-        				</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>4</td>
-                <td>Florence</td>
-                <td>Delgado</td>
-                <td>Active</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#suc">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>7</td>
-                <td>Jake</td>
-                <td>Cruz</td>
-                <td>Active</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#suc">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>11</td>
-                <td>Beth</td>
-                <td>Wade</td>
-                <td>Disabled</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#suc">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>14</td>
-                <td>Denise</td>
-                <td>Stephens</td>
-                <td>Active</td>
-                <td>
-                  <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#suc">
-                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                    </span>
-                    <span class="btn-inner--text">Delete</span>
-                  </button>
-                </td>
-              </tr>
+              <tbody id="tBody">
+                <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
+                  <td><b>No User Found</b></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
               </tbody>
             </table>
             <div class="form-group col-md-2 mt-3">
-              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../admin.html'">Back</button>
+              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.location='../../admin.php'">Back</button>
             </div>
-            <div class="modal fade" id="suc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -157,31 +98,31 @@
                     </div>
                     <div class="modal-footer">
                       
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id='deleteUserButton' >Yes</button>
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="deleteUserModalSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
                       <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                          <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                           </button>
                       </div>
                       
                       <div class="modal-body">
-                          <p>User successfully deleted</p>
+                          <p id="modalTextDismiss"></p>
                           
                       </div>
                       
                       <div class="modal-footer">
                           
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../admin.html'">Close</button> 
+                          <button type="button" class="btn btn-link  ml-auto" id="btnCloseDismiss" data-dismiss="modal" onclick="">Close</button> 
                       </div>
                       
                   </div>
@@ -226,6 +167,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="JS/deleteUser-JS.js"></script>
 </body>
 
 </html>

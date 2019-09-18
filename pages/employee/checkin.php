@@ -1,10 +1,10 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Employee Check-in - Stock Path</title>
   <!-- Favicon -->
@@ -16,6 +16,11 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link type="text/css" href="../../assets/bootstrap-notify-master/profileNotify.css" rel="stylesheet">
+  <link type="text/css" href="../../assets/bootstrap-notify-master/animate.css" rel="stylesheet">
+
+  <!-- Link scanning library -->
+  <script type="text/javascript" src="https://rawgit.com/schmich/instascan-builds/master/instascan.min.js" ></script>	
 </head>
 
 <body>
@@ -55,62 +60,45 @@
                 
                   <style>
                   #qrscan {
-                  
+                    margin: 0px auto;
                     width: 400px;
                     height: 400px;
                     background-image:url("../../assets/img/brand/qr.png");
                     background-size: 400px;
+                    display:inline-block;
+                    overflow: hidden;
                   }
                   #videoElement {
-                    width: 500px;
-                    height: 400px;
+                    width: 378px;
+                    height: 378px;
+                    object-fit: cover;
+                    margin: 11px;
                     
                   }
                   </style>
               
                   <div id="qrscan"  class="embed-responsive embed-responsive-16by9">
-                    <video autoplay="true" id="videoElement" class="embed-responsive-item">
-
-                    
+                    <video autoplay="true" id="videoElement" class="">
                     </video>
                   </div>
-                  <script>
-                    var video = document.querySelector("#videoElement");
-
-                      if (navigator.mediaDevices.getUserMedia) {
-                        navigator.mediaDevices.getUserMedia({ video: true })
-                          .then(function (stream) {
-                            video.srcObject = stream;
-                          })
-                          .catch(function (err0r) {
-                            console.log("Something went wrong!");
-                          });
-                      }
-                  </script>
                 
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#suc">
-                    <div>
-                      <i class="fas fa-qrcode"></i></i>
-                      <span>Scan Employee QR</span>
-                    </div>
-                  </button>
 
-                        <div class="modal fade" id="suc" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="checkedIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                                <h5 class="modal-title" id="modal-title-default"></h5>
                               </div>
                               <div class="modal-body">
-                                <p>Employee Successfully checked-in</p>
+                                <p id="modalText"></p>
                               </div>
                               <div class="modal-footer">
                                 
                                 
-                              <button type="button" class="btn btn-secondary" data-dismiss="modal" >Close</button>
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnClose" >Close</button>
                           
                           </div>
                         </div>
@@ -121,7 +109,7 @@
               </div>
               <div class="row icon-examples d-flex justify-content-center">
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.html'">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location='search.php'">
                     <div>
                       <i class="fa fa-search"></i>
                       <span>Search Employee</span>
@@ -139,6 +127,9 @@
       <?php include_once("../footer.php");?>
     </div>
   </div>
+  <!-- <embed src="../../assets/sounds/checkin-sound.mp3" autostart="false" width="0" height="0" id="successfulCheckinSound"
+    enablejavascript="true"> -->
+    <!-- <embed src="../../assets/sounds/qr_scan-sound.mp3" autostart="false" width="0" height="0" id="scanSound" enablejavascript="true"> -->
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -146,6 +137,11 @@
   <!-- Optional JS -->
   <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <script src="../../assets/bootstrap-notify-master/bootstrap-notify.js"></script>
+  <!-- Argon JS -->
+  <script src="../../assets/js/moment.js"></script>
+  <!-- Checkin JS -->
+  <script src="JS/checkin.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
 </body>

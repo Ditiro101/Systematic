@@ -14,8 +14,8 @@
         <li class="nav-item dropdown">
           <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <div class="media align-items-center">
-              <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="../../assets/img/theme/admin.jpg">
+              <span class="avatar avatar-sm rounded-circle border-white">
+                <img alt="Image placeholder" src="../employee/images/ProfilePic/<?php echo $_SESSION["employeeID"]?>.jpg" onerror="this.onerror=null;this.src='../../assets/img/theme/admin.jpg'; this.style.width = '44px'; this.style.height = '44px';" style="width: 36px; height: 36px;">
               </span>
             </div>
           </a>
@@ -23,12 +23,12 @@
             <div class=" dropdown-header noti-title">
               <h6 class="text-overflow m-0">Welcome!</h6>
             </div>
-            <a href="../profile/my-profile.html" class="dropdown-item">
+            <a href="../profile/my-profile.php" class="dropdown-item">
               <i class="ni ni-single-02"></i>
               <span>My profile</span>
             </a>
             <div class="dropdown-divider"></div>
-            <a href="../../index.html" class="dropdown-item">
+            <a href="../../assets/logout/PHPcode/logout.php" class="dropdown-item">
               <i class="ni ni-user-run"></i>
               <span>Logout</span>
             </a>
