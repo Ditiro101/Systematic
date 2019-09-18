@@ -17,13 +17,23 @@ $(document).ready(function(){
                     $('.loadingModal').modal('show');
                 },
                 complete: function(){
-                    $('.loadingModal').modal('hide')
+                    $('.loadingModal').modal('hide');
                 },
                 success:function(response)
                 {
+                    $('.loadingModal').modal('hide');
+                    console.log(response);
                     if(response=="success")
                     {
                         window.location = "dashboard.php"; 
+                    }
+                    else if(response == "user does not exist")
+                    {
+                        $('#alert-login').append("<div class='alert alert-danger py-2' role='alert'><span class='alert-inner--text'>User does not exist, please re-enter email!</span></div>");    
+                    }
+                    else if(response == "password incorrect")
+                    {
+                        $('#alert-login').append("<div class='alert alert-danger py-2' role='alert'><span class='alert-inner--text'>Password incorrect!</span></div>");    
                     }
                     else
                     {

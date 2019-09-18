@@ -81,7 +81,7 @@
                          </select>
                         </div>
                       </div>
-                      <div class="form-row row">
+                      <div class="form-row col">
                         <div class="col">
                           <button type="button" id="addUserRole" class="btn btn-primary mb-3">Save</button>
                         </div>
