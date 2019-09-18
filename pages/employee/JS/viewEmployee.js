@@ -36,13 +36,7 @@ $(()=>{
                 $("#modalText").text("Empoyee tag is being generated...");
                 //$("#btnClose").attr("onclick","window.location='../../employee.php'");
                 $("#displayModal").modal("show");
-
-                 $("#btnClose").click(function(e) {
-
-                                    e.preventDefault();
-                                   
-                                    window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
-                                });
+                window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
             }
             else if(confirmation.includes("Couldnt regenerate employee tag!"))
             {
