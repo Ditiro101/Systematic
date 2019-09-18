@@ -27,13 +27,12 @@
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="name"><b>Date Generated :</b> dd/mm/yyyy</div>
-          <div class="address"><b>Time Generated :</b> HH:mm</div>
+          <div class="name"><b>Date Generated :</b> <?php echo date("Y/m/d")?></div>
+          <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
           <h1>Sales Report</h1>
-          <div class="date"><b>From :</b>01/01/2019</div>
-          <div class="date"><b>To : </b>31/07/2019</div>
+          <div class="date"><b>Sale Report Period:</b><span id="salePeriod"><?php echo $_POST["salePeriod"]?> </span></div>
         </div>
       </div>
       <div style="margin-bottom: 1rem;">
@@ -123,10 +122,24 @@
         options: {
           title: {
             display: true,
-            text: 'SALES PER MONTH'
+            text: 'SALES PER WEEK'
           }
         }
       });
     </script>
+    <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script src="JS/saleReport.js"></script>
   </body>
+  
 </html>

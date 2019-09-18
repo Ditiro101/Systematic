@@ -322,25 +322,24 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Pick Sale Period!</h5>
             </div>
             <div class="modal-body">
-              <p>Please enter the timeframe for which the report should be generated?</p>
-              <div class="form-row ">
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date From</label>
-                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+              <p>Please Select a period on which the sales report should be generated!</p>
+                <form action="pages/reports/sale.php" method="POST">
+                <div class="form-row ">
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    <label for="bane">Sales Reports Period</label>
+                    <select class="form-control" name="salePeriod" placeholder="Daily" required>
+                      <option value= "Daily">Daily</option>
+                      <option value= "Weekly">Weekly</option>
+                      <option value= "Monthly">Monthly</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date To</label>
-                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">  
-              <a href="pages/reports/sale.html"class="btn btn-success" >Generate Report</a>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+                <input type="submit" class="btn btn-success" value="Generate Report"></input>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
           </div>
         </div>
       </div>
