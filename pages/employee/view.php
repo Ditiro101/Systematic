@@ -190,7 +190,7 @@
             <div class="row justify-content-center">
               <div class="col ">
                 <div class="card-profile-image">
-                  <a href="#">
+                  <a>
                 <?php
 
                 //Pic to be inserted here.
@@ -199,13 +199,13 @@
                         if(file_exists($dir))
                         {
                             
-                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person">';
+                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person" style="width: 180px; height: 180px; border: 5px solid white;">';
                            
                         }
                         else
                         {
                          
-                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person">';
+                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person" style="width: 180px; height: 180px; border: 2px solid white;">';
                             
                         }
                 ?>   

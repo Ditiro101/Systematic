@@ -15,7 +15,7 @@ $DBConnect = mysqli_connect($hostname, $username, $password, $database);
 
 if($DBConnect === false)
 {
-die("ERROR: Could not connect. " . mysqli_connect_error());
+    echo ("ERROR: Could not connect. " . mysqli_connect_error());
 }
 else
 {
@@ -32,13 +32,30 @@ else
 
     if($submitCheckQuery)
     {
+
         $row= mysqli_fetch_assoc($submitCheckQuery);
         if(mysqli_num_rows($submitCheckQuery))
         {
-            echo "Already Checked-in!";
+            $nameQuery = "SELECT NAME, SURNAME FROM EMPLOYEE
+            WHERE EMPLOYEE_ID = '$employeeID'";
+
+            $employeNameQueryResult = mysqli_query($DBConnect,$nameQuery);
+            $employee= mysqli_fetch_assoc($employeNameQueryResult);
+
+            $nameSurname = $employee["NAME"]." ".$employee["SURNAME"];
+            echo "Already Checked-in!,".$employeeID.",".$nameSurname;
         }
         else
         {
+            $nameQuery = "SELECT NAME, SURNAME FROM EMPLOYEE
+            WHERE EMPLOYEE_ID = '$employeeID'";
+
+            $employeNameQueryResult = mysqli_query($DBConnect,$nameQuery);
+            $employee= mysqli_fetch_assoc($employeNameQueryResult);
+
+            $nameSurname = $employee["NAME"]." ".$employee["SURNAME"];
+
+            $timeCheckedIn;
 
             $realCheckin;
             $realCheckout;
@@ -82,6 +99,7 @@ else
                         if($currentTime <= $setCheckinTime)
                         {
                             $currentTime = $setCheckinTime;
+                            $timeCheckedIn = $setCheckinTime;
                             
                             
                             $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
@@ -96,7 +114,7 @@ else
                         }
                         else if($currentTime >= $setCheckinTime && $currentTime <= $checkoutTime)
                         {
-                            
+                            $timeCheckedIn = $currentTime;
                             $query = "INSERT INTO `EMPLOYEE_HOUR`(`DATE`, `CHECK_IN_TIME`, `CHECK_OUT_TIME`, `EMPLOYEE_ID`) VALUES ('$day','$currentTime','NULL','$employeeID')";
                             $submitQuery = mysqli_query($DBConnect,$query);
                             if($submitQuery)
@@ -118,14 +136,13 @@ else
                     //var_dump($verifyID);
                     while($correctHash = mysqli_fetch_assoc($query_QR))
                     {
-                        if($correctHash["HASH"]== $verifyID && $addedTime == "Time SQL works" )
+                        if($correctHash["HASH"] == $verifyID && $addedTime == "Time SQL works" )
                         {
-                            $success = "success";
-                            echo $success;
+                            $response = "success".",".$employeeID.",".$nameSurname.",".$timeCheckedIn;
+                            echo $response;
                             break;
                         }
                     }
-        
                 }
                 else
                 {
@@ -136,16 +153,14 @@ else
             {
                 echo "No checkin/checkout times";
             }
-
         }
-
     }
     else
     {
         echo "Error";
     }
 
-        mysqli_close($DBConnect);
-    }
+    mysqli_close($DBConnect);
+}
 
 ?>

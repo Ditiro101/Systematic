@@ -138,7 +138,9 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <script src="../../assets/bootstrap-notify-master/bootstrap-notify.js"></script>
-  
+  <!-- Argon JS -->
+  <script src="../../assets/js/moment.js"></script>
+  <!-- Checkin JS -->
   <script src="JS/checkin.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>

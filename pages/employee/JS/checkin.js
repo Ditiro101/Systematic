@@ -1,4 +1,6 @@
 let scanSound = new Audio('../../assets/sounds/qr_scan-sound.mp3');
+let checkinSuccessfulSound = new Audio('../../assets/sounds/checkin-sound.mp3');
+let checkinErrorSound = new Audio('../../assets/sounds/error.mp3');
 
 $(document).ready(function(){
 
@@ -18,30 +20,7 @@ $(document).ready(function(){
   scanner.addListener('scan', function(content) {
     console.log(content);
     scanSound.play();
-    $.notify({
-      icon: 'https://randomuser.me/api/portraits/med/men/77.jpg',
-      title: '',
-      message: 'Byron Morgan checked in successfully',
-      
-    },{
-      //settings
-      placement: {
-        from: "bottom",
-        align: "right"
-      },
-      animate: {
-        enter: 'animated fadeInUp',
-        exit: 'animated fadeOutDown'
-      },
-      type: 'minimalist',
-      delay: 15000,
-      icon_type: 'image',
-      template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
-        '<img data-notify="icon" class="rounded-circle pull-left d-inline">' +
-        '<span data-notify="title" class="d-inline">{1}</span>' +
-        '<span data-notify="message" class="d-inline">{2}</span>' +
-      '</div>'
-    });
+    
 
       $.ajax({
         type: 'POST',
@@ -52,34 +31,102 @@ $(document).ready(function(){
             
         }
       })
-      .done(data => {
+      .done(response => {
       // do something with data
-        console.log(data);
-        var confirmation = data.trim();
-        if(confirmation.includes("success"))
+        console.log(response);
+        var reponseArray = response.split(',');
+        var responseText = reponseArray[0];
+
+        if(responseText.includes("success"))
         {
+          checkinSuccessfulSound.play();
+          var employeeID = reponseArray[1];
+          var nameSurname = reponseArray[2];
+          var timeCheckedIn = reponseArray[3];
+          var formattedTime = moment(timeCheckedIn).format('h:mm a');
             //Add this when fully done.
             
-            $('#modal-title-default').text("Success!");
-            $('#modalText').text("Employee Successfully checked-in");
-            $("#btnClose").attr("onclick","window.location='../../employee.php'");
-            $('#checkedIn').modal("show");
-            // alert('The scanned content is: ' + content);
-           // window.open(content, "_blank");
-
+          $.notify({
+            icon: '../employee/images/ProfilePic/'+ employeeID +'.jpg',
+            title: nameSurname,
+            message: ' checked-in successfully',
+            
+          },{
+            //settings
+            placement: {
+              from: "bottom",
+              align: "right"
+            },
+            animate: {
+              enter: 'animated fadeInUp',
+              exit: 'animated fadeOutDown'
+            },
+            type: 'minimalist',
+            delay: 20000,
+            icon_type: 'image',
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+              '<img data-notify="icon" class="rounded-circle pull-left d-inline" onerror="imgError(this)">'+
+              '<span data-notify="title" class="d-inline">{1}</span>' +
+              '<span data-notify="message" class="d-inline">{2}</span>' +
+              '<span data-notify="footer">'+formattedTime+'</span>'+
+            '</div>'
+          });
         }
-        else if(confirmation.includes("Over checkout time"))
+        else if(responseText.includes("Over checkout time"))
         {
           $('#modal-title-default').text("Error!");
           $('#modalText').text("Cannot check-in , checkout time has passed");
           
           $('#checkedIn').modal("show");
         }
-        else if(confirmation.includes("Already Checked-in!"))
+        else if(responseText.includes("Already Checked-in!"))
         {
-          $('#modal-title-default').text("Warning!");
-          $('#modalText').text("Already Checked-in!!");
-          $('#checkedIn').modal("show");
+          checkinErrorSound.play();
+
+          var nameSurname = reponseArray[2];
+          var employeeID = reponseArray[1];
+
+          $.notify({
+            icon: '../employee/images/ProfilePic/'+ employeeID +'.jpg',
+            title: nameSurname,
+            message: ' already checked-in !',
+            
+          },{
+            //settings
+            placement: {
+              from: "bottom",
+              align: "right"
+            },
+            animate: {
+              enter: 'animated fadeInUp',
+              exit: 'animated fadeOutDown'
+            },
+            type: 'minimalist2',
+            delay: 20000,
+            icon_type: 'image',
+            template: '<div data-notify="container" class="col-xs-11 col-sm-3 alert alert-{0}" role="alert">' +
+              '<img data-notify="icon" class="rounded-circle pull-left d-inline" onerror="imgError(this)">'+
+              '<span data-notify="title" class="d-inline">{1}</span>' +
+              '<span data-notify="message" class="d-inline">{2}</span>' +
+            '</div>'
+          });
+          // $.notify({
+          //   title: '<strong>'+nameSurname+'</strong>',
+          //   message: ' already checked-in!'
+          // },{
+          //   type: 'danger',
+          //   //settings
+          //   placement: {
+          //     from: "bottom",
+          //     align: "right"
+          //   },
+          //   animate: {
+          //     enter: 'animated fadeInUp',
+          //     exit: 'animated fadeOutDown'
+          //   },
+          //   delay: 20000,
+          //   allow_dismiss: false
+          // });
         }
         else
         {
@@ -96,4 +143,25 @@ $(document).ready(function(){
   });
 
 });
+
+function imgError(element)
+{
+  element.src="../../assets/img/theme/admin.jpg"; 
+  element.style.width = "50px"; 
+  element.style.height = "50px";
+}
+
+function formatDate(date) {
+  var hours = date.getHours();
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
+var d = new Date();
+var e = formatDate(d);
 
