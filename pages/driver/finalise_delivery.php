@@ -81,9 +81,13 @@
             </div>
           </div>
           <div class="row">
+
                 <div class="col">
                   <div class="card shadow border-0 gmap_canvas">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3593.4490469424704!2d28.2303679147015!3d-25.755727452144587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1e9561bcfc7569f3%3A0x956203c2d454479c!2sInformation+Technology+Building!5e0!3m2!1sen!2sza!4v1564001900087!5m2!1sen!2sza" width="500" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <?php $address = 'University Of Pretoria, Pretoria' ; /* Insert address Here */
+
+                      echo '<iframe width="100%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
+                    ?>
                   </div>
                   <style>
                     .gmap_canvas {overflow:hidden;background:none!important;}
@@ -105,12 +109,8 @@
               </div>
          </div>
 
-
-
           <!-- Page content -->
-  
 
-        
         <?php include_once("../footer.php");?>
     
     </div>
