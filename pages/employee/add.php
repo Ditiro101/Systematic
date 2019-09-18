@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,10 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
 </head>
 
 <body>
@@ -54,82 +59,81 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form enctype='multipart/form-data' action='' method='' class="card-body" id='picToUpload'>
                       <div class="col">
                         <div class="form-row">
-                          <div class="form-group col-6">
-                            <label for="exampleInputEmail1">Name</label>
-                            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter name">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label for="employeeName">Name</label>
+                            <input type="text" class="form-control" id="employeeName" name="employeeName" aria-describedby="emailHelp" placeholder="Enter name" required>
                             
                           </div>
-                          <div class="form-group col-6">
-                            <label for="exampleInputPassword1">Surname</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Surname">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                            <label for="employeeSurname">Surname</label>
+                            <input type="text" class="form-control" id="employeeSurname" name="employeeSurname" placeholder="Surname" required>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-2">
+                          <div class="form-group col-lg-2 col-md-2 col-sm-12">
                             <label for="bane">Title</label>
-                            <select class="form-control">
-                              <option>Ms</option>
+                            <select class="form-control" name="eTitle" id="eTitle">
                               <option>Mr</option>
+                              <option>Ms</option>
                               <option>Mrs</option>
                             </select>
                           </div>
-                          <div class="form-group col-10">
-                            <label for="exampleInputPassword1">Contact Number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="Contact Number">
+                          <div class="form-group col-lg-10 col-md-10 col-sm-12">
+                            <label for="contactNumber">Contact Number</label>
+                            <input type="text" maxlength="10" class="form-control" name="contactNumber" id="contactNumber" name="employeeNumber" placeholder="Contact Number" required>
                           </div>
                         </div>
                         <div class="form-row ">
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">Email</label>
-                            <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Email">
+                            <input type="email" class="form-control" id="employeeEmail" name="employeeEmail" placeholder="Email" required>
                           </div>
-                          <div class="form-group col-6">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="exampleInputPassword1">SA ID or Passport number</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="ID">
+                            <input type="text" maxlength="13" class="form-control" name="eID" id="eID" placeholder="ID" required>
                           </div>
                         </div>
 
                         <div class="form-group">
                           <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                        </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+                          <input type="text" class="form-control" id="inputAddress" name="inputAddress" placeholder="1234 Main St" required>
                         </div>
                         <div class="form-row">
-                          <div class="form-group col-md-6">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity">
+                            <input type="text" class="form-control" name="inputSuburb" id="inputSuburb" required>
                           </div>
-                          <div class="form-group col-md-4">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Choose...</option>
-                              <option>...</option>
-                            </select>
+                            <input type="text" class="form-control" name="inputCity" id="inputCity" readonly>
                           </div>
-                          <div class="form-group col-md-2">
+                          <div class="form-group col-lg-6 col-md-6 col-sm-12">
                             <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
+                            <input type="text" class="form-control" name="inputZip" id="inputZip" readonly>
                           </div>
-                          <div class="form-group col-12">
+                          <div class="form-group col-lg-12 col-md-12 col-sm-12">
                             <label for="bane">Employee Type</label>
-                            <select class="form-control">
-                              <option>Driver</option>
-                              <option>Bookeeper</option>
-                              <option>Warehouse Manager</option>
+                            <select class="form-control" name="eType" id="eType">
                             </select>
                           </div>
+                          
+                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                <label for="UploadsPic">Upload Employee Picture</label>
+                                <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
+                                <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control"/><br/>
+                                
+                             
+                          </div>
+                          
                         </div>
                         <div>
-                        <button type="button" class="btn btn-primary mb-3 px-4" data-toggle="modal" data-target="#modal-default">Save</button> 
+                        <button type="submit" class="btn btn-primary mb-3 px-4" id="SavingDetails">Save</button> 
                       </div>
                         <div class="form-group col-md-2">
-                            <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal fade"  tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
                               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                   <div class="modal-content">
                                     
@@ -141,13 +145,13 @@
                                       </div>
                                       
                                       <div class="modal-body">
-                                          <p>Employee added successfully</p>
+                                          <p id="MMessage"></p>
                                           
                                       </div>
                                       
                                       <div class="modal-footer">
                                           
-                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../employee.html'">Close</button>
+                                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
                                       </div>
                                       
                                   </div>
@@ -177,6 +181,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <script src="JS/addEmployee-Ajax.js"></script>
 </body>
 
 </html>

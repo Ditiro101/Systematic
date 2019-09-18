@@ -16755,8 +16755,9 @@ a.text-lighter:focus
 {
     font-size: .875rem; 
 
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
+    border: 4px solid white !important;
 }
 
 .avatar-group .avatar
@@ -22127,3 +22128,22 @@ img {
 }
 
 .containerSign { margin: 150px auto; }
+
+.bd-example-modal-lg .modal-dialog
+{
+    display: table;
+    position: relative;
+    margin: 0 auto;
+    top: calc(40%);
+  }
+
+.bd-example-modal-lg .modal-dialog .modal-content{
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none;
+}
+
+img.loading{
+    width: 80px; 
+    height: 80px;
+}

@@ -1,3 +1,4 @@
+<?php include_once("../sessionCheckPages.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -16,6 +17,7 @@
   <link href="../../assets/vendor/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
+  <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 </head>
 
 <body>
@@ -54,36 +56,39 @@
               <div class="row mt-3">
                 <div class="tab-content col" id="myTabContent">
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
-                    <form>
+                    <form id="mainf">
                       <div class="col">
                         <div class="form-row ">
                           <div class="form-group col">
                             <label for="exampleInputPassword1">Registration number</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="BBC 123 NW">
+                            <label id="rTID" hidden="true"><?php echo $_POST["TRUCK_ID"]; ?></label>
+                            <input type="text" name="tReg" class="form-control" id="registration" value=<?php echo $_POST["REGISTRATION"];?> required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col">
-                            <label for="exampleInputPassword1">Truck Name</label>
-                            <input type="text" class="form-control" id="exampleInputPassword1" placeholder="2015 Izizu NPR">
+                            <label for="tName">Truck Name</label>
+                            <label id="rTName" hidden="true"><?php echo $_POST["TRUCK_NAME"]; ?></label>
+                            <input type="text" name="tName" class="form-control" id="tName" maxlength="20" required>
                           </div>
                         </div>
                         <div class="form-row ">
                           <div class="form-group col-6">
                             <label for="exampleInputPassword1">Truck Capacity</label>
-                            <input type="number" class="form-control" id="exampleInputPassword1" placeholder="10">
+                            <input type="number" name="tCap" class="form-control" id="tCapacity" value=<?php echo $_POST["CAPACITY"];?> required>
                           </div>
                           <div class="form-group col-6 text-center">
                             <label for="exampleInputPassword1">Active Status</label>
-                            <input type="checkbox" class="form-control" id="exampleInputPassword1" checked="true">
+                            <label id="rActive" hidden="true"><?php echo $_POST["ACTIVE"]; ?></label>
+                            <input type="checkbox" name="activestatus" class="form-control" id="activeStatus">
                           </div>
                         </div>
                       </div>
 
  
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save Changes</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-block btn-primary mb-3" id="btnSave">Save Changes</button>
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
@@ -95,13 +100,13 @@
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Successfully Saved</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../delivery_collection.html'">Close</button> 
+                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
                                     </div>
                                     
                                 </div>
@@ -130,6 +135,9 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script type="text/javascript" src="JS/maintainTruck.js"></script>
 </body>
 
 </html>
