@@ -9,7 +9,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Select Truck - Stock Path</title>
+  <title>Finalise Delivery - Stock Path</title>
   <!-- Favicon -->
   <link href="../../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -64,7 +64,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Delivery Details</h5>
-                      <span class="h2 font-weight-bold mb-0">Invoice# 321</span>
+                      <span id="invNo" class="h2 font-weight-bold mb-0"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -73,8 +73,8 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i> IT Building Room 5-69</span>
-                    <span class="text-nowrap">Delivery in progress</span>
+                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i><span id="delA"></span></span>
+                    <div class="text-nowrap">Delivery in progress</div>
                   </p>
                 </div>
               </div>
@@ -84,7 +84,7 @@
 
                 <div class="col">
                   <div class="card shadow border-0 gmap_canvas">
-                    <?php $address = 'University Of Pretoria, Pretoria' ; /* Insert address Here */
+                    <?php $address = $_POST["address"] ; /* Insert address Here */
 
                       echo '<iframe width="100%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
                     ?>
@@ -98,12 +98,15 @@
                <div class="row ">
                 <div class="col ">
                   
-                  <button type="button" class="btn btn-warning text-center" onclick="window.location='sign_off_delivery.php'">
-                    
-                        <i class="fas fa-truck"></i>
-                        <span>Finalise Delivery</span>
+                  <form action="sign_off_delivery.php" method="POST">
+                    <input type="hidden" name="fAss" id="a1">
+                    <input type="hidden" name="fAssP" id="a2" >
+                    <button type="submit" class="btn btn-warning text-center">
                       
-                  </button>
+                          <i class="fas fa-truck"></i>
+                          <span>Finalise Delivery</span>    
+                    </button>
+                  </form>
                
               </div>
               </div>

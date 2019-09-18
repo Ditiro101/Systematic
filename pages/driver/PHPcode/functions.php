@@ -727,4 +727,75 @@
 		}
 	}
 
+	function generateImage($img,$id)
+    {
+
+        $folderPath = "../../deliveryImages/";
+
+
+
+        $image_parts = explode(";base64,", $img);
+
+        $image_type_aux = explode("image/", $image_parts[0]);
+
+        $image_type = $image_type_aux[1];
+
+        $image_base64 = base64_decode($image_parts[1]);
+
+        $file = $folderPath.$id.'.png';
+
+
+
+        file_put_contents($file, $image_base64);
+
+    } 
+
+    function updateDeliveryFinalQty($con,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE SALE_PRODUCT SET QUANTITY_RECEIVED='$productqty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getDeliveryDifference($con,$saleid)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
+			FROM SALE_PRODUCT
+			WHERE SALE_ID='$saleid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateDeliveredDate($con,$saleid,$dte)
+    {
+    	$update_query="UPDATE DELIVERY SET DELIVERED_DATE='$dte' WHERE SALE_ID='$saleid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
 ?>
