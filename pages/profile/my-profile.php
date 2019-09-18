@@ -108,11 +108,11 @@
                     </div>
                   </div>
                 </div>
-                <div class="text-center mt-0">
+                <div class="text-center mt-2">
                   <h2 id="userFullName">
                     <?php echo $myProfileDetails["TITLE_NAME"]." ".$myProfileDetails["FIRST_NAME"]." ".$myProfileDetails["SURNAME"]; ?>
                   </h2>
-                  <hr class="h5 font-weight-300 pb-0 mt-3">
+                  <hr class="h5 font-weight-300 py-1 mt-3 ">
                      <div class="pt-2">
                       <b>Employee ID : </b>
                       <p class="d-inline" id="myEmployeeID"><?php echo $myProfileDetails["EMPLOYEE_ID"]; ?></p>

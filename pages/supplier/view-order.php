@@ -1,4 +1,43 @@
 <?php include_once("../sessionCheckPages.php");?>
+<?php
+
+  $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+
+  $dbparts = parse_url($url);
+
+  $hostname = $dbparts['host'];
+  $username = $dbparts['user'];
+  $password = $dbparts['pass'];
+  $database = ltrim($dbparts['path'],'/');
+
+  $DBConnect = mysqli_connect($hostname, $username, $password, $database);
+
+  if($DBConnect === false)
+  {
+    //Send error response
+    $response = "databaseError";
+    echo $response;
+  }
+  else
+  {
+    $orderID = $_POST['ORDER_ID'];
+    $sql_query = "SELECT A.ORDER_ID, A.SUPPLIER_ID, B.NAME AS SUPPLIER_NAME, B.CONTACT_NUMBER AS SUPPLIER_PHONE, B.EMAIL AS SUPPLIER_EMAIL, B.VAT_NUMBER AS SUPPLIER_VAT_NUMBER, A.ORDER_DATE, A.DATE_RECEIVED, C.STATUS_NAME AS ORDER_STATUS, C.ORDER_STATUS_ID, D.NAME AS EMPLOYEE_NAME, D.SURNAME AS EMPLOYEE_SURNAME
+      FROM ORDER_ A
+      JOIN SUPPLIER B ON A.SUPPLIER_ID = B.SUPPLIER_ID
+      JOIN ORDER_STATUS C ON A.ORDER_STATUS_ID = C.ORDER_STATUS_ID
+      JOIN EMPLOYEE D ON A.EMPLOYEE_ID = D.EMPLOYEE_ID
+      WHERE A.ORDER_ID = '$orderID'";
+
+    $result = mysqli_query($DBConnect,$sql_query);
+    $orderDetails = $result->fetch_assoc();
+
+    mysqli_close($DBConnect);
+  }
+?>
+<script type="text/javascript">
+  var ORDER_ID = eval('(<?php echo json_encode($orderDetails["ORDER_ID"])?>)');
+  var ORDER_STATUS_ID = eval('(<?php echo json_encode($orderDetails["ORDER_STATUS_ID"])?>)');
+</script>
 <!DOCTYPE html>
 <html>
 
@@ -64,20 +103,16 @@
               <div class="row">
 
                 <div class="mb-5 col">
-                  <ol class="progtrckr" data-progtrckr-steps="3">
-                    <li class="progtrckr-done">Order Sent</li>
-                    <li class="progtrckr-done">Order Confirmed</li>
-                    <li class="progtrckr-done">Order Received</li>
+                  <ol class="progtrckr" data-progtrckr-steps="2">
+                    <li id="1" class="progtrckr-todo">Order Sent</li>
+                  <li id="2" class="progtrckr-todo">Order Received</li>
                    
                   </ol>
                 </div>
               </div>
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Supplier Details</h5>
-                    </div>
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
                     <div class="card-body px-3">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
@@ -85,32 +120,40 @@
                               <th style="width: 12rem">
                                   Supplier ID
                               </th>
-                              <td >
-                                  12
+                              <td id="supplierID">
+                                <?php echo $orderDetails["SUPPLIER_ID"]; ?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Name
                               </th>
-                              <td >
-                                  Caines Foods
+                              <td id="supplierName">
+                                  <?php echo $orderDetails["SUPPLIER_NAME"]; ?>
                               </td>
                             </tr> 
                             <tr>
                               <th>
+                                  VAT Number
+                              </th>
+                              <td id="supplierPhone">
+                                  <?php echo $orderDetails["SUPPLIER_VAT_NUMBER"]; ?>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
                                   Contact No
                               </th>
-                              <td >
-                                  067 345 6789
+                              <td id="supplierPhone">
+                                  <?php echo $orderDetails["SUPPLIER_PHONE"]; ?>
                               </td>
                             </tr>
                             <tr>
                               <th>
                                   Email
                               </th>
-                              <td >
-                                  caines.foods@gmail.com
+                              <td id="supplierEmail">
+                                  <?php echo $orderDetails["SUPPLIER_EMAIL"]; ?>
                               </td>
                             </tr>                 
                         </tbody>
@@ -118,35 +161,49 @@
                   </div>
                 </div>
               </div>
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 18.5rem">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 17.3rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
-                        <tbody class="list">    
-                            <tr>
-                              <th style="width: 12rem">
-                                Date 
-                              </th>
-                              <td >
-                                04/07/2019
-                              </td>
-                            </tr>                               
-                            <tr>
-                              <th>
-                                Order #
-                              </th>
-                              <td >
-                                321
-                              </td>
-                            </tr> 
-                            <tr>
-                              <th>
-                                Sales Manager
-                              </th>
-                              <td >
-                                Jabu
-                              </td>
-                            </tr>      
+                        <tbody class="list">
+                          <tr>
+                            <th>
+                              Order #
+                            </th>
+                            <td >
+                              <?php echo $orderDetails["ORDER_ID"]; ?>
+                            </td>
+                          </tr>    
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Date 
+                            </th>
+                            <td >
+                              <?php 
+                                $source = $orderDetails["ORDER_DATE"];
+                                $date = new DateTime($source);
+                                echo $date->format("Y/m/d"); 
+                              ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Time 
+                            </th>
+                            <td >
+                              <?php 
+                                echo $date->format("h:i a"); 
+                              ?>
+                            </td>
+                          </tr> 
+                          <tr>
+                            <th>
+                              Ordered By
+                            </th>
+                            <td >
+                              <?php echo $orderDetails["EMPLOYEE_NAME"]; ?>
+                            </td>
+                          </tr>      
                         </tbody>
                       </table>
                   </div>
@@ -159,56 +216,30 @@
                 <div class="table-responsive">
 
                   <table id="myTable" class="table align-items-center table-flush">
-                     <thead class="thead-light">
-                    <tr class="header">
-                      <th class="text-center"> Quantity</th>
-                      <th> Item Name</th>
-                      <th class="pl-4 text-right"> Unit Price</th>
-                      <th class="text-right"> Total </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="text-right py-3">R83.00</td>
-                      <td class="text-right py-3">R2 490.00</td>
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">Apple Munch (96x50ml) Pallet</td>
-                      <td class="text-right py-3">R81.00</td>
-                      <td class="text-right py-3">R2 430.00</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">80</td>
-                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
-                      <td class="text-right py-3">R47.00</td>
-                      <td class="text-right py-3">R3 760.00</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">20</td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                      <td class="text-right py-3">R130.00</td>
-                      <td class="text-right py-3">R2 600.00</td>
-                    </tr>
-
-                    
+                    <thead class="thead-light">
+                      <tr class="header">
+                        <th class="text-center"> Quantity</th>
+                        <th> Item Name</th>
+                        <th class="pl-4 text-right"> Unit Price</th>
+                        <th class="text-right"> Total </th>
+                      </tr>
+                    </thead>
+                    <tbody id="tBody">
+ 
                     </tbody>
                     <tfoot class="tfoot-light">
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R11 280.00</b></td>
-                    </tr>
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R2 820.00</b></td>
-                    </tr>
+                      <tr class="footer">
+                        <td></td>
+                        <td></td>
+                        <th class="text-right"><b>TOTAL</b></th>
+                        <td class="text-right"><b id="sTotal"></b></td>
+                      </tr>
+                      <tr class="footer">
+                        <td></td>
+                        <td></td>
+                        <th class="text-right"><b>VAT (15%)</b></th>
+                        <td class="text-right"><b id="sVAT"></b></td>
+                      </tr>
                     </tfoot>
                   </table>
                 </div>
@@ -220,46 +251,12 @@
             </div>
             
             <div class="col-12">
-                <div class="card shadow">
+              <div class="card shadow">
                 <div class="table-responsive">
 
                   <table id="myTable" class="table align-items-center table-flush">
-                     <thead class="thead-light">
-                    <tr class="header">
-                      <th class="text-center"> Quantity Returned</th>
-                      <th> Item Name</th>
-                      <th class="pl-4 text-right"> Unit Price</th>
-                      <th class="text-right"> Total </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">10</td>
-                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="text-right py-3">R83.00</td>
-                      <td class="text-right py-3">830.00</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">15</td>
-                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
-                      <td class="text-right py-3">R47.00</td>
-                      <td class="text-right py-3">R705.00</td>
-                    </tr>
+                    <tbody id="tBodyReturns">
                     </tbody>
-                    <tfoot class="tfoot-light">
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R1 535.00</b></td>
-                    </tr>
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R230.25</b></td>
-                    </tr>
-                    </tfoot>
                   </table>
                 </div>
               </div>
@@ -273,11 +270,14 @@
                   <span class="btn-inner--icon"><i class="fas fa-times-circle"></i></span>
                   <span class="btn-inner--text" >Cancel Order</span>
                 </button>
-                <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="button" onclick="window.location='../stock/return-order.html'">
-                  <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
-                  <span class="btn-inner--text">Make Return</span>
-                </button>
-                <button class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="button" onclick="window.location='../stock/receive-order.html'" disabled>
+                <form action="../stock/return-order.php" class="d-inline" method="POST">
+                  <input type="hidden" name="ORDER_ID" value='<?php echo $orderDetails["ORDER_ID"]; ?>'>
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="submit">
+                    <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
+                    <span class="btn-inner--text">Make Return</span>
+                  </button>
+                </form>
+                <button class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="button" onclick="window.location='../stock/receive-order.php'" disabled>
                   <span class="btn-inner--icon"><i class="fas fa-layer-group"></i></span>
                   <span class="btn-inner--text" >Receive Order</span>
                 </button>
@@ -347,6 +347,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- View Order JS -->
+  <script src="JS/viewOrder.js"></script>
 </body>
 
 </html>

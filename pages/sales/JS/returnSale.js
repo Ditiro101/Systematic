@@ -120,10 +120,7 @@ $(()=>{
 			$("#modalCloseButton").attr("onclick","");
 			$('#successfullyAdded').modal("show");
 		}
-		
-
 	});
-
 });
 
 $("button#confirmSalesManagerPassword").on('click', event => {
@@ -172,54 +169,58 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 
 
 			$.ajax({
-			        url:'PHPcode/returnSale_.php',
-			        type:'post',
-			        data:{ 
-			        	saleReturnProducts : SALERETURNPRODUCTS,
-			        	saleID : saleID,
-			        	reasonForReturn : reasonForReturn
-			        },
-			        beforeSend: function(){
-			            //$('.loadingModal').modal('show');
-			            //console.log("Longitude => "+saleDeliveryLongitude+", Latitude => "+saleDeliveryLatitude);
+		        url:'PHPcode/returnSale_.php',
+		        type:'post',
+		        data:{ 
+		        	saleReturnProducts : SALERETURNPRODUCTS,
+		        	saleID : saleID,
+		        	reasonForReturn : reasonForReturn
+		        },
+		        beforeSend: function(){
+		            //$('.loadingModal').modal('show');
+		            //console.log("Longitude => "+saleDeliveryLongitude+", Latitude => "+saleDeliveryLatitude);
 
-			        },
-			        complete: function(){
-			            $('.loadingModal').modal('hide');
-			        }
-			    })
-			    .done(response => {
+		        },
+		        complete: function(){
+		            $('.loadingModal').modal('hide');
+		        }
+		    })
+		    .done(response => {
 
-			    	console.log(response);
+		    	console.log(response);
 
-			        if (response == "success")
-					{
-						$('#modal-title-default2').text("Success!");
-						$('#modalText').text("Correct Password. Sale return successful");
-						$("#modalCloseButton").attr("onclick","window.location='../../sales.php'");
-						$('#successfullyAdded').modal("show");
-					}
-					else if(response == "failed")
-					{
-						$('#modal-title-default2').text("Error!");
-						$('#modalText').text("Incorrect password entered");
-						$("#modalCloseButton").attr("onclick","");
-						$('#successfullyAdded').modal("show");
-					}
-					else if(response == "Database error")
-					{
-						$('#modal-title-default2').text("Database Error!");
-						$('#modalText').text("Database error whilst verifying password");
-						$("#modalCloseButton").attr("onclick","");
-						$('#successfullyAdded').modal("show");
-					}
-					
-					ajaxDone = true;
-			    });
+		        if (response == "success")
+				{
+					$('#modal-title-default2').text("Success!");
+					$('#modalText').text("Correct Password. Sale return successful");
+					$("#modalCloseButton").attr("onclick","window.location='../../sales.php'");
+					$('#successfullyAdded').modal("show");
+				}
+				else if(response == "failed")
+				{
+					$("#reasonForReturn").val("");
+					$("#salesManagerPassword").val("");
+					$('#modal-title-default2').text("Error!");
+					$('#modalText').text("Incorrect password entered");
+					$("#modalCloseButton").attr("onclick","");
+					$('#successfullyAdded').modal("show");
+				}
+				else if(response == "Database error")
+				{
+					$('#modal-title-default2').text("Database Error!");
+					$('#modalText').text("Database error whilst verifying password");
+					$("#modalCloseButton").attr("onclick","");
+					$('#successfullyAdded').modal("show");
+				}
+				
+				ajaxDone = true;
+		    });
 	
 		}
 		else if(response == "failed")
 		{
+			$("#reasonForReturn").val("");
+			$("#salesManagerPassword").val("");
 			$('.loadingModal').modal('hide');
 			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Incorrect password entered");
