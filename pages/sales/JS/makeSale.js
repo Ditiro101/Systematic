@@ -196,7 +196,7 @@ $(()=>{
 					url: 'PHPcode/getSaleDeliveryAddress.php',
 					type: 'POST',
 					data: { 
-						customerID_ : SALECUSTOMERID,
+						customerID : SALECUSTOMERID,
 					},
 					beforeSend: function() {
 			
@@ -204,7 +204,6 @@ $(()=>{
 				})
 				.done(response => {
 					let customerAddressDetails = JSON.parse(response);
-					//console.log(customerAddressDetails);
 					
 					if (response != "false") 
 					{

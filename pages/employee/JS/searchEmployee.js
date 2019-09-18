@@ -9,7 +9,7 @@ $(()=>{
 		if(data!="False")
 		{
 			let arr=JSON.parse(data);
-			console.log(arr);
+			//console.log(arr);
 			let tableEntries="";
 			let formView="";
 			//let formEdit="1"
