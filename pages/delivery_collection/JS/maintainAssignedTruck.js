@@ -2,11 +2,13 @@ var assignments;
 var assignmentProducts;
 var truckID;
 var preAssignQtys=[];
+var trucks=[];
 var removeDeliveryAssignment=0;
 let buildTruck=function()
 {
 	for(let k=0;k<assignments.length;k++)
 	{
+		let found=trucks.includes(assignments[k]["TRUCK_ID"]);
 		if(k==0)
 		{
 			truckID=assignments[k]["TRUCK_ID"];
@@ -15,9 +17,14 @@ let buildTruck=function()
 		let wOption=$("<option></option>").addClass("classDestination");
 		// let id="d"+num;
 		// wOption.attr("id",id);
-		wOption.attr("name",assignments[k]["TRUCK_ID"]);
-		wOption.text(assignments[k]["REGISTRATION_NUMBER"]+"|"+assignments[k]["TRUCK_NAME"]+"|"+assignments[k]["CAPACITY"]+" Tonnes");
-		dW.append(wOption);	
+		if(!found)
+		{
+			trucks.push(assignments[k]["TRUCK_ID"]);
+			wOption.attr("name",assignments[k]["TRUCK_ID"]);
+			wOption.text(assignments[k]["REGISTRATION_NUMBER"]+"|"+assignments[k]["TRUCK_NAME"]+"|"+assignments[k]["CAPACITY"]+" Tonnes");
+			dW.append(wOption);	
+		}
+		
 	}
 }
 
@@ -46,6 +53,12 @@ let buildProduct=function(tmp,arr)
 }
 $(()=>{
 	assignments=JSON.parse($("#adData").text());
+	if(assignments==false)
+	{
+		$("#MMessage").text("There are no assignments to Maintain");
+		$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
+		$("#displayModal").modal("show");
+	}
 	assignmentProducts=JSON.parse($("#adpData").text());
 	console.log(assignments);
 	console.log(assignmentProducts);

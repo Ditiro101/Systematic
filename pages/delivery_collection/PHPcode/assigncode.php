@@ -260,9 +260,22 @@
 		{ 
 			if(updateDeliveryTruckStatus($con,$_POST["SALE_ID"][$i],$_POST["TRUCK_ID"],3))
 			{
-				if($i==$updateCount)
+				if(checkAssignedFinal($con,$_POST["SALE_ID"][$i],2)==0)
 				{
-					echo "T,Finalised Deliveries";
+					if(updateSaleAssignment($con,3,$_POST["SALE_ID"][$i]))
+					{
+						if($i==$updateCount)
+						{
+							echo "T,Finalised Deliveries";
+						}
+					}
+				}
+				else
+				{
+					if($i==$updateCount)
+					{
+						echo "T,Finalised Deliveries";
+					}
 				}
 			}
 			else

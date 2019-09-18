@@ -681,4 +681,36 @@
 		}
 	}
 
+	function checkAssignedFinal($con,$sID,$dct)
+	{
+		$get_query="SELECT * FROM DELIVERY_TRUCK WHERE SALE_ID='$sID' AND DCT_STATUS_ID='$dct'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return count($get_vals);
+		}
+		else
+		{
+			return 0;
+		}
+	}
+
+	function checkDelivery($con,$saleid)
+	{
+		$check_query="SELECT * FROM DELIVERY WHERE SALE_ID='$saleid'";
+		$check_result=mysqli_query($con,$check_query);
+		if(mysqli_num_rows($check_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 ?>
