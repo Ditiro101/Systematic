@@ -38,7 +38,7 @@
         if($salePeriod=="Daily")
         {
 
-            $alles_query ="SELECT COUNT(SALE_ID) as TOTAL_SALES,SUM(SALE_AMOUNT) as TOTAL_REVENUE
+            $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
             FROM SALE
             WHERE SALE_DATE  LIKE '%.$currentDate.%'";
     

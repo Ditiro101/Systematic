@@ -17,12 +17,136 @@ $(()=>{
             if(data!="False")
             {
                 //console.log(data);
-               let arr=JSON.parse(data);
-               console.log(arr);
-                /*let tableEntries="";
+                let arr=JSON.parse(data);
+                console.log(arr);
+                console.log(arr[0]["SALE_DATE"]);
+                console.log( moment(arr[0]["SALE_DATE"]).format('dddd'));
+                let tableEntries="";
                 let formView="";
-                //let formEdit="1"
-                let redCount=0;
+                let totalSales = 0;
+                //[1, 2, 3, 4].reduce((a, b) => a + b, 0)
+                let saleTotalArray=[];
+                let daysOfTheWeek;
+                let previousDay;
+                let staticTotalSales = 0;
+                let futureDay;
+                let arrLength = arr.length;
+                console.log(arrLength);
+                for(let k=0;k<arr.length;k++)
+                {
+                    let day = toString(arr[k]["SALE_DATE"]);
+                    daysOfTheWeek = arr[k]["SALE_DATE"].split(" ");
+                    if(k < arrLength-1)
+                    {
+                        futureDay = arr[k+1]["SALE_DATE"].split(" ");
+                        console.log(futureDay[0]);
+                    }
+                    
+                    var formattedTime = moment(daysOfTheWeek[0]).format('dddd');
+                    ++totalSales;
+                    
+                    
+                        staticTotalSales += parseFloat(arr[k]["SALE_AMOUNT"]);
+
+                        if(previousDay == futureDay[0])
+                        {
+                            if(salePeriod=="Weekly")
+                            {
+                                //saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                                console.log("1");
+                            }
+                            else if(salePeriod=="Monthly")
+                            {
+                                //saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                            }
+                            else
+                            {
+                                saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                            }
+                        }
+                        else if(daysOfTheWeek[0] == previousDay)
+                        {
+                            
+                            
+                            if(salePeriod=="Weekly")
+                            {
+                                //saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                                console.log("1");
+                            }
+                            else if(salePeriod=="Monthly")
+                            {
+                                //saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                            }
+                            else
+                            {
+                                saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                previousDay = daysOfTheWeek[0];
+                            }
+                            
+    
+                          
+                            
+                        }
+                        if(previousDay != futureDay[0] && daysOfTheWeek[0] != futureDay[0])
+                        {
+                      
+
+                               
+                                
+                                    //saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                    //formView="<form action='view-order.php' method='POST'><input type='hidden' name='ORDER_ID' value='"+ordersArray[k]["ORDER_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
+                                    tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
+                                    previousDay = daysOfTheWeek[0];
+                                    //console.log("1");
+                                    //console.log(totalSales);
+                                    totalSales = 0;
+                                    staticTotalSales = 0;
+
+                                    
+                        }
+                    if(k == arrLength-1 && previousDay==daysOfTheWeek[0])
+                    {
+                       
+                        tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
+                        previousDay = daysOfTheWeek[0];
+
+                    }
+                    else
+                    {
+                        saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                        previousDay = daysOfTheWeek[0];
+                    }
+
+                    
+                   
+                }
+               
+
+            
+                
+                $("#tBody").append(tableEntries);
+                /*if(salePeriod == "Daily")
+                {
+                    $("#TotalSales").text(totalSales);
+                    console.log(saleTotalArray);
+                    let sumOfTotals = saleTotalArray.reduce((a, b) => parseInt(a) + parseInt(b), 0);
+                    $("#SaleTotal").text(sumOfTotals);
+                }*/
+               
+
+            }
+            else
+            {
+                alert("Error");
+            }
+        });
+    });
+    /* let redCount=0;
                 let greenCount=0;
                 let arrayOfProdNames = [];
                 let arrayOfProdTotals = [];
@@ -234,17 +358,9 @@ $(()=>{
                 $("#MinQuantityTypeSold").text(`${MinQuantityTypeSold} Sold.`);
                 
 
-
-
-
-
-               /* $("#tBody").append(tableEntries);
-                $('#totalAbsent').append('<td>'+redCount+'</td>');
-                $('#totalPresent').append('<td>'+greenCount+'</td>');*/
-            }
-            else
-            {
-                alert("Error");
-            }
-        });
-    });
+  <tr>
+            <td class="no">January 2019</td>
+            <td class="desc">678</td>
+            <td class="unit-right">R123 567.00</td>
+          </tr>
+ */

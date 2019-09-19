@@ -41,47 +41,13 @@
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th class="desc-center">MONTH YEAR</th>
+            <th class="desc-center" id="MonthAttr"></th>
             <th class="desc">TOTAL SALES</th>
             <th class="desc" style="text-align: right;">TOTAL REVENUE</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="no">January 2019</td>
-            <td class="desc">678</td>
-            <td class="unit-right">R123 567.00</td>
-          </tr>
-          <tr>
-            <td class="no">February 2019</td>
-            <td class="desc">787</td>
-            <td class="unit-right">R146 475.00</td>
-          </tr>
-          <tr>
-            <td class="no">March 2019</td>
-            <td class="desc">745</td>
-            <td class="unit-right">R135 645.00</td>
-          </tr>
-          <tr>
-            <td class="no">April 2019</td>
-            <td class="desc">876</td>
-            <td class="unit-right">R167 456.00</td>
-          </tr>
-          <tr>
-            <td class="no">May 2019</td>
-            <td class="desc">956</td>
-            <td class="unit-right">R178 463.00</td>
-          </tr>
-          <tr>
-            <td class="no">June 2019</td>
-            <td class="desc">1046</td>
-            <td class="unit-right">R193 478.00</td>
-          </tr>
-          <tr>
-            <td class="no">July 2019</td>
-            <td class="desc">986</td>
-            <td class="unit-right">R185 473.00</td>
-          </tr>
+        <tbody id="tBody">
+        
         </tbody>
       </table>
       <table>
@@ -139,6 +105,8 @@
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
   <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
   <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <!-- Moment JS -->
+  <script src="../../assets/js/moment.js"></script>
   <script src="JS/saleReport.js"></script>
   </body>
   
