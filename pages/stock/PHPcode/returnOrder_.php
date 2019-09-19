@@ -2,12 +2,18 @@
 
 	$customerID = "";
 	$userID = "";
-	$addSaleDelivery;
 	$saleDeliveryAddressID;
-	$saleReturnProducts = Array();
+	$orderReturnProducts = Array();
 	$lastID;
 	$deliveryLongitude;
 	$deliveryLatitude;
+
+	// orderID: "2"
+	// reasonForReturn: "bad"
+	// saleReturnProducts: Array(3)
+
+	// PRODUCT_ID: "3"
+	// RETURN_QUANTITY
 
 	$url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
 
@@ -29,19 +35,14 @@
 	else
 	{
 		// Retrieve product details from $_POST
-		$saleID = mysqli_real_escape_string($DBConnect, $_POST['saleID']);
+		$orderID = mysqli_real_escape_string($DBConnect, $_POST['orderID']);
 		$reasonForReturn = mysqli_real_escape_string($DBConnect, $_POST['reasonForReturn']);
-		$saleReturnProducts  = $_POST['saleReturnProducts'];
-
-		// echo var_dump($_POST);
-		// echo($saleID);
-		// echo ($reasonForReturn);
-		// echo ($saleReturnProducts);
+		$orderReturnProducts  = $_POST['orderReturnProducts'];
 
 		$dateTimeNow = date('Y-m-d');
 
 		//Add return to database
-		$queryReturn = "INSERT INTO ORDER_RETURN(REASON, RETURN_DATE) VALUES( '$reasonForReturn', '$dateTimeNow')";
+		$queryReturn = "INSERT INTO ORDER_RETURN(RETURN_DATE, REASON) VALUES('$dateTimeNow', '$reasonForReturn')";
 		mysqli_query($DBConnect, $queryReturn);
 		//echo($queryReturn);
 
@@ -49,24 +50,22 @@
 		$lastIDQueryResult = mysqli_query($DBConnect, $lastIDQuery);
 		$returnID = mysqli_fetch_array($lastIDQueryResult)[0];
 
-		$arraySize = sizeof($saleReturnProducts);
+		$arraySize = sizeof($orderReturnProducts);
 		for ($i=0; $i < $arraySize; $i++) 
 		{ 
-			$returnProductLineProductID = mysqli_real_escape_string($DBConnect, $saleReturnProducts[$i]['PRODUCT_ID']);
-			$returnProductLineReturnQuantity = mysqli_real_escape_string($DBConnect, $saleReturnProducts[$i]['RETURN_QUANTITY']);
+			$returnProductLineProductID = mysqli_real_escape_string($DBConnect, $orderReturnProducts[$i]['PRODUCT_ID']);
+			$returnProductLineReturnQuantity = mysqli_real_escape_string($DBConnect, $orderReturnProducts[$i]['RETURN_QUANTITY']);
 
-			if ($saleReturnProducts[$i]['RETURN_QUANTITY'] != 0) 
+			if ($orderReturnProducts[$i]['RETURN_QUANTITY'] != 0) 
 			{
-				$querySaleReturnProduct = "INSERT INTO SALE_RETURN(SALE_ID, PRODUCT_ID, RETURN_ID, QUANTITY) VALUES( '$saleID','$returnProductLineProductID', '$returnID', '$returnProductLineReturnQuantity')";
+				$querySaleReturnProduct = "INSERT INTO ORDER_RETURN_PRODUCT(RETURN_ID, PRODUCT_ID, ORDER_ID, QUANTITY) VALUES( '$returnID','$returnProductLineProductID', '$orderID', '$returnProductLineReturnQuantity')";
 				mysqli_query($DBConnect, $querySaleReturnProduct);
 				//echo($querySaleReturnProduct);
 
 				//UPDATE AVAILABLE QUANTITY
-				$queryUpdateQuantity = "UPDATE PRODUCT SET QUANTITY_AVAILABLE = QUANTITY_AVAILABLE + $returnProductLineReturnQuantity, QTY_ON_HAND = QTY_ON_HAND + $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID";
+				$queryUpdateQuantity = "UPDATE PRODUCT SET QUANTITY_AVAILABLE = QUANTITY_AVAILABLE - $returnProductLineReturnQuantity, QTY_ON_HAND = QTY_ON_HAND - $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID";
 				mysqli_query($DBConnect, $queryUpdateQuantity);
 
-				$queryUpdateSaleProductQuantity = "UPDATE SALE_PRODUCT SET QUANTITY = QUANTITY - $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID AND SALE_ID = '$saleID'";
-				mysqli_query($DBConnect, $queryUpdateSaleProductQuantity);
 
 				//echo($queryUpdateQuantity);
 
@@ -80,7 +79,7 @@
 
 			    if ($exists == true) 
 			    {
-			    	$queryUpdateWarehouseQuantity = "UPDATE WAREHOUSE_PRODUCT SET QUANTITY = QUANTITY + $returnProductLineReturnQuantity WHERE WAREHOUSE_ID = 4 AND PRODUCT_ID = '$returnProductLineProductID'";
+			    	$queryUpdateWarehouseQuantity = "UPDATE WAREHOUSE_PRODUCT SET QUANTITY = QUANTITY - $returnProductLineReturnQuantity WHERE WAREHOUSE_ID = 4 AND PRODUCT_ID = '$returnProductLineProductID'";
 					mysqli_query($DBConnect, $queryUpdateWarehouseQuantity);
 			    }
 			    else

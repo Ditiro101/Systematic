@@ -15,6 +15,7 @@ $(()=>{
 			orderProductsArray=JSON.parse(response);
 			console.log(orderProductsArray);
 			$("#oProd").val(JSON.stringify(orderProductsArray));
+			$("#oProducts").val(JSON.stringify(orderProductsArray));
 			for(let k=0;k<orderProductsArray.length;k++)
 			{
 				buildTable(k);
@@ -52,6 +53,8 @@ $(()=>{
 		
 		console.log(response);
 		returnsArray=JSON.parse(response);
+		$("#oReturns").val(JSON.stringify(returnsArray));
+
 		//console.log("RETURNS");
 		//console.log(returnsArray);
 
@@ -129,6 +132,32 @@ let buildTable=function(tmp)
 	tableEntry.append(productUnitPriceEntry);
 	tableEntry.append(productTotalEntry);
 	$("#tBody").append(tableEntry);
+}
+
+let buildReturnsTable=function(tmp)
+{
+	let tableEntry=$("<tr></tr>");
+
+	let productQuantityEntry=$("<td></td>").addClass("py-3 text-center").text(returnsArray[tmp]["QUANTITY"]);
+	let productNameEntry=$("<td></td>").addClass("py-3").text(returnsArray[tmp]["PRODUCT_NAME"]);
+
+	let productUnitPrice = parseFloat(returnsArray[tmp]["SELLING_PRICE"]);
+	productUnitPrice = productUnitPrice.toFixed(2);
+	productUnitPrice = numberWithSpaces(productUnitPrice);
+	productUnitPrice = "R"+ productUnitPrice;
+
+	let productUnitPriceEntry=$("<td></td>").addClass("text-right py-3").text(productUnitPrice);
+
+	let productTotalPrice = parseFloat(returnsArray[tmp]["QUANTITY"]).toFixed(2)*parseFloat(returnsArray[tmp]["SELLING_PRICE"]).toFixed(2);
+	productTotalPrice = productTotalPrice.toFixed(2);
+	productTotalPrice = numberWithSpaces(productTotalPrice);
+	productTotalPrice = "R"+ productTotalPrice;
+
+	let productTotalEntry=$("<td></td>").addClass("text-right py-3").text(productTotalPrice);
+	tableEntry.append(productQuantityEntry);
+	tableEntry.append(productNameEntry);
+	$("#tBodyReturns").append(tableEntry);
+
 }
 
 function setTwoNumberDecimal(el) 

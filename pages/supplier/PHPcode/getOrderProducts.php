@@ -34,6 +34,7 @@
 			JOIN PRODUCT D ON A.PRODUCT_ID=D.PRODUCT_ID
 			WHERE ORDER_ID='$orderID'";
 		$get_result=mysqli_query($DBConnect,$get_query);
+		
 		if(mysqli_num_rows($get_result)>0)
 		{
 			while($get_row=$get_result->fetch_assoc())

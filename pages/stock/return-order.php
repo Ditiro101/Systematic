@@ -1,42 +1,13 @@
-<?php include_once("../sessionCheckPages.php");?>
-<?php
+<?php include_once("../sessionCheckPages.php");
 
-  $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
-
-  $dbparts = parse_url($url);
-
-  $hostname = $dbparts['host'];
-  $username = $dbparts['user'];
-  $password = $dbparts['pass'];
-  $database = ltrim($dbparts['path'],'/');
-
-  $DBConnect = mysqli_connect($hostname, $username, $password, $database);
-
-  if($DBConnect === false)
-  {
-    //Send error response
-    $response = "databaseError";
-    echo $response;
-  }
-  else
-  {
-    $orderID = $_POST['ORDER_ID'];
-    $sql_query = "SELECT A.ORDER_ID, A.SUPPLIER_ID, B.NAME AS SUPPLIER_NAME, B.CONTACT_NUMBER AS SUPPLIER_PHONE, B.EMAIL AS SUPPLIER_EMAIL, B.VAT_NUMBER AS SUPPLIER_VAT_NUMBER, A.ORDER_DATE, A.DATE_RECEIVED, C.STATUS_NAME AS ORDER_STATUS, C.ORDER_STATUS_ID, D.NAME AS EMPLOYEE_NAME, D.SURNAME AS EMPLOYEE_SURNAME
-      FROM ORDER_ A
-      JOIN SUPPLIER B ON A.SUPPLIER_ID = B.SUPPLIER_ID
-      JOIN ORDER_STATUS C ON A.ORDER_STATUS_ID = C.ORDER_STATUS_ID
-      JOIN EMPLOYEE D ON A.EMPLOYEE_ID = D.EMPLOYEE_ID
-      WHERE A.ORDER_ID = '$orderID'";
-
-    $result = mysqli_query($DBConnect,$sql_query);
-    $orderDetails = $result->fetch_assoc();
-
-    mysqli_close($DBConnect);
-  }
+  //$orderID = $_POST['ORDER_ID'];
+  $orderDetails = json_decode($_POST['ORDER_DETAILS']);
+  $orderProducts = json_decode($_POST['ORDER_PRODUCTS']);
+  $orderReturns = json_decode($_POST['ORDER_RETURNS']);
 ?>
 <script type="text/javascript">
-  var ORDER_ID = eval('(<?php echo json_encode($orderDetails["ORDER_ID"])?>)');
-  var ORDER_STATUS_ID = eval('(<?php echo json_encode($orderDetails["ORDER_STATUS_ID"])?>)');
+  var ORDER_ID = eval('(<?php echo json_encode($orderDetails->ORDER_ID)?>)');
+  var ORDER_STATUS_ID = eval('(<?php echo json_encode($orderDetails->ORDER_STATUS_ID)?>)');
 </script>
 <!DOCTYPE html>
 <html>
@@ -112,7 +83,7 @@
                                   Supplier ID
                               </th>
                               <td id="supplierID">
-                                <?php echo $orderDetails["SUPPLIER_ID"]; ?>
+                                <?php echo $orderDetails->SUPPLIER_ID; ?>
                               </td>
                             </tr>                               
                             <tr>
@@ -120,7 +91,7 @@
                                   Name
                               </th>
                               <td id="supplierName">
-                                  <?php echo $orderDetails["SUPPLIER_NAME"]; ?>
+                                  <?php echo $orderDetails->SUPPLIER_NAME; ?>
                               </td>
                             </tr> 
                             <tr>
@@ -128,7 +99,7 @@
                                   VAT Number
                               </th>
                               <td id="supplierPhone">
-                                  <?php echo $orderDetails["SUPPLIER_VAT_NUMBER"]; ?>
+                                  <?php echo $orderDetails->SUPPLIER_VAT_NUMBER; ?>
                               </td>
                             </tr>
                             <tr>
@@ -136,7 +107,7 @@
                                   Contact No
                               </th>
                               <td id="supplierPhone">
-                                  <?php echo $orderDetails["SUPPLIER_PHONE"]; ?>
+                                  <?php echo $orderDetails->SUPPLIER_PHONE; ?>
                               </td>
                             </tr>
                             <tr>
@@ -144,7 +115,7 @@
                                   Email
                               </th>
                               <td id="supplierEmail">
-                                  <?php echo $orderDetails["SUPPLIER_EMAIL"]; ?>
+                                  <?php echo $orderDetails->SUPPLIER_EMAIL; ?>
                               </td>
                             </tr>                 
                         </tbody>
@@ -162,7 +133,7 @@
                               Order #
                             </th>
                             <td >
-                              <?php echo $orderDetails["ORDER_ID"]; ?>
+                              <?php echo $orderDetails->ORDER_ID; ?>
                             </td>
                           </tr>    
                           <tr>
@@ -171,7 +142,7 @@
                             </th>
                             <td >
                               <?php 
-                                $source = $orderDetails["ORDER_DATE"];
+                                $source = $orderDetails->ORDER_DATE;
                                 $date = new DateTime($source);
                                 echo $date->format("Y/m/d"); 
                               ?>
@@ -192,7 +163,7 @@
                               Ordered By
                             </th>
                             <td >
-                              <?php echo $orderDetails["EMPLOYEE_NAME"]; ?>
+                              <?php echo $orderDetails->EMPLOYEE_NAME; ?>
                             </td>
                           </tr>      
                         </tbody>
@@ -224,7 +195,7 @@
             </div>
             <br>
               <div class="col mt-4">
-                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal" data-target="#modal-returnOrder">
+                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button">
                   <span class="btn-inner--text">Finalise Return</span>
                 </button>
               </div>
@@ -297,6 +268,30 @@
                   </div>
                 </div>
               </div>
+              <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                      <div class="modal-content">
+                        
+                          <div class="modal-header">
+                              <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                              </button>
+                          </div>
+                          
+                          <div class="modal-body text-left">
+                            <p id="MMessage"></p>
+                              
+                          </div>
+                          
+                          <div class="modal-footer">
+                              
+                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
+                          </div>
+                          
+                      </div>
+                  </div>
+                </div>
             <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
@@ -323,6 +318,10 @@
         <?php include_once("../footer.php");?>
       </div>
     </div>
+    <label hidden="true" id="oDetails"><?php echo json_encode($orderDetails)?></label>
+    <label hidden="true" id="oProducts"><?php echo json_encode($orderProducts)?></label>
+    <label hidden="true" id="oReturns"><?php echo json_encode($orderReturns)?></label>
+
     <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
       <div class="modal-dialog modal-sm">
         <div class="modal-content px-auto" style="">
