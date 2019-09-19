@@ -65,12 +65,9 @@
             </div>
             <div class="card-body">
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Customer Details</h5>
-                    </div>
-                    <div class="card-body px-3">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 15.5rem">
                       <label hidden="true" id="cData"><?php echo $_POST["CUSTOMER_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
@@ -109,20 +106,34 @@
                   </div>
                 </div>
               </div>
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 18.5rem">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 15.5rem">
                       <label hidden="true" id="eData"><?php echo $_POST["EMPLOYEE_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
-                                Date & Time
+                                Sale Date
                               </th>
                               <td id="saleDate">
-                                <?php echo $_POST["SALE_DATE"];?>
+                                <?php 
+                                  $source = $_POST["SALE_DATE"];
+                                  $date = new DateTime($source);
+                                  echo $date->format("Y/m/d"); 
+                                ?>
                               </td>
-                            </tr>                               
+                            </tr>
+                            <tr>
+                              <th style="width: 12rem">
+                                Sale Time 
+                              </th>
+                              <td >
+                                <?php 
+                                  echo $date->format("h:i a"); 
+                                ?>
+                              </td>
+                            </tr>                                
                             <tr>
                               <th>
                                 Invoice #

@@ -1,4 +1,43 @@
 <?php include_once("../sessionCheckPages.php");?>
+<?php
+
+  $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
+
+  $dbparts = parse_url($url);
+
+  $hostname = $dbparts['host'];
+  $username = $dbparts['user'];
+  $password = $dbparts['pass'];
+  $database = ltrim($dbparts['path'],'/');
+
+  $DBConnect = mysqli_connect($hostname, $username, $password, $database);
+
+  if($DBConnect === false)
+  {
+    //Send error response
+    $response = "databaseError";
+    echo $response;
+  }
+  else
+  {
+    $orderID = $_POST['ORDER_ID'];
+    $sql_query = "SELECT A.ORDER_ID, A.SUPPLIER_ID, B.NAME AS SUPPLIER_NAME, B.CONTACT_NUMBER AS SUPPLIER_PHONE, B.EMAIL AS SUPPLIER_EMAIL, B.VAT_NUMBER AS SUPPLIER_VAT_NUMBER, A.ORDER_DATE, A.DATE_RECEIVED, C.STATUS_NAME AS ORDER_STATUS, C.ORDER_STATUS_ID, D.NAME AS EMPLOYEE_NAME, D.SURNAME AS EMPLOYEE_SURNAME
+      FROM ORDER_ A
+      JOIN SUPPLIER B ON A.SUPPLIER_ID = B.SUPPLIER_ID
+      JOIN ORDER_STATUS C ON A.ORDER_STATUS_ID = C.ORDER_STATUS_ID
+      JOIN EMPLOYEE D ON A.EMPLOYEE_ID = D.EMPLOYEE_ID
+      WHERE A.ORDER_ID = '$orderID'";
+
+    $result = mysqli_query($DBConnect,$sql_query);
+    $orderDetails = $result->fetch_assoc();
+
+    mysqli_close($DBConnect);
+  }
+?>
+<script type="text/javascript">
+  var ORDER_ID = eval('(<?php echo json_encode($orderDetails["ORDER_ID"])?>)');
+  var ORDER_STATUS_ID = eval('(<?php echo json_encode($orderDetails["ORDER_STATUS_ID"])?>)');
+</script>
 <!DOCTYPE html>
 <html>
 
@@ -63,44 +102,49 @@
             </div>
             <div class="card-body">
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Supplier Details</h5>
-                    </div>
-                    <div class="card-body px-3">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 17.5rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
                               <th style="width: 12rem">
                                   Supplier ID
                               </th>
-                              <td >
-                                  12
+                              <td id="supplierID">
+                                <?php echo $orderDetails["SUPPLIER_ID"]; ?>
                               </td>
                             </tr>                               
                             <tr>
                               <th>
                                   Name
                               </th>
-                              <td >
-                                  Caines Foods
+                              <td id="supplierName">
+                                  <?php echo $orderDetails["SUPPLIER_NAME"]; ?>
                               </td>
                             </tr> 
                             <tr>
                               <th>
+                                  VAT Number
+                              </th>
+                              <td id="supplierPhone">
+                                  <?php echo $orderDetails["SUPPLIER_VAT_NUMBER"]; ?>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th>
                                   Contact No
                               </th>
-                              <td >
-                                  067 345 6789
+                              <td id="supplierPhone">
+                                  <?php echo $orderDetails["SUPPLIER_PHONE"]; ?>
                               </td>
                             </tr>
                             <tr>
                               <th>
                                   Email
                               </th>
-                              <td >
-                                  caines.foods@gmail.com
+                              <td id="supplierEmail">
+                                  <?php echo $orderDetails["SUPPLIER_EMAIL"]; ?>
                               </td>
                             </tr>                 
                         </tbody>
@@ -108,35 +152,49 @@
                   </div>
                 </div>
               </div>
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 18.5rem">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 17.5rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
-                        <tbody class="list">    
-                            <tr>
-                              <th style="width: 12rem">
-                                Date 
-                              </th>
-                              <td >
-                                04/07/2019
-                              </td>
-                            </tr>                               
-                            <tr>
-                              <th>
-                                Order #
-                              </th>
-                              <td >
-                                321
-                              </td>
-                            </tr> 
-                            <tr>
-                              <th>
-                                Sales Manager
-                              </th>
-                              <td >
-                                Jabu
-                              </td>
-                            </tr>      
+                        <tbody class="list">
+                          <tr>
+                            <th>
+                              Order #
+                            </th>
+                            <td >
+                              <?php echo $orderDetails["ORDER_ID"]; ?>
+                            </td>
+                          </tr>    
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Date 
+                            </th>
+                            <td >
+                              <?php 
+                                $source = $orderDetails["ORDER_DATE"];
+                                $date = new DateTime($source);
+                                echo $date->format("Y/m/d"); 
+                              ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Time 
+                            </th>
+                            <td >
+                              <?php 
+                                echo $date->format("h:i a"); 
+                              ?>
+                            </td>
+                          </tr> 
+                          <tr>
+                            <th>
+                              Ordered By
+                            </th>
+                            <td >
+                              <?php echo $orderDetails["EMPLOYEE_NAME"]; ?>
+                            </td>
+                          </tr>      
                         </tbody>
                       </table>
                   </div>
@@ -149,51 +207,14 @@
                 <div class="table-responsive">
 
                   <table id="myTable" class="table align-items-center table-flush">
-                     <thead class="thead-light">
-                    <tr class="header">
-                      <th style="width: 1rem">Return Qty</th>
-                      <th class="text-center"> Quantity</th>
+                    <thead class="thead-light">
+                      <tr class="header">
+                        <th> Quantity</th>
                       <th> Item Name</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
-                    </tr>                      
-                    <tr>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">Apple Munch (96x50ml) Pallet</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-3 text-center">80</td>
-                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
-                    </tr>
-                    <tr>
-                      <td class="py-2 px-0 table-danger">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                      <td class="py-3 text-center">20</td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                    </tr>
-
+                      <th class="text-center">Return Quantity </th>
+                      </tr>
+                    </thead>
+                    <tbody id="tBody">             
                     
                     </tbody>
                     
@@ -202,63 +223,111 @@
               </div>
             </div>
             <br>
- 
-            
-          
-
               <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-success mt-0 " type="button" data-toggle="modal" data-target="#del">
-                  <span class="btn-inner--text">Submit</span>
+                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal" data-target="#modal-returnOrder">
+                  <span class="btn-inner--text">Finalise Return</span>
                 </button>
               </div>
-              <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
+              <div class="modal fade" id="modal-returnOrder" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                  <div class="modal-content"> 
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                        <h6 class="modal-title" id="modal-title-default">Return</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                        </button>
                     </div>
                     <div class="modal-body">
-                      <p>Are you sure you want to return the selected order item(s)?</p>
+                      <div class="col text-left">
+                        <p>Are you sure you want to return the indicated products from the order?</p>   
+                      </div>
+                      <div class="form-group col">
+                        <label for="bane">Reason for return</label>
+                        <input type="text" class="form-control" id="reasonForReturn" aria-describedby="emailHelp" placeholder="Enter reason for return">
+                      </div>
                     </div>
                     <div class="modal-footer">
-                      
-                    <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                      <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-salesManagerPassword">Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
+                    </div>   
+                  </div>
+                </div>
+              </div>
+              <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="form-group col">
+                        <label for="bane">Sales Manager Password</label>
+                        <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" id="confirmSalesManagerPassword">Approve Sale</button> 
+                    </div>  
+                  </div>
+                </div>
+              </div>
+              <div class="form-group col-md-2">
+                <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                      <div class="modal-content">
+                          <div class="modal-header">
+                              <h6 class="modal-title" id="modal-title-default2"></h6>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">×</span>
+                              </button>
+                          </div>
+                          <div class="modal-body">
+                              <p id="modalText"></p>
+                              
+                          </div>
+                          <div class="modal-footer">
+                              
+                              <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
+                          </div>
+                          
+                      </div>
+                  </div>
+                </div>
+              </div>
+            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p>Order successfully item(s) returned. Sending return email to supplier... </p>
+                    </div>
+                    <div class="modal-footer"> 
+                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button> 
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content">
-                    
-                      <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">×</span>
-                          </button>
-                      </div>
-                      
-                      <div class="modal-body">
-                          <p>Order successfully item(s) returned. Sending return email to supplier... </p>
-                          
-                          
-                      </div>
-                      
-                      <div class="modal-footer">
-                          
-                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button> 
-                      </div>
-                      
-                  </div>
-              </div>
-            </div>
-          </div>
           
           </div>
           </div>
         </div>
         <?php include_once("../footer.php");?>
+      </div>
+    </div>
+    <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content px-auto" style="">
+          <img class="loading" src="../../assets/img/loading/loading.gif">
+        </div>
       </div>
     </div>
   <!-- Argon Scripts -->
@@ -270,6 +339,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- View Order JS -->
+  <script src="JS/returnOrder.js"></script>
 </body>
 
 </html>
