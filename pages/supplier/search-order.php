@@ -50,7 +50,7 @@
             <div class="card-header border-0">
                <div class="input-group input-group-rounded input-group-merge">
                  
-                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Order Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
+                 <input type="text" id="myInput" onkeyup="filterOrders()" placeholder="Enter Order Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <span class="fa fa-search"></span>
@@ -65,95 +65,15 @@
                <thead class="thead-light">
                 <tr class="header">
                   <th>Order #</th>
-                  <th>Date</th>
+                  <th>Date & Time</th>
                   <th>Supplier Name</th>
                   <th>Status</th>
                   <th style="width:1rem;"></th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>321</td>
-                  <td>04/07/2019</td>
-                  <td>Better Bulk</td>
-                  <td>Recieved</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>322</td>
-                  <td>04/07/2019</td>
-                  <td>Caines Foods</td>
-                  <td>Pending</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>323</td>
-                  <td>04/07/2019</td>
-                  <td>Coca Cola</td>
-                  <td>Returned</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>324</td>
-                  <td>05/07/2019</td>
-                  <td>Makro</td>
-                  <td>Pending</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>325</td>
-                  <td>05/07/2019</td>
-                  <td>Wholesale Market</td>
-                  <td>Pending</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>326</td>
-                  <td>05/07/2019</td>
-                  <td>Bulk Bounty</td>
-                  <td>Pending</td>
-                  <td>
-                    <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='view-order-pending.php'">
-                      <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                      </span>
-                      <span class="btn-inner--text">View</span>
-                    </button>
-                  </td>
-                </tr>
+              <tbody id="tBody">
                 <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                   <td><b>No Supplier Order Found</b></td>
-                  <td></td>
-                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -207,45 +127,6 @@
                   </div>
               </div>
             </div>
-
-            <script>
-            function myFunction() 
-            {
-              var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("myInput");
-              filter = input.value.toUpperCase();
-              table = document.getElementById("myTable");
-              tr = table.getElementsByTagName("tr");
-              var showCount = 0;
-              for (i = 0; i < tr.length; i++) 
-              {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) 
-                {
-                  txtValue = td.textContent || td.innerText;
-                  if (txtValue.toUpperCase().indexOf(filter)> -1) 
-                  {
-                    tr[i].style.display = "";
-                    showCount += 1;
-                  } 
-                  else 
-                  {
-                    tr[i].style.display = "none";
-                  }
-                }       
-              }
-
-              if (showCount === 0)
-              {
-                console.log("Zero");
-                $("#emptySearch").show();
-              } 
-              else
-              {
-                $("#emptySearch").hide();
-              }
-            }
-            </script>
           </div>
         </div>
       </div>
@@ -264,6 +145,10 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Moment JS -->
+  <script src="../../assets/js/moment.js"></script>
+  <!-- Search Order JS -->
+  <script type="text/javascript" src="JS/searchSupplierOrder.js"></script>
 </body>
 
 </html>

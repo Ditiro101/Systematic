@@ -31,62 +31,72 @@
             $saltQResult = mysqli_query($DBConnect, $saltQ);
             $saltResult = mysqli_fetch_assoc($saltQResult);
 
-            $userID = $saltResult['USER_ID'];
-            $employeeID = $saltResult['EMPLOYEE_ID'];
-            $salt = $saltResult['PASSWORD_SALT'];
-            $accessLevelID = $saltResult['ACCESS_LEVEL_ID'];
-
-            $passSalt = $password.$salt;
-            $HSPassword = hash('sha256', $passSalt);
-
-            $query = "SELECT * FROM USER WHERE USERNAME='$email' AND USER_PASSWORD='$HSPassword'";
-            $results = mysqli_query($DBConnect, $query);
-
-            if (mysqli_num_rows($results) == 1) 
+            if ($saltResult != null) 
             {
-                //fetch employee name and surname
-                $employeeQ = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID='$employeeID'";
-                $employeeQResult = mysqli_query($DBConnect, $employeeQ);
-                $employeeResult = mysqli_fetch_assoc($employeeQResult);
+                $userID = $saltResult['USER_ID'];
+                $employeeID = $saltResult['EMPLOYEE_ID'];
+                $salt = $saltResult['PASSWORD_SALT'];
+                $accessLevelID = $saltResult['ACCESS_LEVEL_ID'];
 
-                $name = $employeeResult['NAME'];
-                $surname = $employeeResult['SURNAME'];
+                $passSalt = $password.$salt;
+                $HSPassword = hash('sha256', $passSalt);
 
-                //Fetch access level functionalities
-                $userFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_FUNCTIONALITY WHERE ACCESS_LEVEL_ID='$accessLevelID'";
-                $userFunctionalityQResult = mysqli_query($DBConnect, $userFunctionalityQ);
+                $query = "SELECT * FROM USER WHERE USERNAME='$email' AND USER_PASSWORD='$HSPassword'";
+                $results = mysqli_query($DBConnect, $query);
 
-                $access = array();
-                while( $level = mysqli_fetch_array($userFunctionalityQResult))
-                { 
-                    array_push($access, $level['FUNCTIONALITY_ID']);
+                if (mysqli_num_rows($results) == 1) 
+                {
+                    //fetch employee name and surname
+                    $employeeQ = "SELECT * FROM EMPLOYEE WHERE EMPLOYEE_ID='$employeeID'";
+                    $employeeQResult = mysqli_query($DBConnect, $employeeQ);
+                    $employeeResult = mysqli_fetch_assoc($employeeQResult);
+
+                    $name = $employeeResult['NAME'];
+                    $surname = $employeeResult['SURNAME'];
+
+                    //Fetch access level functionalities
+                    $userFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_FUNCTIONALITY WHERE ACCESS_LEVEL_ID='$accessLevelID'";
+                    $userFunctionalityQResult = mysqli_query($DBConnect, $userFunctionalityQ);
+
+                    $access = array();
+                    while( $level = mysqli_fetch_array($userFunctionalityQResult))
+                    { 
+                        array_push($access, $level['FUNCTIONALITY_ID']);
+                    }
+
+                    //Fetch sub functionality level functionalities
+                    $userSubFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_SUB_FUNCTIONALITY WHERE ACCESS_LEVEL_ID ='$accessLevelID'";
+                    $userSubFunctionalityQResult = mysqli_query($DBConnect, $userSubFunctionalityQ);
+
+                    $subFunctionality = array();
+                    while( $functionality = mysqli_fetch_array($userSubFunctionalityQResult))
+                    { 
+                        array_push($subFunctionality, $functionality['SUB_FUNCTIONALITY_ID']);
+                    }
+                    
+                    //Populate session variable
+                    session_start();
+                    $_SESSION['name'] = $name;
+                    $_SESSION['surname'] = $surname;
+                    $_SESSION['userID'] = $userID;
+                    $_SESSION['employeeID'] = $employeeID;
+                    $_SESSION['accessLevel'] = $access;
+                    $_SESSION['subFunctionality'] = $subFunctionality;
+                    $_SESSION['access'] = true;
+
+                    echo "success";
                 }
-
-                //Fetch sub functionality level functionalities
-                $userSubFunctionalityQ = "SELECT * FROM ACCESS_LEVEL_SUB_FUNCTIONALITY WHERE ACCESS_LEVEL_ID ='$accessLevelID'";
-                $userSubFunctionalityQResult = mysqli_query($DBConnect, $userSubFunctionalityQ);
-
-                $subFunctionality = array();
-                while( $functionality = mysqli_fetch_array($userSubFunctionalityQResult))
-                { 
-                    array_push($subFunctionality, $functionality['SUB_FUNCTIONALITY_ID']);
+                else
+                {
+                    $_SESSION['access'] = false;
+                    $response = "password incorrect";
+                    echo $response;
                 }
-                
-                //Populate session variable
-                session_start();
-                $_SESSION['name'] = $name;
-                $_SESSION['surname'] = $surname;
-                $_SESSION['userID'] = $userID;
-                $_SESSION['accessLevel'] = $access;
-                $_SESSION['subFunctionality'] = $subFunctionality;
-                $_SESSION['access'] = true;
-
-                echo "success";
             }
             else
             {
                 $_SESSION['access'] = false;
-                $response = "Wrong username/password combination";
+                $response = "user does not exist";
                 echo $response;
             }
         }

@@ -18,7 +18,7 @@ $(()=>{
             {
                 
                 formView="<form action='maintain-user-role.php' method='POST'><input type='hidden' name='ACCESS_LEVEL_NAME' value='"+arr[k]["ACCESS_LEVEL_NAME"]+"'>"+"<input type='hidden' name='ACCESS_LEVEL_ID' value='"+arr[k]["ACCESS_LEVEL_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-user'></i></span><span class='btn-inner--text'>Edit</span></button>"+"</form>";
-                tableEntries+="<tr><td>"+arr[k]["ACCESS_LEVEL_NAME"]+"</td><td>";
+                tableEntries+="<tr><td>"+arr[k]["ACCESS_LEVEL_NAME"]+"</td><td style='overflow-y: hidden !important;'>";
                 let arr2 = arr[k]["FUNTIONALITY"];
 
                if(!(arr2.length >0) )

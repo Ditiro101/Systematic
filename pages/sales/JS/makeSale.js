@@ -7,6 +7,7 @@ var SALEDELIVERYADD = false;
 var SALEDELIVERYADDRESSID;
 var productElementsCount = 1;
 var productsArray;
+var customersArray;
 
 var INVOICE_CUSTOMER_NAME;
 var INVOICE_CUSTOMER_ADDRESS;
@@ -81,11 +82,19 @@ $(()=>{
 					theProfit = "R"+ theProfit;
 
 
-					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='0' min='0' max='"+productsArray[productIndex].QUANTITY_AVAILABLE+"' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0 unitPriceSpinBox' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
+					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='1' min='0' max='"+productsArray[productIndex].QUANTITY_AVAILABLE+"' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0 unitPriceSpinBox' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
 					let productsTable = $('#productsTable');
 					productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
 					productElementsCount++;
 
+					var quantityOfelementJustAdded = "quantity"+productsArray[productIndex].PRODUCT_ID;
+					var unitPriceOfelementJustAdded = "unitPrice"+productsArray[productIndex].PRODUCT_ID;
+
+					var quantityElement = document.getElementById(quantityOfelementJustAdded);
+					var unitPriceElement = document.getElementById(unitPriceOfelementJustAdded);
+
+					calculateRowTotalUnitPrice(unitPriceElement);
+					calculateRowTotalQuantity(quantityElement);
 					calculateVATandTotal();
 					SALEPRODUCTIDs.push(productsArray[productIndex].PRODUCT_ID);
 				}
@@ -126,15 +135,15 @@ $(()=>{
 
 					if (thisPrice < costPriceOfRow) 
 					{
-						this.style.backgroundColor = "red";
+						this.style.color = "red";
 					}
 					else if (thisPrice == costPriceOfRow) 
 					{
-						this.style.backgroundColor = "orange";
+						this.style.color = "orange";
 					}
 					else
 					{
-						this.style.backgroundColor = "white";
+						this.style.color = "#525f7f";
 					}
 				});
 				
@@ -146,63 +155,48 @@ $(()=>{
 		}
 	});
 
-	SALEUSERID = SESSION['userID'];
-	SALEUSERNAME = SESSION['name'];
-});
+	$.ajax({
+		url: 'PHPcode/getCustomers.php',
+		type: 'POST',
+		data: '' 
+	})
+	.done(data=>{
+		if(data!="False")
+		{
+			let customersArray = JSON.parse(data);
+			//console.log(customersArray);
+			buildCustomersDropDown(customersArray);
 
-$("button#searchCustomerButton").on('click', event => {
-	event.preventDefault();
-	let form=$('#searchCustomertForm');
-	form.validate();
-	if(form.valid() === false)
-	{
-		event.stopPropagation();
-	}
-	else
-	{
-		let customerPhoneNumber = $("#customerSearchInput").val();
+			$("input[id*='dropdownItemCust']").on('click', function(){
+				let customerIndex = this.name;
 
-		$.ajax({
-			url: 'PHPcode/getCustomer_.php',
-			type: 'POST',
-			data: { 
-				customerPhone : customerPhoneNumber,
-			},
-			beforeSend: function() {
-	
-	    	}
-		})
-		.done(response => {
-			let customerDetails = JSON.parse(response);
-			console.log(customerDetails);
-			SALECUSTOMERID = customerDetails["CUSTOMER_ID"];
-			if (response != "false") 
-			{
+
+				SALECUSTOMERID = customersArray[customerIndex].CUSTOMER_ID;
+				//console.log(SALECUSTOMERID);
 				$('#customerSearchInput').val("");
-				customerDetails["CUSTOMER_ID"]
 				let custtomerID = $('#customerSearchInput').val();
 				let customerCard = $('#customerCard');
-				let customerInfo = '<tr><th style="width: 12rem">Customer ID</th><td >'+customerDetails["CUSTOMER_ID"]+'</td></tr><tr><th>Name</th><td>'+customerDetails["NAME"]+'</td></tr>';
-				INVOICE_CUSTOMER_NAME = customerDetails["NAME"];
-				INVOICE_CUSTOMER_EMAIL = customerDetails["EMAIL"];
-				if (customerDetails["SURNAME"] != null) 
+				let customerInfo = '<tr><th style="width: 12rem">Customer ID</th><td >'+customersArray[customerIndex].CUSTOMER_ID+'</td></tr><tr><th>Name</th><td>'+customersArray[customerIndex].NAME+'</td></tr>';
+				INVOICE_CUSTOMER_NAME = customersArray[customerIndex].NAME;
+				INVOICE_CUSTOMER_EMAIL = customersArray[customerIndex].EMAIL;
+				if (customersArray[customerIndex].SURNAME != null) 
 				{
-					customerInfo +='<tr><th>Surname</th><td >'+customerDetails["SURNAME"]+'</td></tr>';
+					customerInfo +='<tr><th>Surname</th><td >'+customersArray[customerIndex].SURNAME+'</td></tr>';
 					INVOICE_CUSTOMER_NAME += " ";
-					INVOICE_CUSTOMER_NAME += customerDetails["SURNAME"];
+					INVOICE_CUSTOMER_NAME += customersArray[customerIndex].SURNAME;
 				}
 				else
 				{
-					customerInfo +='<tr><th>VAT Number</th><td >'+customerDetails["VAT_NUMBER"]+'</td></tr>';
+					customerInfo +='<tr><th>VAT Number</th><td >'+customersArray[customerIndex].VAT_NUMBER+'</td></tr>';
 				}
-				customerInfo +='<tr><th>Contact No</th><td >'+customerDetails["CONTACT_NUMBER"]+'</td></tr>'
-				customerCard.html(customerInfo);	
-				
+				customerInfo +='<tr><th>Contact No</th><td >'+customersArray[customerIndex].CONTACT_NUMBER+'</td></tr>'
+				customerCard.html(customerInfo);
+
 				$.ajax({
 					url: 'PHPcode/getSaleDeliveryAddress.php',
 					type: 'POST',
 					data: { 
-						customerID_ : SALECUSTOMERID,
+						customerID : SALECUSTOMERID,
 					},
 					beforeSend: function() {
 			
@@ -210,7 +204,6 @@ $("button#searchCustomerButton").on('click', event => {
 				})
 				.done(response => {
 					let customerAddressDetails = JSON.parse(response);
-					//console.log(customerAddressDetails);
 					
 					if (response != "false") 
 					{
@@ -241,6 +234,8 @@ $("button#searchCustomerButton").on('click', event => {
 								i = this.getAttribute("array-index");;
 								INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
 								//console.log(INVOICE_CUSTOMER_ADDRESS);
+								//console.log(SALEDELIVERYADDRESSID);
+								
 
 							}
 							else
@@ -258,23 +253,19 @@ $("button#searchCustomerButton").on('click', event => {
 					
 					ajaxDone = true;
 				});
-			}
-			else
-			{
-				$('#customerSearchInput').val("");
-				let customerCard = $('#customerCard');
-				customerCard.html('<tr><th>No Customer Found</th><td></td></tr>');
-				$('#customerSearchInput').val("");
+				
+			});
+		}
+		else
+		{
+			alert("Error retrieving customers");
+		}
+	});
 
-				var addresses = "";
-				let addressesDiv = $('#customerAddresses');
-				addressesDiv.html(addresses);
-			}
-			
-			ajaxDone = true;
-		});
-	}	
-});  
+	SALEUSERID = SESSION['userID'];
+	SALEUSERNAME = SESSION['name'];
+});
+
 
 $("button#finaliseSale").on('click', event => {
 	//console.log(SALECUSTOMERID);
@@ -448,9 +439,16 @@ function numberWithSpaces(x)
 
 $('#menuItems').on('click', '.dropdown-item', function()
 {
-	$("#searchProduct").dropdown('toggle');
+	$("#productsDropdownToggle").dropdown('toggle');
 	$('#searchProduct').val("");
 	filter("");
+});
+
+$('#menuOfCustomers').on('click', '.dropdown-item', function()
+{
+	$("#customerDropdownToggle").dropdown('toggle');
+	$('#customerSearchInput').val("");
+	filterCustomers("");
 });
 
 $('#addSaleDeliveryCheckbox').on('input', function()
@@ -481,13 +479,27 @@ if (productElementsCount == 1) {
 $('#searchProduct').on('input', function()
 {
 	var dropdownShown = $("#menu").hasClass("show");
+	let search = $("#searchProduct");
+	let searchWord = search.val().trim().toLowerCase();
 	if(dropdownShown === false)
 	{
-		$("#searchProduct").dropdown('toggle');
+		$("#productsDropdownToggle").dropdown('toggle');
 	}
-	let search = $("#searchProduct");
-	let searchWord = search.val().trim().toLowerCase()
+
 	filter(searchWord);
+});
+
+$('#customerSearchInput').on('input', function()
+{
+	var dropdownShown = $("#menuCust").hasClass("show");
+
+	if(dropdownShown === false)
+	{
+		$("#customerDropdownToggle").dropdown('toggle');
+	}
+	let search2 = $("#customerSearchInput");
+	let searchWord2 = search2.val().trim().toLowerCase();
+	filterCustomers(searchWord2);
 });
 
 
@@ -519,10 +531,37 @@ function buildDropDown(arrayOfProducts)
   	ind++;
 
   }
-  $('#menuItems').append(contents.join(""))
+  $('#menuItems').append(contents.join(""));
 
   //Hide the row that shows no items were found
-  $('#empty').hide()
+  $('#empty').hide();
+  //console.log(productDetails);
+}
+
+function buildCustomersDropDown(arrayOfCustomers) 
+{
+  let contents = []
+  let ind = 0;
+  for (let customer of arrayOfCustomers) 
+  {
+  	let customerName = "";
+  	if (customer.SURNAME != null) 
+  	{
+  		customerName = customer.NAME+" "+customer.SURNAME+ " (ID : "+customer.CUSTOMER_ID+")";
+
+  	}
+  	else
+  	{
+  		customerName = customer.NAME+" (ID : "+customer.CUSTOMER_ID+")";
+  	}
+  	contents.push('<input type="button" class="dropdown-item customerDropdownMenuItem dropdownItemCust" id="dropdownItemCust'+ind+'" type="button" value="' + customerName + '" name="'+ind+'"/>');
+  	ind++;
+
+  }
+  $('#menuOfCustomers').append(contents.join(""));
+
+  //Hide the row that shows no items were found
+  $('#empty2').hide();
   //console.log(productDetails);
 }
 
@@ -555,6 +594,36 @@ function filter(word)
 	else 
 	{
 		$('#empty').hide()
+	}
+}
+
+function filterCustomers(word) 
+{
+	let items = $(".dropdown-item.customerDropdownMenuItem");
+  	let length = items.length
+  	let collection = []
+  	let hidden = 0
+
+  	for (let i = 0; i < length; i++) 
+	{
+	    if (items[i].value.toLowerCase().startsWith(word)) 
+	    {
+	        $(items[i]).show()
+	    }
+	    else {
+	        $(items[i]).hide()
+	        hidden++
+	    }
+	}
+
+	//If all items are hidden, show the empty view
+	if (hidden === length) 
+	{
+		$('#empty2').show()
+	}
+	else 
+	{
+		$('#empty2').hide()
 	}
 }
 
