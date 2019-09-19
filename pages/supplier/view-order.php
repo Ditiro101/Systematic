@@ -114,6 +114,7 @@
                 <div class="col-6 table">
                   <div class="card card-stats table light" id="myTabContent" >
                     <div class="card-body px-3">
+                      <label hidden="true" id="oDetails"><?php echo json_encode($orderDetails)?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
@@ -270,17 +271,21 @@
                   <span class="btn-inner--icon"><i class="fas fa-times-circle"></i></span>
                   <span class="btn-inner--text" >Cancel Order</span>
                 </button>
-                <form action="../stock/return-order.php" class="d-inline" method="POST">
+                <form action="../stock/return-order.php" class="d-inline" method="POST" >
                   <input type="hidden" name="ORDER_ID" value='<?php echo $orderDetails["ORDER_ID"]; ?>'>
                   <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="submit">
                     <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
                     <span class="btn-inner--text">Make Return</span>
                   </button>
                 </form>
-                <button class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="button" onclick="window.location='../stock/receive-order.php'" disabled>
+                <form action="../stock/receive-order.php" method="POST" class="d-inline">
+                <input type="hidden" name="ordDetails" id="oDet">
+                <input type="hidden" name="ordProducts" id="oProd">
+                <button id="btnReceiveStock" class="btn btn-icon btn-2 btn-success mt-0 float-right mr-2" type="submit">
                   <span class="btn-inner--icon"><i class="fas fa-layer-group"></i></span>
                   <span class="btn-inner--text" >Receive Order</span>
                 </button>
+                </form>
                 <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-addCollection" disabled>
                   <span class="btn-inner--icon">
                     <i class="fas fa-truck"></i>
