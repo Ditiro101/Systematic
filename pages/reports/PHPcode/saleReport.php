@@ -43,6 +43,7 @@
             WHERE SALE_DATE  LIKE '%.$currentDate.%'";
     
             $submit = mysqli_query($con,$alles_query);
+            //var_dump($alles_query);
         }
         else if($salePeriod=="Weekly")
         {
@@ -118,7 +119,7 @@
 	        
 	    }
 	    else{
-	         echo "Empty";
+	         echo json_encode("Empty");
 	    }
 
 	?>

@@ -2,20 +2,23 @@ $(()=>{
     
         var salePeriod = $('#salePeriod').text().trim();
         //var dateTo = $('#dateTo').text().trim();
-
+        let tableHeader;
         console.log(salePeriod);
         if(salePeriod=="Weekly")
         {
             $("#PeriodAttr").text("DAYS OF THE WEEK");
+                tableHeader = "SALES FOR A WEEK";
         }   
         if(salePeriod=="Monthly")
         {
             $("#PeriodAttr").text("DAYS OF THE MONTH");
+            tableHeader = "SALES FOR A MONTH";
         
         }   
         if(salePeriod=="Daily")
         {
-            $("#PeriodAttr").text("DAYerd");
+            $("#PeriodAttr").text("DAY");
+            tableHeader = "SALES FOR A DAY";
     
         }  
         //console.log(dateTo);
@@ -29,9 +32,11 @@ $(()=>{
             
             if(data!="False")
             {
-                //console.log(data);
+                console.log(data);
                 let arr=JSON.parse(data);
                 console.log(arr);
+
+
                 console.log(arr[0]["SALE_DATE"]);
                 console.log( moment(arr[0]["SALE_DATE"]).format('dddd'));
                 let tableEntries="";
@@ -47,6 +52,10 @@ $(()=>{
                 console.log(arrLength);
 
                 let saleGraphDays = [];
+
+
+               if(arr != "Empty")
+               {
                 for(let k=0;k<arr.length;k++)
                 {
                     let day = toString(arr[k]["SALE_DATE"]);
@@ -120,7 +129,7 @@ $(()=>{
                                     tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
                                     previousDay = daysOfTheWeek[0];
 
-                                    saleTotalArray.push(daysOfTheWeek[0]);
+                                    saleTotalArray.push("date");
                                     saleGraphDays.push(daysOfTheWeek[0]);
                                     //console.log("1");
                                     //console.log(totalSales);
@@ -134,7 +143,7 @@ $(()=>{
                        
                         tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
                         previousDay = daysOfTheWeek[0];
-                        saleTotalArray.push(daysOfTheWeek[0]);
+                        saleTotalArray.push("date");
                         saleGraphDays.push(daysOfTheWeek[0]);
 
                     }
@@ -164,46 +173,149 @@ $(()=>{
 
                //Display Graph
                 console.log(saleGraphDays);
+                saleTotalArray.reverse();
                 console.log(saleTotalArray);
                 /*for(int i = 0;i<saleGraphDays.length;i++)
                 {
 
                 }*/
                 //have while loop that starts from the back to put the specefic values of a specefic day onto the graph.
-               new Chart(document.getElementById("line-chart"), {
-                type: 'line',
-                data: {
-                  labels: ['January','February','March','April','May','June','July'],
-                  datasets: [{ 
-                      data: [567,756,654,887,567,789,786],
-                      label: "2017",
-                      borderColor: "#3e95cd",
-                      fill: false
-                    }, { 
-                      data: [454,786,675,786,635,809,655],
-                      label: "2018",
-                      borderColor: "#8e5ea2",
-                      fill: false
-                    }, { 
-                      data: [678,787,745,876,956,1046,986],
-                      label: "2019",
-                      borderColor: "#7cbf56",
-                      fill: false
+                let tempSaleArray = [];
+                for(let i=0;i<saleGraphDays.length;i++)
+                {
+                    for(let a=saleTotalArray.length-1;a>=0;a--)
+                    {
+                        if(saleTotalArray[a] != "date" )
+                        {
+                            tempSaleArray.push(saleTotalArray[a]);
+                         
+                        }
+                        else
+                        {
+                           
+                        }
                     }
-                  ]
-                },
-                options: {
-                  title: {
-                    display: true,
-                    text: 'SALES PER WEEK'
-                  }
+
+                   
                 }
-              });
+                console.log(tempSaleArray);
+                new Chart(document.getElementById("line-chart"), {
+                    type: 'line',
+                    data: {
+                      labels: saleGraphDays,
+                      datasets: [{ 
+                          data: tempSaleArray,
+                          label: "Sales",
+                          borderColor: "#3e95cd",
+                          fill: false
+                        }
+                      ]
+                    },
+                    options: {
+                      title: {
+                        display: true,
+                        text: tableHeader
+                      }
+                    }
+                  });
 
 
 
 
+                /*, { 
+                    data: [454,786,675,786,635,809,655],
+                    label: "2018",
+                    borderColor: "#8e5ea2",
+                    fill: false
+                  }, { 
+                    data: [678,787,745,876,956,1046,986],
+                    label: "2019",
+                    borderColor: "#7cbf56",
+                    fill: false
+                  }*/
+               }
+               else
+               {
+                   
+                   if(salePeriod=="Weekly")
+                   {
+                    new Chart(document.getElementById("line-chart"), {
+                        type: 'line',
+                        data: {
+                          labels: ["DAYS"],
+                          datasets: [{ 
+                              data: [0],
+                              label: "Sales",
+                              borderColor: "#3e95cd",
+                              fill: false
+                            }
+                          ]
+                        },
+                        options: {
+                          title: {
+                            display: true,
+                            text: tableHeader
+                          }
+                        }
+                      });
 
+                    salePeriod = salePeriod.toUpperCase();
+                    $("#tBody").append("<tr></tr>").text(`NO SALES HAVE BEEN MADE ,IN THE LAST WEEK,IN ORDER TO MAKE A ${salePeriod} SALES REPORT`);
+                   }
+                   else if(salePeriod=="Monthly")
+                   {
+                    new Chart(document.getElementById("line-chart"), {
+                        type: 'line',
+                        data: {
+                          labels: ["DAYS"],
+                          datasets: [{ 
+                              data: [0],
+                              label: "Sales",
+                              borderColor: "#3e95cd",
+                              fill: false
+                            }
+                          ]
+                        },
+                        options: {
+                          title: {
+                            display: true,
+                            text: tableHeader
+                          }
+                        }
+                      });
+
+                    salePeriod = salePeriod.toUpperCase();
+                    $("#tBody").append("<tr></tr>").text(`NO SALES HAVE BEEN MADE ,IN THE LAST MONTH, IN ORDER TO MAKE A ${salePeriod} SALES REPORT`);
+                   }
+                   else
+                   {
+
+                    new Chart(document.getElementById("line-chart"), {
+                        type: 'line',
+                        data: {
+                          labels: ["DAYS"],
+                          datasets: [{ 
+                              data: [0],
+                              label: "Sales",
+                              borderColor: "#3e95cd",
+                              fill: false
+                            }
+                          ]
+                        },
+                        options: {
+                          title: {
+                            display: true,
+                            text: tableHeader
+                          }
+                        }
+                      });
+                      
+                    salePeriod = salePeriod.toUpperCase();
+                    $("#tBody").append("<tr></tr>").text(`NO SALES HAVE BEEN MADE TODAY IN ORDER TO MAKE A ${salePeriod} SALES REPORT`);
+                   }
+               
+               } 
+               
 
             }
             else
