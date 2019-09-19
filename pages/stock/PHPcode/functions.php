@@ -109,5 +109,81 @@
 		}
 	}
 	//////////////////////////////////////////////////////
+	function updateQtyReceived($con,$orderid,$id,$qty)
+	{
+		$update_query="UPDATE ORDER_PRODUCT SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$qty' WHERE ORDER_ID='$orderid' AND PRODUCT_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+
+	}
+
+	function updateQtyToReceive($con,$orderid,$id,$qty)
+	{
+		$update_query="UPDATE ORDER_PRODUCT SET QUANTITY_TO_RECEIVE='$qty' WHERE ORDER_ID='$orderid' AND PRODUCT_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateProductQty($con,$id,$qty)
+	{
+		$update_query="UPDATE PRODUCT SET QTY_ON_HAND=QTY_ON_HAND +'$qty',QUANTITY_AVAILABLE=QUANTITY_AVAILABLE+'$qty' WHERE PRODUCT_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function countReceivedQuantity($con,$orderid)
+	{
+		$get_query="SELECT SUM(QUANTITY_TO_RECEIVE) AS FINAL
+			FROM ORDER_PRODUCT
+			WHERE ORDER_ID='$orderid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateOrderReceived($con,$orderid,$dte)
+	{
+		$update_query="UPDATE ORDER_ SET DATE_RECEIVED='$dte',ORDER_STATUS_ID=2 WHERE ORDER_ID='$orderid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 
 ?>
