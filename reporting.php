@@ -123,14 +123,14 @@
                   if (in_array("12.5", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <a href="pages/reports/debtors.php" class="btn-icon-clipboard" >
-                   
-                      <div>
-                        <i class="far fa-handshake"></i>
-                        <span>Debtors Report</span>
-                      </div>
-                   
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDebtors">
+                  <a>
+                    <div>
+                      <i class="fas fa-chart-line"></i>
+                      <span>Debtors Report</span>
+                    </div>
                   </a>
+                </button>
                 </div>
                 <?php
                   }
@@ -201,7 +201,32 @@
           </div>
         </div>
       </div>
+      
 
+
+
+
+
+
+
+
+      <div class="modal fade" id="generateDebtors" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to generate the selected report?</p>
+
+            </div>
+            <div class="modal-footer">  
+              <a href="pages/reports/debtors.php" class="btn btn-success">Yes</a>  
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- attedance report modal -->
 
       <div class="modal fade" id="generateStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,7 +240,7 @@
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <a href="pages/reports/stock-report.php" class="btn btn-success">Yes</a>  
               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
           </div>
