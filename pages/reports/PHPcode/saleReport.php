@@ -53,9 +53,9 @@
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT SALE_ID ,SALE_AMOUNT
+                $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
                                FROM SALE
-                               WHERE SALE_DATE BETWEEN ' $usedDate' AND  '$currentDate'";
+                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$currentDate'";
 
                 //var_dump($alles_query);
         
@@ -64,16 +64,16 @@
         else
         {
             $endDate=mktime(
-                date("H"), date("i"), date("s"), date("m")-1 ,date("d"), date("Y")
+                date("H"), date("i"), date("s"), date("m") ,date("d")-30, date("Y")
                 );
                 $previousDate = date("Y-m-d",$endDate);
 
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT COUNT(SALE_ID) as TOTAL_SALES,SUM(SALE_AMOUNT) as TOTAL_REVENUE
+                $alles_query ="SELECT SALE_ID,SALE_AMOUNT ,SALE_DATE
                                FROM SALE
-                               WHERE SALE_DATE BETWEEN ' $usedDate' AND  '$currentDate'";
+                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$currentDate'";
         
                 $submit = mysqli_query($con,$alles_query);
         }
