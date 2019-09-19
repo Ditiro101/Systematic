@@ -93,7 +93,7 @@
                     <a>
                       <div>
                         <i class="fas fa-user-clock"></i>
-                        <span>Wage Slips Report</span>
+                        <span>Wages Report</span>
                       </div>
                     </a>
                   </button>
@@ -275,11 +275,19 @@
             </div>
             <div class="modal-body">
               <p>Are you sure you want to generate the selected report?</p>
+                <form action="pages/reports/wage-slips.php" method="POST">
+                  <div class="form-row ">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                      <input type="hidden" class="form-control" id="USERNAME" name="USERNAME" value=<?php echo $_SESSION["name"]?> placeholder="Enter Date of Sale From">
+                    </div>
+                  </div>
+                  <input type="submit" class="btn btn-success" value="Yes"></input>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+             
             </div>
           </div>
         </div>
@@ -297,7 +305,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/wage-slips.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/wage-slips.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>
@@ -337,7 +345,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/creditors-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/creditors-report.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>

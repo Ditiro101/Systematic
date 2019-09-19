@@ -35,7 +35,7 @@ $(()=>{
 
             
 				let prodName = arr[k]["NAME"] + " ("+ arr[k]["PRODUCT_MEASUREMENT"] + "" + arr[k]["PRODUCT_MEASUREMENT_UNIT"]+ ")";
-				tableEntries+="<tr><td class='no'>"+arr[k]["PRODUCT_ID"]+"</td><td class='desc'>"+ prodName +"</td><td class='"+stockLevelPQ+"'>"+arr[k]["PALLETS_QUANTITY"]+"</td><td class='"+stockLevelCQ+"'>"+arr[k]["CASES_QUANTITY"]+"</td><td class='"+stockLevelIQ+"'>"+arr[k]["INDIVIDUAL_QUANTITY"]+"</td><td>"+"</td></tr>";
+				tableEntries+="<tr><td class='no'>"+arr[k]["PRODUCT_ID"]+"</td><td class='desc'>"+ prodName +"</td><td class='"+stockLevelPQ+"'>"+arr[k]["PALLETS_QUANTITY"]+"</td><td class='"+stockLevelCQ+"'>"+arr[k]["CASES_QUANTITY"]+"</td><td class='"+stockLevelIQ+"'>"+arr[k]["INDIVIDUAL_QUANTITY"]+"</td></tr>";
 			}
 			$("#tBody").append(tableEntries);
 			
