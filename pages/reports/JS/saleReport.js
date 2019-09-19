@@ -4,7 +4,20 @@ $(()=>{
         //var dateTo = $('#dateTo').text().trim();
 
         console.log(salePeriod);
+        if(salePeriod=="Weekly")
+        {
+            $("#PeriodAttr").text("DAYS OF THE WEEK");
+        }   
+        if(salePeriod=="Monthly")
+        {
+            $("#PeriodAttr").text("DAYS OF THE MONTH");
         
+        }   
+        if(salePeriod=="Daily")
+        {
+            $("#PeriodAttr").text("DAYerd");
+    
+        }  
         //console.log(dateTo);
     
         $.ajax({
@@ -32,6 +45,8 @@ $(()=>{
                 let futureDay;
                 let arrLength = arr.length;
                 console.log(arrLength);
+
+                let saleGraphDays = [];
                 for(let k=0;k<arr.length;k++)
                 {
                     let day = toString(arr[k]["SALE_DATE"]);
@@ -47,6 +62,8 @@ $(()=>{
                     
                     
                         staticTotalSales += parseFloat(arr[k]["SALE_AMOUNT"]);
+                        saleTotalArray.push(parseFloat(arr[k]["SALE_AMOUNT"]).toFixed(2));
+                       
 
                         if(previousDay == futureDay[0])
                         {
@@ -63,7 +80,7 @@ $(()=>{
                             }
                             else
                             {
-                                saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                               
                                 previousDay = daysOfTheWeek[0];
                             }
                         }
@@ -84,7 +101,7 @@ $(()=>{
                             }
                             else
                             {
-                                saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                                
                                 previousDay = daysOfTheWeek[0];
                             }
                             
@@ -102,6 +119,9 @@ $(()=>{
                                     //formView="<form action='view-order.php' method='POST'><input type='hidden' name='ORDER_ID' value='"+ordersArray[k]["ORDER_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
                                     tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
                                     previousDay = daysOfTheWeek[0];
+
+                                    saleTotalArray.push(daysOfTheWeek[0]);
+                                    saleGraphDays.push(daysOfTheWeek[0]);
                                     //console.log("1");
                                     //console.log(totalSales);
                                     totalSales = 0;
@@ -114,11 +134,13 @@ $(()=>{
                        
                         tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
                         previousDay = daysOfTheWeek[0];
+                        saleTotalArray.push(daysOfTheWeek[0]);
+                        saleGraphDays.push(daysOfTheWeek[0]);
 
                     }
                     else
                     {
-                        saleTotalArray.push(arr[k]["SALE_AMOUNT"]);
+                        
                         previousDay = daysOfTheWeek[0];
                     }
 
@@ -137,7 +159,51 @@ $(()=>{
                     let sumOfTotals = saleTotalArray.reduce((a, b) => parseInt(a) + parseInt(b), 0);
                     $("#SaleTotal").text(sumOfTotals);
                 }*/
-               
+
+
+
+               //Display Graph
+                console.log(saleGraphDays);
+                console.log(saleTotalArray);
+                /*for(int i = 0;i<saleGraphDays.length;i++)
+                {
+
+                }*/
+                //have while loop that starts from the back to put the specefic values of a specefic day onto the graph.
+               new Chart(document.getElementById("line-chart"), {
+                type: 'line',
+                data: {
+                  labels: ['January','February','March','April','May','June','July'],
+                  datasets: [{ 
+                      data: [567,756,654,887,567,789,786],
+                      label: "2017",
+                      borderColor: "#3e95cd",
+                      fill: false
+                    }, { 
+                      data: [454,786,675,786,635,809,655],
+                      label: "2018",
+                      borderColor: "#8e5ea2",
+                      fill: false
+                    }, { 
+                      data: [678,787,745,876,956,1046,986],
+                      label: "2019",
+                      borderColor: "#7cbf56",
+                      fill: false
+                    }
+                  ]
+                },
+                options: {
+                  title: {
+                    display: true,
+                    text: 'SALES PER WEEK'
+                  }
+                }
+              });
+
+
+
+
+
 
             }
             else

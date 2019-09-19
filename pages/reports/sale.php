@@ -41,7 +41,7 @@
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th class="desc-center" id="MonthAttr"></th>
+            <th class="desc-center" id="PeriodAttr"></th>
             <th class="desc">TOTAL SALES</th>
             <th class="desc" style="text-align: right;">TOTAL REVENUE</th>
           </tr>
@@ -63,35 +63,7 @@
       © 2019 Stock Path
     </footer>
     <script type="text/javascript">
-      new Chart(document.getElementById("line-chart"), {
-        type: 'line',
-        data: {
-          labels: ['January','February','March','April','May','June','July'],
-          datasets: [{ 
-              data: [567,756,654,887,567,789,786],
-              label: "2017",
-              borderColor: "#3e95cd",
-              fill: false
-            }, { 
-              data: [454,786,675,786,635,809,655],
-              label: "2018",
-              borderColor: "#8e5ea2",
-              fill: false
-            }, { 
-              data: [678,787,745,876,956,1046,986],
-              label: "2019",
-              borderColor: "#7cbf56",
-              fill: false
-            }
-          ]
-        },
-        options: {
-          title: {
-            display: true,
-            text: 'SALES PER WEEK'
-          }
-        }
-      });
+     
     </script>
     <!-- Argon Scripts -->
   <!-- Core -->
