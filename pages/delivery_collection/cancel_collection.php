@@ -1,3 +1,6 @@
+<?php
+  include_once("../sessionCheckPages.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +50,7 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">Supplier Collection No. #321 :   <b>Coca Cola</b></h3>
+              <h3 class="mb-0"><span id="cColID">Supplier Collection No. #321 :</span><span id="cColSupName"><b>Coca Cola</b></span></h3>
             </div>
             <div class="card-body">
 
@@ -56,22 +59,23 @@
                   <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                     <form>
                       <div class="col">
+                        <label hidden="true" id="collectionData"><?php echo $_POST["COLLECTION_DATA"];?></label>
                         <div class="form-group">
-                            <p><b>Collection Date: </b>2019/08/12</p>
+                            <p><span><b>Collection Date: </b></span><span id="cColDate"></span></p>
                         </div>
 
                         <div class="form-group">
-                          <p><b>Collection Address: </b> 15 Roper Street IT Building ,floor 5</p>
+                          <p><span><b>Collection Address: </b></span><span id="cCollectionAddress"></span></p>
                         </div>
                         <div class="form-row pb-0">
                           <div class="form-group col-md-4 mb-2">
-                            <p><b>Suburb: </b>Hatfield</p>
+                            <p><span><b>Suburb: </b></span><span id="cColSuburb">Hatfield</span></p>
                           </div>
                           <div class="form-group col-md-4 mb-2">
-                            <p><b>City: </b>Pretoria</p>
+                            <p><span><b>City: </b></span><span id="cColCity"></span></p>
                           </div>
                           <div class="form-group col-md-2 mb-2">
-                            <p><b>Zip: </b> 001234</p>
+                            <p><span><b>Zip: </b></span><span id="cColZip"></span></p>
                           </div>
                         </div>
                         <div class="form-row mt-0">
@@ -79,7 +83,7 @@
                             <p><b>Collected Date: </b> N/A</p>
                           </div>
                           <div class="form-group col-md-6">
-                            <p><b>Collection Status: </b> Not Collected</p>
+                            <p><span><b>Delivery Status: </b></span> <span id="cColStatus"></span</p>
                           </div>
                         </div>
 
@@ -103,28 +107,28 @@
                                     </div>
                                     
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#test2" >Yes</button>
+                                        <button type="button" class="btn btn-success" id="btnYes" >Yes</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                                     </div>
                                     
                                 </div>
                             </div>
-                            <div id="test2" class="modal fade" role="dialog">
+                            <div id="displayModal" class="modal fade" role="dialog">
                               <div class="modal-dialog modal-dialog-centered" role="document">
                                 <!-- Modal Content -->
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-default">Sucess!</h6>
+                                    <h6 class="modal-title" id="MHeader">Sucess!</h6>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">×</span>
                                     </button>
                                   </div>
                                   <div class="modal-body">
-                                        <p>Supplier order collection canceled successfully</p>
+                                        <p id="MMessage"></p>
                                         
                                   </div>
                                   <div class="modal-footer">
-                                        <button type="button" class="btn btn-link" data-dismiss="modal" onclick="window.location='../../delivery_collection.html'">Close</button> 
+                                        <button type="button" class="btn btn-link" data-dismiss="modal" id="btnClose">Close</button> 
                                   </div>
                                 </div>
                               </div>
@@ -153,6 +157,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/cancelCollection.js"></script>
 </body>
 
 </html>

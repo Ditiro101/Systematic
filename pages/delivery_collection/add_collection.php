@@ -1,3 +1,10 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $addressData=getCompleteSupplierAddresses($con,$_POST["orderID"]);
+  mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -47,7 +54,7 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header bg-transparent">
-              <h3 class="mb-0">Supplier Order No. #321: <b>Coca Cola</b></h3>
+              <h3 class="mb-0"><span id="ordNo">Supplier Order No. #321:</span><span id="supplierName"><b>Coca Cola</b></span></h3>
             </div>
             <div class="card-body">
 
@@ -58,58 +65,41 @@
                       <div class="col">
                         <div class="form-row ">
                           <div class="form-group col">
+                            <label id="addData" hidden="true"><?php echo json_encode($addressData);?></label>
+                            <label hidden="true" id="orderDetails"><?php echo $_POST["ordDetails"];?></label>
                             <label for="exampleInputPassword1">Collection Date</label>
-                            <input type="date" class="form-control" id="exampleInputPassword1" placeholder="Emter Delivery Date">
+                            <input type="date" class="form-control" id="datepicker" placeholder="Emter Delivery Date">
                           </div>
                         </div>
 
                         <div class="form-group">
-                          <label for="inputAddress">Address line 1</label>
-                          <input type="text" class="form-control" id="inputAddress" value="1234 Main St">
+                          <label for="inputAddress">Select Address</label>
+                          <select class="form-control" id="inputAddress">
+                          </select>
                         </div>
-                        <div class="form-group">
-                          <label for="inputAddress2">Address line 2</label>
-                          <input type="text" class="form-control" id="inputAddress2" placeholder="34 Main Avenue">
-                        </div>
-                        <div class="form-row">
-                          <div class="form-group col-md-6">
-                            <label for="inputCity">Suburb</label>
-                            <input type="text" class="form-control" id="inputCity" value="Hatfield">
-                          </div>
-                          <div class="form-group col-md-4">
-                            <label for="inputState">City</label>
-                            <select id="inputState" class="form-control">
-                              <option selected>Pretoria</option>
-                              <option>...</option>
-                            </select>
-                          </div>
-                          <div class="form-group col-md-2">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip" value="0050">
-                          </div>
                         </div>
                       </div> 
                       <div class="form-group col-md-2">
-                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" id="btnSave">Save</button>
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
                                     <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                                        <h6 class="modal-title" id="MHeader">Success!</h6>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">×</span>
                                         </button>
                                     </div>
                                     
                                     <div class="modal-body">
-                                        <p>Supplier Order Collection Saved Successfully!</p>
+                                        <p id="MMessage"></p>
                                         
                                     </div>
                                     
                                     <div class="modal-footer">
                                         
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../delivery_collection.html'">Close</button> 
+                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  id="btnClose">Close</button> 
                                     </div>
                                     
                                 </div>
@@ -138,6 +128,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/addCollection.js"></script>
 </body>
 
 </html>

@@ -498,6 +498,29 @@
 			return false;
 		}
 	}
+	///////////////////////////////////////////////////////
+	function getCompleteSupplierAddresses($con,$id)
+	{
+		$get_query="SELECT A.ADDRESS_ID,CONCAT(B.ADDRESS_LINE_1,', ',C.NAME,', ',C.ZIPCODE,', ',D.CITY_NAME,', South Africa') AS ADDRESS_NAME
+			FROM SUPPLIER_ADDRESS A
+			JOIN ADDRESS B ON A.ADDRESS_ID=B.ADDRESS_ID
+			JOIN SUBURB C ON B.SUBURB_ID=C.SUBURB_ID
+			JOIN CITY D ON C.CITY_ID=D.CITY_ID
+			WHERE SUPPLIER_ID='$id'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	////////////////////////////////////////////////////////
 	//code for maintain
 	function getAssignedDeliveries($con)
@@ -706,6 +729,88 @@
 		if(mysqli_num_rows($check_result)>0)
 		{
 			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function addCollection($con,$orderID,$date,$addressID,$dct,$lat,$long)
+	{
+		$add_query="INSERT INTO COLLECTION (ORDER_ID,EXPECTED_DATE,ADDRESS_ID,LATITUDE,LONGITUDE,COLLECTION_STATUS_ID) VALUES ('$orderID','$date','$addressID','$lat','$long','$dct')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getSearchCollectionData($con)
+	{
+		$get_query="SELECT A.*,B.ADDRESS_LINE_1,C.NAME AS SUBURB_NAME,C.ZIPCODE,D.CITY_NAME,E.ORDER_DATE,F.SUPPLIER_ID,F.CONTACT_NUMBER,F.EMAIL,F.NAME AS SUPPLIER_NAME,CONCAT(B.ADDRESS_LINE_1,', ',C.NAME,', ',C.ZIPCODE,', ',D.CITY_NAME,', South Africa') AS ADDRESS_NAME,G.NAME AS EMPLOYEE_NAME
+			FROM COLLECTION A
+			JOIN ADDRESS B ON A.ADDRESS_ID=B.ADDRESS_ID
+			JOIN SUBURB C ON B.SUBURB_ID=C.SUBURB_ID
+			JOIN CITY D ON C.CITY_ID=D.CITY_ID
+			JOIN ORDER_ E ON A.ORDER_ID=E.ORDER_ID
+			JOIN SUPPLIER F ON E.SUPPLIER_ID=F.SUPPLIER_ID
+			JOIN EMPLOYEE G ON E.EMPLOYEE_ID=G.EMPLOYEE_ID";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function deleteCollection($con,$id)
+	{
+		$delete_query="DELETE FROM COLLECTION WHERE COLLECTION_ID='$id'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getOrderProducts($con,$orderID)
+	{
+		$get_query="SELECT A.*,CONCAT(D.NAME,' (',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN '1'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN D.UNITS_PER_CASE
+			ELSE D.CASES_PER_PALLET
+			END,' x ',D.PRODUCT_MEASUREMENT,D.PRODUCT_MEASUREMENT_UNIT,') ',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
+			ELSE 'Pallet'
+			END) AS PRODUCT_NAME
+			FROM ORDER_PRODUCT A
+			JOIN PRODUCT D ON A.PRODUCT_ID=D.PRODUCT_ID
+			WHERE ORDER_ID='$orderID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$vals[]=$get_row;
+			}
+			return json_encode($vals);
 		}
 		else
 		{

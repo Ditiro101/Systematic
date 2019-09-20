@@ -8,6 +8,7 @@
   $cityData=getAllCity($con);
   $customerData=getAllCustomer($con);
   $saleData=getAllSales($con);
+  mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html>

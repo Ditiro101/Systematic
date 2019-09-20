@@ -1,4 +1,7 @@
-<?php include_once("../sessionCheckPages.php");?>
+<?php 
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/functions.php");
+?>
 <?php
 
   $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/c0t1o13yl3wxe2h3';
@@ -30,6 +33,8 @@
 
     $result = mysqli_query($DBConnect,$sql_query);
     $orderDetails = $result->fetch_assoc();
+
+    $isCollected=checkCollection($DBConnect,$orderID);
 
     mysqli_close($DBConnect);
   }
@@ -286,12 +291,17 @@
                   <span class="btn-inner--text" >Receive Order</span>
                 </button>
                 </form>
-                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-addCollection" disabled>
+                <label hidden="true" id="collectionCheck"><?php echo $isCollected;?></label>
+                <form action="../delivery_collection/add_collection.php" class="d-inline" method="POST">
+                <input type="hidden" name="orderID" id="acOrdID">
+                <input type="hidden" name="ordDetails" id="acOrderDetails"> 
+                <button class="btn btn-icon btn-2 btn-default mt-0 float-right mr-2" type="submit" data-toggle="modal" id="btnAddCollection">
                   <span class="btn-inner--icon">
                     <i class="fas fa-truck"></i>
                   </span>
                   <span class="btn-inner--text" >Add Collection</span>
                 </button>
+              </form>
               </div>
               <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
@@ -310,12 +320,12 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
                       <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                          <h6 class="modal-title" id="MHeader">Success!</h6>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                           </button>
