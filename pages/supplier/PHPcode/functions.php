@@ -298,4 +298,18 @@
 			return false;
 		}
 	}
+	/////////////////////////////////////////////////////////
+	function checkCollection($con,$id)
+	{
+		$check_query="SELECT * FROM COLLECTION WHERE ORDER_ID='$id'";
+		$check_result=mysqli_query($con,$check_query);
+		if(mysqli_num_rows($check_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 ?>

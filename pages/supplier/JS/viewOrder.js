@@ -3,7 +3,16 @@ var orderProductsArray;
 var orderTotal = 0.00;
 
 $(()=>{
-
+	let collectionCheck=$("#collectionCheck").text();
+	console.log(collectionCheck);
+	if(collectionCheck=="")
+	{
+		$("#btnAddCollection").attr("hidden",false);
+	}
+	else
+	{
+		$("#btnAddCollection").attr("hidden",true);
+	}
 	$.ajax({
 		url:'PHPcode/getOrderProducts.php',
 		type:'POST',
@@ -98,9 +107,12 @@ $(()=>{
 	let orderDetails=JSON.parse($("#oDetails").text());
 	console.log(orderDetails);
 	$("#oDet").val(JSON.stringify(orderDetails));
+	$("#acOrdID").val(ORDER_ID);
+	$("#acOrderDetails").val(JSON.stringify(orderDetails));
 	if(ORDER_STATUS_ID==2)
 	{
 		$("#btnReceiveStock").attr("hidden",true);
+		$("#btnAddCollection").attr("hidden",true);
 	}
 
 });

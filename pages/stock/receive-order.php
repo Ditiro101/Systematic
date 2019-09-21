@@ -169,7 +169,7 @@
             </div>
             <br>
               <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-success mt-0 " type="button" data-toggle="modal" data-target="#modal-succ">
+                <button class="btn btn-icon btn-2 btn-success mt-0 " type="button" data-toggle="modal" id="btnSave">
                   <span class="btn-inner--text">Submit</span>
                 </button>
                 <button class="btn btn-icon btn-2 btn-danger mt-0 float-right" type="button" data-toggle="modal" data-target="#force">
@@ -194,22 +194,22 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
                       <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                          <h6 class="modal-title" id="MHeader"></h6>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
                           </button>
                       </div>
                       
                       <div class="modal-body">
-                          <p>Stock recieved successfully. </p>                      
+                          <p id="MMessage"></p>                      
                       </div>
                       <div class="modal-footer">   
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button>
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
                       </div>
                     </div>
                   </div>
