@@ -58,7 +58,7 @@
           <div class="row">
             <label hidden="true" id="aData"><?php echo $_POST["ass"];?></label>
             <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
-            <div class="col-xl-3 col-lg-6">
+            <div class="col">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">

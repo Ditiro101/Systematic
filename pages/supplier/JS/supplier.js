@@ -85,14 +85,16 @@ let getInput= function()
 }
 
 	let createAddress= function(tmp){
-		let formgroup = $('<div></div>').addClass('form-group col').attr('id', 'address'+tmp);;
-		 formgroup.append($("<hr>").addClass('my-4'));
+		let formgroup = $('<div></div>').attr('id', 'address'+tmp);;
+		formgroup.append($("<hr>").addClass('my-4'));
 		let form_row1= $('<div></div>').addClass('form-row');
-		form_row1.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
 		let input_group=$('<div></div>').addClass('input-group');
 		input_group.append( $('<input>').addClass('form-control inputAddress').attr('id', 'inputAddress'+tmp).attr('type', 'text').attr('required','') );
 		input_group.append( $('<span class="input-group-btn"><button class="btn btn-danger btn-remove-address" type="button"><span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span></button>'))
-		form_row1.append(input_group);
+		let formgroup2 = $('<div></div>').addClass('form-group col');
+		formgroup2.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
+		formgroup2.append(input_group);
+		form_row1.append(formgroup2);
 		let form_row2=$('<div></div>').addClass('form-row');
 
 		let suburb=$('<div></div>').addClass('form-group col-md-6');
