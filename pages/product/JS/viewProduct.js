@@ -35,94 +35,100 @@ $(()=>{
 	SIZE_TYPE_ID = $('input[name=SIZE_TYPE_ID]').val();
 
 	productForm = $('#productForm');
+	//Maintain Product
+	$("button#maintainProduct").on('click', event => {
+		event.preventDefault();
+		$("#productForm").attr("action","maintain.php");
+		$("#productForm" ).submit();
+	});
+
+	//Convert Pallet
+	$("button#convertPallet").on('click', event => {
+		event.preventDefault();
+		$('input[name=SIZE_TYPE_ID]').attr("value","3");
+		$("#productForm").attr("action","../stock/convert.php");
+		$("#productForm" ).submit();
+	});
+
+	//Writeofff Pallet
+	$("button#writeOffPallet").on('click', event => {
+		event.preventDefault();
+		$('input[name=SIZE_TYPE_ID]').attr("value","3");
+		let productID=parseInt(PRODUCT_GROUP_ID)+2;
+		$('input[name=PRODUCT_ID]').attr("value",productID);
+		$("#productForm").attr("action","../stock/writeoff.php");
+		$("#productForm" ).submit();
+	});
+
+	//Convert Case
+	$("button#convertCase").on('click', event => {
+		event.preventDefault();
+		$('input[name=SIZE_TYPE_ID]').attr("value","2");
+		$("#productForm").attr("action","../stock/convert.php");
+		$("#productForm" ).submit();
+	});
+
+	//Writeoff Case
+	$("button#writeOffCase").on('click', event => {
+		event.preventDefault();
+		$('input[name=SIZE_TYPE_ID]').attr("value","2");
+		let productID=parseInt(PRODUCT_GROUP_ID)+1;
+		$('input[name=PRODUCT_ID]').attr("value",productID);
+		$("#productForm").attr("action","../stock/writeoff.php");
+		$("#productForm" ).submit();
+	});
+
+	//Writeoff Individual
+	$("button#writeOffIndividual").on('click', event => {
+		event.preventDefault();
+		$('input[name=SIZE_TYPE_ID]').attr("value","1");
+		let productID=parseInt(PRODUCT_GROUP_ID);
+		$('input[name=PRODUCT_ID]').attr("value",productID);
+		$("#productForm").attr("action","../stock/writeoff.php");
+		$("#productForm" ).submit();
+	});
+
+	//Delete Product
+	$("button#deleteProduct").on('click', event => {
+		event.preventDefault();
+				$.ajax({
+				url: 'PHPcode/deleteProduct_.php',
+				type: 'POST',
+				data: { 
+					PRODUCT_NAME_ : NAME,
+					PRODUCT_GROUP_ID_ : PRODUCT_GROUP_ID,
+					UNITS_PER_CASE_ : UNITS_PER_CASE
+				},
+				beforeSend: function() {
+		
+		    	}
+			})
+			.done(response => {
+				console.log(response);
+				if (response == "success")
+				{
+					$('#modal-title-default-deleteModal').text("Success!");
+					$('#modalText').text("Product deleted sucessfully");
+					$('#modal-delete').modal("show");
+				}
+				else if(response == "product cannot be deleted")
+				{
+					$('#modal-title-default-deleteModal').text("Error!");
+					$('#modalText').text("This product cannot be deleted");
+					$("#modalCloseButton").attr("onclick","");
+					$('#modal-delete').modal("show");
+				}
+				else if(response == "databaseError")
+				{
+					$('#modal-title-default-deleteModal').text("Error!");
+					$('#modalText').text("Database error deleting product");
+					$("#modalCloseButton").attr("onclick","");
+					$('#modal-delete').modal("show");
+				}
+				
+				ajaxDone = true;
+			});
+	});
 });
 
-//Maintain Product
-$("button#maintainProduct").on('click', event => {
-	event.preventDefault();
-	$("#productForm").attr("action","maintain.php");
-	$("#productForm" ).submit();
-});
-
-//Convert Pallet
-$("button#convertPallet").on('click', event => {
-	event.preventDefault();
-	$('input[name=SIZE_TYPE_ID]').attr("value","3");
-	$("#productForm").attr("action","../stock/convert.php");
-	$("#productForm" ).submit();
-});
-
-//Writeofff Pallet
-$("button#writeOffPallet").on('click', event => {
-	event.preventDefault();
-	$('input[name=SIZE_TYPE_ID]').attr("value","3");
-	$("#productForm").attr("action","../stock/writeoff.php");
-	$("#productForm" ).submit();
-});
-
-//Convert Case
-$("button#convertCase").on('click', event => {
-	event.preventDefault();
-	$('input[name=SIZE_TYPE_ID]').attr("value","2");
-	$("#productForm").attr("action","../stock/convert.php");
-	$("#productForm" ).submit();
-});
-
-//Writeoff Case
-$("button#writeOffCase").on('click', event => {
-	event.preventDefault();
-	$('input[name=SIZE_TYPE_ID]').attr("value","2");
-	$("#productForm").attr("action","../stock/writeoff.php");
-	$("#productForm" ).submit();
-});
-
-//Writeoff Individual
-$("button#writeOffIndividual").on('click', event => {
-	event.preventDefault();
-	$('input[name=SIZE_TYPE_ID]').attr("value","1");
-	$("#productForm").attr("action","../stock/writeoff.php");
-	$("#productForm" ).submit();
-});
-
-//Delete Product
-$("button#deleteProduct").on('click', event => {
-	event.preventDefault();
-			$.ajax({
-			url: 'PHPcode/deleteProduct_.php',
-			type: 'POST',
-			data: { 
-				PRODUCT_NAME_ : NAME,
-				PRODUCT_GROUP_ID_ : PRODUCT_GROUP_ID,
-				UNITS_PER_CASE_ : UNITS_PER_CASE
-			},
-			beforeSend: function() {
-	
-	    	}
-		})
-		.done(response => {
-			console.log(response);
-			if (response == "success")
-			{
-				$('#modal-title-default-deleteModal').text("Success!");
-				$('#modalText').text("Product deleted sucessfully");
-				$('#modal-delete').modal("show");
-			}
-			else if(response == "product cannot be deleted")
-			{
-				$('#modal-title-default-deleteModal').text("Error!");
-				$('#modalText').text("This product cannot be deleted");
-				$("#modalCloseButton").attr("onclick","");
-				$('#modal-delete').modal("show");
-			}
-			else if(response == "databaseError")
-			{
-				$('#modal-title-default-deleteModal').text("Error!");
-				$('#modalText').text("Database error deleting product");
-				$("#modalCloseButton").attr("onclick","");
-				$('#modal-delete').modal("show");
-			}
-			
-			ajaxDone = true;
-		});
-});
 

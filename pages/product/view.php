@@ -60,6 +60,7 @@
           <input type='hidden' name='PRODUCT_TYPE_ID' value='<?php echo $_POST["PRODUCT_TYPE_ID"] ?>'>
           <input type='hidden' name='UNITS_PER_CASE' value='<?php echo $_POST["UNITS_PER_CASE"] ?>'>
           <input type='hidden' name='PRODUCT_DESCR' value='<?php echo $_POST["PRODUCT_DESCR"] ?>'>
+          <input type="hidden" name="PRODUCT_ID" value=''>
         </form>
       <div class="row">
         <div class="col">

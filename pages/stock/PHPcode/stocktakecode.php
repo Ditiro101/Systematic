@@ -24,5 +24,5 @@
 	{
 		echo "F,Stocktake not added";
 	}
-
+	mysqli_close($con);
 ?>

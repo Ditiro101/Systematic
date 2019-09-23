@@ -260,4 +260,50 @@
 		}
 	}
 
+	function getWriteOffProductDetails($con,$id)
+	{
+		$get_query="SELECT A.*,B.NAME FROM WAREHOUSE_PRODUCT A JOIN WAREHOUSE B ON A.WAREHOUSE_ID=B.WAREHOUSE_ID WHERE A.PRODUCT_ID='$id' AND A.QUANTITY<>0";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function addWriteoff($con,$wID,$pID,$qty,$reason,$dte)
+	{
+		$add_query="INSERT INTO WRITEOFF (WAREHOUSE_ID,PRODUCT_ID,QUANTITY,WRITEOFF_REASON,WRITEOFF_DATE) VALUES('$wID','$pID','$qty','$reason','$dte')";
+		$add_result=mysqli_query($con,$add_query);
+		if($add_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateProductQtyWriteoff($con,$id,$qty)
+	{
+		$update_query="UPDATE PRODUCT SET QTY_ON_HAND=QTY_ON_HAND -'$qty',QUANTITY_AVAILABLE=QUANTITY_AVAILABLE-'$qty' WHERE PRODUCT_ID='$id'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 ?>
