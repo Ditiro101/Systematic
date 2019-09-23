@@ -1,0 +1,135 @@
+var warehouseData;
+var warehouseProduct;
+var filteredProducts;
+var USERID;
+var EMPLOYEEID;
+var sourceID=0;
+let preLoadSourceWarehouse= function(num)
+{
+	let groupDiv=$("<div></div>").addClass("custom-control custom-radio mb-3 col-3");
+	let id=num;
+	let inputDiv=$("<input></input>").addClass("custom-control-input classSourceUnchecked").attr("id",id);
+	inputDiv.attr("type","radio");
+	inputDiv.attr("name",id);
+	let labelDiv=$("<label></label>").addClass("custom-control-label radio-inline").attr("for",id).text(warehouseData[num-1]["NAME"]);
+	groupDiv.append(inputDiv);
+	groupDiv.append(labelDiv);
+	$("#sourceW").append(groupDiv);
+}
+let uncheckSource = function()
+{
+	$(".classSourceChecked").each(function(){
+		$(this).prop("checked",false);
+		$(this).removeClass("classSourceChecked");
+		$(this).addClass("classSourceUnchecked");
+	})
+}
+let buildProduct=function(tmp,arr)
+{
+	let tableEntry=$("<tr></tr>");
+	let quantityEntry1=$("<td></td>").addClass("py-2 px-0 table-light");
+	let innerDivP1=$("<div></div>").addClass("input-group mx-auto");
+	innerDivP1.css("width","4rem");
+	let inputQuantity1=$("<input type='number' min='0' step='1' data-number-to-fixed='00.10' data-number-step-factor='1'></input>").addClass("form-control currency pr-0 classQuantity");
+	inputQuantity1.css("height","2rem");
+	//inputQuantity1.attr("max",arr[tmp]["QUANTITY_TO_RECEIVE"]);
+	inputQuantity1.attr("name",arr[tmp]["PRODUCT_ID"]);
+	inputQuantity1.val(0);
+	innerDivP1.append(inputQuantity1);
+	quantityEntry1.append(innerDivP1);
+	let quantityVisible=$("<td></td>");
+	quantityVisible.text(arr[tmp]["TYPE_NAME"]);
+	let nameEntry=$("<td></td>");
+	nameEntry.text(arr[tmp]["PRODUCT_NAME"]);
+	tableEntry.append(nameEntry);
+	tableEntry.append(quantityVisible);
+	tableEntry.append(quantityEntry1);
+	$("#tBody").append(tableEntry);
+}
+$(()=>{
+	USERID = SESSION['userID'];
+	EMPLOYEEID = SESSION['employeeID'];
+	console.log(USERID);
+	console.log(EMPLOYEEID);
+	warehouseData=JSON.parse($("#wData").text());
+	warehouseProduct=JSON.parse($("#wpData").text());
+	console.log(warehouseData);
+	console.log(warehouseProduct);
+	for(let k=1;k<=warehouseData.length;k++)
+	{
+		preLoadSourceWarehouse(k);
+	}
+	$("#sourceW").on('click','.classSourceUnchecked',function(e){
+		uncheckSource();
+		$(this).removeClass("classSourceUnchecked");
+		$(this).addClass("classSourceChecked");
+		//cleanDropdown();
+		$("#tBody").html("");
+		filteredProducts=warehouseProduct.filter(element=>element["WAREHOUSE_ID"]==$(this).attr("name"));
+		for(let k=0;k<filteredProducts.length;k++)
+		{
+			buildProduct(k,filteredProducts);
+		}
+		console.log(filteredProducts);
+		sourceID=$(this).attr("name");
+		console.log(sourceID);
+	});
+	////////////////////////////////////////
+	$("#btnSave").on('click',function(e){
+		e.preventDefault();
+		if(sourceID==0)
+		{
+			$('#MHeader').text("Error!");
+			$("#MMessage").text("Please Select A Warehouse!");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
+			$("#btnClose").attr("data-dismiss","modal");
+			$("#displayModal").modal("show");
+		}
+		else
+		{
+			let assignProductIDs=[];
+			let assignProductQtys=[];
+			let quantityDifference=[];
+			$("#tBody input").each(function(){
+				assignProductIDs.push($(this).attr("name"));
+				assignProductQtys.push($(this).val());
+			});
+			console.log(assignProductQtys);
+			for(let k=0;k<filteredProducts.length;k++)
+			{
+				let dif=parseInt(filteredProducts[k]["QUANTITY"]-assignProductQtys[k]);
+				quantityDifference.push(dif);
+			}
+			console.log(quantityDifference);
+			$.ajax({
+				url:'PHPcode/stocktakecode.php',
+				type:'POST',
+				data:{num:filteredProducts.length,warehouseID:sourceID,productIDs:assignProductIDs,productQtys:assignProductQtys,differenceQty:quantityDifference,userID:USERID,employeeID:EMPLOYEEID}
+			})
+			.done(data=>{
+				let doneData=data.split(",");
+				console.log(doneData);
+				if(doneData[0]=="T")
+				{
+					$('#MHeader').text("Success!");
+					$("#MMessage").text(doneData[1]);
+					$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+					$("#modalHeader").css("background-color", "#1ab394");
+					$("#btnClose").attr("onclick","window.location='../../stock.php'");
+					$("#displayModal").modal("show");
+				}
+				else
+				{
+					$('#MHeader').text("Error!");
+					$("#MMessage").text(doneData[1]);
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
+					$("#btnClose").attr("data-dismiss","modal");
+					$("#displayModal").modal("show");
+				}
+			});	
+		}
+		
+	});
+})
