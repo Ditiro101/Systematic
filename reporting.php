@@ -326,7 +326,7 @@
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <a href="pages/reports/creditors-report.php" class="btn btn-success">Yes</a> 
               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
           </div>

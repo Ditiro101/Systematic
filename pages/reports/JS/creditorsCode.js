@@ -17,12 +17,12 @@ $(()=>{
         
                 for(let k=0;k<arr.length;k++)
                 {	
-                    total=total+parseFloat(arr[k]["BALANCE"]);
-                    tableEntries+="<tr><td class='no' colspan='2'>"+arr[k]["CUSTOMER_ID"]+"</td><td class='desc'>"+arr[k]["ACCOUNT_NO"]+"</td><td class='unit'>"+arr[k]["NAME"]+" "+arr[k]["SURNAME"]+"</td><td class='total'>"+arr[k]["BALANCE"]+"</td></tr>";
+                    total=total+parseFloat(arr[k]["AMOUNT_OWED"]);
+                    tableEntries+="<tr><td class='no' colspan='2'>"+arr[k]["SUPPLIER_ID"]+"</td><td class='desc'>"+arr[k]["VAT_NUMBER"]+"</td><td class='unit'>"+arr[k]["NAME"]+"</td><td class='total'>"+arr[k]["AMOUNT_OWED"]+"</td></tr>";
                     
                 }
                 $("#tbody").append(tableEntries);
-                $('#total').append('<td>'+total.toFixed(2)+'</td>');
+                $('#TotalAmountOwed').text('total.toFixed(2)');
                 
             }
             else
