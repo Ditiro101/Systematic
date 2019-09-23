@@ -176,27 +176,21 @@
                   <label id="cities" hidden="true"><?php echo json_encode($cityInfo);?></label>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
-                  <ul class="nav nav-pills mb-3" id="listAddress" role="tablist">
-                    <!-- <li class="nav-item">
-                      <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Address1</a>
-                    </li> -->
-                  </ul>
-                  <div class="tab-content" id="pills-tabContent">
-                      <!-- <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-                        <i class="ni location_pin mr-2 text-center"></i>
-                        <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                        <p class="mb-0"><?php echo $addressInfo[0]["ADDRESS_LINE_1"]; ?></p>
-                        <p class="mb-0"><?php echo $suburbInfo[0]["NAME"].", ".$suburbInfo[0]["ZIPCODE"]; ?></p>
-                        <p class="mb-0"><?php echo $cityInfo[0]["CITY_NAME"]; ?></p>
-                        <p class="mb-0">South Africa</p>
-                      </div> -->
+                  <div class="px-auto">
+                    <ul class="nav nav-pills mb-3 px-auto" id="listAddress" role="tablist" style="width: auto;">
+
+                    </ul>
                   </div>
+                    
+                    <div class="tab-content" id="pills-tabContent"></div>
+
+                  
                   
                 </div>
                 </hr>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
               </div>
             </div>

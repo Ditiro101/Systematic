@@ -251,7 +251,9 @@ $(()=>{
 		$("#tBody").find('tr').each(function(rowIndex,r){
 			placeProducts.push($(this).attr("name"));
 			placeProductQty.push(parseInt($(this).find(">:first-child>:first-child>:first-child").val()));
-			validationQty.push(parseInt($(this).find(">:nth-last-child(2)").text()))
+			console.log(parseInt($(this).find(">:first-child>:first-child>:first-child").val()));
+			validationQty.push(parseInt($(this).find(">:nth-last-child(2)").text()));
+			console.log(parseInt($(this).find(">:nth-last-child(2)").text()));
 		});
 		for(let k=0;k<placeProductQty.length;k++)
 		{

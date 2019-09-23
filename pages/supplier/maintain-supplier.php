@@ -191,12 +191,17 @@
                     </div>
                         
                     </form>
-                      <div class="col-md-2 float-right">
-                                    <button class="btn btn-success " id="btn-add-address" type="button">
-                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
-                                    </button>
-                                    <small>Max 3 Adresses allowed</small>
-                      </div> 
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <div class=" float-right">
+                          <button class="btn btn-success " id="btn-add-address" type="button">
+                              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Address</span>
+                          </button>
+                          <br>
+                          <small>Max 3 adresses allowed</small>
+                        </div>
+                      </div>
+                    </div> 
                       <br>
                       <div class="col">
                         <div class="form-group">

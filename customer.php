@@ -54,7 +54,7 @@
                   if (in_array("1.1", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  href="/pages/customer/register.php">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location.href='pages/customer/register.php'">
                     <a href="pages/customer/register.php">
                       <div>
                       <i class="fas fa-plus"></i>
@@ -71,7 +71,7 @@
                   if (in_array("1.2", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location.href='pages/customer/search.php'">
                     <a href="pages/customer/search.php">
                       <div>
                         <i class="far fa-edit"></i>
@@ -88,7 +88,7 @@
                   if (in_array("1.3", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location.href='pages/customer/search.php'">
                     <a href="pages/customer/search.php">
                       <div>
                         <i class="fas fa-search"></i>
@@ -105,10 +105,10 @@
                   if (in_array("1.4", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button class="btn-icon-clipboard" href="#">
+                  <button class="btn-icon-clipboard" onclick="window.location.href='pages/customer/search.php'">
                     <a href="pages/customer/search.php">
                       <div>
-                        <i class="ni ni-fat-remove"></i>
+                        <i class="fas fa-times"></i>
                         <span>Deregister Customer</span>
                       </div>
                     </a>
@@ -122,7 +122,7 @@
                   if (in_array("1.5", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location.href='pages/customer/search.php'">
                     <a href="pages/customer/search.php">
                       <div>
                         <i class="far fa-file-alt"></i>
@@ -139,7 +139,7 @@
                   if (in_array("1.6", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard" data-clipboard-text="ambulance">
+                  <button type="button" class="btn-icon-clipboard" onclick="window.location.href='pages/customer/search.php'">
                     <a href="pages/customer/search.php">
                       <div>
                         <i class="fas fa-file-invoice-dollar"></i>

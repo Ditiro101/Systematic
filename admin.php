@@ -179,23 +179,6 @@ if(isset($_SESSION['userID']))
                 ?>
 
                 <?php 
-                  if (in_array("4.8", $subFunctionality)) {
-                ?>
-                <div class="col-lg-4 col-md-6">
-                  <button type="button" class="btn-icon-clipboard"  href="#">
-                    <a href="#">
-                      <div>
-                        <i class="fas fa-user-times"></i>
-                        <span>Maintain Check-in Checkout Time</span>
-                      </div>
-                    </a>
-                  </button>
-                </div>
-                <?php
-                  }
-                ?>
-
-                <?php 
                   if (in_array("4.9", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
@@ -217,12 +200,12 @@ if(isset($_SESSION['userID']))
                 ?>
                 <div class="col-lg-4 col-md-6">
                   <button type="button" class="btn-icon-clipboard" data-toggle="modal" data-target="#over">
-                    
+                    <a href="">
                       <div>
                       <i class="far fa-clock"></i>
                         <span>Maintain Overdue Delivery Status</span>
                       </div>
-                    
+                    </a>
                   </button>
                 </div>
 
