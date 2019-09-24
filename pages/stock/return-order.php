@@ -144,7 +144,7 @@
                               <?php 
                                 $source = $orderDetails->ORDER_DATE;
                                 $date = new DateTime($source);
-                                echo $date->format("Y/m/d"); 
+                                echo $date->format("d/m/Y"); 
                               ?>
                             </td>
                           </tr>
@@ -245,23 +245,21 @@
                   </div>
                 </div>
               </div>
-              <div class="form-group col-md-2">
+              <div class="form-group col-md-2 errorModal successModal text-center">
                 <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                   <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                       <div class="modal-content">
-                          <div class="modal-header">
-                              <h6 class="modal-title" id="modal-title-default2"></h6>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">×</span>
-                              </button>
+                          <div class="modal-header" id="modalHeader">
+                            <h6 class="modal-title" id="modal-title-default2"></h6>
                           </div>
                           <div class="modal-body">
                               <p id="modalText"></p>
-                              
+                              <div id="animation" style="text-align:center;">
+                              </div>
                           </div>
                           <div class="modal-footer">
                               
-                              <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
+                              <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" >Close</button> 
                           </div>
                           
                       </div>
@@ -269,47 +267,43 @@
                 </div>
               </div>
               <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                      <div class="modal-content">
-                        
-                          <div class="modal-header">
-                              <h6 class="modal-title" id="modal-title-default">Error!</h6>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">×</span>
-                              </button>
-                          </div>
-                          
-                          <div class="modal-body text-left">
-                            <p id="MMessage"></p>
-                              
-                          </div>
-                          
-                          <div class="modal-footer">
-                              
-                              <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
-                          </div>
-                          
-                      </div>
-                  </div>
-                </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                    <div class="modal-header" id="modalHeader">
+                      <h6 class="modal-title" id="modal-title-default">Error!</h6>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">×</span>
                       </button>
                     </div>
-                    <div class="modal-body">
-                      <p>Order successfully item(s) returned. Sending return email to supplier... </p>
+                    <div class="modal-body text-left">
+                      <p id="MMessage"></p>
+                      <div id="animation" style="text-align:center;">
+                      </div>
                     </div>
-                    <div class="modal-footer"> 
-                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button> 
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <p>Order successfully item(s) returned. Sending return email to supplier... </p>
+                      </div>
+                      <div class="modal-footer"> 
+                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button> 
+                      </div>
+                    </div>
+                  </div>
+                </div>
             </div>
           
           </div>

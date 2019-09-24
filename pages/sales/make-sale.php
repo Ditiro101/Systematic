@@ -207,26 +207,23 @@
 
         <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
           <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                
-                  <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
-                  </div>
-                  
-                  <div class="modal-body">
-                    <div class="form-group col">
-                      <label for="bane">Sales Manager Password</label>
-                      <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
-                  </div>
-                  
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
               </div>
+              <div class="modal-body">
+                <div class="form-group col">
+                  <label for="bane">Sales Manager Password</label>
+                  <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
+                </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
+              </div>
+            </div>
           </div>
         </div>
         

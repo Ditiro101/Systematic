@@ -58,26 +58,52 @@ $("#finaliseReturn").on('click',function(e){
 
 	});
 	var errors = 0;
+	var numberZero = 0;
+
 	for(let k=0;k<placeProductQty.length;k++)
 	{
+		if(placeProductQty[k] == 0)
+		{
+			numberZero++;
+		}
+
 		if(Number.isNaN(placeProductQty[k]))
 		{
-			
-			$("#MMessage").text("One or more Input Quantities are empty");
-			$("#btnClose").attr("data-dismiss","modal");
-			$("#displayModal").modal("show");
+			event.preventDefault();
+			$('#modal-title-default2').text("Error!");
+			$("#modalText").text("One or more Input Quantities are empty, please check highlighted quantites.");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
+			$("#modalCloseButton").attr("data-dismiss","modal");
+			$("#successfullyAdded").modal("show");
 			errors++;
 			break;
 		}
 		else if(placeProductQty[k]>validationQty[k])
 		{
-			$("#MMessage").text("One or more quantities are too large, please check highlighted quantites.");
-			$("#btnClose").attr("data-dismiss","modal");
-			$("#displayModal").modal("show");
+			event.preventDefault();
+			$('#modal-title-default2').text("Error!");
+			$("#modalText").text("One or more quantities are too large, please check highlighted quantites.");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
+			$("#modalCloseButton").attr("data-dismiss","modal");
+			$("#successfullyAdded").modal("show");
 			errors++;
 			break;
 		}
 	}
+	if (numberZero == placeProductQty.length) 
+	{
+		event.preventDefault();
+		$('#modal-title-default2').text("Error!");
+		$("#modalText").text("All of your quantities are zero, please enter product quantities to return.");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
+		$("#modalCloseButton").attr("data-dismiss","modal");
+		$("#successfullyAdded").modal("show");
+		errors++;
+	}
+
 	if (errors == 0)
 	{
 		$("#modal-returnOrder").modal("show");
@@ -157,6 +183,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 					$('#modal-title-default2').text("Success!");
 					$('#modalText').text("Correct Password. Sale return successful");
 					$("#modalCloseButton").attr("onclick","window.location='../../stock.php'");
+					
 					$('#successfullyAdded').modal("show");
 				}
 				else if(response == "failed")
@@ -165,6 +192,8 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 					$("#salesManagerPassword").val("");
 					$('#modal-title-default2').text("Error!");
 					$('#modalText').text("Incorrect password entered");
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
 					$("#modalCloseButton").attr("onclick","");
 					$('#successfullyAdded').modal("show");
 				}
@@ -173,6 +202,8 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 					$('#modal-title-default2').text("Database Error!");
 					$('#modalText').text("Database error whilst verifying password");
 					$("#modalCloseButton").attr("onclick","");
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
 					$('#successfullyAdded').modal("show");
 				}
 				
@@ -185,9 +216,13 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 			$("#reasonForReturn").val("");
 			$("#salesManagerPassword").val("");
 			$('.loadingModal').modal('hide');
+			$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+			$("#modalHeader").css("background-color", "#1ab394");
 			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Incorrect password entered");
 			$("#modalCloseButton").attr("onclick","");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
 			$('#successfullyAdded').modal("show");
 		}
 		else if(response == "Password empty")
@@ -196,6 +231,8 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 			$('#modal-title-default2').text("Error!");
 			$('#modalText').text("Please enter a password");
 			$("#modalCloseButton").attr("onclick","");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
 			$('#successfullyAdded').modal("show");
 		}
 		else if(response == "Database error")
@@ -203,6 +240,8 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 			$('.loadingModal').modal('hide');
 			$('#modal-title-default2').text("Database Error!");
 			$('#modalText').text("Database error whilst verifying password");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
 			$("#modalCloseButton").attr("onclick","");
 			$('#successfullyAdded').modal("show");
 		}
@@ -252,15 +291,31 @@ let buildTable=function(arr)
 		tableEntry.append(productReturnQuantityEntry);
 
 		$("#tBody").append(tableEntry);
+
+		$('.returnQuantityNumber').each( function(){
+	        $(this).attr("style","border-color: orange;height: 2rem; color: orange;");
+	    });
 	}
 }
 
-$(document).on('change','.classQuantity',function(e){
+$(document).on('change','.returnQuantityNumber',function(e){
 	e.preventDefault();
 	//console.log($(this).attr("max"));
-	if(parseInt($(this).val())>parseInt($(this).attr("max")))
+	if(parseInt($(this).val()) == parseInt($(this).attr("max")))
 	{
-		$(this).attr("style","border-color: #FF0000;height: 2rem; color: #FF0000;");
+		$(this).attr("style","border-color: orange;height: 2rem; color: orange;");
+	}
+	else if(parseInt($(this).val()) > parseInt($(this).attr("max")))
+	{
+		$(this).attr("style","border-color: red;height: 2rem; color: red;");
+	}
+	else if(parseInt($(this).val()) == 0)
+	{
+		$(this).attr("style","border-color: orange;height: 2rem; color: orange;");
+	}
+	else if(Number.isNaN(parseInt($(this).val())))
+	{
+		$(this).attr("style","border-color: red;height: 2rem; color: red;");
 	}
 	else
 	{

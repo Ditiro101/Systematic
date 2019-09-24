@@ -428,7 +428,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 
 			        },
 			        complete: function(){
-			            $('.loadingModal').modal('hide')
+			            $('.loadingModal').modal('hide');
 			        }
 			    })
 			    .done(response => {
@@ -456,7 +456,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 						$('#modal-title-default2').text("Error!");
 						$('#modalText').text("Incorrect password entered");
 						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-						$("#modalCloseButton").attr("onclick","");
+						$("#btnClose").attr("onclick",'$("#modal-salesManagerPassword").modal("show");');
 						$("#modalHeader").css("background-color", "red");
 						$('#successfullyAdded').modal("show");
 					}
@@ -482,7 +482,7 @@ $("button#confirmSalesManagerPassword").on('click', event => {
 			$('#modalText').text("Incorrect password entered");
 			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 			$("#modalHeader").css("background-color", "red");
-			$("#modalCloseButton").attr("onclick","");
+			$("#btnClose").attr("onclick", '$("#modal-salesManagerPassword").modal("show")');
 			$('#successfullyAdded').modal("show");
 		}
 		else if(response == "Password empty")
