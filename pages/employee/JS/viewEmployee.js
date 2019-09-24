@@ -20,17 +20,25 @@ $(()=>{
         $.ajax({
             url:'PHPcode/regenerateEmployeeTag-SQL.php',
             type:'POST',
-            data: {employee_ID:employeeID}
+            data: {employee_ID:employeeID},
+            beforeSend: function(){
+                $("#modal-title-default").text("Success!");
+                $("#modalText").text("Generating empoyee tag...");
+                $("#displayModal").modal("show");
+            },
         })
         .done(data=>{
             console.log(data);
             let confirmation = data.trim();
-            if(confirmation== "success")
+            $("#displayModal").modal("hide");
+            
+            if(confirmation.includes("success"))
             {
-                $("#modal-title-default").text("Success!");
-                $("#modalText").text("Empoyee tag is being generated...");
-                $("#btnClose").attr("onclick","window.location='../../employee.php'");
-                $("#displayModal").modal("show");
+                let id = confirmation.split(",");
+                let employeeID = parseInt(id[0]);
+                console.log(id[0]);
+                
+                window.open(`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`, '_blank');
             }
             else if(confirmation == "Employee Exists!")
             {

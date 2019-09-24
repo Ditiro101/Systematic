@@ -65,11 +65,8 @@
             </div>
             <div class="card-body">
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Customer Details</h5>
-                    </div>
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
                     <input type="hidden" id="SALE_ID" value='<?php echo $_POST["SALE_ID"];?>'>
                     <input type="hidden" id="SALE_DATE" value='<?php echo $_POST["SALE_DATE"];?>'>
                     <input type="hidden" id="CUSTOMER_ID" value='<?php echo $_POST["CUSTOMER_ID"];?>'>
@@ -77,72 +74,85 @@
                     <input type="hidden" id="EMPLOYEE_DATA" value='<?php echo $_POST["EMPLOYEE_DATA"];?>'>
                     <input type="hidden" id="PRODUCTS_ARRAY" value='<?php echo $_POST["PRODUCTS_ARRAY"];?>'>
                     <input type="hidden" id="SALE_PRODUCTS_ARRAY" value='<?php echo $_POST["SALE_PRODUCTS_ARRAY"];?>'>
-                    <div class="card-body px-3">
+                    <div class="card-body px-3" style="height: 15.5rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
-                            <tr>
-                              <th style="width: 12rem">
-                                  Customer ID
-                              </th>
-                              <td >
-                                  <?php echo $_POST["CUSTOMER_ID"];?>
-                              </td>
-                            </tr>                               
-                            <tr>
-                              <th>
-                                  Name
-                              </th>
-                              <td id="customerName">
-                              </td>
-                            </tr> 
-                            <tr>
-                              <th>
-                                  Surname
-                              </th>
-                              <td id="customerSurname">
-                              </td>
-                            </tr>
-                            <tr>
-                              <th>
-                                  Contact No
-                              </th>
-                              <td id="customerContact">
-                              </td>
-                            </tr>              
+                          <tr>
+                            <th style="width: 12rem">
+                                Customer ID
+                            </th>
+                            <td >
+                                <?php echo $_POST["CUSTOMER_ID"];?>
+                            </td>
+                          </tr>                               
+                          <tr>
+                            <th>
+                                Name
+                            </th>
+                            <td id="customerName">
+                            </td>
+                          </tr> 
+                          <tr>
+                            <th>
+                                Surname
+                            </th>
+                            <td id="customerSurname">
+                            </td>
+                          </tr>
+                          <tr>
+                            <th>
+                                Contact No
+                            </th>
+                            <td id="customerContact">
+                            </td>
+                          </tr>              
                         </tbody>
                       </table>
+                    </div>
                   </div>
                 </div>
-              </div>
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 18.5rem">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 15.5rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
-                        <tbody class="list">    
-                            <tr>
-                              <th style="width: 12rem">
-                                Date & Time
-                              </th>
-                              <td id="saleDate">
-                                <?php echo $_POST["SALE_DATE"];?>
-                              </td>
-                            </tr>                               
-                            <tr>
-                              <th>
-                                Invoice #
-                              </th>
-
-                              <td id="invoiceNo">
-                                <?php echo $_POST["SALE_ID"]?>
-                              </td>
-                            </tr> 
-                            <tr>
-                              <th>
-                                Salesperson
-                              </th>
-                              <td id="eSalesPerson">
-                              </td>
-                            </tr>      
+                        <tbody class="list">                                  
+                          <tr>
+                            <th>
+                              Invoice #
+                            </th>
+                            <td id="invoiceNo">
+                              <?php echo $_POST["SALE_ID"]?>
+                            </td>
+                          </tr> 
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Date 
+                            </th>
+                            <td >
+                              <?php 
+                                $source = $_POST["SALE_DATE"];;
+                                $date = new DateTime($source);
+                                echo $date->format("d/m/Y"); 
+                              ?>
+                            </td>
+                          </tr>
+                          <tr>
+                            <th style="width: 12rem">
+                              Order Time 
+                            </th>
+                            <td >
+                              <?php 
+                                echo $date->format("h:i a"); 
+                              ?>
+                            </td>
+                          </tr> 
+                          <tr>
+                            <th>
+                              Salesperson
+                            </th>
+                            <td id="eSalesPerson">
+                            </td>
+                          </tr>      
                         </tbody>
                       </table>
                   </div>
@@ -186,20 +196,16 @@
             </div>
           </div>
             <br>
-
               <div class="col mt-4">
-                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal" data-target="#modal-creditlimit">
+                <button id="finaliseReturn" class="btn btn-icon btn-2 btn-danger mt-0" type="button" data-toggle="modal">
                   <span class="btn-inner--text">Finalise Return</span>
                 </button>
               </div>
-              <div class="modal fade" id="modal-creditlimit" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal fade" id="modal-returnSale" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content"> 
                     <div class="modal-header">
                         <h6 class="modal-title" id="modal-title-default">Return</h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
                     </div>
                     <div class="modal-body">
                       <div class="col text-left">
@@ -220,52 +226,43 @@
 
               <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                    <div class="modal-content">
-                      
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        
-                        <div class="modal-body">
-                          <div class="form-group col">
-                            <label for="bane">Sales Manager Password</label>
-                            <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" id="confirmSalesManagerPassword">Approve Sale</button> 
-                        </div>
-                        
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
                     </div>
+                    <div class="modal-body">
+                      <div class="form-group col">
+                        <label for="bane">Sales Manager Password</label>
+                        <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-success  ml-auto" data-dismiss="modal" id="confirmSalesManagerPassword">Approve Sale</button> 
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <div class="form-group col-md-2">
-          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
+              <div class="form-group col-md-2 errorModal successModal text-center">
+                <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                  <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header" id="modalHeader">
                         <h6 class="modal-title" id="modal-title-default2"></h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
+                      </div>
+                      <div class="modal-body">
                         <p id="modalText"></p>
-                        
+                        <div id="animation" style="text-align:center;">
+
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal">Close</button> 
+                      </div>
                     </div>
-                    <div class="modal-footer">
-                        
-                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
-                    </div>
-                    
+                  </div>
                 </div>
-            </div>
-          </div>
-        </div>
+              </div>
 
               <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">

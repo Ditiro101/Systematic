@@ -1,4 +1,10 @@
-<?php include_once("../sessionCheckPages.php");?>
+<?php 
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $warehouseProduct=getWriteOffProductDetails($con,$_POST["PRODUCT_ID"]);
+  mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -59,32 +65,31 @@
                     <form>
                       <div class="form-row">
                         <div class="form-group col">
+                          <label hidden="true" id="pID"><?php echo $_POST["PRODUCT_ID"];?></label>
+                          <label hidden="true" id="sizeID"><?php echo $_POST["SIZE_TYPE_ID"];?></label>
+                          <label hidden="true" id="warehouseP"><?php echo json_encode($warehouseProduct); ?></label>
                           <label for="bane"> Select Warehouse</label>
-                          <select class="form-control">
-                            <option>Sale Warehouse</option>
-                            <option>Return Warehouse</option>
-                            <option>Receival Warehouse</option>  
-                            <option>Coke Warehouse</option>
+                          <select class="form-control" id="destinationWarehouse">
                           </select>
                         </div>
                       </div>
                       <div class="form-row"> 
                         <div class="form-group col">
                           <label for="bane">Quantity of item(s) write-off</label>
-                          <input type="number" class="form-control" id="name" aria-describedby="emailHelp" placeholder="1">
+                          <input type="number" class="form-control classQuantity" id="writeoffQty" aria-describedby="emailHelp" min="1" step="1">
                         </div>
                       </div>
                      <div class="form-row"> 
                         <div class="form-group col">
                           <label for="bane">Reason for writeoff</label>
-                          <input type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Writeoff due to damage - packing">
+                          <input type="text" class="form-control" id="wReason" aria-describedby="emailHelp" placeholder="Writeoff due to damage - packing">
                         </div>
                       </div>
                       <div class="form-row">
                         <div class="form-group col">
                           <label for="bane"> Quantity type</label>
                           <select class="form-control" disabled>
-                            <option>Palette</option>  
+                            <option id="sType"></option>  
                           </select>
                         </div>
                       </div>
@@ -94,31 +99,28 @@
                      <!--  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#modal-default">Save</button> -->
                     <div class="form-row">
                       <div class="form-group">
-                          <button type="button" class="btn btn-primary mb-3 px-5 ml-1" data-toggle="modal" data-target="#modal-default">Save</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <button type="button" class="btn btn-primary mb-3 px-5 ml-1" data-toggle="modal" id="btnSave">Save</button>
+                          <div class="form-group col-md-2 errorModal successModal text-center">
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                                <div class="modal-content">
-                                  
-                                    <div class="modal-header">
-                                        <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                            <span aria-hidden="true">×</span>
-                                        </button>
-                                    </div>
-                                    
-                                    <div class="modal-body">
-                                        <p>Stock written off successfully</p>
-                                        
-                                    </div>
-                                    
-                                    <div class="modal-footer">
-                                        
-                                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button>
-                                    </div>
-                                    
+                              <div class="modal-content">
+                                <div class="modal-header" id="modalHeader">
+                                    <h6 class="modal-title" id="MHeader">Success</h6>
                                 </div>
+                                <div class="modal-body">
+                                  <p id="MMessage">Successfully Added</p>
+                                  
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                                </div>
+                              </div>
                             </div>
                           </div>
+                        </div>
                         </div>
                       </div>
                     </form>
@@ -133,6 +135,13 @@
       <?php include_once("../footer.php");?>
     </div>
   </div>
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -142,6 +151,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/writeoffStock.js"></script>
 </body>
 
 </html>

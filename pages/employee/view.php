@@ -185,12 +185,12 @@
       <!-- Table -->
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <div class="col-8 order-xl-2 mb-5 mb-xl-0">
+          <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col ">
                 <div class="card-profile-image">
-                  <a href="#">
+                  <a>
                 <?php
 
                 //Pic to be inserted here.
@@ -199,13 +199,13 @@
                         if(file_exists($dir))
                         {
                             
-                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person">';
+                            echo '<img src="' . $dir . '" class="rounded-circle" alt="person" style="width: 180px; height: 180px; border: 5px solid white;">';
                            
                         }
                         else
                         {
                          
-                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person">';
+                          echo '<img src="../../images/user.png" class="rounded-circle" alt="person" style="width: 180px; height: 180px; border: 2px solid white;">';
                             
                         }
                 ?>   
@@ -214,9 +214,94 @@
                 </div>
               </div>
             </div>
+
+
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+            <div class="card-body pt-0 pt-md-4">
               <div class="row">
-                  <div class="col-md-6 col-lg-6 col-sm-6 ">
+                <div class="col">
+                  <div class="card-profile-stats d-flex justify-content-center mb-6 mb-0">
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-0">
+                <h2>
+                  <?php echo $titleName." ".$name." ".$surname; ?>
+                </h2>
+
+
+                  <div class="row mb-2">
+                    <div class="col d-inline mx-0 px-0">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn btn-icon btn-2 btn-default btn-sm px-2" type="button" id="wageCalc" style="width: 10rem">
+                            <span class="btn-inner--icon"><i class="far fa-money-bill-alt"></i>
+                            </span>
+                            <span class="btn-inner--text">Calculate Wage</span>
+                        </button>
+                      </form>
+                    </div> 
+                    <div class="col d-inline mx-0 px-0">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn btn-icon btn-2 btn-warning btn-sm px-2" type="button" id="checkIn" style="width: 7rem">
+                            <span class="btn-inner--icon"><i class="far fa-check-square"></i>
+                            </span>
+                            <span class="btn-inner--text">Check-in</span>
+                        </button>
+                      </form>
+                    </div> 
+                    <div class="col d-inline mx-0 px-0">
+                      <form action='' method="POST" id="addUserView">
+                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
+
+                        <button class="btn btn-icon btn-2 btn-warning btn-sm px-2" type="button" id="checkOUT" style="width: 7rem">
+                            <span class="btn-inner--icon"><i class="fas fa-check-double"></i>
+                            </span>
+                            <span class="btn-inner--text">Checkout</span>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col d-inline mx-0 px-0">
+                      <button class="btn btn-sm btn-icon btn-default" type="button" data-toggle="modal" data-target="#del" style="width: 10rem">
+                        <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
+                        </span>
+                        <span class="btn-inner--text">Re-generate Tag</span>
+                      </button>
+                    </div>
+
+                  </div>
+                </div>
+                <hr class="h5 font-weight-300 pb-0 mt-3">
+                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline" id="employee_ID"><?php echo $employeeID;?></p></div>
+                   <div class="pt-2">
+                      <b>Employee Type : </b>
+                      <p class="d-inline" id="eEmployeeTypeName"><?php echo $employeeTypeName;?></p>
+                   </div>                 
+                </hr>
+                <hr class="h5 font-weight-300 pb-0 mt-3">
+
+                  <div class="pt-2"><b>ID Number : </b><p class="d-inline"><?php echo $identityNo;?></p></div>
+
+                  <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $email;?></p></div>
+                  
+                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $contactNumber ?></p></div>
+                </hr>
+                <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
+                  <i class="ni location_pin mr-2 text-center"></i>
+                  <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
+                  <p class="mb-0"><?php echo $addressInfoLine1;?></p>
+                  <p class="mb-0" id="eSuburb"><?php echo $suburbName.", ".$cityName.", ".$zipCode;?></p>
+                  <p class="mb-0">South Africa</p>
+                </div>
+                <hr class="my-2 d-flex justify-content-center">
+                <div class="row mb-2">
+                  <div class="col d-inline mx-0 px-0">
                     <form id="formMaintain" action="maintain.php" method="POST">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
@@ -231,101 +316,43 @@
                         <input type="hidden" name="SUBURB" id="SUBURB">
                         <input type="hidden" name="CITY" id="CITY">
                         <input type="hidden" name="ZIP" value=<?php echo $zipCode;?>>
-                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-3" type="submit" style="width: 7rem">
                           <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                           </span>
                           <span class="btn-inner--text">Edit</span>
                         </button>
                       </form>
                   </div>
-                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
+                  <div class="col d-inline mx-0 px-0">
                       <form action='../user/add-user.php' method="POST" id="addUserView">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
 
-                        <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="submit">
+                        <button class="btn btn-icon btn-2 btn-success btn-sm px-2" type="submit" style="width: 7rem">
                             <span class="btn-inner--icon"><i class="fas fa-user-plus"></i>
                             </span>
                             <span class="btn-inner--text">Add User</span>
                         </button>
                       </form>
-                  </div> 
-                </div>
-
-                <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
-                      <form action='' method="POST" id="addUserView">
-                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
-                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
-
-                        <button class="btn pb-2 btn-icon btn-2 btn-info btn-sm px-2" type="button" id="wageCalc">
-                            <span class="btn-inner--icon"><i class="far fa-money-bill-alt"></i>
-                            </span>
-                            <span class="btn-inner--text">Calculate Wage</span>
-                        </button>
-                      </form>
-                  </div> 
-
-
-                <div class="row">
-                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2 pb-2">
-                    <button class="btn btn-icon btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" >
-                      <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                      </span>
-                      <span class="btn-inner--text">Delete</span>
-                    </button>
+                    </div> 
+                    <div class="col d-inline mx-0 px-0">
+                      <button class="btn btn-icon btn-danger btn-sm" type="button" data-toggle="modal" data-target="#dismiss" style="width: 7rem">
+                        <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                        </span>
+                        <span class="btn-inner--text">Delete</span>
+                      </button>
+                    </div> 
                   </div>
-                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
-                    <button class="btn btn-sm btn-icon btn-default " type="button" data-toggle="modal" data-target="#del">
-                      <span class="btn-inner--icon"><i class="fas fa-id-card"></i>
-                      </span>
-                      <span class="btn-inner--text">Re-generate Tag</span>
-                    </button>
+                <hr class="my-2 d-flex justify-content-center">
+                  <div class="d-flex justify-content-center">
+                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
-
-                  <div class="col-6">
-                      <form action='' method="POST" id="addUserView">
-                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
-                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
-
-                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkIn">
-                            <span class="btn-inner--icon"><i class="far fa-check-square"></i>
-                            </span>
-                            <span class="btn-inner--text">Check-in</span>
-                        </button>
-                      </form>
-                  </div> 
-
-                  <div class="col-md-6 col-lg-6 col-sm-6 pt-2">
-                      <form action='' method="POST" id="addUserView">
-                        <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
-                        <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
-
-                        <button class="btn pb-2 btn-icon btn-2 btn-success btn-sm px-2" type="button" id="checkOUT">
-                            <span class="btn-inner--icon"><i class="fas fa-check-double"></i>
-                            </span>
-                            <span class="btn-inner--text">Checkout</span>
-                        </button>
-                      </form>
-                  </div> 
-                  
-                  <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                        </div>
-                        <div class="modal-body text-left">
-                            <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
-                        </div>
-                        <div class="modal-footer">   
-                          <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              </div>
+            </div>
+          </div>
+        </div>
+          </div>
+          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -344,8 +371,7 @@
                     </div>
                   </div>
 
-
-                  <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -372,7 +398,25 @@
                   </div>
                 </div>
               </div>
-              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+
+              <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                        </div>
+                        <div class="modal-body text-left">
+                            <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
+                        </div>
+                        <div class="modal-footer">   
+                          <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                     <div class="modal-content">
                       
@@ -396,55 +440,6 @@
                     </div>
                 </div>
               </div>
-  
-              </div>
-            </div>
-
-            <div class="card-body pt-0 pt-md-4">
-              <div class="row">
-                <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center mt-2 mb-0">
-                  </div>
-                </div>
-              </div>
-              <div class="text-center mt-0">
-                <h2>
-                  <?php echo $titleName." ".$name." ".$surname; ?>
-                </h2>
-                <hr class="h5 font-weight-300 pb-0 mt-3">
-                   <div class="pt-2"><b>Employee ID : </b><p class="d-inline" id="employee_ID"><?php echo $employeeID;?></p></div>
-                   <div class="pt-2">
-                      <b>Employee Type : </b>
-                      <p class="d-inline" id="eEmployeeTypeName"><?php echo $employeeTypeName;?></p>
-                   </div>                 
-                </hr>
-                <hr class="h5 font-weight-300 pb-0 mt-3">
-
-                  <div class="pt-2"><b>ID Number : </b><p class="d-inline"><?php echo $identityNo;?></p></div>
-
-                  <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $email;?></p></div>
-                  
-                  <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $contactNumber ?></p></div>
-                </hr>
-                <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
-                  <i class="ni location_pin mr-2 text-center"></i>
-                  <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <label id="eAddress" hidden="true"><?php echo $addressInfoLine1;?></label>
-                  <p class="mb-0"><?php echo $addressInfoLine1;?></p>
-                  <p class="mb-0" id="eSuburb"><?php echo $suburbName;?></p>
-                  <label id="eCity"><?php echo $cityName;?></label>
-                  <p class="mb-0"><?php echo $cityName.",".$zipCode; ?></p>
-                  <p class="mb-0">South Africa</p>
-                </div>
-                <hr class="my-2 d-flex justify-content-center">
-                  <div class="d-flex justify-content-center">
-                     <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.close(); return false;">Close</button>
-                  </div>
-              </div>
-            </div>
-          </div>
-        </div>
-          </div>
         
 
   

@@ -1,3 +1,6 @@
+<?php
+  include_once("../sessionCheckPages.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -52,13 +55,15 @@
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
+            <label hidden="true" id="aData"><?php echo $_POST["fAss"];?></label>
+            <label hidden="true" id="apData"><?php echo $_POST["fAssP"];?></label>
             <div class="col-xl-3 col-lg-6">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Customer Detials</h5>
-                      <span class="h2 font-weight-bold mb-0">Customer Invoice# 321</span>
+                      <span id="invNo" class="h2 font-weight-bold mb-0"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -67,7 +72,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i> IT Building Room 5-69</span>
+                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i><span id="delA"></span></span>
                     <span class="text-nowrap">Finalisation in progress</span>
                   </p>
                 </div>
@@ -90,17 +95,7 @@
                           
                         </tr>
                       </thead>
-                      <tbody>
-                        <tr>
-                          <td> 
-                            <div class="input-group mx-auto" style="width: 4rem">
-                              <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                            </div>
-                          </td>
-                          <td class="py-3 text-center">2</td>
-                          <td class="py-3">Surprise Product</td>
-
-                        </tr>
+                      <tbody id="tBody">
                         </tbody>
                       </table>
                   </div>  
@@ -138,7 +133,7 @@
                       <p class="pl-3 mt-1">Please sign to confirm receival of delivery</p>
                     </div>
                     <div class="modal-footer">
-                      <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" data-target="#finalise-success">
+                      <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" id="btnSave">
                         <i class="fas fa-truck"></i>
                         <span>Submit </span>
                       </button>
@@ -181,6 +176,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/makeDelivery.js"></script>
 </body>
 
 </html>
