@@ -61,6 +61,7 @@ $(()=>{
 	}
 	$("#sourceW").on('click','.classSourceUnchecked',function(e){
 		uncheckSource();
+		$("#myInput").val("");
 		$(this).removeClass("classSourceUnchecked");
 		$(this).addClass("classSourceChecked");
 		//cleanDropdown();
@@ -70,6 +71,8 @@ $(()=>{
 		{
 			buildProduct(k,filteredProducts);
 		}
+		let searchEmpty=$('<tr id="emptySearch" style="display: none;" class="table-danger"><td class="py-2"><b>Product Not Found</b></td><td class="py-2"></td><td class="py-2"></td></tr>');
+		$("#tBody").append(searchEmpty);
 		console.log(filteredProducts);
 		sourceID=$(this).attr("name");
 		console.log(sourceID);
@@ -139,3 +142,39 @@ $(()=>{
 		
 	});
 })
+
+function myFunction() 
+{
+	var input, filter, table, tr, td, i, txtValue;
+	input = document.getElementById("myInput");
+	filter = input.value.toUpperCase();
+	table = document.getElementById("myTable");
+	tr = table.getElementsByTagName("tr");
+	var showCount = 0;
+	for (i = 0; i < tr.length; i++) 
+	{
+	  td = tr[i].getElementsByTagName("td")[0];
+	  if (td) 
+	  {
+	    txtValue = td.textContent || td.innerText;
+	    if (txtValue.toUpperCase().indexOf(filter)> -1) 
+	    {
+	      tr[i].style.display = "";
+	      showCount += 1;
+	    } 
+	    else 
+	    {
+	      tr[i].style.display = "none";
+	    }
+	  }       
+	}
+
+	if (showCount === 0)
+	{
+	  $("#emptySearch").show();
+	} 
+	else
+	{
+	  $("#emptySearch").hide();
+	}
+}

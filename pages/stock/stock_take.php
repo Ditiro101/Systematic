@@ -66,102 +66,74 @@
           <div class="card shadow">
             <div class="card-header border-0">
                <div class="input-group input-group-rounded input-group-merge">
-                 
-                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Product name" title="Type in a name" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
-                  <div class="input-group-prepend">
-                    <div class="input-group-text">
-                      <span class="fa fa-search"></span>
-                    </div>
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search by Product name" title="Type in a name" class="form-control form-control-rounded form-control-prepended" placeholder="Search" aria-label="Search">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <span class="fa fa-search"></span>
                   </div>
+                </div>
             </div>
           </div>
-          <div class="table-responsive">
-            <label hidden="true" id="wData"><?php echo json_encode($warehouseData);?></label>
-            <label hidden="true" id="wpData"><?php echo json_encode($warehouseProduct);?></label>
-            <table id="myTable" class="table align-items-center table-flush">
-               <thead class="thead-light">
-              <tr class="header">	
-                <th >Product Name</th>
-                <th >Product Type</th>
-                <th>Quantity</th>
-                <th></th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody id="tBody">
-              </tbody>
-              <tfoot>
-                
-                <tr>
-                  <td>
-                      <button type="button" class="btn btn-primary mb-3 px-5" data-toggle="modal" id="btnSave">Save</button>
-          <div class="form-group col-md-2 errorModal successModal text-center">
-          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                <div class="modal-header" id="modalHeader">
-                    <h6 class="modal-title" id="MHeader">Success</h6>
-                </div>
-                <div class="modal-body">
-                  <p id="MMessage">Successfully Added</p>
-                  
-                  <div id="animation" style="text-align:center;">
-
-                  </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
-                </div>
+          <div class="card-body pt-0">
+            <div class="table-responsive">
+              <label hidden="true" id="wData"><?php echo json_encode($warehouseData);?></label>
+              <label hidden="true" id="wpData"><?php echo json_encode($warehouseProduct);?></label>
+              <table id="myTable" class="table align-items-center table-flush">
+                 <thead class="thead-light">
+                  <tr class="header">	
+                    <th>Product Name</th>
+                    <th>Product Type</th>
+                    <th>Quantity</th>
+                  </tr>
+                </thead>
+                <tbody id="tBody">
+                  <tr id="emptySearch" style="display: none;" class="table-danger">
+                    <td class="py-2"><b>Product Not Found</b></td>
+                    <td class="py-2"></td>
+                    <td class="py-2"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="col">
+              <div class="row mt-4">
+                <button type="button" class="btn btn-primary px-5" data-toggle="modal" id="btnSave">Save</button>
               </div>
             </div>
           </div>
-        </div>
-                  </td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-
-              </tr>
-              </tfoot>
-            </table>
-
-            <script>
-            function myFunction() {
-              var input, filter, table, tr, td, i, txtValue;
-              input = document.getElementById("myInput");
-              filter = input.value.toUpperCase();
-              table = document.getElementById("myTable");
-              tr = table.getElementsByTagName("tr");
-              for (i = 0; i < tr.length; i++) {
-                td = tr[i].getElementsByTagName("td")[0];
-                if (td) {
-                  txtValue = td.textContent || td.innerText;
-                  if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                    tr[i].style.display = "";
-                  } else {
-                    tr[i].style.display = "none";
-                  }
-                }       
-              }
-            }
-            </script>
           </div>
         </div>
       </div>
     </div>
-  
+    <div class="form-group col-md-2 errorModal successModal text-center">
+      <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+          <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <h6 class="modal-title" id="MHeader">Success</h6>
+            </div>
+            <div class="modal-body">
+              <p id="MMessage">Successfully Added</p>
+              
+              <div id="animation" style="text-align:center;">
 
-      <?php include_once("../footer.php");?>
+              </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <?php include_once("../footer.php");?>
+   </div>
     <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
       <div class="modal-dialog modal-sm">
           <div class="modal-content px-auto" style="">
               <img class="loading" src="../../assets/img/loading/loading.gif">
           </div>
       </div>
-  </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

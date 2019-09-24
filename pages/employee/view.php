@@ -400,44 +400,39 @@
               </div>
 
               <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                        </div>
-                        <div class="modal-body text-left">
-                            <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
-                        </div>
-                        <div class="modal-footer">   
-                          <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
-                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
-                        </div>
-                      </div>
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                    </div>
+                    <div class="modal-body text-left">
+                      <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
+                    </div>
+                    <div class="modal-footer">   
+                      <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
+                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                     </div>
                   </div>
+                </div>
+              </div>
 
-                  <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                    <div class="modal-content">
-                      
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        
-                        <div class="modal-body">
-                            <p id="modalTextDismiss"></p>
-                            
-                        </div>
-                        
-                        <div class="modal-footer">
-                            
-                            <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
-                        </div>
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <p id="modalTextDismiss"></p>
                         
                     </div>
+                    <div class="modal-footer">                       
+                      <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                    </div>
+                  </div>
                 </div>
               </div>
         
