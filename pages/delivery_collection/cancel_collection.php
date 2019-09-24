@@ -90,7 +90,7 @@
                       </div> 
                       <div class="form-group col-md-3">
                           <button type="button" class="btn btn-block btn-danger mb-3 px-3" data-toggle="modal" data-target="#modal-default">Cancel Supplier Collection</button>
-                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                          <div class="modal fade" id="modal-default" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="warnModal">
                             <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                 <div class="modal-content">
                                   
@@ -113,26 +113,27 @@
                                     
                                 </div>
                             </div>
-                            <div id="displayModal" class="modal fade" role="dialog">
-                              <div class="modal-dialog modal-dialog-centered" role="document">
-                                <!-- Modal Content -->
-                                <div class="modal-content">
-                                  <div class="modal-header">
-                                    <h6 class="modal-title" id="MHeader">Sucess!</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
+                            <div class="form-group col-md-2 errorModal successModal text-center">
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header" id="modalHeader">
+                                    <h6 class="modal-title" id="MHeader">Success</h6>
+                                </div>
+                                <div class="modal-body">
+                                  <p id="MMessage">Successfully Added</p>
+                                  
+                                  <div id="animation" style="text-align:center;">
+
                                   </div>
-                                  <div class="modal-body">
-                                        <p id="MMessage"></p>
-                                        
-                                  </div>
-                                  <div class="modal-footer">
-                                        <button type="button" class="btn btn-link" data-dismiss="modal" id="btnClose">Close</button> 
-                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
                                 </div>
                               </div>
                             </div>
+                          </div>
+                        </div>
                           </div>
                         </div>
                     </form>
