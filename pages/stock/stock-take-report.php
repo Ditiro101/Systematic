@@ -29,7 +29,7 @@
           <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
-          <h1>Stock Report</h1>
+          <h1>Stock Take Report</h1>
           <div class="date"></div>
           <div class="date"></div>
         </div>
@@ -37,11 +37,18 @@
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th class="desc-center">PRODUCT ID</th>
-            <th class="desc">PRODUCT NAME</th>
-            <th class="desc">PALLET QTY</th>
-            <th class="desc">CASE QTY</th>
-            <th class="desc">INDIVIDUAL QTY</th>
+            <th colspan="5" id="WareHouseName"><?php echo $_POST["WAREHOUSE_NAME"]?></th>
+          </tr>
+          <tr>
+            <label hidden="true" id="prodName"><?php echo $_POST["PRODUCT_NAMES"];?></label>
+            <label hidden="true" id="qty"><?php echo $_POST["QTY"];?></label>
+            <label hidden="true" id="qtyCounted"><?php echo $_POST["QTY_COUNTED"];?></label>
+            <label hidden="true" id="diffQty"><?php echo $_POST["QTY_DIFF"];?></label>
+
+            <th class="desc-center">PRODUCT NAME</th>
+            <th class="desc">QTY</th>
+            <th class="desc">QTY COUNTED</th>
+            <th class="desc">SURPLUS/DEFICIT</th>
           </tr>
         </thead>
         <tbody id="tBody">
@@ -56,7 +63,8 @@
       </table>
       <div id="notices">
         <div><b>NOTICE:</b></div>
-        <div class="notice">Entered in products which dont match the products available in the system are highlighted in red</div>
+        <div class="notice">Products that are in <span style="color: red">DEFICT</span> are highlighted in red.</div>
+        <div class="notice">Products that are in <span style="color: green">SURPLUS</span> are highlighted in green.</div>
       </div>
     </main>
     <footer>
