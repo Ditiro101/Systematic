@@ -380,7 +380,7 @@ $("button#confirmPlaceOrder").on('click', event => {
 				$('#modalText').text("Incorrect password entered");
 				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 				$("#modalHeader").css("background-color", "red");
-				$("#modalCloseButton").attr("onclick","");
+				$("#btnClose").attr("onclick", '$("#modal-salesManagerPassword").modal("show")');
 				$('#successfullyAdded').modal("show");
 			}
 			else if(response == "Database error")
@@ -389,7 +389,7 @@ $("button#confirmPlaceOrder").on('click', event => {
 				$('#modalText').text("Database error whilst verifying password");
 				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 				$("#modalHeader").css("background-color", "red");
-				$("#modalCloseButton").attr("onclick","");
+				$("#btnClose").attr("onclick","");
 				$('#successfullyAdded').modal("show");
 			}
 			

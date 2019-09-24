@@ -35,7 +35,7 @@
           <div class="email"><a><?php echo $_POST['EMAIL']; ?></a></div>
         </div>
         <div id="invoice">
-          <h1>ORDER INVOICE #<?php echo $_POST['ORDER_ID']; ?></h1>
+          <h1>ORDER #<?php echo $_POST['ORDER_ID']; ?></h1>
           <div class="date"><b>Date of Invoice: &nbsp;</b><?php echo(date('d/m/Y')); ?></div>
           <div class="date"><b>Time of Invoice: &nbsp;</b><?php echo(date('g:ia')); ?></div>
           <div class="date"><b>Salesperson: &nbsp;</b> <?php echo $_POST['ORDERED_BY']; ?></div>
