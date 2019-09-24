@@ -46,6 +46,8 @@ $(()=>{
 	$("button#convertPallet").on('click', event => {
 		event.preventDefault();
 		$('input[name=SIZE_TYPE_ID]').attr("value","3");
+		let productID=parseInt(PRODUCT_GROUP_ID)+2;
+		$('input[name=PRODUCT_ID]').attr("value",productID);
 		$("#productForm").attr("action","../stock/convert.php");
 		$("#productForm" ).submit();
 	});
@@ -64,6 +66,8 @@ $(()=>{
 	$("button#convertCase").on('click', event => {
 		event.preventDefault();
 		$('input[name=SIZE_TYPE_ID]').attr("value","2");
+		let productID=parseInt(PRODUCT_GROUP_ID)+1;
+		$('input[name=PRODUCT_ID]').attr("value",productID);
 		$("#productForm").attr("action","../stock/convert.php");
 		$("#productForm" ).submit();
 	});

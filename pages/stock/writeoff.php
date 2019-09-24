@@ -66,6 +66,7 @@
                       <div class="form-row">
                         <div class="form-group col">
                           <label hidden="true" id="pID"><?php echo $_POST["PRODUCT_ID"];?></label>
+                          <label hidden="true" id="sizeID"><?php echo $_POST["SIZE_TYPE_ID"];?></label>
                           <label hidden="true" id="warehouseP"><?php echo json_encode($warehouseProduct); ?></label>
                           <label for="bane"> Select Warehouse</label>
                           <select class="form-control" id="destinationWarehouse">
@@ -88,7 +89,7 @@
                         <div class="form-group col">
                           <label for="bane"> Quantity type</label>
                           <select class="form-control" disabled>
-                            <option>Palette</option>  
+                            <option id="sType"></option>  
                           </select>
                         </div>
                       </div>
