@@ -90,7 +90,7 @@
                   
                 </tr>
               </thead>
-              <tbody>
+                <tbody id="tBody">
                 </tbody>
                 <tfoot class="tfoot-light">
                 <tr class="footer">
@@ -207,53 +207,49 @@
 
         <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
           <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                
-                  <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
-                  </div>
-                  
-                  <div class="modal-body">
-                    <div class="form-group col">
-                      <label for="bane">Sales Manager Password</label>
-                      <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
-                  </div>
-                  
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
               </div>
-          </div>
-        </div>
-        
-        <div class="form-group col-md-2">
-          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default2"></h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modalText"></p>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        
-                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
-                    </div>
-                    
+              <div class="modal-body">
+                <div class="form-group col">
+                  <label for="bane">Sales Manager Password</label>
+                  <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
                 </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        
+        <div class="form-group col-md-2 errorModal successModal text-center">
+          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+              <div class="modal-content">
+                <div class="modal-header" id="modalHeader">
+                    <h6 class="modal-title" id="modal-title-default2">Success</h6>
+                </div>
+                <div class="modal-body">
+                  <p id="modalText">Successfully Added</p>
+                  
+                  <div id="animation" style="text-align:center;">
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
       <?php include_once("../footer.php");?>
     </div>
   </div>

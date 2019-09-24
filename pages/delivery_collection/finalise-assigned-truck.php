@@ -1,6 +1,7 @@
 <?php
   include_once("PHPcode/connection.php");
   include_once("PHPcode/functions.php");
+  include_once("../sessionCheckPages.php");
   $assignedDeliveryData=getAssignedDeliveries($con);
   $assignedDeliveryProductData=getAssignedDeliveryProducts($con);
 ?>
@@ -123,17 +124,17 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
+                      <h5 class="modal-title" id="MLabel"></h5>
                     </div>
                     <div class="modal-body">
-                      <p>Assignment finalisation of selected delivery(ies)/collection(s) successful</p>
+                      <p id="MMessage"></p>
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../delivery_collection.php'">Close</button> 
+                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  id="btnClose">Close</button> 
                   </div>
                 </div>
               </div>

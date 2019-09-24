@@ -298,4 +298,32 @@
 			return false;
 		}
 	}
+	/////////////////////////////////////////////////////////
+	function checkCollection($con,$id)
+	{
+		$check_query="SELECT * FROM COLLECTION WHERE ORDER_ID='$id'";
+		$check_result=mysqli_query($con,$check_query);
+		if(mysqli_num_rows($check_result)>0)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function deleteSupplier($con,$id)
+	{
+		$delete_query="DELETE FROM SUPPLIER WHERE SUPPLIER_ID='$id'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 ?>

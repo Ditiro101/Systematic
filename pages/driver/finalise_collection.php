@@ -1,3 +1,5 @@
+<?php include_once("../sessionCheckPages.php");?>
+
 <!DOCTYPE html>
 <html>
 
@@ -52,7 +54,7 @@
         <div class="header-body">
           <!-- Card stats -->
           <div class="row">
-            <div class="col-xl-3 col-lg-6">
+            <div class="col-xl-12 col-lg-12">
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
@@ -77,7 +79,10 @@
           <div class="row">
                 <div class="col">
                   <div class="card shadow border-0 gmap_canvas">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3596.873308474411!2d27.781811315018388!3d-25.64232998369103!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1ebe302b2a76f52f%3A0xa53079186dae12b5!2s4+Hajje+St%2C+Primindia%2C+Brits%2C+0250!5e0!3m2!1sen!2sza!4v1562712203779!5m2!1sen!2sza" width="500" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <?php $address = 'University Of Pretoria, Pretoria' ; /* Insert address Here */
+
+                      echo '<iframe width="100%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
+                    ?>
                   </div>
                   <style>
                     .gmap_canvas {overflow:hidden;background:none!important;}

@@ -22147,3 +22147,331 @@ img.loading{
     width: 80px; 
     height: 80px;
 }
+
+.successModal .page-body{
+  max-width:200px;
+  background-color:#FFFFFF;
+  margin:10% auto;
+}
+ .successModal .page-body .head{
+  text-align:center;
+}
+/* .successModal .tic{
+  font-size:186px;
+} */
+.successModal .close{
+      opacity: 1;
+    position: absolute;
+    right: 0px;
+    font-size: 30px;
+    padding: 3px 15px;
+  margin-bottom: 10px;
+}
+.successModal .checkmark-circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.checkmark-circle .background {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #1ab394;
+  position: absolute;
+}
+.successModal .checkmark-circle .checkmark {
+  border-radius: 5px;
+}
+.successModal .checkmark-circle .checkmark.draw:after {
+  -webkit-animation-delay: 300ms;
+  -moz-animation-delay: 300ms;
+  animation-delay: 300ms;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-name: checkmark;
+  -moz-animation-name: checkmark;
+  animation-name: checkmark;
+  -webkit-transform: scaleX(-1) rotate(135deg);
+  -moz-transform: scaleX(-1) rotate(135deg);
+  -ms-transform: scaleX(-1) rotate(135deg);
+  -o-transform: scaleX(-1) rotate(135deg);
+  transform: scaleX(-1) rotate(135deg);
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+.successModal .checkmark-circle .checkmark:after {
+  opacity: 1;
+  height: 50px;
+  width: 25px;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+  border-right: 15px solid #fff;
+  border-top: 15px solid #fff;
+  border-radius: 2.5px !important;
+  content: '';
+  left: 10px;
+  top: 60px;
+  position: absolute;
+}
+
+@-webkit-keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@-moz-keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@keyframes checkmark {
+  0% {
+    height: 0;
+    width: 0;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+
+.errorModal .page-body{
+  max-width:200px;
+  background-color:#FFFFFF;
+  margin:10% auto;
+}
+ .errorModal .page-body .head{
+  text-align:center;
+}
+/* .errorModal .tic{
+  font-size:186px;
+} */
+.errorModal .close{
+      opacity: 1;
+    position: absolute;
+    right: 0px;
+    font-size: 30px;
+    padding: 3px 15px;
+  margin-bottom: 10px;
+}
+.errorModal .crossx-circle {
+  width: 100px;
+  height: 100px;
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+}
+.crossx-circle .background {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: red;
+  position: absolute;
+}
+.errorModal .crossx-circle .crossx {
+  border-radius: 5px;
+}
+.errorModal .crossx-circle .crossx.draw:after {
+  -webkit-animation-delay: 300ms;
+  -moz-animation-delay: 300ms;
+  animation-delay: 300ms;
+  -webkit-animation-duration: 1s;
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-name: crossx;
+  -moz-animation-name: crossx;
+  animation-name: crossx;
+  -webkit-transform: scaleX(-1) rotate(135deg);
+  -moz-transform: scaleX(-1) rotate(135deg);
+  -ms-transform: scaleX(-1) rotate(135deg);
+  -o-transform: scaleX(-1) rotate(135deg);
+  transform: scaleX(-1) rotate(135deg);
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.errorModal .crossx-circle .crossx2.draw2:after {
+  /*-webkit-animation-delay: 300ms;*/
+  -moz-animation-delay: 300ms;
+  animation-delay: 300ms;
+  /*-webkit-animation-duration: 1s;*/
+  -moz-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-timing-function: ease;
+  -moz-animation-timing-function: ease;
+  animation-timing-function: ease;
+  -webkit-animation-name: crossx;
+  -moz-animation-name: crossx;
+  animation-name: crossx;
+  -webkit-transform: scaleX(-1) rotate(-135deg);
+  -moz-transform: scaleX(-1) rotate(-135deg);
+  -ms-transform: scaleX(-1) rotate(-135deg);
+  -o-transform: scaleX(-1) rotate(-135deg);
+  transform: scaleX(-1) rotate(-135deg);
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+.errorModal .crossx-circle .crossx:after {
+  opacity: 1;
+  height: 50px;
+  width: 25px;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+  border-right: 15px solid #fff;
+  border-radius: 2.5px !important;
+  content: '';
+  left: 0px;
+  top: 55px;
+  position: absolute;
+}
+
+.errorModal .crossx-circle .crossx2:after {
+  opacity: 1;
+  height: 50px;
+  width: 25px;
+  -webkit-transform-origin: left top;
+  -moz-transform-origin: left top;
+  -ms-transform-origin: left top;
+  -o-transform-origin: left top;
+  transform-origin: left top;
+  border-left: 15px solid #fff;
+  border-radius: 2.5px !important;
+  content: '';
+  left: 70px;
+  top: 82px;
+  position: absolute;
+}
+
+
+
+@-webkit-keyframes crossx {
+  0% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@-moz-keyframes crossx {
+  0% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  20% {
+    height: 0;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}
+@keyframes crossx {
+  0% {
+    height: 0px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  20% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  40% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+  100% {
+    height: 75px;
+    width: 37.5px;
+    opacity: 1;
+  }
+}

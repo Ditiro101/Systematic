@@ -228,6 +228,8 @@ $("button#placeOrderButton").on('click', event => {
 		event.stopPropagation();
 		$('#modal-title-default2').text("Error!");
 		$('#modalText').text("Please add a supplier and products to the order");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#modalCloseButton").attr("onclick","");
 		$('#successfullyAdded').modal("show");
 	}
@@ -236,6 +238,8 @@ $("button#placeOrderButton").on('click', event => {
 		event.stopPropagation();
 		$('#modal-title-default2').text("Error!");
 		$('#modalText').text("Please add a supplier to the order");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#modalCloseButton").attr("onclick","");
 		$('#successfullyAdded').modal("show");
 	}
@@ -244,8 +248,51 @@ $("button#placeOrderButton").on('click', event => {
 		event.stopPropagation();
 		$('#modal-title-default2').text("Error!");
 		$('#modalText').text("Please add products to the order");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#modalCloseButton").attr("onclick","");
 		$('#successfullyAdded').modal("show");
+	}
+
+	let placeProductQty=[];
+	let validationQty=[];
+	$("#tBody").find('tr').each(function(rowIndex,r){
+		if ($(this).find(">:nth-child(2)>:first-child>:first-child").val() != undefined) 
+		{
+			placeProductQty.push(parseInt($(this).find(">:nth-child(2)>:first-child>:first-child").val()));
+			// console.log($(this).find(">:nth-child(2)>:first-child>:first-child").val());
+
+			validationQty.push(parseInt($(this).find(">:nth-child(2)>:first-child>:first-child").attr("max")));
+			// console.log($(this).find(">:nth-child(2)>:first-child>:first-child").attr("max"));
+		}
+	});
+	var errors = 0;
+	for(let k=0;k<placeProductQty.length;k++)
+	{
+		if(Number.isNaN(placeProductQty[k]))
+		{
+			event.stopPropagation();
+			$('#modal-title-default2').text("Error!");
+			$("#modalText").text("One or more Input quantities are empty, please check highlighted quantites.");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
+			$("#modalCloseButton").attr("data-dismiss","modal");
+			$("#successfullyAdded").modal("show");
+			errors++;
+			break;
+		}
+		else if(placeProductQty[k] == 0)
+		{
+			event.stopPropagation();
+			$('#modal-title-default2').text("Error!");
+			$("#modalText").text("One or more Input quantities are zero, please check highlighted quantites.");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
+			$("#modalCloseButton").attr("data-dismiss","modal");
+			$("#successfullyAdded").modal("show");
+			errors++;
+			break;
+		}
 	}
 });
 
@@ -314,23 +361,35 @@ $("button#confirmPlaceOrder").on('click', event => {
 	        if (responseText == "success")
 			{
 				$('#modal-title-default2').text("Success!");
-				$('#modalText').text("Order is complete. Email sent to supplier.");
-				//$("#modalCloseButton").attr("onclick","callTwo()");
-				$("#modalCloseButton").attr("onclick","window.location='../../supplier.php'");
+				$('#modalText').text("Order is complete. Generating invoice....");
+				$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+				$("#modalHeader").css("background-color", "#1ab394");
 				$('#successfullyAdded').modal("show");
+				
+				setTimeout(function(){
+					$('#successfullyAdded').modal("hide");
+				    callTwo();
+				}, 2000);
+				
+				//$("#modalCloseButton").attr("onclick","window.location='../../supplier.php'");
+				
 			}
 			else if(response == "failed")
 			{
 				$('#modal-title-default2').text("Error!");
 				$('#modalText').text("Incorrect password entered");
-				$("#modalCloseButton").attr("onclick","");
+				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+				$("#modalHeader").css("background-color", "red");
+				$("#btnClose").attr("onclick", '$("#modal-salesManagerPassword").modal("show")');
 				$('#successfullyAdded').modal("show");
 			}
 			else if(response == "Database error")
 			{
 				$('#modal-title-default2').text("Database Error!");
 				$('#modalText').text("Database error whilst verifying password");
-				$("#modalCloseButton").attr("onclick","");
+				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+				$("#modalHeader").css("background-color", "red");
+				$("#btnClose").attr("onclick","");
 				$('#successfullyAdded').modal("show");
 			}
 			
@@ -543,7 +602,8 @@ function callTwo(){
 
 	//var URL = "invoice/invoice.php";
 	//window.open(URL, '_blank');
-	var form="<form target='_blank' action='invoice/invoice.php' id='sendSaleInfo' method='POST'><input type='hidden' name='CUSTOMER_NAME' value='"+INVOICE_SUPPLIER_NAME+"'>"+"<input type='hidden' name='ADDRESS' value='"+INVOICE_CUSTOMER_ADDRESS+"'>"+"<input type='hidden' name='SALE_ID' value='"+INVOICE_ORDER_ID+"'>"+"<input type='hidden' name='SALESPERSON' value='"+ORDERUSERNAME+"'>"+"<input type='hidden' name='EMAIL' value='"+INVOICE_SUPPLIER_EMAIL+"'>"+"<input type='hidden' name='SALE_PRODUCTS' value='"+JSON.stringify(ORDERPRODUCTS)+"'>"+"</form>";
+	console.log(ORDERPRODUCTS);
+	var form="<form target='_blank' action='invoice/invoice.php' id='sendSaleInfo' method='POST'><input type='hidden' name='SUPPLIER_NAME' value='"+INVOICE_SUPPLIER_NAME+"'>"+"<input type='hidden' name='ADDRESS' value='"+INVOICE_CUSTOMER_ADDRESS+"'>"+"<input type='hidden' name='ORDER_ID' value='"+INVOICE_ORDER_ID+"'>"+"<input type='hidden' name='ORDERED_BY' value='"+ORDERUSERNAME+"'>"+"<input type='hidden' name='EMAIL' value='"+INVOICE_SUPPLIER_EMAIL+"'>"+"<input type='hidden' name='ORDER_PRODUCTS' value='"+JSON.stringify(ORDERPRODUCTS)+"'>"+"</form>";
 
 	$("body").append(form);
 	$( "#sendSaleInfo" ).submit();
@@ -613,3 +673,25 @@ function removeRow(src)
     //console.log(ORDERPRODUCTIDs);
 
 } 
+
+$(document).on('change','.quantityBox',function(e){
+	e.preventDefault();
+	//console.log($(this).attr("max"));
+	if(parseInt($(this).val()) == parseInt($(this).attr("max")))
+	{
+		$(this).attr("style","border-color: orange;height: 2rem; color: orange;");
+	}
+	else if(parseInt($(this).val()) > parseInt($(this).attr("max")))
+	{
+		$(this).attr("style","border-color: red;height: 2rem; color: red;");
+	}
+	else if(parseInt($(this).val()) == 0 || Number.isNaN(parseInt($(this).val())))
+	{
+		$(this).attr("style","border-color: red;height: 2rem; color: red;");
+	}
+	else
+	{
+		//console.log($(this).val());
+		$(this).attr("style","border-color: #cad1d7; height: 2rem; color: #8898aa;")
+	}
+})

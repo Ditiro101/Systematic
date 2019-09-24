@@ -211,8 +211,10 @@ function addInfoBubble(map,mapArr) {
     ui.addBubble(bub);
   }, false);
   addMarkerToGroup(group,{lat:-25.557606,lng:27.698594},"Greens Supermarket Plot 80 Bethanie Road Brits 0250 South Africa")
+  console.log(addressData);
   for(let k=0;k<mapArr.length;k++)
   {
+    console.log(mapArr[k]["ADDRESS_ID"]);
     let address=addressData.find(function(element){
     	if(element["ADDRESS_ID"]==mapArr[k]["ADDRESS_ID"])
     	{
@@ -398,7 +400,7 @@ let buildDeliveries=function(tmp)
 		let specificLat=deliveryData[tmp]["LATITUDE"];
 		let specificLong=deliveryData[tmp]["LONGITUDE"];
 		calculateRouteFromAtoB(platform,specificLat,specificLong);
-		let specificSaleProducts=saleProductData.filter(element=>element["SALE_ID"]==deliveryData[tmp]["SALE_ID"]);
+		let specificSaleProducts=saleProductData.filter(element=>element["SALE_ID"]==deliveryData[tmp]["SALE_ID"]&&element["QUANTITY_ASSIGNED"]>0);
 		console.log(specificSaleProducts);
 		deliverySelectID=$(this).attr("name");
 		$("#enterProducts").html('');

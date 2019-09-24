@@ -1,3 +1,10 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $collectionData=getSearchCollectionData($con);
+  mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -48,7 +55,7 @@
           <div class="card shadow">
             <div class="card-header border-0">
                <div class="input-group input-group-rounded input-group-merge">
-                 
+                 <label hidden="true" id="cData"><?php echo json_encode($collectionData);?></label>
                  <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Order Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
@@ -72,133 +79,7 @@
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody>
-                      <tr>
-                        <td>121</td>
-                        <td>04/07/2019</td>
-                        <td>Pretoria</td>
-                        <td>Better Bulk</td>
-                        <th>Not Collected</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>124</td>
-                        <td>04/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Makro</td>
-                        <th>On Collection</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" disabled="true" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>128</td>
-                        <td>05/07/2019</td>
-                        <td>Pretoria</td>
-                        <td>Coca Cola</td>
-                        <th>Not Collected</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>134</td>
-                        <td>05/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Caines Foods</td>
-                        <th>Truck Assigned</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>139</td>
-                        <td>05/07/2019</td>
-                        <td>Bloemfontein</td>
-                        <td>Wholesale Market</td>
-                        <th>On Collection</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" disabled="true" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>145</td>
-                        <td>06/07/2019</td>
-                        <td>Johannesburg</td>
-                        <td>Bulk Bounty</td>
-                        <th>Collected</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" disabled="true" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>
+                    <tbody id="tBody">                      
                       <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                         <td><b>No Collection Found</b></td>
                         <td></td>
@@ -310,6 +191,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/searchCollection.js"></script>
 </body>
 
 </html>
