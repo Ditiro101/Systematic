@@ -103,4 +103,39 @@ $(()=>{
 
 	});
 
+	$("#btnDelete").on('click',function(e){
+		e.preventDefault();
+		console.log("Hello");
+		let supplierID=parseInt($("#sID").text());
+		console.log(supplierID);
+		$.ajax({
+			url:'PHPcode/deletesuppliercode.php',
+			type:'POST',
+			data:{SUPPLIER_ID:supplierID}
+		})
+		.done(data=>{
+			let doneData=data.split(",");
+			console.log(doneData);
+			if(doneData[0]=="T")
+			{
+				$('#MHeader').text("Success!");
+				$("#MMessage").text(doneData[1]);
+				$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+				$("#modalHeader").css("background-color", "#1ab394");
+				$("#btnClose").attr("onclick","window.location='../../supplier.php'");
+				$("#displayModal").modal("show");
+			}
+			else
+			{
+				$('#MHeader').text("Error!");
+				$("#MMessage").text(doneData[1]);
+				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+				$("#modalHeader").css("background-color", "red");
+				$("#btnClose").attr("data-dismiss","modal");
+				$("#displayModal").modal("show");
+			}
+		});
+
+	});
+
 });

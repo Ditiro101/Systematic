@@ -79,28 +79,7 @@
                         <th></th>
                       </tr>
                     </thead>
-                    <tbody id="tBody">
-                      <tr>
-                        <td>121</td>
-                        <td>04/07/2019</td>
-                        <td>Pretoria</td>
-                        <td>Better Bulk</td>
-                        <th>Not Collected</th>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-success btn-sm" type="button" onclick="window.location='assign-truck-view-collection.php'">
-                            <span class="btn-inner--icon"><i class="fas fa-eye"></i>
-                            </span>
-                            <span class="btn-inner--text">View</span>
-                          </button>
-                        </td>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-danger btn-sm" type="button" data-toggle="modal" data-target="#del">
-                            <span class="btn-inner--icon"><i class="far fa-times-circle"></i>
-                            </span>
-                            <span class="btn-inner--text">Cancel</span>
-                          </button>
-                        </td>
-                      </tr>                      
+                    <tbody id="tBody">                      
                       <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                         <td><b>No Collection Found</b></td>
                         <td></td>

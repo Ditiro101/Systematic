@@ -312,4 +312,18 @@
 			return false;
 		}
 	}
+
+	function deleteSupplier($con,$id)
+	{
+		$delete_query="DELETE FROM SUPPLIER WHERE SUPPLIER_ID='$id'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 ?>

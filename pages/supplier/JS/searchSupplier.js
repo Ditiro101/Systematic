@@ -2,7 +2,13 @@ $(()=>{
 	$.ajax({
 		url: 'PHPcode/addSupplierCode.php',
 		type: 'POST',
-		data: {choice:3} 
+		data: {choice:3},
+		beforeSend:function(){
+			$('.loadingModal').modal('show');
+		},
+		complete:function(){
+			$('.loadingModal').modal('hide');
+		}  
 	})
 	.done(data=>{
 		if(data!="False")

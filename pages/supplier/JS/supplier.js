@@ -3,14 +3,20 @@ let CheckValid = function(valArr)
 {
 	if(valArr["con"].length!=10)
 	{
+		$('#MHeader').text("Error!");
 		$("#MMessage").text("Contact Number must be 10 digits");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
 	}
 	else if (valArr["VATNumber"].length!=10)
 	{
-		$("#MMessage").text("VAT Number must be 10 digits.");
+		$('#MHeader').text("Error!");
+		$("#MMessage").text("VAT Number must be 10 digits");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
@@ -292,7 +298,13 @@ $(()=>{
 				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{choice:1,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]}
+				data:{choice:1,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]},
+				beforeSend:function(){
+					$('.loadingModal').modal('show');
+				},
+				complete:function(){
+					$('.loadingModal').modal('hide');
+				} 
 				})
 				.done(data=>{
 					//alert(data);
@@ -300,15 +312,19 @@ $(()=>{
 					console.log(doneData);
 					if(doneData[0]=="T")
 					{
-						//alert("True");
+						$('#MHeader').text("Success!");
 						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader").css("background-color", "#1ab394");
 						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
 						$("#displayModal").modal("show");
 					}
 					else
 					{
-						//alert(doneData[1]);
+						$('#MHeader').text("Error!");
 						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
 					}
