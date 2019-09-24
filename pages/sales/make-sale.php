@@ -58,16 +58,17 @@
           <div class="card card-stats shadow">
               <div class="card-header border-0 bg-secondary">
                 <div class="input-group input-group-rounded input-group-merge">
-                  <input type="search" class="form-control form-control-rounded form-control-prepended dropdown-toggle" id="searchProduct" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" placeholder="Enter Product Name" autofocus="true">
-                  <div id="menu" class="dropdown-menu col px-4 mb-4" aria-labelledby="searchProduct">
-                    <div id="menuItems"></div>
-                    <div id="empty" class="dropdown-header table-danger" style="color: black">
-                      No product found
-                    </div>
-                  </div>
+                  <input type="search" class="form-control form-control-rounded form-control-prepended" id="searchProduct" placeholder="Enter Product Name" autofocus="true">
                   <div class="input-group-prepend">
                     <div class="input-group-text">
                       <span class="fa fa-search"></span>
+                    </div>
+                  </div>
+                  <input type="hidden" id="productsDropdownToggle" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <div id="menu" class="dropdown-menu col px-4 mb-3" aria-labelledby="productsDropdownToggle">
+                    <div id="menuItems"></div>
+                    <div id="empty" class="dropdown-header table-danger" style="color: black">
+                      No product found
                     </div>
                   </div>
                 </div>
@@ -89,7 +90,7 @@
                   
                 </tr>
               </thead>
-              <tbody>
+                <tbody id="tBody">
                 </tbody>
                 <tfoot class="tfoot-light">
                 <tr class="footer">
@@ -124,16 +125,21 @@
             <div class="card-header bg-secondary">
               <div class="row"> 
                 <div class="col">
-                  <form id="searchCustomertForm" class="needs-validation" novalidate>
-                    <div class="input-group input-group-rounded input-group-merge mx-2">
-                      <input type="text" id="customerSearchInput" placeholder="Enter Customer Phone # or ID" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search" required>
-                      <div class="input-group-prepend mr-3">
-                        <button class="input-group-text btn-info bg-customGreen" id="searchCustomerButton">
-                        <span class="fa fa-search" style="color: white"></span>
-                        </button>
+                  <div class="input-group input-group-rounded input-group-merge">
+                    <input type="search" id="customerSearchInput" placeholder="Enter Customer Name" title="Type in a name" class="form-control form-control-rounded form-control-prepended">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text bg-customGreen" id="searchCustomerButton">
+                      <span class="fa fa-search" style="color: white"></span>
                       </div>
                     </div>
-                  </form>
+                    <input type="hidden" id="customerDropdownToggle" class=" dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div id="menuCust" class="dropdown-menu col px-2 mb-2" aria-labelledby="customerDropdownToggle">
+                      <div id="menuOfCustomers"></div>
+                      <div id="empty2" class="dropdown-header table-danger" style="color: black">
+                        No Customer found
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -201,53 +207,49 @@
 
         <div class="modal fade" id="modal-salesManagerPassword" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
           <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-              <div class="modal-content">
-                
-                  <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
-                  </div>
-                  
-                  <div class="modal-body">
-                    <div class="form-group col">
-                      <label for="bane">Sales Manager Password</label>
-                      <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
-                  </div>
-                  
+            <div class="modal-content">
+              <div class="modal-header">
+                  <h6 class="modal-title" id="modal-title-default">Finalise Sale</h6>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">×</span>
+                  </button>
               </div>
-          </div>
-        </div>
-        
-        <div class="form-group col-md-2">
-          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h6 class="modal-title" id="modal-title-default2"></h6>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <p id="modalText"></p>
-                        
-                    </div>
-                    <div class="modal-footer">
-                        
-                        <button type="button" class="btn btn-link" id="modalCloseButton" ml-auto" data-dismiss="modal" onclick="callTwo()">Close</button> 
-                    </div>
-                    
+              <div class="modal-body">
+                <div class="form-group col">
+                  <label for="bane">Sales Manager Password</label>
+                  <input type="password" class="form-control" id="salesManagerPassword" aria-describedby="emailHelp" placeholder="Enter password" required>
                 </div>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" data-dismiss="modal" class="btn btn-success  ml-auto" id="confirmSalesManagerPassword">Approve Sale</button> 
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        
+        <div class="form-group col-md-2 errorModal successModal text-center">
+          <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+              <div class="modal-content">
+                <div class="modal-header" id="modalHeader">
+                    <h6 class="modal-title" id="modal-title-default2">Success</h6>
+                </div>
+                <div class="modal-body">
+                  <p id="modalText">Successfully Added</p>
+                  
+                  <div id="animation" style="text-align:center;">
+
+                  </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
       <?php include_once("../footer.php");?>
     </div>
   </div>

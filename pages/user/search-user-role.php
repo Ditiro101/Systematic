@@ -60,22 +60,17 @@
           </div>
           <div class="table-responsive">
 
-            <table id="myTable" class="table align-items-center table-flush">
+            <table id="myTable" class="table align-items-center table-flush" style="table-layout: fixed; width: 100%">
                <thead class="thead-light">
               <tr class="header">
-                <th>Role Name</th>
-                <th class="col-2">Functions </th>
-                <th ></th>
-                <th></th>
+                <th style="width: 20% !important">Role Name</th>
+                <th class="col-2" style="width: 65% !important">Functions </th>
+                <th style="width: 10% !important"></th>
               </tr>
             </thead>
             <tbody id="tBody">
                 <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
                   <td><b>No User Role Found</b></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
-                  <td></td>
                   <td></td>
                   <td></td>
                 </tr>

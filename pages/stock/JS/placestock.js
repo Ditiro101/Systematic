@@ -82,7 +82,10 @@ $(()=>{
 	$.ajax({
 		url:'PHPcode/stockcode.php',
 		type:'POST',
-		data:{choice:1}
+		data:{choice:1},
+		beforeSend:function(){
+					$('.loadingModal').modal('show');
+		}
 	})
 	.done(warehouseDetails=>{
 		warehouse=JSON.parse(warehouseDetails);
@@ -98,7 +101,10 @@ $(()=>{
 			$.ajax({
 				url:'PHPcode/stockcode.php',
 				type:'POST',
-				data:{choice:3}
+				data:{choice:3},
+				complete:function(){
+					$('.loadingModal').modal('hide');
+				}
 			})
 			.done(warehouseProductDetails=>{
 				warehouseProduct=JSON.parse(warehouseProductDetails);
@@ -182,66 +188,97 @@ $(()=>{
 
 	$("#btnSave").on('click',function(e){
 		e.preventDefault();
+		$("#modal-confirm").modal("hide");
 		let emptyBody=$("#tBody>tr").length;
 		console.log(emptyBody);
 		if(emptyBody==0)
 		{
+			$('#MHeader').text("Error!");
 			$("#MMessage").text("Please Select Products");
+			$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+			$("#modalHeader").css("background-color", "red");
 			$("#btnClose").attr("data-dismiss","modal");
 			$("#displayModal").modal("show");
-			e.stopPropogation();
+			e.stopPropagation();
 		}
-		let placeProducts=[];
-		let placeProductQty=[];
-		let validationQty=[];
-		$("#tBody").find('tr').each(function(rowIndex,r){
-			placeProducts.push($(this).attr("name"));
-			placeProductQty.push(parseInt($(this).find(">:first-child>:first-child>:first-child").val()));
-			validationQty.push(parseInt($(this).find(">:nth-last-child(2)").text()))
-		});
-		for(let k=0;k<placeProductQty.length;k++)
+		else
 		{
-			if(placeProductQty[k]==0||placeProductQty[k]=="")
+			let placeProducts=[];
+			let placeProductQty=[];
+			let validationQty=[];
+			let doCall=true;
+			$("#tBody").find('tr').each(function(rowIndex,r){
+				placeProducts.push($(this).attr("name"));
+				placeProductQty.push(parseInt($(this).find(">:first-child>:first-child>:first-child").val()));
+				console.log(parseInt($(this).find(">:first-child>:first-child>:first-child").val()));
+				validationQty.push(parseInt($(this).find(">:nth-last-child(2)").text()));
+				console.log(parseInt($(this).find(">:nth-last-child(2)").text()));
+			});
+			for(let k=0;k<placeProductQty.length;k++)
 			{
-				$("#MMessage").text("One or more Input Quantities are zero");
-				$("#btnClose").attr("data-dismiss","modal");
-				$("#displayModal").modal("show");
-				e.stopPropogation();
-				break;
+				if(placeProductQty[k]==0||placeProductQty[k]=="")
+				{
+					$('#MHeader').text("Error!");
+					$("#MMessage").text("One or more Input Quantities are zero");
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
+					$("#btnClose").attr("data-dismiss","modal");
+					$("#displayModal").modal("show");
+					e.stopPropagation();
+					doCall=false;
+					break;
+				}
+				else if(placeProductQty[k]>validationQty[k])
+				{
+					$('#MHeader').text("Error!");
+					$("#MMessage").text("One or more quantities are too large, please check highlighted quantites.");
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
+					$("#btnClose").attr("data-dismiss","modal");
+					$("#displayModal").modal("show");
+					e.stopPropagation();
+					doCall=false;
+					break;
+				}
 			}
-			else if(placeProductQty[k]>validationQty[k])
+			if(doCall)
 			{
-				$("#MMessage").text("One or more quantities are too large, please check highlighted quantites.");
-				$("#btnClose").attr("data-dismiss","modal");
-				$("#displayModal").modal("show");
-				e.stopPropogation();
-				break;
+				$.ajax({
+				url:'PHPcode/stockcode.php',
+				type:'POST',
+				data:{choice:4,source:sourceID,destination:destinationID,product:placeProducts,qty:placeProductQty,length:placeProducts.length},
+				beforeSend:function(){
+						$('.loadingModal').modal('show');
+				},
+				complete:function(){
+					$('.loadingModal').modal('hide');
+				}
+				})
+				.done(data=>{
+					let doneData=data.split(",");
+					console.log(doneData);
+					if(doneData[0]=="T")
+					{
+						$('#MHeader').text("Success!");
+						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader").css("background-color", "#1ab394");
+						$("#btnClose").attr("onclick","window.location='../../stock.php'");
+						$("#displayModal").modal("show");
+					}
+					else
+					{
+						$('#MHeader').text("Error!");
+						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
+					}
+				});
 			}
 		}
-		$.ajax({
-			url:'PHPcode/stockcode.php',
-			type:'POST',
-			data:{choice:4,source:sourceID,destination:destinationID,product:placeProducts,qty:placeProductQty,length:placeProducts.length}
-		})
-		.done(data=>{
-			let doneData=data.split(",");
-			console.log(doneData);
-			if(doneData[0]=="T")
-			{
-				//alert("True");
-				$("#MMessage").text(doneData[1]);
-				$("#btnClose").attr("onclick","window.location='../../stock.php'");
-				$("#displayModal").modal("show");
-			}
-			else
-			{
-				//alert(doneData[1]);
-				$("#MMessage").text(doneData[1]);
-				$("#btnClose").attr("data-dismiss","modal");
-				$("#displayModal").modal("show");
-			}
-		});
-
-	})
+		
+	});
 
 });

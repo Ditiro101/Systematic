@@ -45,34 +45,41 @@
 				{ 
 					if(checkProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i]))
 					{
-						if(updateProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
+						if($_POST["QTY"][$i]>0)
 						{
-							if($i==$stopProductCount)
+							if(updateProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
 							{
-								echo "True";
-							}
-						}
-						else
-						{
-							echo "Failed to update assignment".$i;
-						}
-					}
-					else
-					{
-						if(insertProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
-						{
-							if($i==$stopProductCount)
-							{
-								echo "True";
+								if($i==$stopProductCount)
+								{
+									echo "True";
+								}
 							}
 							else
 							{
-								echo "F".$i;
+								echo "Failed to update assignment".$i;
 							}
 						}
-						else
+							
+					}
+					else
+					{
+						if($_POST["QTY"][$i]>0)
 						{
-							echo "Failed to insert".$i;
+							if(insertProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
+							{
+								if($i==$stopProductCount)
+								{
+									echo "True";
+								}
+								else
+								{
+									echo "F".$i;
+								}
+							}
+							else
+							{
+								echo "Failed to insert".$i;
+							}
 						}
 					}
 				}
@@ -87,31 +94,39 @@
 				{ 
 					if(checkProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i]))
 					{
-						if(updateProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
+						if($_POST["QTY"][$i]>0)
 						{
-							if($i==$stopProductCount)
+							if(updateProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
 							{
-								echo "True";
+								if($i==$stopProductCount)
+								{
+									echo "True";
+								}
+							}
+							else
+							{
+								echo "Failed to update assignment".$i;
 							}
 						}
-						else
-						{
-							echo "Failed to update assignment".$i;
-						}
+						
 					}
 					else
 					{
-						if(insertProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
+						if($_POST["QTY"][$i]>0)
 						{
-							if($i==$stopProductCount)
+							if(insertProductAssignment($con,$delivery_truck_id,$_POST["SALE_ID"],$_POST["PRODUCT_ID"][$i],$_POST["QTY"][$i]))
 							{
-								echo "True";
+								if($i==$stopProductCount)
+								{
+									echo "True";
+								}
 							}
+							else
+							{
+								echo "Failed to insert".$i;
+							}	
 						}
-						else
-						{
-							echo "Failed to insert".$i;
-						}
+						
 					}
 				}
 			}
@@ -178,6 +193,39 @@
 		{
 			if(deleteDeliveryAssignment($con,$_POST["SALE_ID"],$_POST["TRUCK_ID"]))
 			{
+				if(checkAssigned($con,$_POST["SALE_ID"])==0)
+				{
+					if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+					{
+						echo "T,Assignment Maintained Successfully";
+					}
+					else
+					{
+						echo "F,Sale Assignment Not Updated";
+					}
+				}
+				else
+				{
+					if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
+					{
+						echo "T,Assignment Maintained Successfully";
+					}
+					else
+					{
+						echo "F,Sale Assignment Not Updated";
+					}
+				}
+				
+			}
+			else
+			{
+				echo "F,Assignment not deleted";
+			}
+		}
+		else
+		{
+			if(checkAssigned($con,$_POST["SALE_ID"])==0)
+			{
 				if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
 				{
 					echo "T,Assignment Maintained Successfully";
@@ -189,19 +237,15 @@
 			}
 			else
 			{
-				echo "F,Assignment not deleted";
-			}
-		}
-		else
-		{
-			if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+				if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
 				{
 					echo "T,Assignment Maintained Successfully";
 				}
 				else
 				{
-					echo "F,Assignment Not Updated";
+					echo "F,Sale Assignment Not Updated";
 				}
+			}
 		}
 	}
 	elseif($_POST["choice"]==5)
@@ -216,9 +260,22 @@
 		{ 
 			if(updateDeliveryTruckStatus($con,$_POST["SALE_ID"][$i],$_POST["TRUCK_ID"],3))
 			{
-				if($i==$updateCount)
+				if(checkAssignedFinal($con,$_POST["SALE_ID"][$i],2)==0)
 				{
-					echo "T,Finalised Deliveries";
+					if(updateSaleAssignment($con,3,$_POST["SALE_ID"][$i]))
+					{
+						if($i==$updateCount)
+						{
+							echo "T,Finalised Deliveries";
+						}
+					}
+				}
+				else
+				{
+					if($i==$updateCount)
+					{
+						echo "T,Finalised Deliveries";
+					}
 				}
 			}
 			else

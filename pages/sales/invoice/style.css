@@ -28,13 +28,13 @@ body {
 
 header {
   padding: 10px 0;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
   border-bottom: 1px solid #AAAAAA;
 }
 
 #logo {
   float: left;
-  margin-top: 8px;
+  margin-top: 15px;
 }
 
 #logo img {
@@ -48,10 +48,11 @@ header {
 
 
 #details {
-  margin-bottom: 50px;
+  margin-bottom: 40px;
 }
 
 #client {
+  margin-top: 16px;
   padding-left: 6px;
   border-left: 6px solid #7cbf56;
   float: left;

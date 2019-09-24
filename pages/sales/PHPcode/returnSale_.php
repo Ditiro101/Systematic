@@ -65,8 +65,8 @@
 				$queryUpdateQuantity = "UPDATE PRODUCT SET QUANTITY_AVAILABLE = QUANTITY_AVAILABLE + $returnProductLineReturnQuantity, QTY_ON_HAND = QTY_ON_HAND + $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID";
 				mysqli_query($DBConnect, $queryUpdateQuantity);
 
-				$queryUpdateSaleProductQuantity = "UPDATE SALE_PRODUCT SET QUANTITY = QUANTITY - $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID AND SALE_ID = '$saleID'";
-				mysqli_query($DBConnect, $queryUpdateSaleProductQuantity);
+				// $queryUpdateSaleProductQuantity = "UPDATE SALE_PRODUCT SET QUANTITY = QUANTITY - $returnProductLineReturnQuantity WHERE PRODUCT_ID = $returnProductLineProductID AND SALE_ID = '$saleID'";
+				// mysqli_query($DBConnect, $queryUpdateSaleProductQuantity);
 
 				//echo($queryUpdateQuantity);
 

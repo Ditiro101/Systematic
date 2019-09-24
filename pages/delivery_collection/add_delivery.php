@@ -6,6 +6,7 @@ include_once("../sessionCheckPages.php");
   $addressData=getCompleteCustomerAddresses($con,$_POST["CUSTOMER_ID"]);
   // $suburbData=getAllSuburbs($con);
   // $cityData=getAllCity($con);
+  mysqli_close($con);
 ?>
 <!DOCTYPE html>
 <html>
