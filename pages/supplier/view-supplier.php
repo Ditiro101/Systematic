@@ -85,7 +85,7 @@
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
             </div>
 
-            <div class="card-body pt-0 pt-md-4 my-6">
+            <div class="card-body pt-0 pt-md-4 mt-6">
               <div class="text-center mt-0">
                 <h2 id="supName">
                   <?php echo $_POST["NAME"];?>
@@ -106,41 +106,42 @@
                   </div>
                   <div class="tab-content" id="pills-tabContent"></div>
                 </hr>
-                <hr class="my-2 d-flex justify-content-center">
-                <div class="row mb-2">
-                  <div class="col d-inline mx-0 px-0">
-                    <label hidden="true" id="sID"><?php echo $supID;?></label>
-                    <form id="formMaintain" action="maintain-supplier.php" method="POST" class="d-inline">
-                      <input type="hidden" name="ID" value=<?php echo $supID;?>>
-                      <input type="hidden" name="NAME" id="NAME">
-                      <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
-                      <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
-                      <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
-                      <input type="hidden" name="ADDR" id="ADDR">
-                      <input type="hidden" name="SUBURB" id="SUBURB">
-                      <input type="hidden" name="CITY" id="CITY">
-                      <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
-                      <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
-                        <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                <hr class="my-2 d-flex justify-content-center mt-1">
+                  <div class="row mb-2">
+                    <div class="col d-inline mx-0 px-0">
+                      <label hidden="true" id="sID"><?php echo $supID;?></label>
+                      <form id="formMaintain" action="maintain-supplier.php" method="POST" class="d-inline">
+                        <input type="hidden" name="ID" value=<?php echo $supID;?>>
+                        <input type="hidden" name="NAME" id="NAME">
+                        <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                        <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                        <input type="hidden" name="ADDR" id="ADDR">
+                        <input type="hidden" name="SUBURB" id="SUBURB">
+                        <input type="hidden" name="CITY" id="CITY">
+                        <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
+                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                          <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                          </span>
+                          <span class="btn-inner--text">Edit</span>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col d-inline mx-0 px-0">
+                      <button class="btn btn-icon btn-2 btn-danger btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
+                        <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                         </span>
-                        <span class="btn-inner--text">Edit</span>
+                        <span class="btn-inner--text">Delete Supplier</span>
                       </button>
-                    </form>
+                    </div>       
                   </div>
-                  <div class="col d-inline mx-0 px-0">
-                    <button class="btn btn-icon btn-2 btn-danger btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
-                      <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                      </span>
-                      <span class="btn-inner--text">Delete Supplier</span>
-                    </button>
-                  </div>       
-                </div>
+                </hr>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
-              </hr>
-            </div>
+                </hr>
+              </div>
           </div>
         </div>
           </div>
