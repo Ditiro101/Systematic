@@ -37,9 +37,10 @@
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th colspan="5" id="WareHouseName"><?php echo $_POST["WAREHOUSE_NAME"]?></th>
+            <th colspan="5" id="warehouse"></th>
           </tr>
           <tr>
+          <label hidden="true" id="WareHouseName"><?php echo $_POST["WAREHOUSE_NAME"]?></label>
             <label hidden="true" id="prodName"><?php echo $_POST["PRODUCT_NAMES"];?></label>
             <label hidden="true" id="qty"><?php echo $_POST["QTY"];?></label>
             <label hidden="true" id="qtyCounted"><?php echo $_POST["QTY_COUNTED"];?></label>

@@ -1,6 +1,7 @@
 $(()=>{
     
-    
+    let warehouse = $("#WareHouseName").text();
+    $("#warehouse").html("<b>" + warehouse.toUpperCase() + "</b>");
     let prodName =$("#prodName").text().split(",");
     let sysQty =$("#qty").text().split(",");
     let inputtedQty =$("#qtyCounted").text().split(",");
