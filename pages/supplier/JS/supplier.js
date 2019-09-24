@@ -3,14 +3,20 @@ let CheckValid = function(valArr)
 {
 	if(valArr["con"].length!=10)
 	{
+		$('#MHeader').text("Error!");
 		$("#MMessage").text("Contact Number must be 10 digits");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
 	}
 	else if (valArr["VATNumber"].length!=10)
 	{
-		$("#MMessage").text("VAT Number must be 10 digits.");
+		$('#MHeader').text("Error!");
+		$("#MMessage").text("VAT Number must be 10 digits");
+		$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+		$("#modalHeader").css("background-color", "red");
 		$("#btnClose").attr("data-dismiss","modal");
 		$("#displayModal").modal("show");
 		return false;
@@ -85,14 +91,16 @@ let getInput= function()
 }
 
 	let createAddress= function(tmp){
-		let formgroup = $('<div></div>').addClass('form-group col').attr('id', 'address'+tmp);;
-		 formgroup.append($("<hr>").addClass('my-4'));
+		let formgroup = $('<div></div>').attr('id', 'address'+tmp);;
+		formgroup.append($("<hr>").addClass('my-4'));
 		let form_row1= $('<div></div>').addClass('form-row');
-		form_row1.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
 		let input_group=$('<div></div>').addClass('input-group');
 		input_group.append( $('<input>').addClass('form-control inputAddress').attr('id', 'inputAddress'+tmp).attr('type', 'text').attr('required','') );
 		input_group.append( $('<span class="input-group-btn"><button class="btn btn-danger btn-remove-address" type="button"><span class="btn-inner--icon"><i class="ni ni-fat-delete"></i></span></button>'))
-		form_row1.append(input_group);
+		let formgroup2 = $('<div></div>').addClass('form-group col');
+		formgroup2.append( $('<label></label>').attr('for', 'inputAddress'+tmp).html('Address '+tmp));
+		formgroup2.append(input_group);
+		form_row1.append(formgroup2);
 		let form_row2=$('<div></div>').addClass('form-row');
 
 		let suburb=$('<div></div>').addClass('form-group col-md-6');
@@ -290,7 +298,13 @@ $(()=>{
 				$.ajax({
 				url: 'PHPcode/addSupplierCode.php',
 				type: 'POST',
-				data:{choice:1,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]}
+				data:{choice:1,num:count,name:arr["name"],vat:arr["VATNumber"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"]},
+				beforeSend:function(){
+					$('.loadingModal').modal('show');
+				},
+				complete:function(){
+					$('.loadingModal').modal('hide');
+				} 
 				})
 				.done(data=>{
 					//alert(data);
@@ -298,15 +312,19 @@ $(()=>{
 					console.log(doneData);
 					if(doneData[0]=="T")
 					{
-						//alert("True");
+						$('#MHeader').text("Success!");
 						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader").css("background-color", "#1ab394");
 						$("#btnClose").attr("onclick","window.location='../../supplier.php'");
 						$("#displayModal").modal("show");
 					}
 					else
 					{
-						//alert(doneData[1]);
+						$('#MHeader').text("Error!");
 						$("#MMessage").text(doneData[1]);
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
 					}

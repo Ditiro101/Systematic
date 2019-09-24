@@ -25,7 +25,7 @@
               <h5 class="modal-title" id="exampleModalLabel"> How to use the form</h5>
             </div>
             <div class="modal-body">
-              <video width="450" autoplay controls>
+              <video width="450" controls>
                   <source src="../vid.mp4" type="video/mp4">
              
                   Your browser does not support HTML5 video.

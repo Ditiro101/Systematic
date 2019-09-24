@@ -139,7 +139,6 @@ $(()=>{
 		$("#collectSaleButton").attr("hidden",false);
 	}
 
-
 	let customerData=JSON.parse($("#cData").text());
 	let employeeData=JSON.parse($("#eData").text());
 	productsArr=JSON.parse($("#productsArr").text());
@@ -240,7 +239,7 @@ $(()=>{
 		}
 		else if(response == "false")
 		{
-			//$("#tBodyReturns").append("<td class='py-3 text-left'><b>No Returns</b></td>");
+			$("#tBodyReturns").append("<tr><td class='py-3 text-left'><b>No Returns</b></td></tr>");
 		}
 		else if(response == "Database error")
 		{
@@ -252,8 +251,6 @@ $(()=>{
 		
 		ajaxDone = true;
 	});	
-
-
 });
 
 $("button#updateSaleStatus").on('click', event => {

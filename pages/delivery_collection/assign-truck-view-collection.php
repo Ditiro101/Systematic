@@ -1,3 +1,11 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $collectionData=json_decode($_POST["COLLECTION_DATA"]);
+  $productData=getOrderProducts($con,$_POST["ORDER_ID"]);
+  mysqli_close($con);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -58,17 +66,19 @@
             <div class="card-body">
               <div class="mb-5">
                 <ol class="progtrckr" data-progtrckr-steps="5">
-                  <li class="progtrckr-done">Not Collected</li>
-                  <li class="progtrckr-done">Truck Assigned</li>
-                  <li class="progtrckr-done">Final Assignment</li>
-                  <li class="progtrckr-done">On Collection</li>
-                  <li class="progtrckr-todo">Collected</li>
+                  <li id="1" class="progtrckr-todo">Not Collected</li>
+                  <li id="2" class="progtrckr-todo">Truck Assigned</li>
+                  <li id="3" class="progtrckr-todo">Final Assignment</li>
+                  <li id="4" class="progtrckr-todo">On Collection</li>
+                  <li id="5" class="progtrckr-todo">Collected</li>
                 </ol>
               </div>
               <div class="row mb-3">
                 <div class="col-7 table">
                   <div class="card card-stats table light" id="myTabContent" >
                     <div class="card-body px-3">
+                      <label id="pData" hidden="true"><?php echo $productData;?></label>
+                      <label id="colData" hidden="true"><?php echo $_POST["COLLECTION_DATA"];?></label>
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
@@ -76,7 +86,7 @@
                                   Supplier ID
                               </th>
                               <td >
-                                  12
+                                  <?php echo $collectionData->SUPPLIER_ID;?>
                               </td>
                             </tr>                               
                             <tr>
@@ -84,7 +94,7 @@
                                   Name
                               </th>
                               <td >
-                                  Better Bulk
+                                  <?php echo $collectionData->SUPPLIER_NAME;?>
                               </td>
                             </tr>  
                             <tr>
@@ -92,7 +102,7 @@
                                   Email
                               </th>
                               <td >
-                                  better.bulk@gmail.com
+                                  <?php echo $collectionData->EMAIL;?>
                               </td>
                             </tr>
                             <tr>
@@ -100,7 +110,7 @@
                                   Contact No
                               </th>
                               <td >
-                                  085 515 6262
+                                  <?php echo $collectionData->CONTACT_NUMBER;?>
                               </td>
                             </tr>  
                             <tr>
@@ -108,7 +118,7 @@
                                   Address
                               </th>
                               <td >
-                                  54 Tom St, Primindia, Brits, 0250
+                                  <?php echo $collectionData->ADDRESS_NAME;?>
                               </td>
                             </tr>             
                         </tbody>
@@ -126,7 +136,7 @@
                                   Order #
                               </th>
                               <td >
-                                  321
+                                  <?php echo $collectionData->ORDER_ID;?>
                               </td>
                             </tr>                               
                             <tr>
@@ -134,7 +144,7 @@
                                   Date
                               </th>
                               <td >
-                                  08/07/2019
+                                  <?php echo $collectionData->ORDER_DATE;?>
                               </td>
                             </tr>  
                             <tr>
@@ -142,7 +152,7 @@
                                   Sales Manager
                               </th>
                               <td >
-                                  Matthew
+                                  <?php echo $collectionData->EMPLOYEE_NAME;?>
                               </td>
                             </tr>
              
@@ -166,47 +176,20 @@
                       <th class="text-right"> Total </th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="text-right py-3">R83.00</td>
-                      <td class="text-right py-3">R2 490.00</td>
-                    </tr>
-
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">Apple Munch (96x50ml) Pallet</td>
-                      <td class="text-right py-3">R81.00</td>
-                      <td class="text-right py-3">R2 430.00</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">80</td>
-                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
-                      <td class="text-right py-3">R47.00</td>
-                      <td class="text-right py-3">R3 760.00</td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">20</td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                      <td class="text-right py-3">R130.00</td>
-                      <td class="text-right py-3">R2 600.00</td>
-                    </tr>
-
-                    
+                  <tbody id="tBody">
                     </tbody>
                     <tfoot class="tfoot-light">
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>TOTAL</b></th>
-                      <td class="text-right"><b>R11 280.00</b></td>
+                      <td class="text-right"><b id="TOTAL">R11 280.00</b></td>
                     </tr>
                     <tr class="footer">
                       <td></td>
                       <td></td>
                       <th class="text-right"><b>VAT (15%)</b></th>
-                      <td class="text-right"><b>R2 820.00</b></td>
+                      <td class="text-right"><b id="VAT">R2 820.00</b></td>
                     </tr>
                     </tfoot>
                   </table>
@@ -237,6 +220,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/viewCollection.js"></script>
 </body>
 
 </html>

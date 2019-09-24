@@ -19,7 +19,7 @@
 	}
 	else
 	{
-		$customerID = $_POST['customerID_'];
+		$customerID = $_POST['customerID'];
 		$sql_query = "SELECT A.ADDRESS_ID, B.ADDRESS_LINE_1, C.NAME, D.CITY_NAME, C.ZIPCODE
 		FROM CUSTOMER_ADDRESS A 
 		JOIN ADDRESS B ON A.ADDRESS_ID = B.ADDRESS_ID 

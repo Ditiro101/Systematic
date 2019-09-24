@@ -1,4 +1,7 @@
-<?php include_once("../sessionCheckPages.php");?>
+<?php 
+  include_once("../sessionCheckPages.php");
+  $orderDetails=json_decode($_POST["ordDetails"]);
+?>
 <!DOCTYPE html>
 <html>
 
@@ -63,12 +66,9 @@
             </div>
             <div class="card-body">
               <div class="row mb-3">
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-header" style="background-color: #81b69d">
-                        <h5 class="card-title mb-0">Supplier Details</h5>
-                    </div>
-                    <div class="card-body px-3">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3"  style="height: 15rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
@@ -76,7 +76,7 @@
                                   Supplier ID
                               </th>
                               <td >
-                                  12
+                                  <?php echo $orderDetails->SUPPLIER_ID;?>
                               </td>
                             </tr>                               
                             <tr>
@@ -84,7 +84,7 @@
                                   Name
                               </th>
                               <td >
-                                  Caines Foods
+                                  <?php echo $orderDetails->SUPPLIER_NAME;?>
                               </td>
                             </tr> 
                             <tr>
@@ -92,7 +92,7 @@
                                   Contact No
                               </th>
                               <td >
-                                  067 345 6789
+                                  <?php echo $orderDetails->SUPPLIER_PHONE;?>
                               </td>
                             </tr>
                             <tr>
@@ -100,7 +100,7 @@
                                   Email
                               </th>
                               <td >
-                                  caines.foods@gmail.com
+                                  <?php echo $orderDetails->SUPPLIER_EMAIL;?>
                               </td>
                             </tr>                 
                         </tbody>
@@ -108,9 +108,9 @@
                   </div>
                 </div>
               </div>
-                <div class="col-6">
-                  <div class="card card-stats" id="myTabContent" >
-                    <div class="card-body px-3" style="height: 18.5rem">
+                <div class="col-6 table">
+                  <div class="card card-stats table light" id="myTabContent" >
+                    <div class="card-body px-3" style="height: 15rem">
                       <table class="table align-items-center table-flush table-borderless table-responsive">
                         <tbody class="list">    
                             <tr>
@@ -118,7 +118,10 @@
                                 Date 
                               </th>
                               <td >
-                                04/07/2019
+                                <?php 
+                                $date=new DateTime($orderDetails->ORDER_DATE);
+                                echo $date->format("Y/m/d h:i a");
+                                ?>
                               </td>
                             </tr>                               
                             <tr>
@@ -126,7 +129,7 @@
                                 Order #
                               </th>
                               <td >
-                                321
+                                <?php echo $orderDetails->ORDER_ID;?>
                               </td>
                             </tr> 
                             <tr>
@@ -134,7 +137,7 @@
                                 Sales Manager
                               </th>
                               <td >
-                                Jabu
+                                <?php echo $orderDetails->EMPLOYEE_NAME;?>
                               </td>
                             </tr>      
                         </tbody>
@@ -147,7 +150,8 @@
               <div class="col-12">
                 <div class="card shadow">
                 <div class="table-responsive">
-
+                  <label hidden="true" id="oDet"><?php echo $_POST["ordDetails"];?></label>
+                  <label hidden="true" id="oProd"><?php echo $_POST["ordProducts"];?></label>
                   <table id="myTable" class="table align-items-center table-flush">
                      <thead class="thead-light">
                     <tr class="header">
@@ -156,45 +160,7 @@
                       <th>Qty Recieved</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">All Gold Tomato Sauce (6x350ml) Case</td>
-                      <td class="py-2 px-0 table-light">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>                      
-                    <tr>
-                      <td class="py-3 text-center">30</td>
-                      <td class="py-3">Apple Munch (96x50ml) Pallet</td>
-                      <td class="py-2 px-0 table-light">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">80</td>
-                      <td class="py-3">Kingsley Cola (6x2l) Case</td>
-                      <td class="py-2 px-0 table-light">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="py-3 text-center">20</td>
-                      <td class="py-1">Monster Energy Drink (24x500ml) Case</td>
-                      <td class="py-2 px-0 table-light">
-                        <div class="input-group mx-auto" style="width: 4rem">
-                          <input type="number" value="0" min="0" step="10" data-number-to-fixed="00.10" data-number-stepfactor="10" class="form-control currency pr-0" id="c2" style="height: 2rem;" />
-                        </div> 
-                      </td>
-                    </tr>
-
-                    
+                  <tbody id="tBody">
                     </tbody>
                     
                   </table>
@@ -203,7 +169,7 @@
             </div>
             <br>
               <div class="col mt-4">
-                <button class="btn btn-icon btn-2 btn-success mt-0 " type="button" data-toggle="modal" data-target="#modal-succ">
+                <button class="btn btn-icon btn-2 btn-success mt-0 " type="button" data-toggle="modal" id="btnSave">
                   <span class="btn-inner--text">Submit</span>
                 </button>
                 <button class="btn btn-icon btn-2 btn-danger mt-0 float-right" type="button" data-toggle="modal" data-target="#force">
@@ -228,26 +194,27 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content">
-                    
-                      <div class="modal-header">
-                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">×</span>
-                          </button>
-                      </div>
-                      
-                      <div class="modal-body">
-                          <p>Stock recieved successfully. </p>                      
-                      </div>
-                      <div class="modal-footer">   
-                        <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../stock.html'">Close</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+            <div class="form-group col-md-2 errorModal successModal text-center">
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header" id="modalHeader">
+                                    <h6 class="modal-title" id="MHeader">Success</h6>
+                                </div>
+                                <div class="modal-body">
+                                  <p id="MMessage">Successfully Added</p>
+                                  
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                 <div class="modal fade" id="force" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -290,9 +257,16 @@
               </div>
             </div>
           </div>
+          <?php include_once("../footer.php");?>
         </div>
-       <?php include_once("../footer.php");?>
       </div>
+      <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+    </div>
     </div>
   <!-- Argon Scripts -->
   <!-- Core -->
@@ -303,6 +277,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/receiveStock.js"></script>
 </body>
 
 </html>

@@ -234,6 +234,7 @@
           </div>
           <div class="col-8">
             <div class="car shadow border-0">
+               <!-- <div id="map">Hello</div> -->
                <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
 
             <!-- <script type="text/javascript">

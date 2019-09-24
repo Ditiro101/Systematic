@@ -17,14 +17,22 @@
 		// {
 		// 	echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 		// }
-		if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1,$_POST["latitude"],$_POST["longitude"]))
+		if(checkDelivery($con,$_POST["SALE_ID"]))
 		{
-			echo "T,Delivery Added Sucessfully";
+			echo "F, Delivery Exists";
 		}
 		else
 		{
-			echo "F,Delivery Not Added";
+			if(addDelivery($con,$_POST["SALE_ID"],$_POST["dDate"],$_POST["ADDRESS_ID"],1,$_POST["latitude"],$_POST["longitude"]))
+			{
+				echo "T,Delivery Added Sucessfully";
+			}
+			else
+			{
+				echo "F,Delivery Not Added";
+			}
 		}
+		
 	}
 	elseif($_POST["choice"]==2)
 	{

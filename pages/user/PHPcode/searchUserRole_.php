@@ -20,7 +20,7 @@ $url ='mysql://lf7jfljy0s7gycls:qzzxe2oaj0zj8q5a@u0zbt18wwjva9e0v.cbetxkdyhwsb.u
     $AccessLevelsArray = array();
 
     
-    $sql = "SELECT * FROM ACCESS_LEVEL";
+    $sql = "SELECT * FROM ACCESS_LEVEL ORDER BY ROLE_NAME";
     //var_dump($sql);
     $submit = mysqli_query($DBConnect,$sql);
     if($submit)
