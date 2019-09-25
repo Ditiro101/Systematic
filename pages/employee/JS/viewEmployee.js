@@ -20,25 +20,47 @@ $(()=>{
         $.ajax({
             url:'PHPcode/regenerateEmployeeTag-SQL.php',
             type:'POST',
-            data: {employee_ID:employeeID},
-            beforeSend: function(){
-                $("#modal-title-default").text("Success!");
-                $("#modalText").text("Generating empoyee tag...");
-                $("#displayModal").modal("show");
-            },
+            data: {employee_ID:employeeID} 
         })
         .done(data=>{
             console.log(data);
             let confirmation = data.trim();
             $("#displayModal").modal("hide");
             
-            if(confirmation.includes("success"))
+            if(confirmation.includes("Employee does not earn wage"))
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modalText").text("Employee does not earn wage , thus an employee tag is not generated.");
+               
+                $("#displayModal").modal("show");
+
+                $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                   
+                                    window.location=`../../employee.php`;
+                                });
+
+            }
+            else if(confirmation.includes("success") && !confirmation.includes("Employee does not earn wage"))
             {
                 let id = confirmation.split(",");
                 let employeeID = parseInt(id[0]);
                 console.log(id[0]);
+
+                $("#modal-title-default").text("Success!");
+                $("#modalText").text("Generating empoyee tag...");
+                $("#displayModal").modal("show");
+
+
+                   $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                    
+                                    window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
+                                });
                 
-                window.open(`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`, '_blank');
+               // window.open(`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`, '_blank');
             }
             else if(confirmation.includes("Couldnt regenerate employee tag!"))
             {

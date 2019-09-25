@@ -195,10 +195,11 @@ $(document).ready(function()
                 .done(data=>{
                     console.log(data);
                     let confirmation = data.trim();
-                    if(confirmation.includes("success"))
+                    if(confirmation.includes("success") && !confirmation.includes("Employee does not earn wage"))
                     {
                         let id = confirmation.split(",");
                         let employeeID = parseInt(id[0]);
+                        
                         console.log(id[0]);
                         $("#modal-title-default").text("Success!");
                         $("#MMessage").text("Employee added successfully");
@@ -211,6 +212,24 @@ $(document).ready(function()
                                     e.preventDefault();
                                    
                                     window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
+                                });
+                    }
+                    else if(confirmation.includes("success") && confirmation.includes("Employee does not earn wage"))
+                    {
+                        let id = confirmation.split(",");
+                        let employeeID = parseInt(id[0]);
+                        console.log(id[0]);
+                        $("#modal-title-default").text("Success!");
+                        $("#MMessage").text("Employee added successfully but employee does not earn wage ,thus employee tag not generated.");
+                        //$("#btnClose").attr("onclick","window.location='../../employee.php'");
+                        $("#displayModal").modal("show");
+
+
+                         $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                   
+                                    window.location=`../../employee.php`;
                                 });
                     }
                     else if(confirmation.includes("Employee Exists"))
@@ -243,7 +262,13 @@ $(document).ready(function()
                     else if(confirmation.includes("There was an error within the picture upload"))
                     {
                         $("#modal-title-default").text("Error!");
-                        $("#MMessage").text("Incorrect picture size or format , generate employee tag or upload picture in mainatain");
+                        $("#MMessage").text("Incorrect picture size or format , upload picture in maintain");
+                        $("#displayModal").modal("show");
+                    }
+                    else if(confirmation.includes("Employee QR code could not be generated"))
+                    {
+                        $("#modal-title-default").text("Error!");
+                        $("#MMessage").text("Employee QR code could not be generated, go to regenerate employee tag , to make one!");
                         $("#displayModal").modal("show");
                     }
                     else
