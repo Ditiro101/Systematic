@@ -261,258 +261,8 @@
                     </tr>
                   </thead>
                   <tbody id="tBody">
-                    <tr>
-                      <td>
-                        <label class="mb-0 radio">
-                          <input type="radio" class="classSourceChecked" name="TruckSelect" id="0">
-                        </label>
-                      </td>
-                      <td>LSD 310GP</td>
-                      <td>Land Cruiser</td>
-                      <td>20 Tonnes</td>
-                      <td>
-                        <i class="far fa-dot-circle text-warning"></i>
-                        Packing
-                      </td>
-                      <td>
-                        <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" style="width: 70%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </td>
-                      <td>
-                        <button class="btn btn-icon btn-2 btn-warning btn-sm"  data-toggle="modal" data-target="#trucModal1">
-                          <span class="btn-inner--icon">
-                            <i class="fas fa-eye"></i>
-                          </span>
-                          <span class="btn-inner--text">View</span>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade lg" id="trucModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header bg-default">
-                                <h3 class="modal-title text-white" id="exampleModalCenterTitle">
-                                  <i class="fas fa-truck-moving mr-2"></i>
-                                  LSD 310GP - Land Cruiser (Assignments)
-                                </h3>
-                              </div>
-                              <div class="modal-body">
-                                <div class="nav-wrapper">
-                                    <ul class="nav nav-pills nav-fill flex-column flex-md-row " id="tabs-icons-text" role="tablist">
-                                        <li class="nav-item">
-                                          <a class="nav-link mb-sm-3 mb-md-0 active" id="tab-table-link1" data-toggle="tab" href="#tabs-table1" role="tab" aria-controls="tabs-table" aria-selected="true">
-                                              <i class="fas fa-table mr-2"></i>
-                                            Table
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link mb-sm-3 mb-md-0" id="tab-tree-link1" data-toggle="tab" href="#tabs-tree1" role="tab" aria-controls="tabs-tree1" aria-selected="false">
-                                            <i class="fas fa-sitemap mr-2"></i>
-                                            Tree View
-                                          </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="tab-content" id="myTabContent1">
-                                            <div class="tab-pane fade show active" id="tabs-table1" role="tabpanel" aria-labelledby="tab-table1">
-                                                <h4 class="mb-3">Item(s) Assigned :</h4>
-                                                <div class="table-responsive">
-                                                  <div>
-                                                    <table class="table align-items-center">
-                                                      <thead class="thead-dark text-white">
-                                                        <tr>
-                                                          <th class="text-white" ="col">DeliveryID#</th>
-                                                          <th class="text-white" ="col">Product Name</th>
-                                                          <th class="text-white" ="col">Quantity</th>
-                                                        </tr>
-                                                      </thead>
-                                                      <tbody class="list" id="tB0">
-                                                        <tr>
-                                                          <td>18</td>
-                                                          <td>Coca Cola (24 x 330ml) Case</td>
-                                                          <td>10</td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>18</td>
-                                                          <td>Coca Cola (12 x 2L) Case</td>
-                                                          <td>10</td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>18</td>
-                                                          <td>Fanta Orange (12 x 330ml) Case</td>
-                                                          <td>10</td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="tabs-tree1" role="tabpanel" aria-labelledby="tab-tree1">
-                                              <h4 class="mb-2">Item(s) Assigned :</h4>
-                                              <div class="p-3">
-                                                <ul id="treeview1">
-                                                <li> 
-                                                  <i class="fa fa-truck mr-1"></i>
-                                                  <label>LSD 310GP - Land Cruiser</label>
-                                                  <ul>
-                                                    <li> 
-                                                      <i class="fa fa-plus mr-1"></i>
-                                                      <label>Delvery #18</label>
-                                                      <ul>
-                                                        <li>
-                                                          <label>10 x Coca Cola (24 x 330ml) Case</label>
-                                                        </li>
-                                                        <li>
-                                                          <label>10 x Coca Cola (12 x 2L) Case</label>
-                                                        </li>
-                                                        <li>
-                                                          <label>10 x Fanta Orange (12 x 330ml) Case</label>
-                                                        </li>
-                                                      </ul>
-                                                    </li>
-                                                  </ul>
-                                                </li>
-                                              </ul>
-                                              </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <label class="mb-0 radio">
-                          <input type="radio" class="classSourceChecked" name="TruckSelect" id="0">
-                        </label>
-                      </td>
-                      <td>JGX675NW</td>
-                      <td>Opel GV</td>
-                      <td>90 Tonnes</td>
-                      <td>
-                        <i class="far fa-dot-circle text-warning"></i>
-                        Packing
-                      </td>
-                      <td>
-                        <div class="progress">
-                          <div class="progress-bar bg-warning" role="progressbar" style="width: 50%;" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                      </td>
-                      <td>
-                        <button class="btn btn-icon btn-2 btn-warning btn-sm"  data-toggle="modal" data-target="#trucModal2">
-                          <span class="btn-inner--icon">
-                            <i class="fas fa-eye"></i>
-                          </span>
-                          <span class="btn-inner--text">View</span>
-                        </button>
-
-                        <!-- Modal -->
-                        <div class="modal fade lg" id="trucModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                          <div class="modal-dialog modal-dialog modal-lg" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header bg-default">
-                                <h3 class="modal-title text-white" id="exampleModalCenterTitle">
-                                  <i class="fas fa-truck-moving mr-2"></i>
-                                  JGX675NW - Opel GV (Assignments)
-                                </h3>
-                              </div>
-                              <div class="modal-body">
-                                <div class="nav-wrapper">
-                                    <ul class="nav nav-pills nav-fill flex-column flex-md-row " id="tabs-icons-text" role="tablist">
-                                        <li class="nav-item">
-                                          <a class="nav-link mb-sm-3 mb-md-0 active" id="tab-table-link2" data-toggle="tab" href="#tabs-table2" role="tab" aria-controls="tabs-table2" aria-selected="true">
-                                              <i class="fas fa-table mr-2"></i>
-                                            Table
-                                          </a>
-                                        </li>
-                                        <li class="nav-item">
-                                          <a class="nav-link mb-sm-3 mb-md-0" id="tab-tree-link2" data-toggle="tab" href="#tabs-tree2" role="tab" aria-controls="tabs-tree2" aria-selected="false">
-                                            <i class="fas fa-sitemap mr-2"></i>
-                                            Tree View
-                                          </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="card shadow">
-                                    <div class="card-body">
-                                        <div class="tab-content" id="myTabContent2">
-                                            <div class="tab-pane fade show active" id="tabs-table2" role="tabpanel" aria-labelledby="tab-table2">
-                                                <h4 class="mb-3">Item(s) Assigned :</h4>
-                                                <div class="table-responsive">
-                                                  <div>
-                                                    <table class="table align-items-center">
-                                                     <thead class="thead-dark text-white">
-                                                        <tr>
-                                                          <th class="text-white" ="col">DeliveryID#</th>
-                                                          <th class="text-white" ="col">Product Name</th>
-                                                          <th class="text-white" ="col">Quantity</th>
-                                                        </tr>
-                                                      </thead>
-                                                      <tbody class="list" id="tB0">
-                                                        <tr>
-                                                          <td>25</td>
-                                                          <td>Cola (24 x 330ml) Pallet</td>
-                                                          <td>10</td>
-                                                        </tr>
-                                                        <tr>
-                                                          <td>25</td>
-                                                          <td>Heinz Baked Beans (6 x 200g) Pallet</td>
-                                                          <td>10</td>
-                                                        </tr>
-                                                      </tbody>
-                                                    </table>
-                                                  </div>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="tabs-tree2" role="tabpanel" aria-labelledby="tab-tree2">
-                                              <h4 class="mb-2">Item(s) Assigned :</h4>
-                                              <div class="p-3">
-                                                <ul id="treeview2">
-                                                  <li> 
-                                                    <i class="fa fa-truck mr-1"></i>
-                                                    <label>JGX675NW - Opel GV</label>
-                                                    <ul>
-                                                      <li> 
-                                                        <i class="fa fa-plus mr-1"></i>
-                                                        <label>Delvery #25</label>
-                                                        <ul>
-                                                          <li>
-                                                            <label>25 x Cola (24 x 330ml) Pallet</label>
-                                                          </li>
-                                                          <li>
-                                                            <label>25 x Heinz Baked Beans (6 x 200g) Pallet</label>
-                                                          </li>
-                                                        </ul>
-                                                      </li>
-                                                    </ul>
-                                                  </li>
-                                                </ul>
-                                              </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
+                    
+                   
                     </tbody>
                   </table>
                 </div>
@@ -575,7 +325,7 @@
                 <div class="col">
                   <h3 class="mb-0 text-white">
                     <i class="fas fa-truck-moving mr-2"></i>
-                    LSD 310GP - Land Cruiser (Selected)
+                    <span id="selectTruckName">No Truck Selected</span>
                   </h3>
                 </div>
               </div>
@@ -590,22 +340,7 @@
                       <th scope="col">Quantity</th>
                     </tr>
                   </thead>
-                  <tbody class="list" id="tB0">
-                    <tr>
-                      <td>18</td>
-                      <td>Coca Cola (24 x 330ml) Case</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td>Coca Cola (12 x 2L) Case</td>
-                      <td>10</td>
-                    </tr>
-                    <tr>
-                      <td>18</td>
-                      <td>Fanta Orange (12 x 330ml) Case</td>
-                      <td>10</td>
-                    </tr>
+                  <tbody class="list" id="tSelected">
                   </tbody>
                 </table>
               </div>
@@ -615,7 +350,7 @@
             <div class="card-header  border-0 bg-primary">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i>Delivery #25 Item(s)</h3>
+                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i><span id="assignDelHeading">Item(s)</span></h3>
                 </div>
                 
               </div>
