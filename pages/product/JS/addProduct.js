@@ -1,7 +1,3 @@
-function setTwoNumberDecimal(el) {
-    el.value = parseFloat(el.value).toFixed(2);
-};
-
 var selectedProdType;
 $(()=>{
 	jQuery.validator.setDefaults({
@@ -13,30 +9,6 @@ $(()=>{
         selectedProdType = $(this).children("option:selected").val();
     });
 
-	$.ajax({
-		url: 'PHPcode/getProductTypes_.php',
-		type: 'POST',
-		data: '' 
-	})
-	.done(data=>{
-		if(data!="False")
-		{
-			let arr = JSON.parse(data);
-			let options="";
-			let formView="";
-			let formEdit="1"
-			for(let k=0;k<arr.length;k++)
-			{
-				options+="<option value='"+arr[k]["PRODUCT_TYPE_ID"]+"' >"+arr[k]["TYPE_NAME"]+"</option>";
-			}
-			$("#productType").append(options);
-			
-		}
-		else
-		{
-			alert("Error");
-		}
-	});
 });
 
 $("button#addProduct").on('click', event => {
