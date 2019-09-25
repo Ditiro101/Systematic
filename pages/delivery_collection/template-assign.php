@@ -217,8 +217,42 @@
       </div>
     <!-- Page content -->
     <div class="container-fluid mt--8">
+      <div class="row">
+        <div class="col-xl-4 " >
+            <div class="card">
+              <div class="card-body " >
+                <div class="table-responsive">
+                  <table id="myTable" class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                    <tr class="header">
+                      <th> Supplier ID</th>
+                      <th> Name</th>
+                      <th> Contact number</th>
+                      <th> Email</th>
+                      <th style="width:1rem;"></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                    <tr id="emptySearch" style="display: none;" class="table-danger">
+                      <td><b>No Supplier Found</b></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                      <td></td>
+                    </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
 
         <div class="row">
+
+          
+
           
           <div class="col-xl-4 " id="accordion" >
             <div class="card bg-default">
@@ -235,7 +269,7 @@
           <div class="col-8">
             <div class="car shadow border-0">
                <!-- <div id="map">Hello</div> -->
-               <div id="map" style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
+               <div id="map" style="height: 40rem; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"></div>
 
             <!-- <script type="text/javascript">
               var locations = [

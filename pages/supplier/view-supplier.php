@@ -76,7 +76,7 @@
             <div class="row justify-content-center">
               <div class="col ">
                 <div class="card-profile-image">
-                  <a href="#">
+                  <a>
                     <img src="../../images/user.png" class="rounded-circle">
                   </a>
                 </div>
@@ -101,12 +101,12 @@
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <div class="px-auto">
-                    <ul class="nav nav-pills mb-3 px-auto" id="listAddress" role="tablist" style="width: auto;">
+                    <ul class="nav nav-pills px-auto" id="listAddress" role="tablist" style="width: auto;">
                     </ul>
                   </div>
                   <div class="tab-content" id="pills-tabContent"></div>
                 </hr>
-                <hr class="my-2 d-flex justify-content-center mt-1">
+                <hr class="my-1 mt-3 d-flex justify-content-center pt-1">
                   <div class="row mb-2">
                     <div class="col d-inline mx-0 px-0">
                       <label hidden="true" id="sID"><?php echo $supID;?></label>
@@ -142,18 +142,14 @@
                   </div>
                 </hr>
               </div>
+            </div>
           </div>
-        </div>
-          </div>
-        
-
-  
-
-      <?php include_once("../footer.php");?>
+        <?php include_once("../footer.php");?>
       </div>
-      </div>
-      </div>
-      </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
   </div>
 
