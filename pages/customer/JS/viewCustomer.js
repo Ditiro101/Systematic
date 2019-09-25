@@ -55,7 +55,7 @@ $(()=>{
 	let accountButton="";
 	if(accountCheck=="True")
 	{
-		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm").css("width", "8rem");
 		accountButton.attr("type","submit");
 		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
 		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
@@ -66,7 +66,7 @@ $(()=>{
 	}
 	else
 	{
-		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm").css("width", "9rem");
 		accountButton.attr("type","submit");
 		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
 		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
@@ -128,5 +128,33 @@ $(()=>{
 		$("#inputAddressInfo3").addClass("show active");
 
 	});
+
+
+
+	  $("#formDelete").on('submit',(function(e) {
+        e.preventDefault();
+        console.log("delete");
+        $.ajax({
+            url: "PHPcode/delete.php",
+            type: "POST",
+            data:  new FormData(this),
+            contentType: false,
+            cache: false,
+            processData: false,
+            success: function(data){
+                console.log(data);
+                if(data=="success"){
+                	console.log("success");
+                	$("#modal-succ-del").modal("show");
+                }
+                else{
+               
+                	console.log("failed");
+                }
+       
+              }           
+        });
+    }));
+    
 
 });

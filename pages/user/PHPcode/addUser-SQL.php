@@ -71,7 +71,7 @@ function rand_string($length)
             if($checkResult)
             {
               $row=mysqli_fetch_assoc($checkResult);
-                if(isset($row["USER_ID"]))
+                if(isset($row["USER_ID"]) || isset($row["USERNAME"]))
                 {
                   echo "User exists! ";
                 }

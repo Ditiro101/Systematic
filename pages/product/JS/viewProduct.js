@@ -17,22 +17,22 @@ var PRODUCT_DESCR;
 var SIZE_TYPE_ID;
 
 $(()=>{
-	let NAME = $('input[name=NAME]').val();
-	let PRODUCT_GROUP_ID = $('input[name=PRODUCT_GROUP_ID]').val();
-	let UNITS_PER_CASE = $('input[name=UNITS_PER_CASE]').val();
-	let CASES_PER_PALLET = $('input[name=CASES_PER_PALLET]').val();
-	let INDIVIDUAL_QUANTITY = $('input[name=INDIVIDUAL_QUANTITY]').val();
-	let CASES_QUANTITY = $('input[name=CASES_QUANTITY]').val();
-	let PALLETS_QUANTITY = $('input[name=PALLETS_QUANTITY]').val();
-	let COST_PRICE = $('input[name=COST_PRICE]').val();
-	let GUIDE_DISCOUNT = $('input[name=GUIDE_DISCOUNT]').val();
-	let SELLING_PRICE = $('input[name=SELLING_PRICE]').val();
-	let PRODUCT_MEASUREMENT = $('input[name=PRODUCT_MEASUREMENT]').val();
-	let PRODUCT_MEASUREMENT_UNIT = $('input[name=PRODUCT_MEASUREMENT_UNIT]').val();
-	let PRODUCT_TYPE_ID = $('input[name=PRODUCT_TYPE_ID]').val();
-	let TYPE_NAME = $('input[name=TYPE_NAME]').val();
-	let PRODUCT_DESCR = $('input[name=PRODUCT_DESCR]').val();
-	let SIZE_TYPE_ID = $('input[name=SIZE_TYPE_ID]').val();
+	NAME = $('input[name=NAME]').val();
+	PRODUCT_GROUP_ID = $('input[name=PRODUCT_GROUP_ID]').val();
+	UNITS_PER_CASE = $('input[name=UNITS_PER_CASE]').val();
+	CASES_PER_PALLET = $('input[name=CASES_PER_PALLET]').val();
+	INDIVIDUAL_QUANTITY = $('input[name=INDIVIDUAL_QUANTITY]').val();
+	CASES_QUANTITY = $('input[name=CASES_QUANTITY]').val();
+	PALLETS_QUANTITY = $('input[name=PALLETS_QUANTITY]').val();
+	COST_PRICE = $('input[name=COST_PRICE]').val();
+	GUIDE_DISCOUNT = $('input[name=GUIDE_DISCOUNT]').val();
+	SELLING_PRICE = $('input[name=SELLING_PRICE]').val();
+	PRODUCT_MEASUREMENT = $('input[name=PRODUCT_MEASUREMENT]').val();
+	PRODUCT_MEASUREMENT_UNIT = $('input[name=PRODUCT_MEASUREMENT_UNIT]').val();
+	PRODUCT_TYPE_ID = $('input[name=PRODUCT_TYPE_ID]').val();
+	TYPE_NAME = $('input[name=TYPE_NAME]').val();
+	PRODUCT_DESCR = $('input[name=PRODUCT_DESCR]').val();
+	SIZE_TYPE_ID = $('input[name=SIZE_TYPE_ID]').val();
 
 	productForm = $('#productForm');
 	//Maintain Product

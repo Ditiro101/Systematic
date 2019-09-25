@@ -27,13 +27,13 @@
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="name"><b>Date Generated :</b> dd/mm/yyyy</div>
-          <div class="address"><b>Time Generated :</b> HH:mm</div>
+          <div class="name"><b>Date Generated :</b> <?php echo date("Y/m/d")?></div>
+          <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
           <h1>Product Trends Report</h1>
-          <div class="date"><b>From :</b>01/01/2019</div>
-          <div class="date"><b>To : </b>31/07/2019</div>
+          <div class="date" ><b>From :</b><span id="dateFrom"><?php echo $_POST["DATEFROM"]?> </span></div>
+          <div class="date"><b>To : </b><span id="dateTo"><?php echo $_POST["DATETO"]?></span></div>
         </div>
       </div>
       <div style="margin-bottom: 1rem;">
@@ -46,23 +46,23 @@
         <tbody>
           <tr>
             <td class="no">Product with most number of sales</td>
-            <td class="unit-right">Coca Cola (6x2l) Case</td>
-            <td class="desc">8 546 Sales</td>
+            <td class="unit-right" id="MaxProductName"></td>
+            <td class="desc" id="MaxQuantitySold"></td>
           </tr>
           <tr>
             <td class="no">Product type with most number of sales</td>
-            <td class="unit-right">Beverage</td>
-            <td class="desc">10 067 Sales</td>
+            <td class="unit-right" id="MaxProductType"></td>
+            <td class="desc" id="MaxQuantityTypeSold"></td>
           </tr>
           <tr>
             <td class="total-red">Product with least number of sales</td>
-            <td class="unit-right">All Gold Tomato Sauce (6x350ml) Case</td>
-            <td class="desc">117 Sales</td>
+            <td class="unit-right" id="MinProductName"></td>
+            <td class="desc" id="MinQuantitySold"></td>
           </tr>
           <tr>
             <td class="total-red">Product type with least number of sales</td>
-            <td class="unit-right">Spices</td>
-            <td class="desc">123 Sales</td>
+            <td class="unit-right" id="MinProductType"></td>
+            <td class="desc" id="MinQuantityTypeSold"></td>
           </tr>
         </tbody>
       </table>
@@ -79,9 +79,11 @@
       © 2019 Stock Path
     </footer>
     <script type="text/javascript">
-      new Chart(document.getElementById("pie-chart"), {
-          type: 'pie',
+     /* new Chart(document.getElementById("bar-chart"), {
+          type: 'bar',
           data: {
+             xAxisID: "Names of Sold Products",
+              yAxisID: "Quantity of Sold Products"
             labels: ["All Gold Tomato Sauce (6x700ml) Case", "Coca Cola (6x2l) Case", "Kingsley Ginger Bear (6x2l) Case", "Dragon Energy Drink (24x500ml) Case", "Monster Energy Drink (24x500ml) Case"],
             datasets: [{
               label: "No Of Sales",
@@ -113,7 +115,9 @@
               text: 'TOP 5 MOST SOLD PRODUCT TYPES'
             }
           }
-      });
+      });*/
     </script>
   </body>
+  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script type="text/javascript" src="JS/productTrends.js"></script>
 </html>
