@@ -575,7 +575,7 @@
                 <div class="col">
                   <h3 class="mb-0 text-white">
                     <i class="fas fa-truck-moving mr-2"></i>
-                    LSD 310GP - Land Cruiser (Assigned)
+                    LSD 310GP - Land Cruiser (Selected)
                   </h3>
                 </div>
               </div>
