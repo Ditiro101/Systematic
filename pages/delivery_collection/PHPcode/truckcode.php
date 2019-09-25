@@ -59,6 +59,19 @@
 		}
 	}
 	///////////////////////////////////////////
+	function deleteTruck($con,$reg)
+	{
+		$delete_query="DELETE FROM TRUCK WHERE REGISTRATION_NUMBER='$reg'";
+		$delete_result=mysqli_query($con,$delete_query);
+		if($delete_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
 	/////////////////////////////////////////////
 	if($_POST["choice"]==1)
 	{
@@ -110,6 +123,17 @@
 	    else{
 	         echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 	    }
+	}
+	elseif($_POST["choice"]==4)
+	{
+		if(deleteTruck($con,$_POST["REGISTRATION_NUMBER"]))
+		{
+			echo "T,Truck Deleted Successfully";
+		}
+		else
+		{
+			echo "F,SYSTEM RESTRICT: Truck cannot be deleted";
+		}
 	}
 	mysqli_close($con);
 ?>
