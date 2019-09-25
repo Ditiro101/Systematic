@@ -1041,3 +1041,6 @@ var SalesChart = (function() {
 
 })();
 
+$(document).ready(function () {
+$('.dataTables_length').addClass('bs-select');
+});

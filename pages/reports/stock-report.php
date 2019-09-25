@@ -25,8 +25,8 @@
     <main>
       <div id="details" class="clearfix">
         <div id="client">
-          <div class="name"><b>Date Generated :</b> 03/07/2019</div>
-          <div class="address"><b>Time Generated :</b> 16:54</div>
+          <div class="name"><b>Date Generated :</b> <?php echo date("Y/m/d")?></div>
+          <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
           <h1>Stock Report</h1>
@@ -44,98 +44,8 @@
             <th class="desc">INDIVIDUAL QTY</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td class="no">1</td>
-            <td class="desc">All Gold Tomato Sauce (350ml)</td>
-            <td class="no">34</td>
-            <td class="no">22</td>
-            <td class="no">67</td>
-          </tr>
-          <tr>
-            <td class="no">12</td>
-            <td class="desc">All Gold Tomato Sauce (700ml)</td>
-            <td class="no">34</td>
-            <td class="no">45</td>
-            <td class="no">33</td>
-          </tr>
-          <tr>
-            <td class="no">23</td>
-            <td class="desc">Apple Munch (50ml)</td>
-            <td class="no-red">15</td>
-            <td class="no">78</td>
-            <td class="no">23</td>
-          </tr>
-          <tr>
-            <td class="no">15</td>
-            <td class="desc">Ariel Washing Powder (500g)</td>
-            <td class="no">67</td>
-            <td class="no">21</td>
-            <td class="no">44</td>
-          </tr>
-          <tr>
-            <td class="no">45</td>
-            <td class="desc">Bakers Toppers (125g)</td>
-            <td class="no">36</td>
-            <td class="no">66</td>
-            <td class="no-red">7</td>
-          </tr>
-          <tr>
-            <td class="no">11</td>
-            <td class="desc">Coca Cola (2l)</td>
-            <td class="no-red">3</td>
-            <td class="no">13</td>
-            <td class="no">67</td>
-          </tr>
-          <tr>
-            <td class="no">28</td>
-            <td class="desc">Dragon Energy Drink (500ml)</td>
-            <td class="no">17</td>
-            <td class="no">56</td>
-            <td class="no">76</td>
-          </tr>
-          <tr>
-            <td class="no">20</td>
-            <td class="desc">Kingsley Cola (2l) </td>
-            <td class="no">34</td>
-            <td class="no-red">11</td>
-            <td class="no">23</td>
-          </tr>
-          <tr>
-            <td class="no">14</td>
-            <td class="desc">Kingsley Iron Brew (2l)</td>
-            <td class="no-red">5</td>
-            <td class="no">46</td>
-            <td class="no-red">7</td>
-          </tr>
-          <tr>
-            <td class="no">36</td>
-            <td class="desc">Kingsley Ginger Bear (2l)</td>
-            <td class="no-red">14</td>
-            <td class="no">55</td>
-            <td class="no-red">11</td>
-          </tr>
-          <tr>
-            <td class="no">25</td>
-            <td class="desc">Kingsley Granadila (2l)</td>
-            <td class="no">46</td>
-            <td class="no">67</td>
-            <td class="no">343</td>
-          </tr>
-          <tr>
-            <td class="no">22</td>
-            <td class="desc">Monster Energy Drink (500ml)</td>
-            <td class="no-red">12</td>
-            <td class="no">124</td>
-            <td class="no">66</td>
-          </tr>
-          <tr>
-            <td class="no">33</td>
-            <td class="desc">Castle Lite (500ml)</td>
-            <td class="no-red">2</td>
-            <td class="no">55</td>
-            <td class="no">71</td>
-          </tr>
+        <tbody id="tBody">
+         
         </tbody>
       </table>
 
@@ -152,5 +62,17 @@
     <footer>
       © 2019 Stock Path
     </footer>
+
+     <!-- Argon Scripts -->
+  <!-- Core -->
+  <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
+  <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Optional JS -->
+  <script src="../../assets/vendor/chart.js/dist/Chart.min.js"></script>
+  <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Argon JS -->
+  <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Search Product JS -->
+  <script src="JS/stockReport.js" type="text/javascript"></script>
   </body>
 </html>
