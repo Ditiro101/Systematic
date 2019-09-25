@@ -103,12 +103,14 @@
           </div>
           <div class="row mt-3">
             <div class="col-12 text-center">
-               <a href="http://stockpath.co.za/pages/user/reset-user-password-request.php" class="text-dark"><small>Forgot Password?</small></a>
+               <a href="pages/user/reset-user-password-request.php" class="text-dark"><small>Forgot Password?</small></a>
             </div>
           </div>
         </div>
       </div>
     
+  <!-- http://stockpath.co.za/-->
+
   <!-- Footer -->
 
   <footer class="footer mt-7">
