@@ -55,7 +55,7 @@ $(()=>{
 	let accountButton="";
 	if(accountCheck=="True")
 	{
-		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm").css("width", "8rem");
 		accountButton.attr("type","submit");
 		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
 		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
@@ -66,7 +66,7 @@ $(()=>{
 	}
 	else
 	{
-		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm");
+		accountButton=$("<button></button>").addClass("btn btn-icon btn-2 btn-default btn-sm").css("width", "9rem");
 		accountButton.attr("type","submit");
 		accountButton.append("<span class='btn-inner--icon'><i class='fas fa-eye'></i></span>");
 		let innerButtonText=$("<span></span>").addClass("btn-inner--text");
