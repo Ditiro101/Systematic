@@ -73,7 +73,7 @@ $messageData = [
                         <table class="es-content" cellspacing="0" cellpadding="0" align="center">
                             <tbody>
                                 <tr>
-                                    <td class="esd-stripe" style="background-color: rgb(255, 255, 255);" esd-custom-block-id="6340" bgcolor="#ffa73b" align="center">
+                                    <td class="esd-stripe" style="background-color: rgb(255, 167, 59);" esd-custom-block-id="6340" bgcolor="#ffa73b" align="center">
                                         <table class="es-content-body" style="background-color: transparent;" width="600" cellspacing="0" cellpadding="0" align="center">
                                             <tbody>
                                                 <tr>
