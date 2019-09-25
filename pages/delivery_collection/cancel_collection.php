@@ -107,7 +107,7 @@
                                     </div>
                                     
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-success" data-dismiss="modal" id="btnYes" >Yes</button>
+                                        <button type="button" class="btn btn-success" id="btnYes" >Yes</button>
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
                                     </div>
                                     

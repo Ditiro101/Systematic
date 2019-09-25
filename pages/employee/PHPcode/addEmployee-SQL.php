@@ -161,8 +161,6 @@ include "meRaviQr/qrlib.php";
 	}
 	if($check)
 	{
-		
-
 	
 		$query = "SELECT `EMPLOYEE_ID` FROM `EMPLOYEE` WHERE (NAME='$Ename' and SURNAME ='$Esurname' and CONTACT_NUMBER ='$Econtact')";
 		$submitQuery = mysqli_query($DBConnect,$query);
@@ -173,85 +171,17 @@ include "meRaviQr/qrlib.php";
 			$savedID = mysqli_fetch_assoc($submitQuery);
 		
 			$employeeID = $savedID["EMPLOYEE_ID"];
-
-
-
-
-
 			
 				//Upload picture.
 			if(empty($employeeID))
 			{
-				echo "Employee ID not created.";
+				echo "Employee ID not created, something is wrong with the code";
 			}
 			else
 			{
-
-				$verifyQrCode;
-
-				$sql = "SELECT EMPLOYEE_TYPE.WAGE_EARNING FROM EMPLOYEE
-                INNER JOIN EMPLOYEE_TYPE
-                ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
-                 WHERE (EMPLOYEE_ID='$employeeID')";
-                $query_QR = mysqli_query($DBConnect , $sql);
-
-
-				
-				
-
-				if(mysqli_num_rows($query_QR)>0)
-                {
-                    if($row = mysqli_fetch_assoc($query_QR))
-                    {
-                        if($row["WAGE_EARNING"] == 1)
-                        {
-							$hash = sha1($employeeID);
-							
-								$qrImgName = $employeeID;
-							   
-							   
-								$final = $employeeID ; //.$dev;
-								$qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
-								$qrimage = $qrImgName.".png";
-								$workDir = $_SERVER['HTTP_HOST'];
-								$qrlink = $workDir."/qrcode".$qrImgName.".png";
-								$date = date("Y-m-d H:i:s");
-								
-								$sql = "INSERT INTO EMPLOYEE_QR(HASH,DATE_GENERATED,EMPLOYEE_ID) VALUES('$hash','$date','$employeeID')";
-								//var_dump($sql);
-								$query_QR = mysqli_query($DBConnect , $sql);
-								if($query_QR)
-								{
-									$verifyQrCode = "verified employee QR.";
-									echo $verifyQrCode;
-								}
-								else
-								{
-									$verifyQrCode = "Employee QR code could not be generated";
-									echo $verifyQrCode;
-								}
-                        }
-                        else
-                        {
-                            echo "Employee does not earn wage";
-                        }
-                    }
-                    else
-                    {
-                        echo "Fetch array has errors";
-                    }
-                }
-                else
-                {
-                        echo "This employee does not earn wage";
-                }
-
-
-
-
 						$dir= "../images/ProfilePic/";		
 						//$counter = count($fileTo["name"]);
-					if(($fileTo["type"] == "image/jpeg")&& ($fileTo["size"] < 12500000))
+					if(($fileTo["type"] == "image/jpeg")&& ($fileTo["size"] < 125000))
 					{
 						
 								if($fileTo["error"] > 0)
@@ -288,7 +218,21 @@ include "meRaviQr/qrlib.php";
 
 												  
 												  //var_dump($employeeID);
-												
+												  $hash = sha1($employeeID);
+											  
+												  $qrImgName = $employeeID;
+												 
+												 
+												  $final = $employeeID ; //.$dev;
+												  $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
+												  $qrimage = $qrImgName.".png";
+												  $workDir = $_SERVER['HTTP_HOST'];
+												  $qrlink = $workDir."/qrcode".$qrImgName.".png";
+												  $date = date("Y-m-d H:i:s");
+												  
+												  $sql = "INSERT INTO EMPLOYEE_QR(HASH,DATE_GENERATED,EMPLOYEE_ID) VALUES('$hash','$date','$employeeID')";
+												  //var_dump($sql);
+												  $query_QR = mysqli_query($DBConnect , $sql);
 												 
 												  //var_dump($query_QR);
 														  //return $query;
@@ -303,7 +247,7 @@ include "meRaviQr/qrlib.php";
 												}
 												else
 												{
-													echo "Error in saving employee picture.";
+													echo "error in saving employee pic or generated employee tag";
 												}
 																
 										}

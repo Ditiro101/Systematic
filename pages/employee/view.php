@@ -185,10 +185,10 @@
       <!-- Table -->
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 order-xl-2 mb-4 mb-xl-0">
+          <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
-              <div class="col">
+              <div class="col ">
                 <div class="card-profile-image">
                   <a>
                 <?php
@@ -217,10 +217,10 @@
 
 
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
-            <div class="card-body pt-0 pt-md-4 mt-6">
+            <div class="card-body pt-0 pt-md-4">
               <div class="row">
                 <div class="col">
-                  <div class="card-profile-stats d-flex justify-content-center mb-0">
+                  <div class="card-profile-stats d-flex justify-content-center mb-6 mb-0">
                   </div>
                 </div>
               </div>
@@ -228,6 +228,8 @@
                 <h2>
                   <?php echo $titleName." ".$name." ".$surname; ?>
                 </h2>
+
+
                   <div class="row mb-2">
                     <div class="col d-inline mx-0 px-0">
                       <form action='' method="POST" id="addUserView">
@@ -272,6 +274,7 @@
                         <span class="btn-inner--text">Re-generate Tag</span>
                       </button>
                     </div>
+
                   </div>
                 </div>
                 <hr class="h5 font-weight-300 pb-0 mt-3">
@@ -297,9 +300,9 @@
                   <p class="mb-0">South Africa</p>
                 </div>
                 <hr class="my-2 d-flex justify-content-center">
-                  <div class="row mb-2">
-                    <div class="col d-inline mx-0 px-0">
-                      <form id="formMaintain" action="maintain.php" method="POST">
+                <div class="row mb-2">
+                  <div class="col d-inline mx-0 px-0">
+                    <form id="formMaintain" action="maintain.php" method="POST">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="NAME" id="NAME" value=<?php echo $name;?>>
                         <input type="hidden" name="SURNAME" value=<?php echo $surname;?>>
@@ -319,8 +322,8 @@
                           <span class="btn-inner--text">Edit</span>
                         </button>
                       </form>
-                    </div>
-                    <div class="col d-inline mx-0 px-0">
+                  </div>
+                  <div class="col d-inline mx-0 px-0">
                       <form action='../user/add-user.php' method="POST" id="addUserView">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
@@ -340,7 +343,6 @@
                       </button>
                     </div> 
                   </div>
-                </hr>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
@@ -398,39 +400,44 @@
               </div>
 
               <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                    </div>
-                    <div class="modal-body text-left">
-                      <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
-                    </div>
-                    <div class="modal-footer">   
-                      <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+                        </div>
+                        <div class="modal-body text-left">
+                            <p>Are you sure you want to generate a new employee tag for the selected employee?</p>
+                        </div>
+                        <div class="modal-footer">   
+                          <button type="button" class="btn btn-success" id="btnClick" data-dismiss="modal" >Yes</button>
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                  <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <p id="modalTextDismiss"></p>
+                    <div class="modal-content">
+                      
+                        <div class="modal-header">
+                            <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        
+                        <div class="modal-body">
+                            <p id="modalTextDismiss"></p>
+                            
+                        </div>
+                        
+                        <div class="modal-footer">
+                            
+                            <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
+                        </div>
                         
                     </div>
-                    <div class="modal-footer">                       
-                      <button type="button"  id="btnCloseDismiss" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="">Close</button> 
-                    </div>
-                  </div>
                 </div>
               </div>
         
