@@ -1,52 +1,3 @@
-var regex=/^\d{3}\d{3}\d{4}$/;
-var idRegex=/^\d{3}\d{3}\d{7}$/;
-var emailRegex =/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-let CheckValid = function(valArr)
-{
-    if(valArr["contact"].length!=10)
-    {
-        $("#MMessage").text("Contact Number must be 10 digits long.");
-        $("#btnClose").attr("data-dismiss","modal");
-        $("#displayModal").modal("show");
-        return false;
-    }
-    else if (valArr["IDPASS"].length!=13)
-    {
-        $("#MMessage").text("ID number must be 13 digits long.");
-        $("#btnClose").attr("data-dismiss","modal");
-        $("#displayModal").modal("show");
-        return false;
-    }
-    else if(regex.test(valArr["contact"])!=true)
-    {
-        $("#MMessage").text("Contact Number must only contain digits");
-        $("#btnClose").attr("data-dismiss","modal");
-        $("#displayModal").modal("show");
-        return false;
-    }
-    else if(idRegex.test(valArr["IDPASS"])!=true)
-    {
-        $("#MMessage").text("ID Number must only contain digits");
-        $("#btnClose").attr("data-dismiss","modal");
-        $("#displayModal").modal("show");
-        return false;
-    }
-    else if(emailRegex.test(valArr["email"])!=true)
-    {
-        $("#MMessage").text("Email is not valid");
-        $("#btnClose").attr("data-dismiss","modal");
-        $("#displayModal").modal("show");
-        return false;
-
-    }
-    else
-    {
-        return true;
-    }
-    
-}
-
 let getVals = function()
 {
     let name=$("#employeeName").val().trim();
@@ -152,19 +103,67 @@ $(document).ready(function()
     $("#picToUpload").on("submit",function(e)
     {//use ID of the form
         e.preventDefault();
-        let mainform=$("#picToUpload");
-        mainform.validate();
-        if(mainform.valid()===false)
-        {
-            e.stopPropagation();
-        }
-        else
-        {
-            let arr=getVals();
-            if(CheckValid(arr)!=true)
+        let arr=getVals();
+        let form=new FormData();
+        let pics=$("#fileUpload").get(0).files[0];
+        //$("#fileUpload").prop('files')[0]
+        form.append("file",pics);
+        form.append("name",arr["name"]);
+        form.append("surname",arr["surname"]);
+        form.append("title",arr["title"]);
+        form.append("email",arr["email"]);
+        form.append("contact",arr["contact"]);
+        form.append("employeeType",arr["employeeType"]);
+        form.append("IDPASS",arr["IDPASS"]);
+        form.append("address",arr["address"]);
+        form.append("suburb",arr["suburb"]);
+        form.append("city",arr["city"]);
+        form.append("zip",arr["zip"]);
+        form.append("status",arr["status"]);
+        console.log(pics);
+        $.ajax({
+            url:'PHPcode/addEmployee-SQL.php',
+            type:'POST',
+            data: form,
+            processData: false,
+            contentType: false,
+            cache: false,
+        })
+        .done(data=>{
+            console.log(data);
+            let confirmation = data.trim();
+            if(confirmation== "success")
             {
-                e.stopPropagation();
-            } 
+                $("#modal-title-default").text("Success!");
+                $("#modal-body").text("Employee added successfully");
+                $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "Employee Exists!")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("Employee Exists! , press close and try again");
+               
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "City found suburb added but address not added.")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("City found suburb added but address not added.");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "error in saving employee pic or generated employee tag")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("error in saving employee pic or generated employee tag");
+                $("#displayModal").modal("show");
+            }
+            else if(confirmation == "Couldnt get ID of employee details")
+            {
+                $("#modal-title-default").text("Error!");
+                $("#modal-body").text("Couldnt get ID of employee details");
+                $("#displayModal").modal("show");
+            }
             else
             {
                 let form=new FormData();
@@ -283,7 +282,8 @@ $(document).ready(function()
                   
                 });
             }
-        }
+          
+        });
     });
     
 

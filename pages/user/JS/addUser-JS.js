@@ -84,8 +84,6 @@ $(document).ready(function()
                             $("#modal-title-default").text("Error!");
                             $("#modalText").text("User exists! , press close and try again");
                             $("#displayModal").modal("show");
-                            $("#btnClose").attr("onclick","window.location='../../user.php'");
-
                         }
                         else
                         {

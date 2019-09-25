@@ -1,4 +1,3 @@
-
 let getVals=function()
 {
 	let arr=[];
@@ -24,7 +23,6 @@ $(()=>{
 		else
 		{
 			let arr=getVals();
-
 			$.ajax({
 			url:'PHPcode/truckcode.php',
 			type:'POST',
@@ -66,7 +64,6 @@ $(()=>{
 					$("#modalHeader").css("background-color", "#1ab394");
 					$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 					$("#displayModal").modal("show");
-
 				}
 				else
 				{
@@ -78,12 +75,6 @@ $(()=>{
 					$("#displayModal").modal("show");
 				}
 			});
-
-
-
-
-
-
 		}
 		
 	});

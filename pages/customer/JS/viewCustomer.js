@@ -129,32 +129,4 @@ $(()=>{
 
 	});
 
-
-
-	  $("#formDelete").on('submit',(function(e) {
-        e.preventDefault();
-        console.log("delete");
-        $.ajax({
-            url: "PHPcode/delete.php",
-            type: "POST",
-            data:  new FormData(this),
-            contentType: false,
-            cache: false,
-            processData: false,
-            success: function(data){
-                console.log(data);
-                if(data=="success"){
-                	console.log("success");
-                	$("#modal-succ-del").modal("show");
-                }
-                else{
-               
-                	console.log("failed");
-                }
-       
-              }           
-        });
-    }));
-    
-
 });

@@ -21,8 +21,6 @@ $(()=>{
   		debug: true,
   		success: "valid"
 	});
-
-
 	let active=$("#rActive").text();
 	let truckName=$('#rTName').text();
 	$("#tName").attr("value",truckName);
@@ -132,26 +130,5 @@ $(()=>{
 		});
 	});
 
-	var beforeVals=getVals();
-	
-
-	function createAudit(changed){
-		//make sure you change the subfuc id
-		let Sub_Functionality_ID=10.8;
-		$.ajax({
-		url:'../admin/PHPcode/audit_log.php',
-		type:'POST',
-		data:{Sub_Functionality_ID:Sub_Functionality_ID,changes:changed} //functionality id needs to be included
-		})
-		.done(data=>{
-			if(data=="success"){
-				//alert("success");
-			}
-			else{
-				//alert(data);
-			}
-		
-		});
-	}
 
 });
