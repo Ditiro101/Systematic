@@ -1,4 +1,3 @@
-<?php include_once("../../sessionCheckLanding.php");?>
 <!DOCTYPE html>
 <html>
 
@@ -92,7 +91,7 @@
                             <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 25%; height:25px;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" id="btnSave">Continue</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Continue</button>
                           </div>
                         </div>      
                       </div>
@@ -153,13 +152,6 @@
       <?php include_once("../footer.php");?>
     </div>
   </div>
-  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content px-auto" style="">
-              <img class="loading" src="../../assets/img/loading/loading.gif">
-          </div>
-      </div>
-  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
@@ -169,7 +161,6 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <script type="text/javascript" src="JS/backupDatabase.js"></script>
 </body>
 
 </html>

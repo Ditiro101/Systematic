@@ -396,7 +396,7 @@
             nonSelectedText: 'None selected',
             nSelectedText: 'selected',
             allSelectedText: 'All selected',
-            numberDisplayed: 20,
+            numberDisplayed: 12,
             disableIfEmpty: false,
             disabledText: '',
             delimiterText: ', ',
@@ -724,6 +724,7 @@
             if(this.options.enableClickableOptGroups && this.options.multiple) {
                 $('li.multiselect-group', this.$ul).on('click', $.proxy(function(event) {
                     event.stopPropagation();
+                    console.log('test');
                     var group = $(event.target).parent();
 
                     // Search all option in optgroup

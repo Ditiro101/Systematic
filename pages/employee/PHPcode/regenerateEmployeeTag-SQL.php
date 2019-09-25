@@ -21,79 +21,53 @@ include "meRaviQr/qrlib.php";
         $employeeID = $_POST["employee_ID"];
         if($employeeID)
         {
-                    $sql = "SELECT EMPLOYEE_TYPE.WAGE_EARNING FROM EMPLOYEE
-                    INNER JOIN EMPLOYEE_TYPE
-                    ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
-                    WHERE (EMPLOYEE_ID='$employeeID')";
+            $get_query="SELECT * FROM EMPLOYEE WHERE `EMPLOYEE_ID`=$employeeID ";
+            $get_result=mysqli_query($DBConnect,$get_query);
+            if(mysqli_num_rows($get_result)>0)
+            {
+                $row= mysqli_fetch_assoc($get_result);
+                $name=$row["NAME"];
+                $surname = $row["SURNAME"];
+
+
+
+                $hash = sha1($employeeID);
+                
+                    $qrImgName = $employeeID;
+                
+                
+                    $final = $employeeID ; //.$dev;
+                    $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
+                    $qrimage = $qrImgName.".png";
+                    $workDir = $_SERVER['HTTP_HOST'];
+                    $qrlink = $workDir."/qrcode".$qrImgName.".png";
+                    $date = date("Y-m-d H:i:s");
+                    
+                    $sql = "UPDATE EMPLOYEE_QR
+                    SET `HASH` = '$hash', `DATE_GENERATED`= '$date' 
+                    WHERE `EMPLOYEE_ID`='$employeeID'";
+                    //var_dump($sql);
                     $query_QR = mysqli_query($DBConnect , $sql);
-
-
-                    
-                    
-
-                    if(mysqli_num_rows($query_QR)>0)
+                    if($query_QR)
                     {
-                        if($row = mysqli_fetch_assoc($query_QR))
-                        {
-                            if($row["WAGE_EARNING"] == 1)
-                            {
-                                $hash = sha1($employeeID);
-                                
-                                    $qrImgName = $employeeID;
-                                
-                                
-                                    $final = $employeeID ; //.$dev;
-                                    $qrs = QRcode::png($final,"userQr/$qrImgName.png","H","3","3");
-                                    $qrimage = $qrImgName.".png";
-                                    $workDir = $_SERVER['HTTP_HOST'];
-                                    $qrlink = $workDir."/qrcode".$qrImgName.".png";
-                                    $date = date("Y-m-d H:i:s");
-                                    
-                                    $sql = "UPDATE EMPLOYEE_QR
-                                    SET `HASH` = '$hash', `DATE_GENERATED`= '$date' 
-                                    WHERE `EMPLOYEE_ID`='$employeeID'";
-                                    //var_dump($sql);
-                                    $query_QR = mysqli_query($DBConnect , $sql);
-                                    if($query_QR)
-                                    {
-                                        echo $employeeID . ",success";
-                                    }
-                                    else
-                                    {
-                                        echo "Couldnt regenerate employee tag!";
-                                    }
-                            }
-                            else
-                            {
-                                echo "Employee does not earn wage";
-                            }
-
-                        }
-                        else
-                        {
-                            echo "Fetch array has errors";
-                        }
+                        echo $employeeID . ",success";
                     }
                     else
                     {
-                        echo "Employee type does not exist thus cannot have an employee tag.";
+                        echo "Couldnt regenerate employee tag!";
                     }
-
-
-                           
             }
             else
             {
                 echo "Could not find name and surname of worker";
             }
-            //Close database connection
-            mysqli_close($DBConnect);
         }
 
 
-    
+    //Close database connection
+    mysqli_close($DBConnect);
 
-   
+   }
 
 
 
