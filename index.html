@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <meta charset="utf-8"> 
+  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
   <title>Login - Stock Path</title>
   <!-- Favicon -->
@@ -67,48 +69,43 @@
                   <img class="img-fluid" src="./assets/img/brand/blue.png">
               </div>
             </div>
-
             <div class="card-body px-lg-5 py-lg-5">
-
               <div class="text-center text-muted mb-4">
-                <div id="alert-login">
-                </div>
                 <small>Welcome</small>
-                
               </div>
-              
-                <form method='post' action="">
-                  <div class="form-group mb-3">
-                    <div class="input-group input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-email-83"></i></span>
-                      </div>
-                      <input type="email" class="form-control" placeholder="Email"  id="email" name="email">
+              <form role="form">
+                <div class="form-group mb-3">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
+                    <input class="form-control" placeholder="Email" type="email">
                   </div>
-                  <div class="form-group">
-                    <div class="input-group input-group-alternative">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
-                      </div>
-                      <input class="form-control" placeholder="Password" type="password" id="password" name="password">
+                </div>
+                <div class="form-group">
+                  <div class="input-group input-group-alternative">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
+                    <input class="form-control" placeholder="Password" type="password">
                   </div>
+                </div>
 
-                  <div class="text-center">
-                    <button  class="btn btn-customGreen my-4" id="login_button">Log in</button>
-                  </div>
-                </form>
+                <div class="text-center">
+                  <a  class="btn btn-customGreen my-4" href="./dashboard.php">Log in</a>
+                </div>
+              </form>
             </div>
           </div>
           <div class="row mt-3">
             <div class="col-12 text-center">
-              <a href="./pages/user/reset-user-password-request.html" class="text-dark"><small>Forgot Password?</small></a>
+              <a href="http://stockpath.co.za/pages/user/reset-user-password-request.php" class="text-dark"><small>Forgot Password?</small></a>
             </div>
           </div>
         </div>
       </div>
     
+  
   <!-- Footer -->
 
   <footer class="footer mt-7">
@@ -129,16 +126,8 @@
   </footer>
   </div>
   </div>
-  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content px-auto" style="">
-              <img class="loading" src="assets/img/loading/loading.gif">
-          </div>
-      </div>
-  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
-  <script src="assets/login/JS/login.js"></script>
   <script src="./assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="./assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Argon JS -->
