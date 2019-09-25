@@ -58,20 +58,6 @@
 			return false;
 		}
 	}
-	///////////////////////////////////////////////////
-	function deleteWarehouse($con,$id)
-	{
-		$delete_query="DELETE FROM WAREHOUSE WHERE WAREHOUSE_ID='$id'";
-		$delete_result=mysqli_query($con,$delete_query);
-		if($delete_result)
-		{
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
 	////////////////////////////////////////////////////
 	///////////////////////////////////////////////////
 	if($_POST["choice"]==1)
@@ -124,17 +110,6 @@
 	    else{
 	         echo "Error: " . $sql_query. "<br>" . mysqli_error($con);
 	    }
-	}
-	elseif($_POST["choice"]==4)
-	{
-		if(deleteWarehouse($con,$_POST["WAREHOUSE_ID"]))
-		{
-			echo "T,Warehouse Deleted Successfully!";
-		}
-		else
-		{
-			echo "F,SYSTEM RESTRICT: Warehouse cannot be deleted.";
-		}
 	}
 	mysqli_close($con);
 

@@ -54,83 +54,131 @@
         <div class="col">
           <div class="card shadow">
             <div class="card-header border-0">
-              <div class="input-group input-group-rounded input-group-merge">
-               <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Order Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
-                <div class="input-group-prepend">
-                  <div class="input-group-text">
-                    <span class="fa fa-search"></span>
-                  </div>
-                </div>
-                <label hidden="true" id="cData"><?php echo json_encode($collectionData);?></label>
-                <!-- Button trigger modal -->
-              </div>
-            </div>         
-            <div class="table-responsive">
-              <table id="myTable" class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr class="header">
-                    <th>Order #</th>
-                    <th>Date</th>
-                    <th>City</th>
-                    <th>Supplier</th>
-                    <th>Status</th>
-                    <th></th>
-                    <th></th>
-                  </tr>
-                </thead>
-                <tbody id="tBody">                      
-                  <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
-                    <td><b>No Collection Found</b></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="form-group col-md-2 mt-3">
-                <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
-              </div>
-              <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
-                      </div>
-                      <div class="modal-body">
-                        <p>Are you sure you want to cancel the selected supplier order collection?</p>
-                      </div>
-                      <div class="modal-footer">
-                      <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location='cancel_collection.php'">Yes</button>
-                      <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+               <div class="input-group input-group-rounded input-group-merge">
+                 <label hidden="true" id="cData"><?php echo json_encode($collectionData);?></label>
+                 <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Enter Order Number" title="Type in a name" class="form-control form-control-rounded form-control-prepended" aria-label="Search">
+                  <div class="input-group-prepend">
+                    <div class="input-group-text">
+                      <span class="fa fa-search"></span>
                     </div>
                   </div>
-                </div>
-              </div>
-              <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                  <!-- Button trigger modal -->
+            </div>
+          </div>
+          <div class="table-responsive">
+
+            <table id="myTable" class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr class="header">
+                        <th>Order #</th>
+                        <th>Date</th>
+                        <th>City</th>
+                        <th>Supplier</th>
+                        <th>Status</th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    </thead>
+                    <tbody id="tBody">                      
+                      <tr id="emptySearch" style="display: none;" class="table-danger mb-3">
+                        <td><b>No Collection Found</b></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+            <div class="form-group col-md-2 mt-3">
+              <button type="button" class="btn btn-block btn-primary mb-3" data-toggle="modal" data-target="#modal-default" onclick="window.history.go(-1); return false;">Back</button>
+            </div>
+            <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h6 class="modal-title" id="modal-title-default">Success!</h6>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                      </button>
+                      <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
                     </div>
                     <div class="modal-body">
-                      <p>Supplier order collection successfully cencelled</p>
+                      <p>Are you sure you want to cancel the selected supplier order collection?</p>
                     </div>
-                    <div class="modal-footer"> 
-                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.php'">Close</button> 
-                    </div> 
+                    <div class="modal-footer">
+                      
+                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="window.location='cancel_collection.php'">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
               </div>
             </div>
+            <div class="modal fade" id="modal-succ" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                  <div class="modal-content">
+                    
+                      <div class="modal-header">
+                          <h6 class="modal-title" id="modal-title-default">Success!</h6>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                          </button>
+                      </div>
+                      
+                      <div class="modal-body">
+                          <p>Supplier order collection successfully cencelled</p>
+                          
+                      </div>
+                      
+                      <div class="modal-footer">
+                          
+                          <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" onclick="window.location='../../delivery_collection.php'">Close</button> 
+                      </div>
+                      
+                  </div>
+              </div>
+            </div>
+
+            <script>
+              function myFunction() 
+              {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("myInput");
+                filter = input.value.toUpperCase();
+                table = document.getElementById("myTable");
+                tr = table.getElementsByTagName("tr");
+                var showCount = 0;
+                for (i = 0; i < tr.length; i++) 
+                {
+                  td = tr[i].getElementsByTagName("td")[0];
+                  if (td) 
+                  {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter)> -1) 
+                    {
+                      tr[i].style.display = "";
+                      showCount += 1;
+                    } 
+                    else 
+                    {
+                      tr[i].style.display = "none";
+                    }
+                  }       
+                }
+
+                if (showCount === 0)
+                {
+                  $("#emptySearch").show();
+                } 
+                else
+                {
+                  $("#emptySearch").hide();
+                }
+              }
+            </script>
           </div>
         </div>
       </div>
+    </div>
+  
+
       <?php include_once("../footer.php");?>
     </div>
   </div>

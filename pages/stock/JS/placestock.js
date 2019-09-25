@@ -4,7 +4,6 @@ var products=[];
 var rowCount=0;
 var sourceID=1;
 var destinationID=1;
-var items;
 
 let preLoadSourceWarehouse= function(num)
 {
@@ -28,7 +27,7 @@ let uncheckSource = function()
 	})
 }
 
-let preLoadDestinationWarehouse = function(num)
+let preLoadDestinationWarehouse= function(num)
 {
 	let dW=$("#destinationWarehouse");
 	let wOption=$("<option></option>").addClass("classDestination");
@@ -39,7 +38,7 @@ let preLoadDestinationWarehouse = function(num)
 	dW.append(wOption);
 }
 
-let buildDropdown = function(warehouseID)
+let buildDropdown =function(warehouseID)
 {
 	let menu=$("#menu");
 	let menuItems=$("#menuItems");
@@ -68,68 +67,17 @@ let buildDropdown = function(warehouseID)
 			size="Individual"
 		}
 		quantity=wProducts.find(element=>element["PRODUCT_ID"]==wProductItems[k]["PRODUCT_ID"]);
-		view+="<input type='button' class='dropdown-item productDropdownItem' id='"+wProductItems[k]["PRODUCT_ID"]+"' value='"+wProductItems[k]["NAME"]+" "+wProductItems[k]["PRODUCT_MEASUREMENT"]+wProductItems[k]["PRODUCT_MEASUREMENT_UNIT"]+" "+size+"' name='"+quantity["QUANTITY"]+"'/>";
-		$('#empty').hide()
+		view+="<input type='button' class='dropdown-item' id='"+wProductItems[k]["PRODUCT_ID"]+"' value='"+wProductItems[k]["NAME"]+" "+wProductItems[k]["PRODUCT_MEASUREMENT"]+wProductItems[k]["PRODUCT_MEASUREMENT_UNIT"]+" "+size+"' name='"+quantity["QUANTITY"]+"'/>";
 	}
 	menuItems.append(view);
 	menu.append(menuItems);
 
 }
-
-//Filter dropdown
-function filter(word) 
-{
-  let length = items.length
-  let collection = []
-  let hidden = 0
-
-  for (let i = 0; i < length; i++) 
-  {
-    if (items[i].value.toLowerCase().startsWith(word)) 
-    {
-        $(items[i]).show()
-    }
-    else {
-        $(items[i]).hide()
-        hidden++
-    }
-  }
-
-  //If all items are hidden, show the empty view
-  if (hidden === length) 
-  {
-    $('#empty').show()
-  }
-  else 
-  {
-    $('#empty').hide()
-  }
-}
-
-//
-let search = document.getElementById("searchProduct");
-	window.addEventListener('input', function () {
-		filter(search.value.trim().toLowerCase())
-})
-
-$('#menuItems').on('click', '.dropdown-item.productDropdownItem', function()
-{
-	  $("#dropdown_coins").dropdown('toggle');
-	  $('#searchProduct').val("");
-	  filter("");
-})
-
-function setTwoNumberDecimal(el) 
-{
-	el.value = parseFloat(el.value).toFixed(2);
-};
-
 //////////////////////////////////
 let cleanDropdown = function()
 {
 	$("#menuItems").html("");
 }
-
 $(()=>{
 	$.ajax({
 		url:'PHPcode/stockcode.php',
@@ -169,7 +117,6 @@ $(()=>{
 			});
 		});
 	});
-
 	$("#sourceW").on('click','.classSourceUnchecked',function(e){
 		uncheckSource();
 		$(this).removeClass("classSourceUnchecked");
@@ -177,7 +124,6 @@ $(()=>{
 		cleanDropdown();
 		$("#tBody").html("");
 		buildDropdown($(this).attr("name"));
-		items = $(".dropdown-item.productDropdownItem");
 		sourceID=$(this).attr("name");
 	});
 
