@@ -120,7 +120,7 @@
               </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose" onclick="">Close</button>
             </div>
           </div>
         </div>

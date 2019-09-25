@@ -2,14 +2,16 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title> Stock Report - Stock Path</title>
-    <link rel="stylesheet" href="stock_CSS/style.css" media="all" />
-    <link href="stock_CSS/favicon.png" rel="icon" type="image/png">
+    <title> Sales Report - Stock Path</title>
+    <link rel="stylesheet" href="sale_CSS/style.css" media="all" />
+    <link href="sale_CSS/favicon.png" rel="icon" type="image/png">
+    <script type="text/javascript" src="sale_CSS/Chart.bundle.js"></script>
+     <script type="text/javascript" src="sale_CSS/Chart.min.js"></script>
   </head>
   <body>
     <header class="clearfix">
       <div id="logo">
-        <img src="stock_CSS/logo.png">
+        <img src="sale_CSS/logo.png">
       </div>
       <div id="company">
 
@@ -29,41 +31,41 @@
           <div class="address"><b>Time Generated :</b> <?php echo date("H:i")?></div>
         </div>
         <div id="invoice">
-          <h1>Stock Report</h1>
-          <div class="date"></div>
-          <div class="date"></div>
+          <h1>Sales Report</h1>
+          <div class="date"><b>Sale Report Period:</b><span id="salePeriod"><?php echo $_POST["salePeriod"]?> </span></div>
         </div>
+      </div>
+      <div style="margin-bottom: 1rem;">
+        <canvas id="line-chart" width="800" height="400"></canvas>
       </div>
       <table border="0" cellspacing="0" cellpadding="0">
         <thead>
           <tr>
-            <th class="desc-center">PRODUCT ID</th>
-            <th class="desc">PRODUCT NAME</th>
-            <th class="desc">PALLET QTY</th>
-            <th class="desc">CASE QTY</th>
-            <th class="desc">INDIVIDUAL QTY</th>
+            <th class="desc-center" id="PeriodAttr"></th>
+            <th class="desc">TOTAL SALES</th>
+            <th class="desc" style="text-align: right;">TOTAL REVENUE</th>
           </tr>
         </thead>
         <tbody id="tBody">
-         
+        
         </tbody>
       </table>
-
       <table>
-        <tfoot>
-          
+        <tfoot>   
+
         </tfoot>
       </table>
       <div id="notices">
-        <div><b>NOTICE:</b></div>
-        <div class="notice">Products with low stock are highlighted in red</div>
+        
       </div>
     </main>
     <footer>
       © 2019 Stock Path
     </footer>
-
-     <!-- Argon Scripts -->
+    <script type="text/javascript">
+     
+    </script>
+    <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
   <script src="../../assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -72,7 +74,12 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
-  <!-- Search Product JS -->
-  <script src="JS/stockReport.js" type="text/javascript"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+  <script src="../../assets/jqueryui/jquery-ui.js"></script>
+  <!-- Moment JS -->
+  <script src="../../assets/js/moment.js"></script>
+  <script src="JS/saleReport.js"></script>
   </body>
+  
 </html>
