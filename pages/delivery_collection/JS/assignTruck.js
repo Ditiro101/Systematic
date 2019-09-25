@@ -418,7 +418,7 @@ let buildProducts=function(tmp,arr)
 let buildDeliveries=function(tmp)
 {
 	let tableEntry=$("<tr></tr>");
-	let tableInnerButton=$("<button></button>").addClass("btn btn-sm btn-warning").text("Select");
+	let tableInnerButton=$("<button></button>").addClass("btn btn-sm btn-primary").text("Select");
 	tableInnerButton.attr("name",deliveryData[tmp]["SALE_ID"]);
 	tableInnerButton.on('click',function(e){
 		e.preventDefault();
@@ -471,6 +471,10 @@ let uncheckSource = function()
 }
 
 $(()=>{
+	$("#treeview1").hummingbird();
+	$("#treeview2").hummingbird();
+
+
 	truckData=JSON.parse($("#tData").text());
 	deliveryData=JSON.parse($("#dData").text());
 	addressData=JSON.parse($("#aData").text());
