@@ -231,37 +231,6 @@
               </div>
               </div>
             </div>
-          </div> -->
-        <div class="col-12 mb-3" >
-            <div class="card">
-              <div class="card-header  border-0 bg-default">
-                <h3 class="mb-0 text-white">
-                  <i class="fas fa-truck-moving mr-2"></i>
-                  Trucks Available
-                </h3>
-              </div>
-              <div class="card-body " >
-                <div class="table-responsive">
-                  <table id="myTable" class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                    <tr class="header bg-primary">
-                      <th style="width:1rem;"></th>
-                      <th> Regstration #</th>
-                      <th> Name</th>
-                      <th> Capacity</th>
-                      <th> Status</th>
-                      <th></th>
-                      <th style="width:1rem;"></th>
-                    </tr>
-                  </thead>
-                  <tbody id="tBody">
-                    
-                   
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
           </div>
           <div class="col-8">
             <div class="car shadow border-0">
@@ -353,34 +322,10 @@
             <div class="card-header  border-0 bg-gradient-succes">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0 text-white">
-                    <i class="fas fa-truck-moving mr-2"></i>
-                    <span id="selectTruckName">No Truck Selected</span>
-                  </h3>
+                  <h3 class="mb-0 s">Delivery Item(s)</h3>
                 </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <div>
-                <table class="table align-items-center">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Del #</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody class="list" id="tSelected">
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="card shadow mt-4">
-            <div class="card-header  border-0 bg-primary">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i><span id="assignDelHeading">Item(s)</span></h3>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-lg btn-success" id="btnAssign">Assign</a>
                 </div>
               </div>
             </div>
