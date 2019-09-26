@@ -158,14 +158,14 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h6 class="text-uppercase text-muted ls-1 mb-1">Performance</h6>
-                  <h2 class="mb-0">Total orders</h2>
+                  <h2 class="mb-0" id="PeriodAttrOrder"></h2>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <!-- Chart -->
               <div class="chart">
-                <canvas id="chart-orders" class="chart-canvas"></canvas>
+                <canvas id="bar-chart" class="chart-canvas"></canvas>
               </div>
             </div>
           </div>
@@ -214,6 +214,7 @@
   <script src="pages/employee/JS/noOfWorkers.js"> </script>
   <script src="pages/customer/JS/noOfCustomer.js"> </script>
   <script src="pages/sales/JS/salesGraphDashboard.js"> </script>
+  <script src="pages/supplier/JS/orderGraph.js"> </script>
 
     <script src='assets/fullcalender/packages/core/main.js'></script>
   <script src='assets/fullcalender/packages/daygrid/main.js'></script>
