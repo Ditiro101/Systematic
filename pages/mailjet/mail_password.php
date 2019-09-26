@@ -1,7 +1,7 @@
 <?php
 
 
-$email="u17079463tuks@gmail.com";
+$email=$_POST["email"];;
 
 
 
@@ -73,7 +73,7 @@ $email="u17079463tuks@gmail.com";
                 );
                 $expDate = date("Y-m-d H:i:s",$expFormat);
                
-                $key = md5(425*4+$email); //
+                $key = md5(425*4+$userId); 
                 $salt = substr(md5(uniqid(rand(),1)),3,10);
                 $key = $key . $salt;
               // Insert Temp Table
@@ -90,7 +90,7 @@ $email="u17079463tuks@gmail.com";
               
                 $subject = "Password Recovery - StockPath.com";
                 $href1 = 'http://stockpath.co.za/pages/user/reset-user-password.php?key='.$key.'&userID='.$userId.'&action=reset';
-                $href = '<a href='.$href1.'>http://stockpath.co.za/pages/user/reset-user-password.php?key='.$key.'&userID='.$userId.'&action=reset</a>';
+                $href = '<a href='.$href1.'>Reset Password Now!</a>';
                 
 
                 //echo $body;
@@ -131,8 +131,8 @@ $email="u17079463tuks@gmail.com";
 if(isset($href) )
 {
     
-    $name='DT';
-    $email='u17174572@tuks.co.za';
+    $name='User';
+   
     $mailjetApiKey = 'dc7651212c03feea96f539e4b2303634';
     $mailjetApiSecret = '14e46c9f68a9d61e70f455e997f52141';
     $messageData = [
@@ -221,7 +221,7 @@ if(isset($href) )
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td class="esd-block-text es-p35t es-p5b es-p30r es-p30l" align="center">
-                                                                                            <h1>Welcome! '.$name.'</h1>
+                                                                                            <h1>Reset Password</h1>
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr>
@@ -265,18 +265,20 @@ if(isset($href) )
                                                                                 <tbody>
                                                                                     <tr>
                                                                                         <td class="esd-block-text es-p20t es-p20b es-p30r es-p30l es-m-txt-l" bgcolor="#ffffff" align="left">
-                                                                                            <p>We are excited to have you on board. For info and queries please send a mail to info@stockpath.co.za or call us on 012 242 2541.</p>
+                                                                                            <p>Dear user,</p>
+                                                                                            <p>Please click on the  following link to reset your password: '.$href. '</p>
+                                                                                           
                                                                                         </td>
                                                                                     </tr>
                                                                               
                                                                                     <tr>
                                                                                         <td class="esd-block-text es-p20t es-p30r es-p30l es-m-txt-l" align="left">
-                                                                                            <p>If you have any questions, just reply to this email—were always happy to help out.</p>
+                                                                                             <p>Please be sure to click  on the link in order to reset password.</p>
                                                                                         </td>
                                                                                     </tr>
                                                                                     <tr>
                                                                                         <td class="esd-block-text es-p20t es-p40b es-p30r es-p30l es-m-txt-l" align="left">
-                                                                                            <p>Cheers,</p>
+                                                                                            <p>Brought to you  by StockPath</p>
                                                                                             <p>The Greens Supermarket Team</p>
                                                                                         </td>
                                                                                     </tr>
@@ -391,7 +393,7 @@ if(isset($href) )
     ]);
     $response = json_decode(curl_exec($ch));
     echo "success";
-    var_dump($response);
+    //var_dump($response);
 }
 else
 {

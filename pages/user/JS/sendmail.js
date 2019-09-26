@@ -20,7 +20,7 @@ $(document).ready(function(){
                         $("#modalText").text("Reset password link sent. Check your email");
                         $("#successfullyChanged").modal("show");
 
-                       window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`;
+                      // window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`;
                         
                        
                        
