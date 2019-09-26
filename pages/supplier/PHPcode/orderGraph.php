@@ -47,13 +47,14 @@
         }
         else if($salePeriod=="Weekly")
         {
-
             $today = mktime(
                 date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
                 );
                 $TodaysDate = date("Y-m-d H:i:s",$today);
                 $newDate = new DateTime($TodaysDate);
                 $newDate =  $newDate->format("Y-m-d");
+
+
 
             $endDate=mktime(
                 date("H"), date("i"), date("s"), date("m") ,date("d")-7, date("Y")
@@ -62,13 +63,17 @@
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
-                               FROM SALE
-                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$newDate'";
+                $alles_query ="SELECT ORDER_ID ,ORDER_DATE
+                FROM ORDER_
+                WHERE ORDER_DATE BETWEEN '$usedDate' AND  '$newDate'
+                GROUP BY ORDER_DATE";
 
                 //var_dump($alles_query);
         
                 $submit = mysqli_query($con,$alles_query);
+
+               
+                
         }
         else
         {
@@ -91,25 +96,7 @@
 
         
 
-		
-        //var_dump($alles_query);
-        
-       /* $filterID = [];
-
-        while($max = mysqli_fetch_assoc($submit))
-        {
-            $prodID = $max['PRODUCT_ID'];
-            $findIDs = "SELECT COUNT($prodID) as maxProducTID
-                        FROM SALE_PRODUCT
-                        WHERE PRODUCT_ID = '$prodID'";
-            $IDresult = mysqli_query($con,$findIDs);
-            $idRow = mysqli_fetch_assoc($IDresult);
-
-
-            array_push($filterID,$idRow["maxProducTID"]);
-        }
-        $maxProductID = max()
-	    //$row = mysqli_fetch_array($result);*/
+	
 
         if (mysqli_num_rows($submit)>0) 
         {
