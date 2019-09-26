@@ -93,7 +93,7 @@
                     <a>
                       <div>
                         <i class="fas fa-user-clock"></i>
-                        <span>Wage Slips Report</span>
+                        <span>Wages Report</span>
                       </div>
                     </a>
                   </button>
@@ -123,14 +123,14 @@
                   if (in_array("12.5", $subFunctionality)) {
                 ?>
                 <div class="col-lg-4 col-md-6">
-                  <a href="pages/reports/debtors.php" class="btn-icon-clipboard" >
-                   
-                      <div>
-                        <i class="far fa-handshake"></i>
-                        <span>Debtors Report</span>
-                      </div>
-                   
+                  <button type="button" class="btn-icon-clipboard"  data-toggle="modal" data-target="#generateDebtors">
+                  <a>
+                    <div>
+                      <i class="fas fa-chart-line"></i>
+                      <span>Debtors Report</span>
+                    </div>
                   </a>
+                </button>
                 </div>
                 <?php
                   }
@@ -201,7 +201,32 @@
           </div>
         </div>
       </div>
+      
 
+
+
+
+
+
+
+
+      <div class="modal fade" id="generateDebtors" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+            </div>
+            <div class="modal-body">
+              <p>Are you sure you want to generate the selected report?</p>
+
+            </div>
+            <div class="modal-footer">  
+              <a href="pages/reports/debtors.php" class="btn btn-success">Yes</a>  
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- attedance report modal -->
 
       <div class="modal fade" id="generateStock" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -215,7 +240,7 @@
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <a href="pages/reports/stock-report.php" class="btn btn-success">Yes</a>  
               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
           </div>
@@ -234,7 +259,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/stock-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/stock-report.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>
@@ -250,11 +275,19 @@
             </div>
             <div class="modal-body">
               <p>Are you sure you want to generate the selected report?</p>
+                <form action="pages/reports/wage-slips.php" method="POST">
+                  <div class="form-row ">
+                    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                      <input type="hidden" class="form-control" id="USERNAME" name="USERNAME" value=<?php echo $_SESSION["name"]?> placeholder="Enter Date of Sale From">
+                    </div>
+                  </div>
+                  <input type="submit" class="btn btn-success" value="Yes"></input>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+             
             </div>
           </div>
         </div>
@@ -272,7 +305,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/wage-slips.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/wage-slips.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>
@@ -293,7 +326,7 @@
 
             </div>
             <div class="modal-footer">  
-              <button type="button" class="btn btn-success" data-dismiss="modal" data-toggle="modal" data-target="#modal-succ">Yes</button>
+              <a href="pages/reports/creditors-report.php" class="btn btn-success">Yes</a> 
               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
             </div>
           </div>
@@ -312,7 +345,7 @@
                   <p>Report generated successfully</p>    
               </div> 
               <div class="modal-footer">
-                   <a href="pages/reports/creditors-report.php"class="btn btn-link  ml-auto"" >Close</a>                     
+                   <a href="pages/reports/creditors-report.php"class="btn btn-link  ml-auto" >Close</a>                     
                   
               </div>            
             </div>
@@ -322,27 +355,27 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Pick Sale Period!</h5>
             </div>
             <div class="modal-body">
-              <p>Please enter the timeframe for which the report should be generated?</p>
-              <div class="form-row ">
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date From</label>
-                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+              <p>Please Select a period on which the sales report should be generated!</p>
+                <form action="pages/reports/sale.php" method="POST">
+                <div class="form-row ">
+                  <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                    <label for="bane">Sales Reports Period</label>
+                    <select class="form-control" name="salePeriod" placeholder="Daily" required>
+                      <option value= "Daily">Daily</option>
+                      <option value= "Weekly">Weekly</option>
+                      <option value= "Monthly">Monthly</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date To</label>
-                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
-                </div>
-              </div>
-            </div>
-            <div class="modal-footer">  
-              <a href="pages/reports/sale.html"class="btn btn-success" >Generate Report</a>
-              <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+                <input type="submit" class="btn btn-success" value="Generate Report"></input>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
           </div>
         </div>
+      </div>
       </div>
 
 
@@ -353,23 +386,25 @@
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalLabel">Enter Timeframe!</h5>
             </div>
-            <div class="modal-body">
+           <div class="modal-body">
               <p>Please enter the timeframe for which the report should be generated?</p>
-              <div class="form-row ">
+                <form action="pages/reports/product-trends-report.php" method="POST">
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date From</label>
-                  <input type="date" class="form-control" id="dateFrom" placeholder="Enter Delivery From">
+                  <input type="date" class="form-control" id="DATEFROM" name="DATEFROM" placeholder="Enter Date of Sale From">
                 </div>
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date To</label>
-                  <input type="date" class="form-control" id="dateTo" placeholder="Enter Delivery To">
+                  <input type="date" class="form-control" id="DATETO" name="DATETO" placeholder="Enter Date of Sale To">
                 </div>
-              </div>
+                <input type="submit" class="btn btn-success" value="Generate Report"></input>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              </form>
             </div>
-            <div class="modal-footer">  
+            <!--div class="modal-footer">  
               <a href="pages/reports/product-trends-report.php"class="btn btn-success" >Generate Report</a>
               <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-            </div>
+            </div-->
           </div>
         </div>
       </div>
