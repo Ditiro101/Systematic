@@ -231,6 +231,7 @@
               </div>
               </div>
             </div>
+<<<<<<< HEAD
           </div> -->
         <div class="col-12 mb-3" >
             <div class="card">
@@ -262,6 +263,8 @@
                 </div>
               </div>
             </div>
+=======
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
           </div>
           <div class="col-8">
             <div class="car shadow border-0">
@@ -353,6 +356,7 @@
             <div class="card-header  border-0 bg-gradient-succes">
               <div class="row align-items-center">
                 <div class="col">
+<<<<<<< HEAD
                   <h3 class="mb-0 text-white">
                     <i class="fas fa-truck-moving mr-2"></i>
                     <span id="selectTruckName">No Truck Selected</span>
@@ -381,6 +385,12 @@
               <div class="row align-items-center">
                 <div class="col">
                   <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i><span id="assignDelHeading">Item(s)</span></h3>
+=======
+                  <h3 class="mb-0 s">Delivery Item(s)</h3>
+                </div>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-lg btn-success" id="btnAssign">Assign</a>
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
                 </div>
               </div>
             </div>

@@ -176,6 +176,7 @@
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <div class="px-auto">
                     <ul class="nav nav-pills mb-3 px-auto" id="listAddress" role="tablist" style="width: auto;">
+<<<<<<< HEAD
 
                     </ul>
                   </div>
@@ -185,14 +186,70 @@
                   
                   
                 </div>
+=======
+                    </ul>
+                  </div>
+                  <div class="tab-content" id="pills-tabContent"></div>
+                </hr>
+                <hr class="my-2 d-flex justify-content-center mt-1">
+                  <div class="row mb-2">
+                    <div class="col d-inline mx-0 px-0">
+                      <label hidden="true" id="sID"><?php echo $supID;?></label>
+                      <form id="formMaintain" action="maintain-supplier.php" method="POST" class="d-inline">
+                        <input type="hidden" name="ID" value=<?php echo $supID;?>>
+                        <input type="hidden" name="NAME" id="NAME">
+                        <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                        <input type="hidden" name="PHONE" value=<?php echo $_POST["PHONE"];?>>
+                        <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                        <input type="hidden" name="ADDR" id="ADDR">
+                        <input type="hidden" name="SUBURB" id="SUBURB">
+                        <input type="hidden" name="CITY" id="CITY">
+                        <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
+                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                          <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                          </span>
+                          <span class="btn-inner--text">Edit</span>
+                        </button>
+                      </form>
+                    </div>
+                    <div class="col d-inline mx-0 px-0">
+                      <button class="btn btn-icon btn-2 btn-danger btn-sm px-3" type="button" data-toggle="modal" data-target="#del">
+                        <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                        </span>
+                        <span class="btn-inner--text">Delete Supplier</span>
+                      </button>
+                    </div>       
+                  </div>
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
                 </hr>
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
               </div>
-            </div>
           </div>
+<<<<<<< HEAD
+=======
+        </div>
+          </div>
+        
+
+  
+
+      <?php include_once("../footer.php");?>
+      </div>
+      </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
         </div>
           </div>
         

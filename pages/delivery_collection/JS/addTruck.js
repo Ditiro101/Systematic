@@ -1,4 +1,3 @@
-
 let getVals=function()
 {
 	let arr=[];
@@ -24,7 +23,6 @@ $(()=>{
 		else
 		{
 			let arr=getVals();
-
 			$.ajax({
 			url:'PHPcode/truckcode.php',
 			type:'POST',
@@ -34,6 +32,7 @@ $(()=>{
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
 				{
+<<<<<<< HEAD
 
 					//place changes variable her and user id here
 					
@@ -54,29 +53,30 @@ $(()=>{
 					
 					});
 
+=======
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 					$("#displayModal").modal("show");
-
 				}
 				else
 				{
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("data-dismiss","modal");
 					$("#displayModal").modal("show");
 				}
 			});
-
-
-
-
-
-
 		}
 		
 	});
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
 });

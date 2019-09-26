@@ -21,8 +21,6 @@ $(()=>{
   		debug: true,
   		success: "valid"
 	});
-
-
 	let active=$("#rActive").text();
 	let truckName=$('#rTName').text();
 	$("#tName").attr("value",truckName);
@@ -50,6 +48,7 @@ $(()=>{
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
 				{
+<<<<<<< HEAD
 
 					//place changes variable her and user id here
 					//initialize changes
@@ -69,6 +68,8 @@ $(()=>{
 
 					createAudit(changes);
 
+=======
+>>>>>>> parent of a18baf0... Merge branch 'feature-Rangy' into feature-Tshepo
 					$("#MMessage").text(doneData[1]);
 					$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 					$("#displayModal").modal("show");
@@ -84,26 +85,5 @@ $(()=>{
 		}
 	});
 
-	var beforeVals=getVals();
-	
-
-	function createAudit(changed){
-		//make sure you change the subfuc id
-		let Sub_Functionality_ID=10.8;
-		$.ajax({
-		url:'../admin/PHPcode/audit_log.php',
-		type:'POST',
-		data:{Sub_Functionality_ID:Sub_Functionality_ID,changes:changed} //functionality id needs to be included
-		})
-		.done(data=>{
-			if(data=="success"){
-				//alert("success");
-			}
-			else{
-				//alert(data);
-			}
-		
-		});
-	}
 
 });
