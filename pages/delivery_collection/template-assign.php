@@ -238,37 +238,37 @@
               </div>
             </div>
           </div> -->
-        <div class="col-12 mb-3" >
-            <div class="card">
-              <div class="card-header  border-0 bg-default">
-                <h3 class="mb-0 text-white">
-                  <i class="fas fa-truck-moving mr-2"></i>
-                  Trucks Available
-                </h3>
-              </div>
-              <div class="card-body " >
-                <div class="table-responsive">
-                  <table id="myTable" class="table align-items-center table-flush">
-                    <thead class="thead-light">
-                    <tr class="header bg-primary">
-                      <th style="width:1rem;"></th>
-                      <th> Regstration #</th>
-                      <th> Name</th>
-                      <th> Capacity</th>
-                      <th> Status</th>
-                      <th></th>
-                      <th style="width:1rem;"></th>
-                    </tr>
-                  </thead>
-                  <tbody id="tBody">
-                    
-                   
-                    </tbody>
-                  </table>
-                </div>
+        <!-- <div class="col-12 mb-3" >
+          <div class="card">
+            <div class="card-header  border-0 bg-default">
+              <h3 class="mb-0 text-white">
+                <i class="fas fa-truck-moving mr-2"></i>
+                Trucks Available
+              </h3>
+            </div>
+            <div class="card-body " >
+              <div class="table-responsive">
+                <table id="myTable" class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                  <tr class="header bg-primary">
+                    <th style="width:1rem;"></th>
+                    <th> Regstration #</th>
+                    <th> Name</th>
+                    <th> Capacity</th>
+                    <th> Status</th>
+                    <th></th>
+                    <th style="width:1rem;"></th>
+                  </tr>
+                </thead>
+                <tbody id="tBody">
+                  
+                 
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
+        </div> -->
       </div>
         <div class="row">
           <div class="col-12">
@@ -378,14 +378,14 @@
             </div>
           </div>
           <div class="card-shadow mt-4">
-            <div class="card-header border-0 bg-primary">
+            <div class="card-header border-0 bg-warning">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i><span>Suggestion</span></h3>
+                  <h3 class="mb-0 text-white"><i class="fas fa-lightbulb mr-2"></i><span>Suggestion</span></h3>
                 </div>
               </div> 
             </div>
-            <div class="card-body bg-white">
+            <div class="card-body bg-light">
               <p id="suggestion"></p>
             </div> 
           </div>
@@ -393,6 +393,8 @@
             <i class="fas fa-directions mr-2"></i>
           Show Directions
         </button>
+
+
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -414,26 +416,56 @@
           </div>
         </div>
         <div class="form-group col-md-2 errorModal successModal text-center">
-                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                              <div class="modal-content">
-                                <div class="modal-header" id="modalHeader">
-                                    <h6 class="modal-title" id="MHeader">Success</h6>
-                                </div>
-                                <div class="modal-body">
-                                  <p id="MMessage">Successfully Added</p>
-                                  
-                                  <div id="animation" style="text-align:center;">
+            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                <div class="modal-content">
+                  <div class="modal-header" id="modalHeader">
+                      <h6 class="modal-title" id="MHeader">Success</h6>
+                  </div>
+                  <div class="modal-body">
+                    <p id="MMessage">Successfully Added</p>
+                    
+                    <div id="animation" style="text-align:center;">
 
-                                  </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card mt-3">
+        <div class="card-header  border-0 bg-default">
+          <h3 class="mb-0 text-white">
+            <i class="fas fa-truck-moving mr-2"></i>
+            Trucks Available
+          </h3>
+        </div>
+        <div class="card-body " >
+          <div class="table-responsive">
+            <table id="myTable" class="table align-items-center table-flush">
+              <thead class="thead-light">
+              <tr class="header bg-primary">
+                <th style="width:1rem;"></th>
+                <th> Regstration #</th>
+                <th> Name</th>
+                <th> Capacity</th>
+                <th> Status</th>
+                <th></th>
+                <th style="width:1rem;"></th>
+              </tr>
+            </thead>
+            <tbody id="tBody">
+              
+             
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
       <?php include_once("../footer.php");?>
