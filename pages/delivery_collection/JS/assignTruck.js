@@ -247,6 +247,250 @@ var behavior = new H.mapevents.Behavior(new H.mapevents.MapEvents(map));
 var ui = H.ui.UI.createDefault(map, defaultLayers);
 ///////////////////////////////////////////////////////////
 
+let buildTruckDeliveries=function(dtid,productEntry)
+{
+	let listEntry=$("<li></li>");
+	listEntry.append("<i class='fa fa-plus mr-1'></i>");
+	let labelEntry=$("<label></label>").text("Delivery #"+dtid);
+	let ulEntry=$("<ul></ul>");
+	ulEntry.append(productEntry);
+	listEntry.append(labelEntry);
+	listEntry.append(ulEntry);
+	return listEntry;
+}
+
+let buildTreeProducts=function(pName,qty)
+{
+	let liEntry=$("<li></li>");
+	let labelEntry=$("<label></label>").text(qty+" x "+pName);
+	liEntry.append(labelEntry);
+	return liEntry;
+}
+let buildNewTruck=function(tmp)
+{
+	let trTruck=$("<tr></tr>");
+	let tdRadio=$("<td></td>");
+	let lblRadio=$("<label></label>").addClass("mb-0 radio");
+	let inputRadio=$("<input></input>").attr("type","radio");
+	let radioName=truckData[tmp]["TRUCK_ID"];
+	inputRadio.addClass("classSourceUnchecked");
+	inputRadio.attr("name","TruckSelect");
+	inputRadio.attr("id",radioName);
+	lblRadio.append(inputRadio);
+	tdRadio.append(lblRadio);
+	trTruck.append(tdRadio);
+	let tdReg=$("<td></td>").text(truckData[tmp]["REGISTRATION_NUMBER"]);
+	let tdTruckName=$("<td></td>").text(truckData[tmp]["TRUCK_NAME"]);
+	let tdCapacity=$("<td></td>").text(truckData[tmp]["CAPACITY"]+" Pallets");
+	trTruck.append(tdReg);
+	trTruck.append(tdTruckName);
+	trTruck.append(tdCapacity);
+	let tdStatus=$("<td><i class='far fa-dot-circle text-warning'></i></td>");
+	let assignmentStatus=$("<span></span>");
+	tdStatus.append(assignmentStatus);
+	trTruck.append(tdStatus);
+	let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckData[tmp]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
+	if(assignments.length!=0)
+	{
+		assignmentStatus.text(" Packing");
+	}
+	else
+	{
+		assignmentStatus.text(" Empty");
+	}
+	let tdProgress=$("<td></td>");
+	let divProgress=$("<div></div>").addClass("progress");
+	let innerDivProgress=$("<div></div>").addClass("progress-bar bg-warning");
+	innerDivProgress.attr("role","progressbar");
+	innerDivProgress.css("width","70%");
+	innerDivProgress.attr("aria-valuenow",50);//Increse progress bar
+	innerDivProgress.attr("aria-valuemin",0);
+	innerDivProgress.attr("aria-valuemax",100);
+	divProgress.append(innerDivProgress);
+	tdProgress.append(divProgress);
+	trTruck.append(tdProgress);
+	let tdViewButton=$("<td></td>");
+	let buttonView=$("<button></button>").addClass("btn btn-icon btn-2 btn-warning btn-sm");
+	buttonView.attr("data-toggle","modal");
+	buttonView.attr("data-target","#trucModal"+truckData[tmp]["TRUCK_ID"]);
+	let spanEye=$("<span><i class='fas fa-eye'></i></span>");
+	buttonView.append(spanEye);
+	let spanView=$("<span></span>").addClass("btn-inner--text").text("View");
+	buttonView.append(spanView);
+	tdViewButton.append(buttonView);
+	//
+	let divMainModal=$("<div></div>").addClass("modal fade lg");
+	divMainModal.attr("id","trucModal"+truckData[tmp]["TRUCK_ID"]);
+	divMainModal.attr("tabindex",-1);
+	divMainModal.attr("role","dialog");
+	divMainModal.attr("aria-labelledby","exampleModalCenterTitle");
+	divMainModal.attr("aria-hidden",true); //The div holdinh everything
+	let divSecondModal=$("<div></div>").addClass("modal-dialog modal-dialog modal-lg"); //apend to this first
+	divSecondModal.attr("role","document");
+	let divModalContent=$("<div></div>").addClass("modal-content");
+	let divModalHeader=$("<div></div>").addClass("modal-header bg-default");
+	let headingModal=$("<h3</h3>").addClass("modal-title text-white");
+	let headingicon=$("<i></i>").addClass("fas fa-truck-moving mr-2");
+	let spanHeading=$("<span></span>").text(truckData[tmp]["REGISTRATION_NUMBER"]+" - "+truckData[tmp]["TRUCK_NAME"]+" (Assignments)");
+	headingModal.append(headingicon);
+	headingModal.append(spanHeading);
+	divModalHeader.append(headingModal);
+	divModalContent.append(divModalHeader);
+	let divModalBody=$("<div></div>").addClass("modal-body");
+	let divNavWrapper=$("<div></div>").addClass("nav-wrapper");
+	let ulNavPills=$("<ul></ul>").addClass("nav nav-pills nav-fill flex-coloumn flex-md-row");
+	ulNavPills.attr("role","tablist");
+	let listTable=$("<li></li>").addClass("nav-item");
+	let linkTable=$("<a></a>").addClass("nav-link mb-sm-3 mb-md-0 active");
+	linkTable.attr("id","tab-table-link"+truckData[tmp]["TRUCK_ID"]);
+	linkTable.attr("href","#tabs-table"+truckData[tmp]["TRUCK_ID"]);
+	linkTable.attr("role","tab");
+	linkTable.attr("aria-controls","tabs-table");
+	linkTable.attr("aria-selected",true);
+	linkTable.append("<i class='fas fa-table mr-2'></i>Table"); //Examine
+	listTable.append(linkTable);
+	let listTree=$("<li></li>").addClass("nav-item");
+	let linkTree=$("<a></a>").addClass("nav-link mb-sm-3 mb-md-0");
+	linkTree.attr("id","tab-tree-link"+truckData[tmp]["TRUCK_ID"]);
+	linkTree.attr("href","#tabs-tree"+truckData[tmp]["TRUCK_ID"]);
+	linkTree.attr("role","tab");
+	linkTree.attr("aria-controls","tabs-tree"+truckData[tmp["TRUCK_ID"]]);
+	linkTree.attr("aria-selected",false);
+	linkTree.append("<i class='fas fa-sitemap mr-2'></i>Tree View"); //Examine
+	listTree.append(linkTree);
+	ulNavPills.append(listTable);
+	ulNavPills.append(listTree);
+	divNavWrapper.append(ulNavPills);
+	divModalBody.append(divNavWrapper);
+	let divCardShadow=$("<div></div>").addClass("card shadow");
+	let divCardBody=$("<div></div>").addClass("card-body");
+	let divTabContent=$("<div></div>").addClass("tab-content");
+	divTabContent.attr("id","myTabContent"+truckData[tmp]["TRUCK_ID"]);
+	let divTabPane=$("<div></div>").addClass("tab-pane fade show active");
+	divTabPane.attr("id","tabs-table"+truckData[tmp]["TRUCK_ID"]);
+	divTabPane.attr("role","tabpanel");
+	divTabPane.attr("aria-labelledby","tab-table"+truckData[tmp]["TRUCK_ID"]);
+	let headingTabPane=$("<h4></h4>").addClass("mb-3").text("Item(s) Assigned :");
+	divTabPane.append(headingTabPane);
+	let divTableRes=$("<div></div>").addClass("table-responsive");
+	let divTableRes2=$("<div></div>");
+	let table=$("<table></table>").addClass("table align-items-center");
+	let tHead=$("<thead></thead>").addClass("thead-dark text-white");
+	let trHeading=$("<tr></tr>");
+	let thDelID=$("<th></th>").addClass("text-white").text("DeliveryID#");
+	let thProductName=$("<th></th>").addClass("text-white").text("Product Name");
+	let thQuantity=$("<th></th>").addClass("text-white").text("Quantity");
+	trHeading.append(thDelID);
+	trHeading.append(thProductName);
+	trHeading.append(thQuantity);
+	tHead.append(trHeading);
+	table.append(tHead);
+	let tbody=$("<tbody></tbody>").addClass("list");
+	tbody.attr("id","tB"+truckData[tmp]["TRUCK_ID"]);
+	let deliveryUL=$("<ul></ul>");
+	for(let k=0;k<assignments.length;k++)
+	{
+		let treeProductUl=$("<ul></ul>");
+		let assignmentProducts=truckProductData.filter(element=>element["DELIVERY_TRUCK_ID"]==assignments[k]["DELIVERY_TRUCK_ID"]);
+		console.log(assignmentProducts);
+		for(let m=0;m<assignmentProducts.length;m++)
+		{
+			let product=productData.find(function(element){
+				if(element["PRODUCT_ID"]==assignmentProducts[m]["PRODUCT_ID"])
+				{
+					return element;
+				}
+			});
+			let pType="Individual";
+			let pNumber="";
+			if(product["PRODUCT_SIZE_TYPE"]==2)
+			{
+				pType="Case";
+				pNumber=product["UNITS_PER_CASE"];
+			}
+			else if(product["PRODUCT_SIZE_TYPE"]==3)
+			{
+				pType="Pallet";
+				pNumber=product["CASES_PER_PALLET"];
+			}
+			let truckProductName=product["NAME"]+" ("+pNumber+" x "+product["PRODUCT_MEASUREMENT"]+product["PRODUCT_MEASUREMENT_UNIT"]+")"+" "+pType;
+			let entry=buildTruckProducts(assignments[k]["DELIVERY_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
+			console.log(entry);
+			tbody.append(entry);
+			let treeProductE=buildTreeProducts(truckProductName,assignmentProducts[m]["QUANTITY"]);
+			treeProductUl.append(treeProductE);
+		}
+		deliveryUL.append(buildTruckDeliveries(assignments[k]["DELIVERY_ID"],treeProductUl));
+
+	}
+	table.append(tbody);
+	divTableRes2.append(table);
+	divTableRes.append(divTableRes2);
+	divTabPane.append(divTableRes);
+	divTabContent.append(divTabPane);
+	//
+	let divTabPaneT=$("<div></div>").addClass("tab-pane fade");
+	divTabPaneT.attr("id","tabs-tree"+truckData[tmp]["TRUCK_ID"]);
+	divTabPaneT.attr("role","tabpanel");
+	divTabPaneT.attr("aria-labelledby","tab-tree"+truckData[tmp]["TRUCK_ID"]);
+	let headingTabPaneT=$("<h4></h4>").addClass("mb-2").text("Item(s) Assigned :");
+	divTabPaneT.append(headingTabPaneT);
+	let divTree=$("<div></div>").addClass("p-3");
+	let ulMain=$("<ul></ul>").attr("id","treeview"+truckData[tmp]["TRUCK_ID"]);
+	let liMain=$("<li></li>");
+	liMain.append("<i class='fa fa-truck mr-1'></i>");
+	let lblMain=$("<label></label>").text(truckData[tmp]["REGISTRATION_NUMBER"]+" - "+truckData[tmp]["TRUCK_NAME"]);
+	liMain.append(lblMain);
+	liMain.append(deliveryUL);
+	//
+	ulMain.append(liMain);
+	ulMain.hummingbird();
+	divTree.append(ulMain);
+	divTabPaneT.append(divTree);
+	divTabContent.append(divTabPaneT);
+	//
+	divCardBody.append(divTabContent);
+	divCardShadow.append(divCardBody);
+	divModalBody.append(divCardShadow);
+	//
+	linkTable.on('click',function(e){
+		$(this).addClass("active");
+		linkTree.removeClass("active");
+		divTabPane.addClass("show active");
+		divTabPaneT.removeClass("show active");
+	});
+	linkTree.on('click',function(e){
+		$(this).addClass("active");
+		linkTable.removeClass("active");
+		divTabPaneT.addClass("show active");
+		divTabPane.removeClass("show active");
+	});
+	//
+
+
+
+
+
+	divModalContent.append(divModalBody);
+	let divModalFooter=$("<div></div>").addClass("modal-footer");
+	let btnFooter=$("<button></button>").addClass("btn btn-secondary");
+	btnFooter.attr("type","button");
+	btnFooter.attr("data-dismiss","modal");
+	btnFooter.text("Close");
+	divModalFooter.append(btnFooter);
+	divModalContent.append(divModalFooter);
+	divSecondModal.append(divModalContent);
+	divMainModal.append(divSecondModal);
+	tdViewButton.append(divMainModal);
+	trTruck.append(tdViewButton);
+
+
+
+
+
+	$("#tBody").append(trTruck);
+
+}
 let buildTruck =function(tmp)
 {
 	let cardStart=$("<div></div>").addClass("card");
@@ -351,6 +595,7 @@ let buildTruckProducts=function(dtid,productname,qty)
 	return TruckProductEntry;
 }
 
+
 let buildProducts=function(tmp,arr)
 {
 	let tableEntry=$("<tr></tr>");
@@ -403,6 +648,7 @@ let buildDeliveries=function(tmp)
 		let specificSaleProducts=saleProductData.filter(element=>element["SALE_ID"]==deliveryData[tmp]["SALE_ID"]&&element["QUANTITY_ASSIGNED"]>0);
 		console.log(specificSaleProducts);
 		deliverySelectID=$(this).attr("name");
+		$("#assignDelHeading").text("Delivery #"+deliverySelectID+" Item(s)");
 		$("#enterProducts").html('');
 		for(let k=0;k<specificSaleProducts.length;k++)
 		{
@@ -468,7 +714,8 @@ $(()=>{
 	addInfoBubble(map,deliveryData);
 	for(let k=0;k<truckData.length;k++)
 	{
-		buildTruck(k);
+		buildNewTruck(k);
+		//buildTruck(k);
 	}
 	$(document).on('click','input.classSourceUnchecked:radio',function(e){
 		//uncheckSource();
@@ -477,6 +724,39 @@ $(()=>{
 		$(this).addClass("classSourceChecked");
 		truckSelectID=$(this).attr("id");
 		console.log(truckSelectID);
+		$("#tSelected").html('');
+		let selectTruck=truckData.filter(element=>element["TRUCK_ID"]==truckSelectID);
+		$("#selectTruckName").text(selectTruck[0]["REGISTRATION_NUMBER"]+" - "+selectTruck[0]["TRUCK_NAME"]+" (SELECTED)");
+		let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckSelectID&&element["DCT_STATUS_ID"]==2);
+		for(let k=0;k<assignments.length;k++)
+		{
+			let assignmentProducts=truckProductData.filter(element=>element["DELIVERY_TRUCK_ID"]==assignments[k]["DELIVERY_TRUCK_ID"]);
+			console.log(assignmentProducts);
+			for(let m=0;m<assignmentProducts.length;m++)
+			{
+				let product=productData.find(function(element){
+					if(element["PRODUCT_ID"]==assignmentProducts[m]["PRODUCT_ID"])
+					{
+						return element;
+					}
+				});
+				let pType="Individual";
+				let pNumber="";
+				if(product["PRODUCT_SIZE_TYPE"]==2)
+				{
+					pType="Case";
+					pNumber=product["UNITS_PER_CASE"];
+				}
+				else if(product["PRODUCT_SIZE_TYPE"]==3)
+				{
+					pType="Pallet";
+					pNumber=product["CASES_PER_PALLET"];
+				}
+				let truckProductName=product["NAME"]+" ("+pNumber+" x "+product["PRODUCT_MEASUREMENT"]+product["PRODUCT_MEASUREMENT_UNIT"]+")"+" "+pType;
+				let entry=buildTruckProducts(assignments[k]["DELIVERY_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
+				$("#tSelected").append(entry);
+			}
+		}
 
 	});
 	for(let k=0;k<deliveryData.length;k++)
