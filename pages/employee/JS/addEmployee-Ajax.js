@@ -207,12 +207,14 @@ $(document).ready(function()
                         $("#displayModal").modal("show");
 
 
-                         $("#btnClose").click(function(e) {
+                        setTimeout(function(){
+                            $('#displayModal').modal("hide");
+                             window.open(`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`, '_blank');
+                        }, 2000);
 
-                                    e.preventDefault();
+                        
                                    
-                                    window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
-                                });
+                                
                     }
                     else if(confirmation.includes("success") && confirmation.includes("Employee does not earn wage"))
                     {

@@ -8,7 +8,16 @@ $(()=>{
     $("#CITY").val(changedCity);
     $("#EMPLOYEE_TYPE_NAME").val($("#eEmployeeTypeName").text().replace(" ","/"));
 
-
+    let wageEarning=$("#wager").val();
+    console.log(wageEarning);
+    if(wageEarning)
+    {
+        $("#ShowDiv").attr("hidden",false);
+    }
+    else
+    {
+        $("#ShowDiv").attr("hidden",true);
+    }
 
 	$("#btnClick").click(function(e)
     {//use ID of the form
@@ -52,13 +61,13 @@ $(()=>{
                 $("#modalText").text("Generating empoyee tag...");
                 $("#displayModal").modal("show");
 
+                setTimeout(function(){
+                    $('#displayModal').modal("hide");
+                    callTwo(employeeID);
+                }, 2000);
 
-                   $("#btnClose").click(function(e) {
+                  
 
-                                    e.preventDefault();
-                                    
-                                    window.location=`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`;
-                                });
                 
                // window.open(`PHPcode/showGeneratedQRCode.php?employeeID=${employeeID}`, '_blank');
             }
@@ -216,4 +225,21 @@ $(()=>{
 
 
 
+
+function callTwo(EMPLOYEE_ID){
+    
+        //var URL = "invoice/invoice.php";
+        //window.open(URL, '_blank');
+        var form="<form target='_blank' action='PHPcode/showGeneratedQRCode.php' id='sendTagInfo' method='GET'><input type='hidden' name='employeeID' value='"+EMPLOYEE_ID+"'>"+"</form>";
+    
+        $("body").append(form);
+        $( "#sendTagInfo" ).submit();
+        location.reload();
+
+      
+    }
+
+
 });
+
+
