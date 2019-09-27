@@ -145,9 +145,9 @@
 			if($_POST["productremove"][$i]=="true")
 			{
 				$removeCount=$removeCount+1;
-				if(deleteMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i]))
+				if(deleteMaintainProductAssignmentCollection($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i]))
 				{
-					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
+					if(updateMaintainProductSaleAssignmentCollection($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 					{
 						if($i==$assignCount)
 						{
@@ -166,9 +166,9 @@
 			}
 			else
 			{
-				if(updateMaintainProductAssignment($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
+				if(updateMaintainProductAssignmentCollection($con,$_POST["deltruckIDs"][$i],$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 				{
-					if(updateMaintainProductSaleAssignment($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
+					if(updateMaintainProductSaleAssignmentCollection($con,$_POST["saleIDs"][$i],$_POST["productIDs"][$i],$_POST["productQtys"][$i]))
 					{
 						if($i==$assignCount)
 						{
@@ -191,11 +191,11 @@
 	{
 		if($_POST["remove"]=="true")
 		{
-			if(deleteDeliveryAssignment($con,$_POST["SALE_ID"],$_POST["TRUCK_ID"]))
+			if(deleteCollectionAssignment($con,$_POST["SALE_ID"],$_POST["TRUCK_ID"]))
 			{
-				if(checkAssigned($con,$_POST["SALE_ID"])==0)
+				if(checkAssignedCollection($con,$_POST["SALE_ID"])==0)
 				{
-					if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+					if(updateOrderAssignment($con,1,$_POST["SALE_ID"]))
 					{
 						echo "T,Assignment Maintained Successfully";
 					}
@@ -206,7 +206,7 @@
 				}
 				else
 				{
-					if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
+					if(updateOrderAssignment($con,6,$_POST["SALE_ID"]))
 					{
 						echo "T,Assignment Maintained Successfully";
 					}
@@ -224,9 +224,9 @@
 		}
 		else
 		{
-			if(checkAssigned($con,$_POST["SALE_ID"])==0)
+			if(checkAssignedCollection($con,$_POST["SALE_ID"])==0)
 			{
-				if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
+				if(updateOrderAssignment($con,1,$_POST["SALE_ID"]))
 				{
 					echo "T,Assignment Maintained Successfully";
 				}
@@ -237,7 +237,7 @@
 			}
 			else
 			{
-				if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
+				if(updateOrderAssignment($con,6,$_POST["SALE_ID"]))
 				{
 					echo "T,Assignment Maintained Successfully";
 				}
@@ -250,7 +250,7 @@
 	}
 	elseif($_POST["choice"]==5)
 	{
-		$assignSales=getAssignedSales($con,$_POST["TRUCK_ID"]);
+		$assignSales=getAssignedOrders($con,$_POST["TRUCK_ID"]);
 		echo json_encode($assignSales);
 	}
 	elseif($_POST["choice"]==6)
@@ -258,15 +258,15 @@
 		$updateCount=$_POST["num"]-1;
 		for ($i=0; $i<$_POST["num"]; $i++) 
 		{ 
-			if(updateDeliveryTruckStatus($con,$_POST["SALE_ID"][$i],$_POST["TRUCK_ID"],3))
+			if(updateCollectionTruckStatus($con,$_POST["SALE_ID"][$i],$_POST["TRUCK_ID"],3))
 			{
-				if(checkAssignedFinal($con,$_POST["SALE_ID"][$i],2)==0)
+				if(checkAssignedFinalCollection($con,$_POST["SALE_ID"][$i],2)==0)
 				{
-					if(updateSaleAssignment($con,3,$_POST["SALE_ID"][$i]))
+					if(updateOrderAssignment($con,3,$_POST["SALE_ID"][$i]))
 					{
 						if($i==$updateCount)
 						{
-							echo "T,Finalised Deliveries";
+							echo "T,Finalised Collections";
 						}
 					}
 				}
@@ -274,13 +274,13 @@
 				{
 					if($i==$updateCount)
 					{
-						echo "T,Finalised Deliveries";
+						echo "T,Finalised Collections";
 					}
 				}
 			}
 			else
 			{
-				echo "F,Deliveries not finalised";
+				echo "F,Collections not finalised";
 			}
 		}
 		

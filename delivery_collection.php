@@ -270,6 +270,38 @@
                 <?php
                   }
                 ?>
+                <?php 
+                  if (in_array("10.14", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  href="#">
+                    <a href="pages/delivery_collection/maintain-assigned-collection.php">
+                      <div>
+                        <i class="far fa-edit"></i>
+                        <span>Maintain Assigned Collections</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
+                <?php 
+                  if (in_array("10.15", $subFunctionality)) {
+                ?>
+                <div class="col-lg-4 col-md-6">
+                  <button type="button" class="btn-icon-clipboard"  href="#">
+                    <a href="pages/delivery_collection/finalise-assigned-collection.php">
+                      <div>
+                        <i class="far fa-check-square"></i>
+                        <span>Finalise Assigned Collections</span>
+                      </div>
+                    </a>
+                  </button>
+                </div>
+                <?php
+                  }
+                ?>
 
               </div>
             </div>

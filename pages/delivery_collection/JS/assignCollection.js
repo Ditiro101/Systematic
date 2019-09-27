@@ -278,7 +278,7 @@ let buildTruckDeliveries=function(dtid,productEntry)
 {
   let listEntry=$("<li></li>");
   listEntry.append("<i class='fa fa-plus mr-1'></i>");
-  let labelEntry=$("<label></label>").text("Delivery #"+dtid);
+  let labelEntry=$("<label></label>").text("Order #"+dtid);
   let ulEntry=$("<ul></ul>");
   ulEntry.append(productEntry);
   listEntry.append(labelEntry);
@@ -487,7 +487,7 @@ let buildNewTruck=function(tmp)
   let table=$("<table></table>").addClass("table align-items-center");
   let tHead=$("<thead></thead>").addClass("thead-dark text-white");
   let trHeading=$("<tr></tr>");
-  let thDelID=$("<th></th>").addClass("text-white").text("DeliveryID#");
+  let thDelID=$("<th></th>").addClass("text-white").text("OrderID#");
   let thProductName=$("<th></th>").addClass("text-white").text("Product Name");
   let thQuantity=$("<th></th>").addClass("text-white").text("Quantity");
   trHeading.append(thDelID);
@@ -816,7 +816,7 @@ let buildDeliveries=function(tmp)
     //console.log(specificSaleProducts);
     selectSaleProducts=specificSaleProducts;
     deliverySelectID=$(this).attr("name");
-    $("#assignDelHeading").text("Delivery #"+deliverySelectID+" Item(s)");
+    $("#assignDelHeading").text("Order #"+deliverySelectID+" Item(s)");
     $("#enterProducts").html('');
     selectProgress=[];
     for(let k=0;k<truckData.length;k++)
