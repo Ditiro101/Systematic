@@ -479,7 +479,15 @@ $(()=>{
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
 				data:{choice:4,num:indcount,name:arr["name"],title:arr["title"],surname:arr["surname"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
-				})
+				,
+			    beforeSend: function(){
+			            $('.loadingModal').modal('show');
+			     },
+			     complete: function(){
+			           // $('.loadingModal').modal('hide');
+			     }
+			     }
+			     )
 				.done(data=>{
 					//alert(data);
 					let doneData=data.split(",");
@@ -496,15 +504,24 @@ $(()=>{
 					else
 					{
 						//alert(doneData[1]);
-						$("#MMessage").text(doneData[1]);
-						$("#btnClose").attr("data-dismiss","modal");
-						$("#displayModal").modal("show");
+								$('#modal-title-default2').text("Error!");
+									$('#modalText').text("Database error");
+									$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+									$("#modalHeader").css("background-color", "red");
+									$('#successfullyAdded').modal("show");
+									$("#btnClose").attr("data-dismiss","modal");
+									$("#displayModal").modal("show");
 					}
 				});	
 			// }
 			
 		}
 	});
+
+
+
+
+
 	////////////////////////////////////////////////////////////////////
 	$("#btnSaveorg").on('click',function(e){
 		e.preventDefault();
@@ -542,7 +559,11 @@ $(()=>{
 					else
 					{
 						//alert(doneData[1]);
-						$("#MMessage").text(doneData[1]);
+						$('#modal-title-default2').text("Error!");
+						$('#modalText').text("Database error");
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
+						$('#successfullyAdded').modal("show");
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
 					}
@@ -554,6 +575,8 @@ $(()=>{
 
 });
 
+
+	
 // if( email != "" ){
            
 //             $.ajax({
