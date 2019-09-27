@@ -135,13 +135,13 @@
                         </div> 
 
                         <button type="submit" class="btn btn-primary mb-3">Save</button>
-                        <div class="form-group col-md-2">
+                        <div class="form-group col-md-2 errorModal successModal text-center">
                             
                             <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                                   <div class="modal-content">
                                     
-                                      <div class="modal-header">
+                                      <div class="modal-header" id="modalHeader">
                                           <h6 class="modal-title" id="modal-title-default">Success!</h6>
                                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                               <span aria-hidden="true">×</span>
@@ -150,6 +150,9 @@
                                       
                                       <div class="modal-body">
                                           <p id="MMessage"></p>
+                                          <div id="animation" style="text-align:center;">
+
+                                            </div>
                                           
                                       </div>
                                       
@@ -172,6 +175,15 @@
       </div>
       <?php include_once("../footer.php");?>
     </div>
+  </div>
+
+
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

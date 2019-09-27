@@ -38,15 +38,20 @@ $(document).ready(function(){
                             type: 'post',
                             url:'PHPcode/collect_wage-SQL.php',
                             data: {wageRate: rate, totalDue :totalPay , employee_ID:employeeID},
+                            beforeSend: function(){
+                                $('.loadingModal').modal('show');
+                            },
                             success: function(data)
                                 {
-                                
+                                    $('.loadingModal').modal('hide');
                                     console.log(data);
                                     let confirm = data.trim();
                                     if(confirm == "success")
                                     {
                                         $("#modal-title-default").text("Success!");
-                                        $("#modalText").text("Wage successfully collected.");    
+                                        $("#modalText").text("Wage successfully collected.");
+                                        $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                                        $("#modalHeader").css("background-color", "#1ab394");    
                                         $("#finaliseWage").modal('show');
 
                                         $("#closeWage").click(function(e){
@@ -57,7 +62,9 @@ $(document).ready(function(){
                                     else
                                     {
                                         $("#modal-title-default").text("Error!");
-                                        $("#modalText").text("Employee either not applicable to earn wage or system error.");     
+                                        $("#modalText").text("Employee either not applicable to earn wage or system error.");  
+                                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                                        $("#modalHeader").css("background-color", "red");   
                                         $("#finaliseWage").modal('show');
                                     }
                                 },

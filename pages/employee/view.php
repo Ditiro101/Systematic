@@ -423,17 +423,20 @@ if(mysqli_num_rows($Wagequery_QR)>0)
           </div>
         </div>
           </div>
-          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+          <div class="modal fade errorModal successModal text-center" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                     <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                         <div class="modal-content">
-                            <div class="modal-header">
+                            <div class="modal-header" id="modalHeader">
                                 <h6 class="modal-title" id="modal-title-default">Success!</h6>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">×</span>
                                 </button>
                             </div>      
                             <div class="modal-body text-left">
-                                <p id="modalText"></p>                             
+                                <p id="modalText"></p>
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>                             
                             </div>
                             <div class="modal-footer">  
                                 <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"id="btnClose" onclick="">Close</button> 
@@ -442,7 +445,7 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                     </div>
                   </div>
 
-                <div class="modal fade" id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade " id="dismiss" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
@@ -470,7 +473,7 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                 </div>
               </div>
 
-              <div class="modal fade" id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal fade " id="del" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                   <div class="modal-content">
                     <div class="modal-header">
@@ -487,10 +490,10 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                 </div>
               </div>
 
-              <div class="modal fade" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+              <div class="modal fade errorModal successModal text-center" id="dismissEmployeeSuccess" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header" id="modalHeader">
                       <h6 class="modal-title" id="modal-title-defaultDismiss">Success!</h6>
                       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">×</span>
@@ -498,6 +501,9 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                     </div>
                     <div class="modal-body">
                       <p id="modalTextDismiss"></p>
+                      <div id="animation" style="text-align:center;">
+
+                                            </div>
                         
                     </div>
                     <div class="modal-footer">                       
@@ -518,6 +524,14 @@ if(mysqli_num_rows($Wagequery_QR)>0)
     </div>
   </div>
 
+
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
