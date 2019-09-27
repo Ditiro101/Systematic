@@ -128,17 +128,20 @@
 
                       
                     </form>
-                    <div class="row">
-                       <div class="col-md-2 text-center float-right">
-                                    <button class="btn btn-success " id="btn-add-address-ind" type="button">
-                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
-                                    </button>
-                                    
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <div class=" float-right">
+                          <button class="btn btn-success " id="btn-add-address-ind" type="button">
+                              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Address</span>
+                          </button>
+                          <br>
+                          <small>Max 3 adresses allowed</small>
+                        </div>
                       </div>
-                     </div>
+                    </div> 
                      <div class="row">
                      	<div class="col-md-2 mt-3 text-center">
-                    <button id="btnSaveind" type="button" class="btn btn-primary">
+                    <button id="btnSaveind" type="button" class="btn btn-block btn-primary mb-3">
                         Submit
                       </button>
                   </div>
@@ -193,22 +196,26 @@
 
                       
                     </form>
-                    <div class="row">
-                    	<div class="col-md-2 float-right">
-                                    <button class="btn btn-success " id="btn-add-address-org" type="button">
-                                        <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Additional Address</span>
-                                    </button>
-                                    
+                    <div class="form-row">
+                      <div class="form-group col">
+                        <div class=" float-right">
+                          <button class="btn btn-success " id="btn-add-address-org" type="button">
+                              <span class="btn-inner--icon"><i class="ni ni-fat-add"></i>Add Address</span>
+                          </button>
+                          <br>
+                          <small>Max 3 adresses allowed</small>
+                        </div>
                       </div>
-					</div>
-					<div class="row">
-						<div class="col-md-2 mt-3 text-center">
-                    <button id="btnSaveorg" type="button" class="btn btn-primary" >
-                        Submit
-                    </button>
-                </div>
-            </div>
-        </div>
+                    </div> 
+ 
+          					<div class="row">
+          						<div class="col-md-2 mt-3 text-center">
+                              <button id="btnSaveorg" type="button" class="btn btn-block btn-primary mb-3" >
+                                  Submit
+                              </button>
+                          </div>
+                      </div>
+                  </div>
                       
                     <div class="form-group col-md-2 errorModal successModal text-center">
                       <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">

@@ -488,9 +488,8 @@ $(()=>{
 							.done(data=>{
 								//alert(data);
 								$('.loadingModal').modal('hide');
-								let doneData=data.split(",");
-								console.log(doneData);
-								if(doneData[0]=="success")
+								
+								if(data=="success")
 								{
 
 									$('#modal-title-default2').text("Success!");
@@ -498,14 +497,14 @@ $(()=>{
 									$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
 									$("#modalHeader").css("background-color", "#1ab394");
 									$('#successfullyAdded').modal("show");
-									$("#btnClose").attr("onclick","window.location='../../customer.php'");
+									$("#btnClose").attr("onclick","window.location='search.php'");
 									$("#displayModal").modal("show");
 								}
 								else
 								{
 
 									$('#modal-title-default2').text("Error!");
-									$('#modalText').text("Database error");
+									$('#modalText').text("Email Failed Sent, Please check email credits");
 									$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 									$("#modalHeader").css("background-color", "red");
 									$('#successfullyAdded').modal("show");
@@ -517,14 +516,15 @@ $(()=>{
 					}
 					else
 					{
+						$('.loadingModal').modal('hide');
 						//alert(doneData[1]);
-								$('#modal-title-default2').text("Error!");
-									$('#modalText').text("Database error");
-									$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-									$("#modalHeader").css("background-color", "red");
-									$('#successfullyAdded').modal("show");
-									$("#btnClose").attr("data-dismiss","modal");
-									$("#displayModal").modal("show");
+						$('#modal-title-default2').text("Error!");
+						$('#modalText').text("Database error");
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
+						$('#successfullyAdded').modal("show");
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
 					}
 				});	
 			}
@@ -598,23 +598,26 @@ $(()=>{
 								.done(data=>{
 									//alert(data);
 									 $('.loadingModal').modal('hide');
-									let doneData=data.split(",");
-									console.log(doneData);
-									if(doneData[0]=="success")
+									
+									if(data=="success")
 									{
 										
+
 										$('#modal-title-default2').text("Success!");
 										$('#modalText').text("Customer successfully registered");
 										$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
 										$("#modalHeader").css("background-color", "#1ab394");
 										$('#successfullyAdded').modal("show");
-										$("#btnClose").attr("onclick","window.location='../../customer.php'");
+										$("#btnClose").attr("onclick","window.location='search.php'");
 										$("#displayModal").modal("show");
+										
+									
+									
 									}
 									else
 									{
 										$('#modal-title-default2').text("Error!");
-										$('#modalText').text("Database error");
+										$('#modalText').text("Failed Sent email");
 										$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 										$("#modalHeader").css("background-color", "red");
 										$('#successfullyAdded').modal("show");
@@ -628,6 +631,7 @@ $(()=>{
 					}
 					else
 					{
+						$('.loadingModal').modal('hide');
 						//alert(doneData[1]);
 						$('#modal-title-default2').text("Error!");
 						$('#modalText').text("Database error");
