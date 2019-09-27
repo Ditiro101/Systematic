@@ -180,21 +180,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Enter Date!</h5>
             </div>
             <div class="modal-body">
-              <p>Select the date please?</p>
                 <form action="pages/reports/employeeAttendance.php" method="POST">
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date From</label>
+                <div class="form-group col">
+                  <label for="exampleInputPassword1">Please enter date:</label>
                   <input type="date" class="form-control" id="DATE" name="DATE" placeholder="Enter Delivery From">
                 </div>
-                <input type="submit" class="btn btn-success" ></input>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                
               </form>
             </div>
             <div class="modal-footer"> 
-
+            <div class="form-group col">
+                  <input type="submit" class="btn btn-success" ></input>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
               
               
             </div>

@@ -29,7 +29,9 @@ $(()=>{
                 let arrayOfIDs = [];
                 let prodTypeNamesArray = [];                
                 let idCount =0;
-
+                let tempArrayProds = arr;
+                let arrayTempProdIDs  = []; 
+               
                 //Group same IDs
             function groupProductTypes(array)
                     {
@@ -106,6 +108,7 @@ $(()=>{
                 }
 
                 groupProductTypes(arrayOfProdTypes); // Group product types
+                console.log(arrayOfIDs);
                 let sortedProductTypesArray=sortProductTypes(arrayOfIDs); //sortedProductTypes
                 console.log(sortedProductTypesArray);
                 
@@ -115,19 +118,26 @@ $(()=>{
                 {	
                    if(k<5)
                    {
-                    if(sortedProductTypesArray[k]==arr[k].PRODUCT_TYPE_ID)
-                    {
-                       
-                        if(!prodTypeNamesArray.includes(arr[k].TYPE_NAME))
+                        
+                        for(let i=0;i<sortedProductTypesArray.length;i++)
                         {
-                            prodTypeNamesArray.push(arr[k].TYPE_NAME);
-
+                            if(sortedProductTypesArray[i]==arr[k].PRODUCT_TYPE_ID)
+                            {
+                            
+                                  
+                                if(!prodTypeNamesArray.includes(arr[k].TYPE_NAME))
+                                {
+                                    prodTypeNamesArray.push(arr[k].TYPE_NAME);
+                                    
+        
+                                }
+                            }
                         }
-                    }
+                   
                    }
                 }
 
-
+                console.log(prodTypeNamesArray);
                 //Get the quantity of product types
                 for(let k=0;k<prodTypeNamesArray.length;k++)
                 {	
@@ -138,7 +148,7 @@ $(()=>{
                             if(prodTypeNamesArray[k] ==arr[t].TYPE_NAME )
                             {
                                 countOfProdTypes += parseInt(arr[t].TOTAL_PRODUCT_QUANTITY);
-                                console.log(arr[t].TOTAL_PRODUCT_QUANTITY);
+                                
 
                             }
                         }

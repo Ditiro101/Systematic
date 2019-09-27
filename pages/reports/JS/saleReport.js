@@ -49,6 +49,8 @@ $(()=>{
                 let staticTotalSales = 0;
                 let futureDay;
                 let arrLength = arr.length;
+                let showTime = [];
+                let timeArray = [];
                 console.log(arrLength);
 
                 let saleGraphDays = [];
@@ -60,10 +62,16 @@ $(()=>{
                 {
                     let day = toString(arr[k]["SALE_DATE"]);
                     daysOfTheWeek = arr[k]["SALE_DATE"].split(" ");
+                    showTime = daysOfTheWeek[1];
+                    console.log(showTime);
                     if(k < arrLength-1)
                     {
                         futureDay = arr[k+1]["SALE_DATE"].split(" ");
                         console.log(futureDay[0]);
+                    }
+                    else
+                    {
+                        futureDay = arr[k]["SALE_DATE"].split(" ");
                     }
                     
                     var formattedTime = moment(daysOfTheWeek[0]).format('dddd');
@@ -131,6 +139,7 @@ $(()=>{
 
                                     saleTotalArray.push("date");
                                     saleGraphDays.push(daysOfTheWeek[0]);
+                                    timeArray.push(showTime);
                                     //console.log("1");
                                     //console.log(totalSales);
                                     totalSales = 0;
@@ -145,9 +154,24 @@ $(()=>{
                         previousDay = daysOfTheWeek[0];
                         saleTotalArray.push("date");
                         saleGraphDays.push(daysOfTheWeek[0]);
+                        timeArray.push(showTime);
+                        totalSales = 0;
+                        staticTotalSales = 0;
 
                     }
-                    else
+                    else if(arrLength==1)
+                    {
+                        tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='TotalSales'>"+totalSales +"</td><td class='unit-right' id='SaleTotal'>"+staticTotalSales.toFixed(2)+"</td></tr>";
+                        previousDay = daysOfTheWeek[0];
+                        timeArray.push(showTime);
+                        saleTotalArray.push("date");
+                        saleGraphDays.push(daysOfTheWeek[0]);
+                        //console.log("1");
+                        //console.log(totalSales);
+                        totalSales = 0;
+                        staticTotalSales = 0;
+                    }
+                    else 
                     {
                         
                         previousDay = daysOfTheWeek[0];
@@ -199,6 +223,10 @@ $(()=>{
                    
                 }
                 console.log(tempSaleArray);
+                for(let i=0;i<timeArray.length;i++)
+                {
+                    
+                }
                 new Chart(document.getElementById("line-chart"), {
                     type: 'line',
                     data: {
