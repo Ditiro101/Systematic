@@ -232,9 +232,9 @@
 		return $addressID;
 	}
 	//////////////////////////////////////////////////
-	function checkEmployee($con,$name,$surname,$contact)
+	function checkEmployee($con,$name,$surname,$contact,$email)
 	{
-		$check_query="SELECT * FROM EMPLOYEE WHERE NAME='$name' AND SURNAME='$surname' AND CONTACT_NUMBER='$contact'";
+		$check_query="SELECT * FROM EMPLOYEE WHERE (NAME='$name' AND SURNAME='$surname' AND CONTACT_NUMBER='$contact') OR (EMAIL = '$email')";
 		$check_result=mysqli_query($con,$check_query);
 		if(mysqli_num_rows($check_result)>0)
 		{
