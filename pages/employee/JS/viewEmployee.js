@@ -20,9 +20,13 @@ $(()=>{
         $.ajax({
             url:'PHPcode/regenerateEmployeeTag-SQL.php',
             type:'POST',
-            data: {employee_ID:employeeID} 
+            data: {employee_ID:employeeID},
+            beforeSend: function(){
+                $('.loadingModal').modal('show');
+            }
         })
         .done(data=>{
+            $('.loadingModal').modal('hide');
             console.log(data);
             let confirmation = data.trim();
             $("#displayModal").modal("hide");
@@ -31,6 +35,8 @@ $(()=>{
             {
                 $("#modal-title-default").text("Error!");
                 $("#modalText").text("Employee does not earn wage , thus an employee tag is not generated.");
+                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                $("#modalHeader").css("background-color", "red");
                
                 $("#displayModal").modal("show");
 
@@ -50,6 +56,8 @@ $(()=>{
 
                 $("#modal-title-default").text("Success!");
                 $("#modalText").text("Generating empoyee tag...");
+                $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                $("#modalHeader").css("background-color", "#1ab394");
                 $("#displayModal").modal("show");
 
 
@@ -66,6 +74,8 @@ $(()=>{
             {
                 $("#modal-title-default").text("Error!");
                 $("#modalText").text("Couldnt regenerate employee tag! , press close and try again");
+                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                $("#modalHeader").css("background-color", "red");
                
                 $("#displayModal").modal("show");
             }
@@ -73,6 +83,8 @@ $(()=>{
             {
                 $("#modal-title-default").text("Error!");
                 $("#modalText").text("Database Error.");
+                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                $("#modalHeader").css("background-color", "red");
                 $("#displayModal").modal("show");
             }
             else
@@ -80,6 +92,8 @@ $(()=>{
                 
                 $("#modal-title-default").text("Error!");
                 $("#modalText").text("Database Error");
+                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                $("#modalHeader").css("background-color", "red");
                 $("#displayModal").modal("show");
             }
           
@@ -99,15 +113,21 @@ $(()=>{
         $.ajax({
             url:'PHPcode/verifyQRcode.php',
             type:'POST',
-            data: {qrCode:employeeID}
+            data: {qrCode:employeeID},
+            beforeSend: function(){
+                $('.loadingModal').modal('show');
+            }
         })
         .done(data=>{
+            $('.loadingModal').modal('hide');
             console.log(data);
             let confirmation = data.trim();
             if(confirmation.includes("success"))
             {
                 $("#modal-title-default").text("Success!");
                 $("#modalText").text("Employee Successfully checked-in");
+                $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                $("#modalHeader").css("background-color", "#1ab394");
                 $("#btnClose").attr("onclick","window.location='../../employee.php'");
                 $("#displayModal").modal("show");
             }
@@ -115,6 +135,8 @@ $(()=>{
             {
                 $("#modal-title-default").text("Error!");
                 $("#modalText").text("Cannot check-in , checkout time has passed");
+                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                $("#modalHeader").css("background-color", "red");
                
                 $("#displayModal").modal("show");
             }
@@ -122,12 +144,16 @@ $(()=>{
             {
               $('#modal-title-default').text("Warning!");
               $('#modalText').text("Already Checked-in!!");
+              $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+              $("#modalHeader").css("background-color", "red");
               $('#displayModal').modal("show");
             }
             else
             {
               $('#modal-title-default').text("Error!");
               $('#modalText').text("Database Error!");
+              $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+              $("#modalHeader").css("background-color", "red");
               $('#displayModal').modal("show");
             }
            
@@ -145,15 +171,21 @@ $(()=>{
         $.ajax({
             url:'PHPcode/checkOut-SQL.php',
             type:'POST',
-            data: {qrCode:employeeID}
+            data: {qrCode:employeeID},
+            beforeSend: function(){
+                $('.loadingModal').modal('show');
+            }
         })
         .done(data=>{
+            $('.loadingModal').modal('hide');
             console.log(data);
             let confirmation = data.trim();
             if(confirmation.includes("success"))
             {
                 $("#modal-title-default").text("Success!");
                 $("#modalText").text("Employee Successfully checked out");
+                $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                $("#modalHeader").css("background-color", "#1ab394");
                 $("#btnClose").attr("onclick","window.location='../../employee.php'");
                 $("#displayModal").modal("show");
             }
@@ -161,12 +193,16 @@ $(()=>{
             {
               $('#modal-title-default').text("Error!");
               $('#modalText').text("Check in first");
+              $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+              $("#modalHeader").css("background-color", "red");
               $('#displayModal').modal("show");
             }
             else 
             {
               $('#modal-title-default').text("Error!");
               $('#modalText').text("Database Error!");
+              $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+              $("#modalHeader").css("background-color", "red");
               $('#displayModal').modal("show");
             }
            
@@ -184,29 +220,36 @@ $(()=>{
         $.ajax({
             url:'PHPcode/collect_wage_scanner.php',
             type:'POST',
-            data: {qrCode:employeeID}
+            data: {qrCode:employeeID},
+            beforeSend: function(){
+                $('.loadingModal').modal('show');
+            }
         })
         .done(data=>{
+            $('.loadingModal').modal('hide');
             console.log(data);
             let confirmation = data.trim();
             if(confirmation.includes("success"))
             {
                 $("#modal-title-default").text("Success!");
                 $("#modalText").text("Employee found , wage will be calculated on next screen...");
+                $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                $("#modalHeader").css("background-color", "#1ab394");
                 //$("#btnClose").attr("onclick",`window.location=wage_calc.php?employeeID='${employeeID}'`);
                 $("#displayModal").modal("show");
 
-                   $("#btnClose").click(function(e) {
-
-                                    e.preventDefault();
-                                   
-                                    window.location=`wage_calc.php?employeeID='${employeeID}'`;
-                                });
+                setTimeout(function(){
+                    $('#displayModal').modal("hide");
+                    window.location=`wage_calc.php?employeeID='${employeeID}'`;
+                }, 2000);
+                  
             }
             else if(confirmation != "success")
             {
               $('#modal-title-default').text("Error!");
               $('#modalText').text(confirmation);
+              $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+              $("#modalHeader").css("background-color", "red");
               $('#scannerSearch').modal("show");
             }
            

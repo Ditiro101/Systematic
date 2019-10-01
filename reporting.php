@@ -180,21 +180,22 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Warning!</h5>
+              <h5 class="modal-title" id="exampleModalLabel">Enter Date!</h5>
             </div>
             <div class="modal-body">
-              <p>Select the date please?</p>
                 <form action="pages/reports/employeeAttendance.php" method="POST">
-                <div class="form-group col-6">
-                  <label for="exampleInputPassword1">Date From</label>
+                <div class="form-group col">
+                  <label for="exampleInputPassword1">Please enter date:</label>
                   <input type="date" class="form-control" id="DATE" name="DATE" placeholder="Enter Delivery From">
                 </div>
-                <input type="submit" class="btn btn-success" ></input>
-                <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+                
               </form>
             </div>
             <div class="modal-footer"> 
-
+            <div class="form-group col">
+                  <input type="submit" class="btn btn-success" ></input>
+                  <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
               
               
             </div>
@@ -388,7 +389,7 @@
             </div>
            <div class="modal-body">
               <p>Please enter the timeframe for which the report should be generated?</p>
-                <form action="pages/reports/product-trends-report.php" method="POST">
+                <form action="pages/reports/product-trends-report.php" method="POST" class="d-inline">
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date From</label>
                   <input type="date" class="form-control" id="DATEFROM" name="DATEFROM" placeholder="Enter Date of Sale From">
@@ -397,7 +398,7 @@
                   <label for="exampleInputPassword1">Date To</label>
                   <input type="date" class="form-control" id="DATETO" name="DATETO" placeholder="Enter Date of Sale To">
                 </div>
-                <input type="submit" class="btn btn-success" value="Generate Report"></input>
+                <input type="submit" class="btn btn-success" id="ReportError" value="Generate Report"></input>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
               </form>
             </div>
@@ -473,6 +474,8 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script src="pages/reports/JS/reportingErrors.js"></script>
+
 </body>
 
 </html>

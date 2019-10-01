@@ -26,12 +26,12 @@ $(document).ready(function(){
         type: 'POST',
         url: 'PHPcode/verifyQRcode.php',
         data: {qrCode : content},
-        beforeSend:()=>
-        {
-            
+        beforeSend: function(){
+            $('.loadingModal').modal('show');
         }
       })
       .done(response => {
+        $('.loadingModal').modal('hide');
       // do something with data
         console.log(response);
         var reponseArray = response.split(',');
@@ -76,6 +76,8 @@ $(document).ready(function(){
         {
           $('#modal-title-default').text("Error!");
           $('#modalText').text("Cannot check-in , checkout time has passed");
+          $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+          $("#modalHeader").css("background-color", "red");
           
           $('#checkedIn').modal("show");
         }
@@ -132,6 +134,8 @@ $(document).ready(function(){
         {
           $('#modal-title-default').text("Error!");
           $('#modalText').text("Database Error!");
+          $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+          $("#modalHeader").css("background-color", "red");
           $('#checkedIn').modal("show");
         }
         
