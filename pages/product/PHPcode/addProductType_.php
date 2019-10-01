@@ -1,5 +1,5 @@
 <?php
-
+	include_once("../../sessionCheckPages.php");
   	$productTypeName = "";
 	$productTypeDescription = "";
 
@@ -47,8 +47,21 @@
 			$query = "INSERT INTO PRODUCT_TYPE(TYPE_NAME, DESCRIPTION) 
 	                  VALUES( '$productTypeName', '$productTypeDescription')";
 	      	mysqli_query($DBConnect, $query);
-
-
+	      	$last_id = mysqli_insert_id($DBConnect);
+	      	$DateAudit = date('Y-m-d H:i:s');
+		    $Functionality_ID='8.4';
+		    $userID = $_SESSION['userID'];
+		    $changes="ID : ".$last_id;
+	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	        $audit_result=mysqli_query($DBConnect,$audit_query);
+	        if($audit_result)
+	        {
+	          
+	        }
+	        else
+	        {
+	          
+	        }
 	      	//Close database connection
 			mysqli_close($DBConnect);
 
