@@ -1,26 +1,41 @@
 var indcount=1;
 var orgcount=1;
-let CheckValid = function(valArr)
-{
-	if(valArr["con"].length!=10)
-	{
-		$("#MMessage").text("Contact Number must be 10 digits");
-		$("#btnClose").attr("data-dismiss","modal");
-		$("#displayModal").modal("show");
-		return false;
-	}
-
-	else
-	{
-		return true;
-	}
+// let CheckValid = function(valArr)
+// {
+// 	if(valArr["con"].length!=10)
+// 	{
+// 		$("#MMessage").text("Contact Number must be 10 digits");
+// 		$("#btnClose").attr("data-dismiss","modal");
+// 		$("#displayModal").modal("show");
+// 		return false;
+// 	}
+// 	else if (valArr["vat"].length!=10)
+// 	{
+// 		$("#MMessage").text("VAT Number must be 10 digits.");
+// 		$("#btnClose").attr("data-dismiss","modal");
+// 		$("#displayModal").modal("show");
+// 		return false;
+// 	}
+// 	else
+// 	{
+// 		return true;
+// 	}
 	
-}
+// }
 let getIndInput= function()
 {
 	let name=$("#name-indi").val().trim();
 	let surname=$("#surname-indi").val().trim();
-	let title=1; //To add later
+	let title=$("#titleSelect option:selected").text();
+	let titleID=1;
+	if(title=="Ms")
+	{
+		titleID=2;
+	}
+	else if(title=="Mrs")
+	{
+		titleID=3
+	}
 	//let VatNum=$("#VATNumber").val().trim();
 	let contact=$("#number-indi").val().trim();
 	let email=$("#email-indi").val().trim();
@@ -44,7 +59,7 @@ let getIndInput= function()
 	});
 
 	let addSupplierArr=[];
-	addSupplierArr["title"]=title;
+	addSupplierArr["title"]=titleID;
 	addSupplierArr["customer_type"]=1;
 	addSupplierArr["status"]=1;
 	addSupplierArr["name"]=name;
@@ -454,12 +469,12 @@ $(()=>{
 			
 			let arr=getIndInput();
 			console.log(arr);
-			if(CheckValid(arr)!=true)
-			{
-				e.stopPropagation();
-			}
-			else
-			{
+			// if(CheckValid(arr)!=true)
+			// {
+			// 	e.stopPropagation();
+			// }
+			// else
+			// {
 				$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
@@ -527,7 +542,7 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});	
-			}
+			// }
 			
 		}
 	});
@@ -552,36 +567,12 @@ $(()=>{
 			
 			
 			let arr=getOrgInput();
-			console.log(arr);
-			if(CheckValid(arr)!=true)
-			{
-				e.stopPropagation();
-				console("not valid");
-			}
-			else
-			{
+
 				$.ajax({
-					url: 'PHPcode/customercode.php',
-					type: 'POST',
-					data:{
-						choice:1,num:orgcount,
-						name:arr["name"],
-						vat:arr["vat"],
-						contact:arr["con"],
-						email:arr["email"],
-						address:arr["address"],
-						suburb:arr["suburb"],
-						city:arr["city"],zip:arr["zip"],
-						customer_type:arr["customer_type"],
-						status:arr["status"]
-					},
-			        beforeSend: function(){
-			            $('.loadingModal').modal('show');
-			        },
-			        complete: function(){
-			           // $('.loadingModal').modal('hide');
-			        }
-		    	})
+				url: 'PHPcode/customercode.php',
+				type: 'POST',
+				data:{choice:1,num:orgcount,name:arr["name"],vat:arr["vat"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
+				})
 				.done(data=>{
 					//alert(data);
 					let doneData=data.split(",");
@@ -642,14 +633,14 @@ $(()=>{
 						$("#displayModal").modal("show");
 					}
 				});
-			}
+			
 			
 		}
 	});
 
 });
 
-			
+
 	
 // if( email != "" ){
            

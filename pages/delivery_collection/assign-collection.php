@@ -3,13 +3,13 @@
     include_once("PHPcode/connection.php");
     include_once("PHPcode/functions.php");
     $truckData=getAllTrucks($con);
-    $deliveryData=getUnassignedDeliveries($con,1);
-    $addressData=getCompleteAddress($con);
-    $deliveryCity=getDeliveryCities($con);
-    $saleData=getSalesCustomer($con);
-    $saleProductData=getAllSaleProducts($con);
-    $truckProductData=getTruckProductData($con);
-    $deliveryTruckData=getDeliveryTruckData($con);
+    $deliveryData=getUnassignedCollections($con,1);
+    $addressData=getCompleteAddressCollection($con);
+    $deliveryCity=getCollectionCities($con);
+    $saleData=getOrderSupplier($con);
+    $saleProductData=getAllOrderProducts($con);
+    $truckProductData=getTruckProductDataCollection($con);
+    $deliveryTruckData=getCollectionTruckData($con);
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="Start your development with a Dashboard for Bootstrap 4.">
   <meta name="author" content="Creative Tim">
-  <title>Assign Truck - Stock Path</title>
+  <title>Assign Collection - Stock Path</title>
   <!-- Favicon -->
   <link href="../../assets/img/brand/favicon.png" rel="icon" type="image/png">
   <!-- Fonts -->
@@ -208,7 +208,7 @@
       <nav class="navbar navbar-top navbar-expand-md navbar-dark" id="navbar-main">
         <div class="container-fluid">
           <!-- Brand -->
-          <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Assign Truck</a>
+          <a class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block">Assign Collection</a>
           <?php include_once("../usernavbar.php");?>
           
         </div>
@@ -293,7 +293,7 @@
                     <label hidden="true" id="spData"><?php echo json_encode($saleProductData);?></label>
                     <label hidden="true" id="tpData"><?php echo json_encode($truckProductData);?></label>
                     <label hidden="true" id="dtData"><?php echo json_encode($deliveryTruckData);?></label>
-                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i>Deliveries Pending</h3>
+                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i>Collections Pending</h3>
                 </div>
               </div>
             </div>
@@ -303,7 +303,7 @@
                 <thead class="thead-light">
                   <tr>
                     <th scope="col"></th>
-                    <th scope="col">Invoice NO#</th>
+                    <th scope="col">Order NO#</th>
                     <th scope="col">Date</th>
                     <th scope="col">City</th>
                     
@@ -333,7 +333,7 @@
                 <table class="table align-items-center">
                   <thead class="thead-light">
                     <tr>
-                      <th scope="col">Del #</th>
+                      <th scope="col">Order #</th>
                       <th scope="col">Product Name</th>
                       <th scope="col">Quantity</th>
                     </tr>
@@ -490,7 +490,7 @@
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
   <!-- <script type="text/javascript" src="JS/assignTruckMap.js"></script> -->
   <script type="text/javascript" src="../../assets/js/hummingbird-treeview.js"></script>
-  <script type="text/javascript" src="JS/assignTruck.js"></script>
+  <script type="text/javascript" src="JS/assignCollection.js"></script>
 </body>
 
 </html>
