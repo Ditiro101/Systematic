@@ -5,15 +5,24 @@ $(()=>{
 
         console.log(dateFrom);
         console.log(dateTo);
-    
+        let comDateFrom = new Date(dateFrom);
+        let comDateTo = new Date(dateTo);
+
+        console.log(comDateFrom);
+        console.log(comDateTo);
+
         $.ajax({
             url: 'PHPcode/productTrends.php',
             type: 'POST',
-            data: {DATEFROM:dateFrom ,DATETO:dateTo} 
+            data: {DATEFROM:dateFrom ,DATETO:dateTo} ,
+            beforeSend: function(){
+               
+            }
         })
         .done(data=>{
             
-            if(data!="False")
+
+            if(data!="Empty")
             {
                 let arr=JSON.parse(data);
                 console.log(arr);
@@ -252,7 +261,7 @@ $(()=>{
             }
             else
             {
-                alert("Error");
+                alert("No Sales Were Made In This Date Period!");
             }
         });
     });

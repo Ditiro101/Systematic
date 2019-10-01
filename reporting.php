@@ -389,7 +389,7 @@
             </div>
            <div class="modal-body">
               <p>Please enter the timeframe for which the report should be generated?</p>
-                <form action="pages/reports/product-trends-report.php" method="POST">
+                <form action="pages/reports/product-trends-report.php" method="POST" class="d-inline">
                 <div class="form-group col-6">
                   <label for="exampleInputPassword1">Date From</label>
                   <input type="date" class="form-control" id="DATEFROM" name="DATEFROM" placeholder="Enter Date of Sale From">
@@ -398,7 +398,7 @@
                   <label for="exampleInputPassword1">Date To</label>
                   <input type="date" class="form-control" id="DATETO" name="DATETO" placeholder="Enter Date of Sale To">
                 </div>
-                <input type="submit" class="btn btn-success" value="Generate Report"></input>
+                <input type="submit" class="btn btn-success" id="ReportError" value="Generate Report"></input>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
               </form>
             </div>
@@ -474,6 +474,8 @@
   <script src="./assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="./assets/js/argon.js?v=1.0.0"></script>
+  <script src="pages/reports/JS/reportingErrors.js"></script>
+
 </body>
 
 </html>
