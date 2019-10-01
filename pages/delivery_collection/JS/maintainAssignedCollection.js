@@ -43,8 +43,8 @@ let buildProduct=function(tmp,arr)
 	quantityEntry.append(innerDivP);
 	tableEntry.append(quantityEntry);
 	let deliveryNO=$("<td></td>").addClass("classDelivery");
-	deliveryNO.attr("name",arr[tmp]["DELIVERY_TRUCK_ID"]);
-	deliveryNO.text(arr[tmp]["SALE_ID"]);
+	deliveryNO.attr("name",arr[tmp]["COLLECTION_TRUCK_ID"]);
+	deliveryNO.text(arr[tmp]["ORDER_ID"]);
 	tableEntry.append(deliveryNO);
 	let nameEntry=$("<td></td>");
 	nameEntry.text(arr[tmp]["PRODUCT_NAME"]);
@@ -62,7 +62,6 @@ $(()=>{
 		$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
 		$("#displayModal").modal("show");
 		
-
 	}
 	$(document).on('change','.classQuantity',function(e){
 		e.preventDefault();
@@ -115,6 +114,7 @@ $(()=>{
 			assignProductIDs.push($(this).attr("name"));
 			assignProductQtys.push($(this).val());
 			validationQty.push($(this).attr("max"));
+
 		});
 		$("#enterProducts td.classDelivery").each(function()
 		{
@@ -136,7 +136,6 @@ $(()=>{
 			filterArr[k]["PRODUCT_NAME"]=assignQtyRemove[k];
 		}
 		let doCall=true;
-		console.log(assignProductQtys);
 		for(let k=0;k<assignProductQtys.length;k++)
 		{
 			if(assignProductQtys[k]=="")
@@ -169,7 +168,7 @@ $(()=>{
 		if(doCall)
 		{
 			$.ajax({
-				url:'PHPcode/assigncode.php',
+				url:'PHPcode/assigncollectioncode.php',
 				type:'POST',
 				data:{choice:5,TRUCK_ID:truckID},
 				beforeSend:function(){
@@ -181,7 +180,7 @@ $(()=>{
 				console.log(salesForTruck);
 				for(let k=0;k<salesForTruck.length;k++)
 				{
-					let dataArr=filterArr.filter(element=>element["SALE_ID"]==salesForTruck[k]["SALE_ID"]);
+					let dataArr=filterArr.filter(element=>element["ORDER_ID"]==salesForTruck[k]["ORDER_ID"]);
 					let dataArrQty=[];
 					let dataArrProductIDs=[];
 					let dataArrDelTruckIDs=[];
@@ -190,8 +189,8 @@ $(()=>{
 					dataArr.forEach(function(element){
 						dataArrQty.push(element["QUANTITY"]);
 						dataArrProductIDs.push(element["PRODUCT_ID"]);
-						dataArrDelTruckIDs.push(element["DELIVERY_TRUCK_ID"]);
-						dataArrSaleIDs.push(element["SALE_ID"]);
+						dataArrDelTruckIDs.push(element["COLLECTION_TRUCK_ID"]);
+						dataArrSaleIDs.push(element["ORDER_ID"]);
 						dataArrQtyRemove.push(element["PRODUCT_NAME"]);
 					});
 					removeDeliveryAssignment=0;
@@ -207,16 +206,16 @@ $(()=>{
 						removeDeliveryAssignmentBool=true;
 					}
 					$.ajax({
-						url:'PHPcode/assigncode.php',
+						url:'PHPcode/assigncollectioncode.php',
 						type:'POST',
 						data:{choice:3,num:dataArrQty.length,productQtys:dataArrQty,productIDs:dataArrProductIDs,deltruckIDs:dataArrDelTruckIDs,saleIDs:dataArrSaleIDs,productremove:dataArrQtyRemove}
 					})
 					.done(data=>{
 						console.log(data);
 						$.ajax({
-							url:'PHPcode/assigncode.php',
+							url:'PHPcode/assigncollectioncode.php',
 							type:'POST',
-							data:{choice:4,remove:removeDeliveryAssignmentBool,SALE_ID:salesForTruck[k]["SALE_ID"],TRUCK_ID:truckID},
+							data:{choice:4,remove:removeDeliveryAssignmentBool,SALE_ID:salesForTruck[k]["ORDER_ID"],TRUCK_ID:truckID},
 							complete:function(){
 								$('.loadingModal').modal('hide');
 							}
@@ -250,6 +249,8 @@ $(()=>{
 
 			});
 		}
+		
+
 
 	});
 
