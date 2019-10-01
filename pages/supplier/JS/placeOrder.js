@@ -101,6 +101,8 @@ $(()=>{
 
 					$('#modal-title-default2').text("Error!");
 					$('#modalText').text("The product "+theProductName+" has already been added to the order.");
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
 					$("#modalCloseButton").attr("onclick","");
 					$('#successfullyAdded').modal("show");
 				}
