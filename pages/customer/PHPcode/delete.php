@@ -15,8 +15,12 @@
 		if (!$con) {
 		  die("Connection failed: " . mysqli_connect_error());
 		}
-		$customerID = $_POST["ID"];		
-		$update_query="UPDATE CUSTOMER SET STATUS_ID=2 WHERE CUSTOMER_ID='$customerID'";
+		$customerID = $_POST["ID"];
+
+
+
+
+		$update_query="DELETE FROM CUSTOMER WHERE CUSTOMER_ID='$customerID'";
 		if(mysqli_query($con,$update_query)){
 			echo "success";
 		}
