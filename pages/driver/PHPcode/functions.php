@@ -798,4 +798,18 @@
 		}
     }
 
+    function updateTruckProductFinalQty($con,$id,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT SET QUANTITY_RECEIVED='$productqty' WHERE DELIVERY_TRUCK_ID='$id' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
 ?>
