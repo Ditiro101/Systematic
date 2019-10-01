@@ -1,6 +1,6 @@
 <?php
 	// include_once("connection.php");
-	include_once("../../sessionCheckPages.php");
+	
 	// echo $userID;
 	function getSupplierAddressIDs($con,$supID)
 	{
