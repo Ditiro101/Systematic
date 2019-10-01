@@ -228,7 +228,7 @@ function addInfoBubble(map,mapArr) {
     let addName=address["ADDRESS_LINE_1"]+", "+address["NAME"]+", "+address["ZIPCODE"]+", "+address["CITY_NAME"]+", South Africa";
     // console.log(addName);
     addMarkerToGroup(group, {lat:mapArr[k]["LATITUDE"], lng:mapArr[k]["LONGITUDE"]},
-    mapArr[k]["SALE_ID"]+": "+saleData[k]["NAME"]+" "+saleData[k]["SURNAME"]+" Address: "+addName);
+    mapArr[k]["ORDERR_ID"]+": "+saleData[k]["NAME"]+" Address: "+addName);
   }
 
 
@@ -278,7 +278,7 @@ let buildTruckDeliveries=function(dtid,productEntry)
 {
   let listEntry=$("<li></li>");
   listEntry.append("<i class='fa fa-plus mr-1'></i>");
-  let labelEntry=$("<label></label>").text("Delivery #"+dtid);
+  let labelEntry=$("<label></label>").text("Order #"+dtid);
   let ulEntry=$("<ul></ul>");
   ulEntry.append(productEntry);
   listEntry.append(labelEntry);
@@ -396,7 +396,8 @@ let buildNewTruck=function(tmp)
   let assignmentStatus=$("<span></span>");
   tdStatus.append(assignmentStatus);
   trTruck.append(tdStatus);
-  let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckData[tmp]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
+  let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckData[tmp]["TRUCK_ID"]&&element["COLLECTION_STATUS_ID"]==2);
+  console.log(assignments);
   // if(assignments.length!=0)
   // {
   //   assignmentStatus.text(" Packing");
@@ -486,7 +487,7 @@ let buildNewTruck=function(tmp)
   let table=$("<table></table>").addClass("table align-items-center");
   let tHead=$("<thead></thead>").addClass("thead-dark text-white");
   let trHeading=$("<tr></tr>");
-  let thDelID=$("<th></th>").addClass("text-white").text("DeliveryID#");
+  let thDelID=$("<th></th>").addClass("text-white").text("OrderID#");
   let thProductName=$("<th></th>").addClass("text-white").text("Product Name");
   let thQuantity=$("<th></th>").addClass("text-white").text("Quantity");
   trHeading.append(thDelID);
@@ -501,19 +502,19 @@ let buildNewTruck=function(tmp)
   for(let k=0;k<assignments.length;k++)
   {
     let treeProductUl=$("<ul></ul>");
-    let assignmentProducts=truckProductData.filter(element=>element["DELIVERY_TRUCK_ID"]==assignments[k]["DELIVERY_TRUCK_ID"]);
-    //console.log(assignmentProducts);
+    let assignmentProducts=truckProductData.filter(element=>element["COLLECTION_TRUCK_ID"]==assignments[k]["COLLECTION_TRUCK_ID"]);
+    console.log(assignmentProducts);
     progressAmount=progressAmount+calculateProgress(assignmentProducts,truckData[tmp]["CAPACITY"]);
     for(let m=0;m<assignmentProducts.length;m++)
     {
       let truckProductName=assignmentProducts[m]["PRODUCT_NAME"];
-      let entry=buildTruckProducts(assignments[k]["SALE_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
+      let entry=buildTruckProducts(assignments[k]["ORDER_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
       //console.log(entry);
       tbody.append(entry);
       let treeProductE=buildTreeProducts(truckProductName,assignmentProducts[m]["QUANTITY"]);
       treeProductUl.append(treeProductE);
     }
-    deliveryUL.append(buildTruckDeliveries(assignments[k]["SALE_ID"],treeProductUl));
+    deliveryUL.append(buildTruckDeliveries(assignments[k]["ORDER_ID"],treeProductUl));
 
   }
   console.log("P "+progressAmount);
@@ -676,11 +677,15 @@ let suggestTruck=function()
   console.log(aTrucks);
   let found=true;
   let suggestion="";
+  if(aTrucks.length==0)
+  {
+    found=false;
+  }
   for(let k=0;k<aTrucks.length;k++)
   {
-    let suggestAssignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==aTrucks[k]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
-    let suggestCity=deliveryCity.find(element=>element["SALE_ID"]==suggestAssignments[0]["SALE_ID"]);
-    let deliverySelectCity=deliveryCity.find(element=>element["SALE_ID"]==deliverySelectID);
+    let suggestAssignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==aTrucks[k]["TRUCK_ID"]&&element["COLLECTION_STATUS_ID"]==2);
+    let suggestCity=deliveryCity.find(element=>element["ORDER_ID"]==suggestAssignments[0]["ORDER_ID"]);
+    let deliverySelectCity=deliveryCity.find(element=>element["ORDER_ID"]==deliverySelectID);
     let progressFit=truckProgress[aTrucks[k]["TRUCK_ID"]]+selectProgress[aTrucks[k]["TRUCK_ID"]];
     if(suggestCity["CITY_NAME"]==deliverySelectCity["CITY_NAME"]&&progressFit<=100)
     {
@@ -697,6 +702,7 @@ let suggestTruck=function()
       console.log(deliverySelectCity);
     }
   }
+  console.log(found);
   if(!found)
   {
     let minimal=100;
@@ -717,6 +723,7 @@ let suggestTruck=function()
     console.log("miniIndex "+minimalIndex);
     suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the delivery you have chosen and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
   }
+  console.log(suggestion);
   return suggestion;
   //console.log(suggestAssignments);
   
@@ -751,9 +758,9 @@ let suggestTruckAssign=function(proArr)
   let suggestion="";
   for(let k=0;k<aTrucks.length;k++)
   {
-    let suggestAssignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==aTrucks[k]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
-    let suggestCity=deliveryCity.find(element=>element["SALE_ID"]==suggestAssignments[0]["SALE_ID"]);
-    let deliverySelectCity=deliveryCity.find(element=>element["SALE_ID"]==deliverySelectID);
+    let suggestAssignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==aTrucks[k]["TRUCK_ID"]&&element["COLLECTION_STATUS_ID"]==2);
+    let suggestCity=deliveryCity.find(element=>element["ORDER_ID"]==suggestAssignments[0]["ORDER_ID"]);
+    let deliverySelectCity=deliveryCity.find(element=>element["ORDER_ID"]==deliverySelectID);
     let progressFit=truckProgress[aTrucks[k]["TRUCK_ID"]]+proArr[aTrucks[k]["TRUCK_ID"]];
     if(suggestCity["CITY_NAME"]==deliverySelectCity["CITY_NAME"]&&progressFit<=100)
     {
@@ -799,17 +806,17 @@ let buildDeliveries=function(tmp)
 {
   let tableEntry=$("<tr></tr>");
   let tableInnerButton=$("<button></button>").addClass("btn btn-sm btn-primary").text("Select");
-  tableInnerButton.attr("name",deliveryData[tmp]["SALE_ID"]);
+  tableInnerButton.attr("name",deliveryData[tmp]["ORDER_ID"]);
   tableInnerButton.on('click',function(e){
     e.preventDefault();
     let specificLat=deliveryData[tmp]["LATITUDE"];
     let specificLong=deliveryData[tmp]["LONGITUDE"];
     calculateRouteFromAtoB(platform,specificLat,specificLong);
-    let specificSaleProducts=saleProductData.filter(element=>element["SALE_ID"]==deliveryData[tmp]["SALE_ID"]&&element["QUANTITY_ASSIGNED"]>0);
+    let specificSaleProducts=saleProductData.filter(element=>element["ORDER_ID"]==deliveryData[tmp]["ORDER_ID"]&&element["QUANTITY_ASSIGNED"]>0);
     //console.log(specificSaleProducts);
     selectSaleProducts=specificSaleProducts;
     deliverySelectID=$(this).attr("name");
-    $("#assignDelHeading").text("Delivery #"+deliverySelectID+" Item(s)");
+    $("#assignDelHeading").text("Order #"+deliverySelectID+" Item(s)");
     $("#enterProducts").html('');
     selectProgress=[];
     for(let k=0;k<truckData.length;k++)
@@ -834,7 +841,7 @@ let buildDeliveries=function(tmp)
 
   });
   let tableButton=$("<td></td>").append(tableInnerButton);
-  let saleEntry=$("<td></td>").text(deliveryData[tmp]["SALE_ID"]);
+  let saleEntry=$("<td></td>").text(deliveryData[tmp]["ORDER_ID"]);
   let dateEntry=$("<td></td>").text(deliveryData[tmp]["EXPECTED_DATE"]);
   let address=addressData.find(function(element){
     if(element["ADDRESS_ID"]==deliveryData[tmp]["ADDRESS_ID"])
@@ -895,15 +902,15 @@ $(()=>{
     $("#tSelected").html('');
     let selectTruck=truckData.filter(element=>element["TRUCK_ID"]==truckSelectID);
     $("#selectTruckName").text(selectTruck[0]["REGISTRATION_NUMBER"]+" - "+selectTruck[0]["TRUCK_NAME"]+" (SELECTED)");
-    let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckSelectID&&element["DCT_STATUS_ID"]==2);
+    let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckSelectID&&element["COLLECTION_STATUS_ID"]==2);
     for(let k=0;k<assignments.length;k++)
     {
-      let assignmentProducts=truckProductData.filter(element=>element["DELIVERY_TRUCK_ID"]==assignments[k]["DELIVERY_TRUCK_ID"]);
+      let assignmentProducts=truckProductData.filter(element=>element["COLLECTION_TRUCK_ID"]==assignments[k]["COLLECTION_TRUCK_ID"]);
       //console.log(assignmentProducts);
       for(let m=0;m<assignmentProducts.length;m++)
       {
         let truckProductName=assignmentProducts[m]["PRODUCT_NAME"];
-        let entry=buildTruckProducts(assignments[k]["SALE_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
+        let entry=buildTruckProducts(assignments[k]["ORDER_ID"],truckProductName,assignmentProducts[m]["QUANTITY"]);
         $("#tSelected").append(entry);
       }
     }
@@ -953,7 +960,7 @@ $(()=>{
         validationQtys.push(parseInt($(this).attr("max")));
       });
       let delID=deliveryData.find(function(element){
-        if(deliverySelectID==element["SALE_ID"])
+        if(deliverySelectID==element["ORDER_ID"])
         {
           return element;
         }
@@ -1010,7 +1017,7 @@ $(()=>{
         else
         {
           $.ajax({
-          url:'PHPcode/assigncode.php',
+          url:'PHPcode/assigncollectioncode.php',
           type:'POST',
           data:{choice:1,num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys},
           beforeSend:function(){
@@ -1020,9 +1027,9 @@ $(()=>{
           .done(data=>{
             console.log(data);
             $.ajax({
-            url:'PHPcode/assigncode.php',
+            url:'PHPcode/assigncollectioncode.php',
             type:'POST',
-            data:{choice:2,DELIVERY_ID:delID["DELIVERY_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID},
+            data:{choice:2,DELIVERY_ID:delID["COLLECTION_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID},
             complete:function(){
               $('.loadingModal').modal('hide');
             }
