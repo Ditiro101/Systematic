@@ -15,7 +15,6 @@ var truckProductData;
 var deliveryTruckData;
 var truckProgress=[];
 var selectProgress=[];
-var selectSaleProducts;
 ///////////////////////////////////////////////////////////
 function calculateRouteFromAtoB (platform,clickLat,clickLong) {
   let wayString=clickLat+","+clickLong;
@@ -344,33 +343,6 @@ let calculateProgressSale=function(arr,max)
   }
   return p;
 }
-let calculateProgressAssign=function(arr,qtyarr,max)
-{
-  let p=parseFloat(0);
-  for(let k=0;k<arr.length;k++)
-  {
-    if(arr[k]["PRODUCT_SIZE_TYPE"]==1)
-    {
-      let divisor=(arr[k]["CASES_PER_PALLET"]*arr[k]["UNITS_PER_CASE"])*max;
-      let val=(qtyarr[k]/divisor)*100;
-      p=p+val;
-    }
-    else if(arr[k]["PRODUCT_SIZE_TYPE"]==2)
-    {
-      let cpp=parseFloat(arr[k]["CASES_PER_PALLET"])*max;
-      let val=(qtyarr[k]/cpp)*100;
-      p=p+val;
-    }
-    else
-    {
-      let val=(qtyarr[k]/max)*100;
-      console.log(val+" "+k);
-      p=p+val;
-      console.log(p+" "+k);
-    }
-  }
-  return p;
-}
 let buildNewTruck=function(tmp)
 {
   let trTruck=$("<tr></tr>");
@@ -397,16 +369,16 @@ let buildNewTruck=function(tmp)
   tdStatus.append(assignmentStatus);
   trTruck.append(tdStatus);
   let assignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==truckData[tmp]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
-  // if(assignments.length!=0)
-  // {
-  //   assignmentStatus.text(" Packing");
-  //   StatusI.addClass("text-warning");
-  // }
-  // else
-  // {
-  //   assignmentStatus.text(" Empty");
-  //   StatusI.addClass("text-success");
-  // }
+  if(assignments.length!=0)
+  {
+    assignmentStatus.text(" Packing");
+    StatusI.addClass("text-warning");
+  }
+  else
+  {
+    assignmentStatus.text(" Empty");
+    StatusI.addClass("text-success");
+  }
   let tdProgress=$("<td></td>");
   let divProgress=$("<div></div>").addClass("progress");
   let innerDivProgress=$("<div></div>").addClass("progress-bar");
@@ -517,41 +489,21 @@ let buildNewTruck=function(tmp)
 
   }
   console.log("P "+progressAmount);
-  if(parseInt(progressAmount)==100)
+  if(progressAmount>90)
   {
     innerDivProgress.addClass("bg-danger");
-    assignmentStatus.text(" Truck Full");
-    StatusI.addClass("text-danger");
-  }
-  else if(progressAmount>90)
-  {
-    innerDivProgress.addClass("bg-danger");
-    assignmentStatus.text(" Packing: "+progressAmount.toFixed(2)+"% Full");
-    StatusI.addClass("text-danger");
   }
   else if(progressAmount>=50)
   {
     innerDivProgress.addClass("bg-warning");
-    assignmentStatus.text(" Packing: "+progressAmount.toFixed(2)+"% Full");
-    StatusI.addClass("text-warning");
   }
   else if(progressAmount>10)
   {
     innerDivProgress.addClass("bg-success");
-    assignmentStatus.text(" Packing: "+progressAmount.toFixed(2)+"% Full");
-    StatusI.addClass("text-success");
-  }
-  else if(progressAmount>0)
-  {
-    innerDivProgress.addClass("bg-primary");
-    assignmentStatus.text(" Packing: "+progressAmount.toFixed(2)+"% Full");
-    StatusI.addClass("text-primary");
   }
   else
   {
-    innerDivProgress.addClass("bg-primary");
-    assignmentStatus.text(" Empty 0%");
-    StatusI.addClass("text-primary");
+    innerDivProgress.addClass("bg-success");
   }
   innerDivProgress.css("width",progressAmount+"%");
   truckProgress.push(progressAmount);
@@ -722,79 +674,6 @@ let suggestTruck=function()
   
 }
 
-let suggestTruckAssign=function(proArr)
-{
-  console.log(truckProgress);
-  console.log(selectProgress);
-  console.log(deliveryData);
-  console.log(deliveryTruckData);
-  console.log(truckSelectID);
-  console.log(deliverySelectID);
-  let aTrucks=[];
-  for(let k=0;k<truckProgress.length;k++)
-  {
-     let val=truckData.find(element=>element["TRUCK_ID"]==truckProgress.indexOf(truckProgress[k]));
-    if(truckProgress[k]>0)
-    {
-      aTrucks.push(val);
-    }
-  }
-  var uTrucks = truckData.filter(
-      function(e) {
-        return this.indexOf(e) < 0;
-      },
-      aTrucks
-  );
-  console.log(uTrucks);
-  console.log(aTrucks);
-  let found=true;
-  let suggestion="";
-  for(let k=0;k<aTrucks.length;k++)
-  {
-    let suggestAssignments=deliveryTruckData.filter(element=>element["TRUCK_ID"]==aTrucks[k]["TRUCK_ID"]&&element["DCT_STATUS_ID"]==2);
-    let suggestCity=deliveryCity.find(element=>element["SALE_ID"]==suggestAssignments[0]["SALE_ID"]);
-    let deliverySelectCity=deliveryCity.find(element=>element["SALE_ID"]==deliverySelectID);
-    let progressFit=truckProgress[aTrucks[k]["TRUCK_ID"]]+proArr[aTrucks[k]["TRUCK_ID"]];
-    if(suggestCity["CITY_NAME"]==deliverySelectCity["CITY_NAME"]&&progressFit<=100)
-    {
-      console.log("Yes We can");
-      suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+aTrucks[k]["REGISTRATION_NUMBER"]+" - "+aTrucks[k]["TRUCK_NAME"]+"</b> as it will easily fit the selected delivery based on your input quantities and both the deliveries are in the same City which is <b>"+deliverySelectCity["CITY_NAME"]+"</b>";
-      found=true;
-      break;
-    }
-    else
-    {
-      found=false;
-      console.log("A "+progressFit);
-      console.log(suggestCity);
-      console.log(deliverySelectCity);
-    }
-  }
-  if(!found)
-  {
-    let minimal=100;
-    let minimalIndex=0;
-    let finalprogressFit=0;
-    for(let k=0;k<uTrucks.length;k++)
-    {
-      let progressFit=truckProgress[uTrucks[k]["TRUCK_ID"]]+proArr[uTrucks[k]["TRUCK_ID"]];
-      let val=100-progressFit;
-      if(val<minimal&&val>=0)
-      {
-        minimal=val;
-        minimalIndex=k;
-        finalprogressFit=progressFit;
-      }
-    }
-    console.log("Mini "+minimal);
-    console.log("miniIndex "+minimalIndex);
-    suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the delivery you have chosen based on your input quantities and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
-  }
-  return suggestion;
-  //console.log(suggestAssignments);
-  
-}
-
 let buildDeliveries=function(tmp)
 {
   let tableEntry=$("<tr></tr>");
@@ -807,7 +686,6 @@ let buildDeliveries=function(tmp)
     calculateRouteFromAtoB(platform,specificLat,specificLong);
     let specificSaleProducts=saleProductData.filter(element=>element["SALE_ID"]==deliveryData[tmp]["SALE_ID"]&&element["QUANTITY_ASSIGNED"]>0);
     //console.log(specificSaleProducts);
-    selectSaleProducts=specificSaleProducts;
     deliverySelectID=$(this).attr("name");
     $("#assignDelHeading").text("Delivery #"+deliverySelectID+" Item(s)");
     $("#enterProducts").html('');
@@ -928,8 +806,7 @@ $(()=>{
   });
   $("#btnAssign").on('click',function(e)
   {
-    let doCall=false;
-    console.log(truckSelectID);
+    let doCall=true;
     if(truckSelectID==-1)
     {
       $('#MHeader').text("Error!");
@@ -940,120 +817,82 @@ $(()=>{
       $("#displayModal").modal("show");
       doCall=false;
     }
-    else
+    let assignProductIDs=[];
+    let assignProductQtys=[];
+    let validationQtys=[];
+    $("#enterProducts input").each(function()
     {
-      let assignProductIDs=[];
-      let assignProductQtys=[];
-      let validationQtys=[];
-      let quantityCheck=true;
-      $("#enterProducts input").each(function()
+      assignProductIDs.push($(this).attr("name"));
+      assignProductQtys.push(parseInt($(this).val()));
+      validationQtys.push(parseInt($(this).attr("max")));
+    });
+    let delID=deliveryData.find(function(element){
+      if(deliverySelectID==element["SALE_ID"])
       {
-        assignProductIDs.push($(this).attr("name"));
-        assignProductQtys.push(parseInt($(this).val()));
-        validationQtys.push(parseInt($(this).attr("max")));
-      });
-      let delID=deliveryData.find(function(element){
-        if(deliverySelectID==element["SALE_ID"])
-        {
-          return element;
-        }
-      });
-      console.log(assignProductQtys);
-      console.log(validationQtys);
-      for(let k=0;k<assignProductQtys.length;k++)
-      {
-        if(Number.isNaN(assignProductQtys[k]))
-        {
-          $('#MHeader').text("Error!");
-          $("#MMessage").text("One or more Input Quantities are either blank or too large. Please refer to highlighted inputs");
-          $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-          $("#modalHeader").css("background-color", "red");
-          $("#btnClose").attr("data-dismiss","modal");
-          $("#displayModal").modal("show");
-          quantityCheck=false;
-          break;
-        }
-        else if(assignProductQtys[k]>validationQtys[k])
-        {
-          $('#MHeader').text("Error!");
-          $("#MMessage").text("One or more Input Quantities are either blank or too large. Please refer to highlighted inputs");
-          $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-          $("#modalHeader").css("background-color", "red");
-          $("#btnClose").attr("data-dismiss","modal");
-          $("#displayModal").modal("show");
-          quantityCheck=false;
-          break;
-        }
+        return element;
       }
-      if(quantityCheck)
+    });
+    console.log(assignProductQtys);
+    for(let k=0;k<assignProductQtys.length;k++)
+    {
+      if(Number.isNaN(assignProductQtys[k])||assignProductQtys[k]>validationQtys[k])
       {
-        let assignProgress=[];
-        for(let k=0;k<truckData.length;k++)
-        {
-          assignProgress.push(calculateProgressAssign(selectSaleProducts,assignProductQtys,truckData[k]["CAPACITY"]));
+        $('#MHeader').text("Error!");
+        $("#MMessage").text("One or more Input Quantities are either blank or too large. Please refer to highlighted inputs");
+        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+        $("#modalHeader").css("background-color", "red");
+        $("#btnClose").attr("data-dismiss","modal");
+        $("#displayModal").modal("show");
+        doCall=false;
+        break;
+      }
+    }
+    if(doCall)
+    {
+      $.ajax({
+      url:'PHPcode/assigncode.php',
+      type:'POST',
+      data:{choice:1,num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys},
+      beforeSend:function(){
+        $('.loadingModal').modal('show');
+      }
+      })
+      .done(data=>{
+        console.log(data);
+        $.ajax({
+        url:'PHPcode/assigncode.php',
+        type:'POST',
+        data:{choice:2,DELIVERY_ID:delID["DELIVERY_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID},
+        complete:function(){
+          $('.loadingModal').modal('hide');
         }
-        let finalAssignProgress=truckProgress[truckSelectID]+assignProgress[truckSelectID];
-        console.log(assignProgress);
-        console.log(finalAssignProgress);
-        if(finalAssignProgress>100)
-        {
-          $('#MHeader').text("Error!");
-          $("#MMessage").text("The Selected Truck you have chosen cannot fit the delivery based on your input quantities. Refer to the suggestion for a better truck choice based on selected delivery and quantities");
-          $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-          $("#modalHeader").css("background-color", "red");
-          $("#btnClose").attr("data-dismiss","modal");
-          $("#displayModal").modal("show");
-          let suggestion=suggestTruckAssign(assignProgress);
-          $("#suggestion").html(suggestion);
-          doCall=false;
-        }
-        else
-        {
-          $.ajax({
-          url:'PHPcode/assigncode.php',
-          type:'POST',
-          data:{choice:1,num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys},
-          beforeSend:function(){
-            $('.loadingModal').modal('show');
+        })
+        .done(data=>{
+          let doneData=data.split(",");
+          console.log(doneData);
+          if(doneData[0]=="T")
+          {
+            $('#MHeader').text("Success!");
+            $("#MMessage").text(doneData[1]);
+            $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+            $("#modalHeader").css("background-color", "#1ab394");
+            $("#btnClose").attr("onclick",location.reload());
+            $("#displayModal").modal("show");
           }
-          })
-          .done(data=>{
-            console.log(data);
-            $.ajax({
-            url:'PHPcode/assigncode.php',
-            type:'POST',
-            data:{choice:2,DELIVERY_ID:delID["DELIVERY_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID},
-            complete:function(){
-              $('.loadingModal').modal('hide');
-            }
-            })
-            .done(data=>{
-              let doneData=data.split(",");
-              console.log(doneData);
-              if(doneData[0]=="T")
-              {
-                $('#MHeader').text("Success!");
-                $("#MMessage").text(doneData[1]);
-                $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
-                $("#modalHeader").css("background-color", "#1ab394");
-                $("#btnClose").attr("onclick",location.reload());
-                $("#displayModal").modal("show");
-              }
-              else
-              {
-                $('#MHeader').text("Error!");
-                $("#MMessage").text(doneData[1]);
-                $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-                $("#modalHeader").css("background-color", "red");
-                $("#btnClose").attr("data-dismiss","modal");
-                $("#displayModal").modal("show");
-              }
+          else
+          {
+            $('#MHeader').text("Error!");
+            $("#MMessage").text(doneData[1]);
+            $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+            $("#modalHeader").css("background-color", "red");
+            $("#btnClose").attr("data-dismiss","modal");
+            $("#displayModal").modal("show");
+          }
 
-            });
-            
-          });
-        }
-      }
+        });
+        
+      });
+
     }
   });
 
