@@ -5,9 +5,9 @@
     $truckData=getAllTrucks($con);
     $deliveryData=getUnassignedDeliveries($con,1);
     $addressData=getCompleteAddress($con);
-    $deliveryCity=getDeliveryCities($con);
     $saleData=getSalesCustomer($con);
     $saleProductData=getAllSaleProducts($con);
+    $productData=getProductDetails($con);
     $truckProductData=getTruckProductData($con);
     $deliveryTruckData=getDeliveryTruckData($con);
 ?>
@@ -237,38 +237,7 @@
               </div>
               </div>
             </div>
-          </div> -->
-        <!-- <div class="col-12 mb-3" >
-          <div class="card">
-            <div class="card-header  border-0 bg-default">
-              <h3 class="mb-0 text-white">
-                <i class="fas fa-truck-moving mr-2"></i>
-                Trucks Available
-              </h3>
-            </div>
-            <div class="card-body " >
-              <div class="table-responsive">
-                <table id="myTable" class="table align-items-center table-flush">
-                  <thead class="thead-light">
-                  <tr class="header bg-primary">
-                    <th style="width:1rem;"></th>
-                    <th> Regstration #</th>
-                    <th> Name</th>
-                    <th> Capacity</th>
-                    <th> Status</th>
-                    <th></th>
-                    <th style="width:1rem;"></th>
-                  </tr>
-                </thead>
-                <tbody id="tBody">
-                  
-                 
-                  </tbody>
-                </table>
-              </div>
-            </div>
           </div>
-        </div> -->
       </div>
         <div class="row">
           <div class="col-12">
@@ -287,10 +256,12 @@
               <div class="row align-items-center">
                 <div class="col ">
                   <label hidden="true" id="dData"><?php echo json_encode($deliveryData);?></label>
-                  <label hidden="true" id="dcData"><?php echo json_encode($deliveryCity);?></label>
                   <label hidden="true" id="aData"><?php echo json_encode($addressData);?></label>
+                  <!-- <label hidden="true" id="subData"><?php echo json_encode($suburbData);?></label>
+                  <label hidden="true" id="citData"><?php echo json_encode($cityData);?></label> -->
                    <label hidden="true" id="sData"><?php echo json_encode($saleData);?></label>
                     <label hidden="true" id="spData"><?php echo json_encode($saleProductData);?></label>
+                    <label hidden="true" id="pData"><?php echo json_encode($productData);?></label>
                     <label hidden="true" id="tpData"><?php echo json_encode($truckProductData);?></label>
                     <label hidden="true" id="dtData"><?php echo json_encode($deliveryTruckData);?></label>
                   <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i>Deliveries Pending</h3>
@@ -321,34 +292,10 @@
             <div class="card-header  border-0 bg-default">
               <div class="row align-items-center">
                 <div class="col">
-                  <h3 class="mb-0 text-white">
-                    <i class="fas fa-truck-moving mr-2"></i>
-                    <span id="selectTruckName">No Truck Selected</span>
-                  </h3>
+                  <h3 class="mb-0 s">Delivery Item(s)</h3>
                 </div>
-              </div>
-            </div>
-            <div class="table-responsive">
-              <div>
-                <table class="table align-items-center">
-                  <thead class="thead-light">
-                    <tr>
-                      <th scope="col">Del #</th>
-                      <th scope="col">Product Name</th>
-                      <th scope="col">Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody class="list" id="tSelected">
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
-          <div class="card shadow mt-4">
-            <div class="card-header  border-0 bg-primary">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0 text-white"><i class="fas fa-truck-loading mr-2"></i><span id="assignDelHeading">Item(s)</span></h3>
+                <div class="col text-right">
+                  <a href="#!" class="btn btn-lg btn-success" id="btnAssign">Assign</a>
                 </div>
                 
               </div>
@@ -377,24 +324,10 @@
               </table>
             </div>
           </div>
-          <div class="card-shadow mt-4">
-            <div class="card-header border-0 bg-warning">
-              <div class="row align-items-center">
-                <div class="col">
-                  <h3 class="mb-0 text-white"><i class="fas fa-lightbulb mr-2"></i><span>Suggestion</span></h3>
-                </div>
-              </div> 
-            </div>
-            <div class="card-body bg-light">
-              <p id="suggestion"></p>
-            </div> 
-          </div>
           <button type="button" class="btn btn-info mt-4" data-toggle="modal" data-target="#exampleModal">
             <i class="fas fa-directions mr-2"></i>
           Show Directions
         </button>
-
-
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -415,69 +348,11 @@
             </div>
           </div>
         </div>
-        <div class="form-group col-md-2 errorModal successModal text-center">
-            <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-              <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                <div class="modal-content">
-                  <div class="modal-header" id="modalHeader">
-                      <h6 class="modal-title" id="MHeader">Success</h6>
-                  </div>
-                  <div class="modal-body">
-                    <p id="MMessage">Successfully Added</p>
-                    
-                    <div id="animation" style="text-align:center;">
-
-                    </div>
-                  </div>
-                  <div class="modal-footer">
-                      <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="card mt-3">
-        <div class="card-header  border-0 bg-default">
-          <h3 class="mb-0 text-white">
-            <i class="fas fa-truck-moving mr-2"></i>
-            Trucks Available
-          </h3>
-        </div>
-        <div class="card-body " >
-          <div class="table-responsive">
-            <table id="myTable" class="table align-items-center table-flush">
-              <thead class="thead-light">
-              <tr class="header bg-primary">
-                <th style="width:1rem;"></th>
-                <th> Regstration #</th>
-                <th> Name</th>
-                <th> Capacity</th>
-                <th> Status</th>
-                <th></th>
-                <th style="width:1rem;"></th>
-              </tr>
-            </thead>
-            <tbody id="tBody">
-              
-             
-              </tbody>
-            </table>
-          </div>
         </div>
       </div>
       <?php include_once("../footer.php");?>
     </div>
  </div>
- <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content px-auto" style="">
-              <img class="loading" src="../../assets/img/loading/loading.gif">
-          </div>
-      </div>
-  </div>
  <label hidden="true" id="tData"><?php echo json_encode($truckData);?>
   <!-- Argon Scripts -->
   <!-- Core -->

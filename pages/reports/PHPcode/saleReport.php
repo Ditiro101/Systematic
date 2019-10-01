@@ -47,8 +47,16 @@
         }
         else if($salePeriod=="Weekly")
         {
+
+            $today = mktime(
+                date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y")
+                );
+                $TodaysDate = date("Y-m-d H:i:s",$today);
+                $newDate = new DateTime($TodaysDate);
+                $newDate =  $newDate->format("Y-m-d");
+
             $endDate=mktime(
-                date("H"), date("i"), date("s"), date("m") ,date("d")-8, date("Y")
+                date("H"), date("i"), date("s"), date("m") ,date("d")-7, date("Y")
                 );
                 $previousDate = date("Y-m-d H:i:s",$endDate);
                 $usedDate = new DateTime($previousDate);
@@ -56,7 +64,7 @@
 
                 $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
                                FROM SALE
-                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$currentDate'";
+                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$newDate'";
 
                 //var_dump($alles_query);
         
