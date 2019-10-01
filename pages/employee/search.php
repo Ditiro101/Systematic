@@ -115,13 +115,13 @@
                                           type: 'POST',
                                           url: 'PHPcode/searchScanner-SQL.php',
                                           data: {qrCode : content},
-                                          beforeSend:()=>
-                                                      {
-                                                          
-                                                      }
+                                          beforeSend: function(){
+                                            $('.loadingModal').modal('show');
+                                            }
                                           })
                                           .done(data => {
                                           // do something with data
+                                          $('.loadingModal').modal('hide');
                                                   console.log(data);
                                                   let confirmation = data.trim();
                                                 
@@ -158,6 +158,8 @@
                                                   {
                                                     $('#modal-title-default').text("Error!");
                                                     $('#modalText').text("Employee not found , please try again or search employee");
+                                                    $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						                                        $("#modalHeader").css("background-color", "red");
                                                     $('#scannerSearch').modal("show");
                                                   }
                                               })
@@ -256,7 +258,7 @@
               <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
                     
-                      <div class="modal-header">
+                      <div class="modal-header" id="modalHeader">
                           <h6 class="modal-title" id="modal-title-default">Success!</h6>
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                               <span aria-hidden="true">×</span>
@@ -265,6 +267,9 @@
                       
                       <div class="modal-body">
                           <p id="modalText">Employee successfully dismissed</p>
+                              <div id="animation" style="text-align:center;">
+
+                              </div>
                           
                       </div>
                       
@@ -327,6 +332,16 @@
 
       <?php include_once("../footer.php");?>
     </div>
+  </div>
+
+
+
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

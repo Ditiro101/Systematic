@@ -110,13 +110,13 @@
                   type: 'POST',
                   url: 'PHPcode/checkOut-SQL.php',
                   data: {qrCode : content},
-                  beforeSend:()=>
-                              {
-                                  
-                              }
+                  beforeSend: function(){
+                    $('.loadingModal').modal('show');
+                }
                   })
                   .done(data => {
                   // do something with data
+                  $('.loadingModal').modal('hide');
                           console.log(data);
                           if(data == "success")
                           {
@@ -125,6 +125,8 @@
                               $('#modal-title-default').text("Success!");
                               $('#modalText').text("Employee Successfully checked out");
                               $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                              $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						                  $("#modalHeader").css("background-color", "#1ab394");
                               $('#checkedOut').modal("show");
                               // alert('The scanned content is: ' + content);
                              // window.open(content, "_blank");
@@ -134,12 +136,16 @@
                           {
                             $('#modal-title-default').text("Error!");
                             $('#modalText').text("Check in first");
+                            $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                            $("#modalHeader").css("background-color", "red");
                             $('#checkedOut').modal("show");
                           }
                           else
                           {
                             $('#modal-title-default').text("Error!");
                             $('#modalText').text("Employee not found , please try again");
+                            $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                            $("#modalHeader").css("background-color", "red");
                             $('#checkedOut').modal("show");
                           }
                       })
@@ -174,14 +180,18 @@
                     </div>
                   </button>
 
-                        <div class="modal fade" id="checkedOut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade errorModal successModal text-center" id="checkedOut" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                              <div class="modal-header">
+                              <div class="modal-header" id="modalHeader">
                                 <h5 class="modal-title" id="modal-title-default"></h5>
                               </div>
                               <div class="modal-body">
                                 <p id="modalText"></p>
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>
+
                               </div>
                               <div class="modal-footer">
                                 
@@ -216,6 +226,15 @@
         </div>
       </div>
     </div>
+  </div>
+
+
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
   </div>
   <!-- Argon Scripts -->
   <!-- Core -->

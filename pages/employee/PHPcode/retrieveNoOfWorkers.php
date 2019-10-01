@@ -25,7 +25,9 @@ else
    if($testerVariable)
    {
 
-                $query = "SELECT count(*) as total_employees  FROM EMPLOYEE_TYPE WHERE (`WAGE_EARNING` = '1' )";
+                $query = "SELECT count(EMPLOYEE.EMPLOYEE_ID) as total_employees  FROM EMPLOYEE_TYPE
+                INNER JOIN EMPLOYEE ON EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID = EMPLOYEE.EMPLOYEE_TYPE_ID
+               WHERE EMPLOYEE_TYPE.WAGE_EARNING='1'";
                 $execute = mysqli_query($DBConnect , $query);
                 if($execute)
                 {

@@ -191,8 +191,12 @@ $(document).ready(function()
                     processData: false,
                     contentType: false,
                     cache: false,
+                    beforeSend: function(){
+                        $('.loadingModal').modal('show');
+                    }
                 })
                 .done(data=>{
+                    $('.loadingModal').modal('hide');
                     console.log(data);
                     let confirmation = data.trim();
                     if(confirmation.includes("success") && !confirmation.includes("Employee does not earn wage"))
@@ -203,6 +207,8 @@ $(document).ready(function()
                         console.log(id[0]);
                         $("#modal-title-default").text("Success!");
                         $("#MMessage").text("Employee added successfully");
+                        $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader").css("background-color", "#1ab394");
                         //$("#btnClose").attr("onclick","window.location='../../employee.php'");
                         $("#displayModal").modal("show");
 
@@ -221,6 +227,8 @@ $(document).ready(function()
                         console.log(id[0]);
                         $("#modal-title-default").text("Success!");
                         $("#MMessage").text("Employee added successfully but employee does not earn wage ,thus employee tag not generated.");
+                        $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader").css("background-color", "#1ab394");
                         //$("#btnClose").attr("onclick","window.location='../../employee.php'");
                         $("#displayModal").modal("show");
 
@@ -236,6 +244,8 @@ $(document).ready(function()
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Employee Exists! , press close and try again");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                        
                         $("#displayModal").modal("show");
                     }
@@ -243,12 +253,16 @@ $(document).ready(function()
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("City found suburb added but address not added.");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
                     }
                     else if(confirmation == "error in saving employee pic or generated employee tag")
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("error in saving employee pic or generated employee tag , generate employee tag or upload picture in mainatain");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
 
                         
@@ -257,18 +271,24 @@ $(document).ready(function()
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Couldnt get ID of employee details , generate employee tag or upload picture in mainatain");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
                     }
                     else if(confirmation.includes("There was an error within the picture upload"))
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Incorrect picture size or format , upload picture in maintain");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
                     }
                     else if(confirmation.includes("Employee QR code could not be generated"))
                     {
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text("Employee QR code could not be generated, go to regenerate employee tag , to make one!");
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
                     }
                     else
@@ -276,6 +296,8 @@ $(document).ready(function()
                         
                         $("#modal-title-default").text("Error!");
                         $("#MMessage").text(confirmation);
+                        $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "red");
                         $("#displayModal").modal("show");
 
                         

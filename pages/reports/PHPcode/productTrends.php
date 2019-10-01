@@ -34,6 +34,29 @@
         $endDate = new DateTime($dateTo);
         $endDate = $endDate->format("Y-m-d");
 
+        $sql="SELECT  *
+        FROM SALE
+        ORDER BY SALE_DATE DESC 
+        LIMIT 1 ";
+        $query = mysqli_query($con, $sql);
+
+        $dateModified;
+
+        if (mysqli_num_rows($query)>0) 
+        {
+            while ($row= $query->fetch_assoc())
+	        {
+                if($row["SALE_DATE"] < $endDate)
+                {
+                    $endDate = $row["SALE_DATE"] ;
+                }
+                else
+                {
+
+                }
+	        }
+        }
+
 		$alles_query ="SELECT SALE.SALE_DATE ,SALE_PRODUCT.PRODUCT_ID , SALE_PRODUCT.SELLING_PRICE, SUM(SALE_PRODUCT.QUANTITY) as TOTAL_PRODUCT_QUANTITY ,PRODUCT.PRODUCT_MEASUREMENT,PRODUCT.PRODUCT_MEASUREMENT_UNIT, PRODUCT.NAME ,PRODUCT.CASES_PER_PALLET,PRODUCT.UNITS_PER_CASE , PRODUCT.PRODUCT_SIZE_TYPE ,PRODUCT_TYPE.TYPE_NAME,PRODUCT_TYPE.PRODUCT_TYPE_ID
                     FROM SALE_PRODUCT 
                     INNER JOIN SALE ON SALE_PRODUCT.SALE_ID = SALE.SALE_ID
@@ -44,24 +67,7 @@
                     ORDER BY COUNT(PRODUCT.PRODUCT_ID) DESC";
             
         $submit = mysqli_query($con,$alles_query);
-        //var_dump($alles_query);
-        
-       /* $filterID = [];
-
-        while($max = mysqli_fetch_assoc($submit))
-        {
-            $prodID = $max['PRODUCT_ID'];
-            $findIDs = "SELECT COUNT($prodID) as maxProducTID
-                        FROM SALE_PRODUCT
-                        WHERE PRODUCT_ID = '$prodID'";
-            $IDresult = mysqli_query($con,$findIDs);
-            $idRow = mysqli_fetch_assoc($IDresult);
-
-
-            array_push($filterID,$idRow["maxProducTID"]);
-        }
-        $maxProductID = max()
-	    //$row = mysqli_fetch_array($result);*/
+     
 
         if (mysqli_num_rows($submit)>0) 
         {

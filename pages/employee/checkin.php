@@ -84,16 +84,21 @@
                 
               </div>
               <div class="row icon-examples d-flex justify-content-center">
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-4 col-md-6 errorModal successModal text-center">
 
                         <div class="modal fade" id="checkedIn" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-centered" role="document">
                             <div class="modal-content">
-                              <div class="modal-header">
+                              <div class="modal-header" id="modalHeader">
                                 <h5 class="modal-title" id="modal-title-default"></h5>
                               </div>
+                              
                               <div class="modal-body">
                                 <p id="modalText"></p>
+
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>
                               </div>
                               <div class="modal-footer">
                                 
@@ -126,6 +131,15 @@
 
       <?php include_once("../footer.php");?>
     </div>
+  </div>
+
+
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
   </div>
   <!-- <embed src="../../assets/sounds/checkin-sound.mp3" autostart="false" width="0" height="0" id="successfulCheckinSound"
     enablejavascript="true"> -->

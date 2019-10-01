@@ -20,6 +20,7 @@ $(document).ready(function(){
                     {
                         let numberOfEmployees = confirmation.split(":");
                         let percent = (numberOfEmployees[1]/numberOfEmployees[2]) * 100;
+                        percent = percent.toFixed(2);
                         $("#NoOfEmployees").text(numberOfEmployees[1]);
                         $("#percentageOfEmployees").text(percent+"%");
                     }

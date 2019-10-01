@@ -40,7 +40,7 @@
 
             $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
             FROM SALE
-            WHERE SALE_DATE  LIKE '%.$currentDate.%'";
+            WHERE SALE_DATE  LIKE '%$currentDate%'";
     
             $submit = mysqli_query($con,$alles_query);
             //var_dump($alles_query);

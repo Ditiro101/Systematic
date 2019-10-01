@@ -7,6 +7,7 @@ $(()=>{
 	.done(data=>{
 		if(data!="False")
 		{
+
 			let arr=JSON.parse(data);
 			console.log(arr);
 			let tableEntries="";
