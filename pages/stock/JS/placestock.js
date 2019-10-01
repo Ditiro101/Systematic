@@ -227,7 +227,7 @@ $(()=>{
 			console.log($(this).val());
 			$(this).attr("style","border-color: #cad1d7; height: 2rem;")
 		}
-	})
+	});
 	////////////////////////////
 	$("#tBody").on('click','.classRemove',function(e){
 		e.preventDefault();
