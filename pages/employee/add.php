@@ -123,7 +123,7 @@
                             <div class="form-group col-lg-12 col-md-12 col-sm-12">
                                 <label for="UploadsPic">Upload Employee Picture</label>
                                 <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
-                                <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control" required/><br/>
+                                <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control"/><br/>
                                 
                              
                           </div>

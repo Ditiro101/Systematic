@@ -24,7 +24,6 @@
   $cityID;
   $titleID;
   $employeeStatus;
-  $wage_earner = false;
   if(isset($_GET["employeeID"]))
   {
     //include_once("PHPcode/connection.php");
@@ -71,9 +70,6 @@
                     $identityNo = $rowsQuery["IDENTITY_NUMBER"];
                     $addressID = $rowsQuery["ADDRESS_ID"];
                     $employeeTypeID = $rowsQuery["EMPLOYEE_TYPE_ID"];
-
-
-
                     $titleID = $rowsQuery["TITLE_ID"];
                     $employeeStatus = $rowsQuery["EMPLOYEE_STATUS_ID"];
                   }
@@ -90,48 +86,14 @@
                 {
                     echo "not found";
                 }
-
-
-
-                $Wagesql = "SELECT EMPLOYEE_TYPE.WAGE_EARNING FROM EMPLOYEE
-                INNER JOIN EMPLOYEE_TYPE
-                ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
-                 WHERE (EMPLOYEE_ID='$employeeID')";
-                $Wagequery_QR = mysqli_query($DBConnect , $Wagesql);
+                   
             
-            
-            
-            
-            
-            if(mysqli_num_rows($Wagequery_QR)>0)
-                {
-                    if($Wagerow = mysqli_fetch_assoc($Wagequery_QR))
-                    {
-                        if($Wagerow["WAGE_EARNING"] == 1)
-                        {
-                          $wage_earner = true;
-                        }
-                        else
-                        {
-                          $wage_earner = false;
-                        }
-                    }
-                }
                 mysqli_close($DBConnect);
-            
-               
     }
-
-
-
-
-   
     //getting the address stuff
 
     include_once("PHPcode/connection.php");
     include_once("PHPcode/functions.php");
-
-
 
     $addressInfo=getAddressInfo($con,$addressID);
     $suburbInfo=getSuburbInfo($con,$addressInfo["SUBURB_ID"]);
@@ -158,42 +120,10 @@
     $cityInfo=getCityInfo($con,$suburbInfo["CITY_ID"]);
     $employeeType=getEmployeeType($con,$_POST["EMPLOYEE_TYPE_ID"]);
     $titleInfo=getTitleInfo($con,$_POST["TITLE_ID"]);
-    
-
-
-    $employeeID = $_POST["EMPLOYEE_ID"];  
-
-    $Wagesql = "SELECT EMPLOYEE_TYPE.WAGE_EARNING FROM EMPLOYEE
-    INNER JOIN EMPLOYEE_TYPE
-    ON EMPLOYEE.EMPLOYEE_TYPE_ID = EMPLOYEE_TYPE.EMPLOYEE_TYPE_ID
-     WHERE (EMPLOYEE_ID='$employeeID')";
-    $Wagequery_QR = mysqli_query($con, $Wagesql);
-
-
-
-
-
-if(mysqli_num_rows($Wagequery_QR)>0)
-    {
-        if($Wagerow = mysqli_fetch_assoc($Wagequery_QR))
-        {
-            if($Wagerow["WAGE_EARNING"] == 1)
-            {
-              $wage_earner = true;
-            }
-            else
-            {
-              $wage_earner = false;
-            }
-        }
-    }
-
-
     mysqli_close($con);
 
 
-
-    //Initialise variables
+    $employeeID = $_POST["EMPLOYEE_ID"];  
     $name = $_POST["NAME"]; 
     $surname = $_POST["SURNAME"]; 
     $contactNumber = $_POST["CONTACT_NUMBER"]; 
@@ -206,8 +136,6 @@ if(mysqli_num_rows($Wagequery_QR)>0)
     $addressInfoLine1 = $addressInfo["ADDRESS_LINE_1"];
     $suburbName = $suburbInfo["NAME"];
     $cityName = $cityInfo["CITY_NAME"];
-
-    
 
   }
 ?>
@@ -300,11 +228,10 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                 <h2>
                   <?php echo $titleName." ".$name." ".$surname; ?>
                 </h2>
-                  <div class="row mb-2" id="ShowDiv">
+                  <div class="row mb-2">
                     <div class="col d-inline mx-0 px-0">
                       <form action='' method="POST" id="addUserView">
                         <input type="hidden" name="ID" value=<?php echo $employeeID;?>>
-                        <input type="hidden" name="wageEarner" id="wager" value=<?php echo $wage_earner;?>>
                         <input type="hidden" name="EMAIL" value=<?php echo $email;?>>
 
                         <button class="btn btn-icon btn-2 btn-default btn-sm px-2" type="button" id="wageCalc" style="width: 10rem">
