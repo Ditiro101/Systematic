@@ -57,7 +57,7 @@
 
 
             $endDate=mktime(
-                date("H"), date("i"), date("s"), date("m") ,date("d")-7, date("Y")
+                date("H"), date("i"), date("s"), date("m") ,date("d")-8, date("Y")
                 );
                 $previousDate = date("Y-m-d H:i:s",$endDate);
                 $usedDate = new DateTime($previousDate);

@@ -53,6 +53,10 @@ $(()=>{
                         futureDay = arr[k+1]["ORDER_DATE"].split(" ");
                         console.log(futureDay[0]);
                     }
+                    else
+                    {
+                        futureDay = arr[k]["ORDER_DATE"].split(" ");
+                    }
                     
                     var formattedTime = moment(daysOfTheWeek[0]).format('dddd');
                     ++totalOrders;
@@ -134,12 +138,23 @@ $(()=>{
                         orderTotalArray.push(totalOrders);
                         formattedTime = moment(daysOfTheWeek[0]).format('dddd');
                         orderGraphDays.push(formattedTime);
+                        
 
                     }
                     else
                     {
                         
                         previousDay = daysOfTheWeek[0];
+                        if(k == arrLength-1 && previousDay==daysOfTheWeek[0])
+                        {
+                            tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='totalOrders'>"+totalOrders +"</td><td class='unit-right' id='SaleTotal'>"+statictotalOrders.toFixed(2)+"</td></tr>";
+                            previousDay = daysOfTheWeek[0];
+                            orderTotalArray.push(totalOrders);
+                            formattedTime = moment(daysOfTheWeek[0]).format('dddd');
+                            orderGraphDays.push(formattedTime);                            
+                        }
+
+                        console.log("Catch");
                     }
 
                     
