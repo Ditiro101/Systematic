@@ -62,7 +62,7 @@
                     <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Collection Details</h5>
-                      <span class="h2 font-weight-bold mb-0">Supplier Order# 321</span>
+                      <span id="invNo" class="h2 font-weight-bold mb-0"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -71,7 +71,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i> 4 Hajje Street</span>
+                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i><span id="delA"></span></span>
                     <span class="text-nowrap">Collection in progress</span>
                   </p>
                 </div>
@@ -81,7 +81,7 @@
           <div class="row">
                 <div class="col">
                   <div class="card shadow border-0 gmap_canvas">
-                    <?php $address = 'University Of Pretoria, Pretoria' ; /* Insert address Here */
+                    <?php $address = $_POST["address"] ; /* Insert address Here */
 
                       echo '<iframe width="150%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
                     ?>

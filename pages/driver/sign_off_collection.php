@@ -64,7 +64,7 @@
                   <div class="row">
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Supplier Detials</h5>
-                      <span class="h2 font-weight-bold mb-0">Supplier Order# 321</span>
+                      <span id="invNo" class="h2 font-weight-bold mb-0"></span>
                     </div>
                     <div class="col-auto">
                       <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -73,7 +73,7 @@
                     </div>
                   </div>
                   <p class="mt-3 mb-0 text-muted text-sm">
-                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i> 4 Hajje Street</span>
+                    <span class="text-success mr-2"><i class="fas fa-map-marker-alt"></i><span id="delA"></span></span>
                     <span class="text-nowrap">Finalisation in progress</span>
                   </p>
                 </div>
@@ -104,7 +104,7 @@
               </div>
           </div>
           <br>
-            <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" data-target="#finalise-success">
+            <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" id="btnSubmit">
                   <i class="fas fa-truck"></i>
                       <span>Submit</span>
             </button>

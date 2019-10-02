@@ -45,7 +45,7 @@ $(()=>{
 			$(this).attr("style","border-color: #cad1d7; height: 2rem;")
 		}
 	});
-	$("#invNo").text("Invoice #"+assignments[0]["SALE_ID"]);
+	$("#invNo").text("Order #"+assignments[0]["ORDER_ID"]);
 	$("#delA").text(" "+assignments[0]["ADDRESS_NAME"]);
 	for(let k=0;k<assignmentProducts.length;k++)
 	{
@@ -109,52 +109,43 @@ $(()=>{
 		}
 		if(doCall)
 		{
-			$("#finalise").modal("show");
+			console.log(assignProductIDs);
+			console.log(assignProductQtys);
+			let delTruckID=assignmentProducts[0]["COLLECTION_TRUCK_ID"];
+			let sendAssignment=JSON.stringify(assignments);
+			let sendAssignmentP=JSON.stringify(assignmentProducts);
+			$.ajax({
+				url:'PHPcode/makecollectioncode.php',
+				type:'POST',
+				data:{num:assignProductIDs.length,assignment:sendAssignment,productIDs:assignProductIDs,productQty:assignProductQtys,COLLECTION_TRUCK_ID:delTruckID},
+				beforeSend:function(){
+					$('.loadingModal').modal('show');
+				}
+			})
+			.done(data=>{
+				let doneData=data.split(",");
+				console.log(doneData);
+				$('.loadingModal').modal('hide');
+				if(doneData[0]=="T")
+				{
+					$('#MHeader').text("Success!");
+					$("#MMessage").text(doneData[1]);
+					$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+					$("#modalHeader").css("background-color", "#1ab394");
+					$("#btnClose").attr("onclick","window.location='select_truck_collection.php'");
+					$("#displayModal").modal("show");
+				}
+				else
+				{
+					$('#MHeader').text("Error!");
+					$("#MMessage").text(doneData[1]);
+					$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+					$("#modalHeader").css("background-color", "red");
+					$("#btnClose").attr("data-dismiss","modal");
+					$("#displayModal").modal("show");
+				}
+			});
 		}
 
-	});
-	$("#btnSave").on('click',function(e){
-		e.preventDefault();
-		let image=new Image();
-		let canvas=document.getElementById("canvas");
-		image.src=canvas.toDataURL("image/png");
-		let d=canvas.toDataURL("image/png");
-		console.log(assignProductIDs);
-		console.log(assignProductQtys);
-		let delTruckID=assignmentProducts[0]["COLLECTION_TRUCK_ID"];
-		let sendAssignment=JSON.stringify(assignments);
-		let sendAssignmentP=JSON.stringify(assignmentProducts);
-		$.ajax({
-			url:'PHPcode/makedeliverycode.php',
-			type:'POST',
-			data:{image:d,num:assignProductIDs.length,assignment:sendAssignment,productIDs:assignProductIDs,productQty:assignProductQtys,DELIVERY_TRUCK_ID:delTruckID},
-			beforeSend:function(){
-				$('.loadingModal').modal('show');
-			}
-		})
-		.done(data=>{
-			let doneData=data.split(",");
-			console.log(doneData);
-			$('.loadingModal').modal('hide');
-			if(doneData[0]=="T")
-			{
-				$('#MHeader').text("Success!");
-				$("#MMessage").text(doneData[1]);
-				$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
-				$("#modalHeader").css("background-color", "#1ab394");
-				$("#btnClose").attr("onclick","window.location='select_truck_delivery.php'");
-				$("#displayModal").modal("show");
-			}
-			else
-			{
-				$('#MHeader').text("Error!");
-				$("#MMessage").text(doneData[1]);
-				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-				$("#modalHeader").css("background-color", "red");
-				$("#btnClose").attr("data-dismiss","modal");
-				$("#displayModal").modal("show");
-			}
-		});
-		
 	});
 });

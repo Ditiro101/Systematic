@@ -902,4 +902,116 @@
 		}
     }
 
+    //Make  Collection Functions
+
+    function updateCollectionFinalQty($con,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE ORDER_PRODUCT SET QUANTITY_COLLECTED=QUANTITY_COLLECTED+'$productqty' WHERE ORDER_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionTruckFinalQty($con,$deltID,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT_COLLECTION SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE ORDER_ID='$saleid' AND COLLECTION_TRUCK_ID='$deltID' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getCollectionDifference($con,$saleid)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_COLLECTED)) AS FINAL
+			FROM ORDER_PRODUCT
+			WHERE ORDER_ID='$saleid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getCollectionTruckDifference($con,$saleid,$deltID)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
+			FROM TRUCK_PRODUCT_COLLECTION
+			WHERE ORDER_ID='$saleid' AND COLLECTION_TRUCK_ID='$deltID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionStatus($con,$sID,$dct)
+	{
+		$update_query="UPDATE COLLECTION SET COLLECTION_STATUS_ID='$dct' WHERE ORDER_ID='$sID'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateCollectedDate($con,$saleid,$dte)
+    {
+    	$update_query="UPDATE COLLECTION SET COLLECTED_DATE='$dte' WHERE ORDER_ID='$saleid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionTruckStatus($con,$sID,$truckid,$dct)
+	{
+		$update_query="UPDATE COLLECTION_TRUCK SET COLLECTION_STATUS_ID='$dct' WHERE ORDER_ID='$sID' AND TRUCK_ID='$truckid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 ?>
