@@ -495,22 +495,51 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
+						$.ajax({
+							url: '../mailjet/mail_registration.php',
+							type: 'GET',
+							data:{name:arr["name"],email:arr["email"]}
+							})
+							.done(data=>{
+								//alert(data);
+								$('.loadingModal').modal('hide');
+								
+								if(data=="success")
+								{
 
-						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
-						$("#MMessage").text(doneData[1]);
-						$("#btnClose").attr("onclick","window.location='../../customer.php'");
-						$("#displayModal").modal("show");
-					}
-					else
-					{
-						//alert(doneData[1]);
-								$('#modal-title-default2').text("Error!");
-									$('#modalText').text("Database error");
+									$('#modal-title-default2').text("Success!");
+									$('#modalText').text("Customer successfully registered");
+									$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+									$("#modalHeader").css("background-color", "#1ab394");
+									$('#successfullyAdded').modal("show");
+									$("#btnClose").attr("onclick","window.location='search.php'");
+									$("#displayModal").modal("show");
+								}
+								else
+								{
+
+									$('#modal-title-default2').text("Error!");
+									$('#modalText').text("Email Failed Sent, Please check email credits");
 									$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 									$("#modalHeader").css("background-color", "red");
 									$('#successfullyAdded').modal("show");
 									$("#btnClose").attr("data-dismiss","modal");
 									$("#displayModal").modal("show");
+								}
+							});
+
+					}
+					else
+					{
+						$('.loadingModal').modal('hide');
+						//alert(doneData[1]);
+						$('#modal-title-default2').text("Error!");
+						$('#modalText').text("Database error");
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
+						$('#successfullyAdded').modal("show");
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
 					}
 				});	
 			// }
@@ -551,13 +580,49 @@ $(()=>{
 					if(doneData[0]=="T")
 					{
 						//alert("True");
-						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
-						$("#MMessage").text(doneData[1]);
-						$("#btnClose").attr("onclick","window.location='../../customer.php'");
-						$("#displayModal").modal("show");
+
+							$.ajax({
+								url: '../mailjet/mail_registration.php',
+								type: 'GET',
+								data:{name:arr["name"],email:arr["email"]}
+								})
+								.done(data=>{
+									//alert(data);
+									 $('.loadingModal').modal('hide');
+									
+									if(data=="success")
+									{
+										
+
+										$('#modal-title-default2').text("Success!");
+										$('#modalText').text("Customer successfully registered");
+										$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+										$("#modalHeader").css("background-color", "#1ab394");
+										$('#successfullyAdded').modal("show");
+										$("#btnClose").attr("onclick","window.location='search.php'");
+										$("#displayModal").modal("show");
+										
+									
+									
+									}
+									else
+									{
+										$('#modal-title-default2').text("Error!");
+										$('#modalText').text("Failed Sent email");
+										$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+										$("#modalHeader").css("background-color", "red");
+										$('#successfullyAdded').modal("show");
+										$("#btnClose").attr("data-dismiss","modal");
+										$("#displayModal").modal("show");
+									}
+								});
+
+
+						
 					}
 					else
 					{
+						$('.loadingModal').modal('hide');
 						//alert(doneData[1]);
 						$('#modal-title-default2').text("Error!");
 						$('#modalText').text("Database error");

@@ -136,54 +136,37 @@
                                     </button>
                                     <small>Max 3 Adresses allowed</small>
                       </div> 
-                      <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-success" aria-hidden="true">
+                    <div class="form-group col-md-2 errorModal successModal text-center">
+                      <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                         <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                            <div class="modal-content">
-                              
-                                <div class="modal-header">
-                                    <h6 class="modal-title" id="modal-title-success">Success!</h6>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">×</span>
-                                    </button>
-                                </div>
-                                
-                                <div class="modal-body">
-                                    <p id="MMessage"></p>
-                                    
-                                </div>
-                                
-                                <div class="modal-footer">
-                                    
-                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button> 
-                                </div>
-                                
+                          <div class="modal-content">
+                            <div class="modal-header" id="modalHeader">
+                                <h6 class="modal-title" id="modal-title-default2">Success</h6>
                             </div>
+                            <div class="modal-body">
+                              <p id="modalText">Successfully Added</p>
+                              
+                              <div id="animation" style="text-align:center;">
+
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
-                      <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
-                          <div class="modal-content">
-                            
-                              <div class="modal-header">
-                                  <h6 class="modal-title" id="modal-title-default">Warning!</h6>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">×</span>
-                                  </button>
-                              </div>
-                              
-                              <div class="modal-body">
-                                  <p id="MRemove"></p>
-                                  
-                              </div>
-                              
-                              <div class="modal-footer">                                 
-                                  <button type="button" class="btn btn-success" data-dismiss="modal" id="btnRemove">Yes</button>
-                                  <button type="button" class="btn btn-danger" data-dismiss="modal">No</button> 
-                              </div>
-                              
+                    </div>
+
+                <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+                      <div class="modal-dialog modal-sm">
+                          <div class="modal-content px-auto" style="">
+                              <img class="loading" src="../../assets/img/loading/loading.gif">
                           </div>
                       </div>
-                    </div>
+                  </div>
+
+                      
                 </div>
 
               </div>

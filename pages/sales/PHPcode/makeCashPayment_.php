@@ -1,4 +1,5 @@
 <?php
+	include_once("functions.php");
 
 	$saleID = "";
 
@@ -29,12 +30,16 @@
 		//UPDATE AVAILABLE QUANTITY
 		$queryUpdateSaleStatus = "UPDATE SALE SET SALE_STATUS_ID = 2 WHERE SALE_ID = $saleID";
 		mysqli_query($DBConnect, $queryUpdateSaleStatus);
+		if(recordPayment($DBConnect,$saleID,$_POST["AMOUNT"],1))
+		{
+			$response = "success";
+			echo $response;
+		}
 
 		//Close database connection
 		mysqli_close($DBConnect);
 
 		//Send success response
-		$response = "success";
-		echo $response;
+		
 	}
 ?>
