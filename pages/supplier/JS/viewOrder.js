@@ -4,6 +4,7 @@ var orderTotal = 0.00;
 
 $(()=>{
 	let collectionCheck=$("#collectionCheck").text();
+	console.log(ORDER_ID);
 	console.log(collectionCheck);
 	if(collectionCheck=="")
 	{
@@ -107,7 +108,7 @@ $(()=>{
 	let orderDetails=JSON.parse($("#oDetails").text());
 	console.log(orderDetails);
 	$("#oDet").val(JSON.stringify(orderDetails));
-	$("#acOrdID").val(ORDER_ID);
+	$("#acOrdID").val(orderDetails["SUPPLIER_ID"]);
 	$("#acOrderDetails").val(JSON.stringify(orderDetails));
 	if(ORDER_STATUS_ID==2)
 	{

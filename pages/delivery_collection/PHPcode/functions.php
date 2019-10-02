@@ -760,8 +760,15 @@
 	{
 		$add_query="INSERT INTO COLLECTION (ORDER_ID,EXPECTED_DATE,ADDRESS_ID,LATITUDE,LONGITUDE,COLLECTION_STATUS_ID) VALUES ('$orderID','$date','$addressID','$lat','$long','$dct')";
 		$add_result=mysqli_query($con,$add_query);
+		$last_id=mysqli_insert_id($con);
 		if($add_result)
 		{
+			$DateAudit = date('Y-m-d H:i:s');
+		    $Functionality_ID='10.4';
+		   	$userID = $_SESSION['userID'];
+		    $changes="ID : ".$last_id."| Order ID : ".$orderID;
+	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	        $audit_result=mysqli_query($con,$audit_query);
 			return true;
 		}
 		else

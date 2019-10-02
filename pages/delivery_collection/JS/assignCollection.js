@@ -690,7 +690,7 @@ let suggestTruck=function()
     if(suggestCity["CITY_NAME"]==deliverySelectCity["CITY_NAME"]&&progressFit<=100)
     {
       console.log("Yes We can");
-      suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+aTrucks[k]["REGISTRATION_NUMBER"]+" - "+aTrucks[k]["TRUCK_NAME"]+"</b> as it will easily fit the selected delivery and both the deliveries are in the same City which is <b>"+deliverySelectCity["CITY_NAME"]+"</b>";
+      suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+aTrucks[k]["REGISTRATION_NUMBER"]+" - "+aTrucks[k]["TRUCK_NAME"]+"</b> as it will easily fit the selected collection and both the collection are in the same City which is <b>"+deliverySelectCity["CITY_NAME"]+"</b>";
       found=true;
       break;
     }
@@ -721,7 +721,7 @@ let suggestTruck=function()
     }
     console.log("Mini "+minimal);
     console.log("miniIndex "+minimalIndex);
-    suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the delivery you have chosen and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
+    suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the collection you have chosen and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
   }
   console.log(suggestion);
   return suggestion;
@@ -765,7 +765,7 @@ let suggestTruckAssign=function(proArr)
     if(suggestCity["CITY_NAME"]==deliverySelectCity["CITY_NAME"]&&progressFit<=100)
     {
       console.log("Yes We can");
-      suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+aTrucks[k]["REGISTRATION_NUMBER"]+" - "+aTrucks[k]["TRUCK_NAME"]+"</b> as it will easily fit the selected delivery based on your input quantities and both the deliveries are in the same City which is <b>"+deliverySelectCity["CITY_NAME"]+"</b>";
+      suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+aTrucks[k]["REGISTRATION_NUMBER"]+" - "+aTrucks[k]["TRUCK_NAME"]+"</b> as it will easily fit the selected collection based on your input quantities and both the collections are in the same City which is <b>"+deliverySelectCity["CITY_NAME"]+"</b>";
       found=true;
       break;
     }
@@ -795,7 +795,7 @@ let suggestTruckAssign=function(proArr)
     }
     console.log("Mini "+minimal);
     console.log("miniIndex "+minimalIndex);
-    suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the delivery you have chosen based on your input quantities and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
+    suggestion="StockPath Intelligence Engine: I suggest you select Truck: <b>"+uTrucks[minimalIndex]["REGISTRATION_NUMBER"]+" - "+uTrucks[minimalIndex]["TRUCK_NAME"]+"</b> as it will best fit the collection you have chosen based on your input quantities and is estimated to make the truck <b>"+finalprogressFit.toFixed(2)+"%</b> full compared to the other trucks.";
   }
   return suggestion;
   //console.log(suggestAssignments);
@@ -1005,7 +1005,7 @@ $(()=>{
         if(finalAssignProgress>100)
         {
           $('#MHeader').text("Error!");
-          $("#MMessage").text("The Selected Truck you have chosen cannot fit the delivery based on your input quantities. Refer to the suggestion for a better truck choice based on selected delivery and quantities");
+          $("#MMessage").text("The Selected Truck you have chosen cannot fit the collection based on your input quantities. Refer to the suggestion for a better truck choice based on selected collection and quantities");
           $('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
           $("#modalHeader").css("background-color", "red");
           $("#btnClose").attr("data-dismiss","modal");
