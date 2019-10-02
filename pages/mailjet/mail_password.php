@@ -148,7 +148,7 @@ if(isset($href) )
                         'Name' =>  $name
                     ]
                 ],
-                'Subject' => 'Stockpath Registration',
+                'Subject' => 'Stockpath Reset Password',
                 'TextPart' => 'Mailjet test body email message',
                 'HTMLPart' => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html>
@@ -393,7 +393,7 @@ if(isset($href) )
     ]);
     $response = json_decode(curl_exec($ch));
     echo "success";
-    //var_dump($response);
+    var_dump($response);
 }
 else
 {
