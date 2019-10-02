@@ -1,7 +1,4 @@
 <?php
-	// include_once("connection.php");
-	include_once("../../sessionCheckPages.php");
-	// echo $userID;
 	function getSupplierAddressIDs($con,$supID)
 	{
 		$get_query="SELECT ADDRESS_ID FROM SUPPLIER_ADDRESS WHERE SUPPLIER_ID='$supID'";
@@ -389,27 +386,8 @@
 	{
 		$add_query="INSERT INTO CUSTOMER (NAME,SURNAME,EMAIL,CONTACT_NUMBER,TITLE_ID,CUSTOMER_TYPE_ID,STATUS_ID) VALUES ('$name','$surname','$email','$contact','$title','$customerType','$customerStatus')";
 		$add_result=mysqli_query($con,$add_query);
-		$last_id = mysqli_insert_id($con);
-	
 		if($add_result)
 		{
-			
-		    $DateAudit = date('Y-m-d H:i:s');
-		    $Functionality_ID='1.1';
-		   $userID = $_SESSION['userID'];
-		    $changes="ID : ".$last_id."| Name : ".$name." ".$surname;
-	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
-	        $audit_result=mysqli_query($con,$audit_query);
-	        if($audit_result)
-	        {
-	          
-	        }
-	        else
-	        {
-	          
-	        }
-
-
 			return true;
 		}
 		else
@@ -417,33 +395,13 @@
 			return false;
 		}	
 	}
-
-
-// addIndCustomer($con,"John","Smither","0736673000","Jh@gmail.com","1","1","1");
-
 	//////////////////////////////////////////////
 	function addOrgCustomer($con,$name,$vat,$contact,$email,$customerType,$customerStatus)
 	{
 		$add_query="INSERT INTO CUSTOMER (NAME,EMAIL,VAT_NUMBER,CONTACT_NUMBER,CUSTOMER_TYPE_ID,STATUS_ID) VALUES ('$name','$email','$vat','$contact','$customerType','$customerStatus')";
 		$add_result=mysqli_query($con,$add_query);
-		$last_id = mysqli_insert_id($con);
 		if($add_result)
 		{
-
-			$DateAudit = date('Y-m-d H:i:s');
-		    $Functionality_ID='1.1';
-		   $userID = $_SESSION['userID'];
-		    $changes="ID : ".$last_id."| Name : ".$name;
-	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
-	        $audit_result=mysqli_query($con,$audit_query);
-	        if($audit_result)
-	        {
-	          
-	        }
-	        else
-	        {
-	          
-	        }
 			return true;
 		}
 		else
