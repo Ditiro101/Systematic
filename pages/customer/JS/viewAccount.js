@@ -1,7 +1,52 @@
+var amountDue=0;
+function numberWithSpaces(x) 
+{
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+}
+let buildTable=function(tmp,arr)
+{
+	let tableEntry=$("<tr></tr>");
+	let tdDate=$("<td></td>").text(arr[tmp]["PAYMENT_DATE"]);
+	tableEntry.append(tdDate);
+	let transactionType="";
+	let trans="";
+	let tdAP=$("<td></td>").addClass("text-right").text("");
+	if(parseInt(arr[tmp]["PAYMENT_TYPE_ID"])==2)
+	{
+		transactionType="Sale";
+		trans="S";
+		amountDue=amountDue+parseFloat(arr[tmp]["AMOUNT_PAID"]);
+	}
+	else
+	{
+		transactionType="Payment";
+		trans="P";
+		amountDue=amountDue-parseFloat(arr[tmp]["AMOUNT_PAID"]);
+	}
+	let tdRef=$("<td></td>").text(trans+arr[tmp]["TRANSACTION_ID"]);
+	tableEntry.append(tdRef);
+	tdDescription=$("<td></td>").text(transactionType);
+	tableEntry.append(tdDescription);
+	let tdAmount=$("<td></td>").addClass("text-right").text("R"+numberWithSpaces(arr[tmp]["AMOUNT_PAID"]));
+	console.log(parseInt(arr[tmp]["PAYMENT_TYPE_ID"]));
+	if(parseInt(arr[tmp]["PAYMENT_TYPE_ID"])!=3)
+	{
+		console.log("here");
+		tableEntry.append(tdAmount);
+		tableEntry.append(tdAP);
+	}
+	else
+	{
+		console.log("here2");
+		tableEntry.append(tdAP);
+		tableEntry.append(tdAmount);
+	}
+	let tdAmountDue=$("<td></td>").addClass("text-right").text(numberWithSpaces(amountDue.toFixed(2)));
+	tableEntry.append(tdAmountDue);
+	$("#tBody").append(tableEntry);
+	
+}
 $(()=>{
-
-
-
 
 	var CUSTOMER_ID=$('#ID').attr('value');
 	console.log(CUSTOMER_ID);
@@ -18,21 +63,30 @@ $(()=>{
 			$('#acc').append("<td>"+arr["ACCOUNT_NO"]+"</td>");
 			$('#balance').append("<td class='text-right'>"+arr["BALANCE"]+"</td>");
 			$('#limit').append("<td class='text-right'>"+arr["CREDIT_LIMIT"]+"</td>");
-
-			//$("#tBody").append(tableEntries);
-			
+			$.ajax({
+				url: 'PHPcode/accounttransactions.php',
+				type: 'POST',
+				data: {customerID:CUSTOMER_ID}
+			})
+			.done(data=>{
+				let transactions=JSON.parse(data);
+				console.log(transactions);
+				for(let k=0;k<transactions.length;k++)
+				{
+					buildTable(k,transactions);
+				}
+				$("#total").text("R"+numberWithSpaces(amountDue.toFixed(2)));
+			});			
 		}
 		else
 		{
 			alert("Error");
 		}
 	});
-
-
-
-
-	
-
+	$("#btnPay").on('click',function(e){
+		e.preventDefault();
+		$("#modal-pay").modal("show");
+	});
     $("#limit-form").on('submit',(function(e) {
         e.preventDefault();
         $.ajax({
@@ -72,10 +126,4 @@ $(()=>{
               }           
         });
     }));
-    
-	
-
-
-
-
 });
