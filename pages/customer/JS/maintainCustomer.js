@@ -117,10 +117,6 @@ let prefillAddress= function(tmp,address,sub,cityName,zipcode){
 }
 //////////////////////////////////////////////////
 $(()=>{
-	jQuery.validator.setDefaults({
-  		debug: true,
-  		success: "valid"
-  	});
 	let customerTypeID=parseInt($("#cTypeID").text());
 	if(customerTypeID==1)
 	{
@@ -351,8 +347,6 @@ $(()=>{
 		count--;
 		$("#btn-add-address").removeAttr('disabled','');
 	});
-
-
 	$("#btnSave").on('click',function(e){
 		e.preventDefault();
 		let arr=getInput();
@@ -370,47 +364,23 @@ $(()=>{
 			$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
-				data: {choice:2,ID:cusID,num:count,name:arr["name"],vat:arr["VS"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:customerTypeID,status:arr["status"],title:arr["title"]},
-				beforeSend: function(){
-			            $('.loadingModal').modal('show');
-			     } 
+				data: {choice:2,ID:cusID,num:count,name:arr["name"],vat:arr["VS"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:customerTypeID,status:arr["status"],title:arr["title"]} 
 			})
 			.done(data=>{
-				$('.loadingModal').modal('hide');
 				console.log(data);
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")
 				{
-																let changes="Customer Name: "+arr["name"]+" "+arr["surname"];
-						let Sub_Functionality_ID=1.1;
-						$.ajax({
-						url:'../admin/PHPcode/audit_log.php',
-						type:'POST',
-						data:{Sub_Functionality_ID:Sub_Functionality_ID,changes:changes} //functionality id needs to be included
-						})
-						.done(data=>{
-							
-							$('#modal-title-default2').text("Success!");
-							$('#modalText').text("Customer successfully updated");
-							$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
-							$("#modalHeader").css("background-color", "#1ab394");
-							$('#successfullyAdded').modal("show");
-							$("#btnClose").attr("onclick","window.location='../../customer.php'");
-							$("#displayModal").modal("show");
-						
-					
-
+					$("#MMessage").text(doneData[1]);
+					$("#btnClose").attr("onclick","window.location='../../customer.php'");
+					$("#displayModal").modal("show");
 				}
 				else
 				{
-						$('#modal-title-default2').text("Error!");
-						$('#modalText').text("Database error");
-						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-						$("#modalHeader").css("background-color", "red");
-						$('#successfullyAdded').modal("show");
-						$("#btnClose").attr("data-dismiss","modal");
-						$("#displayModal").modal("show");
+					$("#MMessage").text(doneData[1]);
+					$("#btnClose").attr("data-dismiss","modal");
+					$("#displayModal").modal("show");
 				}
 			});
 		}

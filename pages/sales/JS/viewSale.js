@@ -329,7 +329,7 @@ $("button#calculateChangeButton").on('click', event => {
 		url: 'PHPcode/makeCashPayment_.php',
 		type: 'POST',
 		data: { 
-			saleID : saleID,AMOUNT:THESALETOTAL
+			saleID : saleID,
 		},
         beforeSend: function(){
             $('.loadingModal').modal('show');

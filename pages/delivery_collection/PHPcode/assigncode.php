@@ -51,12 +51,12 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "T,Delivery Assignment Complete";
+									echo "True";
 								}
 							}
 							else
 							{
-								echo "F,Failed to update assignment".$i;
+								echo "Failed to update assignment".$i;
 							}
 						}
 							
@@ -69,16 +69,16 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "T,Delivery Assignment Complete";
+									echo "True";
 								}
 								else
 								{
-									echo "F,F".$i;
+									echo "F".$i;
 								}
 							}
 							else
 							{
-								echo "F,Failed to insert".$i;
+								echo "Failed to insert".$i;
 							}
 						}
 					}
@@ -100,12 +100,12 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "T,Delivery Assignment Complete";
+									echo "True";
 								}
 							}
 							else
 							{
-								echo "F,Failed to update assignment".$i;
+								echo "Failed to update assignment".$i;
 							}
 						}
 						
@@ -118,12 +118,12 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "T,Delivery Assignment Complete";
+									echo "True";
 								}
 							}
 							else
 							{
-								echo "F,Failed to insert".$i;
+								echo "Failed to insert".$i;
 							}	
 						}
 						
@@ -132,7 +132,7 @@
 			}
 			else
 			{
-				echo "F,Failed to insert in del_truck";
+				echo "Failed to insert in del_truck";
 			}
 		}
 	}

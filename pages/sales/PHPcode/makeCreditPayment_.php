@@ -1,5 +1,4 @@
 <?php
-	include_once("functions.php");
 
 	$saleID = "";
 
@@ -36,15 +35,12 @@
 		$queryUpdateBalance = "UPDATE CUSTOMER_ACCOUNT SET BALANCE = BALANCE + $saleTotal WHERE CUSTOMER_ID = $customerID";
 		mysqli_query($DBConnect, $queryUpdateBalance);
 
-		if(recordPayment($DBConnect,$saleID,$_POST["saleTotalAmount"],2))
-		{
-			$response = "success";
-			echo $response;
-		}
-
 
 		//Close database connection
 		mysqli_close($DBConnect);
 
+		//Send success response
+		$response = "success";
+		echo $response;
 	}
 ?>

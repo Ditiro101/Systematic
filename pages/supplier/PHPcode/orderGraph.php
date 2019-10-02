@@ -63,13 +63,17 @@
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
-                               FROM SALE
-                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$newDate'";
+                $alles_query ="SELECT ORDER_ID ,ORDER_DATE
+                FROM ORDER_
+                WHERE ORDER_DATE BETWEEN '$usedDate' AND  '$newDate'
+                GROUP BY ORDER_DATE";
 
                 //var_dump($alles_query);
         
                 $submit = mysqli_query($con,$alles_query);
+
+               
+                
         }
         else
         {

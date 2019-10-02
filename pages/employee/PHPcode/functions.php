@@ -1,6 +1,4 @@
 <?php
-
-	include_once("../../sessionCheckPages.php");
 	function getSupplierAddressIDs($con,$supID)
 	{
 		$get_query="SELECT ADDRESS_ID FROM SUPPLIER_ADDRESS WHERE SUPPLIER_ID='$supID'";
@@ -234,9 +232,9 @@
 		return $addressID;
 	}
 	//////////////////////////////////////////////////
-	function checkEmployee($con,$name,$surname,$contact)
+	function checkEmployee($con,$name,$surname,$contact,$email)
 	{
-		$check_query="SELECT * FROM EMPLOYEE WHERE NAME='$name' AND SURNAME='$surname' AND CONTACT_NUMBER='$contact'";
+		$check_query="SELECT * FROM EMPLOYEE WHERE (NAME='$name' AND SURNAME='$surname' AND CONTACT_NUMBER='$contact') OR (EMAIL = '$email')";
 		$check_result=mysqli_query($con,$check_query);
 		if(mysqli_num_rows($check_result)>0)
 		{
@@ -252,24 +250,8 @@
 	{
 		$add_query="INSERT INTO EMPLOYEE (NAME,SURNAME,CONTACT_NUMBER,EMAIL,IDENTITY_NUMBER,ADDRESS_ID,TITLE_ID,EMPLOYEE_TYPE_ID,EMPLOYEE_STATUS_ID) VALUES ('$name','$surname','$contact','$email','$passID','$addID','$titleID','$eTypeID','$eStatusID')";
 		$add_result=mysqli_query($con,$add_query);
-		$last_id = mysqli_insert_id($con);
 		if($add_result)
 		{
-
-		    $DateAudit = date('Y-m-d H:i:s');
-		    $Functionality_ID='2.1';
-		   $userID = $_SESSION['userID'];
-		    $changes="ID : ".$last_id."| Name : ".$name." ".$surname;
-	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
-	        $audit_result=mysqli_query($con,$audit_query);
-	        if($audit_result)
-	        {
-	          
-	        }
-	        else
-	        {
-	          
-	        }
 			return true;
 		}
 		else

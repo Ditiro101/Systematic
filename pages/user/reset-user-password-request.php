@@ -84,7 +84,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="email" id="email">
+                    <input class="form-control" placeholder="Email" type="email" name="email" id="email" required>
                   </div>
                 </div>
                 <div class="text-center">

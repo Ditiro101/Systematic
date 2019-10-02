@@ -85,22 +85,76 @@
       <!-- Table -->
       <div class="row">
         <div class="col d-flex justify-content-center">
-          <div class="col-sm-12 col-md-12 col-lg-10 col-xl-8 order-xl-2 mb-5 mb-xl-0">
+          <div class="col-8 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">
             <div class="row justify-content-center">
               <div class="col ">
                 <div class="card-profile-image">
-                  <a>
+                  <a href="#">
                     <img src="../../images/user.png" class="rounded-circle">
                   </a>
                 </div>
               </div>
             </div>
             <div class="card-header text-center border-0 pt-8 pt-md-4 pb-0 pb-md-4">
+              <div class="row mb-3">
+                <div class="col-6">
+                  <form id="formMaintain" action="maintain.php" method="POST">
+                    <input type="hidden" name="ID" value=<?php echo $cusID;?>>
+                    <input type="hidden" name="NAME" id="NAME">
+                    <input type="hidden" name="SURNAME" id="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
+                    <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                    <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
+                    <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
+                    <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                    <input type="hidden" name="ADDR" id="ADDR">
+                    <input type="hidden" name="SUBURB" id="SUBURB">
+                    <input type="hidden" name="CITY" id="CITY">
+                    <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
+                    <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit">
+                      <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
+                      </span>
+                      <span class="btn-inner--text">Edit</span>
+                    </button>
+                  </form>
+                  </div>
+                  <div class="col-6">
 
+                  <form id="formDelete" type='POST'>
+                    <input type="hidden" name="ID" value=<?php echo $cusID;?>>
+                    <button class="btn btn-icon btn-2 btn-danger btn-sm" type="submit" >
+                    <span class="btn-inner--icon"><i class="fas fa-trash"></i>
+                    </span>
+                    <span class="btn-inner--text">Delete</span>
+                  </button>
+                  </form>
+
+                  </div>
+               </div>
+               <div class="row">
+                <div class="col-6">
+                  <label hidden="true" id="cAccountCheck"><?php echo $creditAccountCheck;?></label>
+                  <form id="formAccount" type='POST'>
+                    <input type="hidden" name="ID" value=<?php echo $cusID;?>>
+                    <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
+                    <input type="hidden" name="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
+                    <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
+                    <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
+                    <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
+                    <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
+                    <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
+                    <input type="hidden" name="ADDR" id="accountADDR">
+                    <input type="hidden" name="SUBURB" id="accountSUBURB">
+                    <input type="hidden" name="CITY" id="accountCITY">
+                  </form>
+                </div>
+
+              </div>
             </div>
 
-            <div class="card-body pt-0 pt-md-4 mt-4">
+            <div class="card-body pt-0 pt-md-4">
               <div class="row">
                 <div class="col">
                   <div class="card-profile-stats d-flex justify-content-center mt-2 mb-0">
@@ -121,7 +175,7 @@
                     ?>
                 </h2>
                 <label hidden="true" id="cName"><?php echo $_POST["NAME"];?></label>
-                <hr class="h5 font-weight-300 pb-0 mt-3 pt-1">
+                <hr class="h5 font-weight-300 pb-0 mt-3">
                   
                   <div class="pt-2"><b>Email : </b><p class="d-inline"><?php echo $_POST["EMAIL"];?></p></div>
                   
@@ -133,71 +187,18 @@
                   <label id="cities" hidden="true"><?php echo json_encode($cityInfo);?></label>
                 </hr>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
-                  <ul class="nav nav-pills" id="listAddress" role="tablist">
+                  <ul class="nav nav-pills mb-3" id="listAddress" role="tablist">
                     <!-- <li class="nav-item">
                       <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Address1</a>
                     </li> -->
                   </ul>
                   <div class="tab-content" id="pills-tabContent">
                   </div>
-                </div> 
-                <hr class="my-1 mt-3 d-flex justify-content-center pt-1">
-                  <div class="row mb-2 text-center">
-                    <div class="col d-inline mx-0 px-0">
-                      <form id="formMaintain" action="maintain.php" method="POST" class="d-inline">
-                        <input type="hidden" name="ID" value=<?php echo $cusID;?>>
-                        <input type="hidden" name="NAME" id="NAME">
-                        <input type="hidden" name="SURNAME" id="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
-                        <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
-                        <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
-                        <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
-                        <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
-                        <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
-                        <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
-                        <input type="hidden" name="ADDR" id="ADDR">
-                        <input type="hidden" name="SUBURB" id="SUBURB">
-                        <input type="hidden" name="CITY" id="CITY">
-                        <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
-                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit" style="width: 9rem">
-                          <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
-                          </span>
-                          <span class="btn-inner--text">Edit</span>
-                        </button>
-                      </form>
-                    </div>
-                    <div class="col d-inline mx-0 px-0">
-                      <form id="formDelete" type='POST' class="d-inline">
-                        <input type="hidden" name="ID" value=<?php echo $cusID;?>>
-                        <button class="btn btn-icon btn-2 btn-danger btn-sm" type="submit" style="width: 9rem">
-                          <span class="btn-inner--icon"><i class="fas fa-trash"></i>
-                          </span>
-                          <span class="btn-inner--text">Delete</span>
-                        </button>
-                      </form>
-                    </div>
-                    <div class="col d-inline mx-0 px-0">
-                      <label hidden="true" id="cAccountCheck"><?php echo $creditAccountCheck;?></label>
-                      <form id="formAccount" type='POST' class="d-inline">
-                        <input type="hidden" name="ID" value=<?php echo $cusID;?>>
-                        <input type="hidden" name="NAME" value=<?php echo $_POST["NAME"];?>>
-                        <input type="hidden" name="SURNAME" value=<?php echo $_POST["SURNAME"];?>>
-                        <input type="hidden" name="VAT" value=<?php echo $_POST["VAT"];?>>
-                        <input type="hidden" name="CONTACT_NUMBER" value=<?php echo $_POST["CONTACT_NUMBER"];?>>
-                        <input type="hidden" name="CUSTOMER_TYPE_ID" value=<?php echo $_POST["CUSTOMER_TYPE_ID"];?>>
-                        <input type="hidden" name="STATUS" value=<?php echo $_POST["STATUS_ID"];?>>
-                        <input type="hidden" name="EMAIL" value=<?php echo $_POST["EMAIL"];?>>
-                        <input type="hidden" name="ADDR" id="accountADDR">
-                        <input type="hidden" name="SUBURB" id="accountSUBURB">
-                        <input type="hidden" name="CITY" id="accountCITY">
-                      </form>
-                    </div>    
-                  </div>
-                </hr>               
+                </div>                
                 <hr class="my-2 d-flex justify-content-center">
                   <div class="d-flex justify-content-center">
                      <button type="button" class="btn btn-link mx-auto" data-dismiss="modal"  onclick="window.history.go(-1); return false;">Close</button>
                   </div>
-                </hr>
               </div>
             </div>
           </div>
