@@ -597,7 +597,6 @@
 				$changes=$changes." | Email :".$row['EMAIL'];
 			}
 
-			// $changes="ID :".$row['CUSTOMER_ID']."Name :".$row['NAME']." | ".$row['SURNAME']." | ".$row['EMAIL']." | ".$row['CONTACT_NUMBER'];
 		}
 		else
 		{

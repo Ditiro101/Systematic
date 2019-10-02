@@ -1,5 +1,6 @@
 <?php
-
+	
+	include_once("../../sessionCheckPages.php");
 	$supplierID = "";
 	$userID = "";
 	$addOrderCollection;
@@ -61,6 +62,17 @@
 		$lastIDQuery = "SELECT LAST_INSERT_ID();";        
 		$lastIDQueryResult = mysqli_query($DBConnect, $lastIDQuery);
 		$lastID = mysqli_fetch_array($lastIDQueryResult)[0];
+
+		//Audit step
+
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='5.4';
+	    $userID = $_SESSION['userID'];
+	    $changes="ID : ".$lastID;
+        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+        $audit_result=mysqli_query($DBConnect,$audit_query);
+
+	    ///////////
 
 		$arraySize = sizeof($orderProducts);
 		for ($i=0; $i < $arraySize; $i++) 
