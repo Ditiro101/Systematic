@@ -108,7 +108,7 @@
 
 
 
-            <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" data-target="#finalise">
+            <button class="btn btn-warning text-center" type="button" data-dismiss="modal" data-toggle="modal" id="btnSubmit">
                   <i class="fas fa-truck"></i>
                       <span>Submit</span>
             </button>
@@ -141,22 +141,27 @@
                 </div>
               </div>
             </div>
-            <div class="modal fade" id="finalise-success" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Success!</h5>
-                    </div>
-                    <div class="modal-body">
-                      <p>Successfully Delivered</p>
-                    </div>
-                    <div class="modal-footer">
-                      
-                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal"  onclick="window.location='../../driver.php'">Close</button> 
-                  </div>
-                </div>
-              </div>
-            </div>
+            <div class="form-group col-md-2 errorModal successModal text-center">
+                          <div class="modal fade" id="displayModal" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                            <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header" id="modalHeader">
+                                    <h6 class="modal-title" id="MHeader">Success</h6>
+                                </div>
+                                <div class="modal-body">
+                                  <p id="MMessage">Successfully Added</p>
+                                  
+                                  <div id="animation" style="text-align:center;">
+
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
           <!-- Page content -->
   
 
@@ -164,6 +169,13 @@
         <?php include_once("../footer.php");?>
     
     </div>
+    <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-sm">
+          <div class="modal-content px-auto" style="">
+              <img class="loading" src="../../assets/img/loading/loading.gif">
+          </div>
+      </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script href="../../assets/js/jquery-3.3.1.slim.min.js"></script>

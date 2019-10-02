@@ -705,7 +705,7 @@
 			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
 			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
 			ELSE 'Pallet'
-			END) AS PRODUCT_NAME,E.SELLING_PRICE
+			END) AS PRODUCT_NAME,E.SELLING_PRICE,B.QUANTITY-B.QUANTITY_RECEIVED AS QTY_SHOW
 			FROM DELIVERY_TRUCK A
 			JOIN TRUCK_PRODUCT B ON A.DELIVERY_TRUCK_ID=B.DELIVERY_TRUCK_ID
 			JOIN TRUCK C ON A.TRUCK_ID=C.TRUCK_ID
@@ -752,7 +752,21 @@
 
     function updateDeliveryFinalQty($con,$saleid,$productid,$productqty)
     {
-    	$update_query="UPDATE SALE_PRODUCT SET QUANTITY_RECEIVED='$productqty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+    	$update_query="UPDATE SALE_PRODUCT SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateDeliveryTruckFinalQty($con,$deltID,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE SALE_ID='$saleid' AND DELIVERY_TRUCK_ID='$deltID' AND PRODUCT_ID='$productid'";
 		$update_result=mysqli_query($con,$update_query);
 		if($update_result)
 		{
@@ -769,6 +783,26 @@
     	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
 			FROM SALE_PRODUCT
 			WHERE SALE_ID='$saleid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getDeliveryTruckDifference($con,$saleid,$deltID)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
+			FROM TRUCK_PRODUCT
+			WHERE SALE_ID='$saleid' AND DELIVERY_TRUCK_ID='$deltID'";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
