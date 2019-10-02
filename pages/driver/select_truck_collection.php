@@ -1,3 +1,11 @@
+<?php
+  include_once("../sessionCheckPages.php");
+  include_once("PHPcode/connection.php");
+  include_once("PHPcode/functions.php");
+  $makeDeliveryTrucks=getMakeCollectionTrucks($con);
+  $makeDeliveryProducts=getMakeCollectionProduct($con);
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -58,13 +66,11 @@
             <div class="card-body">    
                   <br>          
                   <div class="form-group">
+                    <label hidden="true" id="mTrucks"><?php echo json_encode($makeDeliveryTrucks);?></label>
+                    <label hidden="true" id="pTrucks"><?php echo json_encode($makeDeliveryProducts);?></label>
                     <label for="exampleFormControlSelect2">Truck Registration No.</label>
 
-                    <select  class="form-control" id="exampleFormControlSelect2">
-                      <option>BBC 123 NW GP</option>
-                      <option>DSM 032 NW GP</option>
-                      <option>BBC 123 NW GP</option>
-                      <option>CAD347 NW GP</option>
+                    <select  class="form-control" id="truckSelect">
                     </select>
                   </div>
                  
@@ -89,8 +95,11 @@
                       <p>Are you sure you want to select this truck to make a Supplier Collection?</p>
                     </div>
                     <div class="modal-footer">
-                      
-                    <a href="list_collection.php" class="btn btn-success" >Yes</a>
+                    <form action="list_collection.php" method="POST">
+                      <input type="hidden" id="a1" name="ass">
+                      <input type="hidden" id="a2" name="assP">
+                      <button type="submit" class="btn btn-success" id="btnYes" >Yes</button>
+                    </form> 
                     <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
                   </div>
                 </div>
@@ -113,6 +122,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/selectCollectionTruck.js"></script>
 </body>
 
 </html>

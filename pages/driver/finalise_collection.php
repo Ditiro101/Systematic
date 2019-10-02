@@ -58,6 +58,8 @@
               <div class="card card-stats mb-4 mb-xl-0">
                 <div class="card-body">
                   <div class="row">
+                    <label hidden="true" id="aData"><?php echo $_POST["ass"];?></label>
+                    <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
                     <div class="col">
                       <h5 class="card-title text-uppercase text-muted mb-0">Collection Details</h5>
                       <span class="h2 font-weight-bold mb-0">Supplier Order# 321</span>
@@ -81,7 +83,7 @@
                   <div class="card shadow border-0 gmap_canvas">
                     <?php $address = 'University Of Pretoria, Pretoria' ; /* Insert address Here */
 
-                      echo '<iframe width="100%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
+                      echo '<iframe width="150%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
                     ?>
                   </div>
                   <style>
@@ -93,12 +95,15 @@
                <div class="row ">
                 <div class="col ">
                   
-                  <button type="button" class="btn btn-warning text-center"  onclick="window.location='sign_off_collection.php'" >
-                    
-                        <i class="fas fa-truck"></i>
-                        <span>Finalise Collection</span>
+                  <form action="sign_off_collection.php" method="POST">
+                    <input type="hidden" name="fAss" id="a1">
+                    <input type="hidden" name="fAssP" id="a2" >
+                    <button type="submit" class="btn btn-warning text-center">
                       
-                  </button>
+                          <i class="fas fa-truck"></i>
+                          <span>Finalise Collection</span>    
+                    </button>
+                  </form>
                
               </div>
               </div>
@@ -122,6 +127,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/finaliseCollection.js"></script>
 </body>
 
 </html>
