@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	$currentDate=date("Y-m-d");
@@ -23,6 +24,7 @@
 			{
 				if(updateDeliveryTruckStatus($con,$assignment[0]->SALE_ID,$assignment[0]->TRUCK_ID,5))
 				{
+					addAuditForMakeDelivery($con,$assignment[0]->TRUCK_ID,$assignment[0]->SALE_ID,"Delivery Complete and Delivered");
 					echo "T,Delivery Complete and Delivered";
 				}
 
@@ -43,11 +45,13 @@
 	{
 		if(updateDeliveryTruckStatus($con,$assignment[0]->SALE_ID,$assignment[0]->TRUCK_ID,5))
 		{
+			addAuditForMakeDelivery($con,$assignment[0]->TRUCK_ID,$assignment[0]->SALE_ID,"Delivery Assignment Delivered");
 			echo "T,Delivery Assignment Delivered";
 		}
 	}
 	else
 	{
+		addAuditForMakeDelivery($con,$assignment[0]->TRUCK_ID,$assignment[0]->SALE_ID,"Delivery Assignment Delivered but not completed");
 		echo "T,Delivery Assignment Delivered but not completed";
 	}
 	mysqli_close($con);

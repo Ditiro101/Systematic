@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	$currentDate=date("Y-m-d");
@@ -22,6 +23,7 @@
 			{
 				if(updateCollectionTruckStatus($con,$assignment[0]->ORDER_ID,$assignment[0]->TRUCK_ID,5))
 				{
+					addAuditForMakeCollection($con,$assignment[0]->TRUCK_ID,$assignment[0]->ORDER_ID,"Collection Complete and Collected");
 					echo "T,Collection Complete and Collected";
 				}
 
@@ -42,11 +44,13 @@
 	{
 		if(updateCollectionTruckStatus($con,$assignment[0]->ORDER_ID,$assignment[0]->TRUCK_ID,5))
 		{
-			echo "T,Collection Assignment Collection";
+			addAuditForMakeCollection($con,$assignment[0]->TRUCK_ID,$assignment[0]->ORDER_ID,"Collection Assignment Completed");
+			echo "T,Collection Assignment Completed";
 		}
 	}
 	else
 	{
+		addAuditForMakeCollection($con,$assignment[0]->TRUCK_ID,$assignment[0]->ORDER_ID,"Collection Assignment Collected but not completed");
 		echo "T,Collection Assignment Collected but not completed";
 	}
 	mysqli_close($con);

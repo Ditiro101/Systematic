@@ -216,12 +216,10 @@ $(()=>{
 						$.ajax({
 							url:'PHPcode/assigncode.php',
 							type:'POST',
-							data:{choice:4,remove:removeDeliveryAssignmentBool,SALE_ID:salesForTruck[k]["SALE_ID"],TRUCK_ID:truckID},
-							complete:function(){
-								$('.loadingModal').modal('hide');
-							}
+							data:{choice:4,remove:removeDeliveryAssignmentBool,SALE_ID:salesForTruck[k]["SALE_ID"],TRUCK_ID:truckID}
 						})
 						.done(data=>{
+							$('.loadingModal').modal('hide');
 							console.log(data);
 							let doneData=data.split(",");
 							if(doneData[0]=="T")

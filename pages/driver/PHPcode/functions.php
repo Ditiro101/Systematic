@@ -1014,4 +1014,23 @@
 		}
 	}
 
+	function addAuditForMakeDelivery($con,$truckid,$saleid,$status)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='11.1';
+		$userID = $_SESSION['userID'];
+		$changes="Truck ID : ".$truckid."| Sale ID : ".$saleid."| Status : ".$status;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForMakeCollection($con,$truckid,$saleid,$status)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='11.3';
+		$userID = $_SESSION['userID'];
+		$changes="Truck ID : ".$truckid."| Order ID : ".$saleid."| Status : ".$status;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
 ?>

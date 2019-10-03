@@ -1022,12 +1022,10 @@ $(()=>{
             $.ajax({
             url:'PHPcode/assigncode.php',
             type:'POST',
-            data:{choice:2,DELIVERY_ID:delID["DELIVERY_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID},
-            complete:function(){
-              $('.loadingModal').modal('hide');
-            }
+            data:{choice:2,DELIVERY_ID:delID["DELIVERY_ID"],num:assignProductIDs.length,SALE_ID:deliverySelectID,PRODUCT_ID:assignProductIDs,QTY:assignProductQtys,TRUCK_ID:truckSelectID}
             })
             .done(data=>{
+              $('.loadingModal').modal('hide');
               let doneData=data.split(",");
               console.log(doneData);
               if(doneData[0]=="T")

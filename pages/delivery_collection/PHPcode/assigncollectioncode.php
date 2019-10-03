@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	if($_POST["choice"]==1)
@@ -51,6 +52,7 @@
 							{
 								if($i==$stopProductCount)
 								{
+									addAuditForAssignCollection($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
 									echo "T,Collection Assignment Complete";
 								}
 							}
@@ -69,6 +71,7 @@
 							{
 								if($i==$stopProductCount)
 								{
+									addAuditForAssignCollection($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
 									echo "T,Collection Assignment Complete";
 								}
 								else
@@ -100,6 +103,7 @@
 							{
 								if($i==$stopProductCount)
 								{
+									addAuditForAssignCollection($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
 									echo "T,Collection Assignment Complete";
 								}
 							}
@@ -118,6 +122,7 @@
 							{
 								if($i==$stopProductCount)
 								{
+									addAuditForAssignCollection($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
 									echo "T,Collection Assignment Complete";
 								}
 							}
@@ -197,6 +202,7 @@
 				{
 					if(updateOrderAssignment($con,1,$_POST["SALE_ID"]))
 					{
+						addAuditForMaintainColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"REMOVED");
 						echo "T,Assignment Maintained Successfully";
 					}
 					else
@@ -208,6 +214,7 @@
 				{
 					if(updateOrderAssignment($con,6,$_POST["SALE_ID"]))
 					{
+						addAuditForMaintainColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"REMOVED");
 						echo "T,Assignment Maintained Successfully";
 					}
 					else
@@ -228,6 +235,7 @@
 			{
 				if(updateOrderAssignment($con,1,$_POST["SALE_ID"]))
 				{
+					addAuditForMaintainColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"UPDATED");
 					echo "T,Assignment Maintained Successfully";
 				}
 				else
@@ -239,6 +247,7 @@
 			{
 				if(updateOrderAssignment($con,6,$_POST["SALE_ID"]))
 				{
+					addAuditForMaintainColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"UPDATED");
 					echo "T,Assignment Maintained Successfully";
 				}
 				else
@@ -266,6 +275,7 @@
 					{
 						if($i==$updateCount)
 						{
+							addAuditForFinaliseColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"][$i]);
 							echo "T,Finalised Collections";
 						}
 					}
@@ -274,6 +284,7 @@
 				{
 					if($i==$updateCount)
 					{
+						addAuditForFinaliseColAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"][$i]);
 						echo "T,Finalised Collections";
 					}
 				}

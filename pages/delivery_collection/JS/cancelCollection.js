@@ -24,12 +24,10 @@ $(()=>{
 			data:{choice:2,collectionID:collectionData["COLLECTION_ID"]},
 			beforeSend:function(){
 				$('.loadingModal').modal('show');
-			},
-			complete:function(){
-				$('.loadingModal').modal('hide');
 			}
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
 				{

@@ -104,12 +104,10 @@ $(()=>{
 				data:{choice:6,num:finalised.length,SALE_ID:finalised,TRUCK_ID:truckID},
 				beforeSend:function(){
 					$('.loadingModal').modal('show');
-				},
-				complete:function(){
-					$('.loadingModal').modal('hide');
 				}
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				console.log(data);
 				let doneData=data.split(",");
 				if(doneData[0]=="T")
