@@ -1,4 +1,5 @@
 <?php
+	
 	if(!empty($_POST['data'])){ 
 		$data = base64_decode($_POST['data']);
 		//$data = $_POST['data'];
