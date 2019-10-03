@@ -110,11 +110,11 @@ $(()=>{
 	console.log(deliveryCheck);
 	if(deliveryCheck=="")
 	{
-		$("#btnAddDelivery").attr("hidden",false);
+		$("#btnAddDelivery").attr("disabled",false);
 	}
 	else
 	{
-		$("#btnAddDelivery").attr("hidden",true);
+		$("#btnAddDelivery").attr("disabled",true);
 	}
 
 	let saleCheck =$("#SALE_STATUS_ID").val();
@@ -122,21 +122,22 @@ $(()=>{
 	if(saleCheck >= 2)
 	{
 		console.log("EQUAL");
-		$("#makePaymentButton").attr("hidden",true);
+		$("#makePaymentButton").attr("disabled",true);
+		$("#collectSaleButton").attr("disabled",false);
 	}
 	else
 	{
-		$("#makePaymentButton").attr("hidden",false);
+		$("#makePaymentButton").attr("disabled",false);
+		$("#btnAddDelivery").attr("disabled",true);
+		$("#collectSaleButton").attr("disabled",true);
+		$("#btnMakeReturn").attr("disabled",true);
 	}
 
 	if(saleCheck == 3)
 	{
 		console.log("EQUAL");
-		$("#collectSaleButton").attr("hidden",true);
-	}
-	else
-	{
-		$("#collectSaleButton").attr("hidden",false);
+		$("#collectSaleButton").attr("disabled",true);
+		$("#btnMakeReturn").attr("disabled",false);
 	}
 
 	let customerData=JSON.parse($("#cData").text());

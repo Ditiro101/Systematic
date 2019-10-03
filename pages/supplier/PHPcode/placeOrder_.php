@@ -68,7 +68,7 @@
 			$productLineProductID = mysqli_real_escape_string($DBConnect, $orderProducts[$i]['PRODUCT_ID']);
 			$productLineCostPrice = mysqli_real_escape_string($DBConnect, $orderProducts[$i]['COST_PRICE']);
 			$productLineQuantity = mysqli_real_escape_string($DBConnect, $orderProducts[$i]['QUANTITY']);
-			$queryOrderProduct = "INSERT INTO ORDER_PRODUCT(ORDER_ID, PRODUCT_ID, QUANTITY, PRICE) VALUES( '$lastID','$productLineProductID', '$productLineQuantity', '$productLineCostPrice')";
+			$queryOrderProduct = "INSERT INTO ORDER_PRODUCT(ORDER_ID, PRODUCT_ID, QUANTITY,QUANTITY_TO_RECEIVE,QUANTITY_ASSIGNED, PRICE) VALUES( '$lastID','$productLineProductID', '$productLineQuantity','$productLineQuantity','$productLineQuantity', '$productLineCostPrice')";
 			mysqli_query($DBConnect, $queryOrderProduct);
 
 		}

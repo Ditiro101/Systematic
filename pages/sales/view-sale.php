@@ -240,7 +240,7 @@
 
                 
 
-                  <button class="btn btn-icon btn-2 btn-danger mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-makeReturn">
+                  <button class="btn btn-icon btn-2 btn-danger mt-0 float-right mr-2" type="button" data-toggle="modal" data-target="#modal-makeReturn" id="btnMakeReturn">
                     <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
                     <span class="btn-inner--text">Make Return</span>
                   </button>

@@ -281,7 +281,7 @@
                   <input type="hidden" name="ORDER_PRODUCTS" id="oProducts">
                    <input type="hidden" name="ORDER_RETURNS" id="oReturns">
                   <input type="hidden" name="ORDER_ID" value='<?php echo $orderDetails["ORDER_ID"]; ?>'>
-                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="submit">
+                  <button class="btn btn-icon btn-2 btn-warning mt-0 float-right mr-2" type="submit" id="btnReturn">
                     <span class="btn-inner--icon"><i class="fas fa-undo"></i></span>
                     <span class="btn-inner--text">Make Return</span>
                   </button>

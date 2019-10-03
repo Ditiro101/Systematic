@@ -1,5 +1,4 @@
 <?php
-	include_once("../../sessionCheckPages.php");
 	function getSupplierAddressIDs($con,$supID)
 	{
 		$get_query="SELECT ADDRESS_ID FROM SUPPLIER_ADDRESS WHERE SUPPLIER_ID='$supID'";

@@ -8,11 +8,11 @@ $(()=>{
 	console.log(collectionCheck);
 	if(collectionCheck=="")
 	{
-		$("#btnAddCollection").attr("hidden",false);
+		$("#btnAddCollection").attr("disabled",false);
 	}
 	else
 	{
-		$("#btnAddCollection").attr("hidden",true);
+		$("#btnAddCollection").attr("disabled",true);
 	}
 	$.ajax({
 		url:'PHPcode/getOrderProducts.php',
@@ -112,8 +112,12 @@ $(()=>{
 	$("#acOrderDetails").val(JSON.stringify(orderDetails));
 	if(ORDER_STATUS_ID==2)
 	{
-		$("#btnReceiveStock").attr("hidden",true);
-		$("#btnAddCollection").attr("hidden",true);
+		$("#btnReceiveStock").attr("disabled",true);
+		$("#btnAddCollection").attr("disabled",true);
+	}
+	else
+	{
+		$("#btnReturn").attr("disabled",true);
 	}
 
 });

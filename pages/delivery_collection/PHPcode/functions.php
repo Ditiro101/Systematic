@@ -269,7 +269,10 @@
 
 	function getUnassignedDeliveries($con,$dct)
 	{
-		$get_query="SELECT * FROM DELIVERY WHERE DCT_STATUS_ID='$dct' OR DCT_STATUS_ID=6";
+		$get_query="SELECT A.*,B.SALE_STATUS_ID
+		FROM DELIVERY A
+		JOIN SALE B ON A.SALE_ID=B.SALE_ID
+		WHERE B.SALE_STATUS_ID=2 AND (A.DCT_STATUS_ID='$dct' OR A.DCT_STATUS_ID=6)";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
