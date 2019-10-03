@@ -1,5 +1,6 @@
 <?php
-
+	include_once("../../sessionCheckPages.php");
+	include_once("functions.php");
 	$customerID = "";
 	$userID = "";
 	$saleDeliveryAddressID;
@@ -45,7 +46,7 @@
 		$queryReturn = "INSERT INTO ORDER_RETURN(RETURN_DATE, REASON) VALUES('$dateTimeNow', '$reasonForReturn')";
 		mysqli_query($DBConnect, $queryReturn);
 		//echo($queryReturn);
-
+		addAuditForReturnStock($DBConnect,$orderID,$reasonForReturn);
 		$lastIDQuery = "SELECT LAST_INSERT_ID();";        
 		$lastIDQueryResult = mysqli_query($DBConnect, $lastIDQuery);
 		$returnID = mysqli_fetch_array($lastIDQueryResult)[0];

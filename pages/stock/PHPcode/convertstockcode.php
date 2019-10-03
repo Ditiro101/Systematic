@@ -15,7 +15,7 @@
 						
 						$sourceP=getProductName($con,$_POST["PRODUCT_ID"]);
 						$convertedP=getProductName($con,$_POST["CPRODUCT_ID"]);
-						addAuditForConvertStock($con,$sourceP[0]["PRODUCT_NAME"],$convertedP[0]["PRODUCT_NAME"]);
+						addAuditForConvertStock($con,$sourceP[0]["PRODUCT_NAME"],$convertedP[0]["PRODUCT_NAME"],$sourceP[0]["PRODUCT_GROUP_ID"]);
 						echo "T,Stock Converted Successfully!";
 					}
 					else
@@ -37,7 +37,7 @@
 					{
 						$souP=getProductName($con,$_POST["PRODUCT_ID"]);
 						$conP=getProductName($con,$_POST["CPRODUCT_ID"]);
-						addAuditForConvertStock($con,$souP[0]["PRODUCT_NAME"],$conP[0]["PRODUCT_NAME"]);
+						addAuditForConvertStock($con,$souP[0]["PRODUCT_NAME"],$conP[0]["PRODUCT_NAME"],$souP[0]["PRODUCT_GROUP_ID"]);
 						echo "T,Stock Converted Successfully!";
 					}
 					else

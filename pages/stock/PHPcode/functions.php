@@ -316,6 +316,16 @@
 	    $audit_result=mysqli_query($con,$audit_query);
 	}
 
+	function addAuditForReturnStock($con,$orderid,$reason)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.3';
+		$userID = $_SESSION['userID'];
+		$changes="Order ID : ".$orderid."| Reason : ".$reason;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
 	function addAuditForWriteoffStock($con,$last_id,$warehouseid,$productid,$reason)
 	{
 		$DateAudit = date('Y-m-d H:i:s');
@@ -326,12 +336,12 @@
 	    $audit_result=mysqli_query($con,$audit_query);
 	}
 
-	function addAuditForConvertStock($con,$productid,$productid2)
+	function addAuditForConvertStock($con,$productid,$productid2,$groupid)
 	{
 		$DateAudit = date('Y-m-d H:i:s');
 		$Functionality_ID='9.4';
 		$userID = $_SESSION['userID'];
-		$changes="Product : ".$productid."| Converted Product : ".$productid2;
+		$changes="Product : ".$productid."| Converted Product : ".$productid2."| Product Group ID : ".$groupid;
 	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
 	    $audit_result=mysqli_query($con,$audit_query);
 	}
@@ -366,7 +376,7 @@
 			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
 			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
 			ELSE 'Pallet'
-			END) AS PRODUCT_NAME
+			END) AS PRODUCT_NAME,D.PRODUCT_GROUP_ID
 			FROM PRODUCT D
 			WHERE D.PRODUCT_ID='$id'";
 		$get_result=mysqli_query($con,$get_query);
