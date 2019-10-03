@@ -356,6 +356,7 @@
                               <img class="loading" src="../../assets/img/loading/loading.gif">
                           </div>
                       </div>
+                    </div>
 
               
               <div class="modal fade" id="modal-default2" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
@@ -396,14 +397,14 @@
                             <label for="c2">Enter Amount Received</label>
                             <div class="input-group"> 
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">R</span>
+                                <span class="input-group-text " id="inputGroupFileAddon01">R</span>
                               </div>
-                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" autofocus />
-                              <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden>
+                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" autofocus >
+                              <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden >
                             </div> 
                           </div>
   
-                          <input type="submit" class="btn btn-success  ml-auto">
+                          <input type="submit" id="btnPayOff" class="btn btn-success  ml-auto">
 
                       </form>
                     </div>

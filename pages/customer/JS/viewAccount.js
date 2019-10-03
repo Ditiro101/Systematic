@@ -87,6 +87,11 @@ $(()=>{
 		e.preventDefault();
 		$("#modal-pay").modal("show");
 	});
+	$("#btnPayOff").on('click',function(e){
+		e.preventDefault();
+		let payAmount=$("#amount").val();
+		console.log(payAmount);
+	});
     $("#limit-form").on('submit',(function(e) {
         e.preventDefault();
         $.ajax({
