@@ -97,12 +97,10 @@ $(()=>{
 				data:{num:orderProducts.length,orderID:orderDetails["ORDER_ID"],productIDs:assignProductIDs,productQtys:assignProductQtys,differenceQty:quantityDifference},
 				beforeSend:function(){
 					$('.loadingModal').modal('show');
-				},
-				complete:function(){
-					$('.loadingModal').modal('hide');
 				}
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")

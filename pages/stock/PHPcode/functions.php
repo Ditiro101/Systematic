@@ -306,4 +306,82 @@
 		}
 	}
 
+	function addAuditForReceiveStock($con,$orderid,$status)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.1';
+		$userID = $_SESSION['userID'];
+		$changes="Order ID : ".$orderid."| Order Status : ".$status;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForWriteoffStock($con,$last_id,$warehouseid,$productid,$reason)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.2';
+		$userID = $_SESSION['userID'];
+		$changes="Writeoff ID : ".$last_id."| Warehouse ID : ".$warehouseid."| Product ID : ".$productid."| Reason : ".$reason;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForConvertStock($con,$productid,$productid2)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.4';
+		$userID = $_SESSION['userID'];
+		$changes="Product : ".$productid."| Converted Product : ".$productid2;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForPlaceStock($con,$productid,$productid2)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.5';
+		$userID = $_SESSION['userID'];
+		$changes="Source Warehouse : ".$productid."| Destination Warehouse : ".$productid2;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForStocktake($con,$productid)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='9.6';
+		$userID = $_SESSION['userID'];
+		$changes="Warehouse of Stocktake : ".$productid;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function getProductName($con,$id)
+	{
+		$get_query="SELECT CONCAT(D.NAME,' (',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN '1'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN D.UNITS_PER_CASE
+			ELSE D.CASES_PER_PALLET
+			END,' x ',D.PRODUCT_MEASUREMENT,D.PRODUCT_MEASUREMENT_UNIT,') ',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
+			ELSE 'Pallet'
+			END) AS PRODUCT_NAME
+			FROM PRODUCT D
+			WHERE D.PRODUCT_ID='$id'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 ?>

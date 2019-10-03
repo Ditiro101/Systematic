@@ -153,12 +153,10 @@ $(()=>{
 			$.ajax({
 				url:'PHPcode/stockcode.php',
 				type:'POST',
-				data:{choice:3},
-				complete:function(){
-					$('.loadingModal').modal('hide');
-				}
+				data:{choice:3}
 			})
 			.done(warehouseProductDetails=>{
+				$('.loadingModal').modal('hide');
 				warehouseProduct=JSON.parse(warehouseProductDetails);
 				console.log(warehouseProduct);
 				for(let k=1;k<=warehouse.length;k++)
@@ -303,12 +301,10 @@ $(()=>{
 				data:{choice:4,source:sourceID,destination:destinationID,product:placeProducts,qty:placeProductQty,length:placeProducts.length},
 				beforeSend:function(){
 						$('.loadingModal').modal('show');
-				},
-				complete:function(){
-					$('.loadingModal').modal('hide');
 				}
 				})
 				.done(data=>{
+					$('.loadingModal').modal('hide');
 					let doneData=data.split(",");
 					console.log(doneData);
 					if(doneData[0]=="T")

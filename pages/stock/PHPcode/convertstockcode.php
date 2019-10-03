@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	if(reduceWarehouseProductQty($con,$_POST["WAREHOUSE_ID"],$_POST["PRODUCT_ID"],$_POST["QUANTITY"]))
@@ -11,6 +12,10 @@
 				{
 					if(updateProductQty($con,$_POST["CPRODUCT_ID"],$_POST["CONVERTQTY"]))
 					{
+						
+						$sourceP=getProductName($con,$_POST["PRODUCT_ID"]);
+						$convertedP=getProductName($con,$_POST["CPRODUCT_ID"]);
+						addAuditForConvertStock($con,$sourceP[0]["PRODUCT_NAME"],$convertedP[0]["PRODUCT_NAME"]);
 						echo "T,Stock Converted Successfully!";
 					}
 					else
@@ -30,6 +35,9 @@
 				{
 					if(updateProductQty($con,$_POST["CPRODUCT_ID"],$_POST["CONVERTQTY"]))
 					{
+						$souP=getProductName($con,$_POST["PRODUCT_ID"]);
+						$conP=getProductName($con,$_POST["CPRODUCT_ID"]);
+						addAuditForConvertStock($con,$souP[0]["PRODUCT_NAME"],$conP[0]["PRODUCT_NAME"]);
 						echo "T,Stock Converted Successfully!";
 					}
 					else
