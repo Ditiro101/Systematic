@@ -63,9 +63,10 @@
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT SALE_ID ,SALE_AMOUNT,SALE_DATE
-                               FROM SALE
-                               WHERE SALE_DATE BETWEEN '$usedDate' AND  '$newDate'";
+                $alles_query ="SELECT CAST(SALE_DATE AS DATE) AS SALE_DATE ,SUM(SALE_AMOUNT) as SALE_AMOUNT,COUNT(SALE_ID) as TOTAL_SALES
+                                FROM SALE
+                                WHERE SALE_DATE BETWEEN '$usedDate' AND  '$newDate'
+                                GROUP BY CAST(SALE_DATE AS DATE)";
 
                 //var_dump($alles_query);
         
