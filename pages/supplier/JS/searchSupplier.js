@@ -1,6 +1,6 @@
 $(()=>{
 	$.ajax({
-		url: 'PHPcode/addSupplierCode.php',
+		url: 'PHPcode/addSuppliercode.php',
 		type: 'POST',
 		data: {choice:3}
 	})
