@@ -231,6 +231,7 @@ $(()=>{
             .done(data=>
             {
                 $('.loadingModal').modal('hide');
+                console.log(data);
                 let doneData=data.split(",");
                 if(doneData[0]=="T")
                 {           

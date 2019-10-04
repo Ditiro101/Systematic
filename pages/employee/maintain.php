@@ -138,7 +138,7 @@
                                   <label for="fileUpload" id="ImageUploadLabel">Upload Employee Picture</label>
                                   
                                   <input type='hidden' class='form-control' name='set' id="UploadsPic" class="form-control"/>
-                                  <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control" required/><br/>
+                                  <input type='file' class='form-control' id="fileUpload" name='UploadsPic'  class="form-control" /><br/>
                               </div>
                                    
                          
