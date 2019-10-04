@@ -218,24 +218,8 @@
 	{
 		$add_query="INSERT INTO SUPPLIER (NAME,VAT_NUMBER,CONTACT_NUMBER,EMAIL) VALUES ('$name','$vat','$contact','$email')";
 		$add_result=mysqli_query($con,$add_query);
-		$last_id = mysqli_insert_id($con);
 		if($add_result)
 		{
-			$DateAudit = date('Y-m-d H:i:s');
-		    $Functionality_ID='5.1';
-		    $userID = $_SESSION['userID'];
-		    $changes="ID : ".$last_id;
-	        $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
-	        $audit_result=mysqli_query($con,$audit_query);
-	        if($audit_result)
-	        {
-	          
-	        }
-	        else
-	        {
-	          
-	        }
-
 			return true;
 		}
 		else
