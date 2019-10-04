@@ -180,6 +180,12 @@ let createOrgAddress= function(tmp){
 		return formgroup;
 	}
 $(()=>{
+	$.ajax({
+      url: "JS/makeSale.js",
+      dataType: "script",
+      success: "success"
+    });
+
 	jQuery.validator.setDefaults({
   		debug: true,
   		success: "valid"
@@ -207,7 +213,7 @@ $(()=>{
 			$("#indinputAddress").autocomplete({
 				source:viewArr,
 				select: function(event,ui){
-				alert(ui.item.index);
+				//alert(ui.item.index);
 				let finalObj=useArr.filter(element=>element.locationId==ui.item.index);
 				console.log(finalObj);
 				$("#indinputSuburb").val(finalObj[0].address.district);
@@ -480,31 +486,26 @@ $(()=>{
 			// else
 			// {
 				$.ajax({
-				url: 'PHPcode/customercode.php',
-				type: 'POST',
-				data:{choice:4,num:indcount,name:arr["name"],title:arr["title"],surname:arr["surname"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
-				,
-			    beforeSend: function(){
-			            $('.loadingModal').modal('show');
-			     },
-			     complete: function(){
-			           // $('.loadingModal').modal('hide');
-			     }
-			     }
-			     )
+					url: 'PHPcode/customercode.php',
+					type: 'POST',
+					data:{choice:4,num:indcount,name:arr["name"],title:arr["title"],surname:arr["surname"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
+					,beforeSend: function(){
+				        $('.loadingModal').modal('show');
+				    }
+				})
 				.done(data=>{
 					//alert(data);
+					$('.loadingModal').modal('hide');
 					let doneData=data.split(",");
 					console.log(doneData);
 					if(doneData[0]=="T")
 					{
 						//alert("True");
-
-						window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
+						$('#registerCustomerModal').modal('hide');
 						$("#MMessage").text(doneData[1]);
 						$('#modal-title-default2').text("Success!");
-						$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
-						$("#modalHeader").css("background-color", "#1ab394");
+						$('#animation2').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader2").css("background-color", "#1ab394");
 						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
 
@@ -517,9 +518,98 @@ $(()=>{
 							if(data!="False")
 							{
 								let customersArray = JSON.parse(data);
-								//console.log(customersArray);
+								console.log(customersArray);
 								$('#menuOfCustomers').empty();
 								buildCustomersDropDown(customersArray);
+
+								$("input[id*='dropdownItemCust']").on('click', function(){
+									let customerIndex = this.name;
+
+
+									SALECUSTOMERID = customersArray[customerIndex].CUSTOMER_ID;
+									//console.log(SALECUSTOMERID);
+									$('#customerSearchInput').val("");
+									let custtomerID = $('#customerSearchInput').val();
+									let customerCard = $('#customerCard');
+									let customerInfo = '<tr><th class="py-1">Customer ID</th><td class="py-1">'+customersArray[customerIndex].CUSTOMER_ID+'</td></tr><tr><th class="py-1">Name</th><td class="py-1">'+customersArray[customerIndex].NAME+'</td></tr>';
+									INVOICE_CUSTOMER_NAME = customersArray[customerIndex].NAME;
+									INVOICE_CUSTOMER_EMAIL = customersArray[customerIndex].EMAIL;
+									if (customersArray[customerIndex].SURNAME != null) 
+									{
+										customerInfo +='<tr><th class="py-1">Surname</th><td class="py-1">'+customersArray[customerIndex].SURNAME+'</td></tr>';
+										INVOICE_CUSTOMER_NAME += " ";
+										INVOICE_CUSTOMER_NAME += customersArray[customerIndex].SURNAME;
+									}
+									else
+									{
+										customerInfo +='<tr><th class="py-1">VAT Number</th><td class="py-1">'+customersArray[customerIndex].VAT_NUMBER+'</td></tr>';
+									}
+									customerInfo +='<tr><th class="py-1">Contact No</th><td class="py-1">'+customersArray[customerIndex].CONTACT_NUMBER+'</td></tr>'
+									customerCard.html(customerInfo);
+
+									$.ajax({
+										url: 'PHPcode/getSaleDeliveryAddress.php',
+										type: 'POST',
+										data: { 
+											customerID : SALECUSTOMERID,
+										},
+										beforeSend: function() {
+								
+								    	}
+									})
+									.done(response => {
+										let customerAddressDetails = JSON.parse(response);
+										
+										if (response != "false") 
+										{
+											var addresses = "";
+											for (var i = 0; i < customerAddressDetails.length; i++) {
+												//console.log(customerAddressDetails[i].ADDRESS_ID);
+												var checked = "";
+												if (i == 0) 
+												{
+													checked = "checked";
+													INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+
+												}
+												addresses +='<div class="custom-control custom-radio mb-3 col"><input name="custom-radio-2" class="custom-control-input deliveryAddressSelect" array-index="'+i+'" id="addressSelect'+i+'" type="radio" value="'+customerAddressDetails[i].ADDRESS_ID+'"'+checked+'><label class="custom-control-label" for="addressSelect'+i+'">'+customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE+'</label></div>';
+											}
+											let addressesDiv = $('#customerAddresses');
+											addressesDiv.html(addresses);
+
+											SALEDELIVERYADDRESSID = $('.deliveryAddressSelect:checked').val();
+											//console.log(SALEDELIVERYADDRESSID);
+
+											$('.deliveryAddressSelect').on('input', function()
+											{
+												//console.log(this.value);
+												if (this.checked) 
+												{
+													SALEDELIVERYADDRESSID = this.value;
+													i = this.getAttribute("array-index");;
+													INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+													//console.log(INVOICE_CUSTOMER_ADDRESS);
+													//console.log(SALEDELIVERYADDRESSID);
+													
+
+												}
+												else
+												{
+													console.log(SALEDELIVERYADDRESSID);
+												}
+											});	
+										}
+										else
+										{
+											var addresses = "";
+											let addressesDiv = $('#customerAddresses');
+											addressesDiv.html(addresses);
+										}
+										
+										ajaxDone = true;
+									});
+									
+								});
 							}
 							else
 							{
@@ -532,8 +622,8 @@ $(()=>{
 						//alert(doneData[1]);
 						$('#modal-title-default2').text("Error!");
 						$('#modalText').text("Database error");
-						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-						$("#modalHeader").css("background-color", "red");
+						$('#animation2').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader2").css("background-color", "red");
 						$('#successfullyAdded').modal("show");
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
@@ -543,9 +633,6 @@ $(()=>{
 			
 		}
 	});
-
-
-
 
 
 	////////////////////////////////////////////////////////////////////
@@ -566,38 +653,149 @@ $(()=>{
 			let arr=getOrgInput();
 
 				$.ajax({
-				url: 'PHPcode/customercode.php',
-				type: 'POST',
-				data:{choice:1,num:orgcount,name:arr["name"],vat:arr["vat"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
+					url: 'PHPcode/customercode.php',
+					type: 'POST',
+					data:{choice:1,num:orgcount,name:arr["name"],vat:arr["vat"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:arr["customer_type"],status:arr["status"]}
+					,beforeSend: function(){
+				        $('.loadingModal').modal('show');
+				    }
 				})
 				.done(data=>{
 					//alert(data);
+					$('.loadingModal').modal('hide');
 					let doneData=data.split(",");
 					console.log(doneData);
 					if(doneData[0]=="T")
 					{
 						//alert("True");
-						 window.open("http://stockpath.co.za/pages/sendEmail.php?email="+arr["email"]+"&subject=StockPath Registration&message=You have been successfully registered");
-						$('#modal-title-default2').text("Success!");
-						$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
-						$("#modalHeader").css("background-color", "#1ab394");
+						$('#registerCustomerModal').modal('hide');
 						$("#MMessage").text(doneData[1]);
+						$('#modal-title-default2').text("Success!");
+						$('#animation2').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+						$("#modalHeader2").css("background-color", "#1ab394");
+						$("#btnClose").attr("onclick","window.location='../../customer.php'");
 						$("#displayModal").modal("show");
+
+						$.ajax({
+							url: 'PHPcode/getCustomers.php',
+							type: 'POST',
+							data: '' 
+						})
+						.done(data=>{
+							if(data!="False")
+							{
+								let customersArray = JSON.parse(data);
+								console.log(customersArray);
+								$('#menuOfCustomers').empty();
+								buildCustomersDropDown(customersArray);
+
+								$("input[id*='dropdownItemCust']").on('click', function(){
+									let customerIndex = this.name;
+
+
+									SALECUSTOMERID = customersArray[customerIndex].CUSTOMER_ID;
+									//console.log(SALECUSTOMERID);
+									$('#customerSearchInput').val("");
+									let custtomerID = $('#customerSearchInput').val();
+									let customerCard = $('#customerCard');
+									let customerInfo = '<tr><th class="py-1">Customer ID</th><td class="py-1">'+customersArray[customerIndex].CUSTOMER_ID+'</td></tr><tr><th class="py-1">Name</th><td class="py-1">'+customersArray[customerIndex].NAME+'</td></tr>';
+									INVOICE_CUSTOMER_NAME = customersArray[customerIndex].NAME;
+									INVOICE_CUSTOMER_EMAIL = customersArray[customerIndex].EMAIL;
+									if (customersArray[customerIndex].SURNAME != null) 
+									{
+										customerInfo +='<tr><th class="py-1">Surname</th><td class="py-1">'+customersArray[customerIndex].SURNAME+'</td></tr>';
+										INVOICE_CUSTOMER_NAME += " ";
+										INVOICE_CUSTOMER_NAME += customersArray[customerIndex].SURNAME;
+									}
+									else
+									{
+										customerInfo +='<tr><th class="py-1">VAT Number</th><td class="py-1">'+customersArray[customerIndex].VAT_NUMBER+'</td></tr>';
+									}
+									customerInfo +='<tr><th class="py-1">Contact No</th><td class="py-1">'+customersArray[customerIndex].CONTACT_NUMBER+'</td></tr>'
+									customerCard.html(customerInfo);
+
+									$.ajax({
+										url: 'PHPcode/getSaleDeliveryAddress.php',
+										type: 'POST',
+										data: { 
+											customerID : SALECUSTOMERID,
+										},
+										beforeSend: function() {
+								
+								    	}
+									})
+									.done(response => {
+										let customerAddressDetails = JSON.parse(response);
+										
+										if (response != "false") 
+										{
+											var addresses = "";
+											for (var i = 0; i < customerAddressDetails.length; i++) {
+												//console.log(customerAddressDetails[i].ADDRESS_ID);
+												var checked = "";
+												if (i == 0) 
+												{
+													checked = "checked";
+													INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+
+												}
+												addresses +='<div class="custom-control custom-radio mb-3 col"><input name="custom-radio-2" class="custom-control-input deliveryAddressSelect" array-index="'+i+'" id="addressSelect'+i+'" type="radio" value="'+customerAddressDetails[i].ADDRESS_ID+'"'+checked+'><label class="custom-control-label" for="addressSelect'+i+'">'+customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE+'</label></div>';
+											}
+											let addressesDiv = $('#customerAddresses');
+											addressesDiv.html(addresses);
+
+											SALEDELIVERYADDRESSID = $('.deliveryAddressSelect:checked').val();
+											//console.log(SALEDELIVERYADDRESSID);
+
+											$('.deliveryAddressSelect').on('input', function()
+											{
+												//console.log(this.value);
+												if (this.checked) 
+												{
+													SALEDELIVERYADDRESSID = this.value;
+													i = this.getAttribute("array-index");;
+													INVOICE_CUSTOMER_ADDRESS = customerAddressDetails[i].ADDRESS_LINE_1+', '+customerAddressDetails[i].NAME+', '+customerAddressDetails[i].CITY_NAME+', '+customerAddressDetails[i].ZIPCODE;
+													//console.log(INVOICE_CUSTOMER_ADDRESS);
+													//console.log(SALEDELIVERYADDRESSID);
+													
+
+												}
+												else
+												{
+													console.log(SALEDELIVERYADDRESSID);
+												}
+											});	
+										}
+										else
+										{
+											var addresses = "";
+											let addressesDiv = $('#customerAddresses');
+											addressesDiv.html(addresses);
+										}
+										
+										ajaxDone = true;
+									});
+									
+								});
+							}
+							else
+							{
+								alert("Error retrieving customers");
+							}
+						});
 					}
 					else
 					{
 						//alert(doneData[1]);
 						$('#modal-title-default2').text("Error!");
 						$('#modalText').text("Database error");
-						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
-						$("#modalHeader").css("background-color", "red");
+						$('#animation2').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader2").css("background-color", "red");
 						$('#successfullyAdded').modal("show");
 						$("#btnClose").attr("data-dismiss","modal");
 						$("#displayModal").modal("show");
 					}
 				});
-			
-			
 		}
 	});
 

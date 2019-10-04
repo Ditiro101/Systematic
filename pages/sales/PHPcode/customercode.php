@@ -20,7 +20,7 @@
 						{
 							if($i==$stopCount)
 							{
-								echo "T,Customer Added";
+								echo "T,Customer Added Successfully";
 							}
 							
 						}
@@ -39,7 +39,7 @@
 								{
 									if($i==$stopCount)
 									{
-										echo "T,Customer Added";
+										echo "T,Customer Added Successfully";
 									}
 								}
 								else
@@ -66,7 +66,7 @@
 										{
 											if($i==$stopCount)
 											{
-												echo "T,Customer Added";
+												echo "T,Customer Added Successfully";
 											}
 										}
 										else
@@ -95,7 +95,7 @@
 											{
 												if($i==$stopCount)
 												{
-													echo "T,Customer Added";
+													echo "T,Customer Added Successfully";
 												}
 											}
 											else

@@ -18,6 +18,8 @@
   <!-- Argon CSS -->
   <link type="text/css" href="../../assets/css/argon.css?v=1.0.0" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <!-- validation -->
+  <link href="../../assets/jqueryui/jquery-ui.css" rel="stylesheet">
   <!-- Validation Stylesheet -->
   <link rel="stylesheet" href="../../assets/css/site-demos.css">
 </head>
@@ -26,6 +28,12 @@
   .dropdown-menu{
     transform: translate3d(0px, 2.7rem, 0px)!important;
   }
+  .ui-autocomplete, #displayModal
+    {
+        position:absolute;
+        cursor:default;
+        z-index:4000 !important
+    }
 </style>
 
 <body>
@@ -78,17 +86,15 @@
                 </div>
                 <div class="col-6 ">
                   <div class="row">
-                    <div class="card col-10 table ml-5">
+                    <div class="card shadow table ml-5"  style="width: 100%;">
                       <div class="card-body">
                         <div class="row">
-                          <div class="justify-content-left d-inline pl-3">
-                            <div class="">
+                          <div class=" col-3 d-inline pl-3">
                               <a>
                                 <img src="../../images/user.png" class="rounded-circle" style="height:103px; width: 103px">
                               </a>
-                            </div>
                           </div>
-                          <div class="px-3 col d-inline">
+                          <div class="px-3 col-9 d-inline">
                             <style type="text/css">
                               table#customerCard tr
                               {
@@ -96,7 +102,7 @@
                                 height:10px !important;
                               }
                             </style>
-                            <table class="table align-items-center table-flush table-borderless table-responsive bg-white" id= "customerCard">
+                            <table class="table align-items-center table-flush table-borderless table-responsive bg-white mr-0 pr-0" id= "customerCard">
                               <tbody class="list">
                                 <tr></tr> 
                                 <tr></tr> 
@@ -115,9 +121,9 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-3 py-auto vertical-center pt-5">
+                <div class="col-3 py-auto vertical-center pl-3 pt-5">
                   <span class=" my-auto align-middle">
-                    <button class="btn btn-warning" data-toggle="modal" data-target="#registerCustomerModal">
+                    <button class="btn bg-gradient-custom float-right px-4" style="width: 13rem;" data-toggle="modal" data-target="#registerCustomerModal">
                         <span class="btn-inner--icon mr-2">
                           <i class="fas fa-user-plus"></i>
                         </span>
@@ -285,16 +291,6 @@
       <?php include_once("../footer.php");?>
     </div>
   </div>
-  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
-      <div class="modal-dialog modal-sm">
-          <div class="modal-content px-auto" style="">
-              <img class="loading" src="../../assets/img/loading/loading.gif">
-          </div>
-      </div>
-  </div>
-
-  
-
 
   <div class="modal fade" id="registerCustomerModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
@@ -445,33 +441,9 @@
                     </div>
                     <div class="row">
                       <div class="col-md-2 mt-3 text-center">
-                              <button id="btnSaveorg" type="button" class="btn btn-primary" >
-                                  Submit
-                              </button>
-                          </div>
-                      </div>
-                  </div>
-                      
-                    <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
-                      <div class="modal-dialog modal- modal-dialog-centered modal- " role="document">
-                          <div class="modal-content">
-                            
-                              <div class="modal-header">
-                                  <h6 class="modal-title" id="MTopW modal-title-default">Success!</h6>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">×</span>
-                                  </button>
-                              </div>
-                              
-                              <div class="modal-body">
-                                  <p id="MMessage"></p>
-                                  
-                              </div>
-                              
-                              <div class="modal-footer">
-                                  <button type="button" class="btn btn-link ml-auto" id="btnClose" >Close</button> 
-                              </div>
-                              
+                          <button id="btnSaveorg" type="button" class="btn btn-primary" >
+                              Submit
+                          </button>
                           </div>
                       </div>
                     </div>
@@ -482,7 +454,31 @@
       </div>
     </div>
   </div>
+  <div class="modal fade errorModal successModal text-center" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true" id="displayModal">
+    <div class="modal-dialog modal- modal-dialog-centered modal- " role="document">
+      <div class="modal-content">
+        <div class="modal-header" id="modalHeader2">
+            <h6 class="modal-title" id="modal-title-default">Success!</h6>
+        </div>
+        <div class="modal-body">
+            <p id="MMessage"></p>
+            <div id="animation2" style="text-align:center;">
 
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-link ml-auto" data-dismiss="modal" id="btnClose" >Close</button> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content px-auto" style="">
+            <img class="loading" src="../../assets/img/loading/loading.gif">
+        </div>
+    </div>
+  </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>
