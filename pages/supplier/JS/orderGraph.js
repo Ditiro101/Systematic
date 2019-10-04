@@ -3,7 +3,7 @@ $(()=>{
         var salePeriod = "Weekly";
         //var dateTo = $('#dateTo').text().trim();
         let tableHeader;
-        console.log(salePeriod);
+        //console.log(salePeriod);
         if(salePeriod=="Weekly")
         {
             $("#PeriodAttrOrder").text("Weekly Total Orders");
@@ -20,13 +20,13 @@ $(()=>{
             
             if(data!="False")
             {
-                console.log(data);
+               // console.log(data);
                 let arr=JSON.parse(data);
-                console.log(arr);
+                //console.log(arr);
 
 
-                console.log(arr[0]["ORDER_DATE"]);
-                console.log( moment(arr[0]["ORDER_DATE"]).format('dddd'));
+               // console.log(arr[0]["ORDER_DATE"]);
+                //console.log( moment(arr[0]["ORDER_DATE"]).format('dddd'));
                 let tableEntries="";
                 let formView="";
                 let totalOrders = 0;
@@ -37,167 +37,148 @@ $(()=>{
                 let statictotalOrders = 0;
                 let futureDay;
                 let arrLength = arr.length;
-                console.log(arrLength);
-
+                //console.log(arrLength);
+                let  orderDates = [];
                 let orderGraphDays = [];
 
 
                if(arr != "Empty")
                {
-                for(let k=0;k<arr.length;k++)
-                {
-                    let day = toString(arr[k]["ORDER_DATE"]);
-                    daysOfTheWeek = arr[k]["ORDER_DATE"].split(" ");
-                    if(k < arrLength-1)
+                
+                    for(let k=0;k<arr.length;k++)
                     {
-                        futureDay = arr[k+1]["ORDER_DATE"].split(" ");
-                        console.log(futureDay[0]);
-                    }
-                    else
-                    {
-                        futureDay = arr[k]["ORDER_DATE"].split(" ");
-                    }
+                        daysOfTheWeek= arr[k]["ORDER_DATE"];
+                       orderDates.push(daysOfTheWeek);
                     
-                    var formattedTime = moment(daysOfTheWeek[0]).format('dddd');
-                    ++totalOrders;
-                    
-                    
-                      
-                       
-
-                        if(previousDay == futureDay[0])
+                        
+                         
+                        totalOrders = arr[k]["TOTAL_ORDERS"];
+                        //console.log(totalOrders);
+                        formattedTime = daysOfTheWeek;
+                        statictotalOrders =  parseFloat(arr[k]["SALE_AMOUNT"]);
+                       orderTotalArray.push(totalOrders);
+                        if(salePeriod=="Weekly"  || salePeriod == "Daily")
                         {
-                            if(salePeriod=="Weekly")
-                            {
-                                //orderTotalArray.push(arr[k]["SALE_AMOUNT"]);
-                                previousDay = daysOfTheWeek[0];
-                                console.log("1");
-                            }
-                            else if(salePeriod=="Monthly")
-                            {
-                                //orderTotalArray.push(arr[k]["SALE_AMOUNT"]);
-                                previousDay = daysOfTheWeek[0];
-                            }
-                            else
-                            {
-                               
-                                previousDay = daysOfTheWeek[0];
-                            }
+                            formattedTime = moment(daysOfTheWeek).format('dddd');
                         }
-                        else if(daysOfTheWeek[0] == previousDay)
-                        {
-                            
-                            
-                            if(salePeriod=="Weekly")
-                            {
-                                //orderTotalArray.push(arr[k]["SALE_AMOUNT"]);
-                                previousDay = daysOfTheWeek[0];
-                              
-                            }
-                            else if(salePeriod=="Monthly")
-                            {
-                                //orderTotalArray.push(arr[k]["SALE_AMOUNT"]);
-                                previousDay = daysOfTheWeek[0];
-                            }
-                            else
-                            {
-                                
-                                previousDay = daysOfTheWeek[0];
-                            }
-                            
-    
-                          
-                            
-                        }
-                        if(previousDay != futureDay[0] && daysOfTheWeek[0] != futureDay[0])
-                        {
-                      
-
-                               
-                                
-                                    //orderTotalArray.push(arr[k]["SALE_AMOUNT"]);
-                                    //formView="<form action='view-order.php' method='POST'><input type='hidden' name='ORDER_ID' value='"+ordersArray[k]["ORDER_ID"]+"'>"+"<button class='btn btn-icon btn-2 btn-success btn-sm' type='submit'><span class='btn-inner--icon'><i class='fas fa-eye'></i></span><span class='btn-inner--text'>View</span></button>"+"</form>";
-                                    tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='totalOrders'>"+totalOrders +"</td><td class='unit-right' id='SaleTotal'>"+statictotalOrders.toFixed(2)+"</td></tr>";
-                                    previousDay = daysOfTheWeek[0];
-
-                                    orderTotalArray.push(totalOrders);
-                                    formattedTime = moment(daysOfTheWeek[0]).format('dddd');
-                                    orderGraphDays.push(formattedTime);
-                                    //console.log("1");
-                                    //console.log(totalOrders);
-                                    totalOrders = 0;
-                                    statictotalOrders = 0;
-
-                                    
-                        }
-                    if(k == arrLength-1 && previousDay==daysOfTheWeek[0])
-                    {
-                       
-                        tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='totalOrders'>"+totalOrders +"</td><td class='unit-right' id='SaleTotal'>"+statictotalOrders.toFixed(2)+"</td></tr>";
-                        previousDay = daysOfTheWeek[0];
-                        orderTotalArray.push(totalOrders);
-                        formattedTime = moment(daysOfTheWeek[0]).format('dddd');
                         orderGraphDays.push(formattedTime);
                         
-
-                    }
-                    else
-                    {
-                        
-                        previousDay = daysOfTheWeek[0];
-                        if(k == arrLength-1 && previousDay==daysOfTheWeek[0])
-                        {
                             tableEntries+="<tr><td class='no'>"+formattedTime+"</td><td class='desc' id='totalOrders'>"+totalOrders +"</td><td class='unit-right' id='SaleTotal'>"+statictotalOrders.toFixed(2)+"</td></tr>";
-                            previousDay = daysOfTheWeek[0];
-                            orderTotalArray.push(totalOrders);
-                            formattedTime = moment(daysOfTheWeek[0]).format('dddd');
-                            orderGraphDays.push(formattedTime);                            
-                        }
+                            
 
-                        console.log("Catch");
-                    }
 
+                        
                     
-                   
-                }
-               
+                    }
+                
 
             
                 
-                $("#tBody").append(tableEntries);
-               
-
+               // $("#tBody").append(tableEntries);
+             
 
 
                //Display Graph
-                console.log(orderGraphDays);
-                orderTotalArray.reverse();
-                console.log(orderTotalArray);
-                /*for(int i = 0;i<orderGraphDays.length;i++)
+                //console.log(orderGraphDays);
+               orderTotalArray.reverse();
+                //console.log( orderTotalArray);
+                orderDates.reverse();
+                //console.log(orderDates);
+                var day = new Date();
+
+               
+                var prevDay = new Date(day);
+                prevDay.setDate(day.getDate());
+                let comDate;
+                comDate = prevDay.getFullYear()+'-'+(prevDay.getMonth()+1)+'-'+(prevDay.getDate());
+                console.log(orderDates);
+                console.log(comDate);
+                let newWeek = [];
+                let count = 0;
+                day = prevDay;
+                let tempOrderArray = [];
+                let arraComparer;
+                let newDatesArray = [];
+                    console.log( orderTotalArray);
+                if(comDate == arraComparer)
+                {
+                    console.log("Compare Works!");
+                }
+                let countArr = 0;
+                if(salePeriod=="Weekly" || salePeriod=="Daily")
                 {
 
-                }*/
-                //have while loop that starts from the back to put the specefic values of a specefic day onto the graph.
-                let tempOrderArray = [];
-              
-                    for(let a=orderTotalArray.length-1;a>=0;a--)
+                    if(salePeriod=="Weekly")
                     {
-                        
-                            tempOrderArray.push(orderTotalArray[a]);
-                         
+                        while(count <7)
+                        {
+
+                            arraComparer = new Date(orderDates[countArr]);
+                            arraComparer = arraComparer.getFullYear()+'-'+(arraComparer.getMonth()+1)+'-'+(arraComparer.getDate());
+                            //console.log(arraComparer);
+                            //console.log(comDate);
+                           if(comDate==arraComparer)
+                           {
+                                //formattedTime = moment(orderDates[count]).format('dddd');
+                                newWeek.push(arraComparer);
+                                tempOrderArray.push( orderTotalArray[countArr]);
+                                //console.log("Works: " + countArr);
+                                //count++;
+                                countArr +=1;
+
+                           }
+                           else
+                           {
+                                //formattedTime = moment(comDate).format('dddd');
+                                newWeek.push(comDate);
+                               
+                                tempOrderArray.push(0);
+                                
+
+                           }
+                           count +=1;
+                          
+                           
+                           day = new Date(prevDay);
+                           //prevDay = prevDay.getFullYear()+'-'+(prevDay.getMonth())+'-'+(prevDay.getDate()-1);
+                           prevDay.setDate(day.getDate()-1);
+                           comDate = prevDay.getFullYear()+'-'+(prevDay.getMonth()+1)+'-'+prevDay.getDate();
+                           //console.log(comDate);
+                           //console.log(moment(comDate).format('dddd'));
+
+                        }
+
+
+                        for(let i =0;i<newWeek.length;i++)
+                        {
+                            day = new Date(newWeek[i]);
+                            formattedTime = moment(day).format('dddd');
+                            newDatesArray.push(formattedTime);
+        
+                        }
                        
                     }
-
                    
-    
-                console.log(tempOrderArray);
+
+                    if(salePeriod=="Daily")
+                    {
+                        newWeek.push(orderGraphDays[0]);
+                        tempOrderArray.push( orderTotalArray[0]);
+                    }
+                }
+                
+                //console.log(tempOrderArray);
+                //console.log(newWeek);
+              
+                newDatesArray.reverse();
+               tempOrderArray.reverse();
                 
                let maxValue = Math.max(...tempOrderArray);
-               console.log(maxValue);
+               //console.log(maxValue);
                 new Chart(document.getElementById("bar-chart"), {
                     type: 'bar',
                     data: {
-                      labels: orderGraphDays,
+                      labels: newDatesArray,
                       datasets: [{ 
                           data: tempOrderArray,
                           label: "Orders",
