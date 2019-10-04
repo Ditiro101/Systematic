@@ -167,6 +167,19 @@ $(()=>{
 
     });
     ////////////////////////////////////////////////////
+    var imageLoader = document.getElementById('fileUpload');
+    imageLoader.addEventListener('change', handleImage, false);
+
+    function handleImage(e) {
+        var reader = new FileReader();
+        reader.onload = function (event) {
+            
+            $('.uploader img').attr('src',event.target.result);
+        }
+        reader.readAsDataURL(e.target.files[0]);
+    }
+
+
     let emID= $("#employeeID").text();
     $("#mainf").on("submit",function(e)
     {//use ID of the form
