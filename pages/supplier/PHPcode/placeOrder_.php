@@ -1,6 +1,27 @@
 <?php
 	
 	include_once("../../sessionCheckPages.php");
+
+	function getOrderAmount($con,$orderid)
+	{
+		$get_query="SELECT SUM(A.PRICE) AS TOTAL_AMOUNT,B.ORDER_ID
+			FROM ORDER_PRODUCT A
+			JOIN ORDER_ B ON A.ORDER_ID=B.ORDER_ID
+			WHERE B.ORDER_ID='$orderid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			$row=$get_result->fetch_assoc();
+			$cityID=$row["TOTAL_AMOUNT"];
+		}
+		else
+		{
+			$cityID=false;
+		}
+		return $cityID;
+	}
+
+
 	$supplierID = "";
 	$userID = "";
 	$addOrderCollection;

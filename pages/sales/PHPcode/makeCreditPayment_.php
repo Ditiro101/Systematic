@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("functions.php");
 
 	$saleID = "";
@@ -42,7 +43,7 @@
 			$DateAudit = date('Y-m-d H:i:s');
 			$Functionality_ID='7.5';
 			$userID = $_SESSION['userID'];
-			$changes="Sale ID : ".$saleid;
+			$changes="Sale ID : ".$saleID;
 		    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
 		    $audit_result=mysqli_query($DBConnect,$audit_query);
 			$response = "success";
