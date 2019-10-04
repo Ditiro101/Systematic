@@ -82,7 +82,7 @@ $(()=>{
 					theProfit = "R"+ theProfit;
 
 
-					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='1' min='0' max='"+productsArray[productIndex].QUANTITY_AVAILABLE+"' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0 unitPriceSpinBox' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td>");
+					$('#productLine'+productElementsCount).html("<input type='hidden' value='"+productsArray[productIndex].PRODUCT_ID+"'><td class='py-2 px-0' id='quantityCol'><div class='input-group mx-auto' style='width: 4rem'><input type='number' value='1' min='0' max='"+productsArray[productIndex].QUANTITY_AVAILABLE+"' step='1' data-number-to-fixed='00.10' data-number-stepfactor='1' class='form-control currency pr-0 quantityBox' onchange='calculateRowTotalQuantity(this)' id='quantity"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' /></div> </td><td class='py-2 pl-0'>"+ theProductName +"</td><td class='py-2 px-0 float-center unitPrice'><div class='input-group mx-auto' style='width: 6.4rem'> <div class='input-group-prepend'><span class='input-group-text' id='inputGroupFileAddon01' style='height: 2rem; font-size: 0.9rem'>R</span></div><input type='number' value='"+theUnitPrice+"' min='0' step='.10' data-number-to-fixed='00.10' data-number-stepfactor='10' class='form-control currency pr-0 unitPriceSpinBox' onchange='calculateRowTotalUnitPrice(this)' id='unitPrice"+productsArray[productIndex].PRODUCT_ID+"' style='height: 2rem;' onchange='setTwoNumberDecimal(this)' /></div> </td><td class='text-right py-2 pr-1'>"+theGuidePrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theCostPrice+"</td><td class='text-right py-2 pr-1 pl-2'>"+theProfit+"</td><td class='text-right py-2 pr-1 price'>R0.00</td><td class='pl-2 px-0 py-2'><a class='btn py-0 px-2' id='deleteRow' onclick='removeRow(this)'><i class='fas fa-times-circle' style='color: red;'></i></a></td>");
 					let productsTable = $('#productsTable');
 					productsTable.append('<tr id="productLine'+(productElementsCount+1)+'"></tr>');
 					productElementsCount++;
@@ -126,7 +126,7 @@ $(()=>{
 				{
 					//console.log(this.value);
 					//console.log(this.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML);
-					var costPriceOfRow = this.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML;
+					var costPriceOfRow = this.parentNode.parentNode.nextSibling.nextSibling.innerHTML;
 					costPriceOfRow = costPriceOfRow.slice(1);
 					costPriceOfRow = costPriceOfRow.replace(/\s/g, '');
 					costPriceOfRow = parseFloat(costPriceOfRow);
@@ -184,12 +184,12 @@ $(()=>{
 				$('#customerSearchInput').val("");
 				let custtomerID = $('#customerSearchInput').val();
 				let customerCard = $('#customerCard');
-				let customerInfo = '<tr><th style="width: 12rem">Customer ID</th><td >'+customersArray[customerIndex].CUSTOMER_ID+'</td></tr><tr><th>Name</th><td>'+customersArray[customerIndex].NAME+'</td></tr>';
+				let customerInfo = '<tr><th class="py-1">Customer ID</th><td class="py-1">'+customersArray[customerIndex].CUSTOMER_ID+'</td></tr><tr><th class="py-1">Name</th><td class="py-1">'+customersArray[customerIndex].NAME+'</td></tr>';
 				INVOICE_CUSTOMER_NAME = customersArray[customerIndex].NAME;
 				INVOICE_CUSTOMER_EMAIL = customersArray[customerIndex].EMAIL;
 				if (customersArray[customerIndex].SURNAME != null) 
 				{
-					customerInfo +='<tr><th>Surname</th><td >'+customersArray[customerIndex].SURNAME+'</td></tr>';
+					customerInfo +='<tr><th class="py-1">Surname</th><td class="py-1">'+customersArray[customerIndex].SURNAME+'</td></tr>';
 					INVOICE_CUSTOMER_NAME += " ";
 					INVOICE_CUSTOMER_NAME += customersArray[customerIndex].SURNAME;
 				}
@@ -197,7 +197,7 @@ $(()=>{
 				{
 					customerInfo +='<tr><th>VAT Number</th><td >'+customersArray[customerIndex].VAT_NUMBER+'</td></tr>';
 				}
-				customerInfo +='<tr><th>Contact No</th><td >'+customersArray[customerIndex].CONTACT_NUMBER+'</td></tr>'
+				customerInfo +='<tr><th class="py-1">Contact No</th><td class="py-1">'+customersArray[customerIndex].CONTACT_NUMBER+'</td></tr>'
 				customerCard.html(customerInfo);
 
 				$.ajax({
@@ -745,7 +745,7 @@ function calculateRowTotalQuantity(element)
 	rowTotal = numberWithSpaces(rowTotal);
 	rowTotal = "R"+ rowTotal;
 
-	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.innerHTML = rowTotal;
+	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = rowTotal;
 	calculateVATandTotal();
 }
 
@@ -759,17 +759,18 @@ function calculateRowTotalUnitPrice(element)
 	rowTotal2 = numberWithSpaces(rowTotal2);
 	rowTotal2 = "R"+ rowTotal2;
 
-	element.parentNode.parentNode.nextSibling.innerHTML = rowTotal2;
+	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = rowTotal2;
 	calculateVATandTotal();
 
-	var costPrice = element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML.replace("R","").replace(/\s/g, "");
+	var costPrice = element.parentNode.parentNode.nextSibling.nextSibling.innerHTML.replace("R","").replace(/\s/g, "");
+	console.log(costPrice);
 
 	var newProfit = thisUnitPrice - costPrice;
 	newProfit = newProfit.toFixed(2);
 	newProfit = numberWithSpaces(newProfit);
 	newProfit = "R"+ newProfit;
 
-	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling.innerHTML = newProfit;
+	element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.innerHTML = newProfit;
 	//console.log(element.parentNode.parentNode.nextSibling.nextSibling.nextSibling.nextSibling.nextSibling);
 
 	setTwoNumberDecimal(element);
@@ -838,3 +839,6 @@ $(document).on('change','.quantityBox',function(e){
 	}
 })
 
+// calculateRowTotalUnitPrice(unitPriceElement);
+// calculateRowTotalQuantity(quantityElement);
+// calculateVATandTotal();
