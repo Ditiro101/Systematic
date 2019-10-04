@@ -129,7 +129,8 @@ $(()=>{
     });
 	////////////////////////////////////////////
 	$("#tit").val(preTitle);
-	$("#inputAddress").val(changedAddress);
+    $("#inputAddress").val(changedAddress);
+    console.log(changedAddress);
 	$("#inputSuburb").val(changedSuburb);
 	$("#inputCity").val(changedCity);
 	/////////////////////////////////////////
@@ -166,6 +167,7 @@ $(()=>{
 
     });
     ////////////////////////////////////////////////////
+    let emID= $("#employeeID").text();
     $("#mainf").on("submit",function(e)
     {//use ID of the form
         e.preventDefault();
@@ -219,11 +221,25 @@ $(()=>{
                 let doneData=data.split(",");
                 if(doneData[0]=="T")
                 {           
+                    
+                    console.log(emID);
                     $("#MMessage").text(doneData[1]);
                     $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
                     $("#modalHeader").css("background-color", "#1ab394");
-                    $("#btnClose").attr("onclick","window.location='../../employee.php'");
+                   // $("#btnClose").attr("onclick","window.location='../../view.php?employeeID = '");
                     $("#displayModal").modal("show");
+
+
+                      $("#btnClose").click(function(e) {
+
+                                    e.preventDefault();
+                                   
+                                    window.location=`view.php?employeeID=${emID}`;
+                                });
+                                setTimeout(function(){
+                                    $('#displayModal').modal("hide");
+                                     window.open(`view.php?employeeID=${emID}`, '_blank');
+                                }, 2000);
                 }
                 else
                 {

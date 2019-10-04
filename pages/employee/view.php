@@ -362,10 +362,14 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                   
                   <div class="pt-3"><b>Contact Number : </b><p class="d-inline"><?php echo $contactNumber ?></p></div>
                 </hr>
+                <?php 
+                
+                $address = $addressInfoLine1;
+                ?>
                 <hr class="h5 font-weight-300 pb-0 mt-3 pt-0">
                   <i class="ni location_pin mr-2 text-center"></i>
                   <h3 class="text-center pt-0 mt-0"><b>Address :</b></h3>
-                  <p class="mb-0"><?php echo $addressInfoLine1;?></p>
+                  <p class="mb-0" id="AddressMan"><?php echo $addressInfoLine1;?></p>
                   <p class="mb-0" id="eSuburb"><?php echo $suburbName.", ".$cityName.", ".$zipCode;?></p>
                   <p class="mb-0">South Africa</p>
                 </div>
@@ -382,9 +386,9 @@ if(mysqli_num_rows($Wagequery_QR)>0)
                         <input type="hidden" name="TITLE_NAME" value=<?php echo $titleName;?>>
                         <input type="hidden" id="EMPLOYEE_TYPE_NAME" name="EMPLOYEE_TYPE_NAME">
                         <input type="hidden" name="EMPLOYEE_STATUS_ID" value=<?php echo $employeeStatus;?>>
-                        <input type="hidden" name="ADDR" id="ADDR">
-                        <input type="hidden" name="SUBURB" id="SUBURB">
-                        <input type="hidden" name="CITY" id="CITY">
+                        <input type="hidden" name="ADDR" id="ADDR" value="<?php echo $address?>">
+                        <input type="hidden" name="SUBURB" id="SUBURB" value=<?php echo $suburbName;?>>
+                        <input type="hidden" name="CITY" id="CITY" value=<?php echo $cityName;?>>
                         <input type="hidden" name="ZIP" value=<?php echo $zipCode;?>>
                         <button class="btn btn-icon btn-2 btn-primary btn-sm px-3" type="submit" style="width: 7rem">
                           <span class="btn-inner--icon"><i class="fas fa-wrench"></i>

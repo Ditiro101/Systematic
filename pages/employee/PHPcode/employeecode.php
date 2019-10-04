@@ -207,7 +207,7 @@
 															
 														if(($res== true))
 														{
-															echo "T,Employee Maintained";
+															echo "T,Employee Maintained,".$employeeID;
 															
 														}
 														else

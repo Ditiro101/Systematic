@@ -3,9 +3,9 @@ $(()=>{
 	let changedAddress=eAddr.replace(" ","/");
 	let changedSuburb=$("#eSuburb").text().replace(" ","/");
     let changedCity=$("#eCity").text().replace(" ","/");
-	$("#ADDR").val(changedAddress);
+	/*$("#ADDR").val(changedAddress);
     $("#SUBURB").val(changedSuburb);
-    $("#CITY").val(changedCity);
+    $("#CITY").val(changedCity);*/
     $("#EMPLOYEE_TYPE_NAME").val($("#eEmployeeTypeName").text().replace(" ","/"));
 
     let wageEarning=$("#wager").val();

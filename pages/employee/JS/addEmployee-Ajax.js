@@ -239,8 +239,12 @@ $(document).ready(function()
 
                                     e.preventDefault();
                                    
-                                    window.location=`../../employee.php`;
+                                    window.location=`view.php?employeeID=${employeeID}`;
                                 });
+                                setTimeout(function(){
+                                    $('#displayModal').modal("hide");
+                                     window.open(`view.php?employeeID=${employeeID}`, '_blank');
+                                }, 2000);
                     }
                     else if(confirmation.includes("Employee Exists"))
                     {
