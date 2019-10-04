@@ -123,10 +123,7 @@
                           <label for="zip">Zip</label>
                           <input type="text" class="form-control indinputZip" id="indinputZip" name="zip" readonly>
                         </div>
-                      </div> 
-
-
-                      
+                      </div>  
                     </form>
                     <div class="form-row">
                       <div class="form-group col">

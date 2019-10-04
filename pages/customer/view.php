@@ -158,7 +158,7 @@
                         <input type="hidden" name="SUBURB" id="SUBURB">
                         <input type="hidden" name="CITY" id="CITY">
                         <!-- <input type="hidden" name="ZIP" value=<?php echo json_encode($suburbInfo);?>> -->
-                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit" style="width: 9rem">
+                        <button class="btn btn-icon btn-2 btn-primary btn-sm px-5" type="submit" style="width: 10rem">
                           <span class="btn-inner--icon"><i class="fas fa-wrench"></i>
                           </span>
                           <span class="btn-inner--text">Edit</span>
@@ -168,7 +168,7 @@
                     <div class="col d-inline mx-0 px-0">
                       <form id="formDelete" type='POST' class="d-inline">
                         <input type="hidden" name="ID" value=<?php echo $cusID;?>>
-                        <button class="btn btn-icon btn-2 btn-danger btn-sm" type="submit" style="width: 9rem">
+                        <button class="btn btn-icon btn-2 btn-danger btn-sm" type="submit" style="width: 10rem">
                           <span class="btn-inner--icon"><i class="fas fa-trash"></i>
                           </span>
                           <span class="btn-inner--text">Delete</span>
