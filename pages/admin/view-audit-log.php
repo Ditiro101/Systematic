@@ -224,6 +224,8 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <!-- Moment JS -->
+  <script src="../../assets/js/moment.js"></script>
   <script type="text/javascript" src="JS/viewAudit.js"></script>
 </body>
 

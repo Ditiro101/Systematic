@@ -22,7 +22,8 @@ $(()=>{
 			for(let k=0;k<arr.length;k++)
 			{
 				options+="<option value='"+arr[k]["NAME"]+"' >"+arr[k]["NAME"]+"</option>";
-				tableEntries+="<tr><td>"+arr[k]["USERNAME"]+"</td><td>"+arr[k]["AUDIT_DATE"]+"</td><td>"+arr[k]["NAME"]+"</td><td>"+arr[k]["CHANGES"]+"</td></tr>";
+				var formattedTime = moment(arr[k]["AUDIT_DATE"]).format('L - LT');
+				tableEntries+="<tr><td>"+arr[k]["USERNAME"]+"</td><td>"+formattedTime+"</td><td>"+arr[k]["NAME"]+"</td><td>"+arr[k]["CHANGES"]+"</td></tr>";
 			}
 			$("#tBody").append(tableEntries);
 			$("#function_name").append(options);
