@@ -19,15 +19,18 @@
     else
     {
 
+    	$username=$_POST["username"];
+    	$sub_name=$_POST["sub_name"];
+    	$changes=$_POST["changed"];
 
-		$sql_query ="SELECT AUDIT_LOG.AUDIT_DATE, USER.USERNAME ,SUB_FUNCTIONALITY.NAME, AUDIT_LOG.CHANGES 
-			FROM AUDIT_LOG 
-			INNER JOIN USER ON AUDIT_LOG.USER_ID = USER.USER_ID 
-			INNER JOIN SUB_FUNCTIONALITY ON AUDIT_LOG.SUB_FUNCTIONALITY_ID = SUB_FUNCTIONALITY.SUB_FUNCTIONALITY_ID
-			ORDER BY AUDIT_LOG.AUDIT_DATE DESC";
+		$sql_query ="SELECT AUDIT_LOG.AUDIT_DATE, USER.USERNAME , SUB_FUNCTIONALITY.NAME, AUDIT_LOG.CHANGES
+		FROM AUDIT_LOG 
+		INNER JOIN USER ON AUDIT_LOG.USER_ID = USER.USER_ID 
+		INNER JOIN SUB_FUNCTIONALITY ON AUDIT_LOG.SUB_FUNCTIONALITY_ID = SUB_FUNCTIONALITY.SUB_FUNCTIONALITY_ID 
+		WHERE USER.USERNAME = '$username' AND SUB_FUNCTIONALITY.NAME='$sub_name' AND AUDIT_LOG.CHANGES LIKE '%$changes%'";
 	    $result = mysqli_query($con,$sql_query);
 	    //$row = mysqli_fetch_array($result);
-
+	    //var_dump( $result);
 	    if (mysqli_num_rows($result)>0) {
 	        $count=0;
 	        while ($row=$result->fetch_assoc())
@@ -38,8 +41,6 @@
 	        }
 	        $json_data=json_encode($vals);
 	        echo json_encode($vals);
-	        // echo mysqli_num_rows($result);
-	        file_put_contents('export_audit.json', $json_data);
 	        
 	    }
 	    else{
