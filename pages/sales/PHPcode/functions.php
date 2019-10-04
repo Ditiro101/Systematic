@@ -49,9 +49,9 @@
 		}
 	}
 
-	function recordPayment($con,$id,$amount,$type)
+	function recordPayment($con,$id,$amount,$dte,$type)
 	{
-		$add_query="INSERT INTO PAYMENT (SALE_ID,AMOUNT_PAID,PAYMENT_TYPE_ID) VALUES ('$id','$amount','$type')";
+		$add_query="INSERT INTO PAYMENT (SALE_ID,AMOUNT_PAID,PAYMENT_DATE,PAYMENT_TYPE_ID) VALUES ('$id','$amount','$dte','$type')";
 		$add_result=mysqli_query($con,$add_query);
 		if($add_result)
 		{

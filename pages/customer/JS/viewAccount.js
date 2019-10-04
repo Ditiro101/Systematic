@@ -95,6 +95,7 @@ $(()=>{
 		e.preventDefault();
 		let payAmount=$("#amount").val();
 		let change=0;
+		$("#modal-pay").modal("hide");
 		if(payAmount>amountDue)
 		{
 			change=payAmount-amountDue;
@@ -120,9 +121,8 @@ $(()=>{
 					$('#modalText').text("Account Payment Recorded Successfully.");
 					$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
 					$("#modalHeader").css("background-color", "#1ab394");
-					$('#successfullyAdded').modal("show");
-					//$("#btnClose").attr("onclick",location.reload());
-					$("#displayModal").modal("show");	
+					$("#btnClose").attr("onclick",location.reload());
+					$('#successfullyAdded').modal("show");	
 				}
 				else
 				{
@@ -130,9 +130,8 @@ $(()=>{
 					$('#modalText').text("Account Payment Recorded Successfully. Change is "+change);
 					$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
 					$("#modalHeader").css("background-color", "#1ab394");
+					$("#btnClose").attr("onclick",location.reload());
 					$('#successfullyAdded').modal("show");
-					//$("#btnClose").attr("onclick",location.reload());
-					$("#displayModal").modal("show");
 				}
 				
 			}
@@ -142,9 +141,8 @@ $(()=>{
 				$('#modalText').text("Record Payment Failed");
 				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
 				$("#modalHeader").css("background-color", "red");
-				$('#successfullyAdded').modal("show");
 				$("#btnClose").attr("data-dismiss","modal");
-				$("#displayModal").modal("show");
+				$('#successfullyAdded').modal("show");
 			}
 		});
 	});

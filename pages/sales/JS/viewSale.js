@@ -306,7 +306,7 @@ $("button#calculateChangeButton").on('click', event => {
 	amountReceived = parseFloat(amountReceived).toFixed(2);
 	console.log(amountReceived);
 
-	let change =  parseFloat(amountReceived).toFixed(2) - parseFloat(saleTotal).toFixed(2);
+	let change =  parseFloat(amountReceived).toFixed(2) - parseFloat(THESALETOTAL).toFixed(2);
 	console.log(change);
 
 	amountReceived = numberWithSpaces(amountReceived);
@@ -326,45 +326,43 @@ $("button#calculateChangeButton").on('click', event => {
 	$("#saleChange").text(change);
 
 
-	$.ajax({
-		url: 'PHPcode/makeCashPayment_.php',
-		type: 'POST',
-		data: { 
-			saleID : saleID,AMOUNT:THESALETOTAL
-		},
-        beforeSend: function(){
-            $('.loadingModal').modal('show');
-        },
-        complete: function(){
-            $('.loadingModal').modal('hide');
-        }
-	})
-	.done(response => {
-		console.log(response);
-		if (response == "success")
-		{
-			$('#modal-title-default2').text("Success!");
-			$('#modalText').text("Sale payment successful");
-			$("#modalCloseButton").attr("onclick","window.location='../../sales.php'");
-			$('#successfullyAdded').modal("show");
-		}
-		else if(response == "failed")
-		{
-			$('#modal-title-default2').text("Error!");
-			$('#modalText').text("Sale payment unsuccessful");
-			$("#modalCloseButton").attr("onclick","");
-			$('#successfullyAdded').modal("show");
-		}
-		else if(response == "Database error")
-		{
-			$('#modal-title-default2').text("Database Error!");
-			$('#modalText').text("Database error whilst verifying password");
-			$("#modalCloseButton").attr("onclick","");
-			$('#successfullyAdded').modal("show");
-		}
+	// $.ajax({
+	// 	url: 'PHPcode/makeCashPayment_.php',
+	// 	type: 'POST',
+	// 	data: { 
+	// 		saleID : saleID,AMOUNT:THESALETOTAL
+	// 	},
+ //        beforeSend: function(){
+ //            $('.loadingModal').modal('show');
+ //        }
+	// })
+	// .done(response => {
+	// 	$('.loadingModal').modal('hide');
+	// 	console.log(response);
+	// 	if (response == "success")
+	// 	{
+	// 		$('#modal-title-default2').text("Success!");
+	// 		$('#modalText').text("Sale payment successful");
+	// 		$("#modalCloseButton").attr("onclick","window.location='../../sales.php'");
+	// 		$('#successfullyAdded').modal("show");
+	// 	}
+	// 	else if(response == "failed")
+	// 	{
+	// 		$('#modal-title-default2').text("Error!");
+	// 		$('#modalText').text("Sale payment unsuccessful");
+	// 		$("#modalCloseButton").attr("onclick","");
+	// 		$('#successfullyAdded').modal("show");
+	// 	}
+	// 	else if(response == "Database error")
+	// 	{
+	// 		$('#modal-title-default2').text("Database Error!");
+	// 		$('#modalText').text("Database error whilst verifying password");
+	// 		$("#modalCloseButton").attr("onclick","");
+	// 		$('#successfullyAdded').modal("show");
+	// 	}
 		
-		ajaxDone = true;
-	});	
+	// 	ajaxDone = true;
+	// });	
 });  
 
 $("button#makeAccountPaymentButton").on('click', event => {
