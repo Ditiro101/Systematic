@@ -27,7 +27,14 @@ $(()=>{
 			}
 			$("#tBody").append(tableEntries);
 			$("#function_name").append(options);
+	// 		var option=[];
+	// 		for (var i = 0; i < arr.length; i++) {
+	// 			option[i]=arr[i]["NAME"];
+	// 		}
+	// let x = (option) => names.filter((v,i) => names.indexOf(v) === i)
+	// 		x(option);
 
+}
 
 		}
 		else
