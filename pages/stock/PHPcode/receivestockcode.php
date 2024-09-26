@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	$currentDate=date("Y-m-d");
@@ -21,6 +22,7 @@
 								{
 									if(updateOrderReceived($con,$_POST["orderID"],$currentDate))
 									{
+										addAuditForReceiveStock($con,$_POST["orderID"],"Complete");
 										echo "T,Stock Received successfully";
 									}
 									else
@@ -30,6 +32,7 @@
 								}
 								else
 								{
+									addAuditForReceiveStock($con,$_POST["orderID"],"Received but Incomplete");
 									echo "T,Stock Received but Order Still to be completed";
 								}
 							}
@@ -50,6 +53,7 @@
 								{
 									if(updateOrderReceived($con,$_POST["orderID"],$currentDate))
 									{
+										addAuditForReceiveStock($con,$_POST["orderID"],"Complete");
 										echo "T,Stock Received successfully";
 									}
 									else
@@ -59,6 +63,7 @@
 								}
 								else
 								{
+									addAuditForReceiveStock($con,$_POST["orderID"],"Received but Incomplete");
 									echo "T,Stock Received but Order Still to be completed";
 								}
 							}

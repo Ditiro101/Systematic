@@ -128,12 +128,10 @@ $(()=>{
 				data:{WAREHOUSE_ID:warehouseID,PRODUCT_ID:productID,CPRODUCT_ID:toProductID,QUANTITY:quantity,CONVERTQTY:newQuantity},
 				beforeSend:function(){
 					$('.loadingModal').modal('show');
-				},
-				complete:function(){
-					$('.loadingModal').modal('hide');
 				}
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")

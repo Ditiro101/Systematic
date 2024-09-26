@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	if($_POST["choice"]==1)
@@ -51,12 +52,13 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "True";
+									addAuditForAssignDelivery($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
+									echo "T,Delivery Assignment Complete";
 								}
 							}
 							else
 							{
-								echo "Failed to update assignment".$i;
+								echo "F,Failed to update assignment".$i;
 							}
 						}
 							
@@ -69,16 +71,17 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "True";
+									addAuditForAssignDelivery($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
+									echo "T,Delivery Assignment Complete";
 								}
 								else
 								{
-									echo "F".$i;
+									echo "F,F".$i;
 								}
 							}
 							else
 							{
-								echo "Failed to insert".$i;
+								echo "F,Failed to insert".$i;
 							}
 						}
 					}
@@ -100,12 +103,13 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "True";
+									addAuditForAssignDelivery($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
+									echo "T,Delivery Assignment Complete";
 								}
 							}
 							else
 							{
-								echo "Failed to update assignment".$i;
+								echo "F,Failed to update assignment".$i;
 							}
 						}
 						
@@ -118,12 +122,13 @@
 							{
 								if($i==$stopProductCount)
 								{
-									echo "True";
+									addAuditForAssignDelivery($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"]);
+									echo "T,Delivery Assignment Complete";
 								}
 							}
 							else
 							{
-								echo "Failed to insert".$i;
+								echo "F,Failed to insert".$i;
 							}	
 						}
 						
@@ -132,7 +137,7 @@
 			}
 			else
 			{
-				echo "Failed to insert in del_truck";
+				echo "F,Failed to insert in del_truck";
 			}
 		}
 	}
@@ -197,6 +202,7 @@
 				{
 					if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
 					{
+						addAuditForMaintainDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"REMOVED");
 						echo "T,Assignment Maintained Successfully";
 					}
 					else
@@ -208,6 +214,7 @@
 				{
 					if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
 					{
+						addAuditForMaintainDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"REMOVED");
 						echo "T,Assignment Maintained Successfully";
 					}
 					else
@@ -228,6 +235,7 @@
 			{
 				if(updateSaleAssignment($con,1,$_POST["SALE_ID"]))
 				{
+					addAuditForMaintainDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"UPDATED");
 					echo "T,Assignment Maintained Successfully";
 				}
 				else
@@ -239,6 +247,7 @@
 			{
 				if(updateSaleAssignment($con,6,$_POST["SALE_ID"]))
 				{
+					addAuditForMaintainDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"],"UPDATED");
 					echo "T,Assignment Maintained Successfully";
 				}
 				else
@@ -266,6 +275,7 @@
 					{
 						if($i==$updateCount)
 						{
+							addAuditForFinaliseDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"][$i]);
 							echo "T,Finalised Deliveries";
 						}
 					}
@@ -274,6 +284,7 @@
 				{
 					if($i==$updateCount)
 					{
+						addAuditForFinaliseDelAss($con,$_POST["TRUCK_ID"],$_POST["SALE_ID"][$i]);
 						echo "T,Finalised Deliveries";
 					}
 				}

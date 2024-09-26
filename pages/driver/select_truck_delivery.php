@@ -74,7 +74,7 @@
                   </div>
                  
                   <div class="col mt-4 text-center">
-                    <button class="btn btn-icon btn-2 btn-primary mt-0" type="button" data-dismiss="modal" data-toggle="modal" data-target="#finalise">
+                    <button class="btn btn-icon btn-2 btn-primary mt-0" type="button" data-dismiss="modal" data-toggle="modal" data-target="#finalise" id="btnSelectTruck">
                       <span class="btn-inner--text">Select Truck</span>
                     </button>
                   </div>

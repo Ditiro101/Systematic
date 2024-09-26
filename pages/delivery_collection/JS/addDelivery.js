@@ -80,12 +80,10 @@ $(()=>{
 						data:{choice:1,SALE_ID:saleID,ADDRESS_ID:chooseAddressID,dDate:deliveryDate,latitude:lat,longitude:long},
 						beforeSend:function(){
 							$('.loadingModal').modal('show');
-						},
-						complete:function(){
-							$('.loadingModal').modal('hide');
 						}
 						})
 						.done(data=>{
+							$('.loadingModal').modal('hide');
 							let doneData=data.split(",");
 							console.log(doneData);
 							if(doneData[0]=="T")

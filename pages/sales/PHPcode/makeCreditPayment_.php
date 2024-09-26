@@ -1,4 +1,6 @@
 <?php
+	include_once("../../sessionCheckPages.php");
+	include_once("functions.php");
 
 	$saleID = "";
 
@@ -35,12 +37,22 @@
 		$queryUpdateBalance = "UPDATE CUSTOMER_ACCOUNT SET BALANCE = BALANCE + $saleTotal WHERE CUSTOMER_ID = $customerID";
 		mysqli_query($DBConnect, $queryUpdateBalance);
 
+		$dte=Date('Y-m-d');
+		if(recordPayment($DBConnect,$saleID,$_POST["saleTotalAmount"],$dte,2))
+		{
+			$DateAudit = date('Y-m-d H:i:s');
+			$Functionality_ID='7.5';
+			$userID = $_SESSION['userID'];
+			$changes="Sale ID : ".$saleID;
+		    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+		    $audit_result=mysqli_query($DBConnect,$audit_query);
+			$response = "success";
+			echo $response;
+		}
+
 
 		//Close database connection
 		mysqli_close($DBConnect);
 
-		//Send success response
-		$response = "success";
-		echo $response;
 	}
 ?>

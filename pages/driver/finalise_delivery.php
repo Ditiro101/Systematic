@@ -86,7 +86,7 @@
                   <div class="card shadow border-0 gmap_canvas">
                     <?php $address = $_POST["address"] ; /* Insert address Here */
 
-                      echo '<iframe width="100%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
+                      echo '<iframe width="150%" height="400" frameborder="0" src="https://maps.google.com/maps?f=q&source=s_q&hl=en&geocode=&q=' . str_replace(",", "", str_replace(" ", "+", $address)) . '&z=14&output=embed"></iframe>';
                     ?>
                   </div>
                   <style>

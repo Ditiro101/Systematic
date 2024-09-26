@@ -117,6 +117,10 @@ let prefillAddress= function(tmp,address,sub,cityName,zipcode){
 }
 //////////////////////////////////////////////////
 $(()=>{
+	jQuery.validator.setDefaults({
+  		debug: true,
+  		success: "valid"
+  	});
 	let customerTypeID=parseInt($("#cTypeID").text());
 	if(customerTypeID==1)
 	{
@@ -347,6 +351,8 @@ $(()=>{
 		count--;
 		$("#btn-add-address").removeAttr('disabled','');
 	});
+
+
 	$("#btnSave").on('click',function(e){
 		e.preventDefault();
 		let arr=getInput();
@@ -364,24 +370,37 @@ $(()=>{
 			$.ajax({
 				url: 'PHPcode/customercode.php',
 				type: 'POST',
-				data: {choice:2,ID:cusID,num:count,name:arr["name"],vat:arr["VS"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:customerTypeID,status:arr["status"],title:arr["title"]} 
+				data: {choice:2,ID:cusID,num:count,name:arr["name"],vat:arr["VS"],contact:arr["con"],email:arr["email"],address:arr["address"],suburb:arr["suburb"],city:arr["city"],zip:arr["zip"],customer_type:customerTypeID,status:arr["status"],title:arr["title"]},
+				beforeSend: function(){
+			            $('.loadingModal').modal('show');
+			     } 
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				console.log(data);
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")
 				{
-					$("#MMessage").text(doneData[1]);
-					$("#btnClose").attr("onclick","window.location='../../customer.php'");
+					$('#modal-title-default2').text("Success!");
+					$('#modalText').text("Customer successfully updated");
+					$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+					$("#modalHeader").css("background-color", "#1ab394");
+					$('#successfullyAdded').modal("show");
+					$("#btnClose").attr("onclick","window.location='search.php'");
 					$("#displayModal").modal("show");
 				}
 				else
 				{
-					$("#MMessage").text(doneData[1]);
-					$("#btnClose").attr("data-dismiss","modal");
-					$("#displayModal").modal("show");
+						$('#modal-title-default2').text("Error!");
+						$('#modalText').text("Database error");
+						$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+						$("#modalHeader").css("background-color", "red");
+						$('#successfullyAdded').modal("show");
+						$("#btnClose").attr("data-dismiss","modal");
+						$("#displayModal").modal("show");
 				}
+			
 			});
 		}
 		

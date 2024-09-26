@@ -57,16 +57,16 @@
 
 
             $endDate=mktime(
-                date("H"), date("i"), date("s"), date("m") ,date("d")-7, date("Y")
+                date("H"), date("i"), date("s"), date("m") ,date("d")-8, date("Y")
                 );
                 $previousDate = date("Y-m-d H:i:s",$endDate);
                 $usedDate = new DateTime($previousDate);
                 $usedDate =  $usedDate->format("Y-m-d");
 
-                $alles_query ="SELECT ORDER_ID ,ORDER_DATE
-                FROM ORDER_
-                WHERE ORDER_DATE BETWEEN '$usedDate' AND  '$newDate'
-                GROUP BY ORDER_DATE";
+                $alles_query ="SELECT CAST(ORDER_DATE AS DATE) AS ORDER_DATE ,COUNT(ORDER_ID) as TOTAL_ORDERS
+                                FROM ORDER_
+                                WHERE ORDER_DATE BETWEEN '$usedDate' AND  '$newDate'
+                                GROUP BY CAST(ORDER_DATE AS DATE)";
 
                 //var_dump($alles_query);
         

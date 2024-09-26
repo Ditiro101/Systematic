@@ -51,8 +51,8 @@
             </div>
             <div class="card-body">
               <div class="row">
-                <div class="col-5">
-                  <div class="card card-stats" id="myTabContent" >
+                <div class="col-6">
+                  <div class="card card-stats" id="myTabContent" style="height:22rem;">
                     <div class="card-header" style="background-color: #81b69d">
                         <h5 class="card-title mb-0">Customer Details</h5>
                     </div>
@@ -105,13 +105,13 @@
                   </div>
                 </div>
               </div>
-                              <div class="col-7">
-                  <div class="card card-stats" id="myTabContent" >
+                <div class="col-6">
+                  <div class="card card-stats" id="myTabContent" style="height:22rem;">
                     <div class="card-header" style="background-color: #81b69d">
                         <h5 class="card-title mb-0">Account Details</h5>
                     </div>
                     <div class="card-body">
-                      <div class="table-borderless table-responsive">
+                      <div class="table-borderless">
                         <div>
                           <table class="table align-items-center table-flush">
                             <tbody class="list">                          
@@ -238,41 +238,7 @@
                       <th class="text-right"> Amount Due</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>02/04/19</td>
-                      <td>10034</td>
-                      <td>Sale</td>
-                      <td class="text-right">R2 100.00</td>
-                      <td class="text-right"></td>
-                      <td class="text-right">R2 100.00</td>
-                    </tr>
-                    <tr>
-                      <td>11/04/19</td>
-                      <td>10112</td>
-                      <td>Sale</td>
-                      <td class="text-right">R3 560.00</td>
-                      <td class="text-right"></td>
-                      <td class="text-right">R5 660.00</td>
-                    </tr>
-                    <tr>
-                      <td>15/04/19</td>
-                      <td>10141</td>
-                      <td>Payment</td>
-                      <td class="text-right"></td>
-                      <td class="text-right">R1 160.00</td>
-                      <td class="text-right">R4 500.00</td>
-                    </tr>
-                    <tr>
-                      <td>22/04/19</td>
-                      <td>10255</td>
-                      <td>Sale</td>
-                      <td class="text-right">R3 560.00</td>
-                      <td class="text-right"></td>
-                      <td class="text-right">R8 060.00</td>
-                    </tr>
-
-                    
+                  <tbody id="tBody">
                     </tbody>
                     <tfoot class="tfoot-light">
                     <tr class="footer">
@@ -280,24 +246,8 @@
                       <td></td>
                       <td></td>
                       <td></td>
-                      <th class="text-right"><b>SUBTOTAL</b></th>
-                      <td class="text-right"><b>R8 060.00</b></td>
-                    </tr>
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <th class="text-right"><b>INTEREST</b></th>
-                      <td class="text-right"><b>R120.00</b></td>
-                    </tr>
-                    <tr class="footer">
-                      <td></td>
-                      <td></td>
-                      <td></td>
-                      <td></td>
                       <th class="text-right"><b>TOTAL DUE</b></th>
-                      <td class="text-right"><b>R8 180.00</b></td>
+                      <td class="text-right"><b id="total"></b></td>
                     </tr>
                     
                     </tfoot>
@@ -329,7 +279,7 @@
           </div>
               <div class="col ">
                 
-                <button type="button" class="btn btn-success mb-3 mt-4 float-right" data-toggle="modal" data-target="#modal-pay">
+                <button type="button" class="btn btn-success mb-3 mt-4 float-right" data-toggle="modal" id="btnPay">
                   <span><i class="fas fa-money-check-alt mr-2"></i></span>
                 <span class="btn-inner--text">Pay Off Account</span>
                 </button>
@@ -376,6 +326,7 @@
                     </div>
                 </div>
               </div>
+              
               <div class="modal fade" id="modal-default2" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                     <div class="modal-content">
@@ -414,16 +365,17 @@
                             <label for="c2">Enter Amount Received</label>
                             <div class="input-group"> 
                               <div class="input-group-prepend">
-                                <span class="input-group-text" id="inputGroupFileAddon01">R</span>
+                                <span class="input-group-text " id="inputGroupFileAddon01">R</span>
                               </div>
-                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" autofocus />
-                              <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden>
+                              <input type="number" value="" min="0" step="100" data-number-to-fixed="2" data-number-stepfactor="100" class="form-control currency" id="amount" name="amount" autofocus >
+                              <input type="number" name="customerID" id="customerID" value="<?=$_GET['ID']?>" hidden >
                             </div> 
                           </div>
-                        </div>
-                          <input type="submit" class="btn btn-success  ml-auto"></button> 
+  
+                          <input type="submit" id="btnPayOff" class="btn btn-success  ml-auto">
 
                       </form>
+                    </div>
                     <div class="modal-footer">
                           
                     
@@ -431,6 +383,27 @@
                   </div>
                 </div>
               </div>
+              <div class="form-group col-md-2 errorModal successModal text-center">
+                      <div class="modal fade" id="successfullyAdded" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
+                        <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header" id="modalHeader">
+                                <h6 class="modal-title" id="modal-title-default2">Success</h6>
+                            </div>
+                            <div class="modal-body">
+                              <p id="modalText">Successfully Added</p>
+                              
+                              <div id="animation" style="text-align:center;">
+
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-link  ml-auto" data-dismiss="modal" id="btnClose">Close</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
               <div class="modal fade" id="modal-change" tabindex="-1" role="dialog" aria-labelledby="modal-default" aria-hidden="true">
                 <div class="modal-dialog modal- modal-dialog-centered modal-" role="document">
                   <div class="modal-content">
@@ -466,15 +439,20 @@
                 </div>
               </div>
 
-          </div>
           
           </div>
           </div>
-        </div>
         <!-- Footer -->
         <?php include_once("../footer.php");?>
       </div>
     </div>
+      <div class="modal loadingModal fade bd-example-modal-lg justify-content-center" data-backdrop="static" data-keyboard="false" tabindex="-1">
+                      <div class="modal-dialog modal-sm">
+                          <div class="modal-content px-auto" style="">
+                              <img class="loading" src="../../assets/img/loading/loading.gif">
+                          </div>
+                      </div>
+                    </div>
   <!-- Argon Scripts -->
   <!-- Core -->
   <script src="../../assets/vendor/jquery/dist/jquery.min.js"></script>

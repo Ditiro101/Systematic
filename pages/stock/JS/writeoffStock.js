@@ -91,12 +91,10 @@ $(()=>{
 				data:{WAREHOUSE_ID:warehouseID,PRODUCT_ID:productID,QUANTITY:quantity,REASON:reason},
 				beforeSend:function(){
 					$('.loadingModal').modal('show');
-				},
-				complete:function(){
-					$('.loadingModal').modal('hide');
 				}
 			})
 			.done(data=>{
+				$('.loadingModal').modal('hide');
 				let doneData=data.split(",");
 				console.log(doneData);
 				if(doneData[0]=="T")

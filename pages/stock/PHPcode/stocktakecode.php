@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	$date=Date("Y-m-d");
@@ -11,6 +12,7 @@
 			{
 				if($stopCount==$i)
 				{
+					addAuditForStocktake($con,$_POST["warehouseID"]);
 					echo "T,Stock Take Saved Successfully!";
 				}
 			}

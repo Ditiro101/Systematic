@@ -4,14 +4,23 @@ var orderTotal = 0.00;
 
 $(()=>{
 	let collectionCheck=$("#collectionCheck").text();
+	console.log(ORDER_ID);
 	console.log(collectionCheck);
-	if(collectionCheck=="")
+	if(parseInt(ORDER_PAID)==0)
 	{
-		$("#btnAddCollection").attr("hidden",false);
+		$("#makePaymentButton").attr("disabled",false);
 	}
 	else
 	{
-		$("#btnAddCollection").attr("hidden",true);
+		$("#makePaymentButton").attr("disabled",true);
+	}
+	if(collectionCheck=="")
+	{
+		$("#btnAddCollection").attr("disabled",false);
+	}
+	else
+	{
+		$("#btnAddCollection").attr("disabled",true);
 	}
 	$.ajax({
 		url:'PHPcode/getOrderProducts.php',
@@ -107,13 +116,51 @@ $(()=>{
 	let orderDetails=JSON.parse($("#oDetails").text());
 	console.log(orderDetails);
 	$("#oDet").val(JSON.stringify(orderDetails));
-	$("#acOrdID").val(ORDER_ID);
+	$("#acOrdID").val(orderDetails["SUPPLIER_ID"]);
 	$("#acOrderDetails").val(JSON.stringify(orderDetails));
 	if(ORDER_STATUS_ID==2)
 	{
-		$("#btnReceiveStock").attr("hidden",true);
-		$("#btnAddCollection").attr("hidden",true);
+		$("#btnReceiveStock").attr("disabled",true);
+		$("#btnAddCollection").attr("disabled",true);
 	}
+	else
+	{
+		$("#btnReturn").attr("disabled",true);
+	}
+	$("#makePaymentButton").on('click',function(e){
+		e.preventDefault();
+		$.ajax({
+			url:'PHPcode/makepayment.php',
+			type:'POST',
+			data:{orderID : ORDER_ID,amount:orderTotal,supplierID:orderDetails["SUPPLIER_ID"]},
+			beforeSend:function(){
+				$('.loadingModal').modal('show');
+			}
+		})
+		.done(data=>{
+			$('.loadingModal').modal('hide');
+			let doneData=data.split(",");
+			console.log(doneData);
+			if(doneData[0]=="T")
+			{
+				$('#MHeader').text("Success!");
+				$("#MMessage").text(doneData[1]);
+				$('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+				$("#modalHeader").css("background-color", "#1ab394");
+				$("#btnClose").attr("onclick","window.location='../../delivery_collection.php'");
+				$("#displayModal").modal("show");
+			}
+			else
+			{
+				$('#MHeader').text("Error!");
+				$("#MMessage").text(doneData[1]);
+				$('#animation').html('<div class="crossx-circle"><div class="background"></div><div style="position: relative;"><div class="crossx draw" style="text-align:center; position: absolute !important;"></div><div class="crossx2 draw2" style="text-align:center; position: absolute !important;"></div></div></div>');
+				$("#modalHeader").css("background-color", "red");
+				$("#btnClose").attr("data-dismiss","modal");
+				$("#displayModal").modal("show");
+			}
+		});
+	});
 
 });
 

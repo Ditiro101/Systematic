@@ -665,10 +665,6 @@
 
 	function getMakeDeliveryTrucks($con)
 	{
-		// $get_query="SELECT A.TRUCK_ID,A.DELIVERY_ID,B.REGISTRATION_NUMBER,C.LONGITUDE,C.LATITUDE FROM DELIVERY_TRUCK A
-		// JOIN TRUCK B on A.TRUCK_ID=B.TRUCK_ID
-		// JOIN DELIVERY C on A.DELIVERY_ID=C.DELIVERY_ID
-		// WHERE A.DCT_STATUS_ID=3";
 		$get_query="SELECT A.DELIVERY_ID,A.EXPECTED_DATE,A.SALE_ID,B.DELIVERY_TRUCK_ID,B.DCT_STATUS_ID,B.TRUCK_ID,C.REGISTRATION_NUMBER,C.TRUCK_NAME,C.CAPACITY,F.CITY_NAME,CONCAT(D.ADDRESS_LINE_1,', ',E.NAME,', ',E.ZIPCODE,', ',F.CITY_NAME,', South Africa') AS ADDRESS_NAME,G.SALE_AMOUNT,H.NAME AS EMPLOYEE_NAME,I.NAME AS CUSTOMER_NAME,I.CUSTOMER_ID,I.SURNAME,I.EMAIL,I.CONTACT_NUMBER
 			FROM DELIVERY A
 			JOIN DELIVERY_TRUCK B ON A.DELIVERY_ID=B.DELIVERY_ID
@@ -695,6 +691,34 @@
 		}
 	}
 
+	function getMakeCollectionTrucks($con)
+	{
+		$get_query="SELECT A.COLLECTION_ID,A.EXPECTED_DATE,A.ORDER_ID,B.COLLECTION_TRUCK_ID,B.COLLECTION_STATUS_ID,B.TRUCK_ID,C.REGISTRATION_NUMBER,C.TRUCK_NAME,C.CAPACITY,F.CITY_NAME,CONCAT(D.ADDRESS_LINE_1,', ',E.NAME,', ',E.ZIPCODE,', ',F.CITY_NAME,', South Africa') AS ADDRESS_NAME,H.NAME AS EMPLOYEE_NAME,I.NAME AS CUSTOMER_NAME,I.SUPPLIER_ID,I.EMAIL,I.CONTACT_NUMBER
+			FROM COLLECTION A
+			JOIN COLLECTION_TRUCK B ON A.COLLECTION_ID=B.COLLECTION_ID
+			JOIN TRUCK C ON B.TRUCK_ID=C.TRUCK_ID
+			JOIN ADDRESS D ON A.ADDRESS_ID=D.ADDRESS_ID
+			JOIN SUBURB E ON D.SUBURB_ID=E.SUBURB_ID
+			JOIN CITY F on E.CITY_ID=F.CITY_ID
+			JOIN ORDER_ G on A.ORDER_ID=G.ORDER_ID
+			JOIN EMPLOYEE H on G.EMPLOYEE_ID=H.EMPLOYEE_ID
+			JOIN SUPPLIER I on G.SUPPLIER_ID=I.SUPPLIER_ID
+			WHERE B.COLLECTION_STATUS_ID=3";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	function getMakeDeliveryProduct($con)
 	{
 		$get_query="SELECT A.DELIVERY_TRUCK_ID,A.DELIVERY_ID,A.SALE_ID,B.PRODUCT_ID,B.QUANTITY,C.TRUCK_ID,CONCAT(D.NAME,' (',CASE
@@ -705,13 +729,45 @@
 			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
 			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
 			ELSE 'Pallet'
-			END) AS PRODUCT_NAME,E.SELLING_PRICE
+			END) AS PRODUCT_NAME,E.SELLING_PRICE,B.QUANTITY-B.QUANTITY_RECEIVED AS QTY_SHOW
 			FROM DELIVERY_TRUCK A
 			JOIN TRUCK_PRODUCT B ON A.DELIVERY_TRUCK_ID=B.DELIVERY_TRUCK_ID
 			JOIN TRUCK C ON A.TRUCK_ID=C.TRUCK_ID
 			JOIN PRODUCT D ON B.PRODUCT_ID=D.PRODUCT_ID
 			JOIN SALE_PRODUCT E ON A.SALE_ID=E.SALE_ID AND B.PRODUCT_ID=E.PRODUCT_ID
 			WHERE A.DCT_STATUS_ID=3";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function getMakeCollectionProduct($con)
+	{
+		$get_query="SELECT A.COLLECTION_TRUCK_ID,A.COLLECTION_ID,A.ORDER_ID,B.PRODUCT_ID,B.QUANTITY,C.TRUCK_ID,CONCAT(D.NAME,' (',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN '1'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN D.UNITS_PER_CASE
+			ELSE D.CASES_PER_PALLET
+			END,' x ',D.PRODUCT_MEASUREMENT,D.PRODUCT_MEASUREMENT_UNIT,') ',CASE
+			WHEN D.PRODUCT_SIZE_TYPE=1 THEN 'Individual'
+			WHEN D.PRODUCT_SIZE_TYPE=2 THEN 'Case'
+			ELSE 'Pallet'
+			END) AS PRODUCT_NAME,B.QUANTITY-B.QUANTITY_RECEIVED AS QTY_SHOW
+			FROM COLLECTION_TRUCK A
+			JOIN TRUCK_PRODUCT_COLLECTION B ON A.COLLECTION_TRUCK_ID=B.COLLECTION_TRUCK_ID
+			JOIN TRUCK C ON A.TRUCK_ID=C.TRUCK_ID
+			JOIN PRODUCT D ON B.PRODUCT_ID=D.PRODUCT_ID
+			JOIN ORDER_PRODUCT E ON A.ORDER_ID=E.ORDER_ID AND B.PRODUCT_ID=E.PRODUCT_ID
+			WHERE A.COLLECTION_STATUS_ID=3";
 		$get_result=mysqli_query($con,$get_query);
 		if(mysqli_num_rows($get_result)>0)
 		{
@@ -752,7 +808,21 @@
 
     function updateDeliveryFinalQty($con,$saleid,$productid,$productqty)
     {
-    	$update_query="UPDATE SALE_PRODUCT SET QUANTITY_RECEIVED='$productqty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+    	$update_query="UPDATE SALE_PRODUCT SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE SALE_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateDeliveryTruckFinalQty($con,$deltID,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE SALE_ID='$saleid' AND DELIVERY_TRUCK_ID='$deltID' AND PRODUCT_ID='$productid'";
 		$update_result=mysqli_query($con,$update_query);
 		if($update_result)
 		{
@@ -784,6 +854,26 @@
 		}
     }
 
+    function getDeliveryTruckDifference($con,$saleid,$deltID)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
+			FROM TRUCK_PRODUCT
+			WHERE SALE_ID='$saleid' AND DELIVERY_TRUCK_ID='$deltID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
     function updateDeliveredDate($con,$saleid,$dte)
     {
     	$update_query="UPDATE DELIVERY SET DELIVERED_DATE='$dte' WHERE SALE_ID='$saleid'";
@@ -798,4 +888,149 @@
 		}
     }
 
+    function updateTruckProductFinalQty($con,$id,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT SET QUANTITY_RECEIVED='$productqty' WHERE DELIVERY_TRUCK_ID='$id' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    //Make  Collection Functions
+
+    function updateCollectionFinalQty($con,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE ORDER_PRODUCT SET QUANTITY_COLLECTED=QUANTITY_COLLECTED+'$productqty' WHERE ORDER_ID='$saleid' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionTruckFinalQty($con,$deltID,$saleid,$productid,$productqty)
+    {
+    	$update_query="UPDATE TRUCK_PRODUCT_COLLECTION SET QUANTITY_RECEIVED=QUANTITY_RECEIVED+'$productqty' WHERE ORDER_ID='$saleid' AND COLLECTION_TRUCK_ID='$deltID' AND PRODUCT_ID='$productid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getCollectionDifference($con,$saleid)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_COLLECTED)) AS FINAL
+			FROM ORDER_PRODUCT
+			WHERE ORDER_ID='$saleid'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function getCollectionTruckDifference($con,$saleid,$deltID)
+    {
+    	$get_query="SELECT (SUM(QUANTITY)-SUM(QUANTITY_RECEIVED)) AS FINAL
+			FROM TRUCK_PRODUCT_COLLECTION
+			WHERE ORDER_ID='$saleid' AND COLLECTION_TRUCK_ID='$deltID'";
+		$get_result=mysqli_query($con,$get_query);
+		if(mysqli_num_rows($get_result)>0)
+		{
+			while($get_row=$get_result->fetch_assoc())
+			{
+				$get_vals[]=$get_row;
+			}
+			return $get_vals;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionStatus($con,$sID,$dct)
+	{
+		$update_query="UPDATE COLLECTION SET COLLECTION_STATUS_ID='$dct' WHERE ORDER_ID='$sID'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function updateCollectedDate($con,$saleid,$dte)
+    {
+    	$update_query="UPDATE COLLECTION SET COLLECTED_DATE='$dte' WHERE ORDER_ID='$saleid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+    }
+
+    function updateCollectionTruckStatus($con,$sID,$truckid,$dct)
+	{
+		$update_query="UPDATE COLLECTION_TRUCK SET COLLECTION_STATUS_ID='$dct' WHERE ORDER_ID='$sID' AND TRUCK_ID='$truckid'";
+		$update_result=mysqli_query($con,$update_query);
+		if($update_result)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+
+	function addAuditForMakeDelivery($con,$truckid,$saleid,$status)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='11.1';
+		$userID = $_SESSION['userID'];
+		$changes="Truck ID : ".$truckid."| Sale ID : ".$saleid."| Status : ".$status;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
+
+	function addAuditForMakeCollection($con,$truckid,$saleid,$status)
+	{
+		$DateAudit = date('Y-m-d H:i:s');
+		$Functionality_ID='11.3';
+		$userID = $_SESSION['userID'];
+		$changes="Truck ID : ".$truckid."| Order ID : ".$saleid."| Status : ".$status;
+	    $audit_query="INSERT INTO AUDIT_LOG (AUDIT_DATE,USER_ID,SUB_FUNCTIONALITY_ID,CHANGES) VALUES('$DateAudit','$userID','$Functionality_ID','$changes')";
+	    $audit_result=mysqli_query($con,$audit_query);
+	}
 ?>

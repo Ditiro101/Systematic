@@ -4,6 +4,14 @@ var truckID;
 var trucks=[];
 let buildTruck=function()
 {
+	if(assignments==false)
+	{
+		let dW=$("#truckSelect");
+		let wOption=$("<option></option>").addClass("classDestination");
+		wOption.text("No Delivery Assignments");
+		dW.append(wOption);
+		$("#btnSelectTruck").attr("disabled",true);
+	}
 	for(let k=0;k<assignments.length;k++)
 	{
 		let found=trucks.includes(assignments[k]["TRUCK_ID"]);
@@ -19,7 +27,7 @@ let buildTruck=function()
 		{
 			trucks.push(assignments[k]["TRUCK_ID"]);
 			wOption.attr("name",assignments[k]["TRUCK_ID"]);
-			wOption.text(assignments[k]["REGISTRATION_NUMBER"]+"|"+assignments[k]["TRUCK_NAME"]+"|"+assignments[k]["CAPACITY"]+" Tonnes");
+			wOption.text(assignments[k]["REGISTRATION_NUMBER"]+"|"+assignments[k]["TRUCK_NAME"]+"|"+assignments[k]["CAPACITY"]+" Pallets");
 			dW.append(wOption);	
 		}
 	}

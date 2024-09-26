@@ -7,18 +7,33 @@ $(document).ready(function(){
             $.ajax({
                 url:'../mailjet/mail_password.php',
                 type:'post',
-                data:{email:emailSent}
+                data:{email:emailSent},
+                beforeSend: function(){
+                    $('.loadingModal').modal('show');
+                }
             })
             .done(function(data)
                 {
-
+                   
+                        $('.loadingModal').modal('hide');
+                    
                     console.log(data);
                     let confirm = data.trim(); 
                     if(confirm =="success")
                     {
                         $("#modal-title-default").text("Success!");
                         $("#modalText").text("Reset password link sent. Check your email");
+                        $("#closeModal").attr('onclick',"window.location='../../admin.php'");
+                        $('#animation').html('<div style="text-align:center;"><div class="checkmark-circle"><div class="background"></div><div class="checkmark draw" style="text-align:center;"></div></div></div>');
+                        $("#modalHeader").css("background-color", "#1ab394");
                         $("#successfullyChanged").modal("show");
+
+                        setTimeout(function(){
+                            $('#successfullyChanged').modal("hide");
+                            console.log("Wham");
+                            window.location='../../index.php';
+                        }, 2000);
+                        
 
                       // window.location = `PHPcode/generatePasswordLink.php?email='${emailSent}'`;
                         

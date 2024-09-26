@@ -259,5 +259,4 @@ curl_setopt($ch, CURLOPT_HTTPHEADER, [
 ]);
 $response = json_decode(curl_exec($ch));
 echo "success";
-var_dump($response);
 //var_dump($response);

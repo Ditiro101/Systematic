@@ -1,3 +1,6 @@
+<?php
+  include_once("../sessionCheckPages.php");
+?>
 <!DOCTYPE html>
 <html>
 
@@ -82,6 +85,8 @@
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home"  aria-labelledby="home-tab">
                 <div class="table-responsive">
+                  <label hidden="true" id="aData"><?php echo $_POST["ass"];?></label>
+                  <label hidden="true" id="apData"><?php echo $_POST["assP"];?></label>
                   <table id="myTable" class="table align-items-center table-flush">
                     <thead class="thead-light">
                       <tr class="header">
@@ -91,64 +96,16 @@
                     
                       </tr>
                     </thead>
-                    <tbody>
-                      <thead class="table-light" id="dateHeading1">
+                    <tbody id="tBody">
+                      <!-- <thead class="table-light" id="dateHeading1">
                         <th><b>04/07/2019</b></th>
                         <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select" >
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Collection</span>
-                          </button>
-                        </td>
-                        <td>321</td>
-
-                      </tr>
-                      <tr>
-                       
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Collection</span>
-                          </button>
-                        </td>
-                        <td>124</td>
-                     
-                        
-                      </tr>
-                      <thead class="table-light" id="dateHeading2">
+                      </thead> -->
+                      
+                      <!-- <thead class="table-light" id="dateHeading2">
                         <th><b>05/07/2019</b></th>
                         <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Collection</span>
-                          </button>
-                        </td>
-                        <td>128</td>
-                      </tr>
-
-                      <thead class="table-light" id="dateHeading3">
-                        <th><b>06/07/2019</b></th>
-                        <th></th>
-                      </thead>
-                      <tr>
-                        <td>
-                          <button class="btn btn-icon btn-2 btn-primary btn-sm" type="button" data-dismiss="modal" data-toggle="modal" data-target="#select">
-                            <span class="btn-inner--icon"><i class="fas fa-truck"></i>
-                            </span>
-                            <span class="btn-inner--text">Make Collection</span>
-                          </button>
-                        </td>
-                        <td>135</td>
-                      </tr>
+                      </thead> -->
                       <tr id="emptySearch" style="display: none;" class="table-danger">
                         <td><b>No Collection Found</b></td>
                         <td></td>
@@ -353,6 +310,7 @@
   <script src="../../assets/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="../../assets/js/argon.js?v=1.0.0"></script>
+  <script type="text/javascript" src="JS/listCollection.js"></script>
 </body>
 
 </html>

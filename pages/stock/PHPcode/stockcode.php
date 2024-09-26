@@ -1,4 +1,5 @@
 <?php
+	include_once("../../sessionCheckPages.php");
 	include_once("connection.php");
 	include_once("functions.php");
 	if($_POST["choice"]==1)
@@ -26,6 +27,7 @@
 						
 						if($i==$stopCount)
 						{
+							addAuditForPlaceStock($con,$_POST["source"],$_POST["destination"]);
 							echo "T,Stock Items Placed Successfully";
 						}
 						
@@ -41,6 +43,7 @@
 					{
 						if($i==$stopCount)
 						{
+							addAuditForPlaceStock($con,$_POST["source"],$_POST["destination"]);
 							echo "T, Stock Items Placed Successfully";
 						}
 						
